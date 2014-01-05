@@ -32,7 +32,7 @@ var SDView = {
     handlers: {},
     
     init: function() {
-        alert('test');
+        alert('Hello World!');
     },
     
     installHandler: function(name, handler, selector, event) {
