@@ -26,9 +26,7 @@ var SDPresenter = {
      * Entry point of program.
      */
     init: function() {
-        SDModel.facebookApi('me', function(response) {
-            SDView.init(response);
-        });
+        SDView.init();
         
         // Install Handlers
     }
@@ -45,8 +43,7 @@ var SDView = {
     /**
      * Init function for SDView.
      */
-    init: function(response) {
-        alert(response.name);
+    init: function() {
     },
     
     /**
