@@ -6,6 +6,15 @@
  * Model for the Swapper's Delight program.
  */
 var SDModel = {
+    
+    /**
+     * Wrapper function for FB.api
+     * @param {type} api
+     * @param {type} callback
+     */
+    facebookApi: function(api, callback) {
+        FB.api(api, callback);
+    }
 };
 
 /**
@@ -17,7 +26,9 @@ var SDPresenter = {
      * Entry point of program.
      */
     init: function() {
-        SDView.init();
+        SDModel.facebookApi('/me', function(response) {
+            SDView.init(response);
+        });
         
         // Install Handlers
     }
@@ -31,21 +42,20 @@ var SDPresenter = {
 var SDView = {
     handlers: {},
     
-    init: function() {
-        var i;
-        var groups;
-        
-        FB.api('/me/groups', function(response) {
-            groups = '';
-            
-            for (i = 0; i < response.data.length; i++) {
-                groups += response.data[i].name + ' ';
-            }
-            
-            alert(groups);
-        });
+    /**
+     * Init function for SDView.
+     */
+    init: function(response) {
+        alert(response.name);
     },
     
+    /**
+     * Installs an event handler and connects it to the presenter.
+     * @param {type} name
+     * @param {type} handler
+     * @param {type} selector
+     * @param {type} event
+     */
     installHandler: function(name, handler, selector, event) {
         this.handlers[name] = handler;
         
