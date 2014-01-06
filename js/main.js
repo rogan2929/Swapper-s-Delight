@@ -32,8 +32,15 @@ var SDView = {
     handlers: {},
     
     init: function() {
-        FB.api('/me', function(response) {
-            alert(response.name);
+        var i;
+        var groups;
+        
+        FB.api('/me/groups', function(response) {
+            groups = '';
+            
+            for (i = 0; i < response.data.length; i++) {
+                groups += response.data[i].name + ' ';
+            }
         });
     },
     
