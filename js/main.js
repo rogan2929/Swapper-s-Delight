@@ -13,7 +13,7 @@ var SDModel = {
      * @param {type} callback
      */
     facebookApi: function(api, callback) {
-        FB.api(api, callback);
+        FB.api('/' + api, callback);
     }
 };
 
@@ -26,7 +26,7 @@ var SDPresenter = {
      * Entry point of program.
      */
     init: function() {
-        SDModel.facebookApi('/me', function(response) {
+        SDModel.facebookApi('me', function(response) {
             SDView.init(response);
         });
         
