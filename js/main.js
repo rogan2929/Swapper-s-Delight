@@ -33,7 +33,7 @@ var SDView = {
     
     init: function() {
         FB.api('/me', function(response) {
-            alert(reponse.name);
+            alert(response.name);
         });
     },
     
