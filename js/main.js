@@ -41,6 +41,8 @@ var SDView = {
             for (i = 0; i < response.data.length; i++) {
                 groups += response.data[i].name + ' ';
             }
+            
+            alert(groups);
         });
     },
     
