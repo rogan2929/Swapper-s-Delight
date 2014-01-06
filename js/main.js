@@ -32,7 +32,9 @@ var SDView = {
     handlers: {},
     
     init: function() {
-        alert('Hello World!');
+        FB.api('/me', function(response) {
+            alert(reponse.name);
+        });
     },
     
     installHandler: function(name, handler, selector, event) {
