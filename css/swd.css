@@ -46,6 +46,7 @@ and open the template in the editor.
 }
 
 .left.col {
+    left: 0;
     width: 215px;
     background-color: blue;
 }
