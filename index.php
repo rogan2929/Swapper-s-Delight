@@ -37,7 +37,7 @@
                 <div class='body row scroll-x scroll-y'>
                 </div>
 
-                <div class='ad row'>You're apparently using AdBlock. Please consider purchasing the add-free version of this app for a mere dollar. It's a one time upgrade and you'll never see an add again! (At least not in this app; I truly with I had the power to remove all ads, but... alas.)</div>
+                <div class='ad row'>You're apparently using AdBlock. Please consider purchasing the add-free version of this app for a mere dollar. It's a one-time upgrade and you'll never see an ad again! (At least not in this app; I truly with I had the power to remove all ads, but... alas.)</div>
             </div>
 
             <div class='header row'>
