@@ -34,6 +34,8 @@
             <div class='right col'>
                 <div class='body row scroll-x scroll-y'>
                 </div>
+
+                <div class='ad row'></div>
             </div>
 
             <div class='header row'>
@@ -42,8 +44,6 @@
                 <div class='button-bump'>Bump</div>
                 <div class='button-remove'>Remove</div>
             </div>
-            
-            <div class='ad row'></div>
         </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
