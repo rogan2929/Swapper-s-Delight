@@ -27,7 +27,7 @@
             <div id='fb-root'></div>
 
             <div class='header row'>
-                <div style='background-color: green'></div>
+
             </div>
 
             <div class='left col'>
