@@ -35,7 +35,7 @@
                 <div class='body row scroll-x scroll-y'>
                 </div>
 
-                <div class='ad row'></div>
+                <div class='ad row'>Ads go here.</div>
             </div>
 
             <div class='header row'>
