@@ -28,7 +28,9 @@
             <div id='fb-root'></div>
 
             <div class='left col'>
-                <div class='body row scroll-y'></div>
+                <div class='body row scroll-y'>
+
+                </div>
             </div>
 
             <div class='right col'>
@@ -41,8 +43,8 @@
             <div class='header row'>
                 <div class='header-button button-new-iso'>New ISO</div>
                 <div class='header-button button-new-post'>New Sell Post</div>
-                <div class='header-button button-bump'>Bump</div>
-                <div class='header-button button-remove'>Remove</div>
+                <div class='header-button button-bump'>Bump Selected</div>
+                <div class='header-button button-remove'>Remove Selected</div>
             </div>
         </div>
 
