@@ -13,7 +13,7 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         <link rel='stylesheet' href="//code.jquery.com/ui/1.10.3/themes/dark-hive/jquery-ui.css"
-        <link rel="stylesheet" href="css/normalize.css">
+              <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/swd.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
@@ -28,7 +28,6 @@
             <div id='fb-root'></div>
 
             <div class='header row'>
-                <div class='button-test'>Hello</div>
             </div>
 
             <div class='left col'>
@@ -37,6 +36,7 @@
 
             <div class='right col'>
                 <div class='body border row scroll-x scroll-y'>
+                    <div class='button-test'>Hello</div>
                 </div>
             </div>
         </div>
