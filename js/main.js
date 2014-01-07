@@ -35,7 +35,12 @@ var SwdPresenter = {
         // Retrieve group info for logged in user.
         SwdModel.facebookApi('me', function(response) {
             SwdModel.queryBSTGroups(response.id, function(response) {
-                alert(response[0]);
+                if (response.length > 0) {
+                    // Have the view write create groups vertical tab.
+                }
+                else {
+                    // Have the view prompt the user to edit BST groups.
+                }
             });
         });
 
@@ -54,7 +59,7 @@ var SwdView = {
      * Init function for SwdView.
      */
     init: function() {
-
+        $('div.button-test').button();
     },
     /**
      * Installs an event handler and connects it to the presenter.
