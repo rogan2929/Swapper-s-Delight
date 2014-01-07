@@ -64,7 +64,7 @@ and open the template in the editor.
 }
 
 .ad.row {
-    height: 40px;
+    height: 200px;
     bottom: 0;
     background-color: red;
 }
