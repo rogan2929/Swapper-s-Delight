@@ -36,8 +36,8 @@ and open the template in the editor.
 }
 
 .header.row {
-    height: 35px;
-    line-height: 35px;
+    height: 40px;
+    line-height: 40px;
     top: 0;
 }
 
@@ -57,7 +57,7 @@ and open the template in the editor.
 }
 
 .body.row {
-    top: 35px;
+    top: 40px;
     bottom: 0;
 }
 
