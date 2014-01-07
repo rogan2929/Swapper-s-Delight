@@ -29,6 +29,8 @@
 
             <div class='header row'>
                 <div class='button-test'>Hello</div>
+                <div class='button-test'>Hello2</div>
+                <div class='button-test'>Hello3</div>
             </div>
 
             <div class='left col'>
