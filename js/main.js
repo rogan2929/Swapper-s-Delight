@@ -26,9 +26,10 @@ var SDPresenter = {
      * Entry point of program.
      */
     init: function() {
+        alert('presenter');
         SDModel.facebookApi('me', function(response) {
             SDView.init(response);
-        })
+        });
         
         // Install Handlers
     }
@@ -47,6 +48,7 @@ var SDView = {
      * @param {type} response
      */
     init: function(response) {
+        alert('test');
         $('div.name').html('Hello, ' + response.name + '!');
     },
     
