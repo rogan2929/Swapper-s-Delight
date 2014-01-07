@@ -13,6 +13,7 @@ var SDModel = {
      * @param {type} callback
      */
     facebookApi: function(api, callback) {
+        alert('test');
         FB.api('/' + api, callback);
     }
 };
