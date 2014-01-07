@@ -16,11 +16,11 @@ var SwdModel = {
         FB.api('/' + api, callback);
     },
     
-    queryBSTGroups: function(callback) {
+    queryBSTGroups: function(id, callback) {
         // This is just some dummy data. Replace this with an actual ajax call.
         var response = ('1447216838830981', '575530119133790');
         
-        call(SwdModel, callback, response);
+        callback.call(SwdModel, response);
     }
 };
 
