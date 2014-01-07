@@ -67,7 +67,7 @@ and open the template in the editor.
 .ad.row {
     height: 150px;
     bottom: 0;
-    background-color: red;
+    border: red dashed;
 }
 
 .header-button {
