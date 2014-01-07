@@ -27,6 +27,7 @@
             <div id='fb-root'></div>
 
             <div class='header row'>
+                <div class='body row border scroll-y'></div>
             </div>
 
             <div class='left col'>
@@ -34,7 +35,7 @@
             </div>
 
             <div class='right col'>
-                <div class='body row scroll-x scroll-y'>
+                <div class='body border row scroll-x scroll-y'>
                     <div class='name'></div>
                 </div>
             </div>
