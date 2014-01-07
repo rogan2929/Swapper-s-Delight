@@ -58,11 +58,9 @@ var SwdView = {
     /**
      * Init function for SwdView.
      */
-    init: function() {        
-        $('div.button-new-iso').button();
-        $('div.button-new-post').button();
-        $('div.button-bump').button();
-        $('div.button-remove').button();
+    init: function() {
+        // Init header row buttons.
+        $('div.header-button').button();
     },
     /**
      * Installs an event handler and connects it to the presenter.

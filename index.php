@@ -39,10 +39,10 @@
             </div>
 
             <div class='header row'>
-                <div class='button-new-iso'>New ISO</div>
-                <div class='button-new-post'>New Sell Post</div>
-                <div class='button-bump'>Bump</div>
-                <div class='button-remove'>Remove</div>
+                <div class='header-button button-new-iso'>New ISO</div>
+                <div class='header-button button-new-post'>New Sell Post</div>
+                <div class='header-button button-bump'>Bump</div>
+                <div class='header-button button-remove'>Remove</div>
             </div>
         </div>
 
