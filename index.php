@@ -37,10 +37,13 @@
             </div>
 
             <div class='header row'>
-                <div class='button-test'>Hello</div>
-                <div class='button-test'>Hello2</div>
-                <div class='button-test'>Hello3</div>
+                <div class='button-new-iso'>New ISO</div>
+                <div class='button-new-post'>New Sell Post</div>
+                <div class='button-bump'>Bump</div>
+                <div class='button-remove'>Remove</div>
             </div>
+            
+            <div class='ad row'></div>
         </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
