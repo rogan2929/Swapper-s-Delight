@@ -47,17 +47,18 @@ and open the template in the editor.
 
 .left.col {
     width: 215px;
+    background-color: blue;
 }
 
 .right.col {
     left: 215px;
     right: 0;
+    background-color: green;
 }
 
 .body.row {
     top: 35px;
     bottom: 0;
-    background-color: green;
 }
 
 .border {
