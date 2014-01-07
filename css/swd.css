@@ -8,6 +8,39 @@ and open the template in the editor.
     Author     : rogan2929
 */
 
+.row,.col {
+    overflow: hidden;
+    position: absolute;
+}
+
+.row {
+    left: 0;
+    right: 0;
+}
+
+.col {
+    top: 0;
+    bottom: 0;
+}
+
+.scroll-x {
+    overflow-x: auto
+}
+
+.scroll-y {
+    overflow-y: auto
+}
+
+.scroll-x,.scroll-y {
+    -webkit-overflow-scrolling: touch
+}
+
+.header.row {
+    height: 70px;
+    line-height: 70px;
+    top: 0;
+}
+
 .left.col {
     width: 215px;
     border: 1px solid green;
@@ -17,4 +50,9 @@ and open the template in the editor.
     left: 231px;
     right: 0;
     border: 1px solid red;
+}
+
+.body.row {
+    top: 70px;
+    bottom: 0;
 }

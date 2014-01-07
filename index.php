@@ -25,13 +25,21 @@
         <!-- Add your site or application content here -->
         <div id='wrapper'>
             <div id='fb-root'></div>
-            
-            <div class='left col'>
-                
+
+            <div class='header row'>
+                <span>Test</span>
             </div>
-            
+
+            <div class='left col'>
+                <div class='header row'>
+                    <span>Test</span>
+                </div>
+            </div>
+
             <div class='right col'>
-                
+                <div class='body row scroll-x scroll-y'>
+                    Test
+                </div>
             </div>
         </div>
 
