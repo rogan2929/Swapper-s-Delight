@@ -35,6 +35,7 @@
 
             <div class='right col'>
                 <div class='body row scroll-x scroll-y'>
+                    <div class='name'></div>
                 </div>
             </div>
         </div>

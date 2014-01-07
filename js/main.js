@@ -13,7 +13,6 @@ var SDModel = {
      * @param {type} callback
      */
     facebookApi: function(api, callback) {
-        alert('test');
         FB.api('/' + api, callback);
     }
 };
@@ -48,7 +47,7 @@ var SDView = {
      * @param {type} response
      */
     init: function(response) {
-        alert('Hello, ' + response.name + '!');
+        $('div.name').html('Hello, ' + response.name + '!');
     },
     
     /**
