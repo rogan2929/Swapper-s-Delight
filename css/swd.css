@@ -39,6 +39,7 @@ and open the template in the editor.
     height: 70px;
     line-height: 70px;
     top: 0;
+    background: blue;
 }
 
 .header {
@@ -47,13 +48,13 @@ and open the template in the editor.
 
 .left.col {
     width: 215px;
-    border: 1px solid green;
+    background: red;
 }
 
 .right.col {
     left: 231px;
     right: 0;
-    border: 1px solid red;
+    background: green;
 }
 
 .body.row {

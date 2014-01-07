@@ -27,20 +27,14 @@
             <div id='fb-root'></div>
 
             <div class='header row'>
-                <span>Button 1</span>
-                <span>Button 2</span>
-                <span>Button 3</span>
-                <span>Button 4</span>
-                <span>Button 5</span>
             </div>
 
             <div class='left col'>
-
+                
             </div>
 
             <div class='right col'>
                 <div class='body row scroll-x scroll-y'>
-                    Test
                 </div>
             </div>
         </div>
