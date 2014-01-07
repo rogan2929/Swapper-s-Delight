@@ -27,11 +27,11 @@
             <div id='fb-root'></div>
 
             <div class='header row'>
-                <div class='body row border scroll-y'></div>
+                <div style='background-color: green'></div>
             </div>
 
             <div class='left col'>
-                
+                <div class='body row border scroll-y'></div>
             </div>
 
             <div class='right col'>
