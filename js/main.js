@@ -17,6 +17,7 @@ var SwdModel = {
     },
     
     queryBSTGroups: function(callback) {
+        // This is just some dummy data. Replace this with an actual ajax call.
         var response = ('1447216838830981', '575530119133790');
         
         alert('test');
