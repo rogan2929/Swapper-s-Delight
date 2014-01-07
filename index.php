@@ -27,13 +27,15 @@
             <div id='fb-root'></div>
 
             <div class='header row'>
-                <span>Test</span>
+                <span>Button 1</span>
+                <span>Button 2</span>
+                <span>Button 3</span>
+                <span>Button 4</span>
+                <span>Button 5</span>
             </div>
 
             <div class='left col'>
-                <div class='header row'>
-                    <span>Test</span>
-                </div>
+
             </div>
 
             <div class='right col'>
