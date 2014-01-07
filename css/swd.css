@@ -71,3 +71,7 @@ and open the template in the editor.
     bottom: 0;
     background-color: red;
 }
+
+.header-button {
+    margin-left: 5px;
+}
