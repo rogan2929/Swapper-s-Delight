@@ -5,7 +5,7 @@
 /**
  * Model for the Swapper's Delight program.
  */
-var SDModel = {
+var SwdModel = {
     
     /**
      * Wrapper function for FB.api
@@ -14,20 +14,29 @@ var SDModel = {
      */
     facebookApi: function(api, callback) {
         FB.api('/' + api, callback);
+    },
+    
+    queryBSTGroups: function(callback) {
+        var response = ('1447216838830981', '575530119133790');
+        
+        alert('test');
+        
+        call(callback, response);
     }
 };
 
 /**
  * Presenter for the Swapper's Delight program.
  */
-var SDPresenter = {
+var SwdPresenter = {
     
     /**
      * Entry point of program.
      */
     init: function() {
-        SDModel.facebookApi('me', function(response) {
-            SDView.init(response);
+        SwdView.init();
+        SwdModel.queryBSTGroups(function(response) {
+            alert(response[0]);
         });
         
         // Install Handlers
@@ -39,15 +48,14 @@ var SDPresenter = {
 /**
  * View for the Swapper's Delight program.
  */
-var SDView = {
+var SwdView = {
     handlers: {},
     
     /**
-     * Init function for SDView.
-     * @param {type} response
+     * Init function for SwdView.
      */
-    init: function(response) {
-        $('div.name').html('Hello, ' + response.name + '!');
+    init: function() {
+        
     },
     
     /**
@@ -61,7 +69,7 @@ var SDView = {
         this.handlers[name] = handler;
         
         $(selector).bind(event, function(e, args) {
-            SDView.handlers[name].call(SDPresenter, e, args);
+            SwdView.handlers[name].call(SwdPresenter, e, args);
         });
     }
 };
@@ -79,11 +87,11 @@ $(document).ready(function() {
         // Try to get a login session going if there isn't one already.
         FB.getLoginStatus(function(response) {
             if (response.status === 'connected') {
-                SDPresenter.init();
+                SwdPresenter.init();
             } else {
                 FB.login(function(response) {
                     if (response.status === 'connected') {
-                        SDPresenter.init();
+                        SwdPresenter.init();
                     }
                 }, {scope: 'user_groups,user_likes'});
             }
