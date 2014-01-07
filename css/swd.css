@@ -57,6 +57,7 @@ and open the template in the editor.
 .body.row {
     top: 35px;
     bottom: 0;
+    background-color: green;
 }
 
 .border {
