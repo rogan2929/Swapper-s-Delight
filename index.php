@@ -35,7 +35,7 @@
                             <li><a href='#tab-buying'>Buying</a></li>
                             <li><a href='#tab-selling'>Selling</a></li>
                         </ul>
-                        <div id='tab-feed' style="bottom: 0">
+                        <div id='tab-feed'>
                             Group Feed
                         </div>
                         <div id='tab-buying'>

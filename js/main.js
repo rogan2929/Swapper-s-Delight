@@ -61,7 +61,9 @@ var SwdView = {
     init: function() {
         // Init header row buttons.
         $('div.header-button').button();
-        $('div.tabs-main').tabs();
+        $('div.tabs-main').tabs(
+                {heightStyle: "fill"}
+        );
     },
     /**
      * Installs an event handler and connects it to the presenter.
