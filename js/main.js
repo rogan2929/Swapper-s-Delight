@@ -64,6 +64,7 @@ var SwdView = {
         $('div.tabs-main').tabs(
                 {heightStyle: "fill"}
         );
+        $('div.button-menu-main').button();
         $('ul.menu-main').menu();
     },
     /**
