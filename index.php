@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-                <div class='ad row'>You're apparently using AdBlock. Please consider purchasing the add-free version of this app. It's a one-time upgrade and you'll never see an ad again! (At least not in this app; I truly wish I had the power to remove all ads, but... alas.)</div>
+                <div class='ad row ui-widget-content'>You're apparently using AdBlock. Please consider purchasing the add-free version of this app. It's a one-time upgrade and you'll never see an ad again! (At least not in this app; I truly wish I had the power to remove all ads, but... alas.)</div>
             </div>
 
             <div class='right col'>
