@@ -52,7 +52,7 @@
 
             <div class='right col'>
                 <div class='body row scroll-y ui-widget-content'>
-                    <div class='ui-widget-content'>No post has been selected.</div>
+                    No post has been selected.
                 </div>
             </div>
 

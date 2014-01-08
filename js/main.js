@@ -12,7 +12,7 @@ var SwdModel = {
      * @param {type} callback
      */
     facebookApi: function(api, callback) {
-            FB.api('/' + api, callback);
+        FB.api('/' + api, callback);
     },
     queryBSTGroups: function(id, callback) {
         // This is just some dummy data. Replace this with an actual ajax call.
@@ -26,8 +26,8 @@ var SwdModel = {
  * Presenter for the Swapper's Delight program.
  */
 var SwdPresenter = {
+    selectedPost: null,
     userObject: null,
-    
     /**
      * Entry point of program.
      */
@@ -56,14 +56,13 @@ var SwdPresenter = {
             });
         });
     },
-    
     startApp: function() {
         // Retrieve group info for logged in user.
         SwdModel.facebookApi('me', function(response) {
-            
+
             // Save the FB user object for later consumption.
             SwdPresenter.userObject = response;
-            
+
             SwdModel.queryBSTGroups(SwdPresenter.userObject.id, function(response) {
                 if (response.length > 0) {
                     // Have the view write create groups vertical tab.
@@ -73,7 +72,7 @@ var SwdPresenter = {
                 }
             });
         });
-        
+
         // Install Handlers
     }
 
