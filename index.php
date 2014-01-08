@@ -26,8 +26,6 @@
         <!-- Add your site or application content here -->
         <div id='wrapper'>
             <div id='fb-root'></div>
-            
-            <div class='header row'></div>
 
             <div class='left col'>
                 <div class='body row scroll-x scroll-y'>
@@ -41,6 +39,8 @@
 
                 </div>
             </div>
+
+            <div class='header row'></div>
         </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
