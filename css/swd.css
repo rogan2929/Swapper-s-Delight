@@ -77,4 +77,5 @@ and open the template in the editor.
 
 div.button-menu-main {
     right: 10px;
+    position: absolute;
 }
