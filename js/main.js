@@ -12,36 +12,13 @@ var SwdModel = {
      * @param {type} callback
      */
     facebookApi: function(api, callback) {
-        FB.api('/' + api, callback);
+            FB.api('/' + api, callback);
     },
     queryBSTGroups: function(id, callback) {
         // This is just some dummy data. Replace this with an actual ajax call.
         var response = new Array('1447216838830981', '575530119133790');
 
         callback.call(SwdModel, response);
-    },
-    fbLogin: function() {
-        $.getScript('//connect.facebook.net/en_US/all.js', function() {
-            FB.init({
-                //appId: '1401018793479333',      // Swapper's Delight PROD
-                appId: '652991661414427', // Swapper's Delight TEST
-            });
-
-            $('#loginbutton,#feedbutton').removeAttr('disabled');
-
-            // Try to get a login session going if there isn't one already.
-            FB.getLoginStatus(function(response) {
-                if (response.status === 'connected') {
-                    
-                } else {
-                    FB.login(function(response) {
-                        if (response.status === 'connected') {
-                            
-                        }
-                    }, {scope: 'user_groups,user_likes'});
-                }
-            });
-        });
     }
 };
 
@@ -55,6 +32,30 @@ var SwdPresenter = {
     init: function() {
         SwdView.init();
 
+        $.getScript('//connect.facebook.net/en_US/all.js', function() {
+            FB.init({
+                //appId: '1401018793479333',      // Swapper's Delight PROD
+                appId: '652991661414427', // Swapper's Delight TEST
+            });
+
+            $('#loginbutton,#feedbutton').removeAttr('disabled');
+
+            // Try to get a login session going if there isn't one already.
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    SwdPresenter.startApp();
+                } else {
+                    FB.login(function(response) {
+                        if (response.status === 'connected') {
+                            SwdPresenter.startApp();
+                        }
+                    }, {scope: 'user_groups,user_likes'});
+                }
+            });
+        });
+    },
+    
+    startApp: function() {
         // Retrieve group info for logged in user.
         SwdModel.facebookApi('me', function(response) {
             SwdModel.queryBSTGroups(response.id, function(response) {
@@ -67,7 +68,7 @@ var SwdPresenter = {
                 }
             });
         });
-
+        
         // Install Handlers
     }
 
