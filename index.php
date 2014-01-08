@@ -29,9 +29,25 @@
 
             <div class='left col'>
                 <div class='body row scroll-x scroll-y'>
+                    <div class='tabs-main'>
+                        <ul>
+                            <li><a href='#tab-feed'>Group Feed</a></li>
+                            <li><a href='#tab-buying'>Buying</a></li>
+                            <li><a href='#tab-selling'>Selling</a></li>
+                        </ul>
+                        <div id='tab-feed'>
+                            Group Feed
+                        </div>
+                        <div id='tab-buying'>
+                            Buying Posts
+                        </div>
+                        <div id='tab-selling'>
+                            Selling Posts
+                        </div>
+                    </div>
                 </div>
 
-                <div class='ad row'>You're apparently using AdBlock. Please consider purchasing the add-free version of this app. It's a one-time upgrade and you'll never see an ad again! (At least not in this app; I truly with I had the power to remove all ads, but... alas.)</div>
+                <div class='ad row'>You're apparently using AdBlock. Please consider purchasing the add-free version of this app. It's a one-time upgrade and you'll never see an ad again! (At least not in this app; I truly wish I had the power to remove all ads, but... alas.)</div>
             </div>
 
             <div class='right col'>
