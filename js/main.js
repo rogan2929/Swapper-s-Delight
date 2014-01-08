@@ -26,6 +26,8 @@ var SwdModel = {
  * Presenter for the Swapper's Delight program.
  */
 var SwdPresenter = {
+    userObject: null,
+    
     /**
      * Entry point of program.
      */
@@ -58,9 +60,11 @@ var SwdPresenter = {
     startApp: function() {
         // Retrieve group info for logged in user.
         SwdModel.facebookApi('me', function(response) {
-            alert(response.name);
             
-            SwdModel.queryBSTGroups(response.id, function(response) {
+            // Save the FB user object for later consumption.
+            SwdPresenter.userObject = response;
+            
+            SwdModel.queryBSTGroups(SwdPresenter.userObject.id, function(response) {
                 if (response.length > 0) {
                     // Have the view write create groups vertical tab.
                 }
