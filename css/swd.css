@@ -79,3 +79,8 @@ div.button-menu-main {
     right: 10px;
     position: absolute;
 }
+
+div.button-menu-groups {
+    margin-left: 5px;
+    min-width: 100px;
+}
