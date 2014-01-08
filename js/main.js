@@ -58,10 +58,11 @@ var SwdPresenter = {
     startApp: function() {
         // Retrieve group info for logged in user.
         SwdModel.facebookApi('me', function(response) {
+            alert(response.name);
+            
             SwdModel.queryBSTGroups(response.id, function(response) {
                 if (response.length > 0) {
                     // Have the view write create groups vertical tab.
-                    alert(response.name);
                 }
                 else {
                     // Have the view prompt the user to edit BST groups.
