@@ -39,7 +39,7 @@ and open the template in the editor.
     height: 50px;
     line-height: 50px;
     top: 0;
-    background-color: blue;
+    background-color: #ccc;
 }
 
 .header {
@@ -49,17 +49,15 @@ and open the template in the editor.
 .left.col {
     left: 0;
     right: 400px;
-    background-color: green;
 }
 
 .right.col {
     width: 400px;
     right: 0;
-    background-color: red;
 }
 
 .body.row {
-    top: 50px;
+    top: 70px;
     bottom: 0;
 }
 
