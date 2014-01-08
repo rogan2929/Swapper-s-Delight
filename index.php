@@ -56,7 +56,9 @@
                 </div>
             </div>
 
-            <div class='header row'></div>
+            <div class='header row'>
+                <div class='menu-main' style="float: right">TEST</div>
+            </div>
         </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
