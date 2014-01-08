@@ -76,11 +76,13 @@ and open the template in the editor.
 }
 
 div.button-menu-main {
+    top: 10px;
     right: 10px;
     float: right;
 }
 
 div.button-menu-groups {
+    top: 10px;
     left: 10px;
     float: left;
     min-width: 100px;
