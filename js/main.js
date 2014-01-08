@@ -89,6 +89,7 @@ var SwdView = {
         );
         $('div.button-menu-main').button();
         $('ul.menu-main').menu();
+        $('div.button-menu-groups').button();
     },
     /**
      * Installs an event handler and connects it to the presenter.
