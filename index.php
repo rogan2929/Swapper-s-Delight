@@ -57,7 +57,11 @@
             </div>
 
             <div class='header row'>
-                <div class='menu-main' style="float: right">TEST</div>
+                <div class='button-menu-main'>
+                    <ul class='menu-main'>
+                        <li><a href="#">Test Menu Item</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
 

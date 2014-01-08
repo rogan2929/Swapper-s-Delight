@@ -64,6 +64,7 @@ var SwdView = {
         $('div.tabs-main').tabs(
                 {heightStyle: "fill"}
         );
+        $('ul.menu-main').menu();
     },
     /**
      * Installs an event handler and connects it to the presenter.
