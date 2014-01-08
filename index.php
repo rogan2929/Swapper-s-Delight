@@ -51,7 +51,7 @@
             </div>
 
             <div class='right col'>
-                <div class='body row scroll-y ui-widget ui-widget-content'>
+                <div class='body row scroll-y ui-widget ui-widget-content ui-corner-all'>
                     No post has been selected.
                 </div>
             </div>
