@@ -51,7 +51,7 @@
             </div>
 
             <div class='right col'>
-                <div class='body row scroll-y ui-widget'>
+                <div class='body row scroll-y ui-widget-content'>
 
                 </div>
             </div>
