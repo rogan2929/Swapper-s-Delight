@@ -13,7 +13,7 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         <link rel='stylesheet' href="//code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css"
-        <link rel="stylesheet" href="css/normalize.css">
+              <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/swd.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
@@ -26,15 +26,17 @@
         <!-- Add your site or application content here -->
         <div id='wrapper'>
             <div id='fb-root'></div>
+            
+            <div class='header row'></div>
 
             <div class='left col'>
                 <div class='body row scroll-x scroll-y'>
                 </div>
 
-                <div class='ad row'>You're apparently using AdBlock. Please consider purchasing the add-free version of this app for a mere dollar. It's a one-time upgrade and you'll never see an ad again! (At least not in this app; I truly with I had the power to remove all ads, but... alas.)</div>
+                <div class='ad row'>You're apparently using AdBlock. Please consider purchasing the add-free version of this app. It's a one-time upgrade and you'll never see an ad again! (At least not in this app; I truly with I had the power to remove all ads, but... alas.)</div>
             </div>
-            
-                        <div class='right col'>
+
+            <div class='right col'>
                 <div class='body row scroll-y'>
 
                 </div>
