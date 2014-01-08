@@ -28,23 +28,16 @@
             <div id='fb-root'></div>
 
             <div class='left col'>
-                <div class='body row scroll-y'>
-
-                </div>
-            </div>
-
-            <div class='right col'>
                 <div class='body row scroll-x scroll-y'>
                 </div>
 
                 <div class='ad row'>You're apparently using AdBlock. Please consider purchasing the add-free version of this app for a mere dollar. It's a one-time upgrade and you'll never see an ad again! (At least not in this app; I truly with I had the power to remove all ads, but... alas.)</div>
             </div>
+            
+                        <div class='right col'>
+                <div class='body row scroll-y'>
 
-            <div class='header row'>
-                <div class='header-button button-new-iso'>New ISO</div>
-                <div class='header-button button-new-post'>New Sell Post</div>
-                <div class='header-button button-bump'>Bump Selected</div>
-                <div class='header-button button-remove'>Remove Selected</div>
+                </div>
             </div>
         </div>
 
