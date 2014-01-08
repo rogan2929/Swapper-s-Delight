@@ -81,6 +81,7 @@ div.button-menu-main {
 }
 
 div.button-menu-groups {
-    margin-left: 5px;
+    left: 10px;
+    float: left;
     min-width: 100px;
 }
