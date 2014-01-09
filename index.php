@@ -59,6 +59,9 @@
             <div class='header row ui-widget ui-widget-content'>
                 <div class='toolbar'>
                     <div class='button-menu-groups'>Select a Group</div>
+                    <div class='toolbar button'>New Post</div>
+                    <div class='toolbar button'>Bump Selected</div>
+                    <div class='toolbar button'>Delete Selected</div>
                 </div>
                 <div class='button-menu-main'>Menu</div>
                 <div style='clear: both;'></div>

@@ -82,9 +82,13 @@ div.button-menu-main {
 }
 
 div.toolbar {
-    top: 5px;
-    left: 5px;
+    margin-top: 5px;
+    margin-left: 5px;
     float: left;
+}
+
+.toolbar.button {
+    margin-left: 5px;
 }
 
 div.button-menu-groups {
