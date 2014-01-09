@@ -89,13 +89,31 @@ var SwdView = {
      */
     init: function() {
         // Init header row buttons.
-        $('div.toolbar-button').button();
-        $('div.tabs-main').tabs(
-                {heightStyle: "fill"}
-        );
+        $('div.tabs-main').tabs({
+            heightStyle: "fill"
+        });
         $('div.button-menu-main').button();
         $('ul.menu-main').menu();
         $('div.button-menu-groups').button();
+        
+        $('#toolbar-button-new').button({
+            icons: {
+                primary: 'ui-icon-comment'
+            }, 
+            text: false
+        });
+        $('#toolbar-button-delete').button({
+            icons: {
+                primary: 'ui-icon-trash'
+            },
+            text: false
+        });
+        $('#toolbar-button-bump').button({
+            icons: {
+                primary: 'ui-icon-circle-plus'
+            },
+            text: false
+        });
     },
     /**
      * Installs an event handler and connects it to the presenter.
