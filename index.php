@@ -56,7 +56,7 @@
                 </div>
             </div>
 
-            <div class='header row'>
+            <div class='header row ui-widget ui-widget-content'>
                 <div class='button-menu-groups'>Select a Group</div>
                 <div class='button-menu-main'>Menu</div>
                 <div style='clear: both;'></div>
