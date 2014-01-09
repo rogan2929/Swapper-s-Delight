@@ -89,7 +89,7 @@ var SwdView = {
      */
     init: function() {
         // Init header row buttons.
-        $('div.header-button').button();
+        $('div.toolbar-button').button();
         $('div.tabs-main').tabs(
                 {heightStyle: "fill"}
         );
