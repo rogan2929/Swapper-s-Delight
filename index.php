@@ -63,7 +63,9 @@
                     <div class='toolbar-button'>Bump Selected</div>
                     <div class='toolbar-button'>Delete Selected</div>
                 </div>
-                <div class='button-menu-main'>Menu</div>
+                <div class='right-toolbar'>
+                    <div class='button-menu-main'>Menu</div>
+                </div>
                 <div style='clear: both;'></div>
             </div>
         </div>

@@ -76,15 +76,19 @@ and open the template in the editor.
 }
 
 div.button-menu-main {
-    top: 5px;
+/*    top: 5px;
     right: 5px;
-    float: right;
+    float: right;*/
 }
 
 div.toolbar {
-    top: 5px;
-    left: 5px;
+    margin-left: 5px;
     float: left;
+}
+
+div.right-toolbar {
+    margin-right: 5px;
+    float: right;
 }
 
 .toolbar-button {
