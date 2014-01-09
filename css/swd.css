@@ -82,8 +82,8 @@ div.button-menu-main {
 }
 
 div.toolbar {
-    margin-top: 5px;
-    margin-left: 5px;
+    top: 5px;
+    left: 5px;
     float: left;
 }
 
