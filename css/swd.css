@@ -81,9 +81,12 @@ div.button-menu-main {
     float: right;
 }
 
-div.button-menu-groups {
+div.toolbar {
     top: 5px;
     left: 5px;
     float: left;
+}
+
+div.button-menu-groups {
     min-width: 100px;
 }
