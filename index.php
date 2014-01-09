@@ -12,7 +12,7 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <link rel='stylesheet' href="//code.jquery.com/ui/1.10.3/themes/ui-lightness/jquery-ui.css"
+        <link rel='stylesheet' href="//code.jquery.com/ui/1.10.3/themes/dark-hive/jquery-ui.css"
               <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/swd.css">
@@ -35,15 +35,9 @@
                             <li><a href='#tab-buying'>Buying</a></li>
                             <li><a href='#tab-selling'>Selling</a></li>
                         </ul>
-                        <div id='tab-feed'>
-                            Group Feed
-                        </div>
-                        <div id='tab-buying'>
-                            Buying Posts
-                        </div>
-                        <div id='tab-selling'>
-                            Selling Posts
-                        </div>
+                        <div id='tab-feed'></div>
+                        <div id='tab-buying'></div>
+                        <div id='tab-selling'></div>
                     </div>
                 </div>
 
