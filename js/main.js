@@ -61,16 +61,21 @@ var SwdPresenter = {
         // Retrieve group info for logged in user.
         SwdModel.facebookApi('me', function(response) {
             var i;
+            var html;
 
             // Save the FB user object for later consumption.
             SwdPresenter.userObject = response;
 
             SwdModel.queryBSTGroups(SwdPresenter.userObject.id, function(response) {
                 if (response.length > 0) {
+                    html = '';
+                    
                     // Have the view write create groups vertical tab.
                     for (i = 0; i < response.length; i++) {
                         SwdModel.facebookApi(response[i], function(response) {
-                            $('#popup-menu-groups').add('span').html(response.name);
+                            html += '<div>' + response.name + '</div>';
+                            
+                            $('#popup-menu-groups').html(html);
                         });
                     }
                 }
