@@ -94,3 +94,10 @@ div.right-toolbar {
 div.button-menu-groups {
     min-width: 100px;
 }
+
+div.post-tile {
+    width: 100px;
+    height: 100px;
+    margin: 15px;
+    background-color: blue;
+}

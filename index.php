@@ -35,7 +35,17 @@
                             <li><a href='#tab-buying'>Buying</a></li>
                             <li><a href='#tab-selling'>Selling</a></li>
                         </ul>
-                        <div id='tab-feed'></div>
+                        <div id='tab-feed'>
+                            <div class='post-tile'></div>
+                            <div class='post-tile'></div>
+                            <div class='post-tile'></div>
+                            <div class='post-tile'></div>
+                            <div class='post-tile'></div>
+                            <div class='post-tile'></div>
+                            <div class='post-tile'></div>
+                            <div class='post-tile'></div>
+                            <div class='post-tile'></div>
+                        </div>
                         <div id='tab-buying'></div>
                         <div id='tab-selling'></div>
                     </div>
