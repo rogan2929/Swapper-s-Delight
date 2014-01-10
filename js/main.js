@@ -76,6 +76,8 @@ var SwdPresenter = {
                             html += '<div>' + response.name + '</div>';
                         });
                     }
+                    
+                    alert(html);
 
                     $('#popup-menu-groups').html(html);
                 }
