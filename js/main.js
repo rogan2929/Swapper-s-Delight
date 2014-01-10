@@ -88,11 +88,10 @@ var SwdPresenter = {
                                     of: $('#button-menu-groups'),
                                     my: 'left top',
                                     at: 'left bottom'
-                                });
+                                }).hide();
                             }
                         });
                     }
-
                 }
                 else {
                     // Have the view prompt the user to edit BST groups.
@@ -157,13 +156,6 @@ var SwdView = {
                 primary: 'ui-icon-calendar'
             }
         });
-
-        // Configure Menus
-//        $('#popup-menu-groups').position({
-//            of: $('#button-menu-groups'),
-//            my: 'left top',
-//            at: 'left bottom'
-//        }).show();
     },
     /**
      * Installs an event handler and connects it to the presenter.
