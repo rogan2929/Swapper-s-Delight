@@ -63,14 +63,14 @@ var SwdPresenter = {
             var i;
             var groupCount;
             var completed;
-            
+
             // Save the FB user object for later consumption.
             SwdPresenter.userObject = response;
 
             SwdModel.queryBSTGroups(SwdPresenter.userObject.id, function(response) {
                 groupCount = response.length;
                 completed = 0;
-                
+
                 if (response.length > 0) {
                     // Have the view write create groups vertical tab.
                     for (i = 0; i < response.length; i++) {
@@ -78,17 +78,23 @@ var SwdPresenter = {
                             //$('<li style="display: block;"><a href="#"><img style="display: inline-block;" src="' + response.icon + '" /><div style="display: inline-block; margin-left: 5px">' + response.name + '</div></a></li>').appendTo('#popup-menu-groups');
                             //alert('<li><a href="#">' + response.name + '</a></li>');
                             $('#popup-menu-groups').append('<li><a href="#"><span class="ui-icon" style="background-image: url(' + response.icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + response.name + '</div></a></li>');
-                            
+
                             // Keep track of how many groups have been downloaded.
                             completed++;
-                            
+
                             // On last api call, convert create the menu.
                             if (completed === groupCount) {
-                                $('#popup-menu-groups').menu();
+                                $('#popup-menu-groups').menu({
+                                    position: {
+                                        of: $('#button-menu-groups'),
+                                        my: 'left top',
+                                        at: 'left bottom'
+                                    }
+                                });
                             }
                         });
                     }
-                    
+
                 }
                 else {
                     // Have the view prompt the user to edit BST groups.
@@ -155,11 +161,11 @@ var SwdView = {
         });
 
         // Configure Menus
-        $('#popup-menu-groups').position({
-            of: $('#button-menu-groups'),
-            my: 'left top',
-            at: 'left bottom'
-        }).show();
+//        $('#popup-menu-groups').position({
+//            of: $('#button-menu-groups'),
+//            my: 'left top',
+//            at: 'left bottom'
+//        }).show();
     },
     /**
      * Installs an event handler and connects it to the presenter.
