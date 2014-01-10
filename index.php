@@ -81,7 +81,8 @@
                 </div> 
             </div>
             
-            <div id='popup-menu-groups' class='hidden ui-widget ui-widget-content'></div>
+            <ul id='popup-menu-groups' class='hidden'>
+            </ul>
         </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

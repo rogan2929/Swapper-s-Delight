@@ -73,7 +73,8 @@ var SwdPresenter = {
                     // Have the view write create groups vertical tab.
                     for (i = 0; i < response.length; i++) {
                         SwdModel.facebookApi(response[i], function(response) {
-                            $('<div style="display: block;"><img style="display: inline-block;" src="' + response.icon + '" /><div style="display: inline-block; margin-left: 5px">' + response.name + '</div></div>').button().appendTo('#popup-menu-groups');
+                            $('<li style="display: block;"><img style="display: inline-block;" src="' + response.icon + '" /><div style="display: inline-block; margin-left: 5px">' + response.name + '</div></li>').button().appendTo('#popup-menu-groups');
+                            $('#popup-menu-groups').menu();
                         });
                     }
                 }
