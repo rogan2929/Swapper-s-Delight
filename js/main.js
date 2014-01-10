@@ -67,13 +67,13 @@ var SwdPresenter = {
             SwdPresenter.userObject = response;
 
             SwdModel.queryBSTGroups(SwdPresenter.userObject.id, function(response) {
-                alert(response.length);
                 if (response.length > 0) {
                     html = '';
 
                     // Have the view write create groups vertical tab.
                     for (i = 0; i < response.length; i++) {
                         SwdModel.facebookApi(response[i], function(response) {
+                            alert(response.name);
                             html += '<div>' + response.name + '</div>';
                         });
                     }
