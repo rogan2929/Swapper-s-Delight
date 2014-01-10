@@ -72,11 +72,11 @@ var SwdPresenter = {
                         SwdModel.facebookApi(response[i], function(response) {
                             //$('<li style="display: block;"><a href="#"><img style="display: inline-block;" src="' + response.icon + '" /><div style="display: inline-block; margin-left: 5px">' + response.name + '</div></a></li>').appendTo('#popup-menu-groups');
                             alert('<li><a href="#">' + response.name + '</a></li>');
-                            $('#popup-menu-groups').append('<li><a href="#">' + response.name + '</a></li>');
+                            $('#popup-menu-groups').append('<li><a href="#">' + response.name + '</a></li>').menu();
                         });
                     }
                     
-                    $('#popup-menu-groups').menu();
+                    //$('#popup-menu-groups').menu();
                 }
                 else {
                     // Have the view prompt the user to edit BST groups.
