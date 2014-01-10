@@ -36,30 +36,17 @@
                             <li><a href='#tab-selling'>Selling</a></li>
                         </ul>
                         <div id='tab-feed'>
-                            <ol id='group-feed-posts'>
-                                <li class='post-tile'></li>
-                                <li class='post-tile'></li>
-                                <li class='post-tile'></li>
-                                <li class='post-tile'></li>
-                                <li class='post-tile'></li>
-                                <li class='post-tile'></li>
-                                <li class='post-tile'></li>
-                                <li class='post-tile'></li>
-                                <li class='post-tile'></li>
-                                <li class='post-tile'></li>
-                                <li class='post-tile'></li>
-                                <li class='post-tile'></li>
-                                <li class='post-tile'></li>
-                                <li class='post-tile'></li>
-                                <li class='post-tile'></li>
-                                <li class='post-tile'></li>
-                                <li class='post-tile'></li>
-                                <li class='post-tile'></li>
-                                <li class='post-tile'></li>
+                            <ol id='feed-posts'>
                             </ol>
                         </div>
-                        <div id='tab-buying'></div>
-                        <div id='tab-selling'></div>
+                        <div id='tab-buying'>
+                            <ol id='buying-posts'>
+                            </ol>
+                        </div>
+                        <div id='tab-selling'>
+                            <ol id='selling-posts'>
+                            </ol>
+                        </div>
                     </div>
                 </div>
 

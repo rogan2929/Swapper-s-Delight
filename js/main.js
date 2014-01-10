@@ -34,6 +34,7 @@ var SwdPresenter = {
     init: function() {
         SwdView.init();
 
+        // Fetch the FB JS API
         $.getScript('//connect.facebook.net/en_US/all.js', function() {
             FB.init({
                 //appId: '1401018793479333',      // Swapper's Delight PROD
@@ -92,30 +93,32 @@ var SwdView = {
         $('div.tabs-main').tabs({
             heightStyle: "fill"
         });
+
+        // Set up tab pages
+        $('#feed-posts').selectable();
+        $('#buying-posts').selectable();
+        $('#selling-posts').selectable();
+
         $('div.button-menu-main').button();
         $('ul.menu-main').menu();
         $('div.button-menu-groups').button();
-        
+
+        // Set up buttons
         $('#toolbar-button-new').button({
             icons: {
                 primary: 'ui-icon-comment'
-            }, 
-            text: false
+            }
         });
         $('#toolbar-button-delete').button({
             icons: {
                 primary: 'ui-icon-trash'
-            },
-            text: false
+            }
         });
         $('#toolbar-button-bump').button({
             icons: {
                 primary: 'ui-icon-circle-plus'
-            },
-            text: false
+            }
         });
-        
-        $('#group-feed-posts').selectable();
     },
     /**
      * Installs an event handler and connects it to the presenter.
