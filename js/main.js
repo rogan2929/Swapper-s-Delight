@@ -88,7 +88,7 @@ var SwdPresenter = {
                                     of: $('#button-menu-groups'),
                                     my: 'left top',
                                     at: 'left bottom'
-                                }).hide();
+                                });
                             }
                         });
                     }
@@ -156,6 +156,8 @@ var SwdView = {
                 primary: 'ui-icon-calendar'
             }
         });
+        
+        $('#popup-menu-groups').hide();
     },
     /**
      * Installs an event handler and connects it to the presenter.
