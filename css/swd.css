@@ -102,3 +102,6 @@ div.button-menu-groups {
     background-color: blue;
     display: inline-block;
 }
+
+#group-feed-posts .ui-selecting { background: #FECA40; }
+#group-feed-posts .ui-selected { background: #F39814; color: white; }
