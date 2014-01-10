@@ -161,7 +161,7 @@ var SwdView = {
             }
         });
 
-        $('#popup-menu-main').main().position({
+        $('#popup-menu-main').menu().position({
             of: $('#button-menu-main'),
             my: 'left top',
             at: 'left bottom'
