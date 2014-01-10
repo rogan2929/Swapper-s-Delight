@@ -126,7 +126,7 @@ div.right-toolbar-button {
     margin-left: 5px;
 }
 
-#popup-menu-groups {
+.menu {
     position: absolute;
-    display: block;
+    display: none;
 }

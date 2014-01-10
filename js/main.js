@@ -158,6 +158,11 @@ var SwdView = {
         });
         
         $('#popup-menu-groups').hide();
+        $('#popup-menu-date').menu().position({
+            of: $('#button-menu-date'),
+            my: 'left top',
+            at: 'left bottom'
+        });
     },
     /**
      * Installs an event handler and connects it to the presenter.

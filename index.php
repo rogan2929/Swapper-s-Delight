@@ -81,8 +81,16 @@
                 </div> 
             </div>
             
-            <ul id='popup-menu-groups' class='hidden'>
+            <ul id='popup-menu-groups' class='menu'>
                 <li><a href='#'><span class='ui-icon ui-icon-check'></span>Choose Groups...</a></li>
+            </ul>
+            
+            <ul id='popup-menu-date' class='menu'>
+                <li><a href='#'><span class='ui-icon ui-icon-check'></span>Today</a></li>
+                <li><a href='#'><span class='ui-icon'></span>Last 3 Days</a></li>
+                <li><a href='#'><span class='ui-icon'></span>Last Week</a></li>
+                <li><a href='#'><span class='ui-icon'></span>Last Month</a></li>
+                <li><a href='#'><span class='ui-icon'></span>All Time</a></li>
             </ul>
         </div>
 
