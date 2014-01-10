@@ -78,7 +78,7 @@ var SwdPresenter = {
                             $('#popup-menu-groups').append('<li><a href="#">' + response.name + '</a></li>');
                             
                             // On last api call, convert create the menu.
-                            if (i === groupCount) {
+                            if (i >= groupCount) {
                                 $('#popup-menu-groups').menu();
                             }
                         });
