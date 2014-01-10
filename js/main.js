@@ -99,7 +99,11 @@ var SwdView = {
         $('#buying-posts').selectable();
         $('#selling-posts').selectable();
 
-        $('#button-menu-main').button();
+        $('#button-menu-main').button({
+            icons: {
+                primary: 'ui-icon-gear'
+            }
+        });
         $('#button-menu-groups').button({
             icons: {
                 primary: 'ui-icon-contact'
@@ -122,7 +126,11 @@ var SwdView = {
                 primary: 'ui-icon-circle-plus'
             }
         });
-        $('#button-menu-date').button();
+        $('#button-menu-date').button({
+            icons: {
+                primary: 'ui-icon-calendar'
+            }
+        });
     },
     /**
      * Installs an event handler and connects it to the presenter.
