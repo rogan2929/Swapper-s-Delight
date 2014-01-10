@@ -75,8 +75,8 @@
                     <div id='button-bump' class='toolbar-button'>Bump</div>
                     <div id='button-delete' class='toolbar-button'>Delete</div>
                 </div>
-                <div class='right-toolbar ui-widget-content'>
-                    <span>Showing Posts From:</span>
+                <div class='right-toolbar'>
+                    <div>Showing Posts From:</div>
                     <div id='button-menu-date' class='right-toolbar-button'>Today</div>
                 </div> 
             </div>
