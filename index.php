@@ -80,6 +80,8 @@
                     <div id='button-menu-date' class='right-toolbar-button'>Today</div>
                 </div> 
             </div>
+            
+            <div id='popup-menu-groups' class='hidden'></div>
         </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
