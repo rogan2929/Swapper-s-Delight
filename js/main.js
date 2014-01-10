@@ -58,7 +58,7 @@ var SwdPresenter = {
         });
     },
     startApp: function() {
-        alert('test');
+        alert('test2');
         
         // Retrieve group info for logged in user.
         SwdModel.facebookApi('me', function(response) {
