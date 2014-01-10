@@ -90,7 +90,7 @@ var SwdView = {
      */
     init: function() {
         // Init header row buttons.
-        $('div.tabs-main').tabs({
+        $('#tabs-main').tabs({
             heightStyle: "fill"
         });
 
@@ -99,9 +99,8 @@ var SwdView = {
         $('#buying-posts').selectable();
         $('#selling-posts').selectable();
 
-        $('div.button-menu-main').button();
-        $('ul.menu-main').menu();
-        $('div.button-menu-groups').button();
+        $('#button-menu-main').button();
+        $('#button-menu-groups').button();
 
         // Set up buttons
         $('#toolbar-button-new').button({

@@ -29,7 +29,7 @@
 
             <div class='left col'>
                 <div class='body row scroll-x scroll-y'>
-                    <div class='tabs-main'>
+                    <div id='tabs-main'>
                         <ul>
                             <li><a href='#tab-feed'>Group Feed</a></li>
                             <li><a href='#tab-buying'>Buying</a></li>
@@ -61,10 +61,10 @@
 
             <div class='header row ui-widget ui-widget-content'>
                 <div class='toolbar'>
-                    <div class='button-menu-groups'>Select a Group</div>
+                    <div id='button-menu-groups'>Select a Group</div>
                 </div>
                 <div class='right-toolbar'>
-                    <div class='button-menu-main'>Menu</div>
+                    <div id='button-menu-main'>Menu</div>
                 </div>
                 <div style='clear: both;'></div>
             </div>
@@ -75,6 +75,9 @@
                     <div id='toolbar-button-bump' class='toolbar-button'>Bump</div>
                     <div id='toolbar-button-delete' class='toolbar-button'>Delete</div>
                 </div>
+                <div class='right-toolbar'>
+                    <div id='button-menu-date'>Today</div>
+                </div> 
             </div>
         </div>
 

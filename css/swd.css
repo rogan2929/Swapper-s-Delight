@@ -96,7 +96,7 @@ div.right-toolbar {
     margin-left: 5px;
 }
 
-div.button-menu-groups {
+#button-menu-groups {
     min-width: 100px;
 }
 
@@ -110,13 +110,14 @@ div.button-menu-groups {
     border-radius: 5px;
 }
 
-#group-feed-posts .ui-selecting { 
+#feed-posts .ui-selecting { 
     border: 10px solid #FECA40; 
     margin: 10px;
 }
 
-#group-feed-posts .ui-selected { 
+#feed-posts .ui-selected { 
     border: 10px solid #F39814; 
     color: white; 
     margin: 10px;
 }
+
