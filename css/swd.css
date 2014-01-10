@@ -129,6 +129,4 @@ div.right-toolbar-button {
 #popup-menu-groups {
     position: absolute;
     display: block;
-    min-width: 200px;
-    height: 100px;
 }
