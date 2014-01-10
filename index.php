@@ -53,7 +53,7 @@
                 <div class='ad row ui-widget ui-widget-content ui-corner-all'>Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by purchasing the ad-free version of this app. It's a one-time upgrade and you'll never see an ad again! (At least not in this app; I truly wish I had the power to remove all ads, but... alas.)</div>
             </div>
 
-            <div class='right col'>
+            <div class='right col hidden'>
                 <div class='body row scroll-y ui-widget ui-widget-content ui-corner-all'>
                     
                 </div>
