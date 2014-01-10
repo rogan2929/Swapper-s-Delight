@@ -133,11 +133,11 @@ var SwdView = {
         });
         
         // Configure Menus
-        $('#popup-menu-groups').position({
-            of: $('#button-menu-groups'),
-            my: 'top',
-            at: 'bottom'
-        }).show();
+//        $('#popup-menu-groups').position({
+//            of: $('#button-menu-groups'),
+//            my: 'top',
+//            at: 'bottom'
+//        }).show();
     },
     /**
      * Installs an event handler and connects it to the presenter.
