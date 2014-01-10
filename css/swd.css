@@ -130,4 +130,5 @@ div.right-toolbar-button {
     background-color: blue;
     position: absolute;
     display: block;
+    z-index: 10000;
 }
