@@ -46,7 +46,6 @@ var SwdPresenter = {
             // Try to get a login session going if there isn't one already.
             FB.getLoginStatus(function(response) {
                 if (response.status === 'connected') {
-                    alert('callingStartApp');
                     SwdPresenter.startApp();
                 } else {
                     FB.login(function(response) {
@@ -59,8 +58,6 @@ var SwdPresenter = {
         });
     },
     startApp: function() {
-        alert('test2');
-        
         // Retrieve group info for logged in user.
         SwdModel.facebookApi('me', function(response) {
             var i;
@@ -70,6 +67,7 @@ var SwdPresenter = {
             SwdPresenter.userObject = response;
 
             SwdModel.queryBSTGroups(SwdPresenter.userObject.id, function(response) {
+                alert(response.length);
                 if (response.length > 0) {
                     html = '';
 
