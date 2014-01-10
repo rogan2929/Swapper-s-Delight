@@ -46,6 +46,12 @@ and open the template in the editor.
 /*    border-bottom: 1px solid black*/
 }
 
+.control.row {
+    height: 50px;
+    line-height: 50px;
+    top: 60;
+}
+
 .left.col {
     left: 0;
     right: 400px;
@@ -57,7 +63,7 @@ and open the template in the editor.
 }
 
 .body.row {
-    top: 70px;
+    top: 120px;
     bottom: 0;
 }
 
@@ -66,7 +72,7 @@ and open the template in the editor.
 }
 
 .ad.row {
-    height: 150px;
+    height: 130px;
     bottom: 0;
     border: red dashed;
 }
