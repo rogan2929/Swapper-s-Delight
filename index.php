@@ -71,9 +71,9 @@
 
             <div class='control row'>
                 <div class='toolbar'>
-                    <div id='toolbar-button-new' class='toolbar-button'>New</div>
-                    <div id='toolbar-button-bump' class='toolbar-button'>Bump</div>
-                    <div id='toolbar-button-delete' class='toolbar-button'>Delete</div>
+                    <div id='button-new' class='toolbar-button'>New</div>
+                    <div id='button-bump' class='toolbar-button'>Bump</div>
+                    <div id='button-delete' class='toolbar-button'>Delete</div>
                 </div>
                 <div class='right-toolbar'>
                     <div>Showing Posts From:</div>

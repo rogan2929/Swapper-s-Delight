@@ -103,21 +103,22 @@ var SwdView = {
         $('#button-menu-groups').button();
 
         // Set up buttons
-        $('#toolbar-button-new').button({
+        $('#button-new').button({
             icons: {
                 primary: 'ui-icon-comment'
             }
         });
-        $('#toolbar-button-delete').button({
+        $('#button-delete').button({
             icons: {
                 primary: 'ui-icon-trash'
             }
         });
-        $('#toolbar-button-bump').button({
+        $('#button-bump').button({
             icons: {
                 primary: 'ui-icon-circle-plus'
             }
         });
+        $('#button-menu-date').button();
     },
     /**
      * Installs an event handler and connects it to the presenter.
