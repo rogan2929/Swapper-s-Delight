@@ -69,15 +69,15 @@ var SwdPresenter = {
             SwdModel.queryBSTGroups(SwdPresenter.userObject.id, function(response) {
                 if (response.length > 0) {
                     html = '';
-                    
+
                     // Have the view write create groups vertical tab.
                     for (i = 0; i < response.length; i++) {
                         SwdModel.facebookApi(response[i], function(response) {
                             html += '<div>' + response.name + '</div>';
-                            
-                            $('#popup-menu-groups').html(html);
                         });
                     }
+
+                    $('#popup-menu-groups').html(html);
                 }
                 else {
                     // Have the view prompt the user to edit BST groups.
@@ -142,7 +142,7 @@ var SwdView = {
                 primary: 'ui-icon-calendar'
             }
         });
-        
+
         // Configure Menus
         $('#popup-menu-groups').position({
             of: $('#button-menu-groups'),
