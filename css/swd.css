@@ -76,12 +76,6 @@ and open the template in the editor.
     border: red dashed;
 }
 
-div.button-menu-main {
-/*    top: 5px;
-    right: 5px;
-    float: right;*/
-}
-
 div.toolbar {
     margin-left: 5px;
     float: left;
@@ -94,10 +88,6 @@ div.right-toolbar {
 
 .toolbar-button {
     margin-left: 5px;
-}
-
-#button-menu-groups {
-    min-width: 200px;
 }
 
 .post-tile {
