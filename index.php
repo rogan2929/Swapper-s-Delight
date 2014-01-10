@@ -55,7 +55,7 @@
 
             <div class='right col'>
                 <div class='body row scroll-y ui-widget ui-widget-content ui-corner-all'>
-                    <span>No post has been selected.</span>
+                    <span style='text-align: center'>Select a post to view its details.</span>
                 </div>
             </div>
 
