@@ -87,10 +87,10 @@
             
             <ul id='popup-menu-date' class='menu'>
                 <li><a href='#'><span class='ui-icon ui-icon-check'></span>Today</a></li>
-                <li><a href='#'><span class='ui-icon'></span>Last 3 Days</a></li>
-                <li><a href='#'><span class='ui-icon'></span>Last Week</a></li>
-                <li><a href='#'><span class='ui-icon'></span>Last Month</a></li>
-                <li><a href='#'><span class='ui-icon'></span>All Time</a></li>
+                <li><a href='#'><span class='ui-icon ui-icon-blank'></span>Last 3 Days</a></li>
+                <li><a href='#'><span class='ui-icon ui-icon-blank'></span>Last Week</a></li>
+                <li><a href='#'><span class='ui-icon ui-icon-blank'></span>Last Month</a></li>
+                <li><a href='#'><span class='ui-icon ui-icon-blank'></span>All Time</a></li>
             </ul>
         </div>
 
