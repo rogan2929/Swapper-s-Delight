@@ -82,7 +82,7 @@
             </div>
             
             <ul id='popup-menu-groups' class='hidden'>
-                <li><a href='#'>Choose Groups...</a>
+                <li><a href='#'>Choose Groups...</a></li>
             </ul>
         </div>
 
