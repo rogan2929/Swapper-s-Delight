@@ -165,7 +165,7 @@ var SwdView = {
             of: $('#button-menu-main'),
             my: 'left top',
             at: 'left bottom'
-        }).show();
+        });
 
         $('#popup-menu-date').menu().position({
             of: $('#button-menu-date'),
