@@ -67,6 +67,8 @@ var SwdPresenter = {
             SwdPresenter.userObject = response;
 
             SwdModel.queryBSTGroups(SwdPresenter.userObject.id, function(response) {
+                alert(response.length);
+                
                 if (response.length > 0) {
                     html = '';
 
@@ -76,8 +78,6 @@ var SwdPresenter = {
                             html += '<div>' + response.name + '</div>';
                         });
                     }
-                    
-                    alert(html);
 
                     $('#popup-menu-groups').html(html);
                 }
