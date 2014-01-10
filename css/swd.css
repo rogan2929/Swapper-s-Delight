@@ -103,5 +103,5 @@ div.button-menu-groups {
     display: inline-block;
 }
 
-#group-feed-posts .ui-selecting { border: 2px solid #FECA40; }
-#group-feed-posts .ui-selected { border: 2px solid #F39814; color: white; }
+#group-feed-posts .ui-selecting { border: 10px solid #FECA40; }
+#group-feed-posts .ui-selected { border: 10px solid #F39814; color: white; }
