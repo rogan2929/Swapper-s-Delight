@@ -76,7 +76,7 @@
                     <div id='button-delete' class='toolbar-button'>Delete</div>
                 </div>
                 <div class='right-toolbar'>
-                    <div>Showing Posts From:</div>
+<!--                    <div>Showing Posts From:</div>-->
                     <div id='button-menu-date'>Today</div>
                 </div> 
             </div>
