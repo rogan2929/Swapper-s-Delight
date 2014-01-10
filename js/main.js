@@ -77,7 +77,7 @@ var SwdPresenter = {
                         SwdModel.facebookApi(response[i], function(response) {
                             //$('<li style="display: block;"><a href="#"><img style="display: inline-block;" src="' + response.icon + '" /><div style="display: inline-block; margin-left: 5px">' + response.name + '</div></a></li>').appendTo('#popup-menu-groups');
                             //alert('<li><a href="#">' + response.name + '</a></li>');
-                            $('#popup-menu-groups').append('<li><a href="#"><span class="ui-icon"><img style="display: inline-block;" src="' + response.icon + '" /></span><div style="display: inline-block; margin-left: 5px">' + response.name + '</div></a></li>');
+                            $('#popup-menu-groups').append('<li><a href="#"><span class="ui-icon" style="background-image: url(' + response.icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + response.name + '</div></a></li>');
                             
                             // Keep track of how many groups have been downloaded.
                             completed++;
