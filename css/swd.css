@@ -97,7 +97,7 @@ div.right-toolbar {
 }
 
 #button-menu-groups {
-    min-width: 100px;
+    min-width: 200px;
 }
 
 .post-tile {
@@ -130,6 +130,6 @@ div.right-toolbar-button {
     background-color: blue;
     position: absolute;
     display: block;
-    min-width: 100px;
+    min-width: 200px;
     height: 100px;
 }
