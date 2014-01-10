@@ -130,6 +130,6 @@ div.right-toolbar-button {
     background-color: blue;
     position: absolute;
     display: block;
-    top: 0;
-    left: 0;
+    width: 100px;
+    height: 100px;
 }
