@@ -74,11 +74,9 @@ var SwdPresenter = {
                     for (i = 0; i < response.length; i++) {
                         SwdModel.facebookApi(response[i], function(response) {
                             alert(response.name);
-                            html += '<div>' + response.name + '</div>';
+                            $('#popup-menu-groups').append('<div>' + response.name + '</div>');
                         });
                     }
-
-                    $('#popup-menu-groups').html(html);
                 }
                 else {
                     // Have the view prompt the user to edit BST groups.
