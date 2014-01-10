@@ -71,7 +71,7 @@ and open the template in the editor.
 }
 
 .ad.row {
-    height: 130px;
+    height: 100px;
     bottom: 0;
     border: red dashed;
 }
