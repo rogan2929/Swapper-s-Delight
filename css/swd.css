@@ -121,3 +121,7 @@ div.right-toolbar {
     margin: 10px;
 }
 
+div.right-toolbar-button {
+    display: inline-block;
+    margin-left: 5px;
+}

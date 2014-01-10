@@ -64,7 +64,7 @@
                     <div id='button-menu-groups'>Select a Group</div>
                 </div>
                 <div class='right-toolbar'>
-                    <div id='button-menu-main'>Menu</div>
+                    <div id='button-menu-main' class='right-toolbar-button'>Menu</div>
                 </div>
                 <div style='clear: both;'></div>
             </div>
@@ -77,7 +77,7 @@
                 </div>
                 <div class='right-toolbar'>
                     <span>Showing Posts From:</span>
-                    <div id='button-menu-date' style='display: inline-block'>Today</div>
+                    <div id='button-menu-date' class='right-toolbar-button'>Today</div>
                 </div> 
             </div>
         </div>
