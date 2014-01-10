@@ -100,4 +100,5 @@ div.post-tile {
     height: 100px;
     margin: 15px;
     background-color: blue;
+    display: inline-block;
 }
