@@ -143,7 +143,7 @@ var SwdView = {
             of: $('#button-menu-groups'),
             my: 'left top',
             at: 'left bottom'
-        }).removeClass('hidden');
+        }).show();
     },
     /**
      * Installs an event handler and connects it to the presenter.
