@@ -124,40 +124,49 @@ var SwdView = {
         $('#buying-posts').selectable();
         $('#selling-posts').selectable();
 
+        // Set up buttons
         $('#button-menu-main').button({
             icons: {
                 primary: 'ui-icon-gear'
             }
         });
+
         $('#button-menu-groups').button({
             icons: {
                 primary: 'ui-icon-contact'
             }
         });
 
-        // Set up buttons
         $('#button-new').button({
             icons: {
                 primary: 'ui-icon-comment'
             }
         });
+
         $('#button-delete').button({
             icons: {
                 primary: 'ui-icon-trash'
             }
         });
+
         $('#button-bump').button({
             icons: {
                 primary: 'ui-icon-circle-plus'
             }
         });
+
         $('#button-menu-date').button({
             icons: {
                 primary: 'ui-icon-calendar'
             }
         });
-        
-        $('#popup-menu-groups').hide();
+
+        $('#popup-menu-main').main().position({
+            of: $('#button-menu-main'),
+            my: 'left top',
+            at: 'left bottom'
+        }).show();
+
         $('#popup-menu-date').menu().position({
             of: $('#button-menu-date'),
             my: 'left top',

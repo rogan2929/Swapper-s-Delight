@@ -85,6 +85,10 @@
                 <li><a href='#'><span class='ui-icon ui-icon-check'></span>Choose Groups...</a></li>
             </ul>
             
+            <ul id='popup-menu-main' class='menu'>
+                <li><a href='#'><span class='ui-icon ui-icon-circle-close'></span>Logout</a></li>
+            </ul>
+            
             <ul id='popup-menu-date' class='menu'>
                 <li><a href='#'><span class='ui-icon ui-icon-check'></span>Today</a></li>
                 <li><a href='#'><span class='ui-icon ui-icon-blank'></span>Last 3 Days</a></li>
