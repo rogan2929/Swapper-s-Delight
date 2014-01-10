@@ -101,6 +101,7 @@ div.button-menu-groups {
     margin: 20px;
     background-color: blue;
     display: inline-block;
+    cursor: pointer;
 }
 
 #group-feed-posts .ui-selecting { 
