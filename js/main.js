@@ -84,12 +84,10 @@ var SwdPresenter = {
 
                             // On last api call, convert create the menu.
                             if (completed === groupCount) {
-                                $('#popup-menu-groups').menu({
-                                    position: {
-                                        of: $('#button-menu-groups'),
-                                        my: 'left top',
-                                        at: 'left bottom'
-                                    }
+                                $('#popup-menu-groups').menu().position({
+                                    of: $('#button-menu-groups'),
+                                    my: 'left top',
+                                    at: 'left bottom'
                                 });
                             }
                         });
