@@ -100,7 +100,11 @@ var SwdView = {
         $('#selling-posts').selectable();
 
         $('#button-menu-main').button();
-        $('#button-menu-groups').button();
+        $('#button-menu-groups').button({
+            icons: {
+                primary: 'ui-icon-contact'
+            }
+        });
 
         // Set up buttons
         $('#button-new').button({
