@@ -59,7 +59,7 @@
                 </div>
             </div>
 
-            <div class='header row ui-widget ui-widget-content'>
+            <div class='header row ui-widget ui-widget-header'>
                 <div class='toolbar'>
                     <div id='button-menu-groups'>Select a Group</div>
                 </div>
