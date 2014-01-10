@@ -115,7 +115,7 @@ var SwdView = {
             text: false
         });
         
-        $('div.post-tile').button();
+        $('div.post-tile').selectable();
     },
     /**
      * Installs an event handler and connects it to the presenter.
