@@ -131,4 +131,5 @@ div.right-toolbar-button {
     display: block;
     min-width: 200px;
     height: 100px;
+    background-color: blue;
 }
