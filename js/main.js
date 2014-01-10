@@ -136,7 +136,7 @@ var SwdView = {
         $('#popup-menu-groups').position({
             of: $('#button-menu-groups'),
             my: 'top',
-            at: 'bottom'
+            at: 'left bottom'
         }).show();
     },
     /**
