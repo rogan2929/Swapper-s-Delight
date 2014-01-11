@@ -110,7 +110,7 @@ var SwdPresenter = {
     },
     
     onClickUiMenuItem: function(e, args) {
-        alert(e.target);
+
     }
 };
 
@@ -180,7 +180,7 @@ var SwdView = {
             of: $('#button-menu-date'),
             my: 'left top',
             at: 'left bottom'
-        }).show();
+        });
     },
     /**
      * Installs an event handler and connects it to the presenter.
