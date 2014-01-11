@@ -100,9 +100,13 @@ var SwdPresenter = {
         });
 
         // Install Handlers
-    }
+        SwdView.installHandler('onClickButtonNew', this.onClickButtonNew, '#button-new', 'click');
+    },
 
     // Event Handlers (onX(e, args))
+    onClickButtonNew: function(e, args) {
+        SwdView.testClick();
+    }
 };
 
 /**
@@ -186,6 +190,10 @@ var SwdView = {
         $(selector).bind(event, function(e, args) {
             SwdView.handlers[name].call(SwdPresenter, e, args);
         });
+    },
+    
+    testClick: function() {
+        alert('test');
     }
 };
 
