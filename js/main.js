@@ -101,7 +101,7 @@ var SwdPresenter = {
 
         // Install Handlers
         SwdView.installHandler('onClickButtonNew', this.onClickButtonNew, '#button-new', 'click');
-        SwdView.installHandler('onClickUiMenuItem', this.onClickUiMenuItem, 'li.ui-menu-item', 'click');
+        SwdView.installHandler('onClickUiMenuItem', this.onClickUiMenuItem, 'li.ui-menu-item', 'select');
     },
 
     // Event Handlers (onX(e, args))
@@ -110,7 +110,7 @@ var SwdPresenter = {
     },
     
     onClickUiMenuItem: function(e, args) {
-
+        alert('test');
     }
 };
 

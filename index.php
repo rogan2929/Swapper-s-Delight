@@ -88,7 +88,7 @@
             </ul>
             
             <ul id='popup-menu-main' class='menu'>
-                <li><a href='#'><span class='ui-icon ui-icon-circle-close'></span>Logout</a></li>
+                <li id='menu-item-main'><a href='#'><span class='ui-icon ui-icon-circle-close'></span>Logout</a></li>
             </ul>
             
             <ul id='popup-menu-date' class='menu'>
