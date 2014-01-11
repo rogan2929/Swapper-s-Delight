@@ -193,7 +193,7 @@ var SwdView = {
     },
     
     showNewPostDialog: function(e, args) {
-        alert('test');
+        $('#dialog-new-post').dialog();
     }
 };
 

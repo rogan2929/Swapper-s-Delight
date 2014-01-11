@@ -81,6 +81,8 @@
                 </div> 
             </div>
             
+            <!--Menus-->
+            
             <ul id='popup-menu-groups' class='menu'>
                 <li><a href='#'><span class='ui-icon ui-icon-check'></span>Choose Groups...</a></li>
             </ul>
@@ -96,6 +98,9 @@
                 <li><a href='#'><span class='ui-icon ui-icon-blank'></span>Last Month</a></li>
                 <li><a href='#'><span class='ui-icon ui-icon-blank'></span>All Time</a></li>
             </ul>
+            
+            <!--Dialogs-->
+            <div id='dialog-new-post'></div>
         </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
