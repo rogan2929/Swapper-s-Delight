@@ -77,7 +77,7 @@ var SwdPresenter = {
                         SwdModel.facebookApi(response[i], function(response) {
                             //$('<li style="display: block;"><a href="#"><img style="display: inline-block;" src="' + response.icon + '" /><div style="display: inline-block; margin-left: 5px">' + response.name + '</div></a></li>').appendTo('#popup-menu-groups');
                             //alert('<li><a href="#">' + response.name + '</a></li>');
-                            $('#popup-menu-groups').append('<li><a href="#"><span class="ui-icon" style="background-image: url(' + response.icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + response.name + '</div></a></li>');
+                            $('#popup-menu-groups').append('<li id="menu-item-' + response.id + '"><a href="#"><span class="ui-icon" style="background-image: url(' + response.icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + response.name + '</div></a></li>');
 
                             // Keep track of how many groups have been downloaded.
                             completed++;
@@ -101,11 +101,16 @@ var SwdPresenter = {
 
         // Install Handlers
         SwdView.installHandler('onClickButtonNew', this.onClickButtonNew, '#button-new', 'click');
+        SwdView.installHandler('onClickUiMenuItem', this.onClickUiMenuItem, 'li.ui-menu-item', 'click');
     },
 
     // Event Handlers (onX(e, args))
     onClickButtonNew: function(e, args) {
         SwdView.showNewPostDialog(e, args);
+    },
+    
+    onClickUiMenuItem: function(e, args) {
+        alert(e.target);
     }
 };
 

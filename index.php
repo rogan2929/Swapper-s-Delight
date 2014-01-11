@@ -72,8 +72,8 @@
             <div class='control row'>
                 <div class='toolbar'>
                     <div id='button-new' class='toolbar-button'>New</div>
-                    <div id='button-bump' class='toolbar-button ui-state-disabled'>Bump</div>
-                    <div id='button-delete' class='toolbar-button ui-state-disabled'>Delete</div>
+                    <div id='button-bump' class='toolbar-button'>Bump</div>
+                    <div id='button-delete' class='toolbar-button'>Delete</div>
                 </div>
                 <div class='right-toolbar'>
                     <span class='ui-widget'>Showing Posts From:</span>
@@ -84,7 +84,7 @@
             <!--Menus-->
             
             <ul id='popup-menu-groups' class='menu'>
-                <li><a href='#'><span class='ui-icon ui-icon-check'></span>Choose Groups...</a></li>
+                <li id='menu-item-choose-groups'><a href='#'><span class='ui-icon ui-icon-check'></span>Choose Groups...</a></li>
             </ul>
             
             <ul id='popup-menu-main' class='menu'>
