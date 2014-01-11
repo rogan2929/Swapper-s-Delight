@@ -105,7 +105,7 @@ var SwdPresenter = {
 
     // Event Handlers (onX(e, args))
     onClickButtonNew: function(e, args) {
-        SwdView.testClick();
+        SwdView.showNewPostDialog(e, args);
     }
 };
 
@@ -192,7 +192,7 @@ var SwdView = {
         });
     },
     
-    testClick: function() {
+    showNewPostDialog: function(e, args) {
         alert('test');
     }
 };
