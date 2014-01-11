@@ -100,7 +100,7 @@
             </ul>
             
             <!--Dialogs-->
-            <div id='dialog-new-post'></div>
+            <div id='dialog-new-post'>TEST</div>
         </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
