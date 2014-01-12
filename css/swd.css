@@ -53,11 +53,11 @@ and open the template in the editor.
 
 .left.col {
     left: 0;
-    right: 400px;
+    right: 300px;
 }
 
 .right.col {
-    width: 400px;
+    width: 300px;
     right: 0;
 }
 
