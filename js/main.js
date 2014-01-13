@@ -104,7 +104,7 @@ var SwdPresenter = {
                                 
                                 // TODO: Select first group.
                                 SwdModel.getGroupFeed('165540190305879', 0, 1, function(response) {
-                                    alert(response.data.length);
+                                    alert(response.feed.data.length);
                                 });
                             }
                         });
