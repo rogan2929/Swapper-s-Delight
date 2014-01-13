@@ -215,9 +215,12 @@ var SwdView = {
             at: 'left bottom'
         });
 
-        $('body:not(.ui-menu)').click(function() {
-            alert($(this).id);
-            //$('.ui-menu').hide();
+        $('html').click(function() {
+            $('.ui-menu').hide();
+        });
+        
+        $('.ui-menu').click(function (e, args) {
+            e.stopPropagation();
         });
     },
     /**
