@@ -216,7 +216,8 @@ var SwdView = {
         });
 
         $('body:not(.ui-menu)').click(function() {
-            $('.ui-menu').hide();
+            alert($(this).name);
+            //$('.ui-menu').hide();
         });
     },
     /**
