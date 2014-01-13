@@ -149,18 +149,20 @@ var SwdPresenter = {
     loadGroupFeed: function() {
         SwdModel.getGroupFeed(this.selectedGroup, this.days, this.currentPage, function(response) {
             alert(response.feed.data[0].message);
+            
+            SwdView.displayFeed(response.feed.data);
         });
     },
     
     // Event Handlers (onX(e, args))
     onClickButtonNew: function(e, args) {
-        SwdView.showNewPostDialog(e, args);
+        SwdView.showNewPostDialog();
     },
     onClickHtml: function(e, args) {
-        SwdView.closeAllUiMenus(e, args);
+        SwdView.closeAllUiMenus();
     },
     onClickMenuButton: function(e, args) {
-        SwdView.showUiMenu(e, args);
+        SwdView.showUiMenu(e);
     },
     onClickUiMenuItem: function(e, args) {
         // Switch logic based on calling element.
@@ -186,12 +188,6 @@ var SwdView = {
         $('#tabs-main').tabs({
             heightStyle: "fill"
         });
-
-        // Set up tab pages
-        $('#feed-posts').selectable();
-        $('#buying-posts').selectable();
-        $('#selling-posts').selectable();
-        $('#pinned-posts').selectable();
 
         // Set up buttons
         $('#button-menu-main').button({
@@ -261,15 +257,19 @@ var SwdView = {
      * @param {type} e
      * @param {type} args
      */
-    closeAllUiMenus: function(e, args) {
+    closeAllUiMenus: function() {
         $('.ui-menu').hide();
+    },
+    
+    displayFeed: function(feed) {
+        alert(feed[0].message);
     },
     /***
      * Displays new post dialog box.
      * @param {type} e
      * @param {type} args
      */
-    showNewPostDialog: function(e, args) {
+    showNewPostDialog: function() {
         $('#dialog-new-post').dialog();
     },
     /***
@@ -278,7 +278,7 @@ var SwdView = {
      * @param {type} args
      * @param {type} menu
      */
-    showUiMenu: function(e, args) {
+    showUiMenu: function(e) {
         var menu;
         e.stopPropagation();
         menu = $(e.currentTarget).find('a').attr('href');
