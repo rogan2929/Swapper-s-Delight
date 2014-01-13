@@ -1,5 +1,10 @@
 "use strict";
 
+// "Enums"
+
+// PostType Enum
+var PostType = {group: 0, buying: 1, selling: 2, pinned: 3}
+
 // http://stackoverflow.com/questions/1102215/mvp-pattern-with-javascript-framework
 
 /**
@@ -17,12 +22,17 @@ var SwdModel = {
     /***
      * AJAX call to FB group feed.
      * @param {type} group Group whose feed is to be retrieved.
+     * @param {type} postType Type of post to retrieve. Specified by PostType enum.
      * @param {type} days Days before today. (0 = today)
      * @param {type} page Page number in results. (Will be multiplied by 25 for exact post count).
      * @param {type} callback Completed callback function.
      */
-    getGroupFeed: function(group, days, page, callback) {
-        SwdModel.facebookApi(group + '?fields=feed', callback);
+    getPosts: function(group, postType, days, page, callback) {
+        switch (postType) {
+            case PostType.group:
+                SwdModel.facebookApi(group + '?fields=feed', callback);
+                break;
+        }
     },
     /***
      * AJAX call to FB comment feed for given post.
@@ -51,6 +61,7 @@ var SwdModel = {
 var SwdPresenter = {
     currentPage: 1,
     days: 0,
+    postType: PostType.group,
     selectedGroup: null,
     selectedPost: null,
     userObject: null,
@@ -140,18 +151,14 @@ var SwdPresenter = {
             });
         });
     },
-    
     /***
-     * 
-     * @param {type} group Facebook group ID.
-     * @param {type} postType Integer representing the type of post to retrieve. 0 = Group Feed, 1 = Buying, 2 = Selling, 3 = Pinned.
+     * Load feed for the current group.
      */
-    loadGroupFeed: function() {
-        SwdModel.getGroupFeed(this.selectedGroup, this.days, this.currentPage, function(response) {
-            SwdView.displayFeed(response.feed.data);
+    loadPosts: function() {
+        SwdModel.getPosts(this.selectedGroup, this.days, this.currentPage, function(response) {
+            SwdView.displayPosts(response.feed.data, SwdPresenter.postType);
         });
     },
-    
     // Event Handlers (onX(e, args))
     onClickButtonNew: function(e, args) {
         SwdView.showNewPostDialog();
@@ -256,21 +263,17 @@ var SwdView = {
     closeAllUiMenus: function() {
         $('.ui-menu').hide();
     },
-    
     /***
      * Displays the returned feed in the main window.
      * @param {type} feed
+     * @param {type} postType
      */
-    displayFeed: function(feed) {
-        //alert(feed[0].message);
+    displayPosts: function(feed, postType) {
         var i;
-        
+
         for (i = 0; i < feed.length; i++) {
             $('#feed-posts').append('<li>' + feed[i].message + '</li>');
         }
-        
-        // TODO: Populate post tiles.
-        // TODO: Mark tiles as selectable.
     },
     /***
      * Displays new post dialog box.
