@@ -255,10 +255,10 @@ var SwdView = {
      * @param {type} menu
      */
     showUiMenu: function(e, args, menu) {
+        var menu;
         e.stopPropagation();
-        var a = $(e.currentTarget).find('a');
-        //alert($(e.currentTarget).find('a').innerHtml);
-        //$(e.currentTarget).next().show();
+        menu = $(e.currentTarget).find('a').attr('href');
+        $(menu).show();
     }
 };
 
