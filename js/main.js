@@ -39,7 +39,7 @@ var SwdModel = {
      */
     queryBSTGroups: function(id, callback) {
         // This is just some dummy data. Replace this with an actual ajax call.
-        var response = new Array('1447216838830981', '575530119133790');
+        var response = new Array('120696471425768', '1447216838830981', '575530119133790');
 
         callback.call(SwdModel, response);
     }
@@ -49,7 +49,7 @@ var SwdModel = {
  * Presenter for the Swapper's Delight program.
  */
 var SwdPresenter = {
-    date: null,
+    days: 0,
     group: null,
     post: null,
     userObject: null,
@@ -140,7 +140,9 @@ var SwdPresenter = {
     },
     
     loadGroupFeed: function(group) {
-        alert(group);
+        SwdModel.getGroupFeed(group, this.days, 1, function(response) {
+            alert(response.feed.data[0].message);
+        });
     },
     
     // Event Handlers (onX(e, args))
