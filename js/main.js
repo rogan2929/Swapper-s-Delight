@@ -162,6 +162,7 @@ var SwdView = {
 
         // Set up tab pages
         $('#feed-posts').selectable();
+        $('#following-posts').selectable();
         $('#buying-posts').selectable();
         $('#selling-posts').selectable();
 
