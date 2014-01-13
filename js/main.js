@@ -139,7 +139,7 @@ var SwdPresenter = {
         SwdView.showNewPostDialog(e, args);
     },
     onClickButtonMenuGroups: function(e, args) {
-        SwdView.showUiMenu('#popup-menu-groups');
+        SwdView.showUiMenu(e, args, '#popup-menu-groups');
     },
     onClickUiMenuItem: function(e, args) {
         // TODO: Switch logic based on calling element.
@@ -218,10 +218,6 @@ var SwdView = {
         $('html').click(function() {
             $('.ui-menu').hide();
         });
-        
-        $('.ui-menu').click(function (e, args) {
-            e.stopPropagation();
-        });
     },
     /**
      * Installs an event handler and connects it to the presenter.
@@ -240,7 +236,8 @@ var SwdView = {
     showNewPostDialog: function(e, args) {
         $('#dialog-new-post').dialog();
     },
-    showUiMenu: function(menu) {
+    showUiMenu: function(e, args, menu) {
+        e.stopPropagation();
         $(menu).show();
     }
 };
