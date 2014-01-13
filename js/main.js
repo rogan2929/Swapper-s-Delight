@@ -103,7 +103,7 @@ var SwdPresenter = {
                                 });
                                 
                                 // TODO: Select first group.
-                                SwdModel.getGroupFeed('1447216838830981', 0, 1, function(response) {
+                                SwdModel.getGroupFeed('165540190305879', 0, 1, function(response) {
                                     alert(response.data.length);
                                 });
                             }
