@@ -49,6 +49,9 @@ var SwdModel = {
  * Presenter for the Swapper's Delight program.
  */
 var SwdPresenter = {
+    date: null,
+    group: null,
+    post: null,
     userObject: null,
     /**
      * Entry point of program.
@@ -87,6 +90,7 @@ var SwdPresenter = {
         SwdModel.facebookApi('me', function(response) {
             var i;
             var groupCount;
+            var groups;
             var completed;
 
             // Save the FB user object for later consumption.
@@ -94,6 +98,7 @@ var SwdPresenter = {
 
             SwdModel.queryBSTGroups(SwdPresenter.userObject.id, function(response) {
                 groupCount = response.length;
+                groups = response;
                 completed = 0;
 
                 if (response.length > 0) {
@@ -115,7 +120,8 @@ var SwdPresenter = {
                                     at: 'left bottom'
                                 });
 
-                                // TODO: Select first group.
+                                // Select first group and load posts.
+                                SwdPresenter.loadGroupFeed(group[0]);
 
                                 // Install Event Handlers
                                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
@@ -132,6 +138,11 @@ var SwdPresenter = {
             });
         });
     },
+    
+    loadGroupFeed: function(group) {
+        alert(group);
+    },
+    
     // Event Handlers (onX(e, args))
     onClickButtonNew: function(e, args) {
         SwdView.showNewPostDialog(e, args);
