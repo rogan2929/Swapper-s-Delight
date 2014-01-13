@@ -262,7 +262,12 @@ var SwdView = {
      * @param {type} feed
      */
     displayFeed: function(feed) {
-        alert(feed[0].message);
+        //alert(feed[0].message);
+        var i;
+        
+        for (i = 0; i < feed.length; i++) {
+            $('#feed-posts').append('<li>' + feed[i].message + '</li>');
+        }
         
         // TODO: Populate post tiles.
         // TODO: Mark tiles as selectable.
