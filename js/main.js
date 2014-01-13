@@ -146,6 +146,7 @@ var SwdPresenter = {
     },
     onClickUiMenuItem: function(e, args) {
         // TODO: Switch logic based on calling element.
+        alert($(e.currentTarget).attr('id'));
     }
 };
 
