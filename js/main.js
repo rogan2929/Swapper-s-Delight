@@ -8,12 +8,24 @@
 var SwdModel = {
     /**
      * Wrapper function for FB.api
-     * @param {type} api
-     * @param {type} callback
+     * @param {type} api Facebook API to call.
+     * @param {type} callback Callback function.
      */
     facebookApi: function(api, callback) {
         FB.api('/' + api, callback);
     },
+    
+    /***
+     * AJAX call to FB group feed.
+     * @param {type} group Group whose feed is to be retrieved.
+     * @param {type} days Days before today.
+     * @param {type} page Page number in results. (Will be multiplied by 25 for exact post count).
+     * @param {type} callback Completed callback function.
+     */
+    getGroupFeed: function(group, days, page, callback) {
+        SwdModel.facebookApi(group + '?fields=feed', callback);
+    },
+    
     queryBSTGroups: function(id, callback) {
         // This is just some dummy data. Replace this with an actual ajax call.
         var response = new Array('1447216838830981', '575530119133790');
@@ -88,6 +100,11 @@ var SwdPresenter = {
                                     of: $('#button-menu-groups'),
                                     my: 'left top',
                                     at: 'left bottom'
+                                });
+                                
+                                // TODO: Select first group.
+                                SwdModel.getGroupFeed('1447216838830981', 0, 1, function(response) {
+                                    alert(response.data.length);
                                 });
                             }
                         });
