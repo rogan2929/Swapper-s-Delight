@@ -58,7 +58,7 @@ var SwdPresenter = {
      * Entry point of program.
      */
     init: function() {
-        SwdView.init();
+        SwdView.initView();
 
         // Fetch the FB JS API
         $.getScript('//connect.facebook.net/en_US/all.js', function() {
@@ -183,7 +183,7 @@ var SwdView = {
     /**
      * Init function for SwdView.
      */
-    init: function() {
+    initView: function() {
         // Init header row buttons.
         $('#tabs-main').tabs({
             heightStyle: "fill"
@@ -254,8 +254,6 @@ var SwdView = {
     },
     /***
      * Closes all Jquery UI menus.
-     * @param {type} e
-     * @param {type} args
      */
     closeAllUiMenus: function() {
         $('.ui-menu').hide();
@@ -266,8 +264,6 @@ var SwdView = {
     },
     /***
      * Displays new post dialog box.
-     * @param {type} e
-     * @param {type} args
      */
     showNewPostDialog: function() {
         $('#dialog-new-post').dialog();
@@ -275,8 +271,6 @@ var SwdView = {
     /***
      * Shows a Jquery UI menu.
      * @param {type} e
-     * @param {type} args
-     * @param {type} menu
      */
     showUiMenu: function(e) {
         var menu;
