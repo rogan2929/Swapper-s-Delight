@@ -256,6 +256,8 @@ var SwdView = {
      */
     showUiMenu: function(e, args, menu) {
         e.stopPropagation();
+        var a = $(e.currentTarget).find('a');
+        //alert($(e.currentTarget).find('a').innerHtml);
         //$(e.currentTarget).next().show();
     }
 };
