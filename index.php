@@ -54,7 +54,7 @@
                     </div>
                 </div>
 
-                <div class='ad row ui-widget ui-widget-content ui-corner-all'>Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by purchasing the ad-free version of this app. It's a one-time upgrade and you'll never see an ad again! (At least not in this app; I truly wish I had the power to remove all ads, but... alas.)</div>
+                <div class='ad row ui-widget ui-widget-content ui-corner-all hidden'>Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by purchasing the ad-free version of this app. It's a one-time upgrade and you'll never see an ad again! (At least not in this app; I truly wish I had the power to remove all ads, but... alas.)</div>
             </div>
 
             <div class='header row ui-widget ui-widget-header'>
@@ -71,15 +71,6 @@
                 </div>
                 <div style='clear: both;'></div>
             </div>
-
-<!--            <div class='control row'>
-                <div class='toolbar'>
-
-                </div>
-                <div class='right-toolbar'>
-
-                </div> 
-            </div>-->
 
             <!--Menus-->
 
