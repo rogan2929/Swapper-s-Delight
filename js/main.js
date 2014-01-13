@@ -118,6 +118,12 @@ var SwdPresenter = {
                                 });
 
                                 // TODO: Select first group.
+
+                                // Install Event Handlers
+                                SwdView.installHandler('onClickButtonNew', this.onClickButtonNew, '#button-new', 'click');
+                                SwdView.installHandler('onClickHtml', this.onClickHtml, 'html', 'click');
+                                SwdView.installHandler('onClickMenuButton', this.onClickMenuButton, '.menu-button', 'click');
+                                SwdView.installHandler('onClickUiMenuItem', this.onClickUiMenuItem, 'li.ui-menu-item', 'click');
                             }
                         });
                     }
@@ -127,12 +133,6 @@ var SwdPresenter = {
                 }
             });
         });
-
-        // Install Event Handlers
-        SwdView.installHandler('onClickButtonNew', this.onClickButtonNew, '#button-new', 'click');
-        SwdView.installHandler('onClickHtml', this.onClickHtml, 'html', 'click');
-        SwdView.installHandler('onClickMenuButton', this.onClickMenuButton, '.menu-button', 'click');
-        SwdView.installHandler('onClickUiMenuItem', this.onClickUiMenuItem, 'li.ui-menu-item', 'click');
     },
     // Event Handlers (onX(e, args))
     onClickButtonNew: function(e, args) {
