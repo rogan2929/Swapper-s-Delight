@@ -27,7 +27,7 @@
             <div id='fb-root'></div>
 
             <div class='left col'>
-                <div class='body row scroll-x scroll-y'>
+                <div class='body row'>
                     <div id='tabs-main'>
                         <ul>
                             <li><a href='#tab-feed'>Group Feed</a></li>
