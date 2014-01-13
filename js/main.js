@@ -206,6 +206,10 @@ var SwdView = {
             my: 'left top',
             at: 'left bottom'
         });
+        
+        $('body:not(.ui-menu)').click(function(){
+            $('.ui-menu').hide();
+        });
     },
     /**
      * Installs an event handler and connects it to the presenter.
