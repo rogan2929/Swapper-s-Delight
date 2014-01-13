@@ -86,15 +86,15 @@
             </ul>
 
             <ul id='popup-menu-main' class='menu'>
-                <li id='menu-item-main'><a href='#'><span class='ui-icon ui-icon-circle-close'></span>Logout</a></li>
+                <li id='menu-item-logout'><a href='#'><span class='ui-icon ui-icon-circle-close'></span>Logout</a></li>
             </ul>
 
             <ul id='popup-menu-date' class='menu'>
-                <li><a href='#'><span class='ui-icon ui-icon-check'></span>Today</a></li>
-                <li><a href='#'><span class='ui-icon ui-icon-blank'></span>Last 3 Days</a></li>
-                <li><a href='#'><span class='ui-icon ui-icon-blank'></span>Last Week</a></li>
-                <li><a href='#'><span class='ui-icon ui-icon-blank'></span>Last Month</a></li>
-                <li><a href='#'><span class='ui-icon ui-icon-blank'></span>All Time</a></li>
+                <li id='menu-item-today'><a href='#'><span class='ui-icon ui-icon-check'></span>Today</a></li>
+                <li id='menu-item-3days'><a href='#'><span class='ui-icon ui-icon-blank'></span>Last 3 Days</a></li>
+                <li id='menu-item-week'><a href='#'><span class='ui-icon ui-icon-blank'></span>Last Week</a></li>
+                <li id='menu-item-month'><a href='#'><span class='ui-icon ui-icon-blank'></span>Last Month</a></li>
+                <li id='menu-item-all'><a href='#'><span class='ui-icon ui-icon-blank'></span>All Time</a></li>
             </ul>
 
             <!--Dialogs-->
