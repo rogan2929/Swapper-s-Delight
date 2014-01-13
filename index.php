@@ -39,6 +39,10 @@
                             <ol id='feed-posts'>
                             </ol>
                         </div>
+                        <div id='tab-following'>
+                            <ol id='following-posts'>
+                            </ol>
+                        </div>
                         <div id='tab-buying'>
                             <ol id='buying-posts'>
                             </ol>
