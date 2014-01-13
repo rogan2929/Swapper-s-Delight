@@ -121,12 +121,18 @@ var SwdPresenter = {
 
         // Install Handlers
         SwdView.installHandler('onClickButtonNew', this.onClickButtonNew, '#button-new', 'click');
+        
         SwdView.installHandler('onClickUiMenuItem', this.onClickUiMenuItem, 'li.ui-menu-item', 'click');
     },
     // Event Handlers (onX(e, args))
     onClickButtonNew: function(e, args) {
         SwdView.showNewPostDialog(e, args);
     },
+    
+    onClickButtonMenuGroups: function(e, args) {
+        SwdView.showUiMenu('#popup-menu-groups');
+    },
+    
     onClickUiMenuItem: function(e, args) {
         // TODO: Switch logic based on calling element.
     }
@@ -217,6 +223,9 @@ var SwdView = {
     },
     showNewPostDialog: function(e, args) {
         $('#dialog-new-post').dialog();
+    },
+    showUiMenu: function(menu) {
+        $(menu).show();
     }
 };
 
