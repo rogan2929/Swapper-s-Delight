@@ -272,7 +272,7 @@ var SwdView = {
         var i;
 
         for (i = 0; i < feed.length; i++) {
-            $('#feed-posts').append('<li>' + feed[i].message + '</li>');
+            $('#feed-posts').append('<li class="post-tile" style="background-image"' +  + '></li>');
         }
     },
     /***
