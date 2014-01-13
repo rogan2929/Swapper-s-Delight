@@ -185,7 +185,7 @@ var SwdView = {
         // Init header row buttons.
         $('#tabs-main').tabs({
             heightStyle: "fill"
-        });
+        }).addClass( "ui-tabs-vertical ui-helper-clearfix" );
 
         // Set up buttons
         $('#button-menu-main').button({
