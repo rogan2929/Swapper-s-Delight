@@ -256,7 +256,7 @@ var SwdView = {
      */
     showUiMenu: function(e, args, menu) {
         e.stopPropagation();
-        $(e).next().show();
+        $(e.currentTarget).next().show();
     }
 };
 
