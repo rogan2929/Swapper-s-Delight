@@ -59,10 +59,7 @@
 
             <div class='header row ui-widget ui-widget-header'>
                 <div class='toolbar'>
-                    <div id='button-menu-groups'>Select a Group</div>
-                    <ul id='popup-menu-groups' class='menu'>
-                        <li id='menu-item-choose-groups'><a href='#'><span class='ui-icon ui-icon-check'></span>Choose Groups...</a></li>
-                    </ul>
+                    <div id='button-menu-groups'><a href='#popup-menu-groups'>Select a Group</a></div>
                 </div>
                 <div class='right-toolbar'>
                     <div id='button-menu-main' class='right-toolbar-button'>Menu</div>
@@ -83,6 +80,10 @@
             </div>
 
             <!--Menus-->
+
+            <ul id='popup-menu-groups' class='menu'>
+                <li id='menu-item-choose-groups'><a href='#'><span class='ui-icon ui-icon-check'></span>Choose Groups...</a></li>
+            </ul>
 
             <ul id='popup-menu-main' class='menu'>
                 <li id='menu-item-main'><a href='#'><span class='ui-icon ui-icon-circle-close'></span>Logout</a></li>
