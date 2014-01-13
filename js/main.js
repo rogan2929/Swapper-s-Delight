@@ -26,6 +26,15 @@ var SwdModel = {
         SwdModel.facebookApi(group + '?fields=feed', callback);
     },
     
+    /***
+     * AJAX call to FB comment feed for given post.
+     * @param {type} message
+     * @param {type} callback
+     */
+    getMessageComments: function(message, callback) {
+        SwdModel.facebookApi(message + '?fields=comments', callback);
+    },
+    
     queryBSTGroups: function(id, callback) {
         // This is just some dummy data. Replace this with an actual ajax call.
         var response = new Array('1447216838830981', '575530119133790');
