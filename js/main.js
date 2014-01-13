@@ -17,7 +17,7 @@ var SwdModel = {
     /***
      * AJAX call to FB group feed.
      * @param {type} group Group whose feed is to be retrieved.
-     * @param {type} days Days before today.
+     * @param {type} days Days before today. (0 = today)
      * @param {type} page Page number in results. (Will be multiplied by 25 for exact post count).
      * @param {type} callback Completed callback function.
      */
