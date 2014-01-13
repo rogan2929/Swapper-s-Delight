@@ -32,7 +32,6 @@ var SwdModel = {
     getMessageComments: function(message, callback) {
         SwdModel.facebookApi(message + '?fields=comments', callback);
     },
-    
     /***
      * Query database for groups that the user has marked as 'BST' (Buy, Sell, Trade)
      * @param {type} id
@@ -132,6 +131,7 @@ var SwdPresenter = {
         // Install Event Handlers
         SwdView.installHandler('onClickButtonNew', this.onClickButtonNew, '#button-new', 'click');
         SwdView.installHandler('onClickButtonMenuGroups', this.onClickButtonMenuGroups, '#button-menu-groups', 'click');
+        SwdView.installHandler('onClickHtml', this.onClickHtml, 'html', 'click');
         SwdView.installHandler('onClickUiMenuItem', this.onClickUiMenuItem, 'li.ui-menu-item', 'click');
     },
     // Event Handlers (onX(e, args))
@@ -140,6 +140,9 @@ var SwdPresenter = {
     },
     onClickButtonMenuGroups: function(e, args) {
         SwdView.showUiMenu(e, args, '#popup-menu-groups');
+    },
+    onClickHtml: function(e, args) {
+        SwdView.closeAllUiMenus(e, args);
     },
     onClickUiMenuItem: function(e, args) {
         // TODO: Switch logic based on calling element.
@@ -214,10 +217,6 @@ var SwdView = {
             my: 'left top',
             at: 'left bottom'
         });
-
-        $('html').click(function() {
-            $('.ui-menu').hide();
-        });
     },
     /**
      * Installs an event handler and connects it to the presenter.
@@ -233,9 +232,28 @@ var SwdView = {
             SwdView.handlers[name].call(SwdPresenter, e, args);
         });
     },
+    /***
+     * Closes all Jquery UI menus.
+     * @param {type} e
+     * @param {type} args
+     */
+    closeAllUiMenus: function(e, args) {
+        $('.ui-menu').hide();
+    },
+    /***
+     * Displays new post dialog box.
+     * @param {type} e
+     * @param {type} args
+     */
     showNewPostDialog: function(e, args) {
         $('#dialog-new-post').dialog();
     },
+    /***
+     * Shows a Jquery UI menu.
+     * @param {type} e
+     * @param {type} args
+     * @param {type} menu
+     */
     showUiMenu: function(e, args, menu) {
         e.stopPropagation();
         $(menu).show();
