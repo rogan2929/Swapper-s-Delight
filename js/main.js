@@ -121,18 +121,18 @@ var SwdPresenter = {
 
         // Install Handlers
         SwdView.installHandler('onClickButtonNew', this.onClickButtonNew, '#button-new', 'click');
-        
+        SwdView.installHandler('onClickButtonMenuGroups', this.onClickButtonMenuGroups, '#button-menu-groups', 'click');
         SwdView.installHandler('onClickUiMenuItem', this.onClickUiMenuItem, 'li.ui-menu-item', 'click');
+
+
     },
     // Event Handlers (onX(e, args))
     onClickButtonNew: function(e, args) {
         SwdView.showNewPostDialog(e, args);
     },
-    
     onClickButtonMenuGroups: function(e, args) {
         SwdView.showUiMenu('#popup-menu-groups');
     },
-    
     onClickUiMenuItem: function(e, args) {
         // TODO: Switch logic based on calling element.
     }
@@ -206,8 +206,8 @@ var SwdView = {
             my: 'left top',
             at: 'left bottom'
         });
-        
-        $('body:not(.ui-menu)').click(function(){
+
+        $('body:not(.ui-menu)').click(function() {
             $('.ui-menu').hide();
         });
     },
