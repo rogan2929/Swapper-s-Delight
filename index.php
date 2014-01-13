@@ -12,8 +12,8 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <link rel='stylesheet' href="//code.jquery.com/ui/1.10.3/themes/flick/jquery-ui.css"
-              <link rel="stylesheet" href="css/normalize.css">
+        <link rel='stylesheet' href="//code.jquery.com/ui/1.10.3/themes/flick/jquery-ui.css">
+        <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/swd.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
@@ -32,16 +32,12 @@
                     <div id='tabs-main'>
                         <ul>
                             <li><a href='#tab-feed'>Group Feed</a></li>
-                            <li><a href='#tab-following'>Following</a></li>
                             <li><a href='#tab-buying'>Buying</a></li>
                             <li><a href='#tab-selling'>Selling</a></li>
+                            <li><a href='#tab-following'>Pinned</a></li>
                         </ul>
                         <div id='tab-feed'>
                             <ol id='feed-posts'>
-                            </ol>
-                        </div>
-                        <div id='tab-following'>
-                            <ol id='following-posts'>
                             </ol>
                         </div>
                         <div id='tab-buying'>
@@ -52,16 +48,14 @@
                             <ol id='selling-posts'>
                             </ol>
                         </div>
+                        <div id='tab-pinned'>
+                            <ol id='pinned-posts'>
+                            </ol>
+                        </div>
                     </div>
                 </div>
 
                 <div class='ad row ui-widget ui-widget-content ui-corner-all'>Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by purchasing the ad-free version of this app. It's a one-time upgrade and you'll never see an ad again! (At least not in this app; I truly wish I had the power to remove all ads, but... alas.)</div>
-            </div>
-
-            <div class='right col'>
-                <div class='body row scroll-y ui-widget ui-widget-content ui-corner-all'>
-                    
-                </div>
             </div>
 
             <div class='header row ui-widget ui-widget-header'>
@@ -77,7 +71,6 @@
             <div class='control row'>
                 <div class='toolbar'>
                     <div id='button-new' class='toolbar-button'>New</div>
-                    <div id='button-bump' class='toolbar-button'>Bump</div>
                     <div id='button-delete' class='toolbar-button'>Delete</div>
                 </div>
                 <div class='right-toolbar'>
@@ -85,17 +78,17 @@
                     <div id='button-menu-date' class='right-toolbar-button'>Today</div>
                 </div> 
             </div>
-            
+
             <!--Menus-->
-            
+
             <ul id='popup-menu-groups' class='menu'>
                 <li id='menu-item-choose-groups'><a href='#'><span class='ui-icon ui-icon-check'></span>Choose Groups...</a></li>
             </ul>
-            
+
             <ul id='popup-menu-main' class='menu'>
                 <li id='menu-item-main'><a href='#'><span class='ui-icon ui-icon-circle-close'></span>Logout</a></li>
             </ul>
-            
+
             <ul id='popup-menu-date' class='menu'>
                 <li><a href='#'><span class='ui-icon ui-icon-check'></span>Today</a></li>
                 <li><a href='#'><span class='ui-icon ui-icon-blank'></span>Last 3 Days</a></li>
@@ -103,7 +96,7 @@
                 <li><a href='#'><span class='ui-icon ui-icon-blank'></span>Last Month</a></li>
                 <li><a href='#'><span class='ui-icon ui-icon-blank'></span>All Time</a></li>
             </ul>
-            
+
             <!--Dialogs-->
             <div id='dialog-new-post'>TEST</div>
         </div>

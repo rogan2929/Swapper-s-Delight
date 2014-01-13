@@ -14,7 +14,6 @@ var SwdModel = {
     facebookApi: function(api, callback) {
         FB.api('/' + api, callback);
     },
-    
     /***
      * AJAX call to FB group feed.
      * @param {type} group Group whose feed is to be retrieved.
@@ -25,7 +24,6 @@ var SwdModel = {
     getGroupFeed: function(group, days, page, callback) {
         SwdModel.facebookApi(group + '?fields=feed', callback);
     },
-    
     /***
      * AJAX call to FB comment feed for given post.
      * @param {type} message
@@ -34,7 +32,6 @@ var SwdModel = {
     getMessageComments: function(message, callback) {
         SwdModel.facebookApi(message + '?fields=comments', callback);
     },
-    
     queryBSTGroups: function(id, callback) {
         // This is just some dummy data. Replace this with an actual ajax call.
         var response = new Array('1447216838830981', '575530119133790');
@@ -110,7 +107,7 @@ var SwdPresenter = {
                                     my: 'left top',
                                     at: 'left bottom'
                                 });
-                                
+
                                 // TODO: Select first group.
                             }
                         });
@@ -126,12 +123,10 @@ var SwdPresenter = {
         SwdView.installHandler('onClickButtonNew', this.onClickButtonNew, '#button-new', 'click');
         SwdView.installHandler('onClickUiMenuItem', this.onClickUiMenuItem, 'li.ui-menu-item', 'click');
     },
-
     // Event Handlers (onX(e, args))
     onClickButtonNew: function(e, args) {
         SwdView.showNewPostDialog(e, args);
     },
-    
     onClickUiMenuItem: function(e, args) {
         // TODO: Switch logic based on calling element.
     }
@@ -153,9 +148,9 @@ var SwdView = {
 
         // Set up tab pages
         $('#feed-posts').selectable();
-        $('#following-posts').selectable();
         $('#buying-posts').selectable();
         $('#selling-posts').selectable();
+        $('#pinned-posts').selectable();
 
         // Set up buttons
         $('#button-menu-main').button({
@@ -220,7 +215,6 @@ var SwdView = {
             SwdView.handlers[name].call(SwdPresenter, e, args);
         });
     },
-    
     showNewPostDialog: function(e, args) {
         $('#dialog-new-post').dialog();
     }
