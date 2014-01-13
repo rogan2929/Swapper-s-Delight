@@ -103,7 +103,7 @@ var SwdPresenter = {
                                 });
                                 
                                 // TODO: Select first group.
-                                SwdModel.getGroupFeed('165540190305879', 0, 1, function(response) {
+                                SwdModel.getGroupFeed('120696471425768', 0, 1, function(response) {
                                     for (var i = 0; i < response.feed.data.length; i++) {
                                         var message = response.feed.data[i].message;
                                         
