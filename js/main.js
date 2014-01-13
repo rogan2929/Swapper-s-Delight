@@ -139,7 +139,7 @@ var SwdPresenter = {
         SwdView.showNewPostDialog(e, args);
     },
     onClickButtonMenuGroups: function(e, args) {
-        SwdView.showUiMenu(e, args, '#popup-menu-groups');
+        SwdView.showUiMenu(e, args);
     },
     onClickHtml: function(e, args) {
         SwdView.closeAllUiMenus(e, args);
@@ -254,7 +254,7 @@ var SwdView = {
      * @param {type} args
      * @param {type} menu
      */
-    showUiMenu: function(e, args, menu) {
+    showUiMenu: function(e, args) {
         var menu;
         e.stopPropagation();
         menu = $(e.currentTarget).find('a').attr('href');
