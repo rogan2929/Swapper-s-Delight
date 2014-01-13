@@ -60,15 +60,6 @@
             <div class='header row ui-widget ui-widget-header'>
                 <div class='toolbar'>
                     <div id='button-menu-groups' class='menu-button'><a href='#popup-menu-groups'>Select a Group</a></div>
-                </div>
-                <div class='right-toolbar'>
-                    <div id='button-menu-main' class='right-toolbar-button menu-button'><a href='#popup-menu-main'>Menu</a></div>
-                </div>
-                <div style='clear: both;'></div>
-            </div>
-
-            <div class='control row'>
-                <div class='toolbar'>
                     <div id='button-new' class='toolbar-button'>New</div>
                     <div id='button-pin' class='toolbar-button'>Pin</div>
                     <div id='button-delete' class='toolbar-button'>Delete</div>
@@ -76,8 +67,19 @@
                 <div class='right-toolbar'>
                     <span class='ui-widget'>Showing Posts From:</span>
                     <div id='button-menu-date' class='right-toolbar-button menu-button'><a href='#popup-menu-date'>Today</a></div>
-                </div> 
+                    <div id='button-menu-main' class='right-toolbar-button menu-button'><a href='#popup-menu-main'>Menu</a></div>
+                </div>
+                <div style='clear: both;'></div>
             </div>
+
+<!--            <div class='control row'>
+                <div class='toolbar'>
+
+                </div>
+                <div class='right-toolbar'>
+
+                </div> 
+            </div>-->
 
             <!--Menus-->
 
