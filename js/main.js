@@ -32,6 +32,13 @@ var SwdModel = {
     getMessageComments: function(message, callback) {
         SwdModel.facebookApi(message + '?fields=comments', callback);
     },
+    
+    /***
+     * Query database for groups that the user has marked as 'BST' (Buy, Sell, Trade)
+     * @param {type} id
+     * @param {type} callback
+     * @returns {undefined}
+     */
     queryBSTGroups: function(id, callback) {
         // This is just some dummy data. Replace this with an actual ajax call.
         var response = new Array('1447216838830981', '575530119133790');
@@ -75,6 +82,9 @@ var SwdPresenter = {
             });
         });
     },
+    /***
+     * Starts the application after init has finished.
+     */
     startApp: function() {
         // Retrieve group info for logged in user.
         SwdModel.facebookApi('me', function(response) {
@@ -119,12 +129,10 @@ var SwdPresenter = {
             });
         });
 
-        // Install Handlers
+        // Install Event Handlers
         SwdView.installHandler('onClickButtonNew', this.onClickButtonNew, '#button-new', 'click');
         SwdView.installHandler('onClickButtonMenuGroups', this.onClickButtonMenuGroups, '#button-menu-groups', 'click');
         SwdView.installHandler('onClickUiMenuItem', this.onClickUiMenuItem, 'li.ui-menu-item', 'click');
-
-
     },
     // Event Handlers (onX(e, args))
     onClickButtonNew: function(e, args) {
@@ -206,10 +214,10 @@ var SwdView = {
             my: 'left top',
             at: 'left bottom'
         });
-//
-//        $('body:not(.ui-menu)').click(function() {
-//            $('.ui-menu').hide();
-//        });
+
+        $('body:not(.ui-menu)').click(function() {
+            $('.ui-menu').hide();
+        });
     },
     /**
      * Installs an event handler and connects it to the presenter.
