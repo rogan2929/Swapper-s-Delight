@@ -130,19 +130,19 @@ var SwdPresenter = {
 
         // Install Event Handlers
         SwdView.installHandler('onClickButtonNew', this.onClickButtonNew, '#button-new', 'click');
-        SwdView.installHandler('onClickButtonMenuGroups', this.onClickButtonMenuGroups, '#button-menu-groups', 'click');
         SwdView.installHandler('onClickHtml', this.onClickHtml, 'html', 'click');
+        SwdView.installHandler('onClickMenuButton', this.onClickMenuButton, '.menu-button', 'click');
         SwdView.installHandler('onClickUiMenuItem', this.onClickUiMenuItem, 'li.ui-menu-item', 'click');
     },
     // Event Handlers (onX(e, args))
     onClickButtonNew: function(e, args) {
         SwdView.showNewPostDialog(e, args);
     },
-    onClickButtonMenuGroups: function(e, args) {
-        SwdView.showUiMenu(e, args);
-    },
     onClickHtml: function(e, args) {
         SwdView.closeAllUiMenus(e, args);
+    },
+    onClickMenuButton: function(e, args) {
+        SwdView.showUiMenu(e, args);
     },
     onClickUiMenuItem: function(e, args) {
         // TODO: Switch logic based on calling element.
