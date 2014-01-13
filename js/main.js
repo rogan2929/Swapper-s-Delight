@@ -49,9 +49,10 @@ var SwdModel = {
  * Presenter for the Swapper's Delight program.
  */
 var SwdPresenter = {
+    currentPage: 1,
     days: 0,
-    group: null,
-    post: null,
+    selectedGroup: null,
+    selectedPost: null,
     userObject: null,
     /**
      * Entry point of program.
@@ -121,7 +122,8 @@ var SwdPresenter = {
                                 });
 
                                 // Select first group and load posts.
-                                SwdPresenter.loadGroupFeed(groups[0]);
+                                SwdPresenter.selectedGroup = groups[0];
+                                SwdPresenter.loadGroupFeed();
 
                                 // Install Event Handlers
                                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
@@ -139,8 +141,13 @@ var SwdPresenter = {
         });
     },
     
-    loadGroupFeed: function(group) {
-        SwdModel.getGroupFeed(group, this.days, 1, function(response) {
+    /***
+     * 
+     * @param {type} group Facebook group ID.
+     * @param {type} postType Integer representing the type of post to retrieve. 0 = Group Feed, 1 = Buying, 2 = Selling, 3 = Pinned.
+     */
+    loadGroupFeed: function() {
+        SwdModel.getGroupFeed(this.selectedGroup, this.days, this.currentPage, function(response) {
             alert(response.feed.data[0].message);
         });
     },
