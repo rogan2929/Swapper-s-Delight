@@ -171,15 +171,15 @@ var SwdView = {
             }
         });
 
-        $('#button-delete').button({
+        $('#button-pin').button({
             icons: {
-                primary: 'ui-icon-trash'
+                primary: 'ui-icon-pin-s'
             }
         });
 
-        $('#button-bump').button({
+        $('#button-delete').button({
             icons: {
-                primary: 'ui-icon-circle-plus'
+                primary: 'ui-icon-trash'
             }
         });
 

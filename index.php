@@ -71,6 +71,7 @@
             <div class='control row'>
                 <div class='toolbar'>
                     <div id='button-new' class='toolbar-button'>New</div>
+                    <div id='button-pin' class='toolbar-button'>Pin</div>
                     <div id='button-delete' class='toolbar-button'>Delete</div>
                 </div>
                 <div class='right-toolbar'>
