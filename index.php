@@ -32,6 +32,7 @@
                     <div id='tabs-main'>
                         <ul>
                             <li><a href='#tab-feed'>Group Feed</a></li>
+                            <li><a href='#tab-following'>Following</a></li>
                             <li><a href='#tab-buying'>Buying</a></li>
                             <li><a href='#tab-selling'>Selling</a></li>
                         </ul>
