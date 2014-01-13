@@ -155,7 +155,7 @@ var SwdPresenter = {
      * Load feed for the current group.
      */
     loadPosts: function() {
-        SwdModel.getPosts(this.selectedGroup, this.days, this.currentPage, function(response) {
+        SwdModel.getPosts(this.selectedGroup, this.postType, this.days, this.currentPage, function(response) {
             SwdView.displayPosts(response.feed.data, SwdPresenter.postType);
         });
     },
