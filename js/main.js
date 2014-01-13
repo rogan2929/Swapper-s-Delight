@@ -36,7 +36,6 @@ var SwdModel = {
      * Query database for groups that the user has marked as 'BST' (Buy, Sell, Trade)
      * @param {type} id
      * @param {type} callback
-     * @returns {undefined}
      */
     queryBSTGroups: function(id, callback) {
         // This is just some dummy data. Replace this with an actual ajax call.
@@ -50,7 +49,6 @@ var SwdModel = {
  * Presenter for the Swapper's Delight program.
  */
 var SwdPresenter = {
-    selectedPost: null,
     userObject: null,
     /**
      * Entry point of program.
@@ -145,8 +143,13 @@ var SwdPresenter = {
         SwdView.showUiMenu(e, args);
     },
     onClickUiMenuItem: function(e, args) {
-        // TODO: Switch logic based on calling element.
-        alert($(e.currentTarget).attr('id'));
+        // Switch logic based on calling element.
+        var id = $(e.currentTarget).attr('id');
+
+        switch (id) {
+            default:
+                break;
+        }
     }
 };
 
