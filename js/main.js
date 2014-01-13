@@ -148,8 +148,6 @@ var SwdPresenter = {
      */
     loadGroupFeed: function() {
         SwdModel.getGroupFeed(this.selectedGroup, this.days, this.currentPage, function(response) {
-            alert(response.feed.data[0].message);
-            
             SwdView.displayFeed(response.feed.data);
         });
     },
@@ -259,8 +257,15 @@ var SwdView = {
         $('.ui-menu').hide();
     },
     
+    /***
+     * Displays the returned feed in the main window.
+     * @param {type} feed
+     */
     displayFeed: function(feed) {
         alert(feed[0].message);
+        
+        // TODO: Populate post tiles.
+        // TODO: Mark tiles as selectable.
     },
     /***
      * Displays new post dialog box.
