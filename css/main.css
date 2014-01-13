@@ -208,6 +208,7 @@ div.right-toolbar-button {
 .menu {
     position: absolute;
     display: none;
+    z-index: 1000;
 }
 
 /* ==========================================================================
