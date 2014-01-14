@@ -360,7 +360,8 @@ var SwdView = {
      * @param {type} text Text to display inside the button.
      */
     setGroupButtonText: function(text) {
-        $('#button-menu-groups').find('a').html(text);
+        alert(text);
+        $('#button-menu-groups span a').text(text);
     },
     /***
      * Displays new post dialog box.
