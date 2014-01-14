@@ -318,7 +318,15 @@ var SwdView = {
      * Sets menu positions.
      */
     positionMenus: function() {
-        
+        $('.menu-button').each(function() {
+            var menu = $(this).find('a').attr('href');
+            
+            $(menu).position({
+                of: $(this),
+                my: 'left top',
+                at: 'left bottom'
+            });
+        });
     },
     /***
      * Displays new post dialog box.
@@ -332,16 +340,12 @@ var SwdView = {
      */
     showUiMenu: function(e) {
         var menu;
-        
+
         e.stopPropagation();
         menu = $(e.currentTarget).find('a').attr('href');
-        
-        // Position and display the menu.
-        $(menu).position({
-            of: $(e.currentTarget),
-            my: 'left top',
-            at: 'left bottom'
-        }).slideDown(300);
+
+        // Display the menu.
+        $(menu).slideDown(300);
     }
 };
 
