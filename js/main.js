@@ -184,7 +184,7 @@ var SwdPresenter = {
             // Remove posts that are not in the selected date range.
             for (i = 0; i < response.feed.data.length; i++) {
                 post = response.feed.data[i];
-                feed += post;
+                feed.push(post);
             }
 
             SwdView.displayGroupFeed(feed, SwdPresenter.postType);
