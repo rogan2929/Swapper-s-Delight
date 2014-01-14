@@ -249,7 +249,7 @@ var SwdView = {
             }
         });
 
-        $('#button-pin').button('disabled', {
+        $('#button-pin').button('disable', {
             icons: {
                 primary: 'ui-icon-pin-s'
             }
