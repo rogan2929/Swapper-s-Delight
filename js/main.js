@@ -317,7 +317,7 @@ var SwdView = {
         });
 
         $('li.post-tile').click(function(e) {
-
+            SwdView.showRightColumn(e);
         });
     },
     /***
