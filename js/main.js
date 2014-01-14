@@ -312,9 +312,9 @@ var SwdView = {
             $('#feed-posts').append('<li id="' + feed[i].id + '" class="post-tile"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + feed[i].message + '</div></li>');
         }
 
-        $('#feed-posts').selectable({
-            filter: " > li"
-        });
+//        $('#feed-posts').selectable({
+//            filter: " > li"
+//        });
 
         $('.post-tile > *').click(function(e) {
             SwdView.showRightColumn(e);
