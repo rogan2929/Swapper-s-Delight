@@ -28,7 +28,7 @@
 
             <div class='left col'>
                 <div class='body row'>
-                    <div id='tabs-main'>
+                    <div id='tabs-main' class='tabs-bottom'>
                         <ul>
                             <li><a href='#tab-feed'>Group Feed</a></li>
                             <li><a href='#tab-buying'>Buying</a></li>
