@@ -153,7 +153,7 @@ var SwdPresenter = {
                                 // Position our menus.
                                 SwdView.positionMenus();
                                 
-                                $('.right.col').slide();
+                                $('.right.col').show('slide');
                             }
                         });
                     }
