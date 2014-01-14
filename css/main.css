@@ -182,9 +182,12 @@ div.right-toolbar {
     border-radius: 5px;
 }
 
-.post-tile img {
+.post-tile div {
     height: 130px;
     width: 130px;
+}
+
+.post-tile div img {
     display: block;
     margin-left: auto;
     margin-right: auto;
