@@ -311,7 +311,7 @@ var SwdView = {
         for (i = 0; i < feed.length; i++) {
             if (url) {
                 url = decodeURIComponent(feed[i].picture);
-                $('#feed-posts').append('<li class="post-tile" style="background-image: url("' + url + '")"></li>');
+                $('#feed-posts').append("<li class='post-tile' style='background-image: url('" + url + "')'></li>");
             }
         }
     },
