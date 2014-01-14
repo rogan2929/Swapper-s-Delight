@@ -187,12 +187,12 @@ div.right-toolbar {
     border: 4px solid #a7a7a7;
 }
 
-.post-tile .post-image {
+.post-image {
     height: 130px;
     width: 130px;
 }
 
-.post-tile div img {
+.post-tile div div img {
     max-height: 130px;
     max-width: 130px;
     display: block;
@@ -200,7 +200,7 @@ div.right-toolbar {
     margin-right: auto;
 }
 
-.post-tile .post-caption {
+.post-caption {
     height: 80px;
     margin-top: 3px;
     overflow-x: hidden;
