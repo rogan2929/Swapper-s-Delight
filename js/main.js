@@ -313,7 +313,7 @@ var SwdView = {
                 url = feed[i].picture;
             }
             else {
-                url = '';
+                url = '/img/no-image.gif';
             }
             
             $('#feed-posts').append('<li class="post-tile ui-widget ui-widget-content"><img src="' + url + '"><div class="post-caption">' + feed[i].message + '</div></li>');
