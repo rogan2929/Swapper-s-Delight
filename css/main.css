@@ -142,6 +142,7 @@ textarea {
 .right.col {
     width: 0;
     right: 0;
+    background-color: blue;
 }
 
 .body.row {

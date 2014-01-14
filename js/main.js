@@ -149,6 +149,11 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
                                 SwdView.installHandler('onClickUiMenuItem', SwdPresenter.onClickUiMenuItem, 'li.ui-menu-item', 'click');
                                 SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
+                                
+                                // Position our menus.
+                                SwdView.positionMenus();
+                                
+                                $('.right.col').slide();
                             }
                         });
                     }
@@ -268,8 +273,6 @@ var SwdView = {
         // Init menus.
         $('#popup-menu-main').menu();
         $('#popup-menu-date').menu();
-        
-        this.positionMenus();
     },
     /**
      * Installs an event handler and connects it to the presenter.
