@@ -109,7 +109,7 @@ var SwdPresenter = {
         SwdModel.facebookApi('me', function(response) {
             var i;
             var groupCount;
-            var groups;
+            var groups = [];
             var completed;
 
             // Save the FB user object for later consumption.
@@ -117,15 +117,15 @@ var SwdPresenter = {
 
             SwdModel.queryBSTGroups(SwdPresenter.userObject.id, function(response) {
                 groupCount = response.length;
-                groups = response;
                 completed = 0;
 
                 if (response.length > 0) {
                     // Have the view write create groups vertical tab.
                     for (i = 0; i < response.length; i++) {
                         SwdModel.facebookApi(response[i], function(response) {
-                            //$('<li style="display: block;"><a href="#"><img style="display: inline-block;" src="' + response.icon + '" /><div style="display: inline-block; margin-left: 5px">' + response.name + '</div></a></li>').appendTo('#popup-menu-groups');
-                            //alert('<li><a href="#">' + response.name + '</a></li>');
+                            // Add group to groups array.
+                            groups.push(response);
+                            
                             $('#popup-menu-groups').append('<li id="menu-item-' + response.id + '"><a href="#"><span class="ui-icon" style="background-image: url(' + response.icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + response.name + '</div></a></li>');
 
                             // Keep track of how many groups have been downloaded.
@@ -166,7 +166,7 @@ var SwdPresenter = {
      * Load feed for the current group.
      */
     loadGroupFeed: function() {
-        SwdModel.getGroupFeed(this.selectedGroup, this.days, this.currentPage, function(response) {
+        SwdModel.getGroupFeed(this.selectedGroup.id, this.days, this.currentPage, function(response) {
             var i;
             var post;
             var feed = [];
