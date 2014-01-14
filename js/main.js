@@ -261,17 +261,10 @@ var SwdView = {
             }
         });
 
-        $('#popup-menu-main').menu().position({
-            of: $('#button-menu-main'),
-            my: 'left top',
-            at: 'left bottom'
-        });
+        // Init menus.
+        $('#popup-menu-main').menu();
 
-        $('#popup-menu-date').menu().position({
-            of: $('#button-menu-date'),
-            my: 'left top',
-            at: 'left bottom'
-        });
+        $('#popup-menu-date').menu();
     },
     /**
      * Installs an event handler and connects it to the presenter.
@@ -329,9 +322,16 @@ var SwdView = {
      */
     showUiMenu: function(e) {
         var menu;
+        
         e.stopPropagation();
         menu = $(e.currentTarget).find('a').attr('href');
-        $(menu).slideDown(300);
+        
+        // Position and display the menu.
+        $(menu).position({
+            of: $(e.currentTarget),
+            my: 'left top',
+            at: 'left bottom'
+        }).slideDown(300);
     }
 };
 
