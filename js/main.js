@@ -56,7 +56,7 @@ var SwdModel = {
      */
     queryBSTGroups: function(id, callback) {
         // This is just some dummy data. Replace this with an actual ajax call.
-        var response = new Array('1447216838830981', '120696471425768', '575530119133790');
+        var response = new Array('120696471425768', '1447216838830981', '575530119133790');
 
         callback.call(SwdModel, response);
     }
@@ -109,6 +109,7 @@ var SwdPresenter = {
         SwdModel.facebookApi('me', function(response) {
             var i;
             var groupCount;
+            var bstGroupIds = response;
             var groups = [];
             var completed;
 
@@ -124,7 +125,7 @@ var SwdPresenter = {
                     for (i = 0; i < response.length; i++) {
                         SwdModel.facebookApi(response[i], function(response) {
                             // Add group to groups array.
-                            groups.push(response);
+                            groups[response.id] = response;
                             
                             $('#popup-menu-groups').append('<li id="menu-item-' + response.id + '"><a href="#"><span class="ui-icon" style="background-image: url(' + response.icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + response.name + '</div></a></li>');
 
@@ -140,7 +141,7 @@ var SwdPresenter = {
                                 });
 
                                 // Select first group and load posts.
-                                SwdPresenter.setSelectedGroup(groups[0]);
+                                SwdPresenter.setSelectedGroup(groups[bstGroupIds[0]]);
 
                                 // Install Event Handlers
                                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
