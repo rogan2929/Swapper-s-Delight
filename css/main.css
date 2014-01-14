@@ -180,6 +180,7 @@ div.right-toolbar {
     display: inline-block;
     cursor: pointer;
     border-radius: 5px;
+    border: 2px solid transparent;
 }
 
 .post-tile:hover {
@@ -187,8 +188,8 @@ div.right-toolbar {
 }
 
 .post-tile img {
-    max-height: 130px;
-    max-width: 130px;
+    height: 130px;
+    width: 130px;
     display: block;
     margin-left: auto;
     margin-right: auto;
