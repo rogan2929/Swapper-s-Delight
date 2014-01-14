@@ -164,6 +164,7 @@ var SwdPresenter = {
     loadGroupFeed: function() {
         SwdModel.getGroupFeed(this.selectedGroup, this.days, this.currentPage, function(response) {
             var i;
+            var post;
             var feed = [];
 
             // If looking for marked posts, then make an additional API call to determine what these are.
@@ -182,7 +183,8 @@ var SwdPresenter = {
             
             // Remove posts that are not in the selected date range.
             for (i = 0; i < response.feed.data.length; i++) {
-                feed 
+                post = response.feed.data[i];
+                feed += post;
             }
 
             SwdView.displayGroupFeed(feed, SwdPresenter.postType);
