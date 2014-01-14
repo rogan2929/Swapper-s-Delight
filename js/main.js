@@ -154,7 +154,9 @@ var SwdPresenter = {
                                 SwdView.positionMenus();
 
                                 $('.right.col').toggle('slide', {
-                                    direction: 'right'
+                                    direction: 'right',
+                                    duration: 300,
+                                    easing: 'easeInOutQuint'
                                 });
                             }
                         });
