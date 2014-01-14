@@ -194,6 +194,10 @@ var SwdPresenter = {
             SwdView.displayGroupFeed(feed, SwdPresenter.postType);
         });
     },
+    /***
+     * Set currently selected group.
+     * @param {type} group
+     */
     setSelectedGroup: function(group) {
         SwdPresenter.selectedGroup = group;
         SwdPresenter.loadGroupFeed();
@@ -361,7 +365,7 @@ var SwdView = {
      */
     setGroupButtonText: function(text) {
         alert(text);
-        $('#button-menu-groups span a').text(text);
+        //$('#button-menu-groups span a').text(text);
     },
     /***
      * Displays new post dialog box.
