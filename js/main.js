@@ -322,7 +322,7 @@ var SwdView = {
 //            filter: " > li"
 //        });
 
-        $('.post-tile > *').click(SwdView.handlers['.post-tile > *']);
+        $('.post-tile > *').click(SwdView.handlers['onClickPostTile']);
     },
     /***
      * Sets menu positions.
