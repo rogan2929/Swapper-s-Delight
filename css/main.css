@@ -183,6 +183,8 @@ div.right-toolbar {
 }
 
 .post-tile img {
+    max-height: 130px;
+    max-width: 130px;
     display: block;
     margin-left: auto;
     margin-right: auto;
