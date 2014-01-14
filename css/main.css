@@ -140,9 +140,8 @@ textarea {
 }
 
 .right.col {
-    width: 200px;
+    width: 300px;
     right: 0;
-    background-color: blue;
     display: none;
     z-index: 1000;
 }

@@ -149,11 +149,13 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
                                 SwdView.installHandler('onClickUiMenuItem', SwdPresenter.onClickUiMenuItem, 'li.ui-menu-item', 'click');
                                 SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
-                                
+
                                 // Position our menus.
                                 SwdView.positionMenus();
-                                
-                                $('.right.col').show('slide');
+
+                                $('.right.col').toggle('slide', {
+                                    direction: 'right'
+                                });
                             }
                         });
                     }
@@ -324,9 +326,9 @@ var SwdView = {
     positionMenus: function() {
         $('.menu-button').each(function() {
             var menu = $(this).find('a').attr('href');
-            
+
             $(menu).css({top: 0, left: 0, position: 'absolute'});
-            
+
             $(menu).position({
                 of: $(this),
                 my: 'left top',
