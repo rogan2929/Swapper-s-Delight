@@ -210,13 +210,13 @@ div.right-toolbar {
     font-size: 0.9em;
 }
 
-#feed-posts .ui-selecting { 
+/*#feed-posts .ui-selecting { 
     border: 5px solid #FECA40;
 }
 
 #feed-posts .ui-selected { 
     border: 5px solid #F39814;
-}
+}*/
 
 div.right-toolbar-button {
     display: inline-block;
