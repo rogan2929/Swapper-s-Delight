@@ -182,6 +182,10 @@ div.right-toolbar {
     border-radius: 5px;
 }
 
+.post-tile:hover {
+    border: 2px solid #a7a7a7;
+}
+
 .post-tile img {
     max-height: 130px;
     max-width: 130px;
