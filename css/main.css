@@ -180,6 +180,7 @@ div.right-toolbar {
     display: inline-block;
     cursor: pointer;
     border-radius: 5px;
+    background: #f0f0f0;
 }
 
 .post-tile .post-image {
@@ -206,7 +207,6 @@ div.right-toolbar {
     overflow-x: hidden;
     overflow-y: hidden;
     font-size: 0.7em;
-    background: #f0f0f0;
 }
 
 #feed-posts .ui-selecting { 
