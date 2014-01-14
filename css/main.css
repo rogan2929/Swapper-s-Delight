@@ -200,7 +200,7 @@ div.right-toolbar {
     margin-right: auto;
 }
 
-.post-caption {
+.post-tile .post-caption {
     height: 80px;
     margin-top: 3px;
     overflow-x: hidden;
