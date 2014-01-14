@@ -181,15 +181,15 @@ div.right-toolbar {
     cursor: pointer;
     border-radius: 5px;
     background: #f0f0f0;
+    border: 4px solid transparent;
 }
 
 .post-tile .post-image {
     height: 130px;
     width: 130px;
-    border: 4px solid transparent;
 }
 
-.post-tile .post-image:hover {
+.post-tile:hover {
     border: 4px solid #a7a7a7;
 }
 
