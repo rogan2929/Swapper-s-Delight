@@ -140,7 +140,7 @@ var SwdPresenter = {
                                 });
 
                                 // Select first group and load posts.
-                                SwdPresenter.setSelectedGroup(group[0]);
+                                SwdPresenter.setSelectedGroup(groups[0]);
 
                                 // Install Event Handlers
                                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
