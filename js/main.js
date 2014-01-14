@@ -152,12 +152,6 @@ var SwdPresenter = {
 
                                 // Position our menus.
                                 SwdView.positionMenus();
-
-                                $('.right.col').toggle('slide', {
-                                    direction: 'right',
-                                    duration: 300,
-                                    easing: 'easeInOutQuint'
-                                });
                             }
                         });
                     }
@@ -321,6 +315,10 @@ var SwdView = {
         $('#feed-posts').selectable({
             filter: " > li"
         });
+
+        $('li.post-tile').click(function(e) {
+
+        });
     },
     /***
      * Sets menu positions.
@@ -343,6 +341,17 @@ var SwdView = {
      */
     showNewPostDialog: function() {
         $('#dialog-new-post').dialog();
+    },
+    /***
+     * Shows the right column.
+     * @param {type} post Post to load into right column.
+     */
+    showRightColumn: function(post) {
+        $('.right.col').show('slide', {
+            direction: 'right',
+            duration: 300,
+            easing: 'easeInOutQuint'
+        });
     },
     /***
      * Shows a Jquery UI menu.
