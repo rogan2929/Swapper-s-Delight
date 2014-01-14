@@ -33,7 +33,7 @@
                             <li><a href='#tab-feed'>Group Feed</a></li>
                             <li><a href='#tab-buying'>Buying</a></li>
                             <li><a href='#tab-selling'>Selling</a></li>
-                            <li><a href='#tab-following'>Pinned</a></li>
+                            <li><a href='#tab-pinned'>Pinned</a></li>
                         </ul>
                         <div id='tab-feed'>
                             <ol id='feed-posts'>

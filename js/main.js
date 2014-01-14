@@ -3,7 +3,7 @@
 // "Enums"
 
 // PostType Enum
-var PostType = {group: 0, buying: 1, selling: 2, pinned: 3}
+var PostType = {group: 0, buying: 1, selling: 2, pinned: 3};
 
 // http://stackoverflow.com/questions/1102215/mvp-pattern-with-javascript-framework
 
@@ -20,19 +20,26 @@ var SwdModel = {
         FB.api('/' + api, callback);
     },
     /***
+     * AJAX call to retrieve marked posts for the given group.
+     * @param {type} postType
+     * @param {type} callback
+     */
+    getMarkedPosts: function(postType, callback) {
+
+    },
+    /***
      * AJAX call to FB group feed.
      * @param {type} group Group whose feed is to be retrieved.
-     * @param {type} postType Type of post to retrieve. Specified by PostType enum.
      * @param {type} days Days before today. (0 = today)
      * @param {type} page Page number in results. (Will be multiplied by 25 for exact post count).
      * @param {type} callback Completed callback function.
      */
-    getPosts: function(group, postType, days, page, callback) {
-        switch (postType) {
-            case PostType.group:
-                SwdModel.facebookApi(group + '?fields=feed', callback);
-                break;
-        }
+    getGroupFeed: function(group, days, page, callback) {
+        var from = 25 * page;
+        var to = from + 25;
+        var apiCall = group + '?fields=feed';
+
+        SwdModel.facebookApi(apiCall, callback);
     },
     /***
      * AJAX call to FB comment feed for given post.
@@ -59,7 +66,7 @@ var SwdModel = {
  * Presenter for the Swapper's Delight program.
  */
 var SwdPresenter = {
-    currentPage: 1,
+    currentPage: 0,
     days: 0,
     postType: PostType.group,
     selectedGroup: null,
@@ -75,7 +82,7 @@ var SwdPresenter = {
         $.getScript('//connect.facebook.net/en_US/all.js', function() {
             FB.init({
                 //appId: '1401018793479333',      // Swapper's Delight PROD
-                appId: '652991661414427', // Swapper's Delight TEST
+                appId: '652991661414427' // Swapper's Delight TEST
             });
 
             $('#loginbutton,#feedbutton').removeAttr('disabled');
@@ -134,7 +141,7 @@ var SwdPresenter = {
 
                                 // Select first group and load posts.
                                 SwdPresenter.selectedGroup = groups[0];
-                                SwdPresenter.loadPosts();
+                                SwdPresenter.loadGroupFeed();
 
                                 // Install Event Handlers
                                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
@@ -154,9 +161,31 @@ var SwdPresenter = {
     /***
      * Load feed for the current group.
      */
-    loadPosts: function() {
-        SwdModel.getPosts(this.selectedGroup, this.postType, this.days, this.currentPage, function(response) {
-            SwdView.displayPosts(response.feed.data, SwdPresenter.postType);
+    loadGroupFeed: function() {
+        SwdModel.getGroupFeed(this.selectedGroup, this.days, this.currentPage, function(response) {
+            var i;
+            var feed = {};
+
+            // If looking for marked posts, then make an additional API call to determine what these are.
+            if (SwdPresenter.postType !== PostType.group) {
+                SwdModel.getMarkedPosts(SwdPresenter.postType, function(response) {
+                    switch (SwdPresenter.postType) {
+                        case PostType.buying:
+                            break;
+                        case PostType.selling:
+                            break;
+                        case PostType.pinned:
+                            break;
+                    }
+                });
+            }
+            
+            // Remove posts that are not in the selected date range.
+            for (i = 0; i < response.feed.data.length; i++) {
+                
+            }
+
+            SwdView.displayGroupFeed(feed, SwdPresenter.postType);
         });
     },
     // Event Handlers (onX(e, args))
@@ -268,11 +297,11 @@ var SwdView = {
      * @param {type} feed
      * @param {type} postType
      */
-    displayPosts: function(feed, postType) {
+    displayGroupFeed: function(feed, postType) {
         var i;
 
         for (i = 0; i < feed.length; i++) {
-            $('#feed-posts').append('<li class="post-tile" style="background-image"' +  + '></li>');
+            $('#feed-posts').append('<li class="post-tile" style="background-image"' + +'></li>');
         }
     },
     /***
