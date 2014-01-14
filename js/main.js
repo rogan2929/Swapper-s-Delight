@@ -255,12 +255,6 @@ var SwdView = {
             }
         });
 
-        $('#button-delete').button({
-            icons: {
-                primary: 'ui-icon-trash'
-            }
-        });
-
         $('#button-menu-date').button({
             icons: {
                 primary: 'ui-icon-calendar'
@@ -315,7 +309,7 @@ var SwdView = {
             else {
                 url = '/img/no-image.gif';
             }
-            
+
             $('#feed-posts').append('<li class="post-tile ui-widget ui-widget-content"><img src="' + url + '"><div class="post-caption">' + feed[i].message + '</div></li>');
         }
     },

@@ -62,7 +62,6 @@
                     <div id='button-menu-groups' class='menu-button'><a href='#popup-menu-groups'>Select a Group</a></div>
                     <div id='button-new' class='toolbar-button'>New</div>
                     <div id='button-pin' class='toolbar-button'>Pin</div>
-                    <div id='button-delete' class='toolbar-button'>Delete</div>
                 </div>
                 <div class='right-toolbar'>
                     <span class='ui-widget'>Showing Posts From:</span>
