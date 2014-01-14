@@ -131,7 +131,7 @@ textarea {
 }
 
 .header {
-/*    border-bottom: 1px solid black*/
+    /*    border-bottom: 1px solid black*/
 }
 
 .left.col {
@@ -180,7 +180,6 @@ div.right-toolbar {
     display: inline-block;
     cursor: pointer;
     border-radius: 5px;
-    border: 2px solid transparent;
 }
 
 .post-tile img {
@@ -189,10 +188,11 @@ div.right-toolbar {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    border: 4px solid transparent;
 }
 
 .post-tile img:hover {
-    border: 2px solid #a7a7a7;
+    border: 4px solid #a7a7a7;
 }
 
 .post-caption {
@@ -261,9 +261,9 @@ div.right-toolbar-button {
  */
 
 .hidden {
-/*    display: none !important;*/
+    /*    display: none !important;*/
     display: none;
-/*    visibility: hidden;*/
+    /*    visibility: hidden;*/
 }
 
 /*
@@ -346,9 +346,9 @@ div.right-toolbar-button {
 }
 
 @media print,
-       (-o-min-device-pixel-ratio: 5/4),
-       (-webkit-min-device-pixel-ratio: 1.25),
-       (min-resolution: 120dpi) {
+(-o-min-device-pixel-ratio: 5/4),
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 120dpi) {
     /* Style adjustments for high resolution devices */
 }
 
