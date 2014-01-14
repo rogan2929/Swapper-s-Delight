@@ -316,7 +316,7 @@ var SwdView = {
                 url = '';
             }
             
-            $('#feed-posts').append('<li class="post-tile"><img src="' + url + '"><div class="post-caption">' + feed[i].message + '</div></li>');
+            $('#feed-posts').append('<li class="post-tile ui-widget"><img src="' + url + '"><div class="post-caption">' + feed[i].message + '</div></li>');
         }
     },
     /***

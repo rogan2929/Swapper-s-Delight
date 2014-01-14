@@ -182,12 +182,18 @@ div.right-toolbar {
     border-radius: 5px;
 }
 
+.post-tile img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .post-caption {
     height: 50px;
     overflow-x: hidden;
     overflow-y: hidden;
     font-size: 0.6em;
-    background: #c0c0c0;
+    background: #f0f0f0;
 }
 
 #feed-posts .ui-selecting { 
