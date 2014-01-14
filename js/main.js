@@ -334,7 +334,7 @@ var SwdView = {
                 message = '[No caption for image.]'
             }
 
-            $('#feed-posts').append('<li id="' + feed[i].id + '" class="post-tile"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + feed[i].message + '</div></li>');
+            $('#feed-posts').append('<li id="' + feed[i].id + '" class="post-tile"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + message + '</div></li>');
         }
 
 //        $('#feed-posts').selectable({
