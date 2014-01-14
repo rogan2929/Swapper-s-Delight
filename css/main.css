@@ -206,6 +206,8 @@ div.right-toolbar {
     overflow-x: hidden;
     overflow-y: hidden;
     font-size: 0.7em;
+    border-color: transparent;
+    background-color: transparent;
 }
 
 #feed-posts .ui-selecting { 
