@@ -12,7 +12,7 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <link rel='stylesheet' href="//code.jquery.com/ui/1.10.3/themes/start/jquery-ui.css">
+        <link rel='stylesheet' href="//code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css">
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
