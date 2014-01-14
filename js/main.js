@@ -267,8 +267,9 @@ var SwdView = {
 
         // Init menus.
         $('#popup-menu-main').menu();
-
         $('#popup-menu-date').menu();
+        
+        this.positionMenus();
     },
     /**
      * Installs an event handler and connects it to the presenter.
