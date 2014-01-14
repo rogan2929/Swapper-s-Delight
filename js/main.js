@@ -140,8 +140,7 @@ var SwdPresenter = {
                                 });
 
                                 // Select first group and load posts.
-                                SwdPresenter.selectedGroup = groups[0];
-                                SwdPresenter.loadGroupFeed();
+                                SwdPresenter.setSelectedGroup(group[0]);
 
                                 // Install Event Handlers
                                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
@@ -194,6 +193,11 @@ var SwdPresenter = {
 
             SwdView.displayGroupFeed(feed, SwdPresenter.postType);
         });
+    },
+    setSelectedGroup: function(group) {
+        SwdPresenter.selectedGroup = group;
+        SwdPresenter.loadGroupFeed();
+        SwdView.setGroupButtonText(group.name);
     },
     // Event Handlers (onX(e, args))
     onClickButtonNew: function(e, args) {
@@ -325,6 +329,9 @@ var SwdView = {
 
         $('.post-tile > *').click(SwdView.handlers['onClickPostTile']);
     },
+    /***
+     * Hides the right column.
+     */
     hideRightColumn: function() {
         $('.right.col').hide('slide', {
             direction: 'right',
@@ -347,6 +354,13 @@ var SwdView = {
                 at: 'left bottom'
             });
         });
+    },
+    /***
+     * Changes the text shown in the "Select a Group" button.
+     * @param {type} text Text to display inside the button.
+     */
+    setGroupButtonText: function(text) {
+        $('#button-menu-groups a').innerHtml(text);
     },
     /***
      * Displays new post dialog box.
