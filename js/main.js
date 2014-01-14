@@ -56,7 +56,7 @@ var SwdModel = {
      */
     queryBSTGroups: function(id, callback) {
         // This is just some dummy data. Replace this with an actual ajax call.
-        var response = new Array('120696471425768', '1447216838830981', '575530119133790');
+        var response = new Array('1447216838830981', '120696471425768', '575530119133790');
 
         callback.call(SwdModel, response);
     }
@@ -364,8 +364,7 @@ var SwdView = {
      * @param {type} text Text to display inside the button.
      */
     setGroupButtonText: function(text) {
-        alert(text);
-        //$('#button-menu-groups span a').text(text);
+        $('#button-menu-groups span a').text(text);
     },
     /***
      * Displays new post dialog box.
