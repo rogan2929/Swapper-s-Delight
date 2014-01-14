@@ -183,7 +183,13 @@ div.right-toolbar {
     border: 4px solid transparent;
 }
 
-.post-tile:hover {
+.post-container {
+    width: 130px;
+    height: 130px;
+    
+}
+
+.post-container:hover {
     border-color: #a7a7a7
 }
 
