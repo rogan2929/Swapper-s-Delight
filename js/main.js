@@ -318,7 +318,7 @@ var SwdView = {
      * Sets menu positions.
      */
     positionMenus: function() {
-        alert('test');
+        
     },
     /***
      * Displays new post dialog box.
