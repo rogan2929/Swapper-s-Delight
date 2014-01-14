@@ -306,9 +306,14 @@ var SwdView = {
      */
     displayGroupFeed: function(feed, postType) {
         var i;
+        var url;
 
         for (i = 0; i < feed.length; i++) {
-            $('#feed-posts').append('<li class="post-tile" style="background-image: url("' + feed[i].picture.replace('/', '//') + '")"></li>');
+            url = feed[i].picture;
+
+            if (url) {
+                $('#feed-posts').append('<li class="post-tile" style="background-image: url("' + url.replace('/', '//') + '")"></li>');
+            }
         }
     },
     /***
