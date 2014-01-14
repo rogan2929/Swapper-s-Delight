@@ -185,6 +185,11 @@ div.right-toolbar {
 .post-tile div {
     height: 130px;
     width: 130px;
+    border: 4px solid transparent;
+}
+
+post-tile div:hover {
+    border: 4px solid #a7a7a7;
 }
 
 .post-tile div img {
@@ -193,11 +198,6 @@ div.right-toolbar {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    border: 4px solid transparent;
-}
-
-.post-tile img:hover {
-    border: 4px solid #a7a7a7;
 }
 
 .post-caption {
