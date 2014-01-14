@@ -322,6 +322,8 @@ var SwdView = {
         $('.menu-button').each(function() {
             var menu = $(this).find('a').attr('href');
             
+            $(menu).css({top: 0, left: 0, position: 'absolute'});
+            
             $(menu).position({
                 of: $(this),
                 my: 'left top',
