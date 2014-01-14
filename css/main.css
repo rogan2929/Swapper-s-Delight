@@ -180,11 +180,12 @@ div.right-toolbar {
     display: inline-block;
     cursor: pointer;
     border-radius: 5px;
-    border: 4px solid transparent;
+/*    border: 4px solid transparent;*/
 }
 
-.post-tile-hover {
-    border: 4px solid #a7a7a7;
+.post-container {
+    width: 130px;
+    height: 130px;
 }
 
 .post-image {
@@ -192,7 +193,7 @@ div.right-toolbar {
     width: 130px;
 }
 
-.post-tile div img {
+.post-image img {
     max-height: 130px;
     max-width: 130px;
     display: block;
@@ -208,8 +209,12 @@ div.right-toolbar {
     font-size: 0.7em;
 }
 
+/*#feed-posts li:hover {
+    border: 10px solid #ccc;
+}
+
 #feed-posts .ui-selecting { 
-    border: 10px solid #FECA40; 
+    border: 10px solid #FECA40;
     margin: 10px;
 }
 
@@ -217,7 +222,7 @@ div.right-toolbar {
     border: 10px solid #F39814; 
     color: white; 
     margin: 10px;
-}
+}*/
 
 div.right-toolbar-button {
     display: inline-block;
