@@ -147,6 +147,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
                                 SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
                                 SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
+                                SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
                                 SwdView.installHandler('onClickUiMenuItem', SwdPresenter.onClickUiMenuItem, 'li.ui-menu-item', 'click');
                                 SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
 
@@ -212,6 +213,11 @@ var SwdPresenter = {
             default:
                 break;
         }
+    },
+    onClickPostTile: function(e, args) {
+        var post = $(e.currentTarget).attr('id');
+        e.stopPropagation();
+        SwdView.showRightColumn(post);
     },
     onWindowResize: function(e, args) {
         SwdView.positionMenus();
@@ -316,9 +322,7 @@ var SwdView = {
 //            filter: " > li"
 //        });
 
-        $('.post-tile > *').click(function(e) {
-            SwdView.showRightColumn(e);
-        });
+        $('.post-tile > *').click(SwdView.handlers['.post-tile > *']);
     },
     /***
      * Sets menu positions.
