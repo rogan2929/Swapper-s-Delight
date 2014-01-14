@@ -174,8 +174,8 @@ div.right-toolbar {
 }
 
 .post-tile {
-    width: 140px;
-    height: 140px;
+    width: 120px;
+    height: 120px;
     margin: 16px;
     display: inline-block;
     cursor: pointer;
