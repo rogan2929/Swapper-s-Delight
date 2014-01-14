@@ -312,6 +312,7 @@ var SwdView = {
             url = feed[i].picture;
 
             if (url) {
+                alert(url);
                 $('#feed-posts').append('<li class="post-tile" style="background-image: url("' + url.replace('/', '//') + '")"></li>');
             }
         }
