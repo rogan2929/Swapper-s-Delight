@@ -317,6 +317,7 @@ var SwdView = {
     displayGroupFeed: function(feed, postType) {
         var i;
         var url;
+        var message;
 
         for (i = 0; i < feed.length; i++) {
             if (feed[i].picture) {
@@ -324,6 +325,13 @@ var SwdView = {
             }
             else {
                 url = '/img/no-image.jpg';
+            }
+            
+            if (feed[i].message) {
+                message = feed[i].message;
+            }
+            else {
+                message = '[No caption for image.]'
             }
 
             $('#feed-posts').append('<li id="' + feed[i].id + '" class="post-tile"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + feed[i].message + '</div></li>');
