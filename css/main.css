@@ -213,10 +213,6 @@ div.right-toolbar {
     font-size: 0.7em;
 }
 
-/*#feed-posts li:hover {
-    border: 10px solid #ccc;
-}
-
 #feed-posts .ui-selecting { 
     border: 10px solid #FECA40;
     margin: 10px;
@@ -226,7 +222,7 @@ div.right-toolbar {
     border: 10px solid #F39814; 
     color: white; 
     margin: 10px;
-}*/
+}
 
 div.right-toolbar-button {
     display: inline-block;

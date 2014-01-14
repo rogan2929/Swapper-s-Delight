@@ -310,8 +310,10 @@ var SwdView = {
                 url = '/img/no-image.jpg';
             }
 
-            $('#feed-posts').append('<li id="' + feed[i].id + '" class="post-tile"><input type="checkbox" name="post" value="' + feed[i].id + '"><div class="ui-widget post-container"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + feed[i].message + '</div></div></li>');
+            $('#feed-posts').append('<li id="' + feed[i].id + '" class="post-tile"><div class="ui-widget post-container"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + feed[i].message + '</div></div></li>');
         }
+        
+        $('#feed-posts').selectable();
     },
     /***
      * Displays new post dialog box.
