@@ -148,6 +148,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
                                 SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
                                 SwdView.installHandler('onClickUiMenuItem', SwdPresenter.onClickUiMenuItem, 'li.ui-menu-item', 'click');
+                                SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
                             }
                         });
                     }
@@ -208,6 +209,9 @@ var SwdPresenter = {
             default:
                 break;
         }
+    },
+    onWindowResize: function(e, args) {
+        SwdView.positionMenus();
     }
 };
 
@@ -309,6 +313,12 @@ var SwdView = {
         $('#feed-posts').selectable({
             filter: " > li"
         });
+    },
+    /***
+     * Sets menu positions.
+     */
+    positionMenus: function() {
+        alert('test');
     },
     /***
      * Displays new post dialog box.
