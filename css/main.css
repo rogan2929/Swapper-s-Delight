@@ -180,11 +180,15 @@ div.right-toolbar {
     display: inline-block;
     cursor: pointer;
     border-radius: 5px;
-    border: 4px solid transparent;
+}
+
+.post-container {
+    margin: 4px;
 }
 
 .post-container:hover {
     border: 4px solid #a7a7a7;
+    margin: 0px;
 }
 
 .post-image {
