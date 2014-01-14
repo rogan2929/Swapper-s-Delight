@@ -309,10 +309,8 @@ var SwdView = {
         var url;
 
         for (i = 0; i < feed.length; i++) {
-            url = decodeURIComponent(feed[i].picture);
-
             if (url) {
-                alert(url);
+                url = decodeURIComponent(feed[i].picture);
                 $('#feed-posts').append('<li class="post-tile" style="background-image: url("' + url + '")"></li>');
             }
         }
