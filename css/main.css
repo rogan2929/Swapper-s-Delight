@@ -214,14 +214,11 @@ div.right-toolbar {
 }
 
 #feed-posts .ui-selecting { 
-    border: 10px solid #FECA40;
-    margin: 10px;
+    border: 4px solid #FECA40;
 }
 
 #feed-posts .ui-selected { 
-    border: 10px solid #F39814; 
-    color: white; 
-    margin: 10px;
+    border: 4px solid #F39814;
 }
 
 div.right-toolbar-button {
