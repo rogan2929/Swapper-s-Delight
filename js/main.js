@@ -316,7 +316,7 @@ var SwdView = {
             filter: " > li"
         });
 
-        $('li.post-tile *').click(function(e) {
+        $('li.post-tile').on('click', '*', function(e) {
             SwdView.showRightColumn(e);
         });
     },
