@@ -201,6 +201,7 @@ var SwdPresenter = {
     },
     onClickHtml: function(e, args) {
         SwdView.closeAllUiMenus();
+        SwdView.hideRightColumn();
     },
     onClickMenuButton: function(e, args) {
         SwdView.showUiMenu(e);
@@ -323,6 +324,13 @@ var SwdView = {
 //        });
 
         $('.post-tile > *').click(SwdView.handlers['onClickPostTile']);
+    },
+    hideRightColumn: function() {
+        $('.right.col').hide('slide', {
+            direction: 'right',
+            duration: 300,
+            easing: 'easeInOutQuint'
+        });
     },
     /***
      * Sets menu positions.
