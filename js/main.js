@@ -249,11 +249,11 @@ var SwdView = {
             }
         });
 
-        $('#button-pin').button('disable', {
+        $('#button-pin').button({
             icons: {
                 primary: 'ui-icon-pin-s'
             }
-        });
+        }).toggle();
 
         $('#button-menu-date').button({
             icons: {
