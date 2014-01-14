@@ -312,12 +312,6 @@ var SwdView = {
 
             $('#feed-posts').append('<li id="' + feed[i].id + '" class="post-tile"><div class="post-container"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + feed[i].message + '</div></div></li>');
         }
-        
-        $('li.post-tile').hover(function() {
-            $(this).addClass('post-tile-hover');
-        }, function() {
-            $(this).removeClass('post-tile-hover');
-        });
     },
     /***
      * Displays new post dialog box.
