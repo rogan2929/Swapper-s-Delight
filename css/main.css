@@ -184,6 +184,7 @@ div.right-toolbar {
 
 .post-caption {
     height: 50px;
+    overflow-x: hidden;
     overflow-y: hidden;
     font-size: 0.6em;
     background: #c0c0c0;
