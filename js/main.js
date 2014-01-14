@@ -109,7 +109,7 @@ var SwdPresenter = {
         SwdModel.facebookApi('me', function(response) {
             var i;
             var groupCount;
-            var bstGroupIds = response;
+            var bstGroupIds;
             var groups = [];
             var completed;
 
@@ -118,6 +118,7 @@ var SwdPresenter = {
 
             SwdModel.queryBSTGroups(SwdPresenter.userObject.id, function(response) {
                 groupCount = response.length;
+                bstGroupIds = response;
                 completed = 0;
 
                 if (response.length > 0) {
@@ -141,7 +142,6 @@ var SwdPresenter = {
                                 });
 
                                 // Select first group and load posts.
-                                alert(bstGroupIds[0]);
                                 SwdPresenter.setSelectedGroup(groups[bstGroupIds[0]]);
 
                                 // Install Event Handlers
