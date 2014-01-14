@@ -184,7 +184,7 @@ div.right-toolbar {
 }
 
 .post-tile:hover {
-    border: 4px solid #a7a7a7;
+    border-color: #a7a7a7;
 }
 
 .post-tile .post-image {
