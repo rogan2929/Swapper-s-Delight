@@ -310,7 +310,7 @@ var SwdView = {
                 url = '/img/no-image.jpg';
             }
 
-            $('#feed-posts').append('<li class="post-tile"><div class= "post-container ui-widget ui-widget-content"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + feed[i].message + '</div></div></li>');
+            $('#feed-posts').append('<li class="post-tile ui-widget ui-widget-content"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + feed[i].message + '</div></li>');
         }
     },
     /***
