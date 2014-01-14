@@ -183,16 +183,16 @@ div.right-toolbar {
     border: 2px solid transparent;
 }
 
-.post-tile:hover {
-    border: 2px solid #a7a7a7;
-}
-
 .post-tile img {
     height: 130px;
     width: 130px;
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.post-tile img:hover {
+    border: 2px solid #a7a7a7;
 }
 
 .post-caption {
