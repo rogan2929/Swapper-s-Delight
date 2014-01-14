@@ -183,7 +183,7 @@ div.right-toolbar {
     border: 4px solid transparent;
 }
 
-.post-tile:hover {
+.post-container:hover {
     border: 4px solid #a7a7a7;
 }
 
@@ -206,8 +206,6 @@ div.right-toolbar {
     overflow-x: hidden;
     overflow-y: hidden;
     font-size: 0.7em;
-    border-color: transparent;
-    background-color: transparent;
 }
 
 #feed-posts .ui-selecting { 
