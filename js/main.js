@@ -312,6 +312,12 @@ var SwdView = {
 
             $('#feed-posts').append('<li class="post-tile ui-widget ui-widget-content"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + feed[i].message + '</div></li>');
         }
+        
+        $('li.post-tile').hover(function() {
+            $(this).addClass('post-tile-hover');
+        }, function() {
+            $(this).removeClass('post-tile-hover');
+        });
     },
     /***
      * Displays new post dialog box.

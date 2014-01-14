@@ -183,7 +183,7 @@ div.right-toolbar {
     border: 4px solid transparent;
 }
 
-li.post-tile:hover {
+.post-tile-hover {
     border: 4px solid #a7a7a7;
 }
 
