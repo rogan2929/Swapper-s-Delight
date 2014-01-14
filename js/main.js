@@ -180,7 +180,7 @@ var SwdPresenter = {
                     }
                 });
             }
-            
+
             // Remove posts that are not in the selected date range.
             for (i = 0; i < response.feed.data.length; i++) {
                 post = response.feed.data[i];
@@ -223,7 +223,9 @@ var SwdView = {
         // Init header row buttons.
         $('#tabs-main').tabs({
             heightStyle: "fill"
-        });
+        }).addClass("ui-tabs-vertical ui-helper-clearfix");
+
+        $('#tabs-main li').removeClass("ui-corner-top").addClass("ui-corner-left");
 
         // Set up buttons
         $('#button-menu-main').button({
