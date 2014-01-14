@@ -141,6 +141,7 @@ var SwdPresenter = {
                                 });
 
                                 // Select first group and load posts.
+                                alert(bstGroupIds[0]);
                                 SwdPresenter.setSelectedGroup(groups[bstGroupIds[0]]);
 
                                 // Install Event Handlers
