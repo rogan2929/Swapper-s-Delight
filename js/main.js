@@ -327,7 +327,7 @@ var SwdView = {
         var menu;
         e.stopPropagation();
         menu = $(e.currentTarget).find('a').attr('href');
-        $(menu).slideDown();
+        $(menu).slideDown(300);
     }
 };
 
