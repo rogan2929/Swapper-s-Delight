@@ -74,7 +74,7 @@
             <!--Menus-->
 
             <ul id='popup-menu-groups' class='menu'>
-                <li id='menu-item-choose-groups'><a href='#'><span class='ui-icon ui-icon-check'></span>Choose Groups...</a></li>
+                <li id='menu-item-choose-groups'><a href='#'><span class='ui-icon ui-icon-check'></span>Edit Groups...</a></li>
             </ul>
 
             <ul id='popup-menu-main' class='menu'>
