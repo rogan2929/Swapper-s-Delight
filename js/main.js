@@ -309,11 +309,11 @@ var SwdView = {
         var url;
 
         for (i = 0; i < feed.length; i++) {
-            url = feed[i].picture;
+            url = decodeURIComponent(feed[i].picture);
 
             if (url) {
                 alert(url);
-                $('#feed-posts').append('<li class="post-tile" style="background-image: url("' + url.replace('/', '//') + '")"></li>');
+                $('#feed-posts').append('<li class="post-tile" style="background-image: url("' + url + '")"></li>');
             }
         }
     },
