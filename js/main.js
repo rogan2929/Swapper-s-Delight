@@ -41,7 +41,7 @@ var SwdModel = {
      * @param {type} callback Completed callback function.
      */
     getGroupFeed: function(group, callback) {
-        SwdModel.facebookApi(group + '?fields=feed', callback);
+        SwdModel.facebookApi(group + '?fields=feed&limit=100', callback);
     },
     /***
      * AJAX call to FB comment feed for given post.
