@@ -165,6 +165,8 @@ var SwdPresenter = {
 
                                 // Position our menus.
                                 SwdView.positionMenus();
+
+                                // TODO: Set auto refresh with setInterval
                             }
                         });
                     }
@@ -241,14 +243,31 @@ var SwdPresenter = {
         SwdView.showUiMenu(e);
     },
     onClickMenuItemDate: function(e, args) {
+        var daysBack;
         var id = $(e.currentTarget).attr('id');
-        alert(id);
 
+        switch (id) {
+            case 'menu-item-3days':
+                daysBack = 3;
+                break;
+            case 'menu-item-week':
+                daysBack = 7;
+                break;
+            case 'menu-item-30days':
+                daysBack = 30;
+                break;
+            case 'menu-item-all':
+                daysBack = Number.MAX_VALUE;
+                break;
+            default:
+                daysBack = 0;
+                break;
+        }
 
+        SwdPresenter.setDaysBack(daysBack);
     },
     onClickMenuItemGroup: function(e, args) {
         var id = $(e.currentTarget).attr('id');
-        alert(id);
 
         if (id === 'menu-item-choose-groups') {
             // TODO: Display group chooser dialog.
@@ -263,7 +282,6 @@ var SwdPresenter = {
     },
     onClickMenuItemMain: function(e, args) {
         var id = $(e.currentTarget).attr('id');
-        alert(id);
     },
     onClickPostTile: function(e, args) {
         var post = $(e.currentTarget).attr('id');
