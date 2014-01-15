@@ -198,10 +198,12 @@ var SwdPresenter = {
                 });
             }
 
-            // Remove posts that are not in the selected date range.
-            for (i = 0; i < response.feed.data.length; i++) {
-                post = response.feed.data[i];
-                feed.push(post);
+            if (response.feed) {
+                // Remove posts that are not in the selected date range.
+                for (i = 0; i < response.feed.data.length; i++) {
+                    post = response.feed.data[i];
+                    feed.push(post);
+                }
             }
 
             SwdView.displayGroupFeed(feed, SwdPresenter.postType);
@@ -241,8 +243,8 @@ var SwdPresenter = {
     onClickMenuItemDate: function(e, args) {
         var id = $(e.currentTarget).attr('id');
         alert(id);
-        
-        
+
+
     },
     onClickMenuItemGroup: function(e, args) {
         var id = $(e.currentTarget).attr('id');
@@ -374,7 +376,7 @@ var SwdView = {
         var url;
         var message;
         var feedContainer;
-        
+
         switch (postType) {
             case PostType.buying:
                 feedContainer = '#feed-buying';
@@ -389,7 +391,7 @@ var SwdView = {
                 feedContainer = '#feed-group';
                 break;
         }
-        
+
         // Clear anything that is currently being displayed.
         $(feedContainer).empty();
 
