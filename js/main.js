@@ -20,6 +20,14 @@ var SwdModel = {
         FB.api('/' + api, callback);
     },
     /***
+     * Get group object from FB API.
+     * @param {type} id
+     * @param {type} callback
+     */
+    getGroupInfo: function(id, callback) {
+        SwdModel.facebookApi(id, callback);
+    },
+    /***
      * AJAX call to retrieve marked posts for the given group.
      * @param {type} postType
      * @param {type} callback
@@ -34,7 +42,7 @@ var SwdModel = {
      * @param {type} page Page number in results. (Will be multiplied by 25 for exact post count).
      * @param {type} callback Completed callback function.
      */
-    getGroupFeed: function(group, days, page, callback) {
+    getGroupFeed: function(group, daysBack, page, callback) {
         var from = 25 * page;
         var to = from + 25;
         var apiCall = group + '?fields=feed';
@@ -67,7 +75,7 @@ var SwdModel = {
  */
 var SwdPresenter = {
     currentPage: 0,
-    days: 0,
+    daysBack: 0,
     postType: PostType.group,
     selectedGroup: null,
     selectedPost: null,
@@ -127,7 +135,7 @@ var SwdPresenter = {
                         SwdModel.facebookApi(response[i], function(response) {
                             // Add group to groups array.
                             groups[response.id] = response;
-                            
+
                             SwdView.addGroupToMenu(response);
 
                             // Keep track of how many groups have been downloaded.
@@ -171,7 +179,7 @@ var SwdPresenter = {
      * Load feed for the current group.
      */
     loadGroupFeed: function() {
-        SwdModel.getGroupFeed(this.selectedGroup.id, this.days, this.currentPage, function(response) {
+        SwdModel.getGroupFeed(this.selectedGroup.id, this.daysBack, this.currentPage, function(response) {
             var i;
             var post;
             var feed = [];
@@ -223,13 +231,27 @@ var SwdPresenter = {
         SwdView.showUiMenu(e);
     },
     onClickMenuItemDate: function(e, args) {
-        alert($(e.currentTarget.attr('id')));
+        var id = $(e.currentTarget).attr('id');
+        alert(id);
     },
     onClickMenuItemGroup: function(e, args) {
-        alert($(e.currentTarget.attr('id')));
+        var id = $(e.currentTarget).attr('id');
+        alert(id);
+
+        if (id === 'menu-item-choose-groups') {
+            // TODO: Display group chooser dialog.
+        }
+        else {
+            // Retreive group information for selected ID
+            SwdModel.getGroupInfo(id, function(response) {
+                // Set selected group and load its feed.
+                SwdPresenter.setSelectedGroup(response);
+            });
+        }
     },
     onClickMenuItemMain: function(e, args) {
-        alert($(e.currentTarget.attr('id')));
+        var id = $(e.currentTarget).attr('id');
+        alert(id);
     },
     onClickPostTile: function(e, args) {
         var post = $(e.currentTarget).attr('id');
@@ -246,15 +268,13 @@ var SwdPresenter = {
  */
 var SwdView = {
     handlers: {},
-    
     /***
      * Add group to Group Select Menu.
      * @param {type} group
      */
     addGroupToMenu: function(group) {
-        $('#popup-menu-groups').append('<li id="menu-item-' + group.id + '"><a href="#"><span class="ui-icon" style="background-image: url(' + group.icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + group.name + '</div></a></li>');
+        $('#popup-menu-groups').append('<li id="' + group.id + '"><a href="#"><span class="ui-icon" style="background-image: url(' + group.icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + group.name + '</div></a></li>');
     },
-    
     /**
      * Init function for SwdView.
      */
@@ -299,13 +319,13 @@ var SwdView = {
                 primary: 'ui-icon-calendar'
             }
         });
-        
+
         $('#button-close-panel').hover(function() {
             $(this).addClass('ui-state-hover');
         }, function() {
             $(this).removeClass('ui-state-hover');
         });
-        
+
         $('#right-panel').click(function(e) {
             e.stopPropagation();
         });
@@ -351,7 +371,7 @@ var SwdView = {
             else {
                 url = '/img/no-image.jpg';
             }
-            
+
             if (feed[i].message) {
                 message = feed[i].message;
             }
