@@ -56,10 +56,12 @@
 
                 <div class='ad row ui-widget ui-widget-content ui-corner-all hidden'>Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by purchasing the ad-free version of this app. It's a one-time upgrade and you'll never see an ad again! (At least not in this app; I truly wish I had the power to remove all ads, but... alas.)</div>
             </div>
-            
+
             <div id='right-panel' class='right col'>
                 <div class='body row ui-widget ui-widget-content'>
-                    <span id='button-close-panel' class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>
+                    <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close ui-state-hover" role="button" aria-disabled="false" title="close"><span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>
+                        <span class="ui-button-text">close</span>
+                    </button>
                 </div>
             </div>
 
@@ -67,7 +69,7 @@
                 <div class='toolbar'>
                     <div id='button-menu-groups' class='menu-button'><a href='#popup-menu-groups'>Select a Group</a></div>
                     <div id='button-new' class='toolbar-button'>New</div>
-<!--                    <div id='button-pin' class='toolbar-button'>Pin</div>-->
+                    <!--                    <div id='button-pin' class='toolbar-button'>Pin</div>-->
                 </div>
                 <div class='right-toolbar'>
                     <span class='ui-widget'>Showing Posts From:</span>
