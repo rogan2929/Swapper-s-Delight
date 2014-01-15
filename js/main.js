@@ -145,6 +145,7 @@ var SwdPresenter = {
                                 SwdPresenter.setSelectedGroup(groups[bstGroupIds[0]]);
 
                                 // Install Event Handlers
+                                SwdView.installHandler('onClickButtonClosePanel', SwdPresenter.onClickButtonClosePanel, '#button-close-panel', 'click');
                                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
                                 SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
                                 SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
@@ -206,6 +207,9 @@ var SwdPresenter = {
         SwdView.setGroupButtonText(group.name);
     },
     // Event Handlers (onX(e, args))
+    onClickButtonClosePanel: function(e, args) {
+        SwdView.hideRightColumn();
+    },
     onClickButtonNew: function(e, args) {
         SwdView.showNewPostDialog();
     },
