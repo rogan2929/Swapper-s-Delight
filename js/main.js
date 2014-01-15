@@ -409,8 +409,6 @@ var SwdView = {
                 feedContainer = '#feed-group';
                 break;
         }
-        
-        var date = new Date();
 
         // Clear anything that is currently being displayed.
         $(feedContainer).empty();
@@ -433,7 +431,7 @@ var SwdView = {
                 message = '[No caption for image.]'
             }
             
-            alert(date.parse(feed[i].created_time));
+            alert(Date.parse(feed[i].created_time));
 
             $(feedContainer).append('<li id="' + feed[i].id + '" class="post-tile"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + message + '</div></li>');
         }
