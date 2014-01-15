@@ -221,13 +221,13 @@ textarea {
     font-size: 0.9em;
 }
 
-.paging {
+/*.paging {
     height: 50px;
     line-height: 50px;
     top: 60px;
     width: 50%;
     margin: 0 auto;
-}
+}*/
 
 /*#feed-posts .ui-selecting { 
     border: 5px solid #FECA40;
