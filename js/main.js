@@ -284,6 +284,8 @@ var SwdView = {
                 primary: 'ui-icon-calendar'
             }
         });
+        
+        $('#button-close-panel').button();
 
         // Init menus.
         $('#popup-menu-main').menu();
