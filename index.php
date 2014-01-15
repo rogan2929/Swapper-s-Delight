@@ -62,7 +62,6 @@
                     <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close ui-state-hover" role="button" aria-disabled="false" title="close"><span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>
                         <span class="ui-button-text">close</span>
                     </button>
-                    :after
                 </div>
             </div>
 
