@@ -412,6 +412,9 @@ var SwdView = {
 
         // Clear anything that is currently being displayed.
         $(feedContainer).empty();
+        
+        // Hide the right panel.
+        SwdView.hideRightPanel();
 
         for (i = 0; i < feed.length; i++) {
             if (feed[i].picture) {
