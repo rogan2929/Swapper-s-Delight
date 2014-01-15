@@ -149,8 +149,10 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
                                 SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
                                 SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
+                                SwdView.installHandler('onclickMenuItemDate', SwdPresenter.onClickMenuItemDate, '.menu-item-date', 'click');
+                                SwdView.installHandler('onclickMenuItemGroup', SwdPresenter.onClickMenuItemGroup, '.menu-item-group', 'click');
+                                SwdView.installHandler('onclickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item-main', 'click');
                                 SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
-                                SwdView.installHandler('onClickUiMenuItem', SwdPresenter.onClickUiMenuItem, 'li.ui-menu-item', 'click');
                                 SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
 
                                 // Position our menus.
@@ -220,16 +222,14 @@ var SwdPresenter = {
     onClickMenuButton: function(e, args) {
         SwdView.showUiMenu(e);
     },
-    onClickUiMenuItem: function(e, args) {
-        // Switch logic based on calling element.
-        var id = $(e.currentTarget).attr('id');
-        
-        alert(id);
-
-        switch (id) {
-            default:
-                break;
-        }
+    onClickMenuItemDate: function(e, args) {
+        alert($(e.currentTarget.attr('id')));
+    },
+    onClickMenuItemGroup: function(e, args) {
+        alert($(e.currentTarget.attr('id')));
+    },
+    onClickMenuItemMain: function(e, args) {
+        alert($(e.currentTarget.attr('id')));
     },
     onClickPostTile: function(e, args) {
         var post = $(e.currentTarget).attr('id');
