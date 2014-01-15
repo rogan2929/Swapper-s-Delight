@@ -373,17 +373,20 @@ var SwdView = {
         var i;
         var url;
         var message;
-        var feedContainer
+        var feedContainer;
         
         switch (postType) {
             case PostType.buying:
+                feedContainer = '#feed-buying';
                 break;
             case PostType.selling:
+                feedContainer = '#feed-selling';
                 break;
             case PostType.pinned:
+                feedContainer = '#feed-pinned';
                 break;
             default:
-                feedContainer = '#feed-posts';
+                feedContainer = '#feed-group';
                 break;
         }
         
@@ -407,10 +410,11 @@ var SwdView = {
             $(feedContainer).append('<li id="' + feed[i].id + '" class="post-tile"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + message + '</div></li>');
         }
 
-//        $('#feed-posts').selectable({
+//        $('#feed-group').selectable({
 //            filter: " > li"
 //        });
 
+        // Associate the click event handler for newly created posts.
         $('.post-tile > *').click(SwdView.handlers['onClickPostTile']);
     },
     /***

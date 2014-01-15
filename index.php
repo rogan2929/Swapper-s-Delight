@@ -36,19 +36,19 @@
                             <li><a href='#tab-pinned'>Pinned</a></li>
                         </ul>
                         <div id='tab-feed'>
-                            <ol id='feed-posts'>
+                            <ol id='feed-group'>
                             </ol>
                         </div>
                         <div id='tab-buying'>
-                            <ol id='buying-posts'>
+                            <ol id='feed-buying'>
                             </ol>
                         </div>
                         <div id='tab-selling'>
-                            <ol id='selling-posts'>
+                            <ol id='feed-selling'>
                             </ol>
                         </div>
                         <div id='tab-pinned'>
-                            <ol id='pinned-posts'>
+                            <ol id='feed-pinned'>
                             </ol>
                         </div>
                     </div>
