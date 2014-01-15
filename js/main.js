@@ -283,7 +283,7 @@ var SwdView = {
      * @param {type} group
      */
     addGroupToMenu: function(group) {
-        $('#popup-menu-groups').append('<li id="' + group.id + '"><a href="#"><span class="ui-icon" style="background-image: url(' + group.icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + group.name + '</div></a></li>');
+        $('#popup-menu-groups').append('<li id="' + group.id + '" class="menu-item-group"><a href="#"><span class="ui-icon" style="background-image: url(' + group.icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + group.name + '</div></a></li>');
     },
     /**
      * Init function for SwdView.
