@@ -66,15 +66,14 @@
             </div>
 
             <div class='header row ui-widget ui-widget-header'>
-                <div class='toolbar'>
+                <div class='float-left left-margin'>
                     <div id='button-menu-groups' class='menu-button'><a href='#popup-menu-groups'>Select a Group</a></div>
-                    <div id='button-new' class='toolbar-button'>New</div>
-                    <!--                    <div id='button-pin' class='toolbar-button'>Pin</div>-->
+                    <div id='button-new' class='left-margin'>New</div>
                 </div>
-                <div class='right-toolbar'>
+                <div class='float-right right-margin'>
                     <span class='ui-widget'>Showing Posts From:</span>
-                    <div id='button-menu-date' class='right-toolbar-button menu-button'><a href='#popup-menu-date'>Today</a></div>
-                    <div id='button-menu-main' class='right-toolbar-button menu-button'><a href='#popup-menu-main'>Menu</a></div>
+                    <div id='button-menu-date' class='right-margin menu-button'><a href='#popup-menu-date'>Today</a></div>
+                    <div id='button-menu-main' class='right-margin menu-button'><a href='#popup-menu-main'>Menu</a></div>
                 </div>
                 <div style='clear: both;'></div>
             </div>
@@ -90,11 +89,11 @@
             </ul>
 
             <ul id='popup-menu-date' class='menu'>
-                <li id='menu-item-today'><a href='#'><span class='ui-icon ui-icon-check'></span>Today</a></li>
-                <li id='menu-item-3days'><a href='#'><span class='ui-icon ui-icon-blank'></span>Last 3 Days</a></li>
-                <li id='menu-item-week'><a href='#'><span class='ui-icon ui-icon-blank'></span>Last Week</a></li>
-                <li id='menu-item-month'><a href='#'><span class='ui-icon ui-icon-blank'></span>Last Month</a></li>
-                <li id='menu-item-all'><a href='#'><span class='ui-icon ui-icon-blank'></span>All Time</a></li>
+                <li id='menu-today' class='menu-item-date'><a href='#'><span class='ui-icon ui-icon-check'></span>Today</a></li>
+                <li id='menu-item-3days' class='menu-item-date'><a href='#'><span class='ui-icon ui-icon-blank'></span>Last 3 Days</a></li>
+                <li id='menu-item-week' class='menu-item-date'><a href='#'><span class='ui-icon ui-icon-blank'></span>Last Week</a></li>
+                <li id='menu-item-month' class='menu-item-date'><a href='#'><span class='ui-icon ui-icon-blank'></span>Last Month</a></li>
+                <li id='menu-item-all' class='menu-item-date'><a href='#'><span class='ui-icon ui-icon-blank'></span>All Time</a></li>
             </ul>
 
             <!--Dialogs-->
