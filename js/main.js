@@ -198,7 +198,7 @@ var SwdPresenter = {
                 }
                 
                 SwdPresenter.nextPage = response.feed.paging.next;
-                SwdPresenter.prevPage = respones.feed.paging.previous;
+                SwdPresenter.prevPage = response.feed.paging.previous;
             }
             else {
                 SwdPresenter.nextPage = null;
@@ -347,19 +347,13 @@ var SwdView = {
             }
         });
 
-//        $('#button-pin').button({
-//            icons: {
-//                primary: 'ui-icon-pin-s'
-//            }
-//        }).toggle();
-
         $('#button-menu-date').button({
             icons: {
                 primary: 'ui-icon-calendar'
             }
         });
 
-        $('.paging-button').button();
+        $('.paging-button').button().hide();
 
         $('#button-close-panel').hover(function() {
             $(this).addClass('ui-state-hover');
