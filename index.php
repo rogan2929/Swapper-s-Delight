@@ -59,7 +59,7 @@
 
             <div id='right-panel' class='right col'>
                 <div class='body row ui-widget ui-widget-content'>
-                    <button id='button-close-panel' class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close ui-state-hover" role="button" aria-disabled="false" title="close"><span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>
+                    <button id='button-close-panel' class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close" role="button" aria-disabled="false" title="close"><span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>
                         <span class="ui-button-text">close</span>
                     </button>
                 </div>

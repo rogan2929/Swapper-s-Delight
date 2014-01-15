@@ -285,7 +285,11 @@ var SwdView = {
             }
         });
         
-        //$('#button-close-panel').button();
+        $('#button-close-panel').hover(function() {
+            $(this).addClass('ui-state-hover');
+        }, function() {
+            $(this).removeClass('ui-state-hover');
+        });
 
         // Init menus.
         $('#popup-menu-main').menu();
