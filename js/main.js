@@ -68,9 +68,7 @@ var SwdModel = {
  * Presenter for the Swapper's Delight program.
  */
 var SwdPresenter = {
-    currentRawFeed: null,
     daysBack: 1,
-    filteredFeed: null,
     nextPage: null,
     prevPage: null,
     postType: PostType.group,
@@ -175,50 +173,51 @@ var SwdPresenter = {
         });
     },
     /***
-     * Filters provided feed by creation time and 'type'.
-     */
-    filterGroupFeed: function() {
-        var i;
-        var feed = SwdPresenter.currentRawFeed.data;
-        var currentTime = new Date();
-        var ONE_DAY = 1000 * 60 * 60 * 24;
-        var maxAge = SwdPresenter.daysBack * ONE_DAY;
-        SwdPresenter.filteredFeed = [];
-
-        // Remove posts that are not in the selected date range.
-        for (i = 0; i < feed.length; i++) {
-            if (currentTime - Date.parse(feed[i].updated_time) <= maxAge) {
-                SwdPresenter.filteredFeed.push(feed[i]);
-            }
-        }
-    },
-    /***
      * Load feed for the current group.
      */
     loadGroupFeed: function() {
+        var i;
+        var currentTime;
+        var post;
+        var ONE_DAY = 1000 * 60 * 60 * 24;
+        var maxAge = SwdPresenter.daysBack * ONE_DAY;
+        var feed = [];
+
         SwdModel.getGroupFeed(this.selectedGroup.id, function(response) {
             if (response.feed && response.feed.data) {
                 // Filter the current raw feed and display it.
-                SwdPresenter.currentRawFeed = response.feed;
-                SwdPresenter.filterGroupFeed();
+                currentTime = new Date();
+
+                // Remove posts that are not in the selected date range.
+                for (i = 0; i < response.feed.data.length; i++) {
+                    post = response.feed.data[i];
+                    
+                    if (currentTime - Date.parse(post.updated_time) <= maxAge) {
+                        feed.push(post);
+                    }
+                }
+                
+                SwdPresenter.nextPage = response.feed.paging.next;
+                SwdPresenter.prevPage = respones.feed.paging.previous;
             }
             else {
-                SwdPresenter.currentRawFeed = null;
+                SwdPresenter.nextPage = null;
+                SwdPresenter.prevPage = null;
             }
 
-            SwdView.displayPosts(SwdPresenter.filteredFeed, SwdPresenter.postType);
+            SwdView.displayPosts(feed, SwdPresenter.postType);
         });
     },
     /***
      * Load next page in group feed.
      */
-    loadGroupFeedNext: function() {
+    loadNextPage: function() {
         // TODO
     },
     /***
      * Load previous page in group feed.
      */
-    loadGroupFeedPrev: function() {
+    loadPrevPage: function() {
         // TODO
     },
     /***
@@ -359,7 +358,7 @@ var SwdView = {
                 primary: 'ui-icon-calendar'
             }
         });
-        
+
         $('.paging-button').button();
 
         $('#button-close-panel').hover(function() {
@@ -427,7 +426,7 @@ var SwdView = {
 
         // Hide the right panel.
         SwdView.hideRightPanel();
-        
+
         // Enable paging controls.
         $('.paging-button').hide();
 
@@ -437,7 +436,7 @@ var SwdView = {
             if (feed.length === 24) {
                 $('.paging-button').show();
             }
-            
+
             for (i = 0; i < feed.length; i++) {
                 if (feed[i].picture) {
                     url = feed[i].picture;
