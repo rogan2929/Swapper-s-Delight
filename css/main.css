@@ -151,11 +151,11 @@ textarea {
 }
 
 #button-close-panel {
-    position: absolute !important;
-    right: 10px !important;
-    top: 10px !important;
-    width: 16px !important;
-    height: 16px !important;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 16px;
+    height: 16px;
 }
 
 .body.row {
