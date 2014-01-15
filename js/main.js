@@ -353,7 +353,8 @@ var SwdView = {
             }
         });
 
-        $('.paging-button').button().hide();
+        $('#button-paging-prev').button().hide();
+        $('#button-paging-next').button().hide();
 
         $('#button-close-panel').hover(function() {
             $(this).addClass('ui-state-hover');
