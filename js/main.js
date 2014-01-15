@@ -172,48 +172,55 @@ var SwdPresenter = {
         });
     },
     /***
+     * Filters provided feed by creation time and 'type'.
+     * @param {type} feed
+     * @returns {unresolved}
+     */
+    filterGroupFeed: function(feed) {
+        var i;
+        var post;
+        var creationTime;
+        var currentTime = new Date();
+        var ONE_DAY = 1000 * 60 * 60 * 24;
+        var maxAge = SwdPresenter.daysBack * ONE_DAY;
+        var filteredFeed = [];
+
+        // If looking for marked posts, then make an additional API call to determine what these are.
+        if (SwdPresenter.postType !== PostType.group) {
+            SwdModel.getMarkedPosts(SwdPresenter.postType, function(response) {
+                switch (SwdPresenter.postType) {
+                    case PostType.buying:
+                        break;
+                    case PostType.selling:
+                        break;
+                    case PostType.pinned:
+                        break;
+                }
+            });
+        }
+
+        // Remove posts that are not in the selected date range.
+        for (i = 0; i < feed.length; i++) {
+            post = feed[i];
+
+            creationTime = Date.parse(post.created_time);
+
+            if (currentTime - creationTime <= maxAge) {
+                filteredFeed.push(post);
+            }
+        }
+
+        return filteredFeed;
+    },
+    /***
      * Load feed for the current group.
      */
     loadGroupFeed: function() {
         SwdModel.getGroupFeed(this.selectedGroup.id, function(response) {
-            var i;
-            var post;
-            var creationTime;
-            var currentTime = new Date();
-            var ONE_DAY = 1000 * 60 * 60 * 24;
-            var maxAge = SwdPresenter.daysBack * ONE_DAY;
-            var feed = [];
-
-            // If looking for marked posts, then make an additional API call to determine what these are.
-            if (SwdPresenter.postType !== PostType.group) {
-                SwdModel.getMarkedPosts(SwdPresenter.postType, function(response) {
-                    switch (SwdPresenter.postType) {
-                        case PostType.buying:
-                            break;
-                        case PostType.selling:
-                            break;
-                        case PostType.pinned:
-                            break;
-                    }
-                });
-            }
-
             if (response.feed && response.feed.data) {
-                alert(response.paging.next);
-                
-                // Remove posts that are not in the selected date range.
-                for (i = 0; i < response.feed.data.length; i++) {
-                    post = response.feed.data[i];
-                    
-                    creationTime = Date.parse(post.created_time);
-                    
-                    if (currentTime - creationTime <= maxAge) {
-                        feed.push(post);
-                    }
-                }
+                var feed = SwdPresenter.filterGroupFeed(response.feed.data);
+                SwdView.displayGroupFeed(feed, SwdPresenter.postType);
             }
-
-            SwdView.displayGroupFeed(feed, SwdPresenter.postType);
         });
     },
     /***
@@ -417,7 +424,7 @@ var SwdView = {
 
         // Clear anything that is currently being displayed.
         $(feedContainer).empty();
-        
+
         // Hide the right panel.
         SwdView.hideRightPanel();
 
