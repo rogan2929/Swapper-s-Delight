@@ -409,6 +409,8 @@ var SwdView = {
                 feedContainer = '#feed-group';
                 break;
         }
+        
+        alert(new Date());
 
         // Clear anything that is currently being displayed.
         $(feedContainer).empty();
