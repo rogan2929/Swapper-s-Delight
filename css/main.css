@@ -221,10 +221,11 @@ textarea {
     font-size: 0.9em;
 }
 
-.paging.row {
+.paging {
+    position: absolute;
     height: 50px;
     line-height: 50px;
-    top: 70;
+    top: 70px;
 }
 
 /*#feed-posts .ui-selecting { 
