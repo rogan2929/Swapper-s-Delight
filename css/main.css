@@ -222,7 +222,6 @@ textarea {
 }
 
 .paging {
-    position: absolute;
     height: 50px;
     line-height: 50px;
     top: 60px;
