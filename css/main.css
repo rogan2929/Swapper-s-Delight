@@ -225,6 +225,10 @@ textarea {
     font-size: 0.9em;
 }
 
+.post-caption:hover {
+    height: auto;
+}
+
 /*#feed-posts .ui-selecting { 
     border: 5px solid #FECA40;
 }
