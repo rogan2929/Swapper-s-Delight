@@ -128,7 +128,7 @@ var SwdPresenter = {
                             // Add group to groups array.
                             groups[response.id] = response;
                             
-                            SwdView.addGroup(response);
+                            SwdView.addGroupToMenu(response);
 
                             // Keep track of how many groups have been downloaded.
                             completed++;
@@ -208,14 +208,14 @@ var SwdPresenter = {
     },
     // Event Handlers (onX(e, args))
     onClickButtonClosePanel: function(e, args) {
-        SwdView.hideRightColumn();
+        SwdView.hideRightPanel();
     },
     onClickButtonNew: function(e, args) {
         SwdView.showNewPostDialog();
     },
     onClickHtml: function(e, args) {
         SwdView.closeAllUiMenus();
-        SwdView.hideRightColumn();
+        SwdView.hideRightPanel();
     },
     onClickMenuButton: function(e, args) {
         SwdView.showUiMenu(e);
@@ -234,7 +234,7 @@ var SwdPresenter = {
     onClickPostTile: function(e, args) {
         var post = $(e.currentTarget).attr('id');
         e.stopPropagation();
-        SwdView.showRightColumn(post);
+        SwdView.showRightPanel(post);
     },
     onWindowResize: function(e, args) {
         SwdView.positionMenus();
@@ -251,8 +251,8 @@ var SwdView = {
      * Add group to Group Select Menu.
      * @param {type} group
      */
-    addGroup: function(group) {
-        $('#popup-menu-groups').append('<li id="' + response.id + '"><a href="#"><span class="ui-icon" style="background-image: url(' + response.icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + response.name + '</div></a></li>');
+    addGroupToMenu: function(group) {
+        $('#popup-menu-groups').append('<li id="' + group.id + '"><a href="#"><span class="ui-icon" style="background-image: url(' + group.icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + group.name + '</div></a></li>');
     },
     
     /**
@@ -371,7 +371,7 @@ var SwdView = {
     /***
      * Hides the right column.
      */
-    hideRightColumn: function() {
+    hideRightPanel: function() {
         $('#right-panel').hide('slide', {
             direction: 'right',
             duration: 300,
@@ -413,7 +413,7 @@ var SwdView = {
      * Shows the right column.
      * @param {type} post Post to load into right column.
      */
-    showRightColumn: function(post) {
+    showRightPanel: function(post) {
         $('#right-panel').show('slide', {
             direction: 'right',
             duration: 300,
