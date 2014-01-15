@@ -226,7 +226,8 @@ textarea {
     height: 50px;
     line-height: 50px;
     top: 60px;
-    right: 10px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /*#feed-posts .ui-selecting { 
