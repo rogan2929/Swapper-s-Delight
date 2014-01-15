@@ -59,7 +59,7 @@
             
             <div id='right-panel' class='right col'>
                 <div class='body row ui-widget ui-widget-content'>
-                    <div id='button-close-panel'>X</div>
+                    <div id='button-close-panel'><span style='text-align: center'>X</span></div>
                 </div>
             </div>
 
