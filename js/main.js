@@ -128,7 +128,7 @@ var SwdPresenter = {
                             // Add group to groups array.
                             groups[response.id] = response;
                             
-                            $('#popup-menu-groups').append('<li id="menu-item-' + response.id + '"><a href="#"><span class="ui-icon" style="background-image: url(' + response.icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + response.name + '</div></a></li>');
+                            SwdView.addGroup(response);
 
                             // Keep track of how many groups have been downloaded.
                             completed++;
@@ -223,6 +223,8 @@ var SwdPresenter = {
     onClickUiMenuItem: function(e, args) {
         // Switch logic based on calling element.
         var id = $(e.currentTarget).attr('id');
+        
+        alert(id);
 
         switch (id) {
             default:
@@ -244,6 +246,15 @@ var SwdPresenter = {
  */
 var SwdView = {
     handlers: {},
+    
+    /***
+     * Add group to Group Select Menu.
+     * @param {type} group
+     */
+    addGroup: function(group) {
+        $('#popup-menu-groups').append('<li id="' + response.id + '"><a href="#"><span class="ui-icon" style="background-image: url(' + response.icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + response.name + '</div></a></li>');
+    },
+    
     /**
      * Init function for SwdView.
      */
