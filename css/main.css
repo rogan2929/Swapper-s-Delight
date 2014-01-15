@@ -146,6 +146,10 @@ textarea {
     z-index: 1000;
 }
 
+.right.col.body.row {
+    border-left: 2px solid #ccc;
+}
+
 .body.row {
     top: 60px;
     bottom: 0;
