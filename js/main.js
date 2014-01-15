@@ -208,6 +208,14 @@ var SwdPresenter = {
         });
     },
     /***
+     * Set how old the oldest displayed post is to be.
+     * @param {type} daysBack
+     */
+    setDaysBack: function(daysBack) {
+        SwdPresenter.daysBack = daysBack;
+        SwdPresenter.loadGroupFeed();
+    },
+    /***
      * Set currently selected group.
      * @param {type} group
      */
@@ -233,6 +241,8 @@ var SwdPresenter = {
     onClickMenuItemDate: function(e, args) {
         var id = $(e.currentTarget).attr('id');
         alert(id);
+        
+        
     },
     onClickMenuItemGroup: function(e, args) {
         var id = $(e.currentTarget).attr('id');
@@ -363,6 +373,21 @@ var SwdView = {
         var i;
         var url;
         var message;
+        var feedContainer
+        
+        switch (postType) {
+            case PostType.buying:
+                break;
+            case PostType.selling:
+                break;
+            case PostType.pinned:
+                break;
+            default:
+                feedContainer = '#feed-posts';
+                break;
+        }
+        
+        // Clear anything that is currently being displayed.
 
         for (i = 0; i < feed.length; i++) {
             if (feed[i].picture) {
@@ -379,7 +404,7 @@ var SwdView = {
                 message = '[No caption for image.]'
             }
 
-            $('#feed-posts').append('<li id="' + feed[i].id + '" class="post-tile"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + message + '</div></li>');
+            $(feedContainer).append('<li id="' + feed[i].id + '" class="post-tile"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + message + '</div></li>');
         }
 
 //        $('#feed-posts').selectable({
