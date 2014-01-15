@@ -79,7 +79,7 @@
             </div>
             
             <div class='paging row'>
-                <div class='float-right'>
+                <div class='float-right right-margin'>
                     <div id='button-paging-prev' class='paging-button'>Previous</div>
                     <div id='button-paging-next' class='paging-button'>Next</div>
                 </div>
