@@ -75,7 +75,7 @@ var SwdModel = {
  */
 var SwdPresenter = {
     currentPage: 0,
-    daysBack: 0,
+    daysBack: 1,
     postType: PostType.group,
     selectedGroup: null,
     selectedPost: null,
@@ -185,6 +185,9 @@ var SwdPresenter = {
             var i;
             var post;
             var creationTime;
+            var currentTime = new Date();
+            var ONE_DAY = 1000 * 60 * 60 * 24;
+            var maxAge = SwdPresenter.daysBack * ONE_DAY;
             var feed = [];
 
             // If looking for marked posts, then make an additional API call to determine what these are.
@@ -208,9 +211,10 @@ var SwdPresenter = {
                     
                     creationTime = Date.parse(post.created_time);
                     
-                    alert((new Date()) - 2);
                     
-                    feed.push(post);
+                    if (currentTime - creationTime <= maxAge) {
+                        feed.push(post);
+                    }
                 }
             }
 
@@ -263,10 +267,10 @@ var SwdPresenter = {
                 daysBack = 30;
                 break;
             case 'menu-item-all':
-                daysBack = Number.MAX_VALUE;
+                daysBack = 365;
                 break;
             default:
-                daysBack = 0;
+                daysBack = 1;
                 break;
         }
 
