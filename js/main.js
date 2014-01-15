@@ -68,8 +68,11 @@ var SwdModel = {
  * Presenter for the Swapper's Delight program.
  */
 var SwdPresenter = {
-    currentPage: 0,
+    currentRawFeed: null,
     daysBack: 1,
+    filteredFeed: null,
+    nextPage: null,
+    prevPage: null,
     postType: PostType.group,
     selectedGroup: null,
     selectedPost: null,
@@ -173,17 +176,14 @@ var SwdPresenter = {
     },
     /***
      * Filters provided feed by creation time and 'type'.
-     * @param {type} feed
-     * @returns {unresolved}
      */
-    filterGroupFeed: function(feed) {
+    filterGroupFeed: function() {
         var i;
-        var post;
-        var creationTime;
+        var feed = SwdPresenter.currentRawFeed.data;
         var currentTime = new Date();
         var ONE_DAY = 1000 * 60 * 60 * 24;
         var maxAge = SwdPresenter.daysBack * ONE_DAY;
-        var filteredFeed = [];
+        SwdPresenter.filteredFeed = [];
 
         // If looking for marked posts, then make an additional API call to determine what these are.
         if (SwdPresenter.postType !== PostType.group) {
@@ -201,16 +201,10 @@ var SwdPresenter = {
 
         // Remove posts that are not in the selected date range.
         for (i = 0; i < feed.length; i++) {
-            post = feed[i];
-
-            creationTime = Date.parse(post.created_time);
-
-            if (currentTime - creationTime <= maxAge) {
-                filteredFeed.push(post);
+            if (currentTime - Date.parse(feed[i].created_time) <= maxAge) {
+                SwdPresenter.filteredFeed.push(feed[i]);
             }
         }
-
-        return filteredFeed;
     },
     /***
      * Load feed for the current group.
@@ -218,10 +212,28 @@ var SwdPresenter = {
     loadGroupFeed: function() {
         SwdModel.getGroupFeed(this.selectedGroup.id, function(response) {
             if (response.feed && response.feed.data) {
-                var feed = SwdPresenter.filterGroupFeed(response.feed.data);
-                SwdView.displayGroupFeed(feed, SwdPresenter.postType);
+                // Filter the current raw feed and display it.
+                SwdPresenter.currentRawFeed = response.feed;
+                SwdPresenter.filterGroupFeed();
             }
+            else {
+                SwdPresenter.currentRawFeed = null;
+            }
+
+            SwdView.displayGroupFeed(SwdPresenter.filteredFeed, SwdPresenter.postType);
         });
+    },
+    /***
+     * Load next page in group feed.
+     */
+    loadGroupFeedNext: function() {
+
+    },
+    /***
+     * Load previous page in group feed.
+     */
+    loadGroupFeedPrev: function() {
+
     },
     /***
      * Set how old the oldest displayed post is to be.
@@ -428,30 +440,33 @@ var SwdView = {
         // Hide the right panel.
         SwdView.hideRightPanel();
 
-        for (i = 0; i < feed.length; i++) {
-            if (feed[i].picture) {
-                url = feed[i].picture;
-            }
-            else {
-                url = '/img/no-image.jpg';
-            }
+        // If there is a feed to display, then display it.
+        if (feed) {
+            for (i = 0; i < feed.length; i++) {
+                if (feed[i].picture) {
+                    url = feed[i].picture;
+                }
+                else {
+                    url = '/img/no-image.jpg';
+                }
 
-            if (feed[i].message) {
-                message = feed[i].message;
-            }
-            else {
-                message = '[No caption for image.]'
-            }
+                if (feed[i].message) {
+                    message = feed[i].message;
+                }
+                else {
+                    message = '[No caption for image.]'
+                }
 
-            $(feedContainer).append('<li id="' + feed[i].id + '" class="post-tile"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + message + '</div></li>');
-        }
+                $(feedContainer).append('<li id="' + feed[i].id + '" class="post-tile"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + message + '</div></li>');
+            }
 
 //        $('#feed-group').selectable({
 //            filter: " > li"
 //        });
 
-        // Associate the click event handler for newly created posts.
-        $('.post-tile > *').click(SwdView.handlers['onClickPostTile']);
+            // Associate the click event handler for newly created posts.
+            $('.post-tile > *').click(SwdView.handlers['onClickPostTile']);
+        }
     },
     /***
      * Hides the right column.
