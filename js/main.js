@@ -410,7 +410,9 @@ var SwdView = {
                 break;
         }
         
-        alert(new Date());
+        var date = new Date();
+        alert(date.toUTCString());
+        alert(date.toTimeString());
 
         // Clear anything that is currently being displayed.
         $(feedContainer).empty();
