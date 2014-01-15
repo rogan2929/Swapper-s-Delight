@@ -421,7 +421,7 @@ var SwdView = {
 
         // Display the menu.
         $(menu).show('slide', {
-            direction: 'down',
+            direction: 'up',
             duration: 300,
             easing: 'easeInOutQuint'
         });
