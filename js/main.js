@@ -391,6 +391,7 @@ var SwdView = {
         }
         
         // Clear anything that is currently being displayed.
+        $(feedContainer).empty();
 
         for (i = 0; i < feed.length; i++) {
             if (feed[i].picture) {
