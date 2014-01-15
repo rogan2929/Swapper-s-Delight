@@ -69,8 +69,8 @@
                 <div class='float-left left-margin'>
                     <div id='button-menu-groups' class='menu-button'><a href='#popup-menu-groups'>Select a Group</a></div>
                     <div id='button-new' class='left-margin'>New</div>
-                    <div id='button-paging-prev' class='left-margin'>Previous</div>
-                    <div id='button-paging-next' class='left-margin'>Next</div>
+                    <div id='button-paging-prev' class='paging-button left-margin'>Previous</div>
+                    <div id='button-paging-next' class='paging-button left-margin'>Next</div>
                 </div>
                 <div class='float-right right-margin'>
                     <span class='ui-widget'>Showing Posts From:</span>
@@ -79,11 +79,6 @@
                 </div>
                 <div style='clear: both;'></div>
             </div>
-
-<!--            <div class='paging'>
-                <div id='button-paging-prev' class='paging-button'>Previous</div>
-                <div id='button-paging-next' class='paging-button'>Next</div>
-            </div>-->
 
             <!--Menus-->
 
