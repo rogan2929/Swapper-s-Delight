@@ -146,8 +146,8 @@ textarea {
     z-index: 1000;
 }
 
-#right-panel {
-    border-left: 2px solid #ccc;
+#right-panel .body.row {
+    border-left: 10px solid #ccc;
 }
 
 .body.row {
