@@ -184,6 +184,7 @@ var SwdPresenter = {
         SwdModel.getGroupFeed(this.selectedGroup.id, this.daysBack, this.currentPage, function(response) {
             var i;
             var post;
+            var creationTime;
             var feed = [];
 
             // If looking for marked posts, then make an additional API call to determine what these are.
@@ -204,6 +205,11 @@ var SwdPresenter = {
                 // Remove posts that are not in the selected date range.
                 for (i = 0; i < response.feed.data.length; i++) {
                     post = response.feed.data[i];
+                    
+                    creationTime = Date.parse(post.created_time);
+                    
+                    alert((new Date()) - 2);
+                    
                     feed.push(post);
                 }
             }
