@@ -150,6 +150,15 @@ textarea {
     border-left: 10px solid #ccc;
 }
 
+#button-close-panel {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    height: 20px;
+    width: 20px;
+    background: #105cb6;
+}
+
 .body.row {
     top: 60px;
     bottom: 0;

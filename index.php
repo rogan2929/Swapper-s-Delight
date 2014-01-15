@@ -58,7 +58,9 @@
             </div>
             
             <div id='right-panel' class='right col'>
-                <div class='body row ui-widget ui-widget-content'></div>
+                <div class='body row ui-widget ui-widget-content'>
+                    <div id='button-close-panel'>X</div>
+                </div>
             </div>
 
             <div class='header row ui-widget ui-widget-header'>
