@@ -290,6 +290,10 @@ var SwdView = {
         }, function() {
             $(this).removeClass('ui-state-hover');
         });
+        
+        $('#right-panel').click(function(e) {
+            e.stopPropagation();
+        });
 
         // Init menus.
         $('#popup-menu-main').menu();
