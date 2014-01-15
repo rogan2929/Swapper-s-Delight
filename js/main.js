@@ -420,7 +420,11 @@ var SwdView = {
         menu = $(e.currentTarget).find('a').attr('href');
 
         // Display the menu.
-        $(menu).slideDown(300);
+        $(menu).show('slide', {
+            direction: 'down',
+            duration: 300,
+            easing: 'easeInOutQuint'
+        });
     }
 };
 
