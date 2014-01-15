@@ -386,7 +386,9 @@ var SwdView = {
      * Displays new post dialog box.
      */
     showNewPostDialog: function() {
-        $('#dialog-new-post').dialog();
+        $('#dialog-new-post').dialog({
+            modal: true
+        });
     },
     /***
      * Shows the right column.
