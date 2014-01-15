@@ -285,7 +285,7 @@ var SwdView = {
             }
         });
         
-        $('#button-close-panel').button();
+        //$('#button-close-panel').button();
 
         // Init menus.
         $('#popup-menu-main').menu();
