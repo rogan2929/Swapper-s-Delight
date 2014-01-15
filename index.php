@@ -104,7 +104,7 @@
             </ul>
 
             <!--Dialogs-->
-            <div id='dialog-new-post' title='Create New Post'>TEST</div>
+            <div id='dialog-new-post' class='hidden' title='Create New Post'>TEST</div>
         </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
