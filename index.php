@@ -77,12 +77,10 @@
                 </div>
                 <div style='clear: both;'></div>
             </div>
-            
-            <div class='paging'>
-                <div class='float-right right-margin'>
-                    <div id='button-paging-prev' class='paging-button'>Previous</div>
-                    <div id='button-paging-next' class='paging-button'>Next</div>
-                </div>
+
+            <div class='paging float-right right-margin'>
+                <div id='button-paging-prev' class='paging-button'>Previous</div>
+                <div id='button-paging-next' class='paging-button'>Next</div>
             </div>
 
             <!--Menus-->
