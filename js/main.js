@@ -434,7 +434,7 @@ var SwdView = {
         // If there is a feed to display, then display it.
         if (feed) {
             // Disable paging controls if less than one page's worth.
-            if (feed.length === 25) {
+            if (feed.length === 24) {
                 $('.paging-button').show();
             }
             
