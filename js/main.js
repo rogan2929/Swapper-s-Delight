@@ -353,9 +353,6 @@ var SwdView = {
             }
         });
 
-        $('#button-paging-prev').button().hide();
-        $('#button-paging-next').button().hide();
-
         $('#button-close-panel').hover(function() {
             $(this).addClass('ui-state-hover');
         }, function() {
@@ -422,14 +419,8 @@ var SwdView = {
         // Hide the right panel.
         SwdView.hideRightPanel();
 
-        // Enable paging controls.
-        $('.paging-button').hide();
-
         // If there is a feed to display, then display it.
         if (feed) {
-            // Disable paging controls if less than one page's worth.
-            $('.paging-button').show();
-
             for (i = 0; i < feed.length; i++) {
                 if (feed[i].picture) {
                     url = feed[i].picture;
