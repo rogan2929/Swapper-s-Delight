@@ -92,7 +92,7 @@
                 <li id='menu-item-today' class='menu-item-date'><a href='#'><span class='ui-icon ui-icon-check'></span>Today</a></li>
                 <li id='menu-item-3days' class='menu-item-date'><a href='#'><span class='ui-icon ui-icon-blank'></span>Last 3 Days</a></li>
                 <li id='menu-item-week' class='menu-item-date'><a href='#'><span class='ui-icon ui-icon-blank'></span>Last Week</a></li>
-                <li id='menu-item-month' class='menu-item-date'><a href='#'><span class='ui-icon ui-icon-blank'></span>Last Month</a></li>
+                <li id='menu-item-30days' class='menu-item-date'><a href='#'><span class='ui-icon ui-icon-blank'></span>Last Month</a></li>
                 <li id='menu-item-all' class='menu-item-date'><a href='#'><span class='ui-icon ui-icon-blank'></span>All Time</a></li>
             </ul>
 
