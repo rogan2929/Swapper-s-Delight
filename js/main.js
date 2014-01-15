@@ -199,6 +199,8 @@ var SwdPresenter = {
             }
 
             if (response.feed && response.feed.data) {
+                alert(response.paging.next);
+                
                 // Remove posts that are not in the selected date range.
                 for (i = 0; i < response.feed.data.length; i++) {
                     post = response.feed.data[i];
