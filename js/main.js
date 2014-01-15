@@ -191,12 +191,12 @@ var SwdPresenter = {
                 // Remove posts that are not in the selected date range.
                 for (i = 0; i < response.feed.data.length; i++) {
                     post = response.feed.data[i];
-                    
+
                     if (currentTime - Date.parse(post.updated_time) <= maxAge) {
                         feed.push(post);
                     }
                 }
-                
+
                 SwdPresenter.nextPage = response.feed.paging.next;
                 SwdPresenter.prevPage = response.feed.paging.previous;
             }
@@ -427,9 +427,7 @@ var SwdView = {
         // If there is a feed to display, then display it.
         if (feed) {
             // Disable paging controls if less than one page's worth.
-            if (feed.length === 24) {
-                $('.paging-button').show();
-            }
+            $('.paging-button').show();
 
             for (i = 0; i < feed.length; i++) {
                 if (feed[i].picture) {
@@ -451,9 +449,6 @@ var SwdView = {
 
             // Associate the click event handler for newly created posts.
             $('.post-tile > *').click(SwdView.handlers['onClickPostTile']);
-        }
-        else {
-            // Do nothing but disable paging controls.
         }
     },
     /***
