@@ -26,8 +26,8 @@
         <div id='wrapper'>
             <div id='fb-root'></div>
 
-            <div class='left col'>
-                <div id='left-panel' class='body row'>
+            <div id='left-panel' class='left col'>
+                <div class='body row'>
                     <div id='tabs-main' class='tabs-bottom'>
                         <ul>
                             <li><a href='#tab-feed'>Group Feed</a></li>
@@ -57,8 +57,8 @@
                 <div class='ad row ui-widget ui-widget-content ui-corner-all hidden'>Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by purchasing the ad-free version of this app. It's a one-time upgrade and you'll never see an ad again! (At least not in this app; I truly wish I had the power to remove all ads, but... alas.)</div>
             </div>
             
-            <div class='right col'>
-                <div id='right-panel' class='body row ui-widget ui-widget-content'></div>
+            <div id='right-panel' class='right col'>
+                <div class='body row ui-widget ui-widget-content'></div>
             </div>
 
             <div class='header row ui-widget ui-widget-header'>
