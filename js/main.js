@@ -38,16 +38,10 @@ var SwdModel = {
     /***
      * AJAX call to FB group feed.
      * @param {type} group Group whose feed is to be retrieved.
-     * @param {type} days Days before today. (0 = today)
-     * @param {type} page Page number in results. (Will be multiplied by 25 for exact post count).
      * @param {type} callback Completed callback function.
      */
-    getGroupFeed: function(group, daysBack, page, callback) {
-        var from = 25 * page;
-        var to = from + 25;
-        var apiCall = group + '?fields=feed';
-
-        SwdModel.facebookApi(apiCall, callback);
+    getGroupFeed: function(group, callback) {
+        SwdModel.facebookApi(group + '?fields=feed');
     },
     /***
      * AJAX call to FB comment feed for given post.
@@ -181,7 +175,7 @@ var SwdPresenter = {
      * Load feed for the current group.
      */
     loadGroupFeed: function() {
-        SwdModel.getGroupFeed(this.selectedGroup.id, this.daysBack, this.currentPage, function(response) {
+        SwdModel.getGroupFeed(this.selectedGroup.id, function(response) {
             var i;
             var post;
             var creationTime;
@@ -210,7 +204,6 @@ var SwdPresenter = {
                     post = response.feed.data[i];
                     
                     creationTime = Date.parse(post.created_time);
-                    
                     
                     if (currentTime - creationTime <= maxAge) {
                         feed.push(post);
@@ -440,8 +433,6 @@ var SwdView = {
             else {
                 message = '[No caption for image.]'
             }
-            
-            alert(Date.parse(feed[i].created_time));
 
             $(feedContainer).append('<li id="' + feed[i].id + '" class="post-tile"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + message + '</div></li>');
         }
