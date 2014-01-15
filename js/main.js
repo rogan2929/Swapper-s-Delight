@@ -347,7 +347,7 @@ var SwdView = {
      * Hides the right column.
      */
     hideRightColumn: function() {
-        $('.right.col').hide('slide', {
+        $('#right-panel').hide('slide', {
             direction: 'right',
             duration: 300,
             easing: 'easeInOutQuint'
@@ -387,7 +387,7 @@ var SwdView = {
      * @param {type} post Post to load into right column.
      */
     showRightColumn: function(post) {
-        $('.right.col').show('slide', {
+        $('#right-panel').show('slide', {
             direction: 'right',
             duration: 300,
             easing: 'easeInOutQuint'

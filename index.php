@@ -27,7 +27,7 @@
             <div id='fb-root'></div>
 
             <div class='left col'>
-                <div class='body row'>
+                <div id='left-panel' class='body row'>
                     <div id='tabs-main' class='tabs-bottom'>
                         <ul>
                             <li><a href='#tab-feed'>Group Feed</a></li>
@@ -58,7 +58,7 @@
             </div>
             
             <div class='right col'>
-                <div class='body row ui-widget ui-widget-content'></div>
+                <div id='right-panel' class='body row ui-widget ui-widget-content'></div>
             </div>
 
             <div class='header row ui-widget ui-widget-header'>
