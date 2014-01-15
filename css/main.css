@@ -130,10 +130,6 @@ textarea {
     top: 0;
 }
 
-.header {
-    /*    border-bottom: 1px solid black*/
-}
-
 .left.col {
     left: 0;
     right: 0;
@@ -225,8 +221,10 @@ textarea {
     font-size: 0.9em;
 }
 
-.paging-controls {
-    position: absolute;
+.paging.row {
+    height: 50px;
+    line-height: 50px;
+    top: 70;
 }
 
 /*#feed-posts .ui-selecting { 

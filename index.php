@@ -78,9 +78,11 @@
                 <div style='clear: both;'></div>
             </div>
             
-            <div class='paging-controls float-right'>
-                <div id='button-paging-prev' class='paging-button'>Previous</div>
-                <div id='button-paging-next' class='paging-button'>Next</div>
+            <div class='paging row'>
+                <div class='float-right'>
+                    <div id='button-paging-prev' class='paging-button'>Previous</div>
+                    <div id='button-paging-next' class='paging-button'>Next</div>
+                </div>
             </div>
 
             <!--Menus-->
