@@ -185,20 +185,6 @@ var SwdPresenter = {
         var maxAge = SwdPresenter.daysBack * ONE_DAY;
         SwdPresenter.filteredFeed = [];
 
-        // If looking for marked posts, then make an additional API call to determine what these are.
-        if (SwdPresenter.postType !== PostType.group) {
-            SwdModel.getMarkedPosts(SwdPresenter.postType, function(response) {
-                switch (SwdPresenter.postType) {
-                    case PostType.buying:
-                        break;
-                    case PostType.selling:
-                        break;
-                    case PostType.pinned:
-                        break;
-                }
-            });
-        }
-
         // Remove posts that are not in the selected date range.
         for (i = 0; i < feed.length; i++) {
             if (currentTime - Date.parse(feed[i].updated_time) <= maxAge) {
@@ -220,20 +206,20 @@ var SwdPresenter = {
                 SwdPresenter.currentRawFeed = null;
             }
 
-            SwdView.displayGroupFeed(SwdPresenter.filteredFeed, SwdPresenter.postType);
+            SwdView.displayPosts(SwdPresenter.filteredFeed, SwdPresenter.postType);
         });
     },
     /***
      * Load next page in group feed.
      */
     loadGroupFeedNext: function() {
-
+        // TODO
     },
     /***
      * Load previous page in group feed.
      */
     loadGroupFeedPrev: function() {
-
+        // TODO
     },
     /***
      * Set how old the oldest displayed post is to be.
@@ -373,6 +359,8 @@ var SwdView = {
                 primary: 'ui-icon-calendar'
             }
         });
+        
+        $('.paging-button').button();
 
         $('#button-close-panel').hover(function() {
             $(this).addClass('ui-state-hover');
@@ -413,7 +401,7 @@ var SwdView = {
      * @param {type} feed
      * @param {type} postType
      */
-    displayGroupFeed: function(feed, postType) {
+    displayPosts: function(feed, postType) {
         var i;
         var url;
         var message;
@@ -439,9 +427,17 @@ var SwdView = {
 
         // Hide the right panel.
         SwdView.hideRightPanel();
+        
+        // Enable paging controls.
+        $('.paging-button').hide();
 
         // If there is a feed to display, then display it.
         if (feed) {
+            // Disable paging controls if less than one page's worth.
+            if (feed.length === 25) {
+                $('.paging-button').show();
+            }
+            
             for (i = 0; i < feed.length; i++) {
                 if (feed[i].picture) {
                     url = feed[i].picture;
@@ -460,12 +456,11 @@ var SwdView = {
                 $(feedContainer).append('<li id="' + feed[i].id + '" class="post-tile"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + message + '</div></li>');
             }
 
-//        $('#feed-group').selectable({
-//            filter: " > li"
-//        });
-
             // Associate the click event handler for newly created posts.
             $('.post-tile > *').click(SwdView.handlers['onClickPostTile']);
+        }
+        else {
+            // Do nothing but disable paging controls.
         }
     },
     /***
