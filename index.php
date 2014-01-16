@@ -66,6 +66,11 @@
                         <div id='panel-image'>
                             <img>
                         </div>
+                        <div id='panel-comments'>
+                            <ul id='panel-comment-list'>
+                                
+                            </ul>
+                        </div>
                         <div id='panel-button-bar'>
                             <div id='panel-button-like' class='panel-button'>Like</div>
                             <div id='panel-button-comment' class='panel-button'>Comment</div>

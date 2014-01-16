@@ -236,8 +236,13 @@ textarea {
     background: blue;
 }
 
+#panel-comments {
+    height: 300px;
+}
+
 #panel-button-bar {
     text-align: center;
+    bottom: 0;
 }
 
 /*.paging {
