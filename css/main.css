@@ -221,6 +221,20 @@ textarea {
     font-size: 0.9em;
 }
 
+#panel-post {
+    width: 400px;
+    height: 400px;
+}
+
+#panel-post img {
+    max-width: 300px;
+    max-height: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background: blue;
+}
+
 /*.paging {
     height: 50px;
     line-height: 50px;
