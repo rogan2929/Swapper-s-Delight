@@ -152,9 +152,9 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
                                 SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
                                 SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
-                                SwdView.installHandler('onclickMenuItemDate', SwdPresenter.onClickMenuItemDate, '.menu-item-date', 'click');
-                                SwdView.installHandler('onclickMenuItemGroup', SwdPresenter.onClickMenuItemGroup, '.menu-item-group', 'click');
-                                SwdView.installHandler('onclickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item-main', 'click');
+                                SwdView.installHandler('onClickMenuItemDaysBack', SwdPresenter.onClickMenuItemDaysBack, '.menu-item-daysback', 'click');
+                                SwdView.installHandler('onClickMenuItemGroup', SwdPresenter.onClickMenuItemGroup, '.menu-item-group', 'click');
+                                SwdView.installHandler('onClickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item-main', 'click');
                                 SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
                                 SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
 
@@ -213,12 +213,7 @@ var SwdPresenter = {
      */
     loadNextPage: function() {
         // TODO
-    },
-    /***
-     * Load previous page in group feed.
-     */
-    loadPrevPage: function() {
-        // TODO
+        // Switch based on selectedPostType
     },
     /***
      * Set how old the oldest displayed post is to be.
@@ -251,7 +246,7 @@ var SwdPresenter = {
     onClickMenuButton: function(e, args) {
         SwdView.showUiMenu(e);
     },
-    onClickMenuItemDate: function(e, args) {
+    onClickMenuItemDaysBack: function(e, args) {
         var daysBack;
         var id = $(e.currentTarget).attr('id');
 
@@ -274,6 +269,7 @@ var SwdPresenter = {
         }
 
         SwdPresenter.setDaysBack(daysBack);
+        SwdView.setDaysBackMenuItem(e.currentTarget);
     },
     onClickMenuItemGroup: function(e, args) {
         var id = $(e.currentTarget).attr('id');
@@ -365,7 +361,7 @@ var SwdView = {
 
         // Init menus.
         $('#popup-menu-main').menu();
-        $('#popup-menu-date').menu();
+        $('#popup-menu-daysback').menu();
     },
     /**
      * Installs an event handler and connects it to the presenter.
@@ -468,6 +464,14 @@ var SwdView = {
                 at: 'left bottom'
             });
         });
+    },
+    /***
+     * Put a checkmark next to the selected days back menu item.
+     * @param {type} menuItem
+     */
+    setDaysBackMenuItem: function(menuItem) {
+        var id = $(menuItem).attr('id');
+        alert(id);
     },
     /***
      * Changes the text shown in the "Select a Group" button.
