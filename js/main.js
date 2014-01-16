@@ -343,7 +343,7 @@ var SwdView = {
             }
         });
 
-        $('#button-menu-date').button({
+        $('#button-menu-daysback').button({
             icons: {
                 primary: 'ui-icon-calendar'
             }
@@ -477,8 +477,6 @@ var SwdView = {
         $(menuItem).removeClass('ui-icon-blank').addClass('ui-icon-check');
         
         text = $(menuItem).parent().text();
-        
-        alert(text);
         
         $('#button-menu-daysback span a').text(text);
         

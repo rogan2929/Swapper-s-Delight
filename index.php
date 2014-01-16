@@ -72,7 +72,7 @@
                 </div>
                 <div class='float-right right-margin'>
                     <span class='ui-widget'>Showing Posts From:</span>
-                    <div id='button-menu-date' class='right-margin menu-button'><a href='#popup-menu-daysback'>Today</a></div>
+                    <div id='button-menu-daysback' class='right-margin menu-button'><a href='#popup-menu-daysback'>Today</a></div>
                     <div id='button-menu-main' class='menu-button'><a href='#popup-menu-main'>Menu</a></div>
                 </div>
                 <div style='clear: both;'></div>
