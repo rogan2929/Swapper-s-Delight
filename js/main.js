@@ -192,7 +192,7 @@ var SwdPresenter = {
                 for (i = 0; i < response.feed.data.length; i++) {
                     post = response.feed.data[i];
 
-                    if (currentTime - Date.parse(post.updated_time) <= maxAge) {
+                    if (currentTime.getMilliseconds() - Date.parse(post.updated_time) <= maxAge) {
                         feed.push(post);
                     }
                 }
