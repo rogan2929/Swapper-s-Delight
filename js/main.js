@@ -459,7 +459,7 @@ var SwdView = {
                     message = '[No caption for image.]'
                 }
 
-                $(feedContainer).append('<li id="' + feed[i].id + '" class="post-tile ui-widget ui-widget-header"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + message + '</div></li>');
+                $(feedContainer).append('<li id="' + feed[i].id + '" class="post-tile ui-widget ui-widget-content"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + message + '</div></li>');
             }
 
             // Associate the click event handler for newly created posts.
