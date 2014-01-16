@@ -470,15 +470,17 @@ var SwdView = {
      * @param {type} menuItem
      */
     setDaysBackMenuItem: function(menuItem) {
+        var text;
+        
         // Remove previous check box and then check the one that was clicked on.
         $('.menu-item-daysback a .ui-icon-check').removeClass('ui-icon-check').addClass('ui-icon-blank');
         $(menuItem).removeClass('ui-icon-blank').addClass('ui-icon-check');
         
-        var text = $(menuItem).text();
+        text = $(menuItem).parent().text();
         
         alert(text);
         
-        $('#button-menu-daysback').text('TEST');
+        $('#button-menu-daysback span a').text(text);
         
     },
     /***
