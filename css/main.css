@@ -189,12 +189,11 @@ textarea {
 .post-tile {
     width: 130px;
     height: 130px;
-    margin: 32px;
+    margin: 16px;
     display: inline-block;
     cursor: pointer;
     border-radius: 5px;
     border: 5px solid transparent;
-    background: green;
 }
 
 .post-tile:hover {
