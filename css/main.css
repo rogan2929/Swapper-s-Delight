@@ -187,8 +187,8 @@ textarea {
 }
 
 .post-tile {
-    width: 130px;
-    height: 130px;
+    width: 150px;
+    height: 200px;
     margin: 16px;
     display: inline-block;
     cursor: pointer;
@@ -214,7 +214,7 @@ textarea {
 }
 
 .post-caption {
-    height: 4em;
+    height: 55px;
     margin-top: 3px;
     overflow-x: hidden;
     overflow-y: hidden;
