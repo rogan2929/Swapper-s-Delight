@@ -63,7 +63,9 @@
                         <span class="ui-button-text">close</span>
                     </button>
                     <div id='panel-post'>
-                        <img>
+                        <div id='panel-image'>
+                            <img>
+                        </div>
                         <div>
                             <div id='panel-button-like' class='panel-button'>Like</div>
                             <div id='panel-button-comment' class='panel-button'>Comment</div>
