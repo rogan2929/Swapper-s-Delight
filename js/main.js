@@ -269,7 +269,7 @@ var SwdPresenter = {
         }
 
         SwdPresenter.setDaysBack(daysBack);
-        SwdView.setDaysBackMenuItem('#' + id + ' .ui-icon');
+        SwdView.setDaysBackMenuItem('#' + id + ' a span');
     },
     onClickMenuItemGroup: function(e, args) {
         var id = $(e.currentTarget).attr('id');
