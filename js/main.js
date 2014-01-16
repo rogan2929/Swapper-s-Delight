@@ -192,7 +192,7 @@ var SwdPresenter = {
                 for (i = 0; i < response.feed.data.length; i++) {
                     post = response.feed.data[i];
                     
-                    alert($.datepicker.parseDate(post.updated_time));
+                    alert($.datepicker.parseDate('yy-mm-dd', post.updated_time));
 
                     if (currentTime.getMilliseconds() - Date.parse(post.updated_time) <= maxAge) {
                         feed.push(post);
