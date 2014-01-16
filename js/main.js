@@ -476,6 +476,8 @@ var SwdView = {
         
         var text = $(menuItem).text();
         
+        alert(text);
+        
         $('#button-menu-daysback').text('TEST');
         
     },
