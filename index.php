@@ -31,24 +31,24 @@
                     <div id='tabs-main' class='tabs-bottom'>
                         <ul>
                             <li><a href='#tab-feed'>Group Feed</a></li>
-                            <li><a href='#tab-buying'>Buying</a></li>
-                            <li><a href='#tab-selling'>Selling</a></li>
+                            <li><a href='#tab-myposts'>My Posts</a></li>
                             <li><a href='#tab-pinned'>Pinned</a></li>
+                            <li><a href='#tab-search'>Search</a></li>
                         </ul>
                         <div id='tab-feed'>
                             <ol id='feed-group'>
                             </ol>
                         </div>
-                        <div id='tab-buying'>
-                            <ol id='feed-buying'>
-                            </ol>
-                        </div>
-                        <div id='tab-selling'>
-                            <ol id='feed-selling'>
+                        <div id='tab-myposts'>
+                            <ol id='feed-myposts'>
                             </ol>
                         </div>
                         <div id='tab-pinned'>
                             <ol id='feed-pinned'>
+                            </ol>
+                        </div>
+                        <div id='tab-search'>
+                            <ol id='feed-search'>
                             </ol>
                         </div>
                     </div>

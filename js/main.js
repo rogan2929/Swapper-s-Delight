@@ -3,7 +3,7 @@
 // "Enums"
 
 // PostType Enum
-var PostType = {group: 0, buying: 1, selling: 2, pinned: 3};
+var PostType = {group: 0, myposts: 1, pinned: 2, search: 3};
 
 // http://stackoverflow.com/questions/1102215/mvp-pattern-with-javascript-framework
 
@@ -26,14 +26,6 @@ var SwdModel = {
      */
     getGroupInfo: function(id, callback) {
         SwdModel.facebookApi(id, callback);
-    },
-    /***
-     * AJAX call to retrieve marked posts for the given group.
-     * @param {type} postType
-     * @param {type} callback
-     */
-    getMarkedPosts: function(postType, callback) {
-
     },
     /***
      * AJAX call to FB group feed.
@@ -351,25 +343,25 @@ var SwdView = {
                 primary: 'ui-icon-calendar'
             }
         });
-        
+
         $('#panel-button-comment').button({
             icons: {
                 primary: 'ui-icon-comment'
             }
         });
-        
+
         $('#panel-button-bump').button({
             icons: {
                 primary: 'ui-icon-circle-arrow-n'
             }
         });
-        
+
         $('#panel-button-pin').button({
             icons: {
                 primary: 'ui-icon-pin-s'
             }
         });
-        
+
         $('#panel-button-unpin').button({
             icons: {
                 primary: 'ui-icon-pin-w'
@@ -422,14 +414,14 @@ var SwdView = {
         var feedContainer;
 
         switch (postType) {
-            case PostType.buying:
-                feedContainer = '#feed-buying';
-                break;
-            case PostType.selling:
-                feedContainer = '#feed-selling';
+            case PostType.myposts:
+                feedContainer = '#feed-myposts';
                 break;
             case PostType.pinned:
                 feedContainer = '#feed-pinned';
+                break;
+            case PostType.search:
+                feedContainer = '#feed-search';
                 break;
             default:
                 feedContainer = '#feed-group';
@@ -498,15 +490,15 @@ var SwdView = {
      */
     setDaysBackMenuItem: function(menuItem) {
         var text;
-        
+
         // Remove previous check box and then check the one that was clicked on.
         $('.menu-item-daysback a .ui-icon-check').removeClass('ui-icon-check').addClass('ui-icon-blank');
         $(menuItem).removeClass('ui-icon-blank').addClass('ui-icon-check');
-        
+
         text = $(menuItem).parent().text();
-        
+
         $('#button-menu-daysback span a').text(text);
-        
+
     },
     /***
      * Changes the text shown in the "Select a Group" button.
