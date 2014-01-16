@@ -236,6 +236,10 @@ textarea {
     background: blue;
 }
 
+#panel-button-bar {
+    text-align: center;
+}
+
 /*.paging {
     height: 50px;
     line-height: 50px;
