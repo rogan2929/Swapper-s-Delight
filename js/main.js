@@ -473,7 +473,10 @@ var SwdView = {
         // Remove previous check box and then check the one that was clicked on.
         $('.menu-item-daysback a .ui-icon-check').removeClass('ui-icon-check').addClass('ui-icon-blank');
         $(menuItem).removeClass('ui-icon-blank').addClass('ui-icon-check');
-        $('#button-menu-daysback').text($(menuItem).text())
+        
+        var text = $(menuItem).text();
+        
+        $('#button-menu-daysback').text('TEST');
         
     },
     /***
