@@ -219,6 +219,7 @@ textarea {
     overflow-x: hidden;
     overflow-y: hidden;
     font-size: 0.9em;
+    display: block;
 }
 
 #panel-image {
