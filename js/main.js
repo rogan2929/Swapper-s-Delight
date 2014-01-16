@@ -349,7 +349,9 @@ var SwdView = {
             }
         });
         
-        $('.panel-button').button();
+        $('#panel-button-comment').button();
+        $('#panel-button-bump').button();
+        $('#panel-button-pin').button();
 
         $('#button-close-panel').hover(function() {
             $(this).addClass('ui-state-hover');
