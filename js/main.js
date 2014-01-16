@@ -269,7 +269,7 @@ var SwdPresenter = {
         }
 
         SwdPresenter.setDaysBack(daysBack);
-        SwdView.setDaysBackMenuItem(e.currentTarget);
+        SwdView.setDaysBackMenuItem(id + ' .ui-icon');
     },
     onClickMenuItemGroup: function(e, args) {
         var id = $(e.currentTarget).attr('id');
@@ -470,8 +470,8 @@ var SwdView = {
      * @param {type} menuItem
      */
     setDaysBackMenuItem: function(menuItem) {
-        // Remove previous check boxes and then check the one that was clicked on.
-        $('.menu-item-daysback a span').removeClass('ui-icon-check');
+        // Remove previous check box and then check the one that was clicked on.
+        $('.menu-item-daysback a span ui-icon-check').removeClass('ui-icon-check').addClass('ui-icon-blank');
         $(menuItem).removeClass('ui-icon-blank').addClass('ui-icon-check');
     },
     /***
