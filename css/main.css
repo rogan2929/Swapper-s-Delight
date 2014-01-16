@@ -189,7 +189,7 @@ textarea {
 .post-tile {
     width: 130px;
     height: 130px;
-    margin: 16px;
+    margin: 32px;
     display: inline-block;
     cursor: pointer;
     border-radius: 5px;
