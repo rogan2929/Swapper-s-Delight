@@ -187,7 +187,7 @@ var SwdPresenter = {
             if (response.feed && response.feed.data) {
                 // Filter the current raw feed and display it.
                 // Calling moment.js
-                currentTime = moment.unix();
+                currentTime = moment();
 
                 // Remove posts that are not in the selected date range.
                 for (i = 0; i < response.feed.data.length; i++) {
