@@ -193,11 +193,11 @@ var SwdPresenter = {
                     post = response.feed.data[i];
                     
                     alert(post.updated_time);
-                    alert(Date.parse(post.updated_time));
+                    alert(Date.UTC(post.updated_time));
 
-                    if (currentTime.getTime()- Date.parse(post.updated_time) <= maxAge) {
-                        feed.push(post);
-                    }
+//                    if (currentTime.getTime()- Date.parse(post.updated_time) <= maxAge) {
+//                        feed.push(post);
+//                    }
                 }
 
                 SwdPresenter.nextPage = response.feed.paging.next;
