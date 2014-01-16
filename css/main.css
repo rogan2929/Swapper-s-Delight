@@ -194,11 +194,11 @@ textarea {
     display: inline-block;
     cursor: pointer;
     border-radius: 5px;
-    border: 5px solid transparent;
+    border: 5px solid #a7a7a7;
 }
 
 .post-tile:hover {
-    border-color: #a7a7a7
+    border-color: #FECA40;
 }
 
 .post-image {
