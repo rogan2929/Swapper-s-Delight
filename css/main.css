@@ -237,11 +237,12 @@ textarea {
 }
 
 #panel-comments {
-    height: 300px;
+    position: absolute;
+    bottom: 70px;
 }
 
 #panel-button-bar {
-    text-align: center;
+    position: absolute;
     bottom: 0;
 }
 
