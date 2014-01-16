@@ -180,7 +180,7 @@ var SwdPresenter = {
         var currentTime;
         var updatedTime;
         var post;
-        var ONE_DAY = 1000 * 60 * 60 * 24;
+        var ONE_DAY = 60 * 60 * 24;
         var maxAge = SwdPresenter.daysBack * ONE_DAY;
         var feed = [];
 
@@ -194,13 +194,10 @@ var SwdPresenter = {
                 for (i = 0; i < response.feed.data.length; i++) {
                     post = response.feed.data[i];
                     updatedTime = moment(post.updated_time);
-                    
-                    alert(updatedTime.unix());
-                    //alert(moment.unix(post.updated_time));
 
-//                    if (currentTime.getTime()- Date.parse(post.updated_time) <= maxAge) {
-//                        feed.push(post);
-//                    }
+                    if (currentTime.unix() - updatedTime.unix() <= maxAge) {
+                        feed.push(post);
+                    }
                 }
 
                 SwdPresenter.nextPage = response.feed.paging.next;
