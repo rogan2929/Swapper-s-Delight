@@ -136,7 +136,7 @@ textarea {
 }
 
 .right.col {
-    width: 300px;
+    width: 400px;
     right: 0;
     display: none;
     z-index: 1000;
