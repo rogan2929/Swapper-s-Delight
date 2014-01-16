@@ -224,6 +224,7 @@ textarea {
 #panel-post {
     width: 400px;
     height: 400px;
+    background: green;
 }
 
 #panel-post img {
