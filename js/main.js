@@ -186,14 +186,15 @@ var SwdPresenter = {
         SwdModel.getGroupFeed(this.selectedGroup.id, function(response) {
             if (response.feed && response.feed.data) {
                 // Filter the current raw feed and display it.
-                currentTime = new Date();
+                // Calling moment.js
+                currentTime = moment.unix();
 
                 // Remove posts that are not in the selected date range.
                 for (i = 0; i < response.feed.data.length; i++) {
                     post = response.feed.data[i];
                     
-                    alert(post.updated_time);
-                    alert(Date.UTC(post.updated_time));
+                    alert(currentTime);
+                    //alert(moment.unix(post.updated_time));
 
 //                    if (currentTime.getTime()- Date.parse(post.updated_time) <= maxAge) {
 //                        feed.push(post);
