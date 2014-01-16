@@ -348,6 +348,8 @@ var SwdView = {
                 primary: 'ui-icon-calendar'
             }
         });
+        
+        $('.panel-button').button();
 
         $('#button-close-panel').hover(function() {
             $(this).addClass('ui-state-hover');
