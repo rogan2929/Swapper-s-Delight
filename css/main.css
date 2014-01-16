@@ -222,7 +222,6 @@ textarea {
 }
 
 #panel-image {
-    position: absolute;
     top: 60px;
     height: 400px;
     background: green;
@@ -239,15 +238,16 @@ textarea {
 
 #panel-comments {
     position: absolute;
-    bottom: 70px;
+    bottom: 50px;
     background: red;
+    top: 400px;
+    left: 0;
     right: 0;
 }
 
 #panel-button-bar {
     position: absolute;
     bottom: 0;
-    right: 0;
 }
 
 /*.paging {
