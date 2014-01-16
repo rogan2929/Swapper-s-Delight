@@ -470,8 +470,9 @@ var SwdView = {
      * @param {type} menuItem
      */
     setDaysBackMenuItem: function(menuItem) {
-        var id = $(menuItem).attr('id');
-        alert(id);
+        // Remove previous check boxes and then check the one that was clicked on.
+        $('.menu-item-daysback a span').removeClass('ui-icon-check');
+        $(menuItem).removeClass('ui-icon-blank').addClass('ui-icon-check');
     },
     /***
      * Changes the text shown in the "Select a Group" button.
