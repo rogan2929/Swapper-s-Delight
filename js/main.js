@@ -178,6 +178,7 @@ var SwdPresenter = {
     loadGroupFeed: function() {
         var i;
         var currentTime;
+        var updatedTime;
         var post;
         var ONE_DAY = 1000 * 60 * 60 * 24;
         var maxAge = SwdPresenter.daysBack * ONE_DAY;
@@ -188,13 +189,13 @@ var SwdPresenter = {
                 // Filter the current raw feed and display it.
                 // Calling moment.js
                 currentTime = moment();
-                currentTime = moment.unix(currentTime);
 
                 // Remove posts that are not in the selected date range.
                 for (i = 0; i < response.feed.data.length; i++) {
                     post = response.feed.data[i];
+                    updatedTime = moment(post.updated_time);
                     
-                    alert(currentTime);
+                    alert(currentTime.unix());
                     //alert(moment.unix(post.updated_time));
 
 //                    if (currentTime.getTime()- Date.parse(post.updated_time) <= maxAge) {
