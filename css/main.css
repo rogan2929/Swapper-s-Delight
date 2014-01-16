@@ -222,7 +222,8 @@ textarea {
 }
 
 #panel-image {
-    width: 400px;
+    position: absolute;
+    top: 60px;
     height: 400px;
     background: green;
 }
@@ -240,11 +241,13 @@ textarea {
     position: absolute;
     bottom: 70px;
     background: red;
+    right: 0;
 }
 
 #panel-button-bar {
     position: absolute;
     bottom: 0;
+    right: 0;
 }
 
 /*.paging {
