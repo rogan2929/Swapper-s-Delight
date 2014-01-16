@@ -190,6 +190,7 @@ textarea {
     width: 150px;
     height: 200px;
     margin: 16px;
+    padding: 4px;
     display: inline-block;
     cursor: pointer;
     border-radius: 5px;
@@ -216,7 +217,9 @@ textarea {
 .post-caption {
     text-align: center;
     height: 55px;
-    margin: 4px;
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-top: 4px;
     overflow-x: hidden;
     overflow-y: hidden;
     font-size: 0.9em;
