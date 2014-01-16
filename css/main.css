@@ -214,6 +214,7 @@ textarea {
 }
 
 .post-caption {
+    text-align: center;
     height: 55px;
     margin: 4px;
     overflow-x: hidden;
