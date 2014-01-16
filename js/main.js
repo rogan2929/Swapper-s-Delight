@@ -191,6 +191,8 @@ var SwdPresenter = {
                 // Remove posts that are not in the selected date range.
                 for (i = 0; i < response.feed.data.length; i++) {
                     post = response.feed.data[i];
+                    
+                    alert(currentTime.getMilliseconds() - Date.parse(post.updated_time));
 
                     if (currentTime.getMilliseconds() - Date.parse(post.updated_time) <= maxAge) {
                         feed.push(post);
