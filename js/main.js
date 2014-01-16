@@ -195,7 +195,7 @@ var SwdPresenter = {
                     post = response.feed.data[i];
                     updatedTime = moment(post.updated_time);
                     
-                    alert(currentTime.unix());
+                    alert(updatedTime.unix());
                     //alert(moment.unix(post.updated_time));
 
 //                    if (currentTime.getTime()- Date.parse(post.updated_time) <= maxAge) {
