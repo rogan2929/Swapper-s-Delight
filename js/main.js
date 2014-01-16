@@ -349,9 +349,29 @@ var SwdView = {
             }
         });
         
-        $('#panel-button-comment').button();
-        $('#panel-button-bump').button();
-        $('#panel-button-pin').button();
+        $('#panel-button-comment').button({
+            icons: {
+                primary: 'ui-icon-comment'
+            }
+        });
+        
+        $('#panel-button-bump').button({
+            icons: {
+                primary: 'ui-icon-circle-arrow-n'
+            }
+        });
+        
+        $('#panel-button-pin').button({
+            icons: {
+                primary: 'ui-icon-pin-s'
+            }
+        });
+        
+        $('#panel-button-unpin').button({
+            icons: {
+                primary: 'ui-icon-pin-w'
+            }
+        }).hide();
 
         $('#button-close-panel').hover(function() {
             $(this).addClass('ui-state-hover');
