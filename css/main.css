@@ -257,10 +257,7 @@ textarea {
 #panel-button-bar {
     position: absolute;
     bottom: 10px;
-    left: 0;
-    right: 0;
-    width: 200px;
-    margin: auto;
+    right: 10px;
 }
 
 /*.paging {
