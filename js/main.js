@@ -52,8 +52,11 @@ var SwdModel = {
 //            getLiked: false
 //        }
 
-        var minAge = Math.round(((new Date()).getTime() - options.newerThan * 1000 * 60 * 60 * 24) / 1000);
-
+        var minAge;
+        var query;
+        
+        minAge = Math.round(((new Date()).getTime() - options.newerThan * 1000 * 60 * 60 * 24) / 1000);
+        query = 'SELECT post_id,message,attachment FROM stream WHERE source_id=' + group;
 
         SwdModel.facebookFQLQuery('SELECT post_id,message,attachment FROM stream WHERE source_id=' + group + ' AND updated_time > ' + minAge + ' LIMIT 25', callback);
     },
@@ -192,6 +195,17 @@ var SwdPresenter = {
         var options;
 
         // TODO: configure options based on what tab the user is on.
+        switch (SwdPresenter.postType) {
+            case PostType.group:
+                options = { newerThan: SwdPresenter.newerThan }
+                break;
+            case PostType.myposts:
+                break;
+            case PostType.pinned:
+                break;
+            case PostType.search:
+                break;
+        }
 
         SwdModel.getGroupPosts(SwdPresenter.selectedGroup.gid, options, function(response) {
             alert(response.data.count);
