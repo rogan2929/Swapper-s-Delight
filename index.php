@@ -73,7 +73,7 @@
                         </div>
                         <div id='panel-button-bar'>
                             <div id='panel-button-comment' class='panel-button'>Comment</div>
-                            <div id='panel-button-bump' class='panel-button'>Bump</div>
+                            <div id='panel-button-pm' class='panel-button'>Message</div>
                             <div id='panel-button-pin' class='panel-button'>Pin</div>
                             <div id='panel-button-unpin' class='panel-button'>Unpin</div>
                         </div>

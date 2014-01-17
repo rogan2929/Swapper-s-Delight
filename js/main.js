@@ -149,16 +149,12 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickMenuItemDaysBack', SwdPresenter.onClickMenuItemDaysBack, '.menu-item-daysback', 'click');
                                 SwdView.installHandler('onClickMenuItemGroup', SwdPresenter.onClickMenuItemGroup, '.menu-item-group', 'click');
                                 SwdView.installHandler('onClickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item-main', 'click');
+                                SwdView.installHandler('onClickPanelButton', SwdPresenter.onClickPanelButton, '.panel-button', 'click');
                                 SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
                                 SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
 
                                 // Position our menus.
                                 SwdView.positionMenus();
-
-                                FB.ui({
-                                    method: 'send',
-                                    link: 'http://www.foxnews.com',
-                                });
 
                                 // TODO: Set auto refresh with setInterval
                             }
@@ -216,6 +212,16 @@ var SwdPresenter = {
     loadNextPage: function() {
         // TODO
         // Switch based on selectedPostType
+    },
+    /***
+     * Brings up a send message window.
+     */
+    sendFacebookMessage: function(id, link) {
+        FB.ui({
+            to: id,
+            method: 'send',
+            link: link,
+        });
     },
     /***
      * Set how old the oldest displayed post is to be.
@@ -290,6 +296,9 @@ var SwdPresenter = {
     onClickMenuItemMain: function(e, args) {
         var id = $(e.currentTarget).attr('id');
     },
+    onClickPanelButton: function(e, args) {
+        SwdPresenter.sendFacebookMessage('', '');
+    },
     onClickPostTile: function(e, args) {
         var post = $(e.currentTarget).attr('id');
         e.stopPropagation();
@@ -357,7 +366,7 @@ var SwdView = {
             }
         });
 
-        $('#panel-button-bump').button({
+        $('#panel-button-pm').button({
             icons: {
                 primary: 'ui-icon-circle-arrow-n'
             }
