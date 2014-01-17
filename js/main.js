@@ -368,7 +368,7 @@ var SwdView = {
 
         $('#panel-button-pm').button({
             icons: {
-                primary: 'ui-icon-circle-arrow-n'
+                primary: 'ui-icon-mail-closed'
             }
         });
 
