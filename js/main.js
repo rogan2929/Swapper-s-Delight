@@ -297,7 +297,7 @@ var SwdPresenter = {
         var id = $(e.currentTarget).attr('id');
     },
     onClickPanelButton: function(e, args) {
-        SwdPresenter.sendFacebookMessage('', '');
+        SwdPresenter.sendFacebookMessage('', 'http://www.foxnews.com');
     },
     onClickPostTile: function(e, args) {
         var post = $(e.currentTarget).attr('id');
