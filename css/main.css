@@ -204,14 +204,19 @@ textarea {
 .post-image {
     height: 130px;
     width: 200px;
+    position: relative;
 }
 
 .post-image img {
     max-height: 130px;
     max-width: 130px;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+/*    margin-left: auto;
+    margin-right: auto;*/
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
 }
 
 .post-caption {
