@@ -28,7 +28,7 @@ var SwdModel = {
      * @param {type} callback
      */
     getGroupInfo: function(id, callback) {
-        SwdModel.facebookApi({
+        FB.api({
             method: 'fql.query',
             query: 'SELECT gid,name,icon FROM group WHERE gid=' + id
         }, callback);
