@@ -231,6 +231,10 @@ textarea {
     display: block;
 }
 
+#panel-post {
+    position: relative;
+}
+
 #panel-image {
     top: 60px;
     height: 400px;
