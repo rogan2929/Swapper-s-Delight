@@ -20,7 +20,16 @@ var SwdModel = {
      * @param {type} callback Callback function.
      */
     facebookApi: function(api, callback) {
-        FB.api(api, callback);
+        FB.api('/' + api, callback);
+    },
+    /***
+     * Craft a FQL query to be consumed by FB.
+     * @param {type} query
+     * @param {type} callback
+     */
+    facebookFQLQuery: function(query, callback) {
+        query = query.replace(' ', '+');
+        SwdModel.facebookApi('/fql?q=' + query, callback);
     },
     /***
      * Query FB group info.
@@ -28,10 +37,7 @@ var SwdModel = {
      * @param {type} callback
      */
     getGroupInfo: function(id, callback) {
-        FB.api({
-            method: 'fql.query',
-            query: 'SELECT gid,name,icon FROM group WHERE gid=' + id
-        }, callback);
+        SwdModel.facebookFQLQuery('SELECT gid,name,icon FROM group WHERE gid=' + id, callback)
     },
     /***
      * AJAX call to FB group feed.
@@ -106,7 +112,7 @@ var SwdPresenter = {
      */
     startApp: function() {
         // Retrieve group info for logged in user.
-        SwdModel.facebookApi('/me', function(response) {
+        SwdModel.facebookApi('me', function(response) {
             var i;
             var groupCount;
             var bstGroupIds;
