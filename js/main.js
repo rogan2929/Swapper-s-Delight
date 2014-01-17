@@ -32,7 +32,7 @@ var SwdModel = {
         //query = query.replace(',', '%2C');
         query = encodeURIComponent(query);
         alert(query);
-        SwdModel.facebookApi('/fql?q=' + query, callback);
+        SwdModel.facebookApi('fql?q=' + query, callback);
     },
     /***
      * Query FB group info.
