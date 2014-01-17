@@ -191,7 +191,7 @@ var SwdPresenter = {
         var maxAge = SwdPresenter.daysBack * ONE_DAY;
         var feed = [];
 
-        SwdModel.getGroupFeed(this.selectedGroup.id, function(response) {
+        SwdModel.getGroupFeed(this.selectedGroup.gid, function(response) {
             if (response.feed && response.feed.data) {
                 // Filter the current raw feed and display it.
                 // Calling moment.js
