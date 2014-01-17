@@ -482,7 +482,10 @@ var SwdView = {
                 post = posts[i];
                 
                 if (post.attachment && post.attachment.media && post.attachment.media[0].src) {
-                    url = post.attachment.media[0].src;
+                    // Grab photo URL and use hack to get larger version.
+                    // Small: *_s.jpg
+                    // Large: *_n.jpg
+                    url = post.attachment.media[0].src.replace('_s', '_n');
                 }
                 else {
                     url = '/img/no-image.jpg';
