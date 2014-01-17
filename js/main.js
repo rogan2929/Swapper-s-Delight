@@ -30,9 +30,9 @@ var SwdModel = {
     facebookFQLQuery: function(query, callback) {
         //query = query.replace(' ', '%20');
         //query = query.replace(',', '%2C');
-        query = encodeURIComponent(query);
+        query = 'fql?q=' + encodeURIComponent(query);
         alert(query);
-        SwdModel.facebookApi('fql?q=' + query, callback);
+        SwdModel.facebookApi(query, callback);
     },
     /***
      * Query FB group info.
