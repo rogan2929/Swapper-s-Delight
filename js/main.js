@@ -48,8 +48,8 @@ var SwdModel = {
     getGroupFeed: function(group, daysBack, callback) {
         //SwdModel.facebookApi(group + '?fields=feed', callback);
         //SELECT post_id,message,attachment FROM stream WHERE source_id=120696471425768 AND updated_time <  LIMIT 25
-        var maxAge = Math.round(((new Date()).getTime() - daysBack * 1000 * 60 * 60 * 24) / 1000);
-        SwdModel.facebookFQLQuery('SELECT post_id,message,attachment FROM stream WHERE source_id=' + group + ' AND updated_time < ' + maxAge + ' LIMIT 25', callback);
+        var ageCutOff = Math.round(((new Date()).getTime() - daysBack * 1000 * 60 * 60 * 24) / 1000);
+        SwdModel.facebookFQLQuery('SELECT post_id,message,attachment FROM stream WHERE source_id=' + group + ' AND updated_time > ' + ageCutOff + ' LIMIT 25', callback);
     },
     /***
      * AJAX call to FB comment feed for given post.
