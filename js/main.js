@@ -156,7 +156,6 @@ var SwdPresenter = {
                                 SwdView.positionMenus();
 
                                 FB.ui({
-                                    app_id: AppId,
                                     method: 'send',
                                     link: 'http://www.foxnews.com',
                                 });
