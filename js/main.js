@@ -229,7 +229,7 @@ var SwdPresenter = {
         }
 
         SwdModel.getGroupPosts(SwdPresenter.selectedGroup.gid, options, function(response) {
-            alert(response.data.count);
+            alert(response.data.length);
 //            if (response.feed && response.feed.data) {
 //                // Filter the current raw feed and display it.
 //                // Calling moment.js
