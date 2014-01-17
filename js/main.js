@@ -76,8 +76,6 @@ var SwdModel = {
         
         // Give 25 results, if possible.
         query += ' LIMIT 25';
-        
-        alert(query);
 
         SwdModel.facebookFQLQuery(query, callback);
     },
@@ -228,32 +226,9 @@ var SwdPresenter = {
                 break;
         }
 
+        // Get posts and then display them.
         SwdModel.getGroupPosts(SwdPresenter.selectedGroup.gid, options, function(response) {
-            alert(response.data.length);
-//            if (response.feed && response.feed.data) {
-//                // Filter the current raw feed and display it.
-//                // Calling moment.js
-//                currentTime = moment();
-//
-//                // Remove posts that are not in the selected date range.
-//                for (i = 0; i < response.feed.data.length; i++) {
-//                    post = response.feed.data[i];
-//                    updatedTime = moment(post.updated_time);
-//
-//                    if (currentTime.unix() - updatedTime.unix() <= maxAge) {
-//                        feed.push(post);
-//                    }
-//                }
-//
-//                SwdPresenter.nextPage = response.feed.paging.next;
-//                SwdPresenter.prevPage = response.feed.paging.previous;
-//            }
-//            else {
-//                SwdPresenter.nextPage = null;
-//                SwdPresenter.prevPage = null;
-//            }
-
-            SwdView.displayGroupPosts(feed, SwdPresenter.postType);
+            SwdView.displayGroupPosts(response.data, SwdPresenter.postType);
         });
     },
     /***
@@ -470,10 +445,10 @@ var SwdView = {
     },
     /***
      * Displays the returned feed in the main window.
-     * @param {type} feed
+     * @param {type} posts
      * @param {type} postType
      */
-    displayGroupPosts: function(feed, postType) {
+    displayGroupPosts: function(posts, postType) {
         var i;
         var url;
         var message;
@@ -501,23 +476,23 @@ var SwdView = {
         SwdView.hideRightPanel();
 
         // If there is a feed to display, then display it.
-        if (feed) {
-            for (i = 0; i < feed.length; i++) {
-                if (feed[i].picture) {
-                    url = feed[i].picture;
+        if (posts) {
+            for (i = 0; i < posts.length; i++) {
+                if (posts[i].attachment.media.src) {
+                    url = posts[i].attachment.media.src;
                 }
                 else {
                     url = '/img/no-image.jpg';
                 }
 
-                if (feed[i].message) {
-                    message = feed[i].message;
+                if (posts[i].message) {
+                    message = posts[i].message;
                 }
                 else {
                     message = '[No caption for image.]'
                 }
 
-                $(feedContainer).append('<li id="' + feed[i].id + '" class="post-tile ui-widget ui-widget-content"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + message + '</div></li>');
+                $(feedContainer).append('<li id="' + posts[i].post_id + '" class="post-tile ui-widget ui-widget-content"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + message + '</div></li>');
             }
 
             // Associate the click event handler for newly created posts.
