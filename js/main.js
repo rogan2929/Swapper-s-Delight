@@ -121,6 +121,7 @@ var SwdPresenter = {
             var bstGroupIds;
             var groups = [];
             var completed;
+            var group;
 
             // Save the FB user object for later consumption.
             SwdPresenter.userObject = response;
@@ -134,10 +135,12 @@ var SwdPresenter = {
                     // Have the view write create groups vertical tab.
                     for (i = 0; i < response.length; i++) {
                         SwdModel.getGroupInfo(response[i], function(response) {
+                            group = response.data[0];
+                            
                             // Add group to groups array.
-                            groups[response.data.gid] = response.data;
+                            groups[group.gid] = group;
 
-                            SwdView.addGroupToMenu(response.data);
+                            SwdView.addGroupToMenu(group);
 
                             // Keep track of how many groups have been downloaded.
                             completed++;
