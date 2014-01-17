@@ -194,7 +194,7 @@ var SwdPresenter = {
         var ONE_DAY = 60 * 60 * 24;
 
 
-        SwdModel.getGroupFeed(this.selectedGroup.gid, function(response) {
+        SwdModel.getGroupFeed(SwdPresenter.selectedGroup.gid, SwdPresenter.daysBack, function(response) {
             alert(response.data.count);
 //            if (response.feed && response.feed.data) {
 //                // Filter the current raw feed and display it.
