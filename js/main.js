@@ -453,6 +453,7 @@ var SwdView = {
         var url;
         var message;
         var feedContainer;
+        var post;
 
         switch (postType) {
             case PostType.myposts:
@@ -478,21 +479,23 @@ var SwdView = {
         // If there is a feed to display, then display it.
         if (posts) {
             for (i = 0; i < posts.length; i++) {
-                if (posts[i].attachment.media.src) {
-                    url = posts[i].attachment.media.src;
+                post = posts[i];
+                
+                if (post.attachment && post.media && post.media.src) {
+                    url = post.attachment.media.src;
                 }
                 else {
                     url = '/img/no-image.jpg';
                 }
 
-                if (posts[i].message) {
-                    message = posts[i].message;
+                if (post.message) {
+                    message = posts.message;
                 }
                 else {
                     message = '[No caption for image.]'
                 }
 
-                $(feedContainer).append('<li id="' + posts[i].post_id + '" class="post-tile ui-widget ui-widget-content"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + message + '</div></li>');
+                $(feedContainer).append('<li id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + message + '</div></li>');
             }
 
             // Associate the click event handler for newly created posts.
