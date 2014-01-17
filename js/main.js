@@ -133,11 +133,11 @@ var SwdPresenter = {
                 if (response.length > 0) {
                     // Have the view write create groups vertical tab.
                     for (i = 0; i < response.length; i++) {
-                        SwdModel.getGroupInfo(response[i], function(group) {
+                        SwdModel.getGroupInfo(response[i], function(response) {
                             // Add group to groups array.
-                            groups[group.gid] = group;
+                            groups[response.data.gid] = response.data;
 
-                            SwdView.addGroupToMenu(group);
+                            SwdView.addGroupToMenu(response.data);
 
                             // Keep track of how many groups have been downloaded.
                             completed++;
