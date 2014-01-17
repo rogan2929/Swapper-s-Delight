@@ -48,12 +48,8 @@ var SwdModel = {
     getGroupFeed: function(group, daysBack, callback) {
         //SwdModel.facebookApi(group + '?fields=feed', callback);
         //SELECT post_id,message,attachment FROM stream WHERE source_id=120696471425768 AND updated_time <  LIMIT 25
-        var maxAge = Math.round(((new Date()).getTime() - SwdPresenter.daysBack * 1000 * 60 * 60 * 24) / 1000);
-        var feed = [];
-        
-        alert(maxAge);
-        
-        //SwdModel.facebookFQLQuery('SELECT post_id,message,attachment FROM stream WHERE source_id=' + group + 'AND updated_time')
+        var maxAge = Math.round(((new Date()).getTime() - daysBack * 1000 * 60 * 60 * 24) / 1000);
+        SwdModel.facebookFQLQuery('SELECT post_id,message,attachment FROM stream WHERE source_id=' + group + ' AND updated_time < ' + maxAge + ' LIMIT 25', callback);
     },
     /***
      * AJAX call to FB comment feed for given post.
@@ -199,6 +195,7 @@ var SwdPresenter = {
 
 
         SwdModel.getGroupFeed(this.selectedGroup.gid, function(response) {
+            alert(response.data.count);
 //            if (response.feed && response.feed.data) {
 //                // Filter the current raw feed and display it.
 //                // Calling moment.js
