@@ -481,8 +481,8 @@ var SwdView = {
             for (i = 0; i < posts.length; i++) {
                 post = posts[i];
                 
-                if (post.attachment && post.media && post.media.src) {
-                    url = post.attachment.media.src;
+                if (post.attachment && post.media && post.media[0].src) {
+                    url = post.attachment.media[0].src;
                 }
                 else {
                     url = '/img/no-image.jpg';
