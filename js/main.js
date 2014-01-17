@@ -42,14 +42,20 @@ var SwdModel = {
     /***
      * AJAX call to FB group feed.
      * @param {type} group Group whose feed is to be retrieved.
-     * @param {type} daysBack
+     * @param {type} options
      * @param {type} callback Completed callback function.
      */
-    getGroupFeed: function(group, daysBack, callback) {
-        //SwdModel.facebookApi(group + '?fields=feed', callback);
-        //SELECT post_id,message,attachment FROM stream WHERE source_id=120696471425768 AND updated_time <  LIMIT 25
-        var ageCutOff = Math.round(((new Date()).getTime() - daysBack * 1000 * 60 * 60 * 24) / 1000);
-        SwdModel.facebookFQLQuery('SELECT post_id,message,attachment FROM stream WHERE source_id=' + group + ' AND updated_time > ' + ageCutOff + ' LIMIT 25', callback);
+    getGroupPosts: function(group, options, callback) {
+//        var options = { 
+//            id: 'id',
+//            newerThan: 30,
+//            getLiked: false
+//        }
+
+        var minAge = Math.round(((new Date()).getTime() - options.newerThan * 1000 * 60 * 60 * 24) / 1000);
+
+
+        SwdModel.facebookFQLQuery('SELECT post_id,message,attachment FROM stream WHERE source_id=' + group + ' AND updated_time > ' + minAge + ' LIMIT 25', callback);
     },
     /***
      * AJAX call to FB comment feed for given post.
@@ -57,14 +63,14 @@ var SwdModel = {
      * @param {type} callback
      */
     getMessageComments: function(message, callback) {
-        SwdModel.facebookApi(message + '?fields=comments', callback);
+        //SwdModel.facebookApi(message + '?fields=comments', callback);
     },
     /***
      * Query database for groups that the user has marked as 'BST' (Buy, Sell, Trade)
      * @param {type} id
      * @param {type} callback
      */
-    queryBSTGroups: function(id, callback) {
+    getMarkedGroups: function(id, callback) {
         // This is just some dummy data. Replace this with an actual ajax call.
         var response = new Array('120696471425768', '1447216838830981', '575530119133790');
 
@@ -76,13 +82,12 @@ var SwdModel = {
  * Presenter for the Swapper's Delight program.
  */
 var SwdPresenter = {
-    daysBack: 1,
+    newerThan: 1,
     nextPage: null,
     prevPage: null,
     postType: PostType.group,
     selectedGroup: null,
     selectedPost: null,
-    userObject: null,
     /**
      * Entry point of program.
      */
@@ -119,17 +124,14 @@ var SwdPresenter = {
         SwdModel.facebookApi('me', function(response) {
             var i;
             var groupCount;
-            var bstGroupIds;
+            var markedGroupIds;
             var groups = [];
             var completed;
             var group;
 
-            // Save the FB user object for later consumption.
-            SwdPresenter.userObject = response;
-
-            SwdModel.queryBSTGroups(SwdPresenter.userObject.id, function(response) {
+            SwdModel.getMarkedGroups(response.id, function(response) {
                 groupCount = response.length;
-                bstGroupIds = response;
+                markedGroupIds = response;
                 completed = 0;
 
                 if (response.length > 0) {
@@ -137,7 +139,7 @@ var SwdPresenter = {
                     for (i = 0; i < response.length; i++) {
                         SwdModel.getGroupInfo(response[i], function(response) {
                             group = response.data[0];
-                            
+
                             // Add group to groups array.
                             groups[group.gid] = group;
 
@@ -155,14 +157,14 @@ var SwdPresenter = {
                                 });
 
                                 // Select first group and load posts.
-                                SwdPresenter.setSelectedGroup(groups[bstGroupIds[0]]);
+                                SwdPresenter.setSelectedGroup(groups[markedGroupIds[0]]);
 
                                 // Install Event Handlers
                                 SwdView.installHandler('onClickButtonClosePanel', SwdPresenter.onClickButtonClosePanel, '#button-close-panel', 'click');
                                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
                                 SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
                                 SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
-                                SwdView.installHandler('onClickMenuItemDaysBack', SwdPresenter.onClickMenuItemDaysBack, '.menu-item-daysback', 'click');
+                                SwdView.installHandler('onClickMenuItemNewerThan', SwdPresenter.onClickMenuItemNewerThan, '.menu-item-newerthan', 'click');
                                 SwdView.installHandler('onClickMenuItemGroup', SwdPresenter.onClickMenuItemGroup, '.menu-item-group', 'click');
                                 SwdView.installHandler('onClickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item-main', 'click');
                                 SwdView.installHandler('onClickPanelButton', SwdPresenter.onClickPanelButton, '.panel-button', 'click');
@@ -186,15 +188,12 @@ var SwdPresenter = {
     /***
      * Load feed for the current group.
      */
-    loadGroupFeed: function() {
-        var i;
-        var currentTime;
-        var updatedTime;
-        var post;
-        var ONE_DAY = 60 * 60 * 24;
+    loadGroupPosts: function() {
+        var options;
 
+        // TODO: configure options based on what tab the user is on.
 
-        SwdModel.getGroupFeed(SwdPresenter.selectedGroup.gid, SwdPresenter.daysBack, function(response) {
+        SwdModel.getGroupPosts(SwdPresenter.selectedGroup.gid, options, function(response) {
             alert(response.data.count);
 //            if (response.feed && response.feed.data) {
 //                // Filter the current raw feed and display it.
@@ -219,7 +218,7 @@ var SwdPresenter = {
 //                SwdPresenter.prevPage = null;
 //            }
 
-            SwdView.displayPosts(feed, SwdPresenter.postType);
+            SwdView.displayGroupPosts(feed, SwdPresenter.postType);
         });
     },
     /***
@@ -241,11 +240,11 @@ var SwdPresenter = {
     },
     /***
      * Set how old the oldest displayed post is to be.
-     * @param {type} daysBack
+     * @param {type} newerThan
      */
-    setDaysBack: function(daysBack) {
-        SwdPresenter.daysBack = daysBack;
-        SwdPresenter.loadGroupFeed();
+    setNewerThan: function(newerThan) {
+        SwdPresenter.newerThan = newerThan;
+        SwdPresenter.loadGroupPosts();
     },
     /***
      * Set currently selected group.
@@ -253,7 +252,7 @@ var SwdPresenter = {
      */
     setSelectedGroup: function(group) {
         SwdPresenter.selectedGroup = group;
-        SwdPresenter.loadGroupFeed();
+        SwdPresenter.loadGroupPosts();
         SwdView.setGroupButtonText(group.name);
     },
     // Event Handlers (onX(e, args))
@@ -270,30 +269,30 @@ var SwdPresenter = {
     onClickMenuButton: function(e, args) {
         SwdView.showUiMenu(e);
     },
-    onClickMenuItemDaysBack: function(e, args) {
-        var daysBack;
+    onClickMenuItemNewerThan: function(e, args) {
+        var newerThan;
         var id = $(e.currentTarget).attr('id');
 
         switch (id) {
             case 'menu-item-3days':
-                daysBack = 3;
+                newerThan = 3;
                 break;
             case 'menu-item-week':
-                daysBack = 7;
+                newerThan = 7;
                 break;
             case 'menu-item-30days':
-                daysBack = 30;
+                newerThan = 30;
                 break;
             case 'menu-item-all':
-                daysBack = 365;
+                newerThan = 365;
                 break;
             default:
-                daysBack = 1;
+                newerThan = 1;
                 break;
         }
 
-        SwdPresenter.setDaysBack(daysBack);
-        SwdView.setDaysBackMenuItem('#' + id + ' a span');
+        SwdPresenter.setNewerThan(newerThan);
+        SwdView.setNewerThanMenuItem('#' + id + ' a span');
     },
     onClickMenuItemGroup: function(e, args) {
         var id = $(e.currentTarget).attr('id');
@@ -439,7 +438,7 @@ var SwdView = {
      * @param {type} feed
      * @param {type} postType
      */
-    displayPosts: function(feed, postType) {
+    displayGroupPosts: function(feed, postType) {
         var i;
         var url;
         var message;
@@ -520,11 +519,11 @@ var SwdView = {
      * Put a checkmark next to the selected days back menu item.
      * @param {type} menuItem
      */
-    setDaysBackMenuItem: function(menuItem) {
+    setNewerThanMenuItem: function(menuItem) {
         var text;
 
         // Remove previous check box and then check the one that was clicked on.
-        $('.menu-item-daysback a .ui-icon-check').removeClass('ui-icon-check').addClass('ui-icon-blank');
+        $('.menu-item-newerthan a .ui-icon-check').removeClass('ui-icon-check').addClass('ui-icon-blank');
         $(menuItem).removeClass('ui-icon-blank').addClass('ui-icon-check');
 
         text = $(menuItem).parent().text();
