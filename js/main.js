@@ -41,24 +41,45 @@ var SwdModel = {
     },
     /***
      * AJAX call to FB group feed.
-     * @param {type} group Group whose feed is to be retrieved.
+     * @param {type} gid Group id whose posts are to be retrieved.
      * @param {type} options
      * @param {type} callback Completed callback function.
      */
-    getGroupPosts: function(group, options, callback) {
+    getGroupPosts: function(gid, options, callback) {
 //        var options = { 
 //            id: 'id',
 //            newerThan: 30,
-//            getLiked: false
+//            getLiked: true
 //        }
 
         var minAge;
         var query;
         
-        minAge = Math.round(((new Date()).getTime() - options.newerThan * 1000 * 60 * 60 * 24) / 1000);
-        query = 'SELECT post_id,message,attachment FROM stream WHERE source_id=' + group;
+        // Base query
+        query = 'SELECT post_id,message,attachment FROM stream WHERE source_id=' + gid;
 
-        SwdModel.facebookFQLQuery('SELECT post_id,message,attachment FROM stream WHERE source_id=' + group + ' AND updated_time > ' + minAge + ' LIMIT 25', callback);
+        // Constrain by age.
+        if (options.newerThan) {
+            minAge = Math.round(((new Date()).getTime() - options.newerThan * 1000 * 60 * 60 * 24) / 1000);
+            query += ' AND updated_time > ' + minAge;
+        }
+        
+        // Constrain by current user.
+        if (options.id) {
+            query += ' AND actor_id=' + options.id;
+        }
+        
+        // Constrain by whether or not the user likes the post.
+        if (options.getLiked) {
+            query += ' AND like_info.user_likes=1';
+        }
+        
+        // Give 25 results, if possible.
+        query += ' LIMIT 25';
+        
+        alert(query);
+
+        SwdModel.facebookFQLQuery(query, callback);
     },
     /***
      * AJAX call to FB comment feed for given post.
