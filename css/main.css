@@ -187,7 +187,7 @@ textarea {
 }
 
 .post-tile {
-    width: 150px;
+    width: 180px;
     height: 200px;
     margin: 16px;
     padding: 4px;
@@ -203,7 +203,7 @@ textarea {
 
 .post-image {
     height: 130px;
-    width: 150px;
+    width: 180px;
 }
 
 .post-image img {
