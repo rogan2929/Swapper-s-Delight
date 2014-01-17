@@ -135,7 +135,7 @@ var SwdPresenter = {
                     for (i = 0; i < response.length; i++) {
                         SwdModel.getGroupInfo(response[i], function(group) {
                             // Add group to groups array.
-                            groups[group.id] = group;
+                            groups[group.gid] = group;
 
                             SwdView.addGroupToMenu(group);
 
@@ -331,7 +331,7 @@ var SwdView = {
      * @param {type} group
      */
     addGroupToMenu: function(group) {
-        $('#popup-menu-groups').append('<li id="' + group.id + '" class="menu-item-group"><a href="#"><span class="ui-icon" style="background-image: url(' + group.icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + group.name + '</div></a></li>');
+        $('#popup-menu-groups').append('<li id="' + group.gid + '" class="menu-item-group"><a href="#"><span class="ui-icon" style="background-image: url(' + group.icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + group.name + '</div></a></li>');
     },
     /**
      * Init function for SwdView.
