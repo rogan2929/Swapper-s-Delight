@@ -20,15 +20,18 @@ var SwdModel = {
      * @param {type} callback Callback function.
      */
     facebookApi: function(api, callback) {
-        FB.api('/' + api, callback);
+        FB.api(api, callback);
     },
     /***
-     * Get group object from FB API.
+     * Query FB group info.
      * @param {type} id
      * @param {type} callback
      */
     getGroupInfo: function(id, callback) {
-        SwdModel.facebookApi(id, callback);
+        SwdModel.facebookApi({
+            method: 'fql.query',
+            query: 'SELECT name,icon FROM group WHERE gid=' + id
+        }, callback);
     },
     /***
      * AJAX call to FB group feed.
@@ -103,7 +106,7 @@ var SwdPresenter = {
      */
     startApp: function() {
         // Retrieve group info for logged in user.
-        SwdModel.facebookApi('me', function(response) {
+        SwdModel.facebookApi('/me', function(response) {
             var i;
             var groupCount;
             var bstGroupIds;
@@ -121,44 +124,46 @@ var SwdPresenter = {
                 if (response.length > 0) {
                     // Have the view write create groups vertical tab.
                     for (i = 0; i < response.length; i++) {
-                        SwdModel.facebookApi(response[i], function(response) {
-                            // Add group to groups array.
-                            groups[response.id] = response;
-
-                            SwdView.addGroupToMenu(response);
-
-                            // Keep track of how many groups have been downloaded.
-                            completed++;
-
-                            // On last api call, convert create the menu.
-                            if (completed === groupCount) {
-                                $('#popup-menu-groups').menu().position({
-                                    of: $('#button-menu-groups'),
-                                    my: 'left top',
-                                    at: 'left bottom'
-                                });
-
-                                // Select first group and load posts.
-                                SwdPresenter.setSelectedGroup(groups[bstGroupIds[0]]);
-
-                                // Install Event Handlers
-                                SwdView.installHandler('onClickButtonClosePanel', SwdPresenter.onClickButtonClosePanel, '#button-close-panel', 'click');
-                                SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
-                                SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
-                                SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
-                                SwdView.installHandler('onClickMenuItemDaysBack', SwdPresenter.onClickMenuItemDaysBack, '.menu-item-daysback', 'click');
-                                SwdView.installHandler('onClickMenuItemGroup', SwdPresenter.onClickMenuItemGroup, '.menu-item-group', 'click');
-                                SwdView.installHandler('onClickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item-main', 'click');
-                                SwdView.installHandler('onClickPanelButton', SwdPresenter.onClickPanelButton, '.panel-button', 'click');
-                                SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
-                                SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
-
-                                // Position our menus.
-                                SwdView.positionMenus();
-
-                                // TODO: Set auto refresh with setInterval
-                            }
-                        });
+                        alert(response[i]);
+                        
+//                        SwdModel.facebookApi(response[i], function(response) {
+//                            // Add group to groups array.
+//                            groups[response.id] = response;
+//
+//                            SwdView.addGroupToMenu(response);
+//
+//                            // Keep track of how many groups have been downloaded.
+//                            completed++;
+//
+//                            // On last api call, convert create the menu.
+//                            if (completed === groupCount) {
+//                                $('#popup-menu-groups').menu().position({
+//                                    of: $('#button-menu-groups'),
+//                                    my: 'left top',
+//                                    at: 'left bottom'
+//                                });
+//
+//                                // Select first group and load posts.
+//                                SwdPresenter.setSelectedGroup(groups[bstGroupIds[0]]);
+//
+//                                // Install Event Handlers
+//                                SwdView.installHandler('onClickButtonClosePanel', SwdPresenter.onClickButtonClosePanel, '#button-close-panel', 'click');
+//                                SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
+//                                SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
+//                                SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
+//                                SwdView.installHandler('onClickMenuItemDaysBack', SwdPresenter.onClickMenuItemDaysBack, '.menu-item-daysback', 'click');
+//                                SwdView.installHandler('onClickMenuItemGroup', SwdPresenter.onClickMenuItemGroup, '.menu-item-group', 'click');
+//                                SwdView.installHandler('onClickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item-main', 'click');
+//                                SwdView.installHandler('onClickPanelButton', SwdPresenter.onClickPanelButton, '.panel-button', 'click');
+//                                SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
+//                                SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
+//
+//                                // Position our menus.
+//                                SwdView.positionMenus();
+//
+//                                // TODO: Set auto refresh with setInterval
+//                            }
+//                        });
                     }
                 }
                 else {
