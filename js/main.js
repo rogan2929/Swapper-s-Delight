@@ -489,7 +489,7 @@ var SwdView = {
                 }
 
                 if (post.message) {
-                    message = posts.message;
+                    message = post.message;
                 }
                 else {
                     message = '[No caption for image.]'
