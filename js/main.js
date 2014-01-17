@@ -28,10 +28,7 @@ var SwdModel = {
      * @param {type} callback
      */
     facebookFQLQuery: function(query, callback) {
-        //query = query.replace(' ', '%20');
-        //query = query.replace(',', '%2C');
         query = 'fql?q=' + encodeURIComponent(query);
-        alert(query);
         SwdModel.facebookApi(query, callback);
     },
     /***
