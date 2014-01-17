@@ -48,7 +48,7 @@ var SwdModel = {
     getGroupFeed: function(group, daysBack, callback) {
         //SwdModel.facebookApi(group + '?fields=feed', callback);
         //SELECT post_id,message,attachment FROM stream WHERE source_id=120696471425768 AND updated_time <  LIMIT 25
-        var maxAge = (new Date()).getSeconds() - SwdPresenter.daysBack * 60 * 60 * 24;
+        var maxAge = ((new Date()).getTime() - SwdPresenter.daysBack * 1000 * 60 * 60 * 24) / 1000;
         var feed = [];
         
         alert(maxAge);
