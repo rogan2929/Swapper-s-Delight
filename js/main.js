@@ -37,15 +37,23 @@ var SwdModel = {
      * @param {type} callback
      */
     getGroupInfo: function(id, callback) {
-        SwdModel.facebookFQLQuery('SELECT gid,name,icon FROM group WHERE gid=' + id, callback)
+        SwdModel.facebookFQLQuery('SELECT gid,name,icon FROM group WHERE gid=' + id, callback);
     },
     /***
      * AJAX call to FB group feed.
      * @param {type} group Group whose feed is to be retrieved.
+     * @param {type} daysBack
      * @param {type} callback Completed callback function.
      */
-    getGroupFeed: function(group, callback) {
-        SwdModel.facebookApi(group + '?fields=feed', callback);
+    getGroupFeed: function(group, daysBack, callback) {
+        //SwdModel.facebookApi(group + '?fields=feed', callback);
+        //SELECT post_id,message,attachment FROM stream WHERE source_id=120696471425768 AND updated_time <  LIMIT 25
+        var maxAge = (new Date()).getSeconds() - SwdPresenter.daysBack * 60 * 60 * 24;
+        var feed = [];
+        
+        alert(maxAge);
+        
+        //SwdModel.facebookFQLQuery('SELECT post_id,message,attachment FROM stream WHERE source_id=' + group + 'AND updated_time')
     },
     /***
      * AJAX call to FB comment feed for given post.
@@ -188,32 +196,31 @@ var SwdPresenter = {
         var updatedTime;
         var post;
         var ONE_DAY = 60 * 60 * 24;
-        var maxAge = SwdPresenter.daysBack * ONE_DAY;
-        var feed = [];
+
 
         SwdModel.getGroupFeed(this.selectedGroup.gid, function(response) {
-            if (response.feed && response.feed.data) {
-                // Filter the current raw feed and display it.
-                // Calling moment.js
-                currentTime = moment();
-
-                // Remove posts that are not in the selected date range.
-                for (i = 0; i < response.feed.data.length; i++) {
-                    post = response.feed.data[i];
-                    updatedTime = moment(post.updated_time);
-
-                    if (currentTime.unix() - updatedTime.unix() <= maxAge) {
-                        feed.push(post);
-                    }
-                }
-
-                SwdPresenter.nextPage = response.feed.paging.next;
-                SwdPresenter.prevPage = response.feed.paging.previous;
-            }
-            else {
-                SwdPresenter.nextPage = null;
-                SwdPresenter.prevPage = null;
-            }
+//            if (response.feed && response.feed.data) {
+//                // Filter the current raw feed and display it.
+//                // Calling moment.js
+//                currentTime = moment();
+//
+//                // Remove posts that are not in the selected date range.
+//                for (i = 0; i < response.feed.data.length; i++) {
+//                    post = response.feed.data[i];
+//                    updatedTime = moment(post.updated_time);
+//
+//                    if (currentTime.unix() - updatedTime.unix() <= maxAge) {
+//                        feed.push(post);
+//                    }
+//                }
+//
+//                SwdPresenter.nextPage = response.feed.paging.next;
+//                SwdPresenter.prevPage = response.feed.paging.previous;
+//            }
+//            else {
+//                SwdPresenter.nextPage = null;
+//                SwdPresenter.prevPage = null;
+//            }
 
             SwdView.displayPosts(feed, SwdPresenter.postType);
         });
