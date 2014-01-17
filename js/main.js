@@ -5,6 +5,9 @@
 // PostType Enum
 var PostType = {group: 0, myposts: 1, pinned: 2, search: 3};
 
+//var AppId = '1401018793479333'; // Prod
+var AppId = '652991661414427'; // Test
+
 // http://stackoverflow.com/questions/1102215/mvp-pattern-with-javascript-framework
 
 /**
@@ -76,8 +79,7 @@ var SwdPresenter = {
         // Fetch the FB JS API
         $.getScript('//connect.facebook.net/en_US/all.js', function() {
             FB.init({
-                //appId: '1401018793479333',      // Swapper's Delight PROD
-                appId: '652991661414427' // Swapper's Delight TEST
+                appId: AppId
             });
 
             $('#loginbutton,#feedbutton').removeAttr('disabled');
@@ -152,6 +154,12 @@ var SwdPresenter = {
 
                                 // Position our menus.
                                 SwdView.positionMenus();
+
+                                FB.ui({
+                                    app_id: AppId,
+                                    method: 'send',
+                                    link: 'http://www.foxnews.com',
+                                });
 
                                 // TODO: Set auto refresh with setInterval
                             }
