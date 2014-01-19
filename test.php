@@ -1,6 +1,6 @@
 <?php
-    //$hmtl = file_get_contents('https://www.facebook.com/groups/120696471425768/permalink/255749264587154/');
-    //print $html;
+print '<h1>Testing</h1>';
+
 $c = curl_init('https://www.facebook.com/groups/120696471425768/permalink/255749264587154/');
 curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
 //curl_setopt(... other options you want...)
