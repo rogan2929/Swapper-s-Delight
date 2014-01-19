@@ -59,10 +59,10 @@ var SwdModel = {
         query = 'SELECT post_id,message,attachment FROM stream WHERE source_id=' + gid;
 
         // Constrain by age.
-        if (options.newerThan) {
-            minAge = Math.round(((new Date()).getTime() - options.newerThan * 1000 * 60 * 60 * 24) / 1000);
-            query += ' AND updated_time > ' + minAge;
-        }
+//        if (options.newerThan) {
+//            minAge = Math.round(((new Date()).getTime() - options.newerThan * 1000 * 60 * 60 * 24) / 1000);
+//            query += ' AND updated_time > ' + minAge;
+//        }
 
         // Constrain by current user.
         if (options.id) {
@@ -104,7 +104,6 @@ var SwdModel = {
  * Presenter for the Swapper's Delight program.
  */
 var SwdPresenter = {
-    newerThan: 1,
     nextPage: null,
     prevPage: null,
     postType: PostType.group,
@@ -186,7 +185,6 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
                                 SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
                                 SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
-                                SwdView.installHandler('onClickMenuItemNewerThan', SwdPresenter.onClickMenuItemNewerThan, '.menu-item-newerthan', 'click');
                                 SwdView.installHandler('onClickMenuItemGroup', SwdPresenter.onClickMenuItemGroup, '.menu-item-group', 'click');
                                 SwdView.installHandler('onClickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item-main', 'click');
                                 SwdView.installHandler('onClickPanelButton', SwdPresenter.onClickPanelButton, '.panel-button', 'click');
@@ -211,12 +209,12 @@ var SwdPresenter = {
      * Load feed for the current group.
      */
     loadGroupPosts: function() {
-        var options;
+        var options = {};
 
         // TODO: configure options based on what tab the user is on.
         switch (SwdPresenter.postType) {
             case PostType.group:
-                options = {newerThan: SwdPresenter.newerThan}
+                options;
                 break;
             case PostType.myposts:
                 break;
@@ -278,31 +276,6 @@ var SwdPresenter = {
     },
     onClickMenuButton: function(e, args) {
         SwdView.showUiMenu(e);
-    },
-    onClickMenuItemNewerThan: function(e, args) {
-        var newerThan;
-        var id = $(e.currentTarget).attr('id');
-
-        switch (id) {
-            case 'menu-item-3days':
-                newerThan = 3;
-                break;
-            case 'menu-item-week':
-                newerThan = 7;
-                break;
-            case 'menu-item-30days':
-                newerThan = 30;
-                break;
-            case 'menu-item-all':
-                newerThan = 365;
-                break;
-            default:
-                newerThan = 1;
-                break;
-        }
-
-        SwdPresenter.setNewerThan(newerThan);
-        SwdView.setNewerThanMenuItem('#' + id + ' a span');
     },
     onClickMenuItemGroup: function(e, args) {
         var id = $(e.currentTarget).attr('id');
@@ -421,7 +394,6 @@ var SwdView = {
 
         // Init menus.
         $('#popup-menu-main').menu();
-        $('#popup-menu-daysback').menu();
     },
     /**
      * Installs an event handler and connects it to the presenter.
@@ -531,22 +503,6 @@ var SwdView = {
                 at: 'left bottom'
             });
         });
-    },
-    /***
-     * Put a checkmark next to the selected days back menu item.
-     * @param {type} menuItem
-     */
-    setNewerThanMenuItem: function(menuItem) {
-        var text;
-
-        // Remove previous check box and then check the one that was clicked on.
-        $('.menu-item-newerthan a .ui-icon-check').removeClass('ui-icon-check').addClass('ui-icon-blank');
-        $(menuItem).removeClass('ui-icon-blank').addClass('ui-icon-check');
-
-        text = $(menuItem).parent().text();
-
-        $('#button-menu-daysback span a').text(text);
-
     },
     /***
      * Changes the text shown in the "Select a Group" button.
