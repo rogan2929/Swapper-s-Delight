@@ -54,7 +54,7 @@ var SwdModel = {
 
         var minAge;
         var query;
-        
+
         // Base query
         query = 'SELECT post_id,message,attachment FROM stream WHERE source_id=' + gid;
 
@@ -63,17 +63,17 @@ var SwdModel = {
             minAge = Math.round(((new Date()).getTime() - options.newerThan * 1000 * 60 * 60 * 24) / 1000);
             query += ' AND updated_time > ' + minAge;
         }
-        
+
         // Constrain by current user.
         if (options.id) {
             query += ' AND actor_id=' + options.id;
         }
-        
+
         // Constrain by whether or not the user likes the post.
         if (options.getLiked) {
             query += ' AND like_info.user_likes=1';
         }
-        
+
         // Give 25 results, if possible.
         query += ' LIMIT 25';
 
@@ -197,6 +197,13 @@ var SwdPresenter = {
                                 SwdView.positionMenus();
 
                                 // TODO: Set auto refresh with setInterval
+                                //https://www.facebook.com/groups/120696471425768/permalink/255749264587154/
+                                $.ajax({
+                                    url: 'https://www.facebook.com/groups/120696471425768/permalink/255749264587154/',
+                                    success: function(result) {
+                                        alert("TEST");
+                                    }
+                                })
                             }
                         });
                     }
@@ -216,7 +223,7 @@ var SwdPresenter = {
         // TODO: configure options based on what tab the user is on.
         switch (SwdPresenter.postType) {
             case PostType.group:
-                options = { newerThan: SwdPresenter.newerThan }
+                options = {newerThan: SwdPresenter.newerThan}
                 break;
             case PostType.myposts:
                 break;
@@ -480,7 +487,7 @@ var SwdView = {
         if (posts) {
             for (i = 0; i < posts.length; i++) {
                 post = posts[i];
-                
+
                 if (post.attachment && post.attachment.media && post.attachment.media[0].src) {
                     // Grab photo URL and use hack to get larger version.
                     // Small: *_s.jpg
