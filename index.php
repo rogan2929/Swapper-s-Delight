@@ -1,8 +1,3 @@
-<?php 
-    $hmtl = file_get_contents('https://www.facebook.com/groups/120696471425768/permalink/255749264587154/');
-    echo $html;
-?>
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -23,6 +18,11 @@
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
+        <?php
+            $hmtl = file_get_contents('https://www.facebook.com/groups/120696471425768/permalink/255749264587154/');
+            echo $html;
+        ?>
+
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
