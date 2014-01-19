@@ -197,16 +197,6 @@ var SwdPresenter = {
                                 SwdView.positionMenus();
 
                                 // TODO: Set auto refresh with setInterval
-                                //https://www.facebook.com/groups/120696471425768/permalink/255749264587154/
-                                $.ajax({
-                                    url: 'https://www.facebook.com/groups/120696471425768/permalink/255749264587154/',
-                                    success: function(result) {
-                                        alert("TEST");
-                                    },
-                                    fail: function(result) {
-                                        alert(result);
-                                    }
-                                })
                             }
                         });
                     }
