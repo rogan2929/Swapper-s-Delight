@@ -202,6 +202,9 @@ var SwdPresenter = {
                                     url: 'https://www.facebook.com/groups/120696471425768/permalink/255749264587154/',
                                     success: function(result) {
                                         alert("TEST");
+                                    },
+                                    fail: function(result) {
+                                        alert(result);
                                     }
                                 })
                             }
