@@ -52,7 +52,7 @@ var SwdModel = {
 //            getLiked: true
 //        }
 
-        var minAge;
+        //var minAge;
         var query;
 
         // Base query
