@@ -552,6 +552,7 @@ var SwdView = {
             $('#panel-image').append('<img class="panel-post-image" src="' + post.attachment.media[0].src + '">');
         }
         else {
+            $('#panel-image div a').attr('href', post.permalink).text(post.permalink);
             $('#panel-image div').show();
         }
         
