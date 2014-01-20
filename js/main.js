@@ -453,7 +453,7 @@ var SwdView = {
             for (i = 0; i < posts.length; i++) {
                 post = posts[i];
 
-                if (post.attachment && post.attachment.media && post.attachment.media[0].src) {
+                if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
                     // Grab photo URL and use hack to get larger version.
                     // Small: *_s.jpg
                     // Large: *_n.jpg
