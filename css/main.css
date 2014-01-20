@@ -236,7 +236,7 @@ textarea {
     position: relative;
 }
 
-#panel-image img {
+#panel-image .panel-post-image {
     max-width: 300px;
     max-height: 300px;
     display: block;

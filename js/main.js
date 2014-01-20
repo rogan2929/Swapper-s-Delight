@@ -544,12 +544,12 @@ var SwdView = {
      */
     showRightPanel: function(post) {        
         // Remove old image. Since we might be displaying a link or iframe instead.
-        $('#panel-image img').remove();
+        $('#panel-image .panel-post-image').remove();
         
         if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
             // Append new image;
             $('#panel-image div').hide();
-            $('#panel-image').append('<img src="' + post.attachment.media[0].src + '">');
+            $('#panel-image').append('<img class="panel-post-image" src="' + post.attachment.media[0].src + '">');
         }
         else {
             $('#panel-image div').show();
