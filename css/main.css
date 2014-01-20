@@ -254,6 +254,7 @@ textarea {
     right: 0;
     left: 0;
     margin: auto;
+    border: 1px solid #ccc;
 }
 
 #panel-image div {
