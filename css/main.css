@@ -248,6 +248,18 @@ textarea {
     margin: auto;
 }
 
+#panel-image div {
+    max-width: 300px;
+    max-height: 300px;
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+}
+
 #panel-comments {
     position: absolute;
     bottom: 50px;

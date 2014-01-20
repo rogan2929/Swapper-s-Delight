@@ -542,14 +542,19 @@ var SwdView = {
      * Shows the right column.
      * @param {type} post Post to load into right column.
      */
-    showRightPanel: function(post) {
-        var src;
+    showRightPanel: function(post) {        
+        // Remove old image. Since we might be displaying a link or iframe instead.
+        $('#panel-image').remove('img');
         
         if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
-            src = post.attachment.media[0].src;
+            // Append new image;
+            $('#panel-image').append('<img src="' + post.attachment.media[0].src + '">');
+        }
+        else {
+            $('#panel-image div').show();
         }
         
-        $('#panel-image img').attr('src', src);
+        //$('#panel-image img').attr('src', src);
         
         $('#right-panel').show('slide', {
             direction: 'right',

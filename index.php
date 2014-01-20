@@ -61,11 +61,11 @@
                 <div class='body row ui-widget ui-widget-content'>
                     <div id='panel-post'>
                         <div id='panel-image'>
-                            <img src=''>
+                            <div class='hidden'><span>This post either does not have an photos, or the owner of this post has chosen not to give permission for applications to view their photos. Click the link below to see the original Facebook posting.</span></div>
                         </div>
                         <div id='panel-comments'>
                             <ul id='panel-comment-list'>
-
+                                
                             </ul>
                         </div>
                         <div id='panel-button-bar'>
