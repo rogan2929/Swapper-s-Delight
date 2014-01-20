@@ -544,7 +544,7 @@ var SwdView = {
      */
     showRightPanel: function(post) {        
         // Remove old image. Since we might be displaying a link or iframe instead.
-        $('#panel-image').remove('#panel-image-internal');
+        $('#panel-image-internal').remove();
         
         if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
             // Append new image;
