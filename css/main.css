@@ -232,7 +232,6 @@ textarea {
 }
 
 #panel-image {
-    top: 60px;
     height: 400px;
     position: relative;
     background: green;
