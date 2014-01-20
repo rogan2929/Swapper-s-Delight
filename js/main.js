@@ -81,10 +81,10 @@ var SwdModel = {
     },
     /***
      * AJAX call to FB comment feed for given post.
-     * @param {type} message
+     * @param {type} id
      * @param {type} callback
      */
-    getMessageComments: function(message, callback) {
+    getMessageComments: function(id, callback) {
         //SwdModel.facebookApi(message + '?fields=comments', callback);
     },
     /***
@@ -97,6 +97,14 @@ var SwdModel = {
         var response = new Array('120696471425768', '1447216838830981', '575530119133790');
 
         callback.call(SwdModel, response);
+    },
+    /***
+     * Get details for the given post.
+     * @param {type} id
+     * @param {type} callback
+     */
+    getPostDetails: function(id, callback) {
+        SwdModel.facebookFQLQuery('SELECT post_id,message,attachment,permalink,like_info,share_info,comment_info FROM stream WHERE post_id="' + id + '"', callback);
     }
 };
 
@@ -298,9 +306,13 @@ var SwdPresenter = {
         SwdPresenter.sendFacebookMessage('', 'http://www.foxnews.com');
     },
     onClickPostTile: function(e, args) {
-        var post = $(e.currentTarget).attr('id');
+        var id = $(e.currentTarget).attr('id');
         e.stopPropagation();
-        SwdView.showRightPanel(post);
+
+        SwdModel.getPostDetails(id, function(response) {
+            alert(response.data[0].message);
+            SwdView.showRightPanel(response.data[0]);
+        });
     },
     onWindowResize: function(e, args) {
         SwdView.positionMenus();
