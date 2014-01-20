@@ -263,7 +263,12 @@ textarea {
 #panel-image div img {
     height: 100px;
     width: 100px;
+    display: block;
     background: blue;
+}
+
+#panel-image div span {
+    display: block;
 }
 
 #panel-comments {
