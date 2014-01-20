@@ -61,7 +61,7 @@
                 <div class='body row ui-widget ui-widget-content'>
                     <div id='panel-post'>
                         <div id='panel-image'>
-                            <div class='hidden'><img src=''><span>This post does not have a photo, or the owner of this post has chosen not to give permission for applications to view it. Click the link below to see the original Facebook posting.</span></div>
+                            <div class='hidden'><img id='panel-error-image' src=''><span>This post does not have a photo, or the owner of this post has chosen not to give permission for applications to view it. Click the link below to see the original Facebook posting.</span></div>
                         </div>
                         <div id='panel-comments'>
                             <ul id='panel-comment-list'>
