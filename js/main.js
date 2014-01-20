@@ -548,6 +548,7 @@ var SwdView = {
         
         if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
             // Append new image;
+            $('#panel-image div').hide();
             $('#panel-image').append('<img id="#panel-image-internal" src="' + post.attachment.media[0].src + '">');
         }
         else {
