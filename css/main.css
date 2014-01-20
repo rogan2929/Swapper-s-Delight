@@ -260,6 +260,12 @@ textarea {
     margin: auto;
 }
 
+#panel-image div img {
+    height: 100px;
+    width: 100px;
+    background: blue;
+}
+
 #panel-comments {
     position: absolute;
     bottom: 50px;
