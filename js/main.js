@@ -306,7 +306,15 @@ var SwdPresenter = {
         SwdPresenter.sendFacebookMessage('', 'http://www.foxnews.com');
     },
     onClickPostTile: function(e, args) {
-        var id = $(e.currentTarget).parents('li.post-tile').attr('id');
+        var id;
+        
+        // Assuming one of the child elements of post-tile was clicked.
+        id = $(e.currentTarget).parents('li.post-tile').attr('id');
+        
+        if (!id) {
+            id = $(e.currentTarget).attr('id');
+        }
+        
         alert(id);
         e.stopPropagation();
 
