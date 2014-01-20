@@ -315,11 +315,9 @@ var SwdPresenter = {
             id = $(e.currentTarget).attr('id');
         }
         
-        alert(id);
         e.stopPropagation();
 
         SwdModel.getPostDetails(id, function(response) {
-            alert(response.data[0].message);
             SwdView.showRightPanel(response.data[0]);
         });
     },
