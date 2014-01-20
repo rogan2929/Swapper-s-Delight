@@ -236,7 +236,7 @@ textarea {
     position: relative;
 }
 
-#panel-image img {
+#panel-image-internal {
     max-width: 300px;
     max-height: 300px;
     display: block;
@@ -260,7 +260,7 @@ textarea {
     margin: auto;
 }
 
-#panel-error-image {
+#panel-image div img {
     height: 100px;
     width: 100px;
     background: blue;
