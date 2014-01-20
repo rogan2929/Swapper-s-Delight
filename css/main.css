@@ -245,8 +245,8 @@ textarea {
 }
 
 #panel-image .panel-post-image {
-    max-width: 350px;
-    max-height: 350px;
+    max-width: 340px;
+    max-height: 340px;
     display: block;
     position: absolute;
     top: 0;
