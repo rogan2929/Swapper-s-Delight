@@ -64,7 +64,7 @@
                     </button>
                     <div id='panel-post'>
                         <div id='panel-image'>
-
+                            <img src=''>
                         </div>
                         <div id='panel-comments'>
                             <ul id='panel-comment-list'>

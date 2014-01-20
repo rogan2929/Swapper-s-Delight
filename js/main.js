@@ -543,6 +543,14 @@ var SwdView = {
      * @param {type} post Post to load into right column.
      */
     showRightPanel: function(post) {
+        var src;
+        
+        if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
+            src = post.attachment.media[0].src;
+        }
+        
+        $('#panel-image img').attr('src', src);
+        
         $('#right-panel').show('slide', {
             direction: 'right',
             duration: 300,
