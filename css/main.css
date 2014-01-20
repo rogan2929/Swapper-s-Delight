@@ -231,6 +231,14 @@ textarea {
     display: block;
 }
 
+.wrappable-link {
+    white-space: pre-wrap; /* css-3 */    
+    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+    white-space: -pre-wrap; /* Opera 4-6 */    
+    white-space: -o-pre-wrap; /* Opera 7 */    
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+
 #panel-image {
     height: 400px;
     position: relative;
@@ -275,11 +283,6 @@ textarea {
 
 #panel-post-permalink {
     margin-top: 1em;
-    white-space: pre-wrap; /* css-3 */    
-    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-    white-space: -pre-wrap; /* Opera 4-6 */    
-    white-space: -o-pre-wrap; /* Opera 7 */    
-    word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
 
 #panel-image div span {
