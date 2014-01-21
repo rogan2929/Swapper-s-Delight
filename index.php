@@ -73,6 +73,7 @@
                             <div id='panel-button-like' class='panel-button'>Like</div>
                         </div>
                         <div id='panel-comments'>
+                            <div id='panel-nocomments'>No comments yet.</div>
                             <ul id='panel-comment-list'>
 
                             </ul>

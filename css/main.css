@@ -288,6 +288,7 @@ textarea {
 
 #panel-post-permalink {
     margin-top: 1em;
+    font-size: 0.9em;
 }
 
 #panel-image div span {
@@ -300,10 +301,12 @@ textarea {
 }
 
 #panel-comments {
-    height: 1000px;
-    background: red;
     left: 0;
     right: 0;
+}
+
+#panel-nocomments {
+    font-style: italic;
 }
 
 #panel-button-bar {
