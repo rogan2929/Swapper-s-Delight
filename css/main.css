@@ -190,18 +190,12 @@ textarea {
     width: 200px;
     height: 250px;
     margin: 16px;
-    padding: 4px;
+    padding: 9px;
     display: inline-block;
     cursor: pointer;
     font-weight: normal !important;
     border: 1px solid transparent;
-/*    border-radius: 5px;
-    border: 5px solid #a7a7a7;*/
 }
-
-/*.post-tile:hover {
-    border-color: #FECA40;
-}*/
 
 .post-image {
     height: 130px;
