@@ -254,6 +254,7 @@ textarea {
 #panel-image div {
     max-width: 350px;
     max-height: 350px;
+    padding: 10px;
     margin: auto;
 }
 
