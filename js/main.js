@@ -482,7 +482,7 @@ var SwdView = {
                 }
 
                 if (!(noImage && noMessage)) {
-                    $(feedContainer).append('<li id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default"><div class="post-image"><img src="' + url + '"></div><div class="post-caption"><div><p>' + message + '</p></div></div></li>');
+                    $(feedContainer).append('<li id="' + post.post_id + '" class="post-tile ui-widget ui-state-default"><div class="post-image"><img src="' + url + '"></div><div class="post-caption"><div><p>' + message + '</p></div></div></li>');
                 }
             }
 
