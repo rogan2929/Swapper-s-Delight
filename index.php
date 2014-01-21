@@ -12,7 +12,7 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-<!--        <link rel='stylesheet' href="//code.jquery.com/ui/1.10.3/themes/ui-lightness/jquery-ui.css">-->
+        <!--        <link rel='stylesheet' href="//code.jquery.com/ui/1.10.3/themes/ui-lightness/jquery-ui.css">-->
         <link rel="stylesheet" href="css/flick-red/jquery-ui-1.10.4.custom.min.css">
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
@@ -61,6 +61,10 @@
             <div id='right-panel' class='right col'>
                 <div class='body row ui-widget ui-widget-content scroll-y'>
                     <div id='panel-post'>
+                        <div id='panel-message-user' class='ui-state-default ui-corner-all'>
+                            <img id='panel-message-pic' src=''>
+                            <span><a id='panel-message-name' href='' target='_blank'></a></span>
+                        </div>
                         <div id='panel-image'>
                             <div class='hidden ui-widget ui-widget-content ui-corner-all'>
                                 <img src='/img/no-image.jpg'>
@@ -69,10 +73,6 @@
                             </div>
                         </div>
                         <div id='panel-message'>
-                            <div id='panel-message-user' class='ui-state-default ui-corner-all'>
-                                <img id='panel-message-pic' src=''>
-                                <span><a id='panel-message-name' href='' target='_blank'></a></span>
-                            </div>
                             <span id='panel-message-text'></span>
                         </div>
                         <div id='panel-button-bar'>
