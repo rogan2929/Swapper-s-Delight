@@ -412,6 +412,8 @@ var SwdView = {
         $('#right-panel').click(function(e) {
             e.stopPropagation();
         });
+        
+        $('#panel-message-user').button();
 
         // Init menus.
         $('#popup-menu-main').menu();
