@@ -221,7 +221,7 @@ textarea {
 
 .post-caption {
     text-align: center;
-    height: 6em;
+    height: 100px;
     margin-left: 4px;
     margin-right: 4px;
     margin-top: 4px;
@@ -330,14 +330,14 @@ p {
 
 .ellipsis {
     overflow: hidden;
-    height: 6em;
+    height: 100px;
 }
 
 .ellipsis:before {
     content:"";
     float: left;
     width: 5px; 
-    height: 6em; 
+    height: 100px; 
 }
 
 .ellipsis > *:first-child {
