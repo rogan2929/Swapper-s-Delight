@@ -46,23 +46,10 @@ var SwdModel = {
      * @param {type} callback Completed callback function.
      */
     getGroupPosts: function(gid, options, callback) {
-//        var options = { 
-//            id: 'id',
-//            newerThan: 30,
-//            getLiked: true
-//        }
-
-        //var minAge;
         var query;
 
         // Base query
-        query = 'SELECT post_id,message,attachment FROM stream WHERE source_id=' + gid;
-
-        // Constrain by age.
-//        if (options.newerThan) {
-//            minAge = Math.round(((new Date()).getTime() - options.newerThan * 1000 * 60 * 60 * 24) / 1000);
-//            query += ' AND updated_time > ' + minAge;
-//        }
+        query = 'SELECT post_id,message,attachment,comment_info FROM stream WHERE source_id=' + gid;
 
         // Constrain by current user.
         if (options.id) {
