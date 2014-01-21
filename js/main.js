@@ -319,7 +319,7 @@ var SwdPresenter = {
             post = response.data[0];
 
             SwdModel.getUserData(post.actor_id, function(response) {
-                SwdView.showRightPanel(post, response[0]);
+                SwdView.showRightPanel(post, response.data[0]);
             });
         });
     },
