@@ -193,7 +193,7 @@ textarea {
     padding: 4px;
     display: inline-block;
     cursor: pointer;
-    font-style: normal !important;
+    font-weight: normal !important;
 /*    border-radius: 5px;
     border: 5px solid #a7a7a7;*/
 }
