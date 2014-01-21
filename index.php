@@ -61,7 +61,7 @@
             <div id='right-panel' class='right col'>
                 <div class='body row ui-widget ui-widget-content scroll-y'>
                     <div id='panel-post'>
-                        <div id='panel-image'>
+                        <div id='panel-image' class='ui-widget ui-widget-content ui-corner-all'>
                             <div class='hidden'>
                                 <img src='/img/no-image.jpg'>
                                 <span>This post does not have a photo, or the owner of this post has chosen not to give permission for applications like Swapper's Delight to view it. Click the link below to see the original Facebook posting.</span>
@@ -72,7 +72,7 @@
                                 <img id='panel-message-pic' src=''>
                                 <span><a id='panel-message-name' href='' target='_blank'></a></span>
                             </div>
-                            <span id='panel-message-text' class='ui-widget ui-state-default ui-widget-content'></span>
+                            <span id='panel-message-text'></span>
                         </div>
                         <div id='panel-button-bar'>
                             <div id='panel-button-comment' class='panel-button'>Comment</div>
