@@ -72,7 +72,7 @@
                                 <img id='panel-message-pic' src=''>
                                 <span><a id='panel-message-name' href='' target='_blank'></a></span>
                             </div>
-                            <span id='panel-message-text'></span>
+                            <span id='panel-message-text' class='ui-widget ui-state-default ui-widget-content'></span>
                         </div>
                         <div id='panel-button-bar'>
                             <div id='panel-button-comment' class='panel-button'>Comment</div>
