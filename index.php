@@ -63,7 +63,7 @@
                     <div id='panel-post'>
                         <div id='panel-message-user' class='ui-state-default ui-corner-all'>
                             <img id='panel-message-pic' src=''>
-                            <span><a id='panel-message-name' href='' target='_blank'></a></span>
+                            <span id='panel-message-name'></span>
                         </div>
                         <div id='panel-image'>
                             <div class='hidden ui-widget ui-widget-content ui-corner-all'>
