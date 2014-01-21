@@ -302,8 +302,8 @@ textarea {
 }
 
 #panel-comments {
-    left: 0;
-    right: 0;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 #panel-nocomments {
