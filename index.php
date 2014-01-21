@@ -32,7 +32,7 @@
                         <ul>
                             <li><a href='#tab-feed'>Group Feed</a></li>
                             <li><a href='#tab-myposts'>My Posts</a></li>
-                            <li><a href='#tab-pinned'>Pinned</a></li>
+                            <li><a href='#tab-liked'>Liked</a></li>
                             <li><a href='#tab-search'>Search</a></li>
                         </ul>
                         <div id='tab-feed'>
@@ -43,7 +43,7 @@
                             <ol id='feed-myposts'>
                             </ol>
                         </div>
-                        <div id='tab-pinned'>
+                        <div id='tab-liked'>
                             <ol id='feed-pinned'>
                             </ol>
                         </div>
@@ -66,17 +66,17 @@
                                 <span>This post does not have a photo, or the owner of this post has chosen not to give permission for applications to view it. Click the link below to see the original Facebook posting.</span>
                                 <a id='panel-post-permalink' class='wrappable-link' target='_blank'></a></div>
                         </div>
+                        <!--7437-->
                         <div id='panel-message'></div>
-                        <div id='panel-comments'>
-                            <ul id='panel-comment-list'>
-                                
-                            </ul>
-                        </div>
                         <div id='panel-button-bar'>
                             <div id='panel-button-comment' class='panel-button'>Comment</div>
                             <div id='panel-button-pm' class='panel-button'>Message</div>
-                            <div id='panel-button-pin' class='panel-button'>Pin</div>
-                            <div id='panel-button-unpin' class='panel-button'>Unpin</div>
+                            <div id='panel-button-like' class='panel-button'>Like</div>
+                        </div>
+                        <div id='panel-comments'>
+                            <ul id='panel-comment-list'>
+
+                            </ul>
                         </div>
                     </div>
                     <button id='button-close-panel' class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close" role="button" aria-disabled="false" title="close"><span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>

@@ -389,17 +389,11 @@ var SwdView = {
             }
         });
 
-        $('#panel-button-pin').button({
+        $('#panel-button-like').button({
             icons: {
                 primary: 'ui-icon-pin-s'
             }
         });
-
-        $('#panel-button-unpin').button({
-            icons: {
-                primary: 'ui-icon-pin-w'
-            }
-        }).hide();
 
         $('#button-close-panel').hover(function() {
             $(this).addClass('ui-state-hover');
