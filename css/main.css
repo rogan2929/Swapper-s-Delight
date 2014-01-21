@@ -283,6 +283,14 @@ textarea {
     margin: 10px;
 }
 
+#panel-message img {
+    display: inline;
+}
+
+#panel-message span {
+    display: inline;
+}
+
 #panel-comments {
     margin-left: 10px;
     margin-right: 10px;

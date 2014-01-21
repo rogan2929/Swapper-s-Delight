@@ -304,6 +304,7 @@ var SwdPresenter = {
     },
     onClickPostTile: function(e, args) {
         var id;
+        var post;
 
         // Assuming one of the child elements of post-tile was clicked.
         id = $(e.currentTarget).parents('li.post-tile').attr('id');
@@ -315,7 +316,11 @@ var SwdPresenter = {
         e.stopPropagation();
 
         SwdModel.getPostDetails(id, function(response) {
-            SwdView.showRightPanel(response.data[0]);
+            post = response.data[0];
+
+            SwdModel.getUserData(post.actor_id, function(response) {
+                SwdView.showRightPanel(post, response);
+            });
         });
     },
     onWindowResize: function(e, args) {
@@ -541,8 +546,11 @@ var SwdView = {
     /***
      * Shows the right column.
      * @param {type} post Post to load into right column.
+     * @param {type} user User data
      */
-    showRightPanel: function(post) {
+    showRightPanel: function(post, user) {
+        var userImage;
+
         // Remove old image. Since we might be displaying a link or iframe instead.
         $('#panel-image .panel-post-image').remove();
 
@@ -556,8 +564,16 @@ var SwdView = {
             $('#panel-image div').show();
         }
 
+        if (user.pic_square) {
+            userImage = user.pic_square;
+        }
+        else {
+            userImage = '';
+        }
+
         //$('#panel-image img').attr('src', src);
-        $('#panel-message').text(post.message);
+        $('#panel-message img').attr('src', userImage);
+        $('#panel-message span').text(post.message);
 
         $('#right-panel').show('slide', {
             direction: 'right',

@@ -67,7 +67,10 @@
                                 <span>This post does not have a photo, or the owner of this post has chosen not to give permission for applications like Swapper's Delight to view it. Click the link below to see the original Facebook posting.</span>
                                 <a id='panel-post-permalink' class='wrappable-link' target='_blank'></a></div>
                         </div>
-                        <div id='panel-message'></div>
+                        <div id='panel-message'>
+                            <img src=''>
+                            <span></span>
+                        </div>
                         <div id='panel-button-bar'>
                             <div id='panel-button-comment' class='panel-button'>Comment</div>
                             <div id='panel-button-pm' class='panel-button'>Message</div>
