@@ -70,7 +70,7 @@
                         <div id='panel-message'>
                             <div id='panel-message-user'>
                                 <img id='panel-message-pic' src=''>
-                                <span id='panel-message-name'></span>>
+                                <span><a id='panel-message-name' href=''></a></span>
                             </div>
                             <span id='panel-message-text'></span>
                         </div>
