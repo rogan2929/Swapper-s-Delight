@@ -294,14 +294,14 @@ var SwdPresenter = {
     },
     onClickPostTile: function(e, args) {
         var id;
-        
+
         // Assuming one of the child elements of post-tile was clicked.
         id = $(e.currentTarget).parents('li.post-tile').attr('id');
-        
+
         if (!id) {
             id = $(e.currentTarget).attr('id');
         }
-        
+
         e.stopPropagation();
 
         SwdModel.getPostDetails(id, function(response) {
@@ -425,6 +425,8 @@ var SwdView = {
         var url;
         var message;
         var feedContainer;
+        var noImage;
+        var noMessage;
         var post;
 
         switch (postType) {
@@ -452,26 +454,28 @@ var SwdView = {
         if (posts) {
             for (i = 0; i < posts.length; i++) {
                 post = posts[i];
+                noImage = false;
+                noMessage = false;
 
                 if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
-                    // Grab photo URL and use hack to get larger version.
-                    // Small: *_s.jpg
-                    // Large: *_n.jpg
-                    //url = post.attachment.media[0].src.replace('_s.jpg', '_n.jpg');
                     url = post.attachment.media[0].src;
                 }
                 else {
                     url = '/img/no-image.jpg';
+                    noImage = true;
                 }
 
                 if (post.message) {
                     message = post.message;
                 }
                 else {
-                    message = '[No caption for image.]'
+                    message = '[No message attached to post.]'
+                    noMessage = true;
                 }
 
-                $(feedContainer).append('<li id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + message + '</div></li>');
+                if (!(noImage && noMessage)) {
+                    $(feedContainer).append('<li id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + message + '</div></li>');
+                }
             }
 
             // Associate the click event handler for newly created posts.
@@ -523,10 +527,10 @@ var SwdView = {
      * Shows the right column.
      * @param {type} post Post to load into right column.
      */
-    showRightPanel: function(post) {        
+    showRightPanel: function(post) {
         // Remove old image. Since we might be displaying a link or iframe instead.
         $('#panel-image .panel-post-image').remove();
-        
+
         if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
             // Append new image;
             $('#panel-image div').hide();
@@ -536,10 +540,10 @@ var SwdView = {
             $('#panel-image div a').attr('href', post.permalink).text(post.permalink);
             $('#panel-image div').show();
         }
-        
+
         //$('#panel-image img').attr('src', src);
         $('#panel-message').text(post.message);
-        
+
         $('#right-panel').show('slide', {
             direction: 'right',
             duration: 300,
