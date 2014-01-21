@@ -489,9 +489,9 @@ var SwdView = {
             // Associate the click event handler for newly created posts.
             $('.post-tile > *').click(SwdView.handlers['onClickPostTile']);
             $('.post-tile').hover(function() {
-                $(this).removeClass('ui-state-default').addClass('ui-state-hover', 300);
+                $(this).removeClass('ui-state-default').addClass('ui-state-hover');
             }, function() {
-                $(this).removeClass('ui-state-hover').addClass('ui-state-default', 300);
+                $(this).removeClass('ui-state-hover').addClass('ui-state-default');
             });
         }
     },
