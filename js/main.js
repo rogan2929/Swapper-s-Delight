@@ -403,7 +403,7 @@ var SwdView = {
             $(this).removeClass('ui-state-hover');
         });
         
-        ('#panel-message-user').hover(function() {
+        $('#panel-message-user').hover(function() {
             $(this).removeClass('ui-state-default').addClass('ui-state-hover');
         }, function() {
             $(this).removeClass('ui-state-hover').addClass('ui-state-default');
