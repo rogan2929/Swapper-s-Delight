@@ -241,7 +241,7 @@ textarea {
 
 #panel-image {
     max-height: 400px;
-    top: 30px;
+    margin-top: 30px;
 /*    position: relative;*/
 }
 
