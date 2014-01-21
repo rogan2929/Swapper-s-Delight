@@ -291,6 +291,7 @@ textarea {
 }
 
 #panel-image div span {
+    font-style: italic;
     display: block;
 }
 
