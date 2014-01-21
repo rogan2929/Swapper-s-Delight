@@ -290,6 +290,10 @@ textarea {
     display: block;
 }
 
+#panel-message {
+    margin: 10px;
+}
+
 #panel-comments {
     height: 1000px;
     background: red;
@@ -298,7 +302,7 @@ textarea {
 }
 
 #panel-button-bar {
-    margin-left: 10px;
+    margin: 10px;
 }
 
 /*.paging {
