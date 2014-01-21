@@ -477,12 +477,12 @@ var SwdView = {
                     message = post.message;
                 }
                 else {
-                    message = '[No message attached to post.]'
+                    message = '[No message attached to post.]';
                     noMessage = true;
                 }
 
                 if (!(noImage && noMessage)) {
-                    $(feedContainer).append('<li id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content"><div class="post-image"><img src="' + url + '"></div><div class="post-caption">' + message + '</div></li>');
+                    $(feedContainer).append('<li id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content"><div class="post-image"><img src="' + url + '"></div><div class="post-caption"><div class="ellipses"><div><p>' + message + '</p></div></div></div></li>');
                 }
             }
 
