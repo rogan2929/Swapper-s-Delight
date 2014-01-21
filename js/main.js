@@ -67,14 +67,6 @@ var SwdModel = {
         SwdModel.facebookFQLQuery(query, callback);
     },
     /***
-     * AJAX call to FB comment feed for given post.
-     * @param {type} id
-     * @param {type} callback
-     */
-    getMessageComments: function(id, callback) {
-        //SwdModel.facebookApi(message + '?fields=comments', callback);
-    },
-    /***
      * Query database for groups that the user has marked as 'BST' (Buy, Sell, Trade)
      * @param {type} id
      * @param {type} callback
@@ -86,12 +78,28 @@ var SwdModel = {
         callback.call(SwdModel, response);
     },
     /***
+     * AJAX call to FB comment feed for given post.
+     * @param {type} id
+     * @param {type} callback
+     */
+    getPostComments: function(id, callback) {
+        //SwdModel.facebookApi(message + '?fields=comments', callback);
+    },
+    /***
      * Get details for the given post.
      * @param {type} id
      * @param {type} callback
      */
     getPostDetails: function(id, callback) {
-        SwdModel.facebookFQLQuery('SELECT post_id,message,attachment,permalink,like_info,share_info,comment_info FROM stream WHERE post_id="' + id + '"', callback);
+        SwdModel.facebookFQLQuery('SELECT post_id,message,actor_id,attachment,permalink,like_info,share_info,comment_info,tagged_ids FROM stream WHERE post_id="' + id + '"', callback);
+    },
+    /***
+     * Get data for the given user.
+     * @param {type} id
+     * @param {type} callback
+     */
+    getUserData: function(id, callback) {
+        
     }
 };
 

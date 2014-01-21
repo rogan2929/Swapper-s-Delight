@@ -229,6 +229,7 @@ textarea {
     overflow-y: hidden;
     font-size: 0.9em;
     display: block;
+    text-overflow: ellipsis;
 }
 
 .wrappable-link {
