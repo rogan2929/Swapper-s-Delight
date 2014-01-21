@@ -221,7 +221,7 @@ textarea {
 
 .post-caption {
     text-align: center;
-    height: 105px;
+    height: 55px;
     margin-left: 4px;
     margin-right: 4px;
     margin-top: 4px;
@@ -340,7 +340,7 @@ div.right-toolbar-button {
 /* Ellipses */
 .ellipsis {
     overflow: hidden;
-    height: 105px;
+    height: 55px;
     line-height: 25px;
     margin: 20px;
     border: 5px solid #AAA; }
@@ -348,7 +348,7 @@ div.right-toolbar-button {
 .ellipsis:before {
     content:"";
     float: left;
-    width: 5px; height: 105px; }
+    width: 5px; height: 55px; }
 
 .ellipsis > *:first-child {
     float: right;
