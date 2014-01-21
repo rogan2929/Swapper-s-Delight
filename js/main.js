@@ -83,7 +83,7 @@ var SwdModel = {
      * @param {type} callback
      */
     getPostComments: function(id, callback) {
-        //SwdModel.facebookApi(message + '?fields=comments', callback);
+        SwdModel.facebookFQLQuery('SELECT fromid,text,text_tags,attachment FROM comment WHERE post_id="' + id + '"', callback);
     },
     /***
      * Get details for the given post.
@@ -99,7 +99,7 @@ var SwdModel = {
      * @param {type} callback
      */
     getUserData: function(id, callback) {
-        
+        SwdModel.facebookFQLQuery('SELECT last_name,first_name,pic_square FROM user WHERE uid=' + id, callback);
     }
 };
 
@@ -241,12 +241,14 @@ var SwdPresenter = {
     },
     /***
      * Brings up a send message window.
+     * @param {type} id
+     * @param {type} link
      */
     sendFacebookMessage: function(id, link) {
         FB.ui({
             to: id,
             method: 'send',
-            link: link,
+            link: link
         });
     },
     /***
