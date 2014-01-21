@@ -99,7 +99,7 @@ var SwdModel = {
      * @param {type} callback
      */
     getUserData: function(id, callback) {
-        SwdModel.facebookFQLQuery('SELECT last_name,first_name,pic_square FROM user WHERE uid=' + id, callback);
+        SwdModel.facebookFQLQuery('SELECT last_name,first_name,pic_square,profile_url FROM user WHERE uid=' + id, callback);
     }
 };
 
