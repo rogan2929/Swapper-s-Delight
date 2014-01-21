@@ -557,7 +557,7 @@ var SwdView = {
         if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
             // Append new image;
             $('#panel-image div').hide();
-            $('#panel-image').append('<img class="panel-post-image" src="' + post.attachment.media[0].src.replace('_s.jpg', '_n.jpg') + '">');
+            $('#panel-image').append('<img class="panel-post-image ui-widget ui-widget-content ui-corner-all" src="' + post.attachment.media[0].src.replace('_s.jpg', '_n.jpg') + '">');
         }
         else {
             $('#panel-image div a').attr('href', post.permalink).text(post.permalink);

@@ -237,7 +237,6 @@ textarea {
 #panel-image {
     max-height: 400px;
     margin-top: 40px;
-    padding: 5px;
 }
 
 #panel-image .panel-post-image {
@@ -249,6 +248,7 @@ textarea {
     margin-right: auto;
     margin-left: auto;
     border: 1px solid #ccc;
+    padding: 10px;
 }
 
 #panel-image div {
