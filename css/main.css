@@ -295,9 +295,13 @@ textarea {
     background: red;
     left: 0;
     right: 0;
+    position: absolute;
+    top: 470px;
 }
 
 #panel-button-bar {
+    position: absolute;
+    margin-top: 10px;
     right: 10px;
 }
 
