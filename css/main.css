@@ -293,7 +293,6 @@ textarea {
 #panel-comments {
     height: 1000px;
     background: red;
-    top: 400px;
     left: 0;
     right: 0;
 }
