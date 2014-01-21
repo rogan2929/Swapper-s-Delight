@@ -300,22 +300,6 @@ textarea {
     margin: 10px;
 }
 
-/*.paging {
-    height: 50px;
-    line-height: 50px;
-    top: 60px;
-    width: 50%;
-    margin: 0 auto;
-}*/
-
-/*#feed-posts .ui-selecting { 
-    border: 5px solid #FECA40;
-}
-
-#feed-posts .ui-selected { 
-    border: 5px solid #F39814;
-}*/
-
 div.right-toolbar-button {
     display: inline-block;
     margin-left: 5px;
@@ -338,17 +322,23 @@ div.right-toolbar-button {
 .tabs-bottom .ui-tabs-nav li.ui-tabs-active { margin-top: -1px; padding-top: 1px; }
 
 /* Ellipses */
+
+p { 
+    margin: 0; 
+    padding: 0; 
+}
+
 .ellipsis {
     overflow: hidden;
     height: 55px;
     line-height: 25px;
-    margin: 20px;
-    border: 5px solid #AAA; }
+}
 
 .ellipsis:before {
     content:"";
     float: left;
-    width: 5px; height: 55px; }
+    width: 5px; height: 55px; 
+}
 
 .ellipsis > *:first-child {
     float: right;
