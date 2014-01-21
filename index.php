@@ -63,7 +63,7 @@
                     <div id='panel-post'>
                         <div id='panel-image'>
                             <div class='hidden'>
-                                <img src=''>
+                                <img src='/img/no-image.jpg'>
                                 <span>This post does not have a photo, or the owner of this post has chosen not to give permission for applications like Swapper's Delight to view it. Click the link below to see the original Facebook posting.</span>
                                 <a id='panel-post-permalink' class='wrappable-link' target='_blank'></a></div>
                         </div>

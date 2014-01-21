@@ -242,7 +242,6 @@ textarea {
 #panel-image {
     max-height: 400px;
     margin-top: 40px;
-/*    position: relative;*/
 }
 
 #panel-image .panel-post-image {
@@ -253,23 +252,12 @@ textarea {
     right: 0;
     margin-right: auto;
     margin-left: auto;
-/*    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    margin: auto;*/
     border: 1px solid #ccc;
 }
 
 #panel-image div {
     max-width: 350px;
     max-height: 350px;
-/*    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;*/
     margin: auto;
 }
 
@@ -283,7 +271,6 @@ textarea {
     margin-left: auto;
     margin-right: auto;
     display: block;
-    background: blue;
 }
 
 #panel-post-permalink {
