@@ -482,12 +482,17 @@ var SwdView = {
                 }
 
                 if (!(noImage && noMessage)) {
-                    $(feedContainer).append('<li id="' + post.post_id + '" class="post-tile ui-widget ui-state-default"><div class="post-image"><img src="' + url + '"></div><div class="post-caption"><div><p>' + message + '</p></div></div></li>');
+                    $(feedContainer).append('<li id="' + post.post_id + '" class="post-tile ui-widget ui-state-default ui-corner-all"><div class="post-image"><img src="' + url + '"></div><div class="post-caption"><div><p>' + message + '</p></div></div></li>');
                 }
             }
 
             // Associate the click event handler for newly created posts.
             $('.post-tile > *').click(SwdView.handlers['onClickPostTile']);
+            $('.post-tile').hover(function() {
+                $(this).removeClass('ui-state-default').addClass('ui-state-hover');
+            }, function() {
+                $(this).removeClass('ui-state-hover').addClass('ui-state-default');
+            });
         }
     },
     /***
