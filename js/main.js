@@ -572,8 +572,9 @@ var SwdView = {
         }
 
         //$('#panel-image img').attr('src', src);
-        $('#panel-message img').attr('src', userImage);
-        $('#panel-message span').text(post.message);
+        $('#panel-message-pic').attr('src', userImage);
+        $('#panel-message-name').text(user.first_name + ' ' + uesr.last_name);
+        $('#panel-message-text').text(post.message);
 
         $('#right-panel').show('slide', {
             direction: 'right',

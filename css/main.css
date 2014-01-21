@@ -283,12 +283,16 @@ textarea {
     margin: 10px;
 }
 
-#panel-message img {
+#panel-message-pic {
     display: inline;
 }
 
-#panel-message span {
+#panel-message-name {
     display: inline;
+}
+
+#panel-message-text {
+    display: block;
 }
 
 #panel-comments {

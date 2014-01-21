@@ -68,8 +68,8 @@
                                 <a id='panel-post-permalink' class='wrappable-link' target='_blank'></a></div>
                         </div>
                         <div id='panel-message'>
-                            <img src=''>
-                            <span></span>
+                            <div><img id='panel-message-pic' src=''><span id='panel-message-name'></span>></div>
+                            <span id='panel-message-text'></span>
                         </div>
                         <div id='panel-button-bar'>
                             <div id='panel-button-comment' class='panel-button'>Comment</div>
