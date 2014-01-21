@@ -58,7 +58,7 @@
             </div>
 
             <div id='right-panel' class='right col'>
-                <div class='body row ui-widget ui-widget-content'>
+                <div class='body row ui-widget ui-widget-content scroll-y'>
                     <div id='panel-post'>
                         <div id='panel-image'>
                             <div class='hidden'>
@@ -66,7 +66,6 @@
                                 <span>This post does not have a photo, or the owner of this post has chosen not to give permission for applications to view it. Click the link below to see the original Facebook posting.</span>
                                 <a id='panel-post-permalink' class='wrappable-link' target='_blank'></a></div>
                         </div>
-                        <!--7437-->
                         <div id='panel-message'></div>
                         <div id='panel-button-bar'>
                             <div id='panel-button-comment' class='panel-button'>Comment</div>

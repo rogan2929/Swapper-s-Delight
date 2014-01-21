@@ -292,7 +292,7 @@ textarea {
 
 #panel-comments {
     position: absolute;
-    bottom: 50px;
+    height: 1000px;
     background: red;
     top: 400px;
     left: 0;
