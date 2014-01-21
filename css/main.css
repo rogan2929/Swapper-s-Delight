@@ -289,6 +289,7 @@ textarea {
 }
 
 #panel-message-user {
+    padding: 3px;
 }
 
 #panel-message-name {

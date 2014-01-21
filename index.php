@@ -69,7 +69,7 @@
                             </div>
                         </div>
                         <div id='panel-message'>
-                            <div id='panel-message-user' class='ui-state-default'>
+                            <div id='panel-message-user' class='ui-state-default ui-corner-all'>
                                 <img id='panel-message-pic' src=''>
                                 <span><a id='panel-message-name' href='' target='_blank'></a></span>
                             </div>
