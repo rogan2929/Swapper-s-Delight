@@ -242,7 +242,7 @@ var SwdPresenter = {
      * Load next page in group feed.
      */
     loadNextGroupPosts: function() {
-        SwdModel.getGroupPosts(SwdPresenter.selectedGroup.gid, { created_time: SwdPresenter.oldestPost.created_time }, function(response) {
+        SwdModel.getGroupPosts(SwdPresenter.selectedGroup.gid, { createdTime: SwdPresenter.oldestPost.created_time }, function(response) {
             SwdPresenter.oldestPost = response.data[response.data.length - 1];
             SwdView.displayNextGroupPosts(response.data, SwdPresenter.postType);
         });
