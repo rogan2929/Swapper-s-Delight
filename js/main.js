@@ -538,12 +538,20 @@ var SwdView = {
                 }
 
                 if (!(noImage && noMessage)) {
-                    postTile = $('<li id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-image"><img src="' + url + '"></div><div class="post-caption"><div><p>' + message + '</p></div></div></li>');
-                    $(postTile).appendTo(feedContainer).fadeIn();
-                    
+                    postTile = $('<li id="' + post.post_id + '" class="hidden post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-image"><img src="' + url + '"></div><div class="post-caption"><div><p>' + message + '</p></div></div></li>');
+                    $(postTile).appendTo(feedContainer);
+
                     //$(feedContainer).append('<li id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-image"><img src="' + url + '"></div><div class="post-caption"><div><p>' + message + '</p></div></div></li>');
                 }
             }
+
+            // Sleekly fade in the post tile elements.
+            // From: http://www.paulirish.com/2008/sequentially-chain-your-callbacks-in-jquery-two-ways/
+            (function shownext(jq) {
+                jq.eq(0).fadeIn("fast", function() {
+                    (jq = jq.slice(1)).length && hidenext(jq);
+                });
+            })($('li.post-tile'));
 
             // Associate the click event handler for newly created posts.
             $('.post-tile > *').click(SwdView.handlers['onClickPostTile']);
