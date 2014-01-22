@@ -339,7 +339,7 @@ var SwdPresenter = {
     onScrollUiTabsPanel: function(e, args) {
         var panel = e.currentTarget;
         var blah = $(panel).scrollTop() + $(panel).innerHeight();
-        var scrollHeight = $(panel).scrollHeight;
+        var scrollHeight = panel.scrollHeight;
         
         alert(blah);
         alert(scrollHeight);
