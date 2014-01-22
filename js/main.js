@@ -234,18 +234,44 @@ var SwdPresenter = {
 
         // Get posts and then display them.
         SwdModel.getGroupPosts(SwdPresenter.selectedGroup.gid, options, function(response) {
-            SwdPresenter.oldestPost = response.data[response.data.length - 1];
-            SwdView.displayGroupPosts(response.data, SwdPresenter.postType);
+            if (response.data) {
+                SwdPresenter.oldestPost = response.data[response.data.length - 1];
+                SwdView.displayGroupPosts(response.data, SwdPresenter.postType);
+            }
+            else {
+                SwdPresenter.oldestPost = null;
+            }
         });
     },
     /***
      * Load next page in group feed.
      */
     loadNextGroupPosts: function() {
-        SwdModel.getGroupPosts(SwdPresenter.selectedGroup.gid, { createdTime: SwdPresenter.oldestPost.created_time }, function(response) {
-            SwdPresenter.oldestPost = response.data[response.data.length - 1];
-            SwdView.displayNextGroupPosts(response.data, SwdPresenter.postType);
-        });
+        var options = {};
+
+        if (SwdPresenter.oldestPost) {
+
+            // TODO: configure options based on what tab the user is on.
+            switch (SwdPresenter.postType) {
+                case PostType.group:
+                    options;
+                    break;
+                case PostType.myposts:
+                    break;
+                case PostType.pinned:
+                    break;
+                case PostType.search:
+                    break;
+            }
+
+            // Get more posts.
+            SwdModel.getGroupPosts(SwdPresenter.selectedGroup.gid, {createdTime: SwdPresenter.oldestPost.created_time}, function(response) {
+                if (response.data) {
+                    SwdPresenter.oldestPost = response.data[response.data.length - 1];
+                    SwdView.displayNextGroupPosts(response.data, SwdPresenter.postType);
+                }
+            });
+        }
     },
     /***
      * Brings up a send message window.
