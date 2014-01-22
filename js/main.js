@@ -236,11 +236,12 @@ var SwdPresenter = {
         SwdModel.getGroupPosts(SwdPresenter.selectedGroup.gid, options, function(response) {
             if (response.data) {
                 SwdPresenter.oldestPost = response.data[response.data.length - 1];
-                SwdView.displayGroupPosts(response.data, SwdPresenter.postType);
             }
             else {
                 SwdPresenter.oldestPost = null;
             }
+
+            SwdView.displayGroupPosts(response.data, SwdPresenter.postType);
         });
     },
     /***
