@@ -191,6 +191,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickMenuItemGroup', SwdPresenter.onClickMenuItemGroup, '.menu-item-group', 'click');
                                 SwdView.installHandler('onClickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item-main', 'click');
                                 SwdView.installHandler('onClickPanelButton', SwdPresenter.onClickPanelButton, '.panel-button', 'click');
+                                SwdView.installHandler('onClickPanelMessageUser', SwdPresenter.onClickPanelMessageUser, '#panel-message-user', 'click');
                                 SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
                                 SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
 
@@ -301,6 +302,10 @@ var SwdPresenter = {
     },
     onClickPanelButton: function(e, args) {
         SwdPresenter.sendFacebookMessage('', 'http://www.foxnews.com');
+    },
+    onClickPanelMessageUser: function(e, args) {
+        var profileUrl = $(e.currentTarget).data('src');
+        window.open(profileUrl);
     },
     onClickPostTile: function(e, args) {
         var id;
