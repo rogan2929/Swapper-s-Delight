@@ -337,9 +337,16 @@ var SwdPresenter = {
         SwdView.positionMenus();
     },
     onScrollUiTabsPanel: function(e, args) {
-        if ($(e.currentTarget).scrollTop() + $(e.currentTarget).innerHeight() >= $(e.currentTarget).scrollHeight) {
-            alert('end reached');
-        }
+        var panel = e.currentTarget;
+        var blah = $(panel).scrollTop() + $(panel).innerHeight();
+        var scrollHeight = $(panel).scrollHeight;
+        
+        alert(blah);
+        alert(scrollHeight);
+        
+//        if ($(panel).scrollTop() + $(e.currentTarget).innerHeight() >= $(e.currentTarget).scrollHeight) {
+//            alert('end reached');
+//        }
     }
 };
 
