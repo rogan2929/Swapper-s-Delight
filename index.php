@@ -61,7 +61,7 @@
             <div id='right-panel' class='right col'>
                 <div class='body row ui-widget ui-widget-content scroll-y'>
                     <div id='panel-post'>
-                        <div id='panel-message-user' class='ui-state-default ui-corner-all'>
+                        <div id='panel-message-user'>
                             <img id='panel-message-pic' src=''>
                             <span id='panel-message-name'></span>
                         </div>
@@ -72,7 +72,7 @@
                                 <a id='panel-post-permalink' class='wrappable-link' target='_blank'></a>
                             </div>
                         </div>
-                        <div id='panel-message'>
+                        <div id='panel-message' class='ui-widget ui-widget-content ui-corner-all'>
                             <span id='panel-message-text'></span>
                         </div>
                         <div id='panel-button-bar'>
