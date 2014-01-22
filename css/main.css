@@ -234,7 +234,7 @@ textarea {
     word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
 
-#panel-post * {
+#panel-post > * {
     margin-bottom: 10px;
 }
 
