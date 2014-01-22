@@ -24,7 +24,7 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <div id='wrapper'>
+        <div id='app-content'>
             <div id='fb-root'></div>
 
             <div id='left-panel' class='left col'>
