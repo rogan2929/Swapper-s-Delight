@@ -433,10 +433,6 @@ var SwdView = {
 
         // Fade out the div we are using to hide non-initted elements.
         $('#overlay-app-loading').fadeOut('fast');
-        
-        $(window).scroll(function() {
-            alert('test');
-        });
     },
     /**
      * Installs an event handler and connects it to the presenter.
