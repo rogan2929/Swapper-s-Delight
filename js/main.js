@@ -426,6 +426,9 @@ var SwdView = {
 
         // Init menus.
         $('#popup-menu-main').menu();
+        
+        // Fade the main view in.
+        $('#left-panel').fadeIn('fast');
     },
     /**
      * Installs an event handler and connects it to the presenter.

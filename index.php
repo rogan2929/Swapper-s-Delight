@@ -27,7 +27,7 @@
         <div id='wrapper'>
             <div id='fb-root'></div>
 
-            <div id='left-panel' class='left col'>
+            <div id='left-panel' class='left col hidden'>
                 <div class='body row'>
                     <div id='tabs-main' class='tabs-bottom'>
                         <ul>
