@@ -327,7 +327,7 @@ var SwdPresenter = {
             // Retreive group information for selected ID
             SwdModel.getGroupInfo(id, function(response) {
                 // Set selected group and load its feed.
-                SwdPresenter.setSelectedGroup(response);
+                SwdPresenter.setSelectedGroup(response.data[0]);
             });
         }
     },
