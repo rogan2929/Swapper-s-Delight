@@ -337,7 +337,9 @@ var SwdPresenter = {
         SwdView.positionMenus();
     },
     onScrollUiTabsPanel: function(e, args) {
-        
+        if ($(e.currentTarget).scrollTop() + $(e.currentTarget).innerHeight() >= $(e.currentTarget).scrollHeight) {
+            alert('end reached');
+        }
     }
 };
 
@@ -569,7 +571,7 @@ var SwdView = {
             });
 
             // Scroll up a tiny bit so the app is never at the bottom of the page after loading posts.
-            $(window).scrollTop($(window).scrollTop() - 1);
+            $('.ui-tabs-panel').scrollTop($('.ui-tabs-panel').scrollTop() - 1);
         }
     },
     /***
