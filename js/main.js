@@ -586,7 +586,8 @@ var SwdView = {
 
         //$('#panel-image img').attr('src', src);
         $('#panel-message-pic').attr('src', userImage);
-        $('#panel-message-name').text(user.first_name + ' ' + user.last_name).data('src', user.profile_url);
+        $('#panel-message-name').text(user.first_name + ' ' + user.last_name);
+        $('#panel-message-user').data('src', user.profile_url);
         $('#panel-message-text').text(post.message);
 
         $('#right-panel').show('slide', {
