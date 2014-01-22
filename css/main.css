@@ -203,7 +203,7 @@ textarea {
     position: relative;
 }
 
-.post-image img {
+.post-image > img {
     max-height: 130px;
     max-width: 130px;
     display: block;
@@ -240,9 +240,10 @@ textarea {
 
 #panel-image {
     max-height: 400px;
+    padding: 10px;
 }
 
-#panel-image .panel-post-image {
+#panel-image > .panel-post-image {
     max-width: 330px;
     max-height: 330px;
     display: block;
@@ -251,17 +252,15 @@ textarea {
     margin-right: auto;
     margin-left: auto;
     border: 1px solid #ccc;
-    padding: 10px;
 }
 
 #panel-no-image {
     max-width: 350px;
     max-height: 350px;
-    padding: 10px;
     margin: auto;
 }
 
-#panel-no-image img {
+#panel-no-image > img {
     height: 100px;
     width: 100px;
     left: 0;
@@ -277,7 +276,7 @@ textarea {
     font-size: 0.9em;
 }
 
-#panel-no-image span {
+#panel-no-image > span {
     font-style: italic;
     font-size: 0.9em;
     display: block;
@@ -303,6 +302,7 @@ textarea {
 
 #panel-message-text {
     display: block;
+    padding: 10px;
 }
 
 #panel-nocomments {
