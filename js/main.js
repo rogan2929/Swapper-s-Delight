@@ -337,8 +337,9 @@ var SwdPresenter = {
         SwdView.positionMenus();
     },
     onScrollUiTabsPanel: function(e, args) {
+        // Check to see if the user has scrolled all the way to the bottom.
         if ($(e.currentTarget).scrollTop() + $(e.currentTarget).innerHeight() >= e.currentTarget.scrollHeight) {
-            alert('end reached');
+            SwdPresenter.loadNextGroupPosts();
         }
     }
 };
