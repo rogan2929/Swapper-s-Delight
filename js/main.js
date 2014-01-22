@@ -197,7 +197,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickPanelMessageUser', SwdPresenter.onClickPanelMessageUser, '#panel-message-user', 'click');
                                 SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
                                 SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
-                                SwdView.installHandler('onScrollAppContent', SwdPresenter.onWindowScroll, '#left-panel', 'scroll');
+                                SwdView.installHandler('onScrollAppContent', SwdPresenter.onWindowScroll, '.ui-tabs-panel', 'scroll');
 
                                 // Position our menus.
                                 SwdView.positionMenus();
