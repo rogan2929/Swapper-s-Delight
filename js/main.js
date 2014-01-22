@@ -61,9 +61,9 @@ var SwdModel = {
             query += ' AND like_info.user_likes=1';
         }
 
-        // For FQL pagination (query by posts with created_time greater than created_time of last query's oldest post.)
+        // For FQL pagination (query by posts with created_time less than created_time of last query's oldest post.)
         if (options.createdTime) {
-            query += ' AND created_time > ' + options.createdTime;
+            query += ' AND created_time < ' + options.createdTime;
         }
 
         // Give 20 results, if possible.
@@ -112,7 +112,7 @@ var SwdModel = {
  * Presenter for the Swapper's Delight program.
  */
 var SwdPresenter = {
-    posts: null,
+    oldestPost: null,
     postType: PostType.group,
     selectedGroup: null,
     /**
@@ -234,7 +234,7 @@ var SwdPresenter = {
 
         // Get posts and then display them.
         SwdModel.getGroupPosts(SwdPresenter.selectedGroup.gid, options, function(response) {
-            SwdPresenter.posts = response.data;
+            SwdPresenter.oldestPost = response.data[response.data.length - 1];
             SwdView.displayGroupPosts(response.data, SwdPresenter.postType);
         });
     },
@@ -242,8 +242,10 @@ var SwdPresenter = {
      * Load next page in group feed.
      */
     loadNextGroupPosts: function() {
-        // TODO
-        // Switch based on selectedPostType
+        SwdModel.getGroupPosts(SwdPresenter.selectedGroup.gid, { created_time: SwdPresenter.oldestPost.created_time }, function(response) {
+            SwdPresenter.oldestPost = response.data[response.data.length - 1];
+            SwdView.displayNextGroupPosts(response.data, SwdPresenter.postType);
+        });
     },
     /***
      * Brings up a send message window.
