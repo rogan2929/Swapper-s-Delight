@@ -49,7 +49,7 @@ var SwdModel = {
         var query;
 
         // Base query
-        query = 'SELECT post_id,message,attachment,comment_info FROM stream WHERE source_id=' + gid;
+        query = 'SELECT post_id,created_time,message,attachment,comment_info FROM stream WHERE source_id=' + gid;
 
         // Constrain by current user.
         if (options.id) {
@@ -61,8 +61,13 @@ var SwdModel = {
             query += ' AND like_info.user_likes=1';
         }
 
-        // Give 25 results, if possible.
-        query += ' LIMIT 25';
+        // For FQL pagination (query by posts with created_time greater than created_time of last query's oldest post.)
+        if (options.createdTime) {
+            query += ' AND created_time > ' + options.createdTime;
+        }
+
+        // Give 20 results, if possible.
+        query += ' LIMIT 20';
 
         SwdModel.facebookFQLQuery(query, callback);
     },
@@ -107,11 +112,9 @@ var SwdModel = {
  * Presenter for the Swapper's Delight program.
  */
 var SwdPresenter = {
-    nextPage: null,
-    prevPage: null,
+    posts: null,
     postType: PostType.group,
     selectedGroup: null,
-    selectedPost: null,
     /**
      * Entry point of program.
      */
@@ -230,13 +233,14 @@ var SwdPresenter = {
 
         // Get posts and then display them.
         SwdModel.getGroupPosts(SwdPresenter.selectedGroup.gid, options, function(response) {
+            SwdPresenter.posts = response.data;
             SwdView.displayGroupPosts(response.data, SwdPresenter.postType);
         });
     },
     /***
      * Load next page in group feed.
      */
-    loadNextPage: function() {
+    loadNextGroupPosts: function() {
         // TODO
         // Switch based on selectedPostType
     },
@@ -407,7 +411,7 @@ var SwdView = {
         }, function() {
             $(this).removeClass('ui-state-hover');
         });
-        
+
         $('#panel-message-user').hover(function() {
             $(this).removeClass('ui-state-default').addClass('ui-state-hover');
         }, function() {
@@ -417,7 +421,7 @@ var SwdView = {
         $('#right-panel').click(function(e) {
             e.stopPropagation();
         });
-        
+
         $('#panel-message-user').button();
 
         // Init menus.
@@ -449,6 +453,35 @@ var SwdView = {
      * @param {type} postType
      */
     displayGroupPosts: function(posts, postType) {
+        // Populate the DOM, clearing any previous posts.
+        SwdView.populatePosts(posts, postType, true);
+    },
+    /***
+     * After a query calling for the next batch of results, display them.
+     * @param {type} posts
+     * @param {type} postType
+     */
+    displayNextGroupPosts: function(posts, postType) {
+        // Populate the DOM, not clearing any previous posts.
+        SwdView.populatePosts(posts, postType, false);
+    },
+    /***
+     * Hides the right column.
+     */
+    hideRightPanel: function() {
+        $('#right-panel').hide('slide', {
+            direction: 'right',
+            duration: 300,
+            easing: 'easeInOutQuint'
+        });
+    },
+    /***
+     * Write posts to the page.
+     * @param {type} posts
+     * @param {type} postType
+     * @param {type} empty
+     */
+    populatePosts: function(posts, postType, empty) {
         var i;
         var url;
         var message;
@@ -456,6 +489,7 @@ var SwdView = {
         var noImage;
         var noMessage;
         var post;
+        var postTile;
 
         switch (postType) {
             case PostType.myposts:
@@ -472,8 +506,10 @@ var SwdView = {
                 break;
         }
 
-        // Clear anything that is currently being displayed.
-        $(feedContainer).empty();
+        if (empty === true) {
+            // Clear anything that is currently being displayed.
+            $(feedContainer).empty();
+        }
 
         // Hide the right panel.
         SwdView.hideRightPanel();
@@ -502,7 +538,10 @@ var SwdView = {
                 }
 
                 if (!(noImage && noMessage)) {
-                    $(feedContainer).append('<li id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-image"><img src="' + url + '"></div><div class="post-caption"><div><p>' + message + '</p></div></div></li>');
+                    postTile = $('<li id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-image"><img src="' + url + '"></div><div class="post-caption"><div><p>' + message + '</p></div></div></li>');
+                    $(postTile).appendTo(feedContainer).fadeIn();
+                    
+                    //$(feedContainer).append('<li id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-image"><img src="' + url + '"></div><div class="post-caption"><div><p>' + message + '</p></div></div></li>');
                 }
             }
 
@@ -514,16 +553,6 @@ var SwdView = {
                 $(this).removeClass('ui-state-hover').addClass('ui-state-default');
             });
         }
-    },
-    /***
-     * Hides the right column.
-     */
-    hideRightPanel: function() {
-        $('#right-panel').hide('slide', {
-            direction: 'right',
-            duration: 300,
-            easing: 'easeInOutQuint'
-        });
     },
     /***
      * Sets menu positions.
