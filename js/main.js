@@ -196,8 +196,8 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickPanelButton', SwdPresenter.onClickPanelButton, '.panel-button', 'click');
                                 SwdView.installHandler('onClickPanelMessageUser', SwdPresenter.onClickPanelMessageUser, '#panel-message-user', 'click');
                                 SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
+                                SwdView.installHandler('onScrollUiTabsPanel', SwdPresenter.onScrollUiTabsPanel, '.ui-tabs-panel', 'scroll');
                                 SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
-                                SwdView.installHandler('onScrollAppContent', SwdPresenter.onWindowScroll, '.ui-tabs-panel', 'scroll');
 
                                 // Position our menus.
                                 SwdView.positionMenus();
@@ -336,8 +336,8 @@ var SwdPresenter = {
     onWindowResize: function(e, args) {
         SwdView.positionMenus();
     },
-    onWindowScroll: function(e, args) {
-        alert('Scroll detected.');
+    onScrollUiTabsPanel: function(e, args) {
+        
     }
 };
 
