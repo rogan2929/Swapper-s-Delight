@@ -27,7 +27,7 @@
         <div id='wrapper'>
             <div id='fb-root'></div>
 
-            <div id='left-panel' class='left col hidden'>
+            <div id='left-panel' class='left col'>
                 <div class='body row'>
                     <div id='tabs-main' class='tabs-bottom'>
                         <ul>
@@ -116,6 +116,10 @@
 
             <!--Dialogs-->
             <div id='dialog-new-post' class='hidden' title='Create New Post'>TEST</div>
+        </div>
+        
+        <div id='overlay-app-loading'>
+            
         </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

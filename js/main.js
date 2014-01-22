@@ -427,8 +427,8 @@ var SwdView = {
         // Init menus.
         $('#popup-menu-main').menu();
         
-        // Fade the main view in.
-        $('#left-panel').fadeIn('fast');
+        // Fade out the div we are using to hide non-initted elements.
+        $('#overlay-app-loading').fadeOut('fast');
     },
     /**
      * Installs an event handler and connects it to the presenter.
