@@ -197,6 +197,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickPanelMessageUser', SwdPresenter.onClickPanelMessageUser, '#panel-message-user', 'click');
                                 SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
                                 SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
+                                SwdView.installHandler('onWindowScroll', SwdPresenter.onWindowScroll, window, 'scroll');
 
                                 // Position our menus.
                                 SwdView.positionMenus();
@@ -334,6 +335,9 @@ var SwdPresenter = {
     },
     onWindowResize: function(e, args) {
         SwdView.positionMenus();
+    },
+    onWindowScroll: function(e, args) {
+        console.log('Scroll detected.');
     }
 };
 
@@ -563,6 +567,9 @@ var SwdView = {
             }, function() {
                 $(this).removeClass('ui-state-hover').addClass('ui-state-default');
             });
+            
+            // Scroll up a tiny bit so the app is never at the bottom of the page after loading posts.
+            $(window).scrollTop($(window.scrollTop() - 1));
         }
     },
     /***
