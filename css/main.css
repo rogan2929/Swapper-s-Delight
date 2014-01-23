@@ -167,6 +167,8 @@ textarea {
 }
 
 #ad-space {
+    margin-left: 10px;
+    margin-right: 10px;
     height: 100px;
     bottom: 0;
     border: red dashed;
