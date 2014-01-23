@@ -525,9 +525,6 @@ var SwdView = {
             $('#group-feed').empty();
         }
 
-        // Hide the right panel.
-        SwdView.hideRightPanel();
-
         // If there is a feed to display, then display it.
         if (posts) {
             for (i = 0; i < posts.length; i++) {
