@@ -392,9 +392,7 @@ var SwdView = {
         // Init header row buttons.
         $('#tabs-main').tabs({
             heightStyle: 'fill'
-        }).addClass("ui-tabs-vertical ui-helper-clearfix");
-
-        $("#tabs li").removeClass("ui-corner-top").addClass("ui-corner-left");
+        });
 
         //$('.tabs-bottom .ui-tabs-nav, .tabs-bottom .ui-tabs-nav > *').removeClass('ui-corner-all ui-corner-top').addClass('ui-corner-bottom');
 
