@@ -390,9 +390,9 @@ var SwdView = {
      */
     initView: function() {
         // Init header row buttons.
-        $('#tabs-main').tabs({
-            heightStyle: 'fill'
-        });
+//        $('#tabs-main').tabs({
+//            heightStyle: 'fill'
+//        });
 //        }).addClass("ui-tabs-vertical ui-helper-clearfix");
 
 //        $("#tabs li").removeClass("ui-corner-top").addClass("ui-corner-left");
@@ -544,7 +544,7 @@ var SwdView = {
                 feedContainer = '#feed-search';
                 break;
             default:
-                feedContainer = '#feed-group';
+                feedContainer = '#group-feed';
                 break;
         }
 
