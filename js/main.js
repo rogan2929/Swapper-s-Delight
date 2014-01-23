@@ -516,12 +516,13 @@ var SwdView = {
     /***
      * Hides the right column.
      */
-    hideRightPanel: function() {
-        $('#right-panel').hide('slide', {
-            direction: 'right',
-            duration: 300,
-            easing: 'easeInOutQuint'
-        });
+    hideRightPanel: function(callback) {
+//        $('#right-panel').hide('slide', {
+//            direction: 'right',
+//            duration: 300,
+//            easing: 'easeInOutQuint'
+//        });
+        $('#right-panel').fadeOut(callback);
     },
     /***
      * Write posts to the page.
