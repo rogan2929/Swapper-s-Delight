@@ -136,7 +136,7 @@ textarea {
 }
 
 #right-panel {
-    width: 400px;
+    width: 350px;
     right: 0;
     display: none;
     z-index: 1000;
@@ -242,13 +242,13 @@ textarea {
 }
 
 #panel-image {
-    max-height: 400px;
+    max-height: 350px;
     padding: 10px;
 }
 
 #panel-image > .panel-post-image {
-    max-width: 330px;
-    max-height: 330px;
+    max-width: 280px;
+    max-height: 280px;
     display: block;
     left: 0;
     right: 0;
@@ -267,8 +267,8 @@ textarea {
 }
 
 #panel-no-image {
-    max-width: 350px;
-    max-height: 350px;
+    max-width: 300px;
+    max-height: 300px;
     margin: auto;
 }
 
