@@ -67,7 +67,7 @@ var SwdModel = {
         }
 
         // Give 20 results, if possible.
-        query += ' LIMIT 20';
+        query += ' ORDER BY created_time LIMIT 20';
 
         SwdModel.facebookFQLQuery(query, callback);
     },
