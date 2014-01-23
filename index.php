@@ -69,6 +69,9 @@
                                 </ul>
                             </div>
                         </div>
+                        <div id='panel-post-empty'>
+                            <span>No post has been selected.</span>
+                        </div>
                     </div>
                 </div>
 

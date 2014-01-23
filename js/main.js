@@ -665,6 +665,8 @@ var SwdView = {
 //            duration: 300,
 //            easing: 'easeInOutQuint'
 //        });
+
+        $('#panel-post-empty').fadeOut();
     },
     /***
      * Shows a Jquery UI menu.

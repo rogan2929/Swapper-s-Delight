@@ -241,6 +241,15 @@ textarea {
     margin-bottom: 10px;
 }
 
+#panel-post-empty {
+    background: white;
+}
+
+#panel-post-empty > span {
+    font-style: italic;
+    text-align: center;
+}
+
 #panel-image {
     max-height: 350px;
     padding: 10px;
