@@ -516,11 +516,11 @@ var SwdView = {
      * @param {type} callback
      */
     hideRightPanel: function(callback) {
-        $('#right-panel').hide('slide', {
-            direction: 'right',
-            duration: 300,
-            easing: 'easeInOutQuint'
-        }, callback);
+//        $('#right-panel').hide('slide', {
+//            direction: 'right',
+//            duration: 300,
+//            easing: 'easeInOutQuint'
+//        }, callback);
     },
     /***
      * Write posts to the page.
