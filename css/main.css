@@ -140,6 +140,7 @@ textarea {
     right: 0;
     display: none;
     z-index: 1000;
+    position: absolute;
 }
 
 #right-panel .body.row {
