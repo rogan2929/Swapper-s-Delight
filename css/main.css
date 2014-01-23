@@ -138,25 +138,11 @@ textarea {
 #right-panel,#right-panel-empty {
     width: 350px;
     right: 0;
-/*    display: none;
-    z-index: 1000;*/
     position: absolute;
     bottom: 0;
     top: 0;
-    border-left: 10px solid #ccc;
+    border-left: 8px solid #ccc;
 }
-
-#right-panel .body.row,#right-panel-empty .body.row {
-    border-left: 10px solid #ccc;
-}
-
-/*#button-close-panel {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    width: 21px;
-    height: 20px;
-}*/
 
 .body.row {
     top: 60px;
@@ -342,7 +328,7 @@ div.right-toolbar-button {
 
 #group-feed {
     left: 190px;
-    right: 360px;
+    right: 362px;
     top: 0;
     bottom: 0;
     position: absolute;
