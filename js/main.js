@@ -591,7 +591,7 @@ var SwdView = {
                 $(this).removeClass('ui-state-hover').addClass('ui-state-default');
             });
 
-            $('#group-feed').selectable();
+//            $('#group-feed').selectable();
 
             // Scroll up a tiny bit so the app is never at the bottom of the page after loading posts.
             $('.ui-tabs-panel').scrollTop($('.ui-tabs-panel').scrollTop() - 1);
