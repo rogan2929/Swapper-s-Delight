@@ -135,7 +135,7 @@ textarea {
     left: 0;
 }
 
-#right-panel {
+#right-panel,#right-panel-empty {
     width: 350px;
     right: 0;
 /*    display: none;
@@ -145,17 +145,17 @@ textarea {
     top: 0;
 }
 
-#right-panel .body.row {
+#right-panel .body.row,#right-panel-empty .body.row {
     border-left: 10px solid #ccc;
 }
 
-#button-close-panel {
+/*#button-close-panel {
     position: absolute;
     right: 10px;
     top: 10px;
     width: 21px;
     height: 20px;
-}
+}*/
 
 .body.row {
     top: 60px;
@@ -241,16 +241,11 @@ textarea {
     margin-bottom: 10px;
 }
 
-#panel-post-empty {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+#right-panel-empty {
     background: white;
 }
 
-#panel-post-empty > span {
+#right-panel-empty > span {
     font-style: italic;
     text-align: center;
 }
@@ -317,7 +312,6 @@ textarea {
 }
 
 #panel-message-user {
-    margin-top: 30px;
     width: 100%;
 }
 
