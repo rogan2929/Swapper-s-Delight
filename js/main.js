@@ -359,7 +359,10 @@ var SwdPresenter = {
 
             if (post) {
                 SwdModel.getUserData(post.actor_id, function(response) {
-                    SwdView.showRightPanel(post, response.data[0]);
+                    // First hide the panel, if it is already showing. Then show it.
+                    SwdView.hideRightPanel(function() {
+                        SwdView.showRightPanel(post, response.data[0]);
+                    });
                 });
             }
             else {
@@ -515,14 +518,14 @@ var SwdView = {
     },
     /***
      * Hides the right column.
+     * @param {type} callback
      */
     hideRightPanel: function(callback) {
-//        $('#right-panel').hide('slide', {
-//            direction: 'right',
-//            duration: 300,
-//            easing: 'easeInOutQuint'
-//        });
-        $('#right-panel').fadeOut(callback);
+        $('#right-panel').hide('slide', {
+            direction: 'right',
+            duration: 300,
+            easing: 'easeInOutQuint'
+        }, callback);
     },
     /***
      * Write posts to the page.
