@@ -353,8 +353,6 @@ var SwdPresenter = {
         }
 
         e.stopPropagation();
-        
-        $(e.currentTarget).parents('li.post-tile').addClass('ui-state-active');
 
         SwdModel.getPostDetails(id, function(response) {
             post = response.data[0];
@@ -592,6 +590,8 @@ var SwdView = {
             }, function() {
                 $(this).removeClass('ui-state-hover').addClass('ui-state-default');
             });
+
+            $('#group-feed').selectable();
 
             // Scroll up a tiny bit so the app is never at the bottom of the page after loading posts.
             $('.ui-tabs-panel').scrollTop($('.ui-tabs-panel').scrollTop() - 1);

@@ -366,6 +366,14 @@ div.right-toolbar-button {
 
 /* JQuery UI Overrides */
 
+.post-tile .ui-state-selecting {
+    
+}
+
+.post-tile .ui-state-selected {
+    border: 5px solid #f39814;
+}
+
 /*.ui-tabs-panel {
     overflow-y: auto;
 }

@@ -40,7 +40,7 @@
                             Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
                         </div>
                     </div>
-                    <div id='group-feed' class='scroll-y'></div>
+                    <ol id='group-feed' class='scroll-y'></ol>
                     <div id='right-panel' class='ui-widget ui-widget-content scroll-y'>
                         <div id='panel-post'>
                             <div id='panel-message-user'>
