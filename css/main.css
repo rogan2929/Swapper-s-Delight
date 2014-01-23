@@ -136,7 +136,7 @@ textarea {
 }
 
 #right-panel,#right-panel-empty {
-    width: 350px;
+    width: 360px;
     right: 0;
     position: absolute;
     bottom: 0;
@@ -238,7 +238,7 @@ textarea {
 }
 
 #panel-image {
-    max-height: 350px;
+    max-height: 360px;
     padding: 10px;
 }
 
@@ -328,7 +328,7 @@ div.right-toolbar-button {
 
 #group-feed {
     left: 190px;
-    right: 358px;
+    right: 348px;
     top: 0;
     bottom: 0;
     position: absolute;
