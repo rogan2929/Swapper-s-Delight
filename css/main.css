@@ -130,8 +130,8 @@ textarea {
     top: 0;
 }*/
 
-#left-panel {
-    right: 360px;
+#main-panel {
+    right: 0;
     left: 0;
 }
 
@@ -333,7 +333,7 @@ div.right-toolbar-button {
 
 #group-feed {
     left: 190px;
-    right: 0;
+    right: 360px;
     top: 0;
     bottom: 0;
     position: absolute;

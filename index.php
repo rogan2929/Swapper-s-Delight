@@ -27,7 +27,7 @@
         <div id='app-content'>
             <div id='fb-root'></div>
 
-            <div id='left-panel'>
+            <div id='main-panel'>
                 <div class='body row'>
                     <div id='left-rail' class='ui-widget ui-widget-content ui-corner-all scroll-y'>
                         <ul id='left-rail-nav'>
@@ -41,44 +41,43 @@
                         </div>
                     </div>
                     <div id='group-feed' class='scroll-y'></div>
-                </div>
+                    <div id='right-panel'>
+                        <div class='body row ui-widget ui-widget-content scroll-y'>
+                            <div id='panel-post'>
+                                <div id='panel-message-user'>
+                                    <img id='panel-message-pic' src=''>
+                                    <span id='panel-message-name'></span>
+                                </div>
+                                <div id='panel-image' class='ui-widget ui-widget-content ui-corner-all'>
+                                    <div id='panel-no-image' class='hidden'>
+                                        <img src='/img/no-image.jpg'>
+                                        <span>This post does not have a photo, or the owner of this post has chosen not to give permission for applications like Swapper's Delight to view it. Click the link below to see the original Facebook posting.</span>
+                                        <a id='panel-post-permalink' class='wrappable-link' target='_blank'></a>
+                                    </div>
+                                </div>
+                                <div id='panel-message' class='ui-widget ui-widget-content ui-corner-all'>
+                                    <span id='panel-message-text'></span>
+                                </div>
+                                <div id='panel-button-bar'>
+                                    <div id='panel-button-comment' class='panel-button'>Comment</div>
+                                    <div id='panel-button-pm' class='panel-button'>Message</div>
+                                    <div id='panel-button-like' class='panel-button'>Like</div>
+                                </div>
+                                <div id='panel-comments'>
+                                    <div id='panel-nocomments'>No comments yet.</div>
+                                    <ul id='panel-comment-list'>
 
-
-            </div>
-
-            <div id='right-panel'>
-                <div class='body row ui-widget ui-widget-content scroll-y'>
-                    <div id='panel-post'>
-                        <div id='panel-message-user'>
-                            <img id='panel-message-pic' src=''>
-                            <span id='panel-message-name'></span>
-                        </div>
-                        <div id='panel-image' class='ui-widget ui-widget-content ui-corner-all'>
-                            <div id='panel-no-image' class='hidden'>
-                                <img src='/img/no-image.jpg'>
-                                <span>This post does not have a photo, or the owner of this post has chosen not to give permission for applications like Swapper's Delight to view it. Click the link below to see the original Facebook posting.</span>
-                                <a id='panel-post-permalink' class='wrappable-link' target='_blank'></a>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        <div id='panel-message' class='ui-widget ui-widget-content ui-corner-all'>
-                            <span id='panel-message-text'></span>
-                        </div>
-                        <div id='panel-button-bar'>
-                            <div id='panel-button-comment' class='panel-button'>Comment</div>
-                            <div id='panel-button-pm' class='panel-button'>Message</div>
-                            <div id='panel-button-like' class='panel-button'>Like</div>
-                        </div>
-                        <div id='panel-comments'>
-                            <div id='panel-nocomments'>No comments yet.</div>
-                            <ul id='panel-comment-list'>
-
-                            </ul>
+                            <button id='button-close-panel' class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close" role="button" aria-disabled="false" title="close"><span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>
+                                <span class="ui-button-text">close</span>
+                            </button>
                         </div>
                     </div>
-                    <button id='button-close-panel' class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close" role="button" aria-disabled="false" title="close"><span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>
-                        <span class="ui-button-text">close</span>
-                    </button>
                 </div>
+
+
             </div>
 
             <div id='main-toolbar' class='ui-widget ui-widget-header'>
