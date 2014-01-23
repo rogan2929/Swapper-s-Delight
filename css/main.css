@@ -131,15 +131,15 @@ textarea {
 }*/
 
 #left-panel {
-    right: 0;
+    right: 360px;
     left: 0;
 }
 
 #right-panel {
     width: 350px;
     right: 0;
-    display: none;
-    z-index: 1000;
+/*    display: none;
+    z-index: 1000;*/
     position: absolute;
     bottom: 0;
     top: 0;
