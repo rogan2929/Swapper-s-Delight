@@ -241,7 +241,7 @@ var SwdPresenter = {
                 SwdPresenter.oldestPost = null;
             }
 
-            SwdView.displayGroupPosts(response.data, SwdPresenter.postType);
+            SwdView.displayGroupPosts(response.data);
         });
     },
     /***
@@ -269,7 +269,7 @@ var SwdPresenter = {
             SwdModel.getGroupPosts(SwdPresenter.selectedGroup.gid, {createdTime: SwdPresenter.oldestPost.created_time}, function(response) {
                 if (response.data) {
                     SwdPresenter.oldestPost = response.data[response.data.length - 1];
-                    SwdView.displayNextGroupPosts(response.data, SwdPresenter.postType);
+                    SwdView.displayNextGroupPosts(response.data);
                 }
             });
         }
@@ -501,20 +501,18 @@ var SwdView = {
     /***
      * Displays the returned feed in the main window.
      * @param {type} posts
-     * @param {type} postType
      */
-    displayGroupPosts: function(posts, postType) {
+    displayGroupPosts: function(posts) {
         // Populate the DOM, clearing any previous posts.
-        SwdView.populatePosts(posts, postType, true);
+        SwdView.populatePosts(posts, true);
     },
     /***
      * After a query calling for the next batch of results, display them.
      * @param {type} posts
-     * @param {type} postType
      */
-    displayNextGroupPosts: function(posts, postType) {
+    displayNextGroupPosts: function(posts) {
         // Populate the DOM, not clearing any previous posts.
-        SwdView.populatePosts(posts, postType, false);
+        SwdView.populatePosts(posts, false);
     },
     /***
      * Hides the right column.
@@ -530,37 +528,20 @@ var SwdView = {
     /***
      * Write posts to the page.
      * @param {type} posts
-     * @param {type} postType
      * @param {type} empty
      */
-    populatePosts: function(posts, postType, empty) {
+    populatePosts: function(posts, empty) {
         var i;
         var url;
         var message;
-        var feedContainer;
         var noImage;
         var noMessage;
         var post;
         var postTile;
 
-        switch (postType) {
-            case PostType.myposts:
-                feedContainer = '#feed-myposts';
-                break;
-            case PostType.pinned:
-                feedContainer = '#feed-pinned';
-                break;
-            case PostType.search:
-                feedContainer = '#feed-search';
-                break;
-            default:
-                feedContainer = '#group-feed';
-                break;
-        }
-
         if (empty === true) {
             // Clear anything that is currently being displayed.
-            $(feedContainer).empty();
+            $('#group-feed').empty();
         }
 
         // Hide the right panel.
@@ -591,9 +572,9 @@ var SwdView = {
 
                 if (!(noImage && noMessage)) {
                     postTile = $('<li id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-image"><img src="' + url + '"></div><div class="post-caption"><div><p>' + message + '</p></div></div></li>').hide();
-                    $(postTile).appendTo(feedContainer);
+                    $(postTile).appendTo('#group-feed');
 
-                    //$(feedContainer).append('<li id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-image"><img src="' + url + '"></div><div class="post-caption"><div><p>' + message + '</p></div></div></li>');
+                    //$('#group-feed').append('<li id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-image"><img src="' + url + '"></div><div class="post-caption"><div><p>' + message + '</p></div></div></li>');
                 }
             }
 
