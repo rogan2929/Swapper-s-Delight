@@ -345,6 +345,7 @@ div.right-toolbar-button {
     top: 0;
     bottom: 0;
     position: absolute;
+    list-style: none;
 }
 
 #left-rail {
