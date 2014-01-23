@@ -220,7 +220,7 @@ textarea {
 
 .post-caption {
     text-align: center;
-    height: 80px;
+    height: 90px;
     margin-left: 4px;
     margin-right: 4px;
     margin-top: 4px;
@@ -395,7 +395,7 @@ p {
     content:"";
     float: left;
     width: 5px; 
-    height: 85px; 
+    height: 97px; 
 }
 
 .post-caption > *:first-child {
