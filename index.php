@@ -29,18 +29,19 @@
 
             <div id='left-panel'>
                 <div class='body row'>
-                    <div id='left-rail' class='ui-widget ui-widget-content ui-corner-all'>
+                    <div id='left-rail' class='ui-widget ui-widget-content ui-corner-all scroll-y'>
                         <ul id='left-rail-nav'>
                             <li>Group Feed</li>
                             <li>My Posts</li>
                             <li>Liked</li>
                             <li>Search</li>
                         </ul>
+                        <div id='ad-space'>
+                            Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by purchasing the ad-free version of this app. It's a one-time upgrade and you'll never see an ad again! (At least not in this app; I truly wish I had the power to remove all ads, but... alas.)
+                        </div>
                     </div>
                     <div id='group-feed' class='scroll-y'></div>
                 </div>
-
-<!--                <div class='ad row ui-widget ui-widget-content ui-corner-all hidden'>Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by purchasing the ad-free version of this app. It's a one-time upgrade and you'll never see an ad again! (At least not in this app; I truly wish I had the power to remove all ads, but... alas.)</div>-->
             </div>
 
             <div id='right-panel'>
