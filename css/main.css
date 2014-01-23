@@ -143,6 +143,7 @@ textarea {
     position: absolute;
     bottom: 0;
     top: 0;
+    border-left: 10px solid #ccc;
 }
 
 #right-panel .body.row,#right-panel-empty .body.row {
