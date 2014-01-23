@@ -124,18 +124,18 @@ textarea {
     -webkit-overflow-scrolling: touch
 }
 
-.header.row {
+/*.header.row {
     height: 50px;
     line-height: 50px;
     top: 0;
-}
+}*/
 
-.left.col {
-    left: 0;
+#left-panel {
     right: 0;
+    left: 0;
 }
 
-.right.col {
+#right-panel {
     width: 400px;
     right: 0;
     display: none;
@@ -163,7 +163,7 @@ textarea {
     border: 1px solid #ccc
 }
 
-.ad.row {
+#ad-space {
     height: 100px;
     bottom: 0;
     border: red dashed;
@@ -336,11 +336,21 @@ div.right-toolbar-button {
     position: absolute;
 }
 
-#main-nav {
+#left-rail {
     width: 180px;
     bottom: 0;
     top: 0;
     position: absolute;
+}
+
+#left-rail-nav {
+    list-style: none;
+}
+
+#main-toolbar {
+    height: 50px;
+    line-height: 50px;
+    top: 0;
 }
 
 /* JQuery UI Overrides */

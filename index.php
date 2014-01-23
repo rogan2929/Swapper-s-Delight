@@ -27,10 +27,10 @@
         <div id='app-content'>
             <div id='fb-root'></div>
 
-            <div id='left-panel' class='left col'>
+            <div id='left-panel'>
                 <div class='body row'>
-                    <div id='main-nav' class='ui-widget ui-widget-content ui-corner-all'>
-                        <ul>
+                    <div id='left-rail' class='ui-widget ui-widget-content ui-corner-all'>
+                        <ul id='left-rail-nav'>
                             <li>Group Feed</li>
                             <li>My Posts</li>
                             <li>Liked</li>
@@ -38,36 +38,12 @@
                         </ul>
                     </div>
                     <div id='group-feed' class='scroll-y'></div>
-                    <!--                    <div id='tabs-main' class='tabs-bottom'>
-                                            <ul>
-                                                <li><a href='#tab-feed'>Group Feed</a></li>
-                                                <li><a href='#tab-myposts'>My Posts</a></li>
-                                                <li><a href='#tab-liked'>Liked</a></li>
-                                                <li><a href='#tab-search'>Search</a></li>
-                                            </ul>
-                                            <div id='tab-feed'>
-                                                <ol id='feed-group'>
-                                                </ol>
-                                            </div>
-                                            <div id='tab-myposts'>
-                                                <ol id='feed-myposts'>
-                                                </ol>
-                                            </div>
-                                            <div id='tab-liked'>
-                                                <ol id='feed-pinned'>
-                                                </ol>
-                                            </div>
-                                            <div id='tab-search'>
-                                                <ol id='feed-search'>
-                                                </ol>
-                                            </div>
-                                        </div>-->
                 </div>
 
-                <div class='ad row ui-widget ui-widget-content ui-corner-all hidden'>Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by purchasing the ad-free version of this app. It's a one-time upgrade and you'll never see an ad again! (At least not in this app; I truly wish I had the power to remove all ads, but... alas.)</div>
+<!--                <div class='ad row ui-widget ui-widget-content ui-corner-all hidden'>Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by purchasing the ad-free version of this app. It's a one-time upgrade and you'll never see an ad again! (At least not in this app; I truly wish I had the power to remove all ads, but... alas.)</div>-->
             </div>
 
-            <div id='right-panel' class='right col'>
+            <div id='right-panel'>
                 <div class='body row ui-widget ui-widget-content scroll-y'>
                     <div id='panel-post'>
                         <div id='panel-message-user'>
@@ -102,7 +78,7 @@
                 </div>
             </div>
 
-            <div class='header row ui-widget ui-widget-header'>
+            <div id='main-toolbar' class='ui-widget ui-widget-header'>
                 <div class='float-left left-margin'>
                     <div id='button-menu-groups' class='menu-button'><a href='#popup-menu-groups'>Select a Group</a></div>
                     <div id='button-new' class='left-margin'>New</div>

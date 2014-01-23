@@ -196,7 +196,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickPanelButton', SwdPresenter.onClickPanelButton, '.panel-button', 'click');
                                 SwdView.installHandler('onClickPanelMessageUser', SwdPresenter.onClickPanelMessageUser, '#panel-message-user', 'click');
                                 SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
-                                SwdView.installHandler('onScrollUiTabsPanel', SwdPresenter.onScrollUiTabsPanel, '.ui-tabs-panel', 'scroll');
+                                SwdView.installHandler('onScrollGroupFeed', SwdPresenter.onScrollGroupFeed, '#group-feed', 'scroll');
                                 SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
 
                                 // Position our menus.
@@ -362,14 +362,14 @@ var SwdPresenter = {
             });
         });
     },
-    onWindowResize: function(e, args) {
-        SwdView.positionMenus();
-    },
-    onScrollUiTabsPanel: function(e, args) {
+    onScrollGroupFeed: function(e, args) {
         // Check to see if the user has scrolled all the way to the bottom.
         if ($(e.currentTarget).scrollTop() + $(e.currentTarget).innerHeight() >= e.currentTarget.scrollHeight) {
             SwdPresenter.loadNextGroupPosts();
         }
+    },
+    onWindowResize: function(e, args) {
+        SwdView.positionMenus();
     }
 };
 
