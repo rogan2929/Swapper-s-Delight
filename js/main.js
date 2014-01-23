@@ -581,7 +581,7 @@ var SwdView = {
             // Sleekly fade in the post tile elements.
             // From: http://www.paulirish.com/2008/sequentially-chain-your-callbacks-in-jquery-two-ways/
             (function shownext(jq) {
-                jq.eq(0).fadeIn(50, function() {
+                jq.eq(0).fadeIn(120, function() {
                     (jq = jq.slice(1)).length && shownext(jq);
                 });
             })($('li.post-tile'));
