@@ -359,10 +359,7 @@ var SwdPresenter = {
 
             if (post) {
                 SwdModel.getUserData(post.actor_id, function(response) {
-                    // First hide the panel, if it is already showing. Then show it.
-                    SwdView.hideRightPanel(function() {
-                        SwdView.showRightPanel(post, response.data[0]);
-                    });
+                    SwdView.showRightPanel(post, response.data[0]);
                 });
             }
             else {
