@@ -331,11 +331,15 @@ div.right-toolbar-button {
 #group-feed {
     left: 190px;
     right: 0;
+    top: 0;
+    position: absolute;
 }
 
 #main-nav {
     width: 180px;
     bottom: 0;
+    top: 0;
+    position: absolute;
 }
 
 /* JQuery UI Overrides */
