@@ -187,7 +187,6 @@ var SwdPresenter = {
                                 SwdPresenter.setSelectedGroup(groups[markedGroupIds[0]]);
 
                                 // Install Event Handlers
-                                SwdView.installHandler('onClickButtonClosePanel', SwdPresenter.onClickButtonClosePanel, '#button-close-panel', 'click');
                                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
                                 SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
                                 SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
@@ -304,15 +303,11 @@ var SwdPresenter = {
         SwdView.setGroupButtonText(group.name);
     },
     // Event Handlers (onX(e, args))
-    onClickButtonClosePanel: function(e, args) {
-        SwdView.hideRightPanel();
-    },
     onClickButtonNew: function(e, args) {
         SwdView.showNewPostDialog();
     },
     onClickHtml: function(e, args) {
         SwdView.closeAllUiMenus();
-        SwdView.hideRightPanel();
     },
     onClickMenuButton: function(e, args) {
         SwdView.showUiMenu(e);
@@ -359,7 +354,7 @@ var SwdPresenter = {
 
             if (post) {
                 SwdModel.getUserData(post.actor_id, function(response) {
-                    SwdView.showRightPanel(post, response.data[0]);
+                    SwdView.showPostDetails(post, response.data[0]);
                 });
             }
             else {
@@ -512,17 +507,6 @@ var SwdView = {
         SwdView.populatePosts(posts, false);
     },
     /***
-     * Hides the right column.
-     * @param {type} callback
-     */
-    hideRightPanel: function(callback) {
-//        $('#right-panel').hide('slide', {
-//            direction: 'right',
-//            duration: 300,
-//            easing: 'easeInOutQuint'
-//        }, callback);
-    },
-    /***
      * Write posts to the page.
      * @param {type} posts
      * @param {type} empty
@@ -629,11 +613,11 @@ var SwdView = {
         });
     },
     /***
-     * Shows the right column.
+     * Shows the post details for the selected post.
      * @param {type} post Post to load into right column.
      * @param {type} user User data
      */
-    showRightPanel: function(post, user) {
+    showPostDetails: function(post, user) {
         var userImage;
 
         // Remove old image. Since we might be displaying a link or iframe instead.
