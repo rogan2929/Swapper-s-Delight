@@ -335,6 +335,7 @@ div.right-toolbar-button {
 
 #main-nav {
     width: 180px;
+    bottom: 0;
 }
 
 /* JQuery UI Overrides */
