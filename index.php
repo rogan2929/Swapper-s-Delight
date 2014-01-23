@@ -37,11 +37,13 @@
                             <li>Search</li>
                         </ul>
                         <div id='ad-space'>
-                            Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by purchasing the ad-free version of this app. It's a one-time upgrade and you'll never see an ad again! (At least not in this app; I truly wish I had the power to remove all ads, but... alas.)
+                            Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
                         </div>
                     </div>
                     <div id='group-feed' class='scroll-y'></div>
                 </div>
+
+
             </div>
 
             <div id='right-panel'>
