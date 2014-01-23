@@ -332,6 +332,7 @@ div.right-toolbar-button {
     left: 190px;
     right: 0;
     top: 0;
+    bottom: 0;
     position: absolute;
 }
 
