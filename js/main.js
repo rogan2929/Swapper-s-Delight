@@ -357,9 +357,15 @@ var SwdPresenter = {
         SwdModel.getPostDetails(id, function(response) {
             post = response.data[0];
 
-            SwdModel.getUserData(post.actor_id, function(response) {
-                SwdView.showRightPanel(post, response.data[0]);
-            });
+            if (post) {
+                SwdModel.getUserData(post.actor_id, function(response) {
+                    SwdView.showRightPanel(post, response.data[0]);
+                });
+            }
+            else {
+                // TODO: Do a real error message.
+                alert('Unable to display post. It was most likely deleted.');
+            }
         });
     },
     onScrollGroupFeed: function(e, args) {
