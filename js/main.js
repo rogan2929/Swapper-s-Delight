@@ -66,8 +66,8 @@ var SwdModel = {
             query += ' AND created_time < ' + options.createdTime;
         }
 
-        // Fetch 20 results, and sorted by creation time.
-        query += ' ORDER BY created_time DESC LIMIT 20';
+        // Fetch 30 results, and sorted by creation time.
+        query += ' ORDER BY created_time DESC LIMIT 30';
 
         SwdModel.facebookFQLQuery(query, callback);
     },
@@ -581,7 +581,7 @@ var SwdView = {
             // Sleekly fade in the post tile elements.
             // From: http://www.paulirish.com/2008/sequentially-chain-your-callbacks-in-jquery-two-ways/
             (function shownext(jq) {
-                jq.eq(0).fadeIn(75, function() {
+                jq.eq(0).fadeIn(50, function() {
                     (jq = jq.slice(1)).length && shownext(jq);
                 });
             })($('li.post-tile'));
