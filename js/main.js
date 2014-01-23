@@ -678,11 +678,27 @@ var SwdView = {
         $('#panel-message-user').data('src', user.profile_url);
         $('#panel-message-text').text(post.message);
 
-        $('#right-panel').show('slide', {
-            direction: 'right',
-            duration: 300,
-            easing: 'easeInOutQuint'
-        });
+        // If the right panel is already visible, then quickly close it and reopen it.
+        if ($('#right-panel').is(':visible')) {
+            $('#right-panel').hide('slide', {
+                direction: 'right',
+                duration: 300,
+                easing: 'easeInOutQuint'
+            }, function() {
+                $('#right-panel').show('slide', {
+                    direction: 'right',
+                    duration: 300,
+                    easing: 'easeInOutQuint'
+                });
+            });
+        }
+        else {
+            $('#right-panel').show('slide', {
+                direction: 'right',
+                duration: 300,
+                easing: 'easeInOutQuint'
+            });
+        }
     },
     /***
      * Shows a Jquery UI menu.
