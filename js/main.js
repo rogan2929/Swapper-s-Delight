@@ -354,7 +354,7 @@ var SwdPresenter = {
 
         e.stopPropagation();
         
-        $(e.currentTarget).addClass('ui-state-selected');
+        $(e.currentTarget).parents('li.post-tile').addClass('ui-state-selected');
 
         SwdModel.getPostDetails(id, function(response) {
             post = response.data[0];
