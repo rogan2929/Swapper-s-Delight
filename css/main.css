@@ -345,7 +345,6 @@ div.right-toolbar-button {
     top: 0;
     bottom: 0;
     position: absolute;
-    list-style: none;
 }
 
 #left-rail {
@@ -366,14 +365,6 @@ div.right-toolbar-button {
 }
 
 /* JQuery UI Overrides */
-
-.post-tile .ui-state-selecting {
-    
-}
-
-.post-tile .ui-state-selected {
-    border: 5px solid #f39814;
-}
 
 /*.ui-tabs-panel {
     overflow-y: auto;

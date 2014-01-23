@@ -346,7 +346,7 @@ var SwdPresenter = {
         var post;
 
         // Assuming one of the child elements of post-tile was clicked.
-        id = $(e.currentTarget).parents('li.post-tile').attr('id');
+        id = $(e.currentTarget).parents('div.post-tile').attr('id');
 
         if (!id) {
             id = $(e.currentTarget).attr('id');
@@ -568,7 +568,7 @@ var SwdView = {
                 }
 
                 if (!(noImage && noMessage)) {
-                    postTile = $('<li id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-image"><img src="' + url + '"></div><div class="post-caption"><div><p>' + message + '</p></div></div></li>').hide();
+                    postTile = $('<div id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-image"><img src="' + url + '"></div><div class="post-caption"><div><p>' + message + '</p></div></div></div>').hide();
                     $(postTile).appendTo('#group-feed');
 
                     //$('#group-feed').append('<li id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-image"><img src="' + url + '"></div><div class="post-caption"><div><p>' + message + '</p></div></div></li>');
@@ -581,7 +581,7 @@ var SwdView = {
                 jq.eq(0).fadeIn(120, function() {
                     (jq = jq.slice(1)).length && shownext(jq);
                 });
-            })($('li.post-tile'));
+            })($('div.post-tile'));
 
             // Associate the click event handler for newly created posts.
             $('.post-tile > *').click(SwdView.handlers['onClickPostTile']);
