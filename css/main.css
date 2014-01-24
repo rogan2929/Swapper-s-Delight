@@ -351,6 +351,11 @@ div.right-toolbar-button {
     top: 0;
 }
 
+.button-nav {
+    left: 0;
+    right: 0;
+}
+
 /* JQuery UI Overrides */
 
 /*.ui-tabs-panel {
