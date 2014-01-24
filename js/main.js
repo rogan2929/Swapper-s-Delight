@@ -630,7 +630,7 @@ var SwdView = {
     },
     setSelectedPostType: function(id) {
         $('.button-nav').removeClass('ui-state-active');
-        $(id).removeClass('ui-state-default').addClass('ui-state-active');
+        $('#' + id).removeClass('ui-state-default').addClass('ui-state-active');
     },
     /***
      * Displays new post dialog box.
