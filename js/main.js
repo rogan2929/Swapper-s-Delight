@@ -574,7 +574,7 @@ var SwdView = {
                     url = null;
                 }
                 
-                postTile = $('<div class="post-tile ui-widget ui-widget-content ui-state-default"><div class="post-tile-primary-content"></div><div class="post-tile-secondary-content">awoeifj oiajwefoiajwef oiajwfeo ij awef</div></div>')
+                postTile = $('<div class="post-tile ui-widget ui-widget-content ui-state-default"><div class="post-tile-primary-content"></div><div class="post-tile-secondary-content"></div></div>')
                 primaryContent = $(postTile).children('.post-tile-primary-content');
                 secondaryContent = $(postTile).children('.post-tile-secondary-content');
                 
