@@ -563,7 +563,7 @@ var SwdView = {
                     url = post.attachment.media[0].src;
                 }
                 else {
-                    url = '/img/no-image.jpg';
+                    //url = '/img/no-image.jpg';
                     noImage = true;
                 }
 
