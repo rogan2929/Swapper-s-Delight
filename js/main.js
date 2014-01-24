@@ -112,6 +112,7 @@ var SwdModel = {
  * Presenter for the Swapper's Delight program.
  */
 var SwdPresenter = {
+    currentUid: null,
     oldestPost: null,
     postType: PostType.group,
     selectedGroup: null,
@@ -155,6 +156,8 @@ var SwdPresenter = {
             var groups = [];
             var completed;
             var group;
+            
+            SwdPresenter.currentUid = response.id;
 
             SwdModel.getMarkedGroups(response.id, function(response) {
                 groupCount = response.length;
@@ -192,6 +195,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
                                 SwdView.installHandler('onClickMenuItemGroup', SwdPresenter.onClickMenuItemGroup, '.menu-item-group', 'click');
                                 SwdView.installHandler('onClickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item-main', 'click');
+                                SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.button-nav', 'click');
                                 SwdView.installHandler('onClickPanelButton', SwdPresenter.onClickPanelButton, '.panel-button', 'click');
                                 SwdView.installHandler('onClickPanelMessageUser', SwdPresenter.onClickPanelMessageUser, '#panel-message-user', 'click');
                                 SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
@@ -221,9 +225,9 @@ var SwdPresenter = {
         // TODO: configure options based on what tab the user is on.
         switch (SwdPresenter.postType) {
             case PostType.group:
-                options;
                 break;
             case PostType.myposts:
+                options = { id: SwdPresenter.currentUid }
                 break;
             case PostType.pinned:
                 break;
@@ -328,6 +332,27 @@ var SwdPresenter = {
     },
     onClickMenuItemMain: function(e, args) {
         var id = $(e.currentTarget).attr('id');
+    },
+    onClickNavButton: function(e, args) {
+        var id = $(e.currentTarget).attr('id');
+        
+        switch (id) {
+            case 'button-nav-group':
+                SwdPresenter.postType = PostType.group;
+                break;
+            case 'button-nav-myposts':
+                SwdPresenter.postType = PostType.myposts;
+                break;
+            case 'button-nav-liked':
+                SwdPresenter.postType = PostType.pinned;
+                break;
+            case 'button-nav-search':
+                SwdPresenter.postType = PostType.search;
+                break;
+        }
+        
+        SwdPresenter.loadGroupPosts();
+        SwdView.setSelectedPostType(id);
     },
     onClickPanelButton: function(e, args) {
         SwdPresenter.sendFacebookMessage('', 'http://www.foxnews.com');
@@ -602,6 +627,10 @@ var SwdView = {
      */
     setGroupButtonText: function(text) {
         $('#button-menu-groups span a').text(text);
+    },
+    setSelectedPostType: function(id) {
+        $('.button-nav').removeClass('ui-state-active');
+        $(id).addClass('ui-state-active');
     },
     /***
      * Displays new post dialog box.
