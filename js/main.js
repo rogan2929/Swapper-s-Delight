@@ -73,7 +73,7 @@ var SwdModel = {
         // Fetch 30 results, and sorted by creation time.
         streamQuery += ' ORDER BY created_time DESC LIMIT 30';
         
-        query = { streamQuery: streamQuery, imageQuery: 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)' };
+        query = { 'streamQuery': streamQuery, 'imageQuery': 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)' };
 
         SwdModel.facebookFQLQuery(JSON.stringify(query), callback);
     },
