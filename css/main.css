@@ -175,6 +175,8 @@ textarea {
     margin-right: 5px;
 }
 
+/*http://jsfiddle.net/E78q3/*/
+
 .post-tile {
     width: 200px;
     height: 200px;
@@ -183,7 +185,7 @@ textarea {
     display: inline-block;
     cursor: pointer;
     font-weight: normal !important;
-    overflow: no-content;
+    overflow: hidden;
 }
 
 .post-tile * {
