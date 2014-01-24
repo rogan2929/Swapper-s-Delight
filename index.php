@@ -70,9 +70,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id='right-panel-empty'>
-                        <span>No post has been selected.</span>
-                    </div>
+                    <div id='right-panel-empty'></div>
                 </div>
 
 
