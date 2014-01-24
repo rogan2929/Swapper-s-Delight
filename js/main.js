@@ -600,27 +600,7 @@ var SwdView = {
                     isEmpty = true;
                 }
                 
-                $('#group-feed').append(postTile);
-                    
-//                if (message || url) {
-//                    postTile = $('<div id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-image"></div><div class="post-caption"><span>' + message + '</span></div></div>').hide();
-//                    
-//                    if (url) {
-//                        $(postTile).children('.post-image').append('<img src="' + url + '">');
-//                    }
-//                    
-//                    $(postTile).appendTo('#group-feed');
-//                }
-
-//                if (!(noImage && noMessage)) {
-//                    postTile = $('<div id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-caption"><div><p>' + message + '</p></div></div></div>').hide();
-//                    
-//                    if (!noImage) {
-//                        //<div class="post-image"><img src="' + url + '"></div>
-//                    }
-//                    
-//                    $(postTile).appendTo('#group-feed');
-//                }
+                $(postTile).hide().appendTo('#group-feed');
             }
 
             // Sleekly fade in the post tile elements.
