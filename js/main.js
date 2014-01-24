@@ -258,6 +258,8 @@ var SwdPresenter = {
                 
                 posts = response.data[0].fql_result_set;
                 
+                SwdPresenter.oldestPost = posts[posts.length - 1];
+                
                 SwdView.displayGroupPosts(posts);
             }
             else if (!loadNextPage) {
