@@ -253,9 +253,12 @@ var SwdPresenter = {
                 SwdView.clearGroupPosts();
             }
 
-            if (response.data) {
-                SwdPresenter.oldestPost = response.data[response.data.length - 1];
-                SwdView.displayGroupPosts(response.data);
+            if (response.data && response.data[0].fql_result_set) {
+                //SwdPresenter.oldestPost = response.data[response.data.length - 1];
+                
+                posts = response.data[0].fql_result_set;
+                
+                SwdView.displayGroupPosts(posts);
             }
             else if (!loadNextPage) {
                 SwdPresenter.oldestPost = null;
