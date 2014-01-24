@@ -547,6 +547,8 @@ var SwdView = {
         var postTile;
         var primaryContent;
         var secondaryContent;
+        var hasMessage;
+        var hasImage;
 
         if (empty === true) {
             // Clear anything that is currently being displayed.
@@ -585,8 +587,9 @@ var SwdView = {
                 }
                 else if (message && !url)
                 {
-                    $(postTile).addClass('post-tile-text');
-                    $(primaryContent).text(message);
+                    $(postTile).addClass('post-tile-multi');
+                    $(primaryContent).css('background-image', 'url("/img/no-image.jpg"');
+                    $(secondaryContent).text(message);
                 }
                 else if (!message && url)
                 {

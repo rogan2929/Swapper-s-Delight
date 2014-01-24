@@ -215,7 +215,7 @@ textarea {
     display: none;
 }
 
-.post-tile-text .post-tile-primary-content{
+/*.post-tile-text .post-tile-primary-content{
     height: 200px;
     width: 200px;
     display: table-cell;
@@ -225,7 +225,7 @@ textarea {
 
 .post-tile-text .post-tile-secondary-content{
     display: none;
-}
+}*/
 
 .wrappable-link {
     white-space: pre-wrap; /* css-3 */    
