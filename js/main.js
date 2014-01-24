@@ -269,7 +269,7 @@ var SwdPresenter = {
                     posts[i]['image_url'] = null;
 
                     // For posts with an image, look for associate image data.
-                    if (posts[i].attachment && posts[i].attachment.media[0]) {
+                    if (posts[i].attachment && posts[i].attachment.media && posts[i].attachment.media[0]) {
                         for (j = 0; j < imageQuery.length; j++) {
                             // See if attachment media has a match for object_id.
                             if (posts[i].attachment.media[0].photo.fbid === imageQuery[j].object_id) {
