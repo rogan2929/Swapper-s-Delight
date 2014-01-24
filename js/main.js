@@ -196,8 +196,8 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickMenuItemGroup', SwdPresenter.onClickMenuItemGroup, '.menu-item-group', 'click');
                                 SwdView.installHandler('onClickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item-main', 'click');
                                 SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.button-nav', 'click');
-                                SwdView.installHandler('onClickPanelButton', SwdPresenter.onClickPanelButton, '.panel-button', 'click');
-                                SwdView.installHandler('onClickPanelMessageUser', SwdPresenter.onClickPanelMessageUser, '#panel-message-user', 'click');
+                                SwdView.installHandler('onClickPostButton', SwdPresenter.onClickPostButton, '.post-button', 'click');
+                                SwdView.installHandler('onClickPanelMessageUser', SwdPresenter.onClickPanelMessageUser, '#post-message-user', 'click');
                                 SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
                                 SwdView.installHandler('onScrollGroupFeed', SwdPresenter.onScrollGroupFeed, '#group-feed', 'scroll');
                                 SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
@@ -354,12 +354,12 @@ var SwdPresenter = {
         SwdPresenter.loadGroupPosts();
         SwdView.setSelectedPostType(id);
     },
-    onClickPanelButton: function(e, args) {
-        SwdPresenter.sendFacebookMessage('', 'http://www.foxnews.com');
-    },
     onClickPanelMessageUser: function(e, args) {
         var profileUrl = $(e.currentTarget).data('src');
         window.open(profileUrl);
+    },
+    onClickPostButton: function(e, args) {
+        SwdPresenter.sendFacebookMessage('', 'http://www.foxnews.com');
     },
     onClickPostTile: function(e, args) {
         var id;
@@ -615,10 +615,8 @@ var SwdView = {
                 $(this).removeClass('ui-state-hover').addClass('ui-state-default');
             });
 
-//            $('#group-feed').selectable();
-
             // Scroll up a tiny bit so the app is never at the bottom of the page after loading posts.
-            $('.ui-tabs-panel').scrollTop($('.ui-tabs-panel').scrollTop() - 1);
+            $('#group-feed').scrollTop($('#group-feed').scrollTop() - 1);
         }
     },
     /***
@@ -664,22 +662,14 @@ var SwdView = {
     showPostDetails: function(post, user) {
         var userImage;
 
-        // Remove old image. Since we might be displaying a link or iframe instead.
-        //$('#panel-image .panel-post-image').remove();
-
         if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
             // Hide the no-image container and display the post's attached image.
             $('#post-no-image').hide();
             $('#post-image').css('background-image', 'url("' + post.attachment.media[0].src.replace('_s.jpg', '_n.jpg') + '")');
-            // Append new image;
-            //$('#panel-image div').hide();
-            //$('#panel-image').append('<img class="panel-post-image" src="' + post.attachment.media[0].src.replace('_s.jpg', '_n.jpg') + '">');
         }
         else {
-            //$('#panel-image div a').attr('href', post.permalink).text(post.permalink);
-            //$('#panel-image div').show();
             // Show the no-image notification.
-            $('#post-permalink').text(post.permalink);
+            $('#post-permalink').attr('href', post.permalink).text(post.permalink);
             $('#post-image').hide();
             $('#post-no-image').show();
         }
@@ -691,7 +681,6 @@ var SwdView = {
             userImage = '';
         }
 
-        //$('#panel-image img').attr('src', src);
         $('#post-message-pic').css('background-image', 'url("' + userImage + '")');
         $('#post-message-name').text(user.first_name + ' ' + user.last_name);
         $('#post-message-user').data('src', user.profile_url);
