@@ -189,9 +189,9 @@ textarea {
 .post-tile-multi .post-tile-primary-content {
     height: 150px;
     width: 200px;
-    position: relative;
     background-image: url('/img/no-image.jpg');
     background-position: center center;
+    margin-bottom: 5px;
 }
 
 .post-tile-multi .post-tile-secondary-content-content {
