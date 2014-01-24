@@ -217,6 +217,18 @@ textarea {
     display: none;
 }
 
+.post-tile-text.post-tile-primary-content{
+    height: 200px;
+    width: 200px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.post-tile-text .post-tile-secondary-content-content{
+    display: none;
+}
+
 /*.post-tile-multi > img {
     max-height: 150px;
     max-width: 200px;

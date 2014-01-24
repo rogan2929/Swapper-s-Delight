@@ -41,12 +41,16 @@
                         </div>
                     </div>
                     <div id='group-feed' class='scroll-y'>
-                        <div class='post-tile post-tile-multi'>
+                        <div class='post-tile post-tile-multi ui-widget ui-widget-content ui-state-default'>
                             <div class='post-tile-primary-content'></div>
                             <div class='post-tile-secondary-content'>awoeifj oiajwefoiajwef oiajwfeo ij awef</div>
                         </div>
-                        <div class='post-tile post-tile-image'>
+                        <div class='post-tile post-tile-image ui-widget ui-widget-content ui-state-default'>
                             <div class='post-tile-primary-content'></div>
+                            <div class='post-tile-secondary-content'></div>
+                        </div>
+                        <div class='post-tile post-tile-text ui-widget ui-widget-content ui-state-default'>
+                            <div class='post-tile-primary-content'>awoeifj oiajwefoiajwef oiajwfeo ij awefawoeifj oiajwefoiajwef oiajwfeo ij awefawoeifj oiajwefoiajwef oiajwfeo ij awefawoeifj oiajwefoiajwef oiajwfeo ij awef</div>
                             <div class='post-tile-secondary-content'></div>
                         </div>
                     </div>
