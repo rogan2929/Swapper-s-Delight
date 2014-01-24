@@ -579,6 +579,8 @@ var SwdView = {
                     if (url) {
                         $(postTile).append('<div class="post-image"><img src="' + url + '"></div>');
                     }
+                    
+                    $(postTile).appendTo('#group-feed');
                 }
 
 //                if (!(noImage && noMessage)) {
