@@ -46,30 +46,36 @@ var SwdModel = {
      * @param {type} callback Completed callback function.
      */
     getGroupPosts: function(gid, options, callback) {
+        var streamQuery;
+        var imageQuery;
         var query;
+        var posts;
+        var i;
 
         // Base query
-        query = 'SELECT post_id,created_time,message,attachment,comment_info FROM stream WHERE source_id=' + gid;
+        streamQuery = 'SELECT post_id,created_time,message,attachment,comment_info FROM stream WHERE source_id=' + gid;
 
         // Constrain by current user.
         if (options.id) {
-            query += ' AND actor_id=' + options.id;
+            streamQuery += ' AND actor_id=' + options.id;
         }
 
         // Constrain by whether or not the user likes the post.
         if (options.getLiked) {
-            query += ' AND like_info.user_likes=1';
+            streamQuery += ' AND like_info.user_likes=1';
         }
 
         // For FQL pagination (query by posts with created_time less than created_time of last query's oldest post.)
         if (options.createdTime) {
-            query += ' AND created_time < ' + options.createdTime;
+            streamQuery += ' AND created_time < ' + options.createdTime;
         }
 
         // Fetch 30 results, and sorted by creation time.
-        query += ' ORDER BY created_time DESC LIMIT 30';
+        streamQuery += ' ORDER BY created_time DESC LIMIT 30';
+        
+        query = { streamQuery: streamQuery, imageQuery: 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)' };
 
-        SwdModel.facebookFQLQuery(query, callback);
+        SwdModel.facebookFQLQuery(JSON.stringify(query), callback);
     },
     /***
      * Query database for groups that the user has marked as 'BST' (Buy, Sell, Trade)
@@ -97,6 +103,14 @@ var SwdModel = {
      */
     getPostDetails: function(id, callback) {
         SwdModel.facebookFQLQuery('SELECT post_id,message,actor_id,attachment,permalink,like_info,share_info,comment_info,tagged_ids FROM stream WHERE post_id="' + id + '"', callback);
+    },
+    /***
+     * Makes a FB api call to retrieve picture data.
+     * @param {type} id
+     * @param {type} callback
+     */
+    getPostPicture: function(id, callback) {
+        SwdModel.facebookFQLQuery('SELECT images FROM photo WHERE object_id=' + id, callback);
     },
     /***
      * Get data for the given user.
