@@ -45,6 +45,10 @@
                             <div class='post-tile-primary-content'></div>
                             <div class='post-tile-secondary-content'>awoeifj oiajwefoiajwef oiajwfeo ij awef</div>
                         </div>
+                        <div class='post-tile post-tile-image'>
+                            <div class='post-tile-primary-content'></div>
+                            <div class='post-tile-secondary-content'></div>
+                        </div>
                     </div>
                     <div id='right-panel' class='ui-widget ui-widget-content scroll-y'>
                         <div id='panel-post'>
