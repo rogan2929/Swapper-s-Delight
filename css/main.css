@@ -183,11 +183,11 @@ textarea {
     display: inline-block;
     cursor: pointer;
     font-weight: normal !important;
-    overflow: hidden;
+    overflow: no-content;
 }
 
 .post-tile * {
-    font-size: 0.81em;
+    font-size: 0.80em;
 }
 
 .post-tile-multi .post-tile-primary-content {
@@ -214,18 +214,6 @@ textarea {
 .post-tile-image .post-tile-secondary-content{
     display: none;
 }
-
-/*.post-tile-text .post-tile-primary-content{
-    height: 200px;
-    width: 200px;
-    display: table-cell;
-    vertical-align: middle;
-    overflow: no-display;
-}
-
-.post-tile-text .post-tile-secondary-content{
-    display: none;
-}*/
 
 .wrappable-link {
     white-space: pre-wrap; /* css-3 */    
@@ -338,11 +326,12 @@ div.right-toolbar-button {
 }
 
 #group-feed {
-    left: 190px;
+    left: 200px;
     right: 371px;
     top: 0;
     bottom: 0;
     position: absolute;
+    margin-top: -5px;
 }
 
 #left-rail {
