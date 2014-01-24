@@ -582,7 +582,7 @@ var SwdView = {
                 else if (message && !url)
                 {
                     $(postTile).addClass('post-tile-multi');
-                    $(primaryContent).css('background-image', 'url("/img/no-image.jpg"');
+                    $(primaryContent).css('background-image', 'url("/img/no-image.jpg")');
                     $(secondaryContent).text(message);
                 }
                 else if (!message && url)
