@@ -574,10 +574,10 @@ var SwdView = {
                 }
                 
                 if (message || url) {
-                    postTile = $('<div id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-caption"><div><p>' + message + '</p></div></div></div>').hide();
+                    postTile = $('<div id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-image"></div><div class="post-caption"><div><p>' + message + '</p></div></div></div>').hide();
                     
                     if (url) {
-                        $(postTile).prepend('<div class="post-image"><img src="' + url + '"></div>');
+                        $(postTile).children('.post-image').append('<img src="' + url + '">');
                     }
                     
                     $(postTile).appendTo('#group-feed');
