@@ -661,11 +661,15 @@ var SwdView = {
      */
     showPostDetails: function(post, user) {
         var userImage;
+        var postImage;
 
         if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
+            postImage = 'url(' + post.attachment.media[0].src.replace('_s.jpg', '_n.jpg') + ')'
+            
             // Hide the no-image container and display the post's attached image.
             $('#post-no-image').hide();
-            $('#post-image').css('background-image', 'url(' + post.attachment.media[0].src.replace('_s.jpg', '_n.jpg') + ')');
+            $('#post-image').show();
+            $('#post-image').css('background-image', postImage);
         }
         else {
             // Show the no-image notification.
@@ -675,13 +679,13 @@ var SwdView = {
         }
 
         if (user.pic_square) {
-            userImage = user.pic_square;
+            userImage = 'url(' + user.pic_square + ')';
         }
         else {
             userImage = '';
         }
 
-        $('#post-message-pic').css('background-image', 'url(' + userImage + ')');
+        $('#post-message-pic').css('background-image', userImage);
         $('#post-message-name').text(user.first_name + ' ' + user.last_name);
         $('#post-message-user').data('src', user.profile_url);
         $('#post-message-text').text(post.message);
