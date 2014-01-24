@@ -685,7 +685,7 @@ var SwdView = {
             userImage = '';
         }
 
-        $('#post-message-pic').css( { backgroundImage: userImage } );
+        //$('#post-message-pic').css('background-image', userImage);
         $('#post-message-name').text(user.first_name + ' ' + user.last_name);
         $('#post-message-user').data('src', user.profile_url);
         $('#post-message-text').text(post.message);

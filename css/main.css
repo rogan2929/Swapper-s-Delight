@@ -239,7 +239,7 @@ textarea {
 }
 
 #post-image-container {
-    max-height: 360px;
+/*    max-height: 360px;*/
     padding: 10px;
 }
 
@@ -252,6 +252,8 @@ textarea {
     border: 1px solid #ccc;
     background-repeat: no-repeat;
     background-size: 100%;
+    max-height: 300px;
+    max-width: 300px;
 }
 
 /*#post-image-container > .post-post-image {
@@ -318,6 +320,7 @@ textarea {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 100%;
+    background-image: url('/img/no-image.jpg');
 }
 
 #post-message-user {
