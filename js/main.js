@@ -72,8 +72,8 @@ var SwdModel = {
 
         // Fetch 30 results, and sorted by creation time.
         streamQuery += ' ORDER BY created_time DESC LIMIT 30';
-        
-        query = { 'streamQuery': streamQuery, 'imageQuery': 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)' };
+
+        query = {'streamQuery': streamQuery, 'imageQuery': 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'};
 
         SwdModel.facebookFQLQuery(JSON.stringify(query), callback);
     },
@@ -102,15 +102,7 @@ var SwdModel = {
      * @param {type} callback
      */
     getPostDetails: function(id, callback) {
-        SwdModel.facebookFQLQuery('SELECT post_id,message,actor_id,attachment,permalink,like_info,share_info,comment_info,tagged_ids FROM stream WHERE post_id="' + id + '"', callback);
-    },
-    /***
-     * Makes a FB api call to retrieve picture data.
-     * @param {type} id
-     * @param {type} callback
-     */
-    getPostPicture: function(id, callback) {
-        SwdModel.facebookFQLQuery('SELECT images FROM photo WHERE object_id=' + id, callback);
+        SwdModel.facebookFQLQuery('SELECT post_id,message,actor_id,permalink,like_info,share_info,comment_info,tagged_ids FROM stream WHERE post_id="' + id + '"', callback);
     },
     /***
      * Get data for the given user.
@@ -233,15 +225,16 @@ var SwdPresenter = {
     /***
      * Load feed for the current group.
      */
-    loadGroupPosts: function() {
+    loadGroupPosts: function(loadNextPage) {
         var options = {};
+        var posts;
 
         // TODO: configure options based on what tab the user is on.
         switch (SwdPresenter.postType) {
             case PostType.group:
                 break;
             case PostType.myposts:
-                options = {id: SwdPresenter.currentUid}
+                options['id'] = SwdPresenter.currentUid;
                 break;
             case PostType.pinned:
                 break;
@@ -249,47 +242,25 @@ var SwdPresenter = {
                 break;
         }
 
+        if (loadNextPage) {
+            options['createdTime'] = SwdPresenter.oldestPost.created_time;
+        }
+
         // Get posts and then display them.
         SwdModel.getGroupPosts(SwdPresenter.selectedGroup.gid, options, function(response) {
+            if (!loadNextPage) {
+                // Clear previous results, unless loading a new page.
+                SwdView.clearGroupPosts();
+            }
+
             if (response.data) {
                 SwdPresenter.oldestPost = response.data[response.data.length - 1];
+                SwdView.displayGroupPosts(response.data);
             }
-            else {
+            else if (!loadNextPage) {
                 SwdPresenter.oldestPost = null;
             }
-
-            SwdView.displayGroupPosts(response.data);
         });
-    },
-    /***
-     * Load next page in group feed.
-     */
-    loadNextGroupPosts: function() {
-        var options = {};
-
-        if (SwdPresenter.oldestPost) {
-
-            // TODO: configure options based on what tab the user is on.
-            switch (SwdPresenter.postType) {
-                case PostType.group:
-                    options;
-                    break;
-                case PostType.myposts:
-                    break;
-                case PostType.pinned:
-                    break;
-                case PostType.search:
-                    break;
-            }
-
-            // Get more posts.
-            SwdModel.getGroupPosts(SwdPresenter.selectedGroup.gid, {createdTime: SwdPresenter.oldestPost.created_time}, function(response) {
-                if (response.data) {
-                    SwdPresenter.oldestPost = response.data[response.data.length - 1];
-                    SwdView.displayNextGroupPosts(response.data);
-                }
-            });
-        }
     },
     /***
      * Brings up a send message window.
@@ -304,20 +275,12 @@ var SwdPresenter = {
         });
     },
     /***
-     * Set how old the oldest displayed post is to be.
-     * @param {type} newerThan
-     */
-    setNewerThan: function(newerThan) {
-        SwdPresenter.newerThan = newerThan;
-        SwdPresenter.loadGroupPosts();
-    },
-    /***
      * Set currently selected group.
      * @param {type} group
      */
     setSelectedGroup: function(group) {
         SwdPresenter.selectedGroup = group;
-        SwdPresenter.loadGroupPosts();
+        SwdPresenter.loadGroupPosts(false);
         SwdView.setGroupButtonText(group.name);
     },
     // Event Handlers (onX(e, args))
@@ -365,7 +328,7 @@ var SwdPresenter = {
                 break;
         }
 
-        SwdPresenter.loadGroupPosts();
+        SwdPresenter.loadGroupPosts(false);
         SwdView.setSelectedPostType(id);
     },
     onClickPanelMessageUser: function(e, args) {
@@ -405,7 +368,7 @@ var SwdPresenter = {
     onScrollGroupFeed: function(e, args) {
         // Check to see if the user has scrolled all the way to the bottom.
         if ($(e.currentTarget).scrollTop() + $(e.currentTarget).innerHeight() >= e.currentTarget.scrollHeight) {
-            SwdPresenter.loadNextGroupPosts();
+            SwdPresenter.loadGroupPosts(true);
         }
     },
     onWindowResize: function(e, args) {
@@ -519,6 +482,9 @@ var SwdView = {
             SwdView.handlers[name].call(SwdPresenter, e, args);
         });
     },
+    clearGroupPosts: function() {
+        $('#group-feed').empty();
+    },
     /***
      * Closes all Jquery UI menus.
      */
@@ -530,23 +496,14 @@ var SwdView = {
      * @param {type} posts
      */
     displayGroupPosts: function(posts) {
-        // Populate the DOM, clearing any previous posts.
-        SwdView.populatePosts(posts, true);
-    },
-    /***
-     * After a query calling for the next batch of results, display them.
-     * @param {type} posts
-     */
-    displayNextGroupPosts: function(posts) {
-        // Populate the DOM, not clearing any previous posts.
-        SwdView.populatePosts(posts, false);
+        // Populate the DOM.
+        SwdView.populatePosts(posts);
     },
     /***
      * Write posts to the page.
      * @param {type} posts
-     * @param {type} empty
      */
-    populatePosts: function(posts, empty) {
+    populatePosts: function(posts) {
         var i;
         var isEmpty;
         var url;
@@ -555,11 +512,6 @@ var SwdView = {
         var postTile;
         var primaryContent;
         var secondaryContent;
-
-        if (empty === true) {
-            // Clear anything that is currently being displayed.
-            $('#group-feed').empty();
-        }
 
         // If there is a feed to display, then display it.
         if (posts) {
@@ -576,13 +528,14 @@ var SwdView = {
                 }
 
                 if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
-                    url = post.attachment.media[0].src.replace('_s.jpg', '_n.jpg');
+                    //url = post.attachment.media[0].src.replace('_s.jpg', '_n.jpg');
+                    url = post.image_url;
                 }
                 else {
                     url = null;
                 }
 
-                postTile = $('<div id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default"><div class="post-tile-primary-content"></div><div class="post-tile-secondary-content"></div></div>')
+                postTile = $('<div id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default"><div class="post-tile-primary-content"></div><div class="post-tile-secondary-content"></div></div>');
                 primaryContent = $(postTile).children('.post-tile-primary-content');
                 secondaryContent = $(postTile).children('.post-tile-secondary-content');
 
@@ -676,8 +629,8 @@ var SwdView = {
         var postImage;
 
         if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
-            postImage = 'url("' + post.attachment.media[0].src.replace('_s.jpg', '_n.jpg') + '")'
-            
+            postImage = 'url("' + post.attachment.media[0].src.replace('_s.jpg', '_n.jpg') + '")';
+
             // Hide the no-image container and display the post's attached image.
             $('#post-no-image').hide();
             $('#post-image').show();
