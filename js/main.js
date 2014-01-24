@@ -542,10 +542,12 @@ var SwdView = {
         var i;
         var url;
         var message;
-        var noImage;
-        var noMessage;
+//        var noImage;
+//        var noMessage;
+        var isEmpty;
         var post;
         var postTile;
+        var html = '';
 
         if (empty === true) {
             // Clear anything that is currently being displayed.
@@ -556,31 +558,38 @@ var SwdView = {
         if (posts) {
             for (i = 0; i < posts.length; i++) {
                 post = posts[i];
-                noImage = false;
-                noMessage = false;
-
-                if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
-                    url = post.attachment.media[0].src;
-                }
-                else {
-                    //url = '/img/no-image.jpg';
-                    noImage = true;
-                }
 
                 if (post.message) {
                     message = post.message;
                 }
                 else {
-                    message = '[No message attached to post.]';
-                    noMessage = true;
+                    message = null;
                 }
 
-                if (!(noImage && noMessage)) {
-                    postTile = $('<div id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-image"><img src="' + url + '"></div><div class="post-caption"><div><p>' + message + '</p></div></div></div>').hide();
-                    $(postTile).appendTo('#group-feed');
-
-                    //$('#group-feed').append('<li id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-image"><img src="' + url + '"></div><div class="post-caption"><div><p>' + message + '</p></div></div></li>');
+                if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
+                    url = post.attachment.media[0].src;
                 }
+                else {
+                    url = null;
+                }
+                
+                if (message || url) {
+                    postTile = $('<div id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-caption"><div><p>' + message + '</p></div></div></div>').hide();
+                    
+                    if (url) {
+                        $(postTile).append('<div class="post-image"><img src="' + url + '"></div>');
+                    }
+                }
+
+//                if (!(noImage && noMessage)) {
+//                    postTile = $('<div id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-caption"><div><p>' + message + '</p></div></div></div>').hide();
+//                    
+//                    if (!noImage) {
+//                        //<div class="post-image"><img src="' + url + '"></div>
+//                    }
+//                    
+//                    $(postTile).appendTo('#group-feed');
+//                }
             }
 
             // Sleekly fade in the post tile elements.
