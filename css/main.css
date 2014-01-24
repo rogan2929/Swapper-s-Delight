@@ -354,6 +354,7 @@ div.right-toolbar-button {
 .button-nav {
     left: 0;
     right: 0;
+    margin-top: 2px;
 }
 
 /* JQuery UI Overrides */
