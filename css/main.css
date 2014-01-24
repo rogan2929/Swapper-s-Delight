@@ -243,6 +243,10 @@ textarea {
     padding: 10px;
 }
 
+#post-image-container > * {
+    font-size: 0.9em;
+}
+
 #post-image {
     background-position: center center;
     border: 1px solid #ccc;
@@ -296,14 +300,14 @@ textarea {
 
 #post-permalink {
     margin-top: 1em;
-    font-size: 0.9em;
+/*    font-size: 0.9em;*/
 }
 
-#post-no-image-container > span {
+/*#post-no-image-container > span {
     font-style: italic;
     font-size: 0.9em;
     display: block;
-}
+}*/
 
 #panel-post {
     padding: 10px;
