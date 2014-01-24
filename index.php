@@ -31,10 +31,10 @@
                 <div class='body row'>
                     <div id='left-rail' class='ui-widget ui-widget-content ui-corner-all scroll-y'>
                         <ul id='left-rail-nav'>
-                            <li>Group Feed</li>
-                            <li>My Posts</li>
-                            <li>Liked</li>
-                            <li>Search</li>
+                            <li id='button-nav-group' class='button-nav'>Group Feed</li>
+                            <li id='button-nav-myposts' class='button-nav'>My Posts</li>
+                            <li id='button-nav-liked' class='button-nav'>Liked</li>
+                            <li id='button-nav-search' class='button-nav'>Search</li>
                         </ul>
                         <div id='ad-space'>
                             Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by by turning what you're using off for this site. Ads are what makes this program viable. Thank you!

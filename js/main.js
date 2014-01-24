@@ -404,6 +404,8 @@ var SwdView = {
 //        $('.tabs-bottom .ui-tabs-nav').appendTo('.tabs-bottom');
 
         // Set up buttons
+        $('.button-nav').button();
+        
         $('#button-menu-main').button({
             icons: {
                 primary: 'ui-icon-gear'
