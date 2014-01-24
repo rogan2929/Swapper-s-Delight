@@ -190,7 +190,7 @@ textarea {
     height: 150px;
     width: 200px;
     background-image: url('/img/no-image.jpg');
-    background-size: 150px 200px;
+    background-size: 200px auto;
     background-repeat: no-repeat;
     background-position: center center;
     margin-bottom: 5px;
