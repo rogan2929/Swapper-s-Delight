@@ -577,10 +577,10 @@ var SwdView = {
                     postTile = $('<div id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-caption"><div><p>' + message + '</p></div></div></div>').hide();
                     
                     if (url) {
-                        $(postTile).append('<div class="post-image"><img src="' + url + '"></div>');
+                        $(postTile).prepend('<div class="post-image"><img src="' + url + '"></div>');
                     }
                     
-                    $(postTile).prependTo('#group-feed');
+                    $(postTile).appendTo('#group-feed');
                 }
 
 //                if (!(noImage && noMessage)) {
