@@ -378,6 +378,9 @@ var SwdPresenter = {
 
         SwdModel.getPostDetails(id, function(response) {
             post = response.data[0];
+            
+            // Try to retrieve image URL from object.
+            post['image_url'] = $('#' + id).data('image_url');
 
             if (post) {
                 SwdModel.getUserData(post.actor_id, function(response) {
@@ -559,7 +562,7 @@ var SwdView = {
                     url = null;
                 }
 
-                postTile = $('<div id="' + post.post_id + '" class="post-tile ui-corner-all ui-widget ui-widget-content ui-state-default"><div class="post-tile-primary-content"></div><div class="post-tile-secondary-content"></div></div>');
+                postTile = $('<div id="' + post.post_id + '" class="post-tile ui-corner-all ui-widget ui-widget-content ui-state-default"><div class="post-tile-primary-content"></div><div class="post-tile-secondary-content"></div></div>').data('image_url', url);
                 primaryContent = $(postTile).children('.post-tile-primary-content');
                 secondaryContent = $(postTile).children('.post-tile-secondary-content');
 
@@ -652,8 +655,9 @@ var SwdView = {
         var userImage;
         var postImage;
 
-        if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
-            postImage = 'url("' + post.attachment.media[0].src.replace('_s.jpg', '_n.jpg') + '")';
+        //if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
+        if (post.image_url) {
+            postImage = 'url("' + post.image_url + '")';
 
             // Hide the no-image container and display the post's attached image.
             $('#post-no-image').hide();
