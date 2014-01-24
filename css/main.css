@@ -238,12 +238,19 @@ textarea {
     text-align: center;
 }
 
-#panel-image {
+#post-image-container {
     max-height: 360px;
     padding: 10px;
 }
 
-#panel-image > .panel-post-image {
+#post-image {
+    background-position: center center;
+    border: 1px solid #ccc;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+/*#post-image-container > .post-post-image {
     max-width: 280px;
     max-height: 280px;
     display: block;
@@ -252,7 +259,7 @@ textarea {
     margin-right: auto;
     margin-left: auto;
     border: 1px solid #ccc;
-}
+}*/
 
 #overlay-app-loading {
     position: absolute;
@@ -263,13 +270,13 @@ textarea {
     background-color: white;
 }
 
-#panel-no-image {
+#post-no-image {
     max-width: 300px;
     max-height: 300px;
     margin: auto;
 }
 
-#panel-no-image > img {
+/*#panel-no-image-container > img {
     height: 100px;
     width: 100px;
     left: 0;
@@ -278,14 +285,21 @@ textarea {
     margin-left: auto;
     margin-right: auto;
     display: block;
+}*/
+
+#post-no-image > div {
+    background-position: center center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-image: url("/img/no-image.jpg");
 }
 
-#panel-post-permalink {
+#post-permalink {
     margin-top: 1em;
     font-size: 0.9em;
 }
 
-#panel-no-image > span {
+#post-no-image-container > span {
     font-style: italic;
     font-size: 0.9em;
     display: block;
@@ -295,25 +309,25 @@ textarea {
     padding: 10px;
 }
 
-#panel-message-pic {
+#post-message-pic {
     display: inline;
 }
 
-#panel-message-user {
+#post-message-user {
     width: 100%;
 }
 
-#panel-message-name {
+#post-message-name {
     display: inline;
     margin-left: 5px;
 }
 
-#panel-message-text {
+#post-message-text {
     display: block;
     padding: 10px;
 }
 
-#panel-nocomments {
+#post-nocomments {
     font-style: italic;
 }
 

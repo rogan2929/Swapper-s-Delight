@@ -671,16 +671,23 @@ var SwdView = {
         var userImage;
 
         // Remove old image. Since we might be displaying a link or iframe instead.
-        $('#panel-image .panel-post-image').remove();
+        //$('#panel-image .panel-post-image').remove();
 
         if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
+            // Hide the no-image container and display the post's attached image.
+            $('#post-no-image').hide();
+            $('#post-image').css('background-image', post.attachment.media[0].src.replace('_s.jpg', '_n.jpg'));
             // Append new image;
-            $('#panel-image div').hide();
-            $('#panel-image').append('<img class="panel-post-image" src="' + post.attachment.media[0].src.replace('_s.jpg', '_n.jpg') + '">');
+            //$('#panel-image div').hide();
+            //$('#panel-image').append('<img class="panel-post-image" src="' + post.attachment.media[0].src.replace('_s.jpg', '_n.jpg') + '">');
         }
         else {
-            $('#panel-image div a').attr('href', post.permalink).text(post.permalink);
-            $('#panel-image div').show();
+            //$('#panel-image div a').attr('href', post.permalink).text(post.permalink);
+            //$('#panel-image div').show();
+            // Show the no-image notification.
+            $('#post-permalink').text(post.permalink);
+            $('#post-image').hide();
+            $('#post-no-image').show();
         }
 
         if (user.pic_square) {
@@ -691,16 +698,10 @@ var SwdView = {
         }
 
         //$('#panel-image img').attr('src', src);
-        $('#panel-message-pic').attr('src', userImage);
-        $('#panel-message-name').text(user.first_name + ' ' + user.last_name);
-        $('#panel-message-user').data('src', user.profile_url);
-        $('#panel-message-text').text(post.message);
-
-//        $('#right-panel').show('slide', {
-//            direction: 'right',
-//            duration: 300,
-//            easing: 'easeInOutQuint'
-//        });
+        $('#post-message-pic').attr('src', userImage);
+        $('#post-message-name').text(user.first_name + ' ' + user.last_name);
+        $('#post-message-user').data('src', user.profile_url);
+        $('#post-message-text').text(post.message);
 
         $('#right-panel-empty').fadeOut();
     },
