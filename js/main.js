@@ -576,19 +576,19 @@ var SwdView = {
 
                 if (message && url) {
                     $(postTile).addClass('post-tile-multi');
-                    $(primaryContent).css('background-image', 'url(' + url + ')');
+                    $(primaryContent).css('background-image', 'url("' + url + '")');
                     $(secondaryContent).text(message);
                 }
                 else if (message && !url)
                 {
                     $(postTile).addClass('post-tile-multi');
-                    $(primaryContent).css('background-image', 'url(/img/no-image.jpg)');
+                    $(primaryContent).css('background-image', 'url("/img/no-image.jpg")');
                     $(secondaryContent).text(message);
                 }
                 else if (!message && url)
                 {
                     $(postTile).addClass('post-tile-image');
-                    $(primaryContent).css('background-image', 'url(' + url + ')');
+                    $(primaryContent).css('background-image', 'url("' + url + '")');
                 }
                 else {
                     isEmpty = true;
@@ -664,7 +664,7 @@ var SwdView = {
         var postImage;
 
         if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
-            postImage = 'url(' + post.attachment.media[0].src.replace('_s.jpg', '_n.jpg') + ')'
+            postImage = 'url("' + post.attachment.media[0].src.replace('_s.jpg', '_n.jpg') + '")'
             
             // Hide the no-image container and display the post's attached image.
             $('#post-no-image').hide();
@@ -679,7 +679,7 @@ var SwdView = {
         }
 
         if (user.pic_square) {
-            userImage = 'url(' + user.pic_square + ')';
+            userImage = 'url("' + user.pic_square + '")';
         }
         else {
             userImage = '';
