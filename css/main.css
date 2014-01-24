@@ -239,9 +239,7 @@ textarea {
 }
 
 #post-image-container {
-    /*    max-height: 360px;*/
     padding: 10px;
-    width: 300px;
     height: 300px;
 }
 
@@ -254,20 +252,8 @@ textarea {
     border: 1px solid #ccc;
     background-repeat: no-repeat;
     background-size: 100%;
-    max-height: 300px;
-    max-width: 300px;
+    height: 300px;
 }
-
-/*#post-image-container > .post-post-image {
-    max-width: 280px;
-    max-height: 280px;
-    display: block;
-    left: 0;
-    right: 0;
-    margin-right: auto;
-    margin-left: auto;
-    border: 1px solid #ccc;
-}*/
 
 #overlay-app-loading {
     position: absolute;
@@ -279,8 +265,12 @@ textarea {
 }
 
 #post-no-image {
-    max-width: 300px;
-    max-height: 300px;
+    height: 300px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
     margin: auto;
 }
 
