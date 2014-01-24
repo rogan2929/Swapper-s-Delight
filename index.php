@@ -45,7 +45,7 @@
                         <div id='panel-post'>
                             <div id='post-message-user'>
                                 <div id='post-message-pic'></div>
-                                <span id='post-message-name'></span>
+                                <div id='post-message-name'></div>
                             </div>
                             <div id='post-image-container' class='ui-widget ui-widget-content ui-corner-all'>
                                 <div id='post-no-image' class='hidden'>

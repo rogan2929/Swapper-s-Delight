@@ -299,7 +299,6 @@ textarea {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 100%;
-    background-image: url('/img/no-image.jpg');
 }
 
 #post-message-user {
@@ -307,8 +306,7 @@ textarea {
 }
 
 #post-message-name {
-    display: inline;
-    margin-left: 5px;
+    margin-top: 5px;
 }
 
 #post-message-text {
