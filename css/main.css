@@ -188,14 +188,14 @@ textarea {
 }
 
 .post-image {
-    height: 100px;
+    height: 130px;
     width: 200px;
     position: relative;
 }
 
 .post-image > img {
-    max-height: 100px;
-    max-width: 100px;
+    max-height: 130px;
+    max-width: 180px;
     display: block;
     position: absolute;
     top: 0;
@@ -207,12 +207,12 @@ textarea {
 
 .post-caption {
     text-align: center;
-    height: 90px;
+    height: 60px;
     margin-left: 4px;
     margin-right: 4px;
     margin-top: 4px;
     overflow: hidden;
-    font-size: 0.9em;
+    font-size: 0.8em;
     display: block;
 }
 
@@ -390,7 +390,7 @@ p {
     content:"";
     float: left;
     width: 5px; 
-    height: 97px; 
+    height: 67px; 
 }
 
 .post-caption > *:first-child {
