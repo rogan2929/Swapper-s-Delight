@@ -455,31 +455,25 @@ var SwdView = {
             }
         });
 
-        $('#panel-button-comment').button({
+        $('#post-button-comment').button({
             icons: {
                 primary: 'ui-icon-comment'
             }
         });
 
-        $('#panel-button-pm').button({
+        $('#post-button-pm').button({
             icons: {
                 primary: 'ui-icon-mail-closed'
             }
         });
 
-        $('#panel-button-like').button({
+        $('#post-button-like').button({
             icons: {
                 primary: 'ui-icon-pin-s'
             }
         });
 
-        $('#button-close-panel').hover(function() {
-            $(this).addClass('ui-state-hover');
-        }, function() {
-            $(this).removeClass('ui-state-hover');
-        });
-
-        $('#panel-message-user').hover(function() {
+        $('#post-message-user').hover(function() {
             $(this).removeClass('ui-state-default').addClass('ui-state-hover');
         }, function() {
             $(this).removeClass('ui-state-hover').addClass('ui-state-default');
@@ -489,7 +483,7 @@ var SwdView = {
             e.stopPropagation();
         });
 
-        $('#panel-message-user').button();
+        $('#post-message-user').button();
 
         // Init menus.
         $('#popup-menu-main').menu();
@@ -676,7 +670,7 @@ var SwdView = {
         if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
             // Hide the no-image container and display the post's attached image.
             $('#post-no-image').hide();
-            $('#post-image').css('background-image', post.attachment.media[0].src.replace('_s.jpg', '_n.jpg'));
+            $('#post-image').css('background-image', 'url("' + post.attachment.media[0].src.replace('_s.jpg', '_n.jpg') + '")');
             // Append new image;
             //$('#panel-image div').hide();
             //$('#panel-image').append('<img class="panel-post-image" src="' + post.attachment.media[0].src.replace('_s.jpg', '_n.jpg') + '">');
@@ -698,7 +692,7 @@ var SwdView = {
         }
 
         //$('#panel-image img').attr('src', src);
-        $('#post-message-pic').attr('src', userImage);
+        $('#post-message-pic').css('background-image', 'url("' + userImage + '")');
         $('#post-message-name').text(user.first_name + ' ' + user.last_name);
         $('#post-message-user').data('src', user.profile_url);
         $('#post-message-text').text(post.message);
