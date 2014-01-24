@@ -205,8 +205,6 @@ textarea {
 }
 
 .post-tile-image .post-tile-primary-content{
-    height: 200px;
-    width: 200px;
     background-image: url('/img/no-image.jpg');
     background-size: 100%;
     background-repeat: no-repeat;
@@ -217,9 +215,7 @@ textarea {
     display: none;
 }
 
-.post-tile-text.post-tile-primary-content{
-    height: 200px;
-    width: 200px;
+.post-tile-text .post-tile-primary-content{
     display: table-cell;
     vertical-align: middle;
     text-align: center;
