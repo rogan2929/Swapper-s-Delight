@@ -179,7 +179,7 @@ textarea {
     width: 200px;
     height: 200px;
     margin: 5px;
-    padding: 9px;
+    padding: 10px;
     display: inline-block;
     cursor: pointer;
     font-weight: normal !important;
@@ -220,6 +220,7 @@ textarea {
     width: 200px;
     display: table-cell;
     vertical-align: middle;
+    overflow: no-display;
 }
 
 .post-tile-text .post-tile-secondary-content{
