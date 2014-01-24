@@ -186,7 +186,7 @@ textarea {
 }
 
 .post-image {
-    height: 150px;
+    max-height: 150px;
     width: 200px;
     position: relative;
 }
@@ -203,12 +203,25 @@ textarea {
     margin: auto;
 }
 
+/*.post-caption-container {
+    height: 200px;
+    width: 200px;
+    position: relative;
+}
+
+.post-caption-full {
+    max-height: 200px;
+    max-width: 200px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+}*/
+
 .post-caption {
     text-align: center;
-    height: 50px;
-    margin-left: 4px;
-    margin-right: 4px;
-    margin-top: 4px;
     overflow: hidden;
     font-size: 0.8em;
     display: block;
@@ -356,32 +369,6 @@ div.right-toolbar-button {
 
 /* JQuery UI Overrides */
 
-/*.ui-tabs-panel {
-    overflow-y: auto;
-}
-
-.ui-tabs-vertical { 
-    width: 55em; 
-    left: 0;
-    right: 0;
-}
-.ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
-.ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
-.ui-tabs-vertical .ui-tabs-nav li a { display:block; }
-.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; border-right-width: 1px; }
-.ui-tabs-vertical .ui-tabs-panel { 
-    padding: 1em; 
-    float: right;
-    right: 0;
-    width: 40em; 
-    right: 0;
-}*/
-
-/*#tabs-main .tabs-spacer { float: left; height: 200px; }
-.tabs-bottom .ui-tabs-nav { clear: left; padding: 0 .2em .2em .2em; }
-.tabs-bottom .ui-tabs-nav li { top: auto; bottom: 0; margin: 0 .2em 1px 0; border-bottom: auto; border-top: 0; }
-.tabs-bottom .ui-tabs-nav li.ui-tabs-active { margin-top: -1px; padding-top: 1px; }*/
-
 /* Ellipses */
 
 p { 
@@ -389,7 +376,7 @@ p {
     padding: 0; 
 }
 
-.post-caption:before {
+/*.post-caption:before {
     content:"";
     float: left;
     width: 5px; 
@@ -420,7 +407,7 @@ p {
     background: -moz-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);           
     background: -o-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
     background: -ms-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white); }
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white); }*/
 
 /* ==========================================================================
    Helper classes
