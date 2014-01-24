@@ -30,12 +30,12 @@
             <div id='main-panel'>
                 <div class='body row'>
                     <div id='left-rail' class='ui-widget ui-widget-content ui-corner-all scroll-y'>
-                        <ul id='left-rail-nav'>
-                            <li id='button-nav-group' class='button-nav'>Group Feed</li>
-                            <li id='button-nav-myposts' class='button-nav'>My Posts</li>
-                            <li id='button-nav-liked' class='button-nav'>Liked</li>
-                            <li id='button-nav-search' class='button-nav'>Search</li>
-                        </ul>
+                        <div id='left-rail-nav'>
+                            <div id='button-nav-group' class='button-nav'>Group Feed</div>
+                            <div id='button-nav-myposts' class='button-nav'>My Posts</div>
+                            <div id='button-nav-liked' class='button-nav'>Liked</div>
+                            <div id='button-nav-search' class='button-nav'>Search</div>
+                        </div>
                         <div id='ad-space'>
                             Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
                         </div>
