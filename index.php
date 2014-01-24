@@ -31,7 +31,7 @@
                 <div class='body row'>
                     <div id='left-rail' class='ui-widget ui-widget-content ui-corner-all scroll-y'>
                         <div id='left-rail-nav'>
-                            <div id='button-nav-group' class='button-nav'>Group Feed</div>
+                            <div id='button-nav-group' class='button-nav selected-nav'>Group Feed</div>
                             <div id='button-nav-myposts' class='button-nav'>My Posts</div>
                             <div id='button-nav-liked' class='button-nav'>Liked</div>
                             <div id='button-nav-search' class='button-nav'>Search</div>
