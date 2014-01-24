@@ -580,7 +580,7 @@ var SwdView = {
                         $(postTile).append('<div class="post-image"><img src="' + url + '"></div>');
                     }
                     
-                    $(postTile).appendTo('#group-feed');
+                    $(postTile).prependTo('#group-feed');
                 }
 
 //                if (!(noImage && noMessage)) {
