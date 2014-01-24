@@ -198,8 +198,6 @@ textarea {
 
 .post-tile-multi .post-tile-secondary-content-content {
     font-size: 0.8em;
-    display: block;
-    position: absolute;
 }
 
 .post-tile-image .post-tile-primary-content{
@@ -219,6 +217,7 @@ textarea {
     width: 200px;
     display: table-cell;
     vertical-align: middle;
+    font-size: 0.8em;
 }
 
 .post-tile-text .post-tile-secondary-content-content{
