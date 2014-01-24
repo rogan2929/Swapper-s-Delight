@@ -40,20 +40,7 @@
                             Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
                         </div>
                     </div>
-                    <div id='group-feed' class='scroll-y'>
-                        <div class='post-tile post-tile-multi ui-widget ui-widget-content ui-state-default'>
-                            <div class='post-tile-primary-content'></div>
-                            <div class='post-tile-secondary-content'>awoeifj oiajwefoiajwef oiajwfeo ij awef</div>
-                        </div>
-                        <div class='post-tile post-tile-image ui-widget ui-widget-content ui-state-default'>
-                            <div class='post-tile-primary-content'></div>
-                            <div class='post-tile-secondary-content'></div>
-                        </div>
-                        <div class='post-tile post-tile-text ui-widget ui-widget-content ui-state-default'>
-                            <div class='post-tile-primary-content'>awoeifj oiajwefoiajwef oiajwfeo ij awefawoeifj oiajwefoiajwef oiajwfeo ij awefawoeifj oiajwefoiajwef oiajwfeo ij awefawoeifj oiajwefoiajwef oiajwfeo ij awef</div>
-                            <div class='post-tile-secondary-content'></div>
-                        </div>
-                    </div>
+                    <div id='group-feed' class='scroll-y'></div>
                     <div id='right-panel' class='ui-widget ui-widget-content scroll-y'>
                         <div id='panel-post'>
                             <div id='panel-message-user'>

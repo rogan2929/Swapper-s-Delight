@@ -540,23 +540,24 @@ var SwdView = {
      */
     populatePosts: function(posts, empty) {
         var i;
+        var isEmpty;
         var url;
         var message;
-//        var noImage;
-//        var noMessage;
-        var isEmpty;
         var post;
         var postTile;
-        var html = '';
+        var primaryContent;
+        var secondaryContent;
 
         if (empty === true) {
             // Clear anything that is currently being displayed.
-            //$('#group-feed').empty();
+            $('#group-feed').empty();
         }
 
         // If there is a feed to display, then display it.
         if (posts) {
             for (i = 0; i < posts.length; i++) {
+                isEmpty = false;
+                
                 post = posts[i];
 
                 if (post.message) {
@@ -573,6 +574,31 @@ var SwdView = {
                     url = null;
                 }
                 
+                postTile = $('<div class="post-tile ui-widget ui-widget-content ui-state-default"><div class="post-tile-primary-content"></div><div class="post-tile-secondary-content">awoeifj oiajwefoiajwef oiajwfeo ij awef</div></div>')
+                primaryContent = $(postTile).children('.post-tile-primary-content');
+                secondaryContent = $(postTile).children('.post-tile-secondary-content');
+                
+                if (message && url) {
+                    $(postTile).addClass('post-tile-multi');
+                    $(primaryContent).css('background-image', 'url("' + url + '")');
+                    $(secondaryContent).text(message);
+                }
+                else if (message && !url)
+                {
+                    $(postTile).addClass('post-tile-text');
+                    $(primaryContent).text(message);
+                }
+                else if (!message && url)
+                {
+                    $(postTile).addClass('post-tile-image');
+                    $(primaryContent).css('background-image', 'url("' + url + '")');
+                }
+                else {
+                    isEmpty = true;
+                }
+                
+                $('#group-feed').append(postTile);
+                    
 //                if (message || url) {
 //                    postTile = $('<div id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-image"></div><div class="post-caption"><span>' + message + '</span></div></div>').hide();
 //                    

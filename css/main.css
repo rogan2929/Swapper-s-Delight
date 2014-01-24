@@ -200,13 +200,11 @@ textarea {
     font-size: 0.8em;
     display: block;
     position: absolute;
-    background: blue;
 }
 
 .post-tile-image .post-tile-primary-content{
     height: 200px;
     width: 200px;
-    background-image: url('/img/no-image.jpg');
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: center center;
@@ -225,24 +223,6 @@ textarea {
 
 .post-tile-text .post-tile-secondary-content-content{
     display: none;
-}
-
-/*.post-tile-multi > img {
-    max-height: 150px;
-    max-width: 200px;
-    display: block;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    margin: auto;
-}*/
-
-
-
-.post-tile-text {
-    
 }
 
 .wrappable-link {
