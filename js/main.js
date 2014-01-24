@@ -224,6 +224,7 @@ var SwdPresenter = {
     },
     /***
      * Load feed for the current group.
+     * @param {type} loadNextPage
      */
     loadGroupPosts: function(loadNextPage) {
         var options = {};
@@ -258,20 +259,27 @@ var SwdPresenter = {
 
             if (response.data && response.data[0].fql_result_set) {
                 //SwdPresenter.oldestPost = response.data[response.data.length - 1];
-                
+
                 posts = response.data[0].fql_result_set;
                 imageQuery = response.data[1].fql_result_set;
-                
+
                 SwdPresenter.oldestPost = posts[posts.length - 1];
-                
+
                 for (i = 0; i < posts.length; i++) {
-                    posts['image_url'] = null;
-                    
-                    for (j = 0; j < imageQuery.length; j++) {
-                        
+                    posts[i]['image_url'] = null;
+
+                    // For posts with an image, look for associate image data.
+                    if (posts[i].attachment && posts[i].attachment.media[0]) {
+                        for (j = 0; j < imageQuery.length; j++) {
+                            // See if attachment media has a match for object_id.
+                            if (posts[i].attachment.media[0].photo.fbid === imageQuery[j].object_id) {
+                                posts[i]['image_url'] = imageQuery[j].images[4].source;
+                                break;
+                            }
+                        }
                     }
                 }
-                
+
                 SwdView.displayGroupPosts(posts);
             }
             else if (!loadNextPage) {
@@ -551,7 +559,7 @@ var SwdView = {
                     url = null;
                 }
 
-                postTile = $('<div id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default"><div class="post-tile-primary-content"></div><div class="post-tile-secondary-content"></div></div>');
+                postTile = $('<div id="' + post.post_id + '" class="post-tile ui-corner-all ui-widget ui-widget-content ui-state-default"><div class="post-tile-primary-content"></div><div class="post-tile-secondary-content"></div></div>');
                 primaryContent = $(postTile).children('.post-tile-primary-content');
                 secondaryContent = $(postTile).children('.post-tile-secondary-content');
 
