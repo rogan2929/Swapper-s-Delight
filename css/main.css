@@ -183,35 +183,29 @@ textarea {
     display: inline-block;
     cursor: pointer;
     font-weight: normal !important;
+    overflow: hidden;
 }
 
-.post-image {
-    max-height: 150px;
+.post-tile-multi .post-tile-primary-content {
+    height: 150px;
     width: 200px;
     position: relative;
+    background: green;
+    background-position: center center;
 }
 
-.post-image > img {
+.post-tile-multi .post-tile-secondary-content-content {
+    text-align: center;
+    font-size: 0.8em;
+    display: block;
+    position: absolute;
+    background: blue;
+}
+
+/*.post-tile-multi > img {
     max-height: 150px;
     max-width: 200px;
     display: block;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    margin: auto;
-}
-
-/*.post-caption-container {
-    height: 200px;
-    width: 200px;
-    position: relative;
-}
-
-.post-caption-full {
-    max-height: 200px;
-    max-width: 200px;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -220,11 +214,12 @@ textarea {
     margin: auto;
 }*/
 
-.post-caption {
-    text-align: center;
-    overflow: hidden;
-    font-size: 0.8em;
-    display: block;
+.post-tile-image {
+    
+}
+
+.post-tile-text {
+    
 }
 
 .wrappable-link {

@@ -573,15 +573,15 @@ var SwdView = {
                     url = null;
                 }
                 
-                if (message || url) {
-                    postTile = $('<div id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-image"></div><div class="post-caption"><div><p>' + message + '</p></div></div></div>').hide();
-                    
-                    if (url) {
-                        $(postTile).children('.post-image').append('<img src="' + url + '">');
-                    }
-                    
-                    $(postTile).appendTo('#group-feed');
-                }
+//                if (message || url) {
+//                    postTile = $('<div id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-image"></div><div class="post-caption"><span>' + message + '</span></div></div>').hide();
+//                    
+//                    if (url) {
+//                        $(postTile).children('.post-image').append('<img src="' + url + '">');
+//                    }
+//                    
+//                    $(postTile).appendTo('#group-feed');
+//                }
 
 //                if (!(noImage && noMessage)) {
 //                    postTile = $('<div id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default ui-corner-all"><div class="post-caption"><div><p>' + message + '</p></div></div></div>').hide();
