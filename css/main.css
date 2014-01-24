@@ -266,30 +266,15 @@ textarea {
 
 #post-no-image {
     height: 300px;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    position: absolute;
-    margin: auto;
+    
 }
-
-/*#panel-no-image-container > img {
-    height: 100px;
-    width: 100px;
-    left: 0;
-    right: 0;
-    margin-bottom: 1em;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-}*/
 
 #post-no-image > div {
     background-position: center center;
-    background-size: 100%;
+    background-size: 50%;
     background-repeat: no-repeat;
     background-image: url("/img/no-image.jpg");
+    height: 200px;
 }
 
 #post-permalink {
