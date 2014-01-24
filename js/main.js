@@ -551,7 +551,7 @@ var SwdView = {
 
         if (empty === true) {
             // Clear anything that is currently being displayed.
-            $('#group-feed').empty();
+            //$('#group-feed').empty();
         }
 
         // If there is a feed to display, then display it.
