@@ -483,7 +483,7 @@ var SwdView = {
             e.stopPropagation();
         });
 
-        $('#post-message-user').button();
+        //$('#post-message-user').button();
 
         // Init menus.
         $('#popup-menu-main').menu();
