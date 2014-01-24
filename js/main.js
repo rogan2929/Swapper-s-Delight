@@ -541,8 +541,6 @@ var SwdView = {
         var postTile;
         var primaryContent;
         var secondaryContent;
-        var hasMessage;
-        var hasImage;
 
         if (empty === true) {
             // Clear anything that is currently being displayed.
@@ -564,7 +562,7 @@ var SwdView = {
                 }
 
                 if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
-                    url = post.attachment.media[0].src;
+                    url = post.attachment.media[0].src.replace('_s.jpg', '_n.jpg');
                 }
                 else {
                     url = null;
