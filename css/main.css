@@ -183,7 +183,6 @@ textarea {
     display: inline-block;
     cursor: pointer;
     font-weight: normal !important;
-    border: 1px solid transparent;
 }
 
 .post-image {
