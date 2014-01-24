@@ -576,19 +576,19 @@ var SwdView = {
 
                 if (message && url) {
                     $(postTile).addClass('post-tile-multi');
-                    $(primaryContent).css('background-image', 'url("' + url + '")');
+                    $(primaryContent).css('background-image', 'url(' + url + ')');
                     $(secondaryContent).text(message);
                 }
                 else if (message && !url)
                 {
                     $(postTile).addClass('post-tile-multi');
-                    $(primaryContent).css('background-image', 'url("/img/no-image.jpg")');
+                    $(primaryContent).css('background-image', 'url(/img/no-image.jpg)');
                     $(secondaryContent).text(message);
                 }
                 else if (!message && url)
                 {
                     $(postTile).addClass('post-tile-image');
-                    $(primaryContent).css('background-image', 'url("' + url + '")');
+                    $(primaryContent).css('background-image', 'url(' + url + ')');
                 }
                 else {
                     isEmpty = true;
@@ -665,7 +665,7 @@ var SwdView = {
         if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
             // Hide the no-image container and display the post's attached image.
             $('#post-no-image').hide();
-            $('#post-image').css('background-image', 'url("' + post.attachment.media[0].src.replace('_s.jpg', '_n.jpg') + '")');
+            $('#post-image').css('background-image', 'url(' + post.attachment.media[0].src.replace('_s.jpg', '_n.jpg') + ')');
         }
         else {
             // Show the no-image notification.
@@ -681,7 +681,7 @@ var SwdView = {
             userImage = '';
         }
 
-        $('#post-message-pic').css('background-image', 'url("' + userImage + '")');
+        $('#post-message-pic').css('background-image', 'url(' + userImage + ')');
         $('#post-message-name').text(user.first_name + ' ' + user.last_name);
         $('#post-message-user').data('src', user.profile_url);
         $('#post-message-text').text(post.message);
