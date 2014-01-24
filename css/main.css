@@ -196,7 +196,7 @@ textarea {
     margin-bottom: 5px;
 }
 
-.post-tile-multi .post-tile-secondary-content-content {
+.post-tile-multi .post-tile-secondary-content {
     font-size: 0.8em;
 }
 
@@ -208,7 +208,7 @@ textarea {
     background-position: center center;
 }
 
-.post-tile-image .post-tile-secondary-content-content{
+.post-tile-image .post-tile-secondary-content{
     display: none;
 }
 
@@ -220,7 +220,7 @@ textarea {
     font-size: 0.8em;
 }
 
-.post-tile-text .post-tile-secondary-content-content{
+.post-tile-text .post-tile-secondary-content{
     display: none;
 }
 
