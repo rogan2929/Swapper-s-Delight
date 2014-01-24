@@ -156,7 +156,7 @@ var SwdPresenter = {
             var groups = [];
             var completed;
             var group;
-            
+
             SwdPresenter.currentUid = response.id;
 
             SwdModel.getMarkedGroups(response.id, function(response) {
@@ -227,7 +227,7 @@ var SwdPresenter = {
             case PostType.group:
                 break;
             case PostType.myposts:
-                options = { id: SwdPresenter.currentUid }
+                options = {id: SwdPresenter.currentUid}
                 break;
             case PostType.pinned:
                 break;
@@ -335,7 +335,7 @@ var SwdPresenter = {
     },
     onClickNavButton: function(e, args) {
         var id = $(e.currentTarget).attr('id');
-        
+
         switch (id) {
             case 'button-nav-group':
                 SwdPresenter.postType = PostType.group;
@@ -350,7 +350,7 @@ var SwdPresenter = {
                 SwdPresenter.postType = PostType.search;
                 break;
         }
-        
+
         SwdPresenter.loadGroupPosts();
         SwdView.setSelectedPostType(id);
     },
@@ -430,7 +430,7 @@ var SwdView = {
 
         // Set up buttons
         $('.button-nav').button();
-        
+
         $('#button-menu-main').button({
             icons: {
                 primary: 'ui-icon-gear'
@@ -559,7 +559,7 @@ var SwdView = {
         if (posts) {
             for (i = 0; i < posts.length; i++) {
                 isEmpty = false;
-                
+
                 post = posts[i];
 
                 if (post.message) {
@@ -575,11 +575,11 @@ var SwdView = {
                 else {
                     url = null;
                 }
-                
-                postTile = $('<div class="post-tile ui-widget ui-widget-content ui-state-default"><div class="post-tile-primary-content"></div><div class="post-tile-secondary-content"></div></div>')
+
+                postTile = $('<div id="' + post.post_id + '" class="post-tile ui-widget ui-widget-content ui-state-default"><div class="post-tile-primary-content"></div><div class="post-tile-secondary-content"></div></div>')
                 primaryContent = $(postTile).children('.post-tile-primary-content');
                 secondaryContent = $(postTile).children('.post-tile-secondary-content');
-                
+
                 if (message && url) {
                     $(postTile).addClass('post-tile-multi');
                     $(primaryContent).css('background-image', 'url("' + url + '")');
@@ -599,8 +599,10 @@ var SwdView = {
                 else {
                     isEmpty = true;
                 }
-                
-                $(postTile).hide().appendTo('#group-feed');
+
+                if (!isEmpty) {
+                    $(postTile).hide().appendTo('#group-feed');
+                }
             }
 
             // Sleekly fade in the post tile elements.
