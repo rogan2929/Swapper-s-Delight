@@ -228,6 +228,9 @@ var SwdPresenter = {
     loadGroupPosts: function(loadNextPage) {
         var options = {};
         var posts;
+        var imageQuery;
+        var i;
+        var j;
 
         // TODO: configure options based on what tab the user is on.
         switch (SwdPresenter.postType) {
@@ -257,8 +260,17 @@ var SwdPresenter = {
                 //SwdPresenter.oldestPost = response.data[response.data.length - 1];
                 
                 posts = response.data[0].fql_result_set;
+                imageQuery = response.data[1].fql_result_set;
                 
                 SwdPresenter.oldestPost = posts[posts.length - 1];
+                
+                for (i = 0; i < posts.length; i++) {
+                    posts['image_url'] = null;
+                    
+                    for (j = 0; j < imageQuery.length; j++) {
+                        
+                    }
+                }
                 
                 SwdView.displayGroupPosts(posts);
             }
@@ -532,8 +544,7 @@ var SwdView = {
                     message = null;
                 }
 
-                if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
-                    //url = post.attachment.media[0].src.replace('_s.jpg', '_n.jpg');
+                if (post.image_url) {
                     url = post.image_url;
                 }
                 else {
