@@ -239,8 +239,10 @@ textarea {
 }
 
 #post-image-container {
-/*    max-height: 360px;*/
+    /*    max-height: 360px;*/
     padding: 10px;
+    width: 300px;
+    height: 300px;
 }
 
 #post-image-container > * {
@@ -302,7 +304,7 @@ textarea {
 
 #post-permalink {
     margin-top: 1em;
-/*    font-size: 0.9em;*/
+    /*    font-size: 0.9em;*/
 }
 
 /*#post-no-image-container > span {
