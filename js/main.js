@@ -48,6 +48,7 @@ var SwdModel = {
     getGroupPosts: function(gid, options, callback) {
         var streamQuery;
         var query;
+        var limit = 30;
 
         // Base query
         streamQuery = 'SELECT post_id,created_time,message,attachment,comment_info FROM stream WHERE source_id=' + gid;
@@ -60,6 +61,7 @@ var SwdModel = {
         // Constrain by whether or not the user likes the post.
         if (options.getLiked) {
             streamQuery += ' AND like_info.user_likes=1';
+            limit = 5000;
         }
 
         // For FQL pagination (query by posts with created_time less than created_time of last query's oldest post.)
@@ -68,7 +70,7 @@ var SwdModel = {
         }
 
         // Fetch 30 results, and sorted by creation time.
-        streamQuery += ' ORDER BY created_time DESC LIMIT 30';
+        streamQuery += ' ORDER BY created_time DESC LIMIT ' + limit;
 
         query = {'streamQuery': streamQuery, 'imageQuery': 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'};
 
