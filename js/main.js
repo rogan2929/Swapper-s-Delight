@@ -19,31 +19,31 @@ var SwdModel = {
      * @param {type} api Facebook API to call.
      * @param {type} callback Callback function.
      */
-    facebookApi: function(api, callback) {
-        //FB.api('/' + api, callback);
-        $.ajax({
-            type: 'GET',
-            url: 'php/actions.php?api=' + api,
-            complete: callback
-        });
-    },
+//    facebookApi: function(api, callback) {
+//        //FB.api('/' + api, callback);
+//        $.ajax({
+//            type: 'GET',
+//            url: 'php/actions.php?api=' + api,
+//            complete: callback
+//        });
+//    },
     /***
      * Craft a FQL query to be consumed by FB.
      * @param {type} query
      * @param {type} callback
      */
-    facebookFQLQuery: function(query, callback) {
-        query = 'fql?q=' + encodeURIComponent(query);
-        SwdModel.facebookApi(query, callback);
-    },
+//    facebookFQLQuery: function(query, callback) {
+//        query = 'fql?q=' + encodeURIComponent(query);
+//        SwdModel.facebookApi(query, callback);
+//    },
     /***
      * Query FB group info.
      * @param {type} gid
      * @param {type} callback
      */
-    getGroupInfo: function(gid, callback) {
-        SwdModel.facebookFQLQuery('SELECT gid,name,icon FROM group WHERE gid=' + gid, callback);
-    },
+//    getGroupInfo: function(gid, callback) {
+//        //SwdModel.facebookFQLQuery('SELECT gid,name,icon FROM group WHERE gid=' + gid, callback);
+//    },
     /***
      * Get posts in the group that are liked.
      * @param {type} uid
@@ -51,68 +51,70 @@ var SwdModel = {
      * @param {type} callback
      */
     getLikedPosts: function(uid, gid, callback) {
-
+        // TODO: liked-posts.php
     },
     /***
      * Query database for groups that the user has marked as 'BST' (Buy, Sell, Trade)
-     * @param {type} uid
      * @param {type} callback
      */
-    getMarkedGroups: function(uid, callback) {
+    getMarkedGroups: function(callback) {
+        // TODO: Replace with AJAX call to group-info.php
         // This is just some dummy data. Replace this with an actual ajax call.
-        var response = new Array('120696471425768', '1447216838830981', '575530119133790');
+        //var response = new Array('120696471425768', '1447216838830981', '575530119133790');
 
-        callback.call(SwdModel, response);
+        //callback.call(SwdModel, response);
     },
     /***
      * Get posts that are owned by the current user in the provided group. Go back 42 days.
-     * @param {type} uid
      * @param {type} gid
-     * @param {type} accessToken
      * @param {type} callback
      */
-    getMyPosts: function(uid, gid, accessToken, callback) {
+    getMyPosts: function(gid, callback) {
         $.ajax({
             type: 'GET',
-            url: '/php/my-posts.php?uid=' + uid + '&gid=' + gid + '&accessToken=' + accessToken,
+            url: '/php/my-posts.php?gid=' + gid,
             complete: callback
         });
     },
     /***
      * AJAX call to FB group feed.
      * @param {type} gid Group id whose posts are to be retrieved.
-     * @param {type} options
      * @param {type} callback Completed callback function.
      */
-    getNewestPosts: function(gid, options, callback) {
-        var streamQuery;
-        var query;
-
-        // Base query
-        streamQuery = 'SELECT post_id,created_time,message,attachment,comment_info FROM stream WHERE source_id=' + gid;
-
-        // Constrain by current user.
-        if (options.id) {
-            streamQuery += ' AND actor_id=' + options.id;
-        }
+    getNewestPosts: function(gid, callback) {
+        $.ajax({
+            type: 'GET',
+            url: '/php/new-posts.php?gid=' + gid,
+            complete: callback
+        });
+//        var streamQuery;
+//        var query;
 //
-//        // Constrain by whether or not the user likes the post.
-//        if (options.getLiked) {
-//            streamQuery += ' AND like_info.user_likes=1';
-//            limit = 1000;
+//        // Base query
+//        streamQuery = 'SELECT post_id,created_time,message,attachment,comment_info FROM stream WHERE source_id=' + gid;
+//
+//        // Constrain by current user.
+//        if (options.id) {
+//            streamQuery += ' AND actor_id=' + options.id;
 //        }
-
-        // For FQL pagination (query by posts with created_time less than created_time of last query's oldest post.)
-        if (options.createdTime) {
-            streamQuery += ' AND created_time < ' + options.createdTime;
-        }
-
-        // Fetch 30 results, and sorted by creation time.
-        streamQuery += ' ORDER BY created_time DESC LIMIT 30';
-
-        query = {'streamQuery': streamQuery, 'imageQuery': 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'};
-
-        SwdModel.facebookFQLQuery(JSON.stringify(query), callback);
+////
+////        // Constrain by whether or not the user likes the post.
+////        if (options.getLiked) {
+////            streamQuery += ' AND like_info.user_likes=1';
+////            limit = 1000;
+////        }
+//
+//        // For FQL pagination (query by posts with created_time less than created_time of last query's oldest post.)
+//        if (options.createdTime) {
+//            streamQuery += ' AND created_time < ' + options.createdTime;
+//        }
+//
+//        // Fetch 30 results, and sorted by creation time.
+//        streamQuery += ' ORDER BY created_time DESC LIMIT 30';
+//
+//        query = {'streamQuery': streamQuery, 'imageQuery': 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'};
+//
+//        SwdModel.facebookFQLQuery(JSON.stringify(query), callback);
     },
     /***
      * AJAX call to FB comment feed for given post.
@@ -120,7 +122,7 @@ var SwdModel = {
      * @param {type} callback
      */
     getPostComments: function(id, callback) {
-        SwdModel.facebookFQLQuery('SELECT fromid,text,text_tags,attachment FROM comment WHERE post_id="' + id + '"', callback);
+        //SwdModel.facebookFQLQuery('SELECT fromid,text,text_tags,attachment FROM comment WHERE post_id="' + id + '"', callback);
     },
     /***
      * Get details for the given post.
@@ -128,7 +130,8 @@ var SwdModel = {
      * @param {type} callback
      */
     getPostDetails: function(id, callback) {
-        SwdModel.facebookFQLQuery('SELECT post_id,message,actor_id,permalink,like_info,share_info,comment_info,tagged_ids FROM stream WHERE post_id="' + id + '"', callback);
+        //SwdModel.facebookFQLQuery('SELECT post_id,message,actor_id,permalink,like_info,share_info,comment_info,tagged_ids FROM stream WHERE post_id="' + id + '"', callback);
+        // TODO: post-details.php
     },
     /***
      * Get data for the given user.
@@ -136,7 +139,8 @@ var SwdModel = {
      * @param {type} callback
      */
     getUserData: function(id, callback) {
-        SwdModel.facebookFQLQuery('SELECT last_name,first_name,pic_square,profile_url FROM user WHERE uid=' + id, callback);
+        //SwdModel.facebookFQLQuery('SELECT last_name,first_name,pic_square,profile_url FROM user WHERE uid=' + id, callback);
+        // TODO: user-data.php
     }
 };
 
@@ -144,11 +148,9 @@ var SwdModel = {
  * Presenter for the Swapper's Delight program.
  */
 var SwdPresenter = {
-    currentUid: null,
     oldestPost: null,
     postType: PostType.group,
     selectedGroup: null,
-    accessToken: null,
     /**
      * Entry point of program.
      */
@@ -166,7 +168,6 @@ var SwdPresenter = {
             // Try to get a login session going if there isn't one already.
             FB.getLoginStatus(function(response) {
                 if (response.status === 'connected') {
-                    SwdPresenter.accessToken = response.authResponse.accessToken;
                     SwdPresenter.startApp();
                 } else {
                     FB.login(function(response) {
@@ -183,15 +184,14 @@ var SwdPresenter = {
      */
     startApp: function() {
         // Retrieve group info for logged in user.
-        SwdModel.facebookApi('me', function(response) {
+        //SwdModel.facebookApi('me', function(response) {
+        SwdModel.getMarkedGroups(function(response) {
             var i;
             var groupCount;
             var markedGroupIds;
             var groups = [];
             var completed;
             var group;
-
-            SwdPresenter.currentUid = response.id;
 
             SwdModel.getMarkedGroups(response.id, function(response) {
                 groupCount = response.length;
