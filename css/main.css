@@ -124,6 +124,11 @@ textarea {
     -webkit-overflow-scrolling: touch
 }
 
+.selected-nav {
+    color: #ef0f0d;
+    text-decoration: none;
+}
+
 /*.header.row {
     height: 50px;
     line-height: 50px;
@@ -268,7 +273,7 @@ textarea {
 
 #post-no-image {
     height: 300px;
-    
+
 }
 
 #post-no-image > div {
