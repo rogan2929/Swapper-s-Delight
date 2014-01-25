@@ -127,6 +127,8 @@ textarea {
 .selected-nav {
     color: #ef0f0d !important;
     text-decoration: none !important;
+    border: 1px solid #dddddd !important;
+    background: #ffffff url(images/ui-bg_glass_65_ffffff_1x400.png) 50% 50% repeat-x !important;
 }
 
 /*.header.row {
@@ -209,7 +211,7 @@ textarea {
 
 .post-tile-multi .post-tile-secondary-content {
     height: 45px;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 .post-tile-image .post-tile-primary-content{
