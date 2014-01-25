@@ -551,7 +551,8 @@ var SwdView = {
                 post = posts[i];
 
                 if (post.message) {
-                    message = post.message;
+                    //message = post.message;
+                    message = post.created_time;
                 }
                 else {
                     message = null;
