@@ -50,7 +50,7 @@ var SwdModel = {
         var query;
 
         // Base query
-        streamQuery = 'SELECT post_id,created_time,message,attachment,comment_info FROM stream WHERE source_id=' + gid;
+        streamQuery = '(SELECT post_id,created_time,message,attachment,comment_info FROM stream WHERE source_id=' + gid;
 
         // Constrain by current user.
         if (options.id) {
@@ -68,7 +68,7 @@ var SwdModel = {
         }
 
         // Fetch 30 results, and sorted by creation time.
-        streamQuery += ' ORDER BY created_time DESC LIMIT 30';
+        streamQuery += ' LIMIT 30) ORDER BY created_time DESC';
 
         query = {'streamQuery': streamQuery, 'imageQuery': 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'};
 
