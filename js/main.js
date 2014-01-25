@@ -20,7 +20,12 @@ var SwdModel = {
      * @param {type} callback Callback function.
      */
     facebookApi: function(api, callback) {
-        FB.api('/' + api, callback);
+        //FB.api('/' + api, callback);
+        $.ajax({
+            type: 'GET',
+            url: 'php/actions.php?api=' + api,
+            complete: callback
+        });
     },
     /***
      * Craft a FQL query to be consumed by FB.
