@@ -46,7 +46,7 @@ var SwdModel = {
      * @param {type} callback
      */
     getLikedPosts: function(uid, gid, callback) {
-        
+
     },
     /***
      * Query database for groups that the user has marked as 'BST' (Buy, Sell, Trade)
@@ -58,6 +58,19 @@ var SwdModel = {
         var response = new Array('120696471425768', '1447216838830981', '575530119133790');
 
         callback.call(SwdModel, response);
+    },
+    /***
+     * Get posts that are owned by the current user in the provided group. Go back 42 days.
+     * @param {type} uid
+     * @param {type} gid
+     * @param {type} callback
+     */
+    getMyPosts: function(uid, gid, callback) {
+        $.ajax({
+            type: 'GET',
+            url: '/php/my-posts',
+            complete: callback
+        });
     },
     /***
      * AJAX call to FB group feed.
@@ -73,9 +86,9 @@ var SwdModel = {
         streamQuery = 'SELECT post_id,created_time,message,attachment,comment_info FROM stream WHERE source_id=' + gid;
 
         // Constrain by current user.
-//        if (options.id) {
-//            streamQuery += ' AND actor_id=' + options.id;
-//        }
+        if (options.id) {
+            streamQuery += ' AND actor_id=' + options.id;
+        }
 //
 //        // Constrain by whether or not the user likes the post.
 //        if (options.getLiked) {
@@ -94,15 +107,6 @@ var SwdModel = {
         query = {'streamQuery': streamQuery, 'imageQuery': 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'};
 
         SwdModel.facebookFQLQuery(JSON.stringify(query), callback);
-    },
-    /***
-     * Get posts that are owned by the current user in the provided group.
-     * @param {type} uid
-     * @param {type} gid
-     * @param {type} callback
-     */
-    getOwnedPosts: function(uid, gid, callback) {
-        
     },
     /***
      * AJAX call to FB comment feed for given post.
@@ -242,13 +246,15 @@ var SwdPresenter = {
      * Load posts liked by user.
      */
     loadLikedPosts: function() {
-        
+
     },
     /***
      * Load posts owned by user.
      */
     loadMyPosts: function() {
-        
+        SwdModel.getOwnedPosts(SwdPresenter.currentUid, SwdPresenter.selectedGroup.gid, function(response) {
+            alert(response);
+        });
     },
     /***
      * Load feed for the current group.
