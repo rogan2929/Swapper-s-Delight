@@ -63,12 +63,13 @@ var SwdModel = {
      * Get posts that are owned by the current user in the provided group. Go back 42 days.
      * @param {type} uid
      * @param {type} gid
+     * @param {type} accessToken
      * @param {type} callback
      */
-    getMyPosts: function(uid, gid, callback) {
+    getMyPosts: function(uid, gid, accessToken, callback) {
         $.ajax({
             type: 'GET',
-            url: '/php/my-posts.php',
+            url: '/php/my-posts.php?uid=' + uid + '&gid=' + gid + '&accessToken=' + accessToken,
             complete: callback
         });
     },
@@ -142,6 +143,7 @@ var SwdPresenter = {
     oldestPost: null,
     postType: PostType.group,
     selectedGroup: null,
+    accessToken: null,
     /**
      * Entry point of program.
      */
@@ -159,6 +161,7 @@ var SwdPresenter = {
             // Try to get a login session going if there isn't one already.
             FB.getLoginStatus(function(response) {
                 if (response.status === 'connected') {
+                    SwdPresenter.accessToken = response.authResponse.accessToken;
                     SwdPresenter.startApp();
                 } else {
                     FB.login(function(response) {
@@ -252,8 +255,8 @@ var SwdPresenter = {
      * Load posts owned by user.
      */
     loadMyPosts: function() {
-        SwdModel.getMyPosts(SwdPresenter.currentUid, SwdPresenter.selectedGroup.gid, function(response) {
-            alert(response);
+        SwdModel.getMyPosts(SwdPresenter.currentUid, SwdPresenter.selectedGroup.gid, SwdPresenter.accessToken, function(response) {
+            alert(response.responseText);
         });
     },
     /***
