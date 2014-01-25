@@ -253,6 +253,7 @@ var SwdPresenter = {
             if (!loadNextPage) {
                 // Clear previous results, unless loading a new page.
                 SwdView.clearGroupPosts();
+                SwdPresenter.oldestPost = null;
             }
 
             if (response.data && response.data[0].fql_result_set) {
