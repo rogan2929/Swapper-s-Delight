@@ -68,7 +68,7 @@ var SwdModel = {
         }
 
         // Fetch 30 results, and sorted by creation time.
-        streamQuery += ' LIMIT 30 ORDER BY created_time DESC';
+        streamQuery += ' ORDER BY created_time DESC LIMIT 30';
 
         query = {'streamQuery': streamQuery, 'imageQuery': 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'};
 
