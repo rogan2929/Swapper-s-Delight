@@ -203,6 +203,8 @@ textarea {
 }
 
 .post-tile-multi .post-tile-secondary-content {
+    height: 45px;
+    overflow-y: hidden;
 }
 
 .post-tile-image .post-tile-primary-content{
