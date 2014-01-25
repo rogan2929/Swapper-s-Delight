@@ -47,10 +47,7 @@ var SwdModel = {
      */
     getGroupPosts: function(gid, options, callback) {
         var streamQuery;
-        var imageQuery;
         var query;
-        var posts;
-        var i;
 
         // Base query
         streamQuery = 'SELECT post_id,created_time,message,attachment,comment_info FROM stream WHERE source_id=' + gid;
@@ -241,6 +238,7 @@ var SwdPresenter = {
                 options['id'] = SwdPresenter.currentUid;
                 break;
             case PostType.pinned:
+                options['getLiked'] = 1;
                 break;
             case PostType.search:
                 break;
@@ -395,9 +393,11 @@ var SwdPresenter = {
     },
     onScrollGroupFeed: function(e, args) {
         // Check to see if the user has scrolled all the way to the bottom.
-        if (($(e.currentTarget).scrollTop() + $(e.currentTarget).innerHeight()) >= (e.currentTarget.scrollHeight - 300)) {
+        if (($(e.currentTarget).scrollTop() + $(e.currentTarget).innerHeight()) >= (e.currentTarget.scrollHeight)) {
             SwdPresenter.loadGroupPosts(true);
         }
+        
+        // TODO: Scroll up to refresh.
     },
     onWindowResize: function(e, args) {
         SwdView.positionMenus();
