@@ -125,10 +125,11 @@ textarea {
 }
 
 .selected-nav {
-    color: #ef0f0d !important;
+    color: #ffffff !important;
     text-decoration: none !important;
     border: 1px solid #0073ea !important;
     background: #0073ea url(images/ui-bg_highlight-soft_25_0073ea_1x100.png) 50% 50% repeat-x !important;
+    font-weight: bold !important;
 }
 
 /*.header.row {
