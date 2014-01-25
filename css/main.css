@@ -125,8 +125,8 @@ textarea {
 }
 
 .selected-nav {
-    color: #ef0f0d;
-    text-decoration: none;
+    color: #ef0f0d !important;
+    text-decoration: none !important;
 }
 
 /*.header.row {
