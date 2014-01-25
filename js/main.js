@@ -68,7 +68,7 @@ var SwdModel = {
     getMyPosts: function(uid, gid, callback) {
         $.ajax({
             type: 'GET',
-            url: '/php/my-posts',
+            url: '/php/my-posts.php',
             complete: callback
         });
     },
