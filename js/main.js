@@ -252,7 +252,7 @@ var SwdPresenter = {
      * Load posts owned by user.
      */
     loadMyPosts: function() {
-        SwdModel.getOwnedPosts(SwdPresenter.currentUid, SwdPresenter.selectedGroup.gid, function(response) {
+        SwdModel.getMyPosts(SwdPresenter.currentUid, SwdPresenter.selectedGroup.gid, function(response) {
             alert(response);
         });
     },
