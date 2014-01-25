@@ -33,11 +33,31 @@ var SwdModel = {
     },
     /***
      * Query FB group info.
-     * @param {type} id
+     * @param {type} gid
      * @param {type} callback
      */
-    getGroupInfo: function(id, callback) {
-        SwdModel.facebookFQLQuery('SELECT gid,name,icon FROM group WHERE gid=' + id, callback);
+    getGroupInfo: function(gid, callback) {
+        SwdModel.facebookFQLQuery('SELECT gid,name,icon FROM group WHERE gid=' + gid, callback);
+    },
+    /***
+     * Get posts in the group that are liked.
+     * @param {type} uid
+     * @param {type} gid
+     * @param {type} callback
+     */
+    getLikedPosts: function(uid, gid, callback) {
+        
+    },
+    /***
+     * Query database for groups that the user has marked as 'BST' (Buy, Sell, Trade)
+     * @param {type} uid
+     * @param {type} callback
+     */
+    getMarkedGroups: function(uid, callback) {
+        // This is just some dummy data. Replace this with an actual ajax call.
+        var response = new Array('120696471425768', '1447216838830981', '575530119133790');
+
+        callback.call(SwdModel, response);
     },
     /***
      * AJAX call to FB group feed.
@@ -76,15 +96,13 @@ var SwdModel = {
         SwdModel.facebookFQLQuery(JSON.stringify(query), callback);
     },
     /***
-     * Query database for groups that the user has marked as 'BST' (Buy, Sell, Trade)
-     * @param {type} id
+     * Get posts that are owned by the current user in the provided group.
+     * @param {type} uid
+     * @param {type} gid
      * @param {type} callback
      */
-    getMarkedGroups: function(id, callback) {
-        // This is just some dummy data. Replace this with an actual ajax call.
-        var response = new Array('120696471425768', '1447216838830981', '575530119133790');
-
-        callback.call(SwdModel, response);
+    getOwnedPosts: function(uid, gid, callback) {
+        
     },
     /***
      * AJAX call to FB comment feed for given post.
@@ -233,7 +251,7 @@ var SwdPresenter = {
 
         // TODO: configure options based on what tab the user is on.
         if (SwdPresenter.postType === PostType.search) {
-            
+
         }
 
         if (loadNextPage) {
@@ -260,7 +278,7 @@ var SwdPresenter = {
                     posts[i]['image_url'] = null;
 
                     // For posts with an image, look for associate image data.
-                    if (posts[i].attachment && posts[i].attachment.media 
+                    if (posts[i].attachment && posts[i].attachment.media
                             && posts[i].attachment.media[0] && posts[i].attachment.media[0].photo) {
                         for (j = 0; j < imageQuery.length; j++) {
                             // See if attachment media has a match for object_id.
@@ -370,7 +388,7 @@ var SwdPresenter = {
 
         SwdModel.getPostDetails(id, function(response) {
             post = response.data[0];
-            
+
             // Try to retrieve image URL from object.
             post['image_url'] = $('#' + id).data('image_url');
 
@@ -390,7 +408,7 @@ var SwdPresenter = {
         if (($(e.currentTarget).scrollTop() + $(e.currentTarget).innerHeight()) >= (e.currentTarget.scrollHeight)) {
             SwdPresenter.loadNewestPosts(true);
         }
-        
+
         // TODO: Scroll up to refresh.
     },
     onWindowResize: function(e, args) {
