@@ -395,7 +395,7 @@ var SwdPresenter = {
     },
     onScrollGroupFeed: function(e, args) {
         // Check to see if the user has scrolled all the way to the bottom.
-        if (($(e.currentTarget).scrollTop() + $(e.currentTarget).innerHeight()) >= (e.currentTarget.scrollHeight - 100)) {
+        if (($(e.currentTarget).scrollTop() + $(e.currentTarget).innerHeight()) >= (e.currentTarget.scrollHeight - 300)) {
             SwdPresenter.loadGroupPosts(true);
         }
     },
