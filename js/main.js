@@ -239,6 +239,18 @@ var SwdPresenter = {
         });
     },
     /***
+     * Load posts liked by user.
+     */
+    loadLikedPosts: function() {
+        
+    },
+    /***
+     * Load posts owned by user.
+     */
+    loadMyPosts: function() {
+        
+    },
+    /***
      * Load feed for the current group.
      * @param {type} loadNextPage
      */
@@ -262,7 +274,7 @@ var SwdPresenter = {
         SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, options, function(response) {
             if (!loadNextPage) {
                 // Clear previous results, unless loading a new page.
-                SwdView.clearGroupPosts();
+                SwdView.clearPosts();
                 SwdPresenter.oldestPost = null;
             }
 
@@ -290,7 +302,7 @@ var SwdPresenter = {
                     }
                 }
 
-                SwdView.displayNewestPosts(posts);
+                SwdView.populatePosts(posts);
             }
             else if (!loadNextPage) {
                 SwdPresenter.oldestPost = null;
@@ -351,19 +363,21 @@ var SwdPresenter = {
         switch (id) {
             case 'button-nav-group':
                 SwdPresenter.postType = PostType.group;
+                SwdPresenter.loadNewestPosts(false);
                 break;
             case 'button-nav-myposts':
                 SwdPresenter.postType = PostType.myposts;
+                SwdPresenter.loadMyPosts();
                 break;
             case 'button-nav-liked':
                 SwdPresenter.postType = PostType.pinned;
+                SwdPresenter.loadLikedPosts();
                 break;
             case 'button-nav-search':
                 SwdPresenter.postType = PostType.search;
                 break;
         }
 
-        SwdPresenter.loadNewestPosts(false);
         SwdView.setSelectedPostType(id);
     },
     onClickPanelMessageUser: function(e, args) {
@@ -522,7 +536,7 @@ var SwdView = {
             SwdView.handlers[name].call(SwdPresenter, e, args);
         });
     },
-    clearGroupPosts: function() {
+    clearPosts: function() {
         $('#group-feed').empty();
     },
     /***
@@ -530,14 +544,6 @@ var SwdView = {
      */
     closeAllUiMenus: function() {
         $('.ui-menu').hide();
-    },
-    /***
-     * Displays the returned feed in the main window.
-     * @param {type} posts
-     */
-    displayNewestPosts: function(posts) {
-        // Populate the DOM.
-        SwdView.populatePosts(posts);
     },
     /***
      * Write posts to the page.
