@@ -46,11 +46,10 @@ var SwdModel = {
 //    },
     /***
      * Get posts in the group that are liked.
-     * @param {type} uid
      * @param {type} gid
      * @param {type} callback
      */
-    getLikedPosts: function(uid, gid, callback) {
+    getLikedPosts: function(gid, callback) {
         // TODO: liked-posts.php
     },
     /***
@@ -118,27 +117,27 @@ var SwdModel = {
     },
     /***
      * AJAX call to FB comment feed for given post.
-     * @param {type} id
+     * @param {type} postId
      * @param {type} callback
      */
-    getPostComments: function(id, callback) {
+    getPostComments: function(postId, callback) {
         //SwdModel.facebookFQLQuery('SELECT fromid,text,text_tags,attachment FROM comment WHERE post_id="' + id + '"', callback);
     },
     /***
      * Get details for the given post.
-     * @param {type} id
+     * @param {type} postId
      * @param {type} callback
      */
-    getPostDetails: function(id, callback) {
+    getPostDetails: function(postId, callback) {
         //SwdModel.facebookFQLQuery('SELECT post_id,message,actor_id,permalink,like_info,share_info,comment_info,tagged_ids FROM stream WHERE post_id="' + id + '"', callback);
         // TODO: post-details.php
     },
     /***
      * Get data for the given user.
-     * @param {type} id
+     * @param {type} uid
      * @param {type} callback
      */
-    getUserData: function(id, callback) {
+    getUserData: function(uid, callback) {
         //SwdModel.facebookFQLQuery('SELECT last_name,first_name,pic_square,profile_url FROM user WHERE uid=' + id, callback);
         // TODO: user-data.php
     }
