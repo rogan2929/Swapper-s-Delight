@@ -61,7 +61,7 @@ var SwdModel = {
         // Constrain by whether or not the user likes the post.
         if (options.getLiked) {
             streamQuery += ' AND like_info.user_likes=1';
-            limit = 5000;
+            limit = 1000;
         }
 
         // For FQL pagination (query by posts with created_time less than created_time of last query's oldest post.)
