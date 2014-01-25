@@ -45,24 +45,23 @@ var SwdModel = {
      * @param {type} options
      * @param {type} callback Completed callback function.
      */
-    getGroupPosts: function(gid, options, callback) {
+    getNewestPosts: function(gid, options, callback) {
         var streamQuery;
         var query;
-        var limit = 30;
 
         // Base query
         streamQuery = 'SELECT post_id,created_time,message,attachment,comment_info FROM stream WHERE source_id=' + gid;
 
         // Constrain by current user.
-        if (options.id) {
-            streamQuery += ' AND actor_id=' + options.id;
-        }
-
-        // Constrain by whether or not the user likes the post.
-        if (options.getLiked) {
-            streamQuery += ' AND like_info.user_likes=1';
-            limit = 1000;
-        }
+//        if (options.id) {
+//            streamQuery += ' AND actor_id=' + options.id;
+//        }
+//
+//        // Constrain by whether or not the user likes the post.
+//        if (options.getLiked) {
+//            streamQuery += ' AND like_info.user_likes=1';
+//            limit = 1000;
+//        }
 
         // For FQL pagination (query by posts with created_time less than created_time of last query's oldest post.)
         if (options.createdTime) {
@@ -70,7 +69,7 @@ var SwdModel = {
         }
 
         // Fetch 30 results, and sorted by creation time.
-        streamQuery += ' ORDER BY created_time DESC LIMIT ' + limit;
+        streamQuery += ' ORDER BY created_time DESC LIMIT 30';
 
         query = {'streamQuery': streamQuery, 'imageQuery': 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'};
 
@@ -225,7 +224,7 @@ var SwdPresenter = {
      * Load feed for the current group.
      * @param {type} loadNextPage
      */
-    loadGroupPosts: function(loadNextPage) {
+    loadNewestPosts: function(loadNextPage) {
         var options = {};
         var posts;
         var imageQuery;
@@ -233,17 +232,8 @@ var SwdPresenter = {
         var j;
 
         // TODO: configure options based on what tab the user is on.
-        switch (SwdPresenter.postType) {
-            case PostType.group:
-                break;
-            case PostType.myposts:
-                options['id'] = SwdPresenter.currentUid;
-                break;
-            case PostType.pinned:
-                options['getLiked'] = 1;
-                break;
-            case PostType.search:
-                break;
+        if (SwdPresenter.postType === PostType.search) {
+            
         }
 
         if (loadNextPage) {
@@ -251,7 +241,7 @@ var SwdPresenter = {
         }
 
         // Get posts and then display them.
-        SwdModel.getGroupPosts(SwdPresenter.selectedGroup.gid, options, function(response) {
+        SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, options, function(response) {
             if (!loadNextPage) {
                 // Clear previous results, unless loading a new page.
                 SwdView.clearGroupPosts();
@@ -282,7 +272,7 @@ var SwdPresenter = {
                     }
                 }
 
-                SwdView.displayGroupPosts(posts);
+                SwdView.displayNewestPosts(posts);
             }
             else if (!loadNextPage) {
                 SwdPresenter.oldestPost = null;
@@ -307,7 +297,7 @@ var SwdPresenter = {
      */
     setSelectedGroup: function(group) {
         SwdPresenter.selectedGroup = group;
-        SwdPresenter.loadGroupPosts(false);
+        SwdPresenter.loadNewestPosts(false);
         SwdView.setGroupButtonText(group.name);
     },
     // Event Handlers (onX(e, args))
@@ -355,7 +345,7 @@ var SwdPresenter = {
                 break;
         }
 
-        SwdPresenter.loadGroupPosts(false);
+        SwdPresenter.loadNewestPosts(false);
         SwdView.setSelectedPostType(id);
     },
     onClickPanelMessageUser: function(e, args) {
@@ -398,7 +388,7 @@ var SwdPresenter = {
     onScrollGroupFeed: function(e, args) {
         // Check to see if the user has scrolled all the way to the bottom.
         if (($(e.currentTarget).scrollTop() + $(e.currentTarget).innerHeight()) >= (e.currentTarget.scrollHeight)) {
-            SwdPresenter.loadGroupPosts(true);
+            SwdPresenter.loadNewestPosts(true);
         }
         
         // TODO: Scroll up to refresh.
@@ -527,7 +517,7 @@ var SwdView = {
      * Displays the returned feed in the main window.
      * @param {type} posts
      */
-    displayGroupPosts: function(posts) {
+    displayNewestPosts: function(posts) {
         // Populate the DOM.
         SwdView.populatePosts(posts);
     },
