@@ -186,7 +186,7 @@ var SwdPresenter = {
         // Retrieve group info for logged in user.
         //SwdModel.facebookApi('me', function(response) {
         SwdModel.getGroupInfo(function(response) {
-            var groups = response;
+            var groups = JSON.parse(response.responseText);
 
             if (groups) {
                 SwdPresenter.setSelectedGroup(groups[0]);
