@@ -179,16 +179,11 @@ var SwdPresenter = {
             // Try to get a login session going if there isn't one already.
             FB.getLoginStatus(function(response) {
                 if (response.status === 'connected') {
-                    SwdModel.login(function(response) {
-                        alert(response.responseText);
-                        SwdPresenter.startApp();
-                    });
+                    SwdPresenter.startApp();
                 } else {
                     FB.login(function(response) {
                         if (response.status === 'connected') {
-                            SwdModel.login(function() {
-                                SwdPresenter.startApp();
-                            });
+                            SwdPresenter.startApp();
                         }
                     }, {scope: 'user_groups,user_likes'});
                 }

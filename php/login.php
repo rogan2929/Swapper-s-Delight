@@ -1,8 +1,8 @@
 <?php
 
 // Read the cookie created by the JS API
-$cookie = preg_replace("/^\"|\"$/i", "", $_COOKIE['fbs_' . FB_APP_ID]);
-parse_str($cookie, $data);
+//$cookie = preg_replace("/^\"|\"$/i", "", $_COOKIE['fbs_' . FB_APP_ID]);
+//parse_str($cookie, $data);
 
 //var AppId = '1401018793479333'; // Prod
 $appId = '652991661414427'; // Test
@@ -16,7 +16,7 @@ $fb = new Facebook(array(
 ));
 
 // Say we are using the token from the JS
-$fb->setAccessToken($data['access_token']);
+//$fb->setAccessToken($data['access_token']);
 
 // It should work now
 var_dump($fb->getUser());
