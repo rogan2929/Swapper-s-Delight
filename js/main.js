@@ -202,6 +202,8 @@ var SwdPresenter = {
         //SwdModel.facebookApi('me', function(response) {
         SwdModel.getGroupInfo(function(response) {
             var groups = JSON.parse(response.responseText);
+            
+            alert(groups[0].name);
 
             if (groups) {
                 SwdPresenter.setSelectedGroup(groups[0]);
