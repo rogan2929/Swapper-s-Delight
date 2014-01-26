@@ -145,7 +145,7 @@ var SwdModel = {
      * Establish a Facebook session on the server.
      * @param {type} callback
      */
-    login: function(callback) {
+    startSession: function(callback) {
         $.ajax({
             type: 'GET',
             url: '/php/login.php',
@@ -179,11 +179,15 @@ var SwdPresenter = {
             // Try to get a login session going if there isn't one already.
             FB.getLoginStatus(function(response) {
                 if (response.status === 'connected') {
-                    SwdPresenter.startApp();
+                    SwdModel.startSession(function() {
+                        SwdPresenter.startApp();
+                    });
                 } else {
                     FB.login(function(response) {
                         if (response.status === 'connected') {
-                            SwdPresenter.startApp();
+                            SwdModel.startSession(function() {
+                                SwdPresenter.startApp();
+                            });
                         }
                     }, {scope: 'user_groups,user_likes'});
                 }
