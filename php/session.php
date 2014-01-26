@@ -8,7 +8,7 @@ $appId = '652991661414427'; // Test
 $appSecret = 'b8447ce73d2dcfccde6e30931cfb0a90';
 
 // Startup the Facebook object
-$fb = new Facebook(array(
+$fbSession = new Facebook(array(
     'appId'  => $appId,
     'secret' => $appSecret
 ));

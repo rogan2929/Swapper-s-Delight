@@ -1,5 +1,7 @@
 <?php
 
-echo $_GET["api"];
+require_once 'session.php';
+
+var_dump($fbSession);
 
 ?>
