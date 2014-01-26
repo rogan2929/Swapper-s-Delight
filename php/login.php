@@ -19,6 +19,6 @@ $fb = new Facebook(array(
 //$fb->setAccessToken($data['access_token']);
 
 // It should work now
-var_dump($fb->getUser());
+var_dump($fb);
 
 ?>
