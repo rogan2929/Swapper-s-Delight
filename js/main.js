@@ -56,12 +56,12 @@ var SwdModel = {
      * Query database for groups that the user has marked as 'BST' (Buy, Sell, Trade)
      * @param {type} callback
      */
-    getMarkedGroups: function(callback) {
-        // TODO: Replace with AJAX call to group-info.php
-        // This is just some dummy data. Replace this with an actual ajax call.
-        //var response = new Array('120696471425768', '1447216838830981', '575530119133790');
-
-        //callback.call(SwdModel, response);
+    getGroupInfo: function(callback) {
+        $.ajax({
+            type: 'GET',
+            url: '/php/group-info.php',
+            complete: callback
+        });
     },
     /***
      * Get posts that are owned by the current user in the provided group. Go back 42 days.
@@ -185,7 +185,7 @@ var SwdPresenter = {
     startApp: function() {
         // Retrieve group info for logged in user.
         //SwdModel.facebookApi('me', function(response) {
-        SwdModel.getMarkedGroups(function(response) {
+        SwdModel.getGroupInfo(function(response) {
             var groups = response;
 
             if (groups) {

@@ -1,8 +1,7 @@
-<?php
+<?php 
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// TODO: Replace with AJAX call to group-info.php
+// This is just some dummy data. Replace this with an actual ajax call.
+//var response = new Array('120696471425768', '1447216838830981', '575530119133790');
 
+?>
