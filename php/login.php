@@ -1,5 +1,7 @@
 <?php
 
+require_once("facebook.php");
+
 // Read the cookie created by the JS API
 //$cookie = preg_replace("/^\"|\"$/i", "", $_COOKIE['fbs_' . FB_APP_ID]);
 //parse_str($cookie, $data);
@@ -19,6 +21,6 @@ $fb = new Facebook(array(
 //$fb->setAccessToken($data['access_token']);
 
 // It should work now
-var_dump($fb);
+var_dump($fb->getUser());
 
 ?>
