@@ -148,7 +148,7 @@ var SwdModel = {
     startSession: function(callback) {
         $.ajax({
             type: 'GET',
-            url: '/php/login.php',
+            url: '/php/session.php',
             complete: callback
         });
     }
