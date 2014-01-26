@@ -140,6 +140,17 @@ var SwdModel = {
     getUserData: function(uid, callback) {
         //SwdModel.facebookFQLQuery('SELECT last_name,first_name,pic_square,profile_url FROM user WHERE uid=' + id, callback);
         // TODO: user-data.php
+    },
+    /***
+     * Establish a Facebook session on the server.
+     * @param {type} callback
+     */
+    login: function(callback) {
+        $.ajax({
+            type: 'GET',
+            url: '/php/login.php',
+            complete: callback
+        });
     }
 };
 
@@ -168,11 +179,16 @@ var SwdPresenter = {
             // Try to get a login session going if there isn't one already.
             FB.getLoginStatus(function(response) {
                 if (response.status === 'connected') {
-                    SwdPresenter.startApp();
+                    SwdModel.login(function(response) {
+                        alert(response.responseText);
+                        SwdPresenter.startApp();
+                    });
                 } else {
                     FB.login(function(response) {
                         if (response.status === 'connected') {
-                            SwdPresenter.startApp();
+                            SwdModel.login(function() {
+                                SwdPresenter.startApp();
+                            });
                         }
                     }, {scope: 'user_groups,user_likes'});
                 }
