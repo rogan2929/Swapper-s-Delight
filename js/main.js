@@ -159,7 +159,8 @@ var SwdPresenter = {
         // Fetch the FB JS API
         $.getScript('//connect.facebook.net/en_US/all.js', function() {
             FB.init({
-                appId: AppId
+                appId: AppId,
+                cookie: true
             });
 
             $('#loginbutton,#feedbutton').removeAttr('disabled');
@@ -185,68 +186,37 @@ var SwdPresenter = {
         // Retrieve group info for logged in user.
         //SwdModel.facebookApi('me', function(response) {
         SwdModel.getMarkedGroups(function(response) {
-            var i;
-            var groupCount;
-            var markedGroupIds;
-            var groups = [];
-            var completed;
-            var group;
+            var groups = response;
 
-            SwdModel.getMarkedGroups(response.id, function(response) {
-                groupCount = response.length;
-                markedGroupIds = response;
-                completed = 0;
+            if (groups) {
+                SwdPresenter.setSelectedGroup(groups[0]);
+                SwdView.addGroupsToMenu(groups);
 
-                if (response.length > 0) {
-                    // Have the view write create groups vertical tab.
-                    for (i = 0; i < response.length; i++) {
-                        SwdModel.getGroupInfo(response[i], function(response) {
-                            group = response.data[0];
+                $('#popup-menu-groups').menu().position({
+                    of: $('#button-menu-groups'),
+                    my: 'left top',
+                    at: 'left bottom'
+                });
 
-                            // Add group to groups array.
-                            groups[group.gid] = group;
+                // Install Event Handlers
+                SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
+                SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
+                SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
+                SwdView.installHandler('onClickMenuItemGroup', SwdPresenter.onClickMenuItemGroup, '.menu-item-group', 'click');
+                SwdView.installHandler('onClickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item-main', 'click');
+                SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.button-nav', 'click');
+                SwdView.installHandler('onClickPostButton', SwdPresenter.onClickPostButton, '.post-button', 'click');
+                SwdView.installHandler('onClickPanelMessageUser', SwdPresenter.onClickPanelMessageUser, '#post-message-user', 'click');
+                SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
+                SwdView.installHandler('onScrollGroupFeed', SwdPresenter.onScrollGroupFeed, '#group-feed', 'scroll');
+                SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
 
-                            SwdView.addGroupToMenu(group);
+                SwdView.positionMenus();
+            }
 
-                            // Keep track of how many groups have been downloaded.
-                            completed++;
-
-                            // On last api call, convert create the menu.
-                            if (completed === groupCount) {
-                                $('#popup-menu-groups').menu().position({
-                                    of: $('#button-menu-groups'),
-                                    my: 'left top',
-                                    at: 'left bottom'
-                                });
-
-                                // Select first group and load posts.
-                                SwdPresenter.setSelectedGroup(groups[markedGroupIds[0]]);
-
-                                // Install Event Handlers
-                                SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
-                                SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
-                                SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
-                                SwdView.installHandler('onClickMenuItemGroup', SwdPresenter.onClickMenuItemGroup, '.menu-item-group', 'click');
-                                SwdView.installHandler('onClickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item-main', 'click');
-                                SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.button-nav', 'click');
-                                SwdView.installHandler('onClickPostButton', SwdPresenter.onClickPostButton, '.post-button', 'click');
-                                SwdView.installHandler('onClickPanelMessageUser', SwdPresenter.onClickPanelMessageUser, '#post-message-user', 'click');
-                                SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
-                                SwdView.installHandler('onScrollGroupFeed', SwdPresenter.onScrollGroupFeed, '#group-feed', 'scroll');
-                                SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
-
-                                // Position our menus.
-                                SwdView.positionMenus();
-
-                                // TODO: Set auto refresh with setInterval
-                            }
-                        });
-                    }
-                }
-                else {
-                    // Have the view prompt the user to edit BST groups.
-                }
-            });
+            else {
+                // Have the view prompt the user to edit BST groups.
+            }
         });
     },
     /***
@@ -450,10 +420,14 @@ var SwdView = {
     handlers: {},
     /***
      * Add group to Group Select Menu.
-     * @param {type} group
+     * @param {type} groups
      */
-    addGroupToMenu: function(group) {
-        $('#popup-menu-groups').append('<li id="' + group.gid + '" class="menu-item-group"><a href="#"><span class="ui-icon" style="background-image: url(' + group.icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + group.name + '</div></a></li>');
+    addGroupsToMenu: function(groups) {
+        var i = 0;
+
+        for (i = 0; i < group.length; i++) {
+            $('#popup-menu-groups').append('<li id="' + groups[i].gid + '" class="menu-item-group"><a href="#"><span class="ui-icon" style="background-image: url(' + groups[i].icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + groups[i].name + '</div></a></li>');
+        }
     },
     /**
      * Init function for SwdView.
