@@ -9,28 +9,21 @@ $queries = array();
 
 // Construct a multi-query
 foreach ($selectedGroups as $gid) {
-    $queries[$gid] = ('SELECT gid,name,icon FROM group WHERE gid=' . $gid);
+	$queries[$gid] = ('SELECT gid,name,icon FROM group WHERE gid=' . $gid);
 }
 
 // Make an FQL call.
-$response = $fbSession->api(array(
-    'method' => 'fql.multiquery',
-    'queries' => $queries
-        ));
+$response = $fbSession -> api(array('method' => 'fql.multiquery', 'queries' => $queries));
 
-echo json_encode($response);
+$groups = array();
 
-//$response = json_decode($response);
-//
-//$groups = array();
-//
-//for ($i = 0; $i < count($response->data); $i++) {
-//    $data = $response->data[$i];
-//    if ($data->name) {
-//        $group[$i] = $data->fql_result_set;
-//    }
-//}
-//
-//// Pass the data on to the client.
-//echo json_encode($groups);
-//?>
+for ($i = 0; $i < count($response -> data); $i++) {
+	$data = $response -> data[$i];
+	if ($data -> name) {
+		$group[$i] = $data -> fql_result_set;
+	}
+}
+
+// Pass the data on to the client.
+echo json_encode($groups);
+?>
