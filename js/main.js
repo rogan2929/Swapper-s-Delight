@@ -346,9 +346,7 @@ var SwdPresenter = {
 			post['image_url'] = $('#' + id).data('image_url');
 
 			if (post) {
-				SwdModel.getUserData(post.actor_id, function(response) {
-					SwdView.showPostDetails(post, response.data[0]);
-				});
+				SwdView.showPostDetails(post);
 			} else {
 				// TODO: Do a real error message.
 				alert('Unable to display post. It was most likely deleted.');
@@ -607,9 +605,8 @@ var SwdView = {
 	/***
 	 * Shows the post details for the selected post.
 	 * @param {type} post Post to load into right column.
-	 * @param {type} user User data
 	 */
-	showPostDetails : function(post, user) {
+	showPostDetails : function(post) {
 		var userImage;
 		var postImage;
 
@@ -628,14 +625,14 @@ var SwdView = {
 			$('#post-no-image').show();
 		}
 
-		if (user.pic_square) {
-			userImage = 'url("' + user.pic_square + '")';
+		if (post.user.pic_square) {
+			userImage = 'url("' + post.user.pic_square + '")';
 		} else {
 			userImage = '';
 		}
 
 		$('#post-message-pic').css('background-image', userImage);
-		$('#post-message-name').text(user.first_name + ' ' + user.last_name);
+		$('#post-message-name').text(post.user.first_name + ' ' + post.user.last_name);
 		$('#post-message-user').data('src', user.profile_url);
 		$('#post-message-text').text(post.message);
 
