@@ -17,11 +17,8 @@ $response = $fbSession -> api(array('method' => 'fql.multiquery', 'queries' => $
 
 $groups = array();
 
-echo count($response);
-
-for ($i = 0; $i < count($response -> data); $i++) {
-	$data = $response -> data[$i];
-	$groups[$i] = $data -> name;
+for ($i = 0; $i < count($response); $i++) {
+	$groups[$i] = $response[$i] -> fql_result_set;
 }
 
 // Pass the data on to the client.
