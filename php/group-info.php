@@ -21,6 +21,8 @@ for ($i = 0; $i < count($response); $i++) {
 	$groups[$i] = $response[$i];
 }
 
+echo json_encode($queries);
+
 // Pass the data on to the client.
-echo json_encode($groups);
+//echo json_encode($groups);
 ?>
