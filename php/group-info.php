@@ -12,20 +12,23 @@ foreach ($selectedGroups as $gid) {
     $queries[$gid] = ('SELECT gid,name,icon FROM group WHERE gid=' . $gid);
 }
 
-// Depending if $queries has more than one element, call either the FB
-// FQL query API or the FB multiquery API.
-if (count($queries) == 1) {
-    $groups = $fbSession->api(array(
-        'method' => 'fql.query',
-        'query' => $queries
-    ));
-} else {
-    $groups = $fbSession->api(array(
-        'method' => 'fql.multiquery',
-        'queries' => $queries
-    ));
+// Make an FQL call.
+$response = $fbSession->api(array(
+    'method' => 'fql.multiquery',
+    'queries' => $queries
+        ));
+
+$response = json_decode($response);
+
+$groups = array();
+
+for ($i = 0; $i < count($response->data); $i++) {
+    $data = $response->data[$i];
+    if ($data->name) {
+        $group[$i] = $data->fql_result_set;
+    }
 }
 
-//echo json_encode($ret);
+// Pass the data on to the client.
 echo json_encode($groups);
 ?>

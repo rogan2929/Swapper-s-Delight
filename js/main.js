@@ -30,7 +30,12 @@ var SwdModel = {
         $.ajax({
             type: 'GET',
             url: '/php/group-info.php',
-            complete: callback
+            success: function(response) {
+                callback.call(SwdModel, JSON.parse(response.responseText));
+            },
+            fail: function(response) {
+                
+            }
         });
     },
     /***
@@ -42,7 +47,12 @@ var SwdModel = {
         $.ajax({
             type: 'GET',
             url: '/php/my-posts.php?gid=' + gid,
-            complete: callback
+            success: function(response) {
+                callback.call(SwdModel, JSON.parse(response.responseText));
+            },
+            fail: function(response) {
+                
+            }
         });
     },
     /***
@@ -61,7 +71,12 @@ var SwdModel = {
         $.ajax({
             type: 'GET',
             url: url,
-            complete: callback
+            success: function(response) {
+                callback.call(SwdModel, JSON.parse(response.responseText));
+            },
+            fail: function(response) {
+                
+            }
         });
     },
     /***
@@ -150,7 +165,7 @@ var SwdPresenter = {
         // Retrieve group info for logged in user.
         //SwdModel.facebookApi('me', function(response) {
         SwdModel.getGroupInfo(function(response) {
-            var groups = JSON.parse(response.responseText);
+            var groups = response.data;
             
             alert(groups[0].name);
 

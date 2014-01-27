@@ -22,10 +22,10 @@ $queries = array(
     'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'
 );
 
-$posts = $fbSession->api(array(
+$response = $fbSession->api(array(
     'method' => 'fql.multiquery',
     'queries' => $queries
         ));
 
-echo json_encode($posts);
+echo json_encode($response);
 ?>
