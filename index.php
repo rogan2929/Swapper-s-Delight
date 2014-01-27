@@ -26,11 +26,6 @@
 		<![endif]-->
 
 		<!-- Add your site or application content here -->
-		<?php
-			// Establish a Facebook session. If the user is not logged in, then redirect them to the login page.
-			require_once 'php/session.php';
-		?>
-
 		<div id='app-content'>
 			<div id='fb-root'></div>
 
@@ -137,6 +132,11 @@
 		<div id='overlay-app-loading'>
 
 		</div>
+
+		<?php
+		// Establish a Facebook session. If the user is not logged in, then redirect them to the login page.
+		require_once 'php/session.php';
+		?>
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
