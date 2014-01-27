@@ -267,7 +267,7 @@ var SwdPresenter = {
      */
     setSelectedGroup: function(group) {
         SwdPresenter.selectedGroup = group;
-        //SwdPresenter.loadNewestPosts(false);
+        SwdPresenter.loadNewestPosts(false);
         SwdView.setGroupButtonText(group.name);
     },
     // Event Handlers (onX(e, args))
