@@ -42,6 +42,7 @@ for ($i = 0; $i < count($stream); $i++) {
 	$post['image_url'] = null;
 	
 	echo json_encode($post);
+}
 	
 	// For posts with an image, look for associate image data.
 	/*
