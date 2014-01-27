@@ -242,6 +242,7 @@ var SwdPresenter = {
             }
 
             if (response) {
+            	SwdPresenter.oldestPost = response[response.length - 1];
                 SwdView.populatePosts(response);
             }
             else if (!loadNextPage) {
