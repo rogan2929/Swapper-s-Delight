@@ -20,7 +20,7 @@ $groups = array();
 for ($i = 0; $i < count($response -> data); $i++) {
 	$data = $response -> data[$i];
 	if ($data -> name) {
-		$group[$i] = $data -> fql_result_set;
+		$groups[$i] = $data -> fql_result_set;
 	}
 }
 
