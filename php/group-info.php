@@ -11,12 +11,10 @@ foreach ($selectedGroups as $gid) {
     $query[$gid] = ('SELECT gid,name,icon FROM group WHERE gid=' . $gid);
 }
 
-echo json_encode($query);
+$ret = $fbSession->api(array(
+    'method' => 'fql.query',
+    'query' => json_encode($query),
+        ));
 
-//$ret = $fbSession->api(array(
-//    'method' => 'fql.query',
-//    'query' => json_encode($query),
-//        ));
-//
-//echo json_encode($ret);
+echo json_encode($ret);
 ?>
