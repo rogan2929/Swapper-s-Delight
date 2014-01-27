@@ -110,15 +110,6 @@ var SwdModel = {
 
 			}
 		});
-	},
-	/***
-	 * Get data for the given user.
-	 * @param {type} uid
-	 * @param {type} callback
-	 */
-	getUserData : function(uid, callback) {
-		//SwdModel.facebookFQLQuery('SELECT last_name,first_name,pic_square,profile_url FROM user WHERE uid=' + id, callback);
-		// TODO: user-data.php
 	}
 };
 
@@ -633,7 +624,7 @@ var SwdView = {
 
 		$('#post-message-pic').css('background-image', userImage);
 		$('#post-message-name').text(post.user.first_name + ' ' + post.user.last_name);
-		$('#post-message-user').data('src', user.profile_url);
+		$('#post-message-user').data('src', post.user.profile_url);
 		$('#post-message-text').text(post.message);
 
 		$('#right-panel-empty').fadeOut();
