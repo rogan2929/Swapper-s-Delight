@@ -47,32 +47,16 @@ for ($i = 0; $i < count($stream); $i++) {
 			for ($j = 0; $j < count($images); $j++) {
 				if ($post['attachment']['media'][0]['photo']['fbid'] == $images[$j]['object_id']) {
 					//$post['image_url'] = $images[$j][4]['source'];
-					echo json_encode($images[$j]['images'][4]['source']);
-					//echo json_encode($post);
+					$post['image_url'] = $images[$j]['images'][4]['source'];
 					break;
 				}
 			}
 	}
+		
+	// Add to the posts array.
+	$posts[] = $post;
 }
 
-/*
-                   // For posts with an image, look for associate image data.
-                    if (posts[i].attachment && posts[i].attachment.media
-                            && posts[i].attachment.media[0] && posts[i].attachment.media[0].photo) {
-                        for (j = 0; j < imageQuery.length; j++) {
-                            // See if attachment media has a match for object_id.
-                            if (posts[i].attachment.media[0].photo.fbid === imageQuery[j].object_id) {
-                                posts[i]['image_url'] = imageQuery[j].images[4].source;
-                                break;
-                            }
-                        }
-                    }
-                }*/
-
-/*
-for ($i = 0; $i < count($response); $i++) {
-	$posts[$i] = $response[$i]['fql_result_set'][0];
-}
-
-echo json_encode($posts);*/
+// Return the result.
+echo json_encode($posts);
 ?>
