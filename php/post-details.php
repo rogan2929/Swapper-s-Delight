@@ -20,7 +20,7 @@ $response = $fbSession->api(array(
 ));
 
 // Construct a return object.
-$postDetails = $response[0];
+$postDetails = $response[0]['fql_result_set'][0];
 
 // Return the result.
 echo json_encode($postDetails);
