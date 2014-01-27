@@ -7,7 +7,7 @@ $gid = $_GET['gid'];
 $createdTime = $_GET['createdTime'];
 
 if ($gid == null) {
-	$gid = 120696471425768;
+	$gid = '120696471425768';
 }
 
 // Base query
