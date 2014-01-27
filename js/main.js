@@ -104,18 +104,19 @@ var SwdModel = {
     getUserData: function(uid, callback) {
         //SwdModel.facebookFQLQuery('SELECT last_name,first_name,pic_square,profile_url FROM user WHERE uid=' + id, callback);
         // TODO: user-data.php
-    },
+    }
     /***
      * Establish a Facebook session on the server.
      * @param {type} callback
      */
+    /*
     startSession: function(callback) {
         $.ajax({
             type: 'GET',
             url: '/php/session.php',
             complete: callback
         });
-    }
+    }*/
 };
 
 /**
@@ -130,8 +131,10 @@ var SwdPresenter = {
      */
     init: function() {
         SwdView.initView();
+		SwdPresenter.startApp();
 
         // Fetch the FB JS API
+        /*
         $.getScript('//connect.facebook.net/en_US/all.js', function() {
             FB.init({
                 appId: AppId,
@@ -156,14 +159,13 @@ var SwdPresenter = {
                     }, {scope: 'user_groups,user_likes'});
                 }
             });
-        });
+        });*/
     },
     /***
      * Starts the application after init has finished.
      */
     startApp: function() {
         // Retrieve group info for logged in user.
-        //SwdModel.facebookApi('me', function(response) {
         SwdModel.getGroupInfo(function(response) {
             var groups = response.data;
             

@@ -9,8 +9,8 @@ require_once ("facebook.php");
 $appId = '652991661414427';
 $appSecret = 'b8447ce73d2dcfccde6e30931cfb0a90';
 
-$cookie = preg_replace("/^\"|\"$/i", "", $_COOKIE['fbs_' . FB_APP_ID]);
-parse_str($cookie, $data);
+//$cookie = preg_replace("/^\"|\"$/i", "", $_COOKIE['fbs_' . FB_APP_ID]);
+//parse_str($cookie, $data);
 
 // Startup the Facebook object
 $fbSession = new Facebook( array(
@@ -18,6 +18,31 @@ $fbSession = new Facebook( array(
 	'secret' => $appSecret
 ));
 
-$fbSession->setAccessToken($data['access_token']);
+//$fbSession->setAccessToken($data['access_token']);
+if ($fbSession->getUser()) {
 
+	// We have a user ID, so probably a logged in user.
+	// If not, we'll get an exception, which we handle below.
+	try {
+		// Test the connectivity waters...
+		$me = $fbSession->api('/me');
+	} catch(FacebookApiException $e) {
+		// If the user is logged out, you can have a
+		// user ID even though the access token is invalid.
+		// In this case, we'll get an exception, so we'll
+		// just ask the user to login again here.
+		$loginUrl = $fbSession->getLoginUrl(array('scope' => 'user_groups,user_likes'));
+		echo 'Please <a href="' . $loginUrl . '">login.</a>';
+		error_log($e->getType());
+		error_log($e->getMessage());
+	}
+} else {
+
+	// No user, print a link for the user to login
+	// We'll use the current URL as the redirect_uri, so we don't
+	// need to specify it here.
+	$loginUrl = $fbSession->getLoginUrl(array('scope' => 'user_groups,user_likes'));
+	echo 'Please <a href="' . $loginUrl . '">login.</a>';
+
+}
 ?>
