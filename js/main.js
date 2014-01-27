@@ -120,18 +120,6 @@ var SwdModel = {
 		//SwdModel.facebookFQLQuery('SELECT last_name,first_name,pic_square,profile_url FROM user WHERE uid=' + id, callback);
 		// TODO: user-data.php
 	}
-	/***
-	 * Establish a Facebook session on the server.
-	 * @param {type} callback
-	 */
-	/*
-	 startSession: function(callback) {
-	 $.ajax({
-	 type: 'GET',
-	 url: '/php/session.php',
-	 complete: callback
-	 });
-	 }*/
 };
 
 /**
@@ -352,7 +340,7 @@ var SwdPresenter = {
 		e.stopPropagation();
 
 		SwdModel.getPostDetails(id, function(response) {
-			post = response.data[0];
+			post = response;
 
 			// Try to retrieve image URL from object.
 			post['image_url'] = $('#' + id).data('image_url');
