@@ -167,7 +167,7 @@ var SwdPresenter = {
     startApp: function() {
         // Retrieve group info for logged in user.
         SwdModel.getGroupInfo(function(response) {
-            var groups = response.data;
+            var groups = response;
             
             alert(groups[0].name);
 
