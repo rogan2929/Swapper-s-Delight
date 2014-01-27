@@ -11,21 +11,21 @@ $streamQuery = 'SELECT post_id,created_time,message,attachment,comment_info FROM
 
 // For FQL pagination (query by posts with created_time less than created_time of last query's oldest post.)
 if ($createdTime) {
-    $streamQuery .= ' AND created_time < ' . $createdTime;
+	$streamQuery .= ' AND created_time < ' . $createdTime;
 }
 
 // Fetch 30 results, and sorted by creation time.
 $streamQuery .= ' ORDER BY created_time DESC LIMIT 30';
 
 $queries = array(
-    'streamQuery' => $streamQuery,
-    'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'
+	'streamQuery' => $streamQuery,
+	'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'
 );
 
 $response = $fbSession->api(array(
-    'method' => 'fql.multiquery',
-    'queries' => $queries
-        ));
+	'method' => 'fql.multiquery',
+	'queries' => $queries
+));
 
 echo json_encode($response);
 ?>
