@@ -11,7 +11,7 @@ foreach ($selectedGroups as $gid) {
     $query[$gid] = ('SELECT gid,name,icon FROM group WHERE gid=' . $gid);
 }
 
-$ret = $fbSession->api('/fql?q=' . $query);
+$ret = $fbSession->api('/fql?q=' . urlencode('SELECT post_id FROM stream WHERE source_id=120696471425768'));
 
 //echo json_encode($ret);
 echo json_encode($ret);
