@@ -220,10 +220,6 @@ var SwdPresenter = {
      */
     loadNewestPosts: function(loadNextPage) {
         var createdTime;
-        var posts;
-        var imageQuery;
-        var i;
-        var j;
 
         // TODO: configure options based on what tab the user is on.
         if (SwdPresenter.postType === PostType.search) {
@@ -245,31 +241,8 @@ var SwdPresenter = {
                 SwdPresenter.oldestPost = null;
             }
 
-            if (response.data && response.data[0].fql_result_set) {
-                //SwdPresenter.oldestPost = response.data[response.data.length - 1];
-
-                posts = response.data[0].fql_result_set;
-                imageQuery = response.data[1].fql_result_set;
-
-                SwdPresenter.oldestPost = posts[posts.length - 1];
-
-                for (i = 0; i < posts.length; i++) {
-                    posts[i]['image_url'] = null;
-
-                    // For posts with an image, look for associate image data.
-                    if (posts[i].attachment && posts[i].attachment.media
-                            && posts[i].attachment.media[0] && posts[i].attachment.media[0].photo) {
-                        for (j = 0; j < imageQuery.length; j++) {
-                            // See if attachment media has a match for object_id.
-                            if (posts[i].attachment.media[0].photo.fbid === imageQuery[j].object_id) {
-                                posts[i]['image_url'] = imageQuery[j].images[4].source;
-                                break;
-                            }
-                        }
-                    }
-                }
-
-                SwdView.populatePosts(posts);
+            if (response) {
+                SwdView.populatePosts(response);
             }
             else if (!loadNextPage) {
                 SwdPresenter.oldestPost = null;
