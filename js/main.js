@@ -172,7 +172,7 @@ var SwdPresenter = {
             alert(groups[0].name);
 
             if (groups) {
-                SwdPresenter.setSelectedGroup(groups[0]);
+                //SwdPresenter.setSelectedGroup(groups[0]);
                 SwdView.addGroupsToMenu(groups);
 
                 $('#popup-menu-groups').menu().position({
@@ -411,7 +411,7 @@ var SwdView = {
     addGroupsToMenu: function(groups) {
         var i = 0;
 
-        for (i = 0; i < group.length; i++) {
+        for (i = 0; i < groups.length; i++) {
             $('#popup-menu-groups').append('<li id="' + groups[i].gid + '" class="menu-item-group"><a href="#"><span class="ui-icon" style="background-image: url(' + groups[i].icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + groups[i].name + '</div></a></li>');
         }
     },
