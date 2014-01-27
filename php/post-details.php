@@ -2,11 +2,7 @@
 
 require_once 'session.php';
 
-echo 'TeST';
-
-$postId = $GET['postId'];
-
-echo $postId;
+$postId = $_GET['postId'];
 
 $queries = array(
 	'detailsQuery' => 'SELECT post_id,message,actor_id,permalink,like_info,share_info,comment_info,tagged_ids FROM stream WHERE post_id="' . $postId . '"',
