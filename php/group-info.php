@@ -26,7 +26,7 @@ $groups = array();
 
 for ($i = 0; $i < count($response); $i++) {
 	//$groups[$i] = $response[$i]->fql_result_set[0];
-	echo $response[$i]->fql_result_set[0];
+	echo $response[$i];
 }
 
 // Pass the data on to the client.
