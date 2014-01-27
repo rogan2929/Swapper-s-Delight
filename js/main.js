@@ -31,7 +31,7 @@ var SwdModel = {
             type: 'GET',
             url: '/php/group-info.php',
             success: function(response) {
-                callback.call(SwdModel, JSON.parse(response.responseText));
+                callback.call(SwdModel, JSON.parse(response));
             },
             fail: function(response) {
                 
