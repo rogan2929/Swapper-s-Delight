@@ -14,36 +14,6 @@ var AppId = '652991661414427'; // Test
  * Model for the Swapper's Delight program.
  */
 var SwdModel = {
-    /**
-     * Wrapper function for FB.api
-     * @param {type} api Facebook API to call.
-     * @param {type} callback Callback function.
-     */
-//    facebookApi: function(api, callback) {
-//        //FB.api('/' + api, callback);
-//        $.ajax({
-//            type: 'GET',
-//            url: 'php/actions.php?api=' + api,
-//            complete: callback
-//        });
-//    },
-    /***
-     * Craft a FQL query to be consumed by FB.
-     * @param {type} query
-     * @param {type} callback
-     */
-//    facebookFQLQuery: function(query, callback) {
-//        query = 'fql?q=' + encodeURIComponent(query);
-//        SwdModel.facebookApi(query, callback);
-//    },
-    /***
-     * Query FB group info.
-     * @param {type} gid
-     * @param {type} callback
-     */
-//    getGroupInfo: function(gid, callback) {
-//        //SwdModel.facebookFQLQuery('SELECT gid,name,icon FROM group WHERE gid=' + gid, callback);
-//    },
     /***
      * Get posts in the group that are liked.
      * @param {type} gid
@@ -78,42 +48,21 @@ var SwdModel = {
     /***
      * AJAX call to FB group feed.
      * @param {type} gid Group id whose posts are to be retrieved.
+     * @param {type} createdTime
      * @param {type} callback Completed callback function.
      */
-    getNewestPosts: function(gid, callback) {
+    getNewestPosts: function(gid, createdTime, callback) {
+        var url = '/php/new-posts.php?gid=' + gid;
+        
+        if (createdTime) {
+            url += '&createdTime=' + createdTime;
+        }
+        
         $.ajax({
             type: 'GET',
-            url: '/php/new-posts.php?gid=' + gid,
+            url: url,
             complete: callback
         });
-//        var streamQuery;
-//        var query;
-//
-//        // Base query
-//        streamQuery = 'SELECT post_id,created_time,message,attachment,comment_info FROM stream WHERE source_id=' + gid;
-//
-//        // Constrain by current user.
-//        if (options.id) {
-//            streamQuery += ' AND actor_id=' + options.id;
-//        }
-////
-////        // Constrain by whether or not the user likes the post.
-////        if (options.getLiked) {
-////            streamQuery += ' AND like_info.user_likes=1';
-////            limit = 1000;
-////        }
-//
-//        // For FQL pagination (query by posts with created_time less than created_time of last query's oldest post.)
-//        if (options.createdTime) {
-//            streamQuery += ' AND created_time < ' + options.createdTime;
-//        }
-//
-//        // Fetch 30 results, and sorted by creation time.
-//        streamQuery += ' ORDER BY created_time DESC LIMIT 30';
-//
-//        query = {'streamQuery': streamQuery, 'imageQuery': 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'};
-//
-//        SwdModel.facebookFQLQuery(JSON.stringify(query), callback);
     },
     /***
      * AJAX call to FB comment feed for given post.
@@ -255,7 +204,7 @@ var SwdPresenter = {
      * @param {type} loadNextPage
      */
     loadNewestPosts: function(loadNextPage) {
-        var options = {};
+        var createdTime;
         var posts;
         var imageQuery;
         var i;
@@ -267,11 +216,14 @@ var SwdPresenter = {
         }
 
         if (loadNextPage) {
-            options['createdTime'] = SwdPresenter.oldestPost.created_time;
+            createdTime = SwdPresenter.oldestPost.created_time;
+        }
+        else {
+            createdTime = null;
         }
 
         // Get posts and then display them.
-        SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, options, function(response) {
+        SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, createdTime, function(response) {
             if (!loadNextPage) {
                 // Clear previous results, unless loading a new page.
                 SwdView.clearPosts();
