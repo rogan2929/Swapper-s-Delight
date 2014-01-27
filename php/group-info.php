@@ -26,7 +26,7 @@ $groups = array();
 
 for ($i = 0; $i < count($response); $i++) {
 	//$groups[$i] = $response[$i]->fql_result_set[0];
-	echo json_encode($response[$i]);
+	echo json_encode($response[$i]['fql_result_set']);
 }
 
 // Pass the data on to the client.
