@@ -2,6 +2,8 @@
 
 require_once 'session.php';
 
+echo 'TeST';
+
 $postId = $GET['postId'];
 
 echo $postId;
