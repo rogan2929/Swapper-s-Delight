@@ -23,5 +23,5 @@ $postDetails['comments'] = $response[1]['fql_result_set'];
 
 // Return the result.
 //echo json_encode($postDetails);
-echo json_encode($response);
+echo json_encode($postDetails);
 ?>
