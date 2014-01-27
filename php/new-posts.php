@@ -44,19 +44,17 @@ for ($i = 0; $i < count($stream); $i++) {
 	// For posts with an image, look for associate image data.
 	if ($post['attachment'] && $post['attachment']['media'] &&
 		$post['attachment']['media'][0] && $post['attachment']['media'][0]['photo']) {
-			echo json_encode($post['attachment']['media'][0]['photo']);
+			for ($j = 0; $j < count($images); $j++) {
+				if ($post['attachment']['media'][0]['photo']['fbid'] == $images[$j]['object_id']) {
+					$post['image_url'] = $images[$j][4]['source'];
+					json_encode($post);
+					break;
+				}
+			}
 	}
 }
 
 /*
-                posts = response.data[0].fql_result_set;
-                imageQuery = response.data[1].fql_result_set;
-
-                SwdPresenter.oldestPost = posts[posts.length - 1];
-
-                for (i = 0; i < posts.length; i++) {
-                    posts[i]['image_url'] = null;
-
                    // For posts with an image, look for associate image data.
                     if (posts[i].attachment && posts[i].attachment.media
                             && posts[i].attachment.media[0] && posts[i].attachment.media[0].photo) {
