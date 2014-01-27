@@ -168,11 +168,9 @@ var SwdPresenter = {
         // Retrieve group info for logged in user.
         SwdModel.getGroupInfo(function(response) {
             var groups = response;
-            
-            alert(groups[0].name);
 
             if (groups) {
-                //SwdPresenter.setSelectedGroup(groups[0]);
+                SwdPresenter.setSelectedGroup(groups[0]);
                 SwdView.addGroupsToMenu(groups);
 
                 $('#popup-menu-groups').menu().position({
@@ -296,7 +294,7 @@ var SwdPresenter = {
      */
     setSelectedGroup: function(group) {
         SwdPresenter.selectedGroup = group;
-        SwdPresenter.loadNewestPosts(false);
+        //SwdPresenter.loadNewestPosts(false);
         SwdView.setGroupButtonText(group.name);
     },
     // Event Handlers (onX(e, args))
