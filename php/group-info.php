@@ -13,6 +13,7 @@ foreach ($selectedGroups as $gid) {
 
 $ret = $fbSession->api('/fql?q=' . json_encode($query));
 
-echo json_encode($ret);
+//echo json_encode($ret);
+echo json_encode($query);
 
 ?>
