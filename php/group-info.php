@@ -18,17 +18,19 @@ $response = $fbSession->api(array(
     'queries' => $queries
         ));
 
-$response = json_decode($response);
+echo $response;
 
-$groups = array();
-
-for ($i = 0; $i < count($response->data); $i++) {
-    $data = $response->data[$i];
-    if ($data->name) {
-        $group[$i] = $data->fql_result_set;
-    }
-}
-
-// Pass the data on to the client.
-echo json_encode($groups);
-?>
+//$response = json_decode($response);
+//
+//$groups = array();
+//
+//for ($i = 0; $i < count($response->data); $i++) {
+//    $data = $response->data[$i];
+//    if ($data->name) {
+//        $group[$i] = $data->fql_result_set;
+//    }
+//}
+//
+//// Pass the data on to the client.
+//echo json_encode($groups);
+//?>
