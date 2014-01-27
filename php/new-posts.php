@@ -47,7 +47,7 @@ for ($i = 0; $i < count($stream); $i++) {
 			for ($j = 0; $j < count($images); $j++) {
 				if ($post['attachment']['media'][0]['photo']['fbid'] == $images[$j]['object_id']) {
 					//$post['image_url'] = $images[$j][4]['source'];
-					echo json_encode($images[$j]);
+					echo json_encode($images[$j]['images'][4]['source']);
 					//echo json_encode($post);
 					break;
 				}
