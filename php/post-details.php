@@ -19,6 +19,9 @@ $response = $fbSession->api(array(
 	'queries' => $queries
 ));
 
+// Construct a return object.
+$postDetails = $response[0]['detailsQuery']['fql_result_set'];
+
 // Return the result.
-echo json_encode($response);
+echo json_encode($postDetails);
 ?>
