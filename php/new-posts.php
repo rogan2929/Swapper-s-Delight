@@ -43,8 +43,8 @@ for ($i = 0; $i < count($stream); $i++) {
 	
 	// For posts with an image, look for associate image data.
 	if ($post['attachment'] && $post['attachment']['media'] &&
-		$post[$i]['attachment']['media'][0] && $post[$i]['attachment']['media'][0]->photo) {
-			echo json_encode($post[$i]['attachment']['media'][0]->photo);
+		$post['attachment']['media'][0] && $post['attachment']['media'][0]->photo) {
+			echo json_encode($post['attachment']['media'][0]->photo);
 	}
 
 /*
