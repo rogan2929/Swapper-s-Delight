@@ -26,8 +26,6 @@ $queries = array(
 	'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'
 );
 
-echo json_encode($queries);
-
 $response = $fbSession->api(array(
 	'method' => 'fql.multiquery',
 	'queries' => $queries
