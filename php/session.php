@@ -20,5 +20,5 @@ $fbSession = new Facebook( array(
 
 $fbSession->setAccessToken($data['access_token']);
 
-echo $fbSession->getUser();
+echo $fbSession->getAccessToken();
 ?>
