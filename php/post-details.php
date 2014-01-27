@@ -23,5 +23,5 @@ $postDetails['user'] = $response[2]['fql_result_set'][0];
 
 // Return the result.
 //echo json_encode($postDetails);
-echo json_encode($response['detailsQuery']);
+echo json_encode($postDetails);
 ?>
