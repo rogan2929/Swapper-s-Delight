@@ -18,7 +18,7 @@ $response = $fbSession->api(array(
     'queries' => $queries
         ));
 
-echo $response;
+echo json_encode($response);
 
 //$response = json_decode($response);
 //
