@@ -76,35 +76,6 @@
                             </div>
                         </div>
                     </div>
-                    <!--<div id='right-panel' class='ui-widget ui-widget-content scroll-y'>
-                            <div id='panel-post'>
-                                <div id='panel-message-user'>
-                                    <img id='panel-message-pic' src=''>
-                                    <span id='panel-message-name'></span>
-                                </div>
-                                <div id='panel-image' class='ui-widget ui-widget-content ui-corner-all'>
-                                    <div id='panel-no-image' class='hidden'>
-                                        <img src='/img/no-image.jpg'>
-                                        <span>This post does not have a photo, or the owner of this post has chosen not to give permission for applications like Swapper's Delight to view it. Click the link below to see the original Facebook posting.</span>
-                                        <a id='panel-post-permalink' class='wrappable-link' target='_blank'></a>
-                                    </div>
-                                </div>
-                                <div id='panel-message' class='ui-widget ui-widget-content ui-corner-all'>
-                                    <span id='panel-message-text'></span>
-                                </div>
-                                <div id='panel-button-bar'>
-                                    <div id='panel-button-comment' class='panel-button'>Comment</div>
-                                    <div id='panel-button-pm' class='panel-button'>Message</div>
-                                    <div id='panel-button-like' class='panel-button'>Like</div>
-                                </div>
-                                <div id='panel-comments'>
-                                    <div id='panel-nocomments'>No comments yet.</div>
-                                    <ul id='panel-comment-list'>
-
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>-->
                     <div id='right-panel-empty'></div>
                 </div>
 

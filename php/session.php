@@ -32,7 +32,8 @@ if ($fbSession->getUser()) {
 		// In this case, we'll get an exception, so we'll
 		// just ask the user to login again here.
 		$loginUrl = $fbSession->getLoginUrl(array('scope' => 'user_groups,user_likes'));
-		echo 'Please <a href="' . $loginUrl . '">login.</a>';
+		//echo 'Please <a href="' . $loginUrl . '">login.</a>';
+		header('Location: ' . $loginUrl);
 		error_log($e->getType());
 		error_log($e->getMessage());
 	}
@@ -42,7 +43,8 @@ if ($fbSession->getUser()) {
 	// We'll use the current URL as the redirect_uri, so we don't
 	// need to specify it here.
 	$loginUrl = $fbSession->getLoginUrl(array('scope' => 'user_groups,user_likes'));
-	echo 'Please <a href="' . $loginUrl . '">login.</a>';
+	//echo 'Please <a href="' . $loginUrl . '">login.</a>';
+	header('Location: ' . $loginUrl);
 
 }
 ?>
