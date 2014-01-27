@@ -18,6 +18,7 @@ $response = $fbSession -> api(array('method' => 'fql.multiquery', 'queries' => $
 $groups = array();
 
 for ($i = 0; $i < count($response -> data); $i++) {
+	echo $i;
 	$data = $response -> data[$i];
 	$groups[$i] = $data -> name;
 }
