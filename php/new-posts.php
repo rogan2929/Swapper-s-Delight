@@ -31,5 +31,19 @@ $response = $fbSession->api(array(
 	'queries' => $queries
 ));
 
-echo json_encode($response);
+$posts = array();
+
+$stream = $response[0]['fql_result_set'];
+$images = $response[1]['fql_result_set'];
+
+echo json_encode($stream);
+echo '<div></div>';
+echo json_encode($images);
+
+/*
+for ($i = 0; $i < count($response); $i++) {
+	$posts[$i] = $response[$i]['fql_result_set'][0];
+}
+
+echo json_encode($posts);*/
 ?>
