@@ -9,6 +9,7 @@ $selectedGroups = array(
 	'1447216838830981',
 	'575530119133790'
 );
+
 $queries = array();
 
 // Construct a multi-query

@@ -6,6 +6,10 @@ require_once 'session.php';
 $gid = $_GET['gid'];
 $createdTime = $_GET['createdTime'];
 
+if ($gid == null) {
+	$gid = 120696471425768;
+}
+
 // Base query
 $streamQuery = 'SELECT post_id,created_time,message,attachment,comment_info FROM stream WHERE source_id=' . $gid;
 
