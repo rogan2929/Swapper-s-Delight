@@ -36,9 +36,38 @@ $posts = array();
 $stream = $response[0]['fql_result_set'];
 $images = $response[1]['fql_result_set'];
 
-echo json_encode($stream);
-echo '<div></div>';
-echo json_encode($images);
+for ($i = 0; $i < count($stream); $i++) {
+	$post = $stream[$i];
+	
+	$post['image_url'] = null;
+	
+	// For posts with an image, look for associate image data.
+	if ($post['attachment'] && $post['attachment']['media'] &&
+		$post[$i]['attachment']['media'][0] && $post[$i]['attachment']['media'][0]->photo) {
+			echo json_encode($post[$i]['attachment']['media'][0]->photo);
+	}
+
+/*
+                posts = response.data[0].fql_result_set;
+                imageQuery = response.data[1].fql_result_set;
+
+                SwdPresenter.oldestPost = posts[posts.length - 1];
+
+                for (i = 0; i < posts.length; i++) {
+                    posts[i]['image_url'] = null;
+
+                   // For posts with an image, look for associate image data.
+                    if (posts[i].attachment && posts[i].attachment.media
+                            && posts[i].attachment.media[0] && posts[i].attachment.media[0].photo) {
+                        for (j = 0; j < imageQuery.length; j++) {
+                            // See if attachment media has a match for object_id.
+                            if (posts[i].attachment.media[0].photo.fbid === imageQuery[j].object_id) {
+                                posts[i]['image_url'] = imageQuery[j].images[4].source;
+                                break;
+                            }
+                        }
+                    }
+                }*/
 
 /*
 for ($i = 0; $i < count($response); $i++) {

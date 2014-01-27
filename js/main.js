@@ -72,7 +72,7 @@ var SwdModel = {
             type: 'GET',
             url: url,
             success: function(response) {
-                callback.call(SwdModel, JSON.parse(response.responseText));
+                callback.call(SwdModel, JSON.parse(response));
             },
             fail: function(response) {
                 
