@@ -41,11 +41,14 @@ for ($i = 0; $i < count($stream); $i++) {
 	
 	$post['image_url'] = null;
 	
+	echo json_encode($post);
+	
 	// For posts with an image, look for associate image data.
+	/*
 	if ($post['attachment'] && $post['attachment']['media'] &&
 		$post['attachment']['media'][0] && $post['attachment']['media'][0]->photo) {
 			echo json_encode($post['attachment']['media'][0]->photo);
-	}
+	}*/
 
 /*
                 posts = response.data[0].fql_result_set;
