@@ -19,9 +19,7 @@ $groups = array();
 
 for ($i = 0; $i < count($response -> data); $i++) {
 	$data = $response -> data[$i];
-	if ($data -> name) {
-		$groups[$i] = $data -> name;
-	}
+	$groups[$i] = $data -> name;
 }
 
 // Pass the data on to the client.
