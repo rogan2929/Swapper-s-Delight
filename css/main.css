@@ -369,6 +369,15 @@ div.right-toolbar-button {
     margin-top: 4px;
 }
 
+div.login-div {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: white;
+}
+
 /* JQuery UI Overrides */
 
 /* Ellipses */
