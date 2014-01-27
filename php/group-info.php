@@ -8,10 +8,10 @@ $query = array();
 
 // Construct a multi-query
 foreach ($selectedGroups as $gid) {
-    $query[$gid] = ('SELECT gid,name,icon FROM group WHERE gid=' & $gid);
+    $query[$gid] = ('SELECT gid,name,icon FROM group WHERE gid=' . $gid);
 }
 
-echo $query;
+echo json_encode($query);
 
 //$ret = $fbSession->api(array(
 //    'method' => 'fql.query',
