@@ -26,14 +26,12 @@ $commentUserData = array();
 
 // For each comment, attach user data to it.
 for ($i = 0; $i < count($postDetails['comments']); $i++) {
-	$comment = $postDetails['comments'][$i];
-	
 	for ($j = 0; $j < count($response[3]['fql_result_set']); $j++) {
 		$userDataObject = $response[3]['fql_result_set'][$j];
 		
 		// See if the comment is from the user.
-		if ($comment['fromid'] == $userDataObject['uid']) {
-			$comment['user'] = $userDataObject;
+		if ($postDetails['comments'][$i]['fromid'] == $userDataObject['uid']) {
+			$postDetails['comments'][$i]['user'] = $userDataObject;
 			break;
 		}
 	}
