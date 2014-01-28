@@ -634,7 +634,7 @@ var SwdView = {
 			$('#post-nocomments').hide();
 			
 			for ( i = 0; i < post.comments.length; i++) {
-				$('#post-comment-list').append('<div>' + post.comments[i].text + '</div>');
+				$('#post-comment-list').append('<div class="post-comment">' + post.comments[i].text + '</div>');
 			}
 		}
 
