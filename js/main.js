@@ -11,7 +11,7 @@ var PostType = {
 };
 
 //var AppId = '1401018793479333'; // Prod
-var AppId = '652991661414427';
+//var AppId = '652991661414427';
 // Test
 
 // http://stackoverflow.com/questions/1102215/mvp-pattern-with-javascript-framework
@@ -601,7 +601,6 @@ var SwdView = {
 		var postImage;
 		var i;
 
-		//if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
 		if (post.image_url) {
 			postImage = 'url("' + post.image_url + '")';
 
@@ -634,7 +633,7 @@ var SwdView = {
 			$('#post-nocomments').hide();
 			
 			for ( i = 0; i < post.comments.length; i++) {
-				$('#post-comment-list').append('<div class="post-comment">' + post.comments[i].text + '</div>');
+				$('#post-comment-list').append('<div class="post-comment ui-corner-all ui-widget ui-widget-content">' + post.comments[i].text + '</div>');
 			}
 		}
 
