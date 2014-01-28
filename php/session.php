@@ -9,8 +9,8 @@ require_once ("facebook.php");
 $appId = '652991661414427';
 $appSecret = 'b8447ce73d2dcfccde6e30931cfb0a90';
 
-//$cookie = preg_replace("/^\"|\"$/i", "", $_COOKIE['fbs_' . FB_APP_ID]);
-//parse_str($cookie, $data);
+$cookie = preg_replace("/^\"|\"$/i", "", $_COOKIE['fbs_' . $appId]);
+parse_str($cookie, $data);
 
 // Startup the Facebook object
 $fbSession = new Facebook( array(
@@ -18,7 +18,8 @@ $fbSession = new Facebook( array(
 	'secret' => $appSecret
 ));
 
-//$fbSession->setAccessToken($data['access_token']);
+$fbSession->setAccessToken($data['access_token']);
+/*
 if ($fbSession->getUser()) {
 
 	// We have a user ID, so probably a logged in user.
@@ -46,5 +47,5 @@ if ($fbSession->getUser()) {
 	echo '<div class="login-div">Please <a href="' . $loginUrl . '">login.</a></div>';
 	//header('Location: ' . $loginUrl);
 
-}
+}*/
 ?>

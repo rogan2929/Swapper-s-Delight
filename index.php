@@ -133,11 +133,6 @@
 
 		</div>
 
-		<?php
-		// Establish a Facebook session. If the user is not logged in, then redirect them to the login page.
-		require_once 'php/session.php';
-		?>
-
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		<script src="js/plugins.js"></script>
