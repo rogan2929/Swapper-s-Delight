@@ -83,7 +83,13 @@
 								<div id='post-nocomments'>
 									No comments yet.
 								</div>
-								<div id='post-comment-list'></div>
+								<div id='post-comment-list'>
+									<div class="post-comment ui-corner-all ui-widget ui-widget-content"><p><a href='#'>Blah Mc. Blaherson</p></a>Test Comment</div>
+									<div class="post-comment ui-corner-all ui-widget ui-widget-content"><p><a href='#'>Blah Mc. Blaherson</p></a>Test Comment</div>
+									<div class="post-comment ui-corner-all ui-widget ui-widget-content"><p><a href='#'>Blah Mc. Blaherson</p></a>Test Comment</div>
+									<div class="post-comment ui-corner-all ui-widget ui-widget-content"><p><a href='#'>Blah Mc. Blaherson</p></a>Test Comment</div>
+									<div class="post-comment ui-corner-all ui-widget ui-widget-content"><p><a href='#'>Blah Mc. Blaherson</p></a>Test Comment</div>
+								</div>
 							</div>
 						</div>
 					</div>

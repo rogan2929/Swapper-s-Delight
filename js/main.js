@@ -625,7 +625,8 @@ var SwdView = {
 			$('#post-nocomments').hide();
 			
 			for ( i = 0; i < post.comments.length; i++) {
-				$('#post-comment-list').append('<div class="post-comment ui-corner-all ui-widget ui-widget-content">' + post.comments[i].text + '</div>');
+				$('<div class="post-comment ui-corner-all ui-widget ui-widget-content">' + post.comments[i].text + '</div>').appendTo('#post-comment-list');
+				//$('#post-comment-list').append('<div class="post-comment ui-corner-all ui-widget ui-widget-content">' + post.comments[i].text + '</div>');
 			}
 		}
 
