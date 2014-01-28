@@ -330,6 +330,8 @@ textarea {
 
 .post-comment {
 	margin-bottom: 5px;
+	padding: 3px;
+	font-size: 0.85em;
 }
 
 div.right-toolbar-button {
