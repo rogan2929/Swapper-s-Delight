@@ -104,7 +104,7 @@ var SwdModel = {
 			}
 		});
 	},
-	startSession: function() {
+	startSession: function(callback) {
 		$.ajax({
 			type: 'GET',
 			url: '/php/session.php',
