@@ -630,11 +630,10 @@ var SwdView = {
 		$('#post-comment-list').empty();
 		$('#post-nocomments').show();
 
-		if (post.comments) {
+		if (post.comments.length > 0) {
 			$('#post-nocomments').hide();
 			
 			for ( i = 0; i < post.comments.length; i++) {
-				alert(post.comments[i].text);
 				$('#post-comment-list').append('<div>' + post.comments[i].text + '</div>');
 			}
 		}
