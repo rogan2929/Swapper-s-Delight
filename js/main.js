@@ -625,7 +625,7 @@ var SwdView = {
 			$('#post-nocomments').hide();
 			
 			for ( i = 0; i < post.comments.length; i++) {
-				$('<div class="post-comment ui-corner-all ui-widget ui-widget-content"><p class="ui-state-default"><a href="' + post.comments[i].user.profile_url + '">' + post.comments[i].user.first_name + ' ' + post.comments[i].user.last_name + '</a></p>' + post.comments[i].text + '</div>').appendTo('#post-comment-list');
+				$('<div class="post-comment ui-corner-all ui-widget ui-widget-content"><p class="ui-state-default"><a href="' + post.comments[i].user.profile_url + '" target="_blank">' + post.comments[i].user.first_name + ' ' + post.comments[i].user.last_name + '</a></p>' + post.comments[i].text + '</div>').appendTo('#post-comment-list');
 				//$('#post-comment-list').append('<div class="post-comment ui-corner-all ui-widget ui-widget-content">' + post.comments[i].text + '</div>');
 			}
 		}
