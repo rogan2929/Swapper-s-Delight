@@ -618,6 +618,7 @@ var SwdView = {
 		$('#post-message-user').data('src', post.user.profile_url);
 		$('#post-message-text').text(post.message);
 		
+		/*
 		$('#post-comment-list').empty();
 		$('#post-nocomments').show();
 
@@ -628,7 +629,7 @@ var SwdView = {
 				$('<div class="post-comment ui-corner-all ui-widget ui-widget-content">' + post.comments[i].text + '</div>').appendTo('#post-comment-list');
 				//$('#post-comment-list').append('<div class="post-comment ui-corner-all ui-widget ui-widget-content">' + post.comments[i].text + '</div>');
 			}
-		}
+		}*/
 
 		$('#right-panel-empty').fadeOut();
 	},
