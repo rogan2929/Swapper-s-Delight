@@ -21,7 +21,23 @@ $response = $fbSession->api(array(
 $postDetails = $response[0]['fql_result_set'][0];
 $postDetails['user'] = $response[2]['fql_result_set'][0];
 $postDetails['comments'] = $response[1]['fql_result_set'];
-$postDetails['commentuser'] = $response[3]['fql_result_set'];
+
+$commentUserData = array();
+
+// For each comment, attach user data to it.
+for ($i = 0; $i < count($postDetails['comments']); $i++) {
+	$comment = $postDetails['comments'][$i];
+	
+	for ($j = 0; $j < count($response[3]['fql_result_set']); $j++) {
+		$userDataObject = $response[3]['fql_result_set'][$j];
+		
+		// See if the comment is from the user.
+		if ($comment['fromid'] == $userDataObject['uid']) {
+			$comment['user'] = $userDataObject;
+			break;
+		}
+	}
+}
 
 // Return the result.
 echo json_encode($postDetails);
