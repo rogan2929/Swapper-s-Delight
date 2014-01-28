@@ -592,6 +592,7 @@ var SwdView = {
 		var userImage;
 		var postImage;
 		var i;
+		var comment;
 
 		if (post.image_url) {
 			postImage = 'url("' + post.image_url + '")';
@@ -617,15 +618,26 @@ var SwdView = {
 		$('#post-message-name').text(post.user.first_name + ' ' + post.user.last_name);
 		$('#post-message-user').data('src', post.user.profile_url);
 		$('#post-message-text').text(post.message);
-		
+
 		$('#post-comment-list').empty();
 		$('#post-nocomments').show();
 
 		if (post.comments.length > 0) {
 			$('#post-nocomments').hide();
-			
+
 			for ( i = 0; i < post.comments.length; i++) {
-				$('<div class="post-comment ui-corner-all ui-widget ui-widget-content"><p class="ui-state-default"><a href="' + post.comments[i].user.profile_url + '" target="_blank">' + post.comments[i].user.first_name + ' ' + post.comments[i].user.last_name + '</a></p>' + post.comments[i].text + '</div>').appendTo('#post-comment-list');
+				// Set user image
+				if (post.comments[i].user.pic_square) {
+					userImage = 'url("' + post.comments[i].user.pic_square + '")';
+				} else {
+					userImage = '';
+				}
+
+				comment = $('<div class="post-comment ui-corner-all ui-widget ui-widget-content"><p class="ui-state-default"><div class="post-comment-user-image"><div><a href="' + post.comments[i].user.profile_url + '" target="_blank">' + post.comments[i].user.first_name + ' ' + post.comments[i].user.last_name + '</a></p>' + post.comments[i].text + '</div>');
+
+				$(comment).children('.post-comment-user-image').css('background-image', userImage);
+
+				$('#post-comment-list').append(comment);
 				//$('#post-comment-list').append('<div class="post-comment ui-corner-all ui-widget ui-widget-content">' + post.comments[i].text + '</div>');
 			}
 		}

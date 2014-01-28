@@ -339,6 +339,15 @@ textarea {
 	margin-bottom: 2px;
 }
 
+.post-comment-user-image {
+	background-position: center;
+	background-size: 100%;
+	width: 40px;
+	height: 40px;
+	background-repeat: no-repeat;
+	display: inline-block;
+}
+
 .post-comment a:hover {
 	text-decoration: underline;
 }
