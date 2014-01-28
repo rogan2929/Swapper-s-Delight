@@ -21,9 +21,9 @@ $response = $fbSession->api(array(
 $postDetails = $response[0]['fql_result_set'][0];
 $postDetails['user'] = $response[2]['fql_result_set'][0];
 $postDetails['comments'] = $response[1]['fql_result_set'];
+$postDetails['commentuser'] = $response[3]['fql_result_set'];
 
 // Return the result.
-//echo json_encode($postDetails);
-//echo json_encode($postDetails);
-echo json_encode($response);
+echo json_encode($postDetails);
+//echo json_encode($response);
 ?>
