@@ -331,13 +331,12 @@ textarea {
 .post-comment {
 	margin-bottom: 5px;
 	padding: 5px;
-	font-size: 0.85em !important;
+	font-size: 0.9em !important;
 }
 
 .post-comment .ui-state-default {
 	padding: 5px;
 	margin-bottom: 2px;
-	font-size: 0.9em !important;
 }
 
 .post-comment a:hover {
