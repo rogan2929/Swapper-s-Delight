@@ -10,9 +10,11 @@ var PostType = {
 	search: 3
 };
 
-//var AppId = '1401018793479333'; // Prod
-//var AppId = '652991661414427';
-// Test
+// Prod AppId
+//AppId = '1401018793479333';
+
+// Test AppId
+AppId = '652991661414427';
 
 // http://stackoverflow.com/questions/1102215/mvp-pattern-with-javascript-framework
 
