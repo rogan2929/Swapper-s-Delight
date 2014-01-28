@@ -599,6 +599,7 @@ var SwdView = {
 	showPostDetails : function(post) {
 		var userImage;
 		var postImage;
+		var i;
 
 		//if (post.attachment && post.attachment.media && post.attachment.media[0] && post.attachment.media[0].src) {
 		if (post.image_url) {
@@ -625,6 +626,17 @@ var SwdView = {
 		$('#post-message-name').text(post.user.first_name + ' ' + post.user.last_name);
 		$('#post-message-user').data('src', post.user.profile_url);
 		$('#post-message-text').text(post.message);
+		
+		$('#post-comment-list').empty();
+		$('#post-nocomments').show();
+
+		if (post.comments) {
+			$('#post-nocomments').hide();
+			
+			for ( i = 0; i < post.comments.length; i++) {
+				$('#post-comment-list').append('<div>' + post.comments[i].text + '</div>');
+			}
+		}
 
 		$('#right-panel-empty').fadeOut();
 	},

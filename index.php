@@ -83,7 +83,7 @@
 								<div id='post-nocomments'>
 									No comments yet.
 								</div>
-								<ul id='post-comment-list'></ul>
+								<div id='post-comment-list'></div>
 							</div>
 						</div>
 					</div>
