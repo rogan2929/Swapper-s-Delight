@@ -635,7 +635,7 @@ var SwdView = {
 
 				comment = $('<div class="post-comment ui-corner-all ui-widget ui-widget-content"><div class="ui-state-default"><div class="post-comment-user-image"></div><a href="' + post.comments[i].user.profile_url + '" target="_blank">' + post.comments[i].user.first_name + ' ' + post.comments[i].user.last_name + '</a></div>' + post.comments[i].text + '</div>');
 
-				$(comment).children('.post-comment-user-image').css('background-image', userImage);
+				$(comment).find('.post-comment-user-image').css('background-image', userImage);
 
 				$('#post-comment-list').append(comment);
 				//$('#post-comment-list').append('<div class="post-comment ui-corner-all ui-widget ui-widget-content">' + post.comments[i].text + '</div>');
