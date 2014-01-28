@@ -86,14 +86,6 @@ var SwdModel = {
 		});
 	},
 	/***
-	 * AJAX call to FB comment feed for given post.
-	 * @param {type} postId
-	 * @param {type} callback
-	 */
-	getPostComments : function(postId, callback) {
-		//SwdModel.facebookFQLQuery('SELECT fromid,text,text_tags,attachment FROM comment WHERE post_id="' + id + '"', callback);
-	},
-	/***
 	 * Get details for the given post.
 	 * @param {type} postId
 	 * @param {type} callback

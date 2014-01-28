@@ -11,6 +11,8 @@ $queries = array(
 	'commentUserQuery' => 'SELECT last_name,first_name,pic_square,profile_url FROM user WHERE uid IN (SELECT fromid in #commentsQuery)'
 );
 
+echo json_encode($queries);
+
 // Run the query.
 $response = $fbSession->api(array(
 	'method' => 'fql.multiquery',
