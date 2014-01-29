@@ -146,26 +146,24 @@ var SwdPresenter = {
 
 			$('#loginbutton,#feedbutton').removeAttr('disabled');
 
-			$.getScript('js/fb-scroll.js', function() {
-				// Try to get a session going if there isn't one already.
-				FB.getLoginStatus(function(response) {
-					if (response.status === 'connected') {
-						SwdModel.startSession(function() {
-							SwdPresenter.startApp();
-						});
-					}
-					else {
-						FB.login(function(response) {
-							if (response.status === 'connected') {
-								SwdModel.startSession(function() {
-									SwdPresenter.startApp();
-								});
-							}
-						}, {
-							scope: 'user_groups,user_likes'
-						});
-					}
-				});
+			// Try to get a session going if there isn't one already.
+			FB.getLoginStatus(function(response) {
+				if (response.status === 'connected') {
+					SwdModel.startSession(function() {
+						SwdPresenter.startApp();
+					});
+				}
+				else {
+					FB.login(function(response) {
+						if (response.status === 'connected') {
+							SwdModel.startSession(function() {
+								SwdPresenter.startApp();
+							});
+						}
+					}, {
+						scope: 'user_groups,user_likes'
+					});
+				}
 			});
 		});
 	},
@@ -229,10 +227,6 @@ var SwdPresenter = {
 
 			scrollTop = parseInt(pageInfo.scrollTop);
 			offsetTop = parseInt(pageInfo.offsetTop);
-			windowHeight = window.innerHeight;
-			parentWindow = parent.window.innerHeight;
-
-			console(parentWindow);
 
 			// Calculate how far to offset things.
 			offset = Math.max(scrollTop - offsetTop, 0);
@@ -243,10 +237,9 @@ var SwdPresenter = {
 			// TODO: Update right-panel height
 
 			// TODO: Detect scroll at bottom
-
-			if (scrollTop >= windowHeight) {
-				SwdPresenter.loadNewestPosts(true);
-			}
+			
+			console.log(window.innerHeight);
+			console.log(document.body.scrollTop);
 
 			setTimeout(SwdPresenter.facebookPageInfoPoll, 50);
 		});
