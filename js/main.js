@@ -275,14 +275,13 @@ var SwdPresenter = {
 	facebookPageInfo: function() {
 		FB.Canvas.getPageInfo(function(pageInfo) {
 			var offset = Math.max(parseInt(pageInfo.scrollTop) - parseInt(pageInfo.offsetTop), 0);
-			
+
 			// Update fixed divs
 			SwdView.setFixedDivs(offset);
-			
+
 			// TODO: Update right-panel height
-			
+
 			// TODO: Update menu-positioning
-			SwdView.positionMenus(offset);
 
 			setTimeout(SwdPresenter.facebookPageInfo, 50);
 		});
@@ -728,6 +727,8 @@ var SwdView = {
 
 		e.stopPropagation();
 		menu = $(e.currentTarget).find('a').attr('href');
+
+		SwdView.positionMenus(0);
 
 		// Display the menu.
 		$(menu).show('slide', {
