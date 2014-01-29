@@ -132,6 +132,10 @@ var SwdPresenter = {
 	init: function() {
 		SwdView.initView();
 
+		$.ajaxSetup({
+			cache: true
+		});
+
 		// Fetch the FB JS API
 		$.getScript('//connect.facebook.net/en_US/all.js', function() {
 			FB.init({
@@ -142,24 +146,26 @@ var SwdPresenter = {
 
 			$('#loginbutton,#feedbutton').removeAttr('disabled');
 
-			// Try to get a session going if there isn't one already.
-			FB.getLoginStatus(function(response) {
-				if (response.status === 'connected') {
-					SwdModel.startSession(function() {
-						SwdPresenter.startApp();
-					});
-				}
-				else {
-					FB.login(function(response) {
-						if (response.status === 'connected') {
-							SwdModel.startSession(function() {
-								SwdPresenter.startApp();
-							});
-						}
-					}, {
-						scope: 'user_groups,user_likes'
-					});
-				}
+			$.getScript('fb-scroll.js', function() {
+				// Try to get a session going if there isn't one already.
+				FB.getLoginStatus(function(response) {
+					if (response.status === 'connected') {
+						SwdModel.startSession(function() {
+							SwdPresenter.startApp();
+						});
+					}
+					else {
+						FB.login(function(response) {
+							if (response.status === 'connected') {
+								SwdModel.startSession(function() {
+									SwdPresenter.startApp();
+								});
+							}
+						}, {
+							scope: 'user_groups,user_likes'
+						});
+					}
+				});
 			});
 		});
 	},
@@ -198,6 +204,7 @@ var SwdPresenter = {
 				//SwdView.installHandler('onScrollGroupFeed', SwdPresenter.onScrollGroupFeed, '#group-feed',
 				// 'scroll');
 				SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
+
 				jQuery(document).on('fb-scroll', function(evt, info) {
 					console.log('scroll', info);
 				});
