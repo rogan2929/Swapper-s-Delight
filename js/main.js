@@ -282,6 +282,7 @@ var SwdPresenter = {
 			// TODO: Update right-panel height
 			
 			// TODO: Update menu-positioning
+			SwdView.positionMenus(offset);
 
 			setTimeout(SwdPresenter.facebookPageInfo, 50);
 		});
@@ -593,15 +594,15 @@ var SwdView = {
 	},
 	/***
 	 * Sets menu positions.
+	 * @param {type} offset
 	 */
-	positionMenus: function() {
+	positionMenus: function(offset) {
 		$('.menu-button').each(function() {
 			var menu = $(this).find('a').attr('href');
 
 			$(menu).css({
-				top: 0,
-				left: 0,
-				position: 'absolute'
+				top: 0 + offset,
+				left: 0
 			});
 
 			$(menu).position({
