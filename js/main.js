@@ -212,12 +212,17 @@ var SwdPresenter = {
 	 */
 	facebookPageInfoPoll: function() {
 		FB.Canvas.getPageInfo(function(pageInfo) {
-			var scrollTop = parseInt(pageInfo.scrollTop);
-			var offsetTop = parseInt(pageInfo.offsetTop);
-			var clientHeight = parseInt(pageInfo.clientHeight);
-			var offset = Math.max(scrollTop - offsetTop, 0);
+			var scrollTop;
+			var offsetTop;
+			var windowHeight;
+			var offset;
+		
+			scrollTop = parseInt(pageInfo.scrollTop);
+			offsetTop = parseInt(pageInfo.offsetTop);
+			windowHeight = window.innerHeight;
 			
-			console.log($(window).innerHeight);
+			// Calculate how far to offset things.
+			offset = Math.max(scrollTop - offsetTop, 0);
 
 			// Update fixed divs
 			SwdView.setFixedDivs(offset);
@@ -226,11 +231,9 @@ var SwdPresenter = {
 
 			// TODO: Detect scroll at bottom
 			
-			/*
-			if (scrollTop >= clientHeight) {
-				console.log(pageInfo);
+			if (scrollTop >= windowHeight) {
 				SwdPresenter.loadNewestPosts(true);
-			}*/
+			}
 
 			setTimeout(SwdPresenter.facebookPageInfoPoll, 50);
 		});
