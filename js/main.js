@@ -283,7 +283,7 @@ var SwdPresenter = {
 			
 			// TODO: Update menu-positioning
 
-			setTimeout(SwdPresenter.facebookPageInfo, 200);
+			setTimeout(SwdPresenter.facebookPageInfo, 50);
 		});
 	},
 	/***
@@ -616,14 +616,6 @@ var SwdView = {
 	 * @param {type} offset
 	 */
 	setFixedDivs: function(offset) {
-		/*
-		$('#left-rail, #right-panel').animate( {
-			top: Math.max(offset + 60, 0)
-		}, 100);
-		
-		$('#main-toolbar').animate( {
-			top: Math.max(offset, 0)
-		}, 100);*/
 		$('#left-rail, #right-panel').css('top', Math.max(offset + 60, 0));
 		$('#main-toolbar').css('top', Math.max(offset, 0));
 	},
