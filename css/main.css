@@ -375,15 +375,14 @@ div.right-toolbar-button {
 }
 
 #group-feed {
-    left: 200px;
-    /*right: 371px;*/
-   /*
+    /*left: 200px;
    	right: 0;
     top: 0;
     bottom: 0;
-    position: absolute;*/
-    position: fixed;
-    margin-top: -5px;
+    position: absolute;
+    margin-top: -5px;*/
+   margin-left: 200px;
+   margin-top: 60px;
 }
 
 #left-rail {
