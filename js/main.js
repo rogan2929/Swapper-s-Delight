@@ -289,11 +289,8 @@ var SwdPresenter = {
 			// TODO: Display group chooser dialog.
 		}
 		else {
-			// Retreive group information for selected ID
-			SwdModel.getGroupInfo(id, function(response) {
-				// Set selected group and load its feed.
-				SwdPresenter.setSelectedGroup(response.data[0]);
-			});
+			// Set selected group and load its feed.
+			SwdPresenter.setSelectedGroup(id);
 		}
 	},
 	onClickMenuItemMain: function(e, args) {
