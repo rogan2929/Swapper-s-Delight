@@ -169,7 +169,7 @@ var SwdPresenter = {
 	startApp: function() {
 		FB.Canvas.setAutoGrow();
 
-		SwdPresenter.facebookPageInfo();
+		SwdPresenter.facebookPageInfoPoll();
 
 		// Retrieve group info for logged in user.
 		SwdModel.getGroupInfo(function(response) {
@@ -195,15 +195,40 @@ var SwdPresenter = {
 				SwdView.installHandler('onClickPostButton', SwdPresenter.onClickPostButton, '.post-button', 'click');
 				SwdView.installHandler('onClickPanelMessageUser', SwdPresenter.onClickPanelMessageUser, '#post-message-user', 'click');
 				SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
-				SwdView.installHandler('onScrollGroupFeed', SwdPresenter.onScrollGroupFeed, '#group-feed', 'scroll');
+				//SwdView.installHandler('onScrollGroupFeed', SwdPresenter.onScrollGroupFeed, '#group-feed',
+				// 'scroll');
 				SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
-				SwdView.installHandler('onWindowScroll', SwdPresenter.onWindowScroll, window, 'scroll');
 
 				SwdView.positionMenus();
 			}
 			else {
 				// Have the view prompt the user to edit BST groups.
 			}
+		});
+	},
+	/***
+	 * Periodically call FB.Canvas.getPageInfo in order to dynmically update the UI within the canvas
+	 * iframe.
+	 */
+	facebookPageInfoPoll: function() {
+		FB.Canvas.getPageInfo(function(pageInfo) {
+			var scrollTop = parseInt(pageInfo.scrollTop);
+			var offsetTop = parseInt(pageInfo.offsetTop);
+			var innerHeight = parseInt(pageInfo.innerHeight);
+			var scrollHeight = parseInt(pageInfo.scrollHeight);
+			var offset = Math.max(scrollTop - offsetTop, 0);
+
+			// Update fixed divs
+			SwdView.setFixedDivs(offset);
+
+			// TODO: Update right-panel height
+
+			// TODO: Detect scroll at bottom
+			if (scrollTop + innerHeight >= scrollHeight) {
+				SwdPresenter.loadNewestPosts(true);
+			}
+
+			setTimeout(SwdPresenter.facebookPageInfoPoll, 50);
 		});
 	},
 	/***
@@ -267,24 +292,6 @@ var SwdPresenter = {
 			to: id,
 			method: 'send',
 			link: link
-		});
-	},
-	/***
-	 * Periodically call FB.Canvas.getPageInfo in order to dynmically update the UI within the canvas
-	 * iframe.
-	 */
-	facebookPageInfo: function() {
-		FB.Canvas.getPageInfo(function(pageInfo) {
-			var offset = Math.max(parseInt(pageInfo.scrollTop) - parseInt(pageInfo.offsetTop), 0);
-
-			// Update fixed divs
-			SwdView.setFixedDivs(offset);
-
-			// TODO: Update right-panel height
-
-			// TODO: Update menu-positioning
-
-			setTimeout(SwdPresenter.facebookPageInfo, 50);
 		});
 	},
 	/***
@@ -390,9 +397,6 @@ var SwdPresenter = {
 	onWindowResize: function(e, args) {
 		SwdView.positionMenus();
 	},
-	onWindowScroll: function(e, args) {
-		alert('test');
-	}
 };
 
 /**
