@@ -237,9 +237,6 @@ var SwdPresenter = {
 			// TODO: Update right-panel height
 
 			// TODO: Detect scroll at bottom
-			
-			console.log(window.innerHeight);
-			console.log(document.body.scrollTop);
 
 			setTimeout(SwdPresenter.facebookPageInfoPoll, 50);
 		});
