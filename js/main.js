@@ -131,13 +131,13 @@ var SwdPresenter = {
 	 */
 	init: function() {
 		SwdView.initView();
-		//		SwdPresenter.startApp();
 
 		// Fetch the FB JS API
 		$.getScript('//connect.facebook.net/en_US/all.js', function() {
 			FB.init({
 				appId: AppId,
-				cookie: true
+				cookie: true,
+				status: true
 			});
 
 			$('#loginbutton,#feedbutton').removeAttr('disabled');
@@ -198,6 +198,9 @@ var SwdPresenter = {
 				//SwdView.installHandler('onScrollGroupFeed', SwdPresenter.onScrollGroupFeed, '#group-feed',
 				// 'scroll');
 				SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
+				jQuery(document).on('fb-scroll', function(evt, info) {
+					console.log('scroll', info);
+				});
 
 				SwdView.positionMenus();
 			}
@@ -216,14 +219,14 @@ var SwdPresenter = {
 			var offsetTop;
 			var windowHeight;
 			var offset;
-		
+
 			scrollTop = parseInt(pageInfo.scrollTop);
 			offsetTop = parseInt(pageInfo.offsetTop);
 			windowHeight = window.innerHeight;
 			parentWindow = parent.window.innerHeight;
-			
+
 			console(parentWindow);
-			
+
 			// Calculate how far to offset things.
 			offset = Math.max(scrollTop - offsetTop, 0);
 
@@ -233,7 +236,7 @@ var SwdPresenter = {
 			// TODO: Update right-panel height
 
 			// TODO: Detect scroll at bottom
-			
+
 			if (scrollTop >= windowHeight) {
 				SwdPresenter.loadNewestPosts(true);
 			}
@@ -592,11 +595,11 @@ var SwdView = {
 			// Sleekly fade in the post tile elements.
 			// From: http://www.paulirish.com/2008/sequentially-chain-your-callbacks-in-jquery-two-ways/
 			/*
-			(function shownext(jq) {
-				jq.eq(0).fadeIn(120, function() {
-					( jq = jq.slice(1)).length && shownext(jq);
-				});
-			})($('div.post-tile'));*/
+			 (function shownext(jq) {
+			 jq.eq(0).fadeIn(120, function() {
+			 ( jq = jq.slice(1)).length && shownext(jq);
+			 });
+			 })($('div.post-tile'));*/
 			$('div.post-tile').show();
 
 			// Associate the click event handler for newly created posts.
