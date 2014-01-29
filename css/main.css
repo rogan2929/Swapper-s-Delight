@@ -370,7 +370,7 @@ div.right-toolbar-button {
 }
 
 .menu {
-    position: fixed;
+    position: absolute;
     display: none;
 }
 
