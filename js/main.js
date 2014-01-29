@@ -168,13 +168,13 @@ var SwdPresenter = {
 	 */
 	startApp: function() {
 		FB.Canvas.setAutoGrow();
-		
+
 		// Animate dynamic placement of #left-rail, #right-panel, and #main-toolbar.
 		SwdView.setFixedDivs();
-		
+
 		// Dynamically calculate height of #right-panel.
 		SwdView.setRightPanelHeight();
-	
+
 		// Retrieve group info for logged in user.
 		SwdModel.getGroupInfo(function(response) {
 			SwdPresenter.groups = response;
@@ -598,16 +598,16 @@ var SwdView = {
 		});
 	},
 	/***
-	 * Simulate the placing of fixed divs within the FB app canvas. 
+	 * Simulate the placing of fixed divs within the FB app canvas.
 	 */
 	setFixedDivs: function() {
 		FB.Canvas.getPageInfo(function(pageInfo) {
-			alert('TEST');
+			
 			setTimeout(SwdView.setFixedDivs, 5000);
 		});
 	},
 	/***
-	 * Dynamically calculate the height of #right-panel, based on how large the FB canvas is. 
+	 * Dynamically calculate the height of #right-panel, based on how large the FB canvas is.
 	 */
 	setRightPanelHeight: function() {
 	},
