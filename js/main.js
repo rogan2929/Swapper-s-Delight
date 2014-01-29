@@ -617,7 +617,7 @@ var SwdView = {
 	 */
 	setFixedDivs: function(offset) {
 		$('#left-rail, #right-panel').animate( {
-			top: Math.max(offset, 60)
+			top: Math.max(offset + 60, 0)
 		}, 100);
 		
 		$('#main-toolbar').animate( {
