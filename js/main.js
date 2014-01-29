@@ -220,6 +220,9 @@ var SwdPresenter = {
 			scrollTop = parseInt(pageInfo.scrollTop);
 			offsetTop = parseInt(pageInfo.offsetTop);
 			windowHeight = window.innerHeight;
+			parentWindow = parent.window.innerHeight;
+			
+			console(parentWindow);
 			
 			// Calculate how far to offset things.
 			offset = Math.max(scrollTop - offsetTop, 0);
