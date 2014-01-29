@@ -215,10 +215,7 @@ var SwdPresenter = {
 			var scrollTop = parseInt(pageInfo.scrollTop);
 			var offsetTop = parseInt(pageInfo.offsetTop);
 			var clientHeight = parseInt(pageInfo.clientHeight);
-			var scrollHeight = parseInt(pageInfo.scrollHeight);
 			var offset = Math.max(scrollTop - offsetTop, 0);
-			
-			console.log(pageInfo);
 
 			// Update fixed divs
 			SwdView.setFixedDivs(offset);
@@ -226,10 +223,10 @@ var SwdPresenter = {
 			// TODO: Update right-panel height
 
 			// TODO: Detect scroll at bottom
-			/*
-			if (scrollTop + innerHeight >= scrollHeight) {
+			
+			if (scrollTop >= clientHeight) {
 				SwdPresenter.loadNewestPosts(true);
-			}*/
+			}
 
 			setTimeout(SwdPresenter.facebookPageInfoPoll, 50);
 		});
