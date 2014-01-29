@@ -616,7 +616,9 @@ var SwdView = {
 	 * @param {type} offset
 	 */
 	setFixedDivs: function(offset) {
-		
+		$('#left-rail, #main-toolbar, #right-panel').animate( {
+			top: Math.max(offset, 0)
+		}, 100);
 	},
 	/***
 	 * Dynamically calculate the height of #right-panel, based on how large the FB canvas is.
