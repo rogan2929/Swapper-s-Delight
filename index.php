@@ -51,7 +51,7 @@
 						</div>
 					</div>
 					<div id='group-feed' class='scroll-y'></div>
-					<div id='right-panel' class='ui-widget ui-widget-content scroll-y'>
+					<div id='right-panel' class='ui-widget ui-widget-content scroll-y hidden'>
 						<div id='panel-post'>
 							<div id='post-message-user'>
 								<div id='post-message-pic'></div>
@@ -87,7 +87,7 @@
 							</div>
 						</div>
 					</div>
-					<div id='right-panel-empty'></div>
+					<!--<div id='right-panel-empty'></div>-->
 				</div>
 
 			</div>

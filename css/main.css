@@ -375,7 +375,8 @@ div.right-toolbar-button {
 
 #group-feed {
     left: 200px;
-    right: 371px;
+    /*right: 371px;*/
+   	right: 0;
     top: 0;
     bottom: 0;
     position: absolute;

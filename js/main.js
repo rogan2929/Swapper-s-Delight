@@ -279,6 +279,7 @@ var SwdPresenter = {
 	},
 	onClickHtml: function(e, args) {
 		SwdView.closeAllUiMenus();
+		SwdView.hideRightPanel();
 	},
 	onClickMenuButton: function(e, args) {
 		SwdView.showUiMenu(e);
@@ -388,20 +389,6 @@ var SwdView = {
 	 * Init function for SwdView.
 	 */
 	initView: function() {
-		// Init header row buttons.
-		//        $('#tabs-main').tabs({
-		//            heightStyle: 'fill'
-		//        });
-		//        }).addClass("ui-tabs-vertical ui-helper-clearfix");
-
-		//        $("#tabs li").removeClass("ui-corner-top").addClass("ui-corner-left");
-
-		//$('.tabs-bottom .ui-tabs-nav, .tabs-bottom .ui-tabs-nav > *').removeClass('ui-corner-all
-		// ui-corner-top').addClass('ui-corner-bottom');
-
-		// move the nav to the bottom
-		//        $('.tabs-bottom .ui-tabs-nav').appendTo('.tabs-bottom');
-
 		// Set up buttons
 		$('.button-nav').button();
 
@@ -487,6 +474,15 @@ var SwdView = {
 	 */
 	closeAllUiMenus: function() {
 		$('.ui-menu').hide();
+	},
+	/***
+	 * Removes the right panel from view.
+	 */
+	hideRightPanel: function() {
+		$('#right-panel').hide('slide', {
+			easing: 'easeInOutQuint',
+			direction: 'right'
+		}, 300);
 	},
 	/***
 	 * Write posts to the page.
@@ -674,7 +670,17 @@ var SwdView = {
 			}
 		}
 
-		$('#right-panel-empty').fadeOut();
+		SwdView.showRightPanel();
+		//$('#right-panel-empty').fadeOut();
+	},
+	/***
+	 * Brings the right panel into view.
+	 */
+	showRightPanel: function() {
+		$('#right-panel').show('slide', {
+			easing: 'easeInOutQuint',
+			direction: 'right'
+		}, 300);
 	},
 	/***
 	 * Shows a Jquery UI menu.
