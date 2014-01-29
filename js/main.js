@@ -224,10 +224,11 @@ var SwdPresenter = {
 
 			// TODO: Detect scroll at bottom
 			
+			/*
 			if (scrollTop >= clientHeight) {
 				console.log(pageInfo);
 				SwdPresenter.loadNewestPosts(true);
-			}
+			}*/
 
 			setTimeout(SwdPresenter.facebookPageInfoPoll, 50);
 		});
