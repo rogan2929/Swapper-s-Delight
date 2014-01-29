@@ -216,6 +216,8 @@ var SwdPresenter = {
 			var offsetTop = parseInt(pageInfo.offsetTop);
 			var clientHeight = parseInt(pageInfo.clientHeight);
 			var offset = Math.max(scrollTop - offsetTop, 0);
+			
+			console.log($(window).innerHeight);
 
 			// Update fixed divs
 			SwdView.setFixedDivs(offset);
