@@ -167,7 +167,7 @@ var SwdPresenter = {
 	 * Starts the application after init has finished.
 	 */
 	startApp: function() {
-		FB.Canvas.setAutoGrow();
+		
 	
 		// Retrieve group info for logged in user.
 		SwdModel.getGroupInfo(function(response) {

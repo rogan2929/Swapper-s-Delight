@@ -149,7 +149,7 @@ textarea {
     /*position: absolute;*/
    	position: fixed;
     bottom: 0;
-    top: 0;
+    top: 60px;
     border-left: 8px solid #ccc;
 }
 
