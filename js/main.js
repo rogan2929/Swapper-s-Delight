@@ -197,6 +197,7 @@ var SwdPresenter = {
 				SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
 				SwdView.installHandler('onScrollGroupFeed', SwdPresenter.onScrollGroupFeed, '#group-feed', 'scroll');
 				SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
+				SwdView.installHandler('onWindowScroll', SwdPresenter.onWindowScroll, window, 'scroll');
 
 				SwdView.positionMenus();
 			}
@@ -388,6 +389,9 @@ var SwdPresenter = {
 	},
 	onWindowResize: function(e, args) {
 		SwdView.positionMenus();
+	},
+	onWindowScroll: function(e, args) {
+		alert('test');
 	}
 };
 
