@@ -169,11 +169,7 @@ var SwdPresenter = {
 	startApp: function() {
 		FB.Canvas.setAutoGrow();
 
-		// Animate dynamic placement of #left-rail, #right-panel, and #main-toolbar.
-		SwdView.setFixedDivs();
-
-		// Dynamically calculate height of #right-panel.
-		SwdView.setRightPanelHeight();
+		SwdPresenter.facebookPageInfo();
 
 		// Retrieve group info for logged in user.
 		SwdModel.getGroupInfo(function(response) {
@@ -270,6 +266,24 @@ var SwdPresenter = {
 			to: id,
 			method: 'send',
 			link: link
+		});
+	},
+	/***
+	 * Periodically call FB.Canvas.getPageInfo in order to dynmically update the UI within the canvas
+	 * iframe.
+	 */
+	facebookPageInfo: function() {
+		FB.Canvas.getPageInfo(function(pageInfo) {
+			var offset = Math.max(parseInt(pageInfo.scrollTop) - parseInt(pageInfo.offsetTop), 0);
+			
+			// Update fixed divs
+			SwdView.setFixedDivs(offset);
+			
+			// TODO: Update right-panel height
+			
+			// TODO: Update menu-positioning
+
+			setTimeout(SwdPresenter.facebookPageInfo, 200);
 		});
 	},
 	/***
@@ -599,17 +613,16 @@ var SwdView = {
 	},
 	/***
 	 * Simulate the placing of fixed divs within the FB app canvas.
+	 * @param {type} offset
 	 */
-	setFixedDivs: function() {
-		FB.Canvas.getPageInfo(function(pageInfo) {
-			
-			setTimeout(SwdView.setFixedDivs, 5000);
-		});
+	setFixedDivs: function(offset) {
+		
 	},
 	/***
 	 * Dynamically calculate the height of #right-panel, based on how large the FB canvas is.
+	 * @param {type} height
 	 */
-	setRightPanelHeight: function() {
+	setRightPanelHeight: function(height) {
 	},
 	/***
 	 * Changes the text shown in the "Select a Group" button.
