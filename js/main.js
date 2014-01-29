@@ -146,7 +146,7 @@ var SwdPresenter = {
 
 			$('#loginbutton,#feedbutton').removeAttr('disabled');
 
-			$.getScript('fb-scroll.js', function() {
+			$.getScript('js/fb-scroll.js', function() {
 				// Try to get a session going if there isn't one already.
 				FB.getLoginStatus(function(response) {
 					if (response.status === 'connected') {
