@@ -125,6 +125,7 @@ var SwdPresenter = {
 	oldestPost: null,
 	postType: PostType.group,
 	selectedGroup: null,
+	groups: null,
 	/**
 	 * Entry point of program.
 	 */
@@ -168,11 +169,11 @@ var SwdPresenter = {
 	startApp: function() {
 		// Retrieve group info for logged in user.
 		SwdModel.getGroupInfo(function(response) {
-			var groups = response;
+			SwdPresenter.groups = response;
 
-			if (groups) {
-				SwdPresenter.setSelectedGroup(groups[0]);
-				SwdView.addGroupsToMenu(groups);
+			if (SwdPresenter.groups) {
+				SwdPresenter.setSelectedGroup(SwdPresenter.groups[0]);
+				SwdView.addGroupsToMenu(SwdPresenter.groups);
 
 				$('#popup-menu-groups').menu().position({
 					of: $('#button-menu-groups'),
