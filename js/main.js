@@ -168,6 +168,13 @@ var SwdPresenter = {
 	 */
 	startApp: function() {
 		FB.Canvas.setAutoGrow();
+		
+		// TODO: Animate dynamic placement of #left-rail, #right-panel, and #main-toolbar.
+		FB.Canvas.getPageInfo(function(pageInfo) {
+			alert('TEST');
+		}, 1000);
+		
+		// TODO: Dynamically calculate height of #right-panel.
 	
 		// Retrieve group info for logged in user.
 		SwdModel.getGroupInfo(function(response) {
