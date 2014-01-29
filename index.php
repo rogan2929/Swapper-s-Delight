@@ -30,65 +30,63 @@
 			<div id='fb-root'></div>
 
 			<div id='main-panel'>
-				<div class='body row'>
-					<div id='left-rail' class='ui-widget ui-widget-content ui-corner-all scroll-y'>
-						<div id='left-rail-nav'>
-							<div id='button-nav-group' class='button-nav selected-nav'>
-								Newest
-							</div>
-							<div id='button-nav-myposts' class='button-nav'>
-								My Posts
-							</div>
-							<div id='button-nav-liked' class='button-nav'>
-								Liked
-							</div>
-							<div id='button-nav-search' class='button-nav'>
-								Search
-							</div>
+				<div id='left-rail' class='ui-widget ui-widget-content ui-corner-all scroll-y'>
+					<div id='left-rail-nav'>
+						<div id='button-nav-group' class='button-nav selected-nav'>
+							Newest
 						</div>
-						<div id='ad-space'>
-							Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+						<div id='button-nav-myposts' class='button-nav'>
+							My Posts
+						</div>
+						<div id='button-nav-liked' class='button-nav'>
+							Liked
+						</div>
+						<div id='button-nav-search' class='button-nav'>
+							Search
 						</div>
 					</div>
-					<div id='group-feed' class='scroll-y'></div>
-					<div id='right-panel' class='ui-widget ui-widget-content scroll-y hidden'>
-						<div id='panel-post'>
-							<div id='post-message-user'>
-								<div id='post-message-pic'></div>
-								<div id='post-message-name'></div>
-							</div>
-							<div id='post-image-container' class='ui-widget ui-widget-content ui-corner-all'>
-								<div id='post-no-image' class='hidden'>
-									<div></div>
-									<span>This post does not have a photo, or the owner of this post has chosen not to give permission for applications like Swapper's Delight to view it. Click the link below to see the original Facebook posting.</span>
-									<a id='post-permalink' class='wrappable-link' target='_blank'></a>
-								</div>
-								<div id='post-image'></div>
-							</div>
-							<div id='post-message' class='ui-widget ui-widget-content ui-corner-all'>
-								<span id='post-message-text'></span>
-							</div>
-							<div id='post-button-bar'>
-								<div id='post-button-comment' class='post-button'>
-									Comment
-								</div>
-								<div id='post-button-pm' class='post-button'>
-									Message
-								</div>
-								<div id='post-button-like' class='post-button'>
-									Like
-								</div>
-							</div>
-							<div id='post-comments'>
-								<div id='post-nocomments'>
-									No comments yet.
-								</div>
-								<div id='post-comment-list'></div>
-							</div>
-						</div>
+					<div id='ad-space'>
+						Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
 					</div>
-					<!--<div id='right-panel-empty'></div>-->
 				</div>
+				<div id='group-feed' class='scroll-y'></div>
+				<div id='right-panel' class='ui-widget ui-widget-content scroll-y hidden'>
+					<div id='panel-post'>
+						<div id='post-message-user'>
+							<div id='post-message-pic'></div>
+							<div id='post-message-name'></div>
+						</div>
+						<div id='post-image-container' class='ui-widget ui-widget-content ui-corner-all'>
+							<div id='post-no-image' class='hidden'>
+								<div></div>
+								<span>This post does not have a photo, or the owner of this post has chosen not to give permission for applications like Swapper's Delight to view it. Click the link below to see the original Facebook posting.</span>
+								<a id='post-permalink' class='wrappable-link' target='_blank'></a>
+							</div>
+							<div id='post-image'></div>
+						</div>
+						<div id='post-message' class='ui-widget ui-widget-content ui-corner-all'>
+							<span id='post-message-text'></span>
+						</div>
+						<div id='post-button-bar'>
+							<div id='post-button-comment' class='post-button'>
+								Comment
+							</div>
+							<div id='post-button-pm' class='post-button'>
+								Message
+							</div>
+							<div id='post-button-like' class='post-button'>
+								Like
+							</div>
+						</div>
+						<div id='post-comments'>
+							<div id='post-nocomments'>
+								No comments yet.
+							</div>
+							<div id='post-comment-list'></div>
+						</div>
+					</div>
+				</div>
+				<!--<div id='right-panel-empty'></div>-->
 
 			</div>
 

@@ -146,7 +146,8 @@ textarea {
 #right-panel,#right-panel-empty {
     width: 360px;
     right: 0;
-    position: absolute;
+    /*position: absolute;*/
+   	position: fixed;
     bottom: 0;
     top: 0;
     border-left: 8px solid #ccc;
@@ -376,18 +377,22 @@ div.right-toolbar-button {
 #group-feed {
     left: 200px;
     /*right: 371px;*/
+   /*
    	right: 0;
     top: 0;
     bottom: 0;
-    position: absolute;
+    position: absolute;*/
+    position: fixed;
     margin-top: -5px;
 }
 
 #left-rail {
     width: 180px;
+    /*
     bottom: 0;
     top: 0;
-    position: absolute;
+    position: absolute;*/
+   	position: fixed;
     padding: 5px;
 }
 
@@ -398,6 +403,8 @@ div.right-toolbar-button {
     height: 50px;
     line-height: 50px;
     top: 0;
+    position: fixed;
+    width: 100%;
 }
 
 .button-nav {
