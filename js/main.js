@@ -603,7 +603,7 @@ var SwdView = {
 	setFixedDivs: function() {
 		FB.Canvas.getPageInfo(function(pageInfo) {
 			alert('TEST');
-			setTimer(SwdView.setFixedDivs, 5000);
+			setTimeout(SwdView.setFixedDivs, 5000);
 		});
 	},
 	/***
