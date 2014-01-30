@@ -383,6 +383,7 @@ div.right-toolbar-button {
     margin-top: -5px;*/
    margin-left: 200px;
    margin-top: 60px;
+   overflow: hidden;
 }
 
 #left-rail {
