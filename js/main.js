@@ -237,12 +237,11 @@ var SwdPresenter = {
 				SwdView.setFixedDivs(offset);
 
 				// Update right-panel height
-				//height = (clientHeight - offsetTop);
 				if (scrollTop > offsetTop) {
 					height = clientHeight - 70;
 				}
 				else {
-					height = clientHeight - offsetTop;
+					height = clientHeight - offsetTop - 70;
 				}
 				
 				SwdView.setRightPanelHeight(height);
