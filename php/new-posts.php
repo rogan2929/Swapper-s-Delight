@@ -15,7 +15,7 @@ if ($createdTime) {
 }
 
 // Fetch 30 results, and sorted by creation time.
-$streamQuery .= ' ORDER BY created_time DESC LIMIT 30';
+$streamQuery .= ' ORDER BY created_time DESC LIMIT 20';
 
 $queries = array(
 	'streamQuery' => $streamQuery,
