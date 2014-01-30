@@ -284,9 +284,6 @@ var SwdPresenter = {
 			} else if (!loadNextPage) {
 				SwdPresenter.oldestPost = null;
 			}
-			
-			// Start polling page info again.
-			SwdPresenter.facebookPageInfoPoll();
 		});
 	},
 	/***
@@ -579,13 +576,12 @@ var SwdView = {
 
 			// Sleekly fade in the post tile elements.
 			// From: http://www.paulirish.com/2008/sequentially-chain-your-callbacks-in-jquery-two-ways/
-			/*
-			 (function shownext(jq) {
-			 jq.eq(0).fadeIn(120, function() {
-			 ( jq = jq.slice(1)).length && shownext(jq);
-			 });
-			 })($('div.post-tile'));*/
-			$('div.post-tile').show();
+			(function shownext(jq) {
+				jq.eq(0).fadeIn(120, function() {
+					( jq = jq.slice(1)).length && shownext(jq);
+				});
+			})($('div.post-tile'));
+			//$('div.post-tile').show();
 
 			// Associate the click event handler for newly created posts.
 			$('.post-tile > *').click(SwdView.handlers['onClickPostTile']);
@@ -597,6 +593,9 @@ var SwdView = {
 
 			// Scroll up a tiny bit so the app is never at the bottom of the page after loading posts.
 			$('#group-feed').scrollTop($('#group-feed').scrollTop() - 1);
+
+			// Start polling page info again.
+			SwdPresenter.facebookPageInfoPoll();
 		}
 	},
 	/***
