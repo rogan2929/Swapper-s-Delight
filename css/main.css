@@ -150,7 +150,7 @@ textarea {
    	position: fixed;
     /*bottom: 0;*/
     /*top: 60px;*/
-    border-left: 7px solid #ccc;
+    border-left: 5px solid #ccc;
 }
 
 .body.row {
@@ -395,7 +395,7 @@ div.right-toolbar-button {
     top: 0;
     position: fixed;
     width: 100%;
-    border-bottom: 7px solid #ccc;
+    border-bottom: 5px solid #ccc;
 }
 
 .button-nav {
