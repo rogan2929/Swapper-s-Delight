@@ -229,6 +229,8 @@ var SwdPresenter = {
 			// Calculate how far to offset things.
 			offset = Math.max(scrollTop - offsetTop, 0);
 
+			console.log($('#right-panel').css('top') + ',' + $('#right-panel').css('margin-top'));
+
 			// Update fixed divs
 			SwdView.setFixedDivs(offset);
 
@@ -577,11 +579,11 @@ var SwdView = {
 			// Sleekly fade in the post tile elements.
 			// From: http://www.paulirish.com/2008/sequentially-chain-your-callbacks-in-jquery-two-ways/
 			/*
-			(function shownext(jq) {
-				jq.eq(0).fadeIn(60, function() {
-					( jq = jq.slice(1)).length && shownext(jq);
-				});
-			})($('div.post-tile'));*/
+			 (function shownext(jq) {
+			 jq.eq(0).fadeIn(60, function() {
+			 ( jq = jq.slice(1)).length && shownext(jq);
+			 });
+			 })($('div.post-tile'));*/
 			$('div.post-tile').show();
 
 			// Associate the click event handler for newly created posts.
@@ -718,9 +720,6 @@ var SwdView = {
 	 * Brings the right panel into view.
 	 */
 	showRightPanel : function() {
-		console.log($('#right-panel').css('top'));
-		console.log($('#right-panel').css('margin-top'));
-		
 		$('#right-panel').show('slide', {
 			easing : 'easeInOutQuint',
 			direction : 'right'
