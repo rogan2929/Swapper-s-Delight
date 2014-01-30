@@ -126,7 +126,7 @@ var SwdPresenter = {
 	postType: PostType.group,
 	selectedGroup: null,
 	groups: null,
-	prevOffset: 0,
+	prevOffset: null,
 	/**
 	 * Entry point of program.
 	 */
