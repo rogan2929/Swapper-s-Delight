@@ -599,19 +599,21 @@ var SwdView = {
 
 			// Sleekly fade in the post tile elements.
 			// From: http://www.paulirish.com/2008/sequentially-chain-your-callbacks-in-jquery-two-ways/
-			/*
-			 (function shownext(jq) {
-			 jq.eq(0).fadeIn(60, function() {
-			 ( jq = jq.slice(1)).length && shownext(jq);
-			 });
-			 })($('div.post-tile'));*/
-			$('div.post-tile').fadeIn(100, function() {
-				FB.Canvas.setSize({
-					height: $('#app-content').height()
-				});
+			(function shownext(jq) {
+				jq.eq(0).fadeIn(60, function() {
+					FB.Canvas.setSize({
+						height: $('#app-content').height()
+					});
 
-				alert($('#app-content').height());
+					( jq = jq.slice(1)).length && shownext(jq);
+				});
+			})($('div.post-tile'));
+			/*
+			$('div.post-tile').fadeIn(100, function() {
+			FB.Canvas.setSize({
+			height: $('#app-content').height()
 			});
+			});*/
 
 			// Associate the click event handler for newly created posts.
 			$('.post-tile > *').click(SwdView.handlers['onClickPostTile']);
