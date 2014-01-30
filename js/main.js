@@ -223,10 +223,12 @@ var SwdPresenter = {
 			var scrollTop;
 			var offsetTop;
 			var windowHeight;
+			var clientHeight;
 			var offset;
 
 			scrollTop = parseInt(pageInfo.scrollTop);
 			offsetTop = parseInt(pageInfo.offsetTop);
+			clientHeight = parseInt(pageInfo.clientHeight);
 
 			// Calculate how far to offset things.
 			offset = Math.max(scrollTop - offsetTop, 0);
@@ -237,6 +239,9 @@ var SwdPresenter = {
 			// TODO: Update right-panel height
 
 			// TODO: Detect scroll at bottom
+			if (scrollTop >= $('#app-content').height() - clientHeight) {
+				alert('bottom reached.');
+			}
 
 			setTimeout(SwdPresenter.facebookPageInfoPoll, 50);
 		});
