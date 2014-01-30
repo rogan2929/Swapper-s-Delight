@@ -218,6 +218,7 @@ var SwdPresenter = {
 			var windowHeight;
 			var clientHeight;
 			var offset;
+			var height;
 
 			scrollTop = parseInt(pageInfo.scrollTop);
 			offsetTop = parseInt(pageInfo.offsetTop);
@@ -235,7 +236,9 @@ var SwdPresenter = {
 				// Update fixed divs
 				SwdView.setFixedDivs(offset);
 
-				// TODO: Update right-panel height
+				// Update right-panel height
+				height = clientHeight - offsetTop - 60;
+				SwdView.setRightPanelHeight(height);
 
 				// Detect scroll at bottom
 				if (scrollTop >= $('#app-content').height() - clientHeight) {
@@ -659,6 +662,7 @@ var SwdView = {
 	 * @param {type} height
 	 */
 	setRightPanelHeight: function(height) {
+		$('#right-panel').height(height);
 	},
 	/***
 	 * Changes the text shown in the "Select a Group" button.
