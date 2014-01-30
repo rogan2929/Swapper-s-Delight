@@ -172,7 +172,7 @@ var SwdPresenter = {
 	 * Starts the application after init has finished.
 	 */
 	startApp: function() {
-		FB.Canvas.setAutoGrow(500);
+		//FB.Canvas.setAutoGrow();
 
 		// Retrieve group info for logged in user.
 		SwdModel.getGroupInfo(function(response) {
@@ -317,8 +317,6 @@ var SwdPresenter = {
 	 * @param {type} group
 	 */
 	setSelectedGroup: function(group) {
-		FB.Canvas.setAutoGrow(false);
-
 		SwdPresenter.selectedGroup = group;
 		SwdPresenter.loadNewestPosts(false);
 		SwdView.setGroupButtonText(group.name);
@@ -622,7 +620,9 @@ var SwdView = {
 			// Start polling page info again.
 			SwdPresenter.facebookPageInfoPoll();
 
-			FB.Canvas.setAutoGrow(500);
+			FB.Canvas.setSize({
+				height: $(document).height() + 20
+			});
 		}
 	},
 	/***
