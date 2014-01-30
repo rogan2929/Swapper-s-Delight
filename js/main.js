@@ -317,6 +317,8 @@ var SwdPresenter = {
 	 * @param {type} group
 	 */
 	setSelectedGroup: function(group) {
+		FB.setAutoGrow(false);
+		
 		SwdPresenter.selectedGroup = group;
 		SwdPresenter.loadNewestPosts(false);
 		SwdView.setGroupButtonText(group.name);
@@ -619,6 +621,8 @@ var SwdView = {
 
 			// Start polling page info again.
 			SwdPresenter.facebookPageInfoPoll();
+			
+			FB.Canvas.setAutoGrow();
 		}
 	},
 	/***
