@@ -229,7 +229,7 @@ var SwdPresenter = {
 			// Calculate how far to offset things.
 			offset = Math.max(scrollTop - offsetTop, 0);
 
-			console.log($('#right-panel').css('top') + ',' + $('#right-panel').css('margin-top'));
+			//console.log($('#right-panel').css('top') + ',' + $('#right-panel').css('margin-top'));
 
 			// Update fixed divs
 			SwdView.setFixedDivs(offset);
