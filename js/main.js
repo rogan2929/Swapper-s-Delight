@@ -227,7 +227,7 @@ var SwdPresenter = {
 			offset = Math.max(scrollTop - offsetTop, 0);
 
 			// Check to see if the offset has been updated.
-			if (offset != SwdPresenter.prevOffSet) {
+			if (offset != SwdPresenter.prevOffset) {
 				SwdPresenter.prevOffset = offset;
 
 				//console.log($('#right-panel').css('top') + ',' + $('#right-panel').css('margin-top'));
