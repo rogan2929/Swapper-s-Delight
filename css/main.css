@@ -143,14 +143,14 @@ textarea {
     left: 0;
 }
 
-#right-panel,#right-panel-empty {
+#right-panel {
     width: 360px;
     right: 0;
     /*position: absolute;*/
    	position: fixed;
     /*bottom: 0;*/
     /*top: 60px;*/
-    border-left: 8px solid #ccc;
+    border-left: 7px solid #ccc;
 }
 
 .body.row {
@@ -238,15 +238,6 @@ textarea {
 
 #panel-post > * {
     margin-bottom: 10px;
-}
-
-#right-panel-empty {
-    background: white;
-}
-
-#right-panel-empty > span {
-    font-style: italic;
-    text-align: center;
 }
 
 #post-image-container {
@@ -404,6 +395,7 @@ div.right-toolbar-button {
     top: 0;
     position: fixed;
     width: 100%;
+    border-bottom: 7px solid #ccc;
 }
 
 .button-nav {

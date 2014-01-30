@@ -86,8 +86,6 @@
 						</div>
 					</div>
 				</div>
-				<!--<div id='right-panel-empty'></div>-->
-
 			</div>
 
 			<div id='main-toolbar' class='ui-widget ui-widget-header'>
