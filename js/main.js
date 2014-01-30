@@ -239,7 +239,7 @@ var SwdPresenter = {
 				// Update right-panel height
 				//height = (clientHeight - offsetTop);
 				if (scrollTop > offsetTop) {
-					height = clientHeight - 65;
+					height = clientHeight - 70;
 				}
 				else {
 					height = clientHeight - offsetTop;
