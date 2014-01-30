@@ -237,7 +237,7 @@ var SwdPresenter = {
 				SwdView.setFixedDivs(offset);
 
 				// Update right-panel height
-				height = clientHeight - offsetTop - 27;
+				height = (clientHeight - offsetTop) * 0.90;
 				SwdView.setRightPanelHeight(height);
 
 				// Detect scroll at bottom
