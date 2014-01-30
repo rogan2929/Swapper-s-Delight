@@ -621,10 +621,10 @@ var SwdView = {
 			SwdPresenter.facebookPageInfoPoll();
 
 			FB.Canvas.setSize({
-				height: $(document).height()
+				height: $('#app-content').height()
 			});
 			
-			alert($(document).height());
+			alert($('#app-content').height());
 		}
 	},
 	/***
