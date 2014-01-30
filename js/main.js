@@ -624,7 +624,7 @@ var SwdView = {
 
 			//FB.Canvas.setAutoGrow();
 			FB.Canvas.setSize({
-				height: $('#app-content').height()
+				height: window.innerHeight
 			});
 		}
 	},
