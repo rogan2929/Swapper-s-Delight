@@ -149,6 +149,7 @@ textarea {
    	position: fixed;
     border-left: 5px solid #ccc;
     border-top: 5px solid #ccc;
+    border-bottom: 5px solid #ccc;
 }
 
 .body.row {
