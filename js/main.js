@@ -318,7 +318,7 @@ var SwdPresenter = {
 	 */
 	setSelectedGroup: function(group) {
 		//FB.Canvas.setAutoGrow(false);
-		
+
 		SwdPresenter.selectedGroup = group;
 		SwdPresenter.loadNewestPosts(false);
 		SwdView.setGroupButtonText(group.name);
@@ -621,9 +621,11 @@ var SwdView = {
 
 			// Start polling page info again.
 			SwdPresenter.facebookPageInfoPoll();
-			
+
 			//FB.Canvas.setAutoGrow();
-			FB.Canvas.setSize();
+			FB.Canvas.setSize({
+				height: $('#app-content').height()
+			});
 		}
 	},
 	/***
