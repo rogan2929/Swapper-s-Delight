@@ -317,7 +317,7 @@ var SwdPresenter = {
 	 * @param {type} group
 	 */
 	setSelectedGroup: function(group) {
-		FB.setAutoGrow(false);
+		FB.Canvas.setAutoGrow(false);
 		
 		SwdPresenter.selectedGroup = group;
 		SwdPresenter.loadNewestPosts(false);
