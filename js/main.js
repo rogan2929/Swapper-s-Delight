@@ -237,7 +237,14 @@ var SwdPresenter = {
 				SwdView.setFixedDivs(offset);
 
 				// Update right-panel height
-				height = (clientHeight - offsetTop) * 0.90;
+				//height = (clientHeight - offsetTop);
+				if (scrollTop > offsetTop) {
+					height = clientHeight - 60;
+				}
+				else {
+					height = clientHeight - offsetTop;
+				}
+				
 				SwdView.setRightPanelHeight(height);
 
 				// Detect scroll at bottom
@@ -662,9 +669,6 @@ var SwdView = {
 		$('#main-toolbar').animate({
 			top: Math.max(offset, 0)
 		}, 100);
-
-		//$('#left-rail, #right-panel').css('top', Math.max(offset + 60, 0));
-		//$('#main-toolbar').css('top', Math.max(offset, 0));
 	},
 	/***
 	 * Dynamically calculate the height of #right-panel, based on how large the FB canvas is.
