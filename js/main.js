@@ -623,6 +623,8 @@ var SwdView = {
 			FB.Canvas.setSize({
 				height: window.innerHeight
 			});
+			
+			alert(window.innerHeight);
 		}
 	},
 	/***
