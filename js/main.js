@@ -718,7 +718,8 @@ var SwdView = {
 	 * Brings the right panel into view.
 	 */
 	showRightPanel : function() {
-		console.log($('#right-panel').top());
+		console.log($('#right-panel').css('top'));
+		console.log($('#right-panel').css('margin-top'));
 		
 		$('#right-panel').show('slide', {
 			easing : 'easeInOutQuint',
