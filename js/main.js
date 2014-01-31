@@ -693,11 +693,11 @@ var SwdView = {
 	 * @param {type} offset
 	 */
 	setFixedDivs: function(offset) {
-		$('#left-rail, #post-details-panel').animate({
+		$('#left-rail').animate({
 			top: Math.max(offset + 60, 0)
 		}, 100);
 
-		$('#main-toolbar').animate({
+		$('#main-toolbar, #post-details-panel').animate({
 			top: Math.max(offset, 0)
 		}, 100);
 	},
