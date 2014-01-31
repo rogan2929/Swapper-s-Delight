@@ -146,8 +146,6 @@ var SwdPresenter = {
 			});
 
 			$('#loginbutton,#feedbutton').removeAttr('disabled');
-			
-			FB.Canvas.showFlashElement('#app-content');
 
 			// Try to get a session going if there isn't one already.
 			FB.getLoginStatus(function(response) {
