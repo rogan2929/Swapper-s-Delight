@@ -7,7 +7,7 @@ $gid = $_GET['gid'];
 $createdTime = $_GET['createdTime'];
 
 // Base query
-$streamQuery = 'SELECT post_id,created_time,message,attachment,comment_info FROM stream WHERE source_id=' . $gid;
+$streamQuery = 'SELECT post_id,updated_time,message,attachment,comment_info FROM stream WHERE source_id=' . $gid;
 
 // For FQL pagination (query by posts with created_time less than created_time of last query's oldest post.)
 if ($createdTime) {
@@ -15,7 +15,7 @@ if ($createdTime) {
 }
 
 // Fetch 30 results, and sorted by creation time.
-$streamQuery .= ' ORDER BY created_time DESC LIMIT 20';
+$streamQuery .= ' ORDER BY updated_time DESC LIMIT 20';
 
 $queries = array(
 	'streamQuery' => $streamQuery,
@@ -42,7 +42,8 @@ for ($i = 0; $i < count($stream); $i++) {
 		$post['attachment']['media'][0] && $post['attachment']['media'][0]['photo']) {
 			for ($j = 0; $j < count($images); $j++) {
 				if ($post['attachment']['media'][0]['photo']['fbid'] == $images[$j]['object_id']) {
-					$post['image_url'] = $images[$j]['images'][4]['source'];
+					$post['image_url'][] = $images[$j]['images'][2]['source'];
+					$post['image_url'][] = $images[$j]['images'][5]['source'];
 					break;
 				}
 			}
