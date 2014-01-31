@@ -157,6 +157,10 @@ textarea {
     border-bottom: 5px solid #ccc;
 }
 
+.ajax-loading-div {
+	background: white;
+}
+
 .body.row {
     top: 60px;
     bottom: 0;

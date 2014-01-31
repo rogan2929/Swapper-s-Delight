@@ -85,6 +85,7 @@
 							<div id='post-comment-list'></div>
 						</div>
 					</div>
+					<div class='ajax-loading-div'></div>
 				</div>
 			</div>
 

@@ -768,6 +768,8 @@ var SwdView = {
 	 * Brings the right panel into view.
 	 */
 	showRightPanel: function() {
+		$('#right-panel .ajax-loading-div').show();
+		
 		$('#right-panel').show('slide', {
 			easing: 'easeInOutQuint',
 			direction: 'right'
