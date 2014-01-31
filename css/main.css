@@ -157,7 +157,7 @@ textarea {
 }
 
 .floating-panel {
-	width: 500px;
+	width: 700px;
    	position: fixed;
     border: 5px solid #ccc;
     left: 0;

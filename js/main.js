@@ -230,18 +230,15 @@ var SwdPresenter = {
 			if (offset != SwdPresenter.prevOffset) {
 				SwdPresenter.prevOffset = offset;
 
-				//console.log($('#post-details-panel').css('top') + ',' +
-				// $('#post-details-panel').css('margin-top'));
-
 				// Update fixed divs
 				SwdView.setFixedDivs(offset);
 
 				// Update post-details-panel height
 				if (scrollTop > offsetTop) {
-					height = clientHeight - 70;
+					height = clientHeight - 10;
 				}
 				else {
-					height = clientHeight - offsetTop - 70;
+					height = clientHeight - offsetTop - 10;
 				}
 
 				SwdView.setFloatingPanelHeight(height);
