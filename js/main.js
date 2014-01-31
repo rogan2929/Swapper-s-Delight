@@ -235,7 +235,7 @@ var SwdPresenter = {
 				//console.log($('#right-panel').css('top') + ',' + $('#right-panel').css('margin-top'));
 
 				// Update fixed divs
-				//SwdView.setFixedDivs(offset);
+				SwdView.setFixedDivs(offset);
 
 				// Update right-panel height
 				if (scrollTop > offsetTop) {
@@ -639,14 +639,13 @@ var SwdView = {
 	},
 	/***
 	 * Sets menu positions.
-	 * @param {type} offset
 	 */
-	positionMenus: function(offset) {
+	positionMenus: function() {
 		$('.menu-button').each(function() {
 			var menu = $(this).find('a').attr('href');
 
 			$(menu).css({
-				top: 0 + offset,
+				top: 0,
 				left: 0
 			});
 
@@ -780,7 +779,7 @@ var SwdView = {
 		e.stopPropagation();
 		menu = $(e.currentTarget).find('a').attr('href');
 
-		SwdView.positionMenus(0);
+		SwdView.positionMenus();
 
 		// Display the menu.
 		$(menu).show('slide', {
