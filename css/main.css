@@ -159,6 +159,7 @@ textarea {
 
 .ajax-loading-div {
 	background: white;
+	background-image: url('/img/ajax.gif');
 	position: absolute;
 	left: 0;
 	right: 0;
