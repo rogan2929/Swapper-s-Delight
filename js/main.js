@@ -795,13 +795,13 @@ var SwdView = {
 	showPostDetailsPanel: function() {
 		$('#post-details-panel .ajax-loading-div').show();
 
+		// Make the panel modal by summoning a ui-widget-overlay.
+		$('<div class="ui-widget-overlay ui-widget-front"></div>').hide().appendTo('body').fadeIn();
+
 		$('#post-details-panel').show('slide', {
 			easing: 'easeInOutQuint',
 			direction: 'down'
-		}, 300, function() {
-			// Make the panel modal by summoning a ui-widget-overlay.
-			$('body').append('<div class="ui-widget-overlay ui-widget-front"></div>');
-		});
+		}, 300);
 	},
 	/***
 	 * Shows a Jquery UI menu.
