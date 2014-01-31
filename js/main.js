@@ -330,6 +330,8 @@ var SwdPresenter = {
 		SwdView.showFloatingPanel('#new-post-panel');
 	},
 	onClickButtonRefresh: function(e, args) {
+		SwdView.toggleFeedLoadingAjaxDiv();
+		
 		switch (SwdPresenter.postType) {
 			case PostType.group:
 				SwdPresenter.loadNewestPosts(false);
