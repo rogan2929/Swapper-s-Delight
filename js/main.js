@@ -66,14 +66,14 @@ var SwdModel = {
 	/***
 	 * AJAX call to FB group feed.
 	 * @param {type} gid Group id whose posts are to be retrieved.
-	 * @param {type} createdTime
+	 * @param {type} updatedTime
 	 * @param {type} callback Completed callback function.
 	 */
-	getNewestPosts: function(gid, createdTime, callback) {
+	getNewestPosts: function(gid, updatedTime, callback) {
 		var url = '/php/new-posts.php?gid=' + gid;
 
-		if (createdTime) {
-			url += '&createdTime=' + createdTime;
+		if (updatedTime) {
+			url += '&updatedTime=' + updatedTime;
 		}
 
 		$.ajax({
@@ -277,17 +277,17 @@ var SwdPresenter = {
 	 * @param {type} loadNextPage
 	 */
 	loadNewestPosts: function(loadNextPage) {
-		var createdTime;
+		var updatedTime;
 
 		if (loadNextPage) {
-			createdTime = SwdPresenter.oldestPost.created_time;
+			updatedTime = SwdPresenter.oldestPost.updated_time;
 		}
 		else {
-			createdTime = null;
+			updatedTime = null;
 		}
 
 		// Get posts and then display them.
-		SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, createdTime, function(response) {
+		SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, updatedTime, function(response) {
 			if (!loadNextPage) {
 				// Clear previous results, unless loading a new page.
 				SwdView.clearPosts();

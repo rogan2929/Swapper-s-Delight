@@ -4,7 +4,7 @@ require_once 'session.php';
 
 // Retrieve group id that is being queried.
 $gid = $_GET['gid'];
-$createdTime = $_GET['createdTime'];
+$createdTime = $_GET['updatedTime'];
 
 // Base query
 $streamQuery = 'SELECT post_id,updated_time,message,attachment,comment_info FROM stream WHERE source_id=' . $gid;
