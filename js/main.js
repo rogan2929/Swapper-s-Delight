@@ -173,6 +173,7 @@ var SwdPresenter = {
 	 */
 	startApp: function() {
 		//FB.Canvas.setAutoGrow();
+		SwdView.toggleFeedLoadingAjaxDiv();
 
 		// Retrieve group info for logged in user.
 		SwdModel.getGroupInfo(function(response) {
@@ -580,6 +581,8 @@ var SwdView = {
 		var postTile;
 		var primaryContent;
 		var secondaryContent;
+		
+		SwdView.toggleFeedLoadingAjaxDiv();
 
 		// If there is a feed to display, then display it.
 		if (posts) {
@@ -828,6 +831,12 @@ var SwdView = {
 			duration: 300,
 			easing: 'easeInOutQuint'
 		});
+	},
+	/***
+	 * Shows or hides the main feed loading div. 
+	 */
+	toggleFeedLoadingAjaxDiv: function() {
+		$('#feed-ajax-loading-div').fadeToggle();
 	}
 };
 
