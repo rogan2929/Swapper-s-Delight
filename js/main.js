@@ -794,7 +794,7 @@ var SwdView = {
 
 		$('#right-panel').show('slide', {
 			easing: 'easeInOutQuint',
-			direction: 'top'
+			direction: 'down'
 		}, 300);
 	},
 	/***
