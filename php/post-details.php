@@ -5,7 +5,7 @@ require_once 'session.php';
 $postId = $_GET['postId'];
 
 $queries = array(
-	'detailsQuery' => 'SELECT post_id,message,actor_id,permalink,like_info,share_info,comment_info,tagged_ids,action_links FROM stream WHERE post_id="' . $postId . '"',
+	'detailsQuery' => 'SELECT post_id,message,actor_id,permalink,like_info,share_info,comment_info,tagged_ids FROM stream WHERE post_id="' . $postId . '"',
 	'userQuery' => 'SELECT last_name,first_name,pic_square,profile_url FROM user WHERE uid IN (SELECT actor_id FROM #detailsQuery)',
 	'commentsQuery' => 'SELECT fromid,text,text_tags,attachment FROM comment WHERE post_id IN (SELECT post_id FROM #detailsQuery)',
 	'commentUserQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url FROM user WHERE uid IN (SELECT fromid FROM #commentsQuery)'
@@ -36,6 +36,11 @@ for ($i = 0; $i < count($postDetails['comments']); $i++) {
 		}
 	}
 }
+
+// Query action links for the given post. (FQL's action_links column always returns null. Suspect a bug.)
+$response = $fbSession->api('/' . $postId . '?fields=actions');
+
+$postDetails['action_links'] = $response['actions'];
 
 // Return the result.
 echo json_encode($postDetails);
