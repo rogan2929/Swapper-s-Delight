@@ -50,7 +50,7 @@
 					</div>
 				</div>
 				<div id='group-feed' class='scroll-y'>
-					<div id='feed-ajax-loading-div' class='ajax-loading-div hidden'></div>
+					<div id='feed-ajax-loading-div' class='ajax-loading-div ui-widget-front hidden'></div>
 				</div>
 				<div id='post-details-panel' class='floating-panel ui-widget-content scroll-y hidden'>
 					<div id='panel-post'>
