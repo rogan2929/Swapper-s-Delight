@@ -191,7 +191,9 @@ var SwdPresenter = {
 				SwdView.installHandler('onClickMenuItemGroup', SwdPresenter.onClickMenuItemGroup, '.menu-item-group', 'click');
 				SwdView.installHandler('onClickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item-main', 'click');
 				SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.button-nav', 'click');
-				SwdView.installHandler('onClickPostButton', SwdPresenter.onClickPostButton, '.post-button', 'click');
+				SwdView.installHandler('onClickPostButtonComment', SwdPresenter.onClickPostButtonComment, '#post-button-comment', 'click');
+				SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
+				SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
 				SwdView.installHandler('onClickPanelMessageUser', SwdPresenter.onClickPanelMessageUser, '#post-message-user', 'click');
 				SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
 				SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
@@ -375,8 +377,14 @@ var SwdPresenter = {
 		var profileUrl = $(e.currentTarget).data('src');
 		window.open(profileUrl);
 	},
-	onClickPostButton: function(e, args) {
-		SwdPresenter.sendFacebookMessage('', 'http://www.foxnews.com');
+	onClickPostButtonComment: function(e, args) {
+		alert($(e.currentTarget).attr('id'));
+	},
+	onClickPostButtonLike: function(e, args) {
+		alert($(e.currentTarget).attr('id'));
+	},
+	onClickPostButtonPm: function(e, args) {
+		alert($(e.currentTarget).attr('id'));
 	},
 	onClickPostTile: function(e, args) {
 		var id;

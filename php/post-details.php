@@ -44,5 +44,4 @@ $postDetails['action_links'] = $response['actions'][0];
 
 // Return the result.
 echo json_encode($postDetails);
-//echo json_encode($response);
 ?>
