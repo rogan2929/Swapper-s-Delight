@@ -27,8 +27,6 @@ function streamQuery($fbSession, $sourceId, $limit = 20, $constraints) {
 		'queries' => $queries
 	));
 
-	echo json_encode($response);
-
 	$posts = array();
 
 	$stream = $response[0]['fql_result_set'];

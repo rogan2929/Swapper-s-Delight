@@ -22,5 +22,5 @@ if ($updatedTime) {
 $posts = streamQuery($fbSession, $gid, 20, $constraints);
 
 // Return the result.
-//echo json_encode($posts);
+echo json_encode($posts);
 ?>
