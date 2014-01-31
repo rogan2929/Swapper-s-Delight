@@ -230,7 +230,8 @@ var SwdPresenter = {
 			if (offset != SwdPresenter.prevOffset) {
 				SwdPresenter.prevOffset = offset;
 
-				//console.log($('#post-details-panel').css('top') + ',' + $('#post-details-panel').css('margin-top'));
+				//console.log($('#post-details-panel').css('top') + ',' +
+				// $('#post-details-panel').css('margin-top'));
 
 				// Update fixed divs
 				SwdView.setFixedDivs(offset);
@@ -485,7 +486,7 @@ var SwdView = {
 				primary: 'ui-icon-comment'
 			}
 		});
-		
+
 		$('#button-refresh').button({
 			icons: {
 				primary: 'ui-icon-refresh'
@@ -564,7 +565,9 @@ var SwdView = {
 		$('#post-details-panel').hide('slide', {
 			easing: 'easeInOutQuint',
 			direction: 'right'
-		}, 300);
+		}, 300, function() {
+			$('div.ui-widget-overlay').hide();
+		});
 	},
 	/***
 	 * Write posts to the page.
@@ -795,7 +798,10 @@ var SwdView = {
 		$('#post-details-panel').show('slide', {
 			easing: 'easeInOutQuint',
 			direction: 'down'
-		}, 300);
+		}, 300, function() {
+			// Make the panel modal by summoning a ui-widget-overlay.
+			$('body').append('<div class="ui-widget-overlay ui-widget-front"></div>');
+		});
 	},
 	/***
 	 * Shows a Jquery UI menu.
