@@ -42,8 +42,8 @@ for ($i = 0; $i < count($stream); $i++) {
 		$post['attachment']['media'][0] && $post['attachment']['media'][0]['photo']) {
 			for ($j = 0; $j < count($images); $j++) {
 				if ($post['attachment']['media'][0]['photo']['fbid'] == $images[$j]['object_id']) {
-					$post['image_url'][] = $images[$j]['images'][2]['source'];
-					$post['image_url'][] = $images[$j]['images'][5]['source'];
+					$post['image_url'][] = $images[$j]['images'][3]['source'];
+					$post['image_url'][] = $images[$j]['images'][6]['source'];
 					break;
 				}
 			}
