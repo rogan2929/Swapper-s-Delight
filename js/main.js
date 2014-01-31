@@ -398,6 +398,8 @@ var SwdPresenter = {
 		}
 
 		e.stopPropagation();
+		
+		SwdView.showRightPanel();
 
 		SwdModel.getPostDetails(id, function(response) {
 			post = response;
@@ -757,13 +759,10 @@ var SwdView = {
 				$(comment).find('.post-comment-user-image').css('background-image', userImage);
 
 				$('#post-comment-list').append(comment);
-				//$('#post-comment-list').append('<div class="post-comment ui-corner-all ui-widget
-				// ui-widget-content">' + post.comments[i].text + '</div>');
 			}
 		}
 
-		SwdView.showRightPanel();
-		//$('#right-panel-empty').fadeOut();
+		$('#right-panel .ajax-loading-div').fadeOut();
 	},
 	/***
 	 * Brings the right panel into view.
