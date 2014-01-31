@@ -566,7 +566,7 @@ var SwdView = {
 			easing: 'easeInOutQuint',
 			direction: 'right'
 		}, 300, function() {
-			$('div.ui-widget-overlay').hide();
+			$('div.ui-widget-overlay').remove();
 		});
 	},
 	/***
