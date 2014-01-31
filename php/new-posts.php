@@ -19,7 +19,7 @@ if ($updatedTime) {
 	);
 }
 
-$posts = streamQuery($gid, 20, $constraints)
+$posts = streamQuery($gid, 20, $constraints);
 
 // Return the result.
 echo json_encode($posts);
