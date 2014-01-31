@@ -172,8 +172,7 @@ var SwdPresenter = {
 	 * Starts the application after init has finished.
 	 */
 	startApp: function() {
-		//FB.Canvas.setAutoGrow();
-		SwdView.toggleFeedLoadingAjaxDiv();
+		SwdView.showFeedLoadingAjaxDiv();
 
 		// Retrieve group info for logged in user.
 		SwdModel.getGroupInfo(function(response) {
@@ -330,7 +329,7 @@ var SwdPresenter = {
 		SwdView.showFloatingPanel('#new-post-panel');
 	},
 	onClickButtonRefresh: function(e, args) {
-		SwdView.toggleFeedLoadingAjaxDiv();
+		SwdView.showFeedLoadingAjaxDiv();
 		
 		switch (SwdPresenter.postType) {
 			case PostType.group:
@@ -559,6 +558,9 @@ var SwdView = {
 	closeAllUiMenus: function() {
 		$('.ui-menu').hide();
 	},
+	hideFeedLoadingAjaxDiv: function() {
+		$('#feed-ajax-loading-div').fadeOut();
+	},
 	/***
 	 * Write posts to the page.
 	 * @param {type} posts
@@ -573,8 +575,6 @@ var SwdView = {
 		var postTile;
 		var primaryContent;
 		var secondaryContent;
-
-		SwdView.toggleFeedLoadingAjaxDiv();
 
 		// If there is a feed to display, then display it.
 		if (posts) {
@@ -627,6 +627,8 @@ var SwdView = {
 					$(postTile).hide().appendTo('#group-feed');
 				}
 			}
+			
+			SwdView.hideFeedLoadingAjaxDiv();
 
 			// Sleekly fade in the post tile elements.
 			// From: http://www.paulirish.com/2008/sequentially-chain-your-callbacks-in-jquery-two-ways/
@@ -710,6 +712,9 @@ var SwdView = {
 	setSelectedPostType: function(id) {
 		$('.button-nav').removeClass('selected-nav');
 		$('#' + id).addClass('selected-nav');
+	},
+	showFeedLoadingAjaxDiv: function() {
+		$('#feed-ajax-loading-div').fadeIn();
 	},
 	showFloatingPanel: function(id) {
 		// Make the panel modal by summoning a ui-widget-overlay.
@@ -818,12 +823,6 @@ var SwdView = {
 			duration: 300,
 			easing: 'easeInOutQuint'
 		});
-	},
-	/***
-	 * Shows or hides the main feed loading div.
-	 */
-	toggleFeedLoadingAjaxDiv: function() {
-		$('#feed-ajax-loading-div').fadeToggle();
 	}
 };
 
