@@ -230,12 +230,12 @@ var SwdPresenter = {
 			if (offset != SwdPresenter.prevOffset) {
 				SwdPresenter.prevOffset = offset;
 
-				//console.log($('#right-panel').css('top') + ',' + $('#right-panel').css('margin-top'));
+				//console.log($('#post-details-panel').css('top') + ',' + $('#post-details-panel').css('margin-top'));
 
 				// Update fixed divs
 				SwdView.setFixedDivs(offset);
 
-				// Update right-panel height
+				// Update post-details-panel height
 				if (scrollTop > offsetTop) {
 					height = clientHeight - 70;
 				}
@@ -243,7 +243,7 @@ var SwdPresenter = {
 					height = clientHeight - offsetTop - 70;
 				}
 
-				SwdView.setRightPanelHeight(height);
+				SwdView.setFloatingPanelHeight(height);
 
 				// Detect scroll at bottom
 				if (scrollTop >= $('#app-content').height() - clientHeight) {
@@ -347,7 +347,7 @@ var SwdPresenter = {
 	},
 	onClickHtml: function(e, args) {
 		SwdView.closeAllUiMenus();
-		SwdView.hideRightPanel();
+		SwdView.hidePostDetailsPanel();
 	},
 	onClickMenuButton: function(e, args) {
 		SwdView.showUiMenu(e);
@@ -415,7 +415,7 @@ var SwdPresenter = {
 
 		e.stopPropagation();
 
-		SwdView.showRightPanel();
+		SwdView.showPostDetailsPanel();
 
 		SwdModel.getPostDetails(id, function(response) {
 			post = response;
@@ -522,7 +522,7 @@ var SwdView = {
 			$(this).removeClass('ui-state-hover').addClass('ui-state-default');
 		});
 
-		$('#right-panel').click(function(e) {
+		$('#post-details-panel').click(function(e) {
 			e.stopPropagation();
 		});
 
@@ -558,10 +558,10 @@ var SwdView = {
 		$('.ui-menu').hide();
 	},
 	/***
-	 * Removes the right panel from view.
+	 * Removes the post details panel from view.
 	 */
-	hideRightPanel: function() {
-		$('#right-panel').hide('slide', {
+	hidePostDetailsPanel: function() {
+		$('#post-details-panel').hide('slide', {
 			easing: 'easeInOutQuint',
 			direction: 'right'
 		}, 300);
@@ -690,7 +690,7 @@ var SwdView = {
 	 * @param {type} offset
 	 */
 	setFixedDivs: function(offset) {
-		$('#left-rail, #right-panel').animate({
+		$('#left-rail, #post-details-panel').animate({
 			top: Math.max(offset + 60, 0)
 		}, 100);
 
@@ -699,11 +699,11 @@ var SwdView = {
 		}, 100);
 	},
 	/***
-	 * Dynamically calculate the height of #right-panel, based on how large the FB canvas is.
+	 * Dynamically calculate the height of #post-details-panel, based on how large the FB canvas is.
 	 * @param {type} height
 	 */
-	setRightPanelHeight: function(height) {
-		$('#right-panel').height(height);
+	setFloatingPanelHeight: function(height) {
+		$('.floating-panel').height(height);
 	},
 	/***
 	 * Changes the text shown in the "Select a Group" button.
@@ -726,7 +726,7 @@ var SwdView = {
 	},
 	/***
 	 * Shows the post details for the selected post.
-	 * @param {type} post Post to load into right column.
+	 * @param {type} post Post to load into floating post details panel.
 	 */
 	showPostDetails: function(post) {
 		var userImage;
@@ -784,15 +784,15 @@ var SwdView = {
 			}
 		}
 
-		$('#right-panel .ajax-loading-div').fadeOut();
+		$('#post-details-panel .ajax-loading-div').fadeOut();
 	},
 	/***
-	 * Brings the right panel into view.
+	 * Brings the post details panel into view.
 	 */
-	showRightPanel: function() {
-		$('#right-panel .ajax-loading-div').show();
+	showPostDetailsPanel: function() {
+		$('#post-details-panel .ajax-loading-div').show();
 
-		$('#right-panel').show('slide', {
+		$('#post-details-panel').show('slide', {
 			easing: 'easeInOutQuint',
 			direction: 'down'
 		}, 300);
