@@ -549,7 +549,8 @@ var SwdView = {
 	populatePosts: function(posts) {
 		var i;
 		var isEmpty;
-		var url;
+		var imageUrl;
+		var imageUrlBig;
 		var message;
 		var post;
 		var postTile;
@@ -565,38 +566,39 @@ var SwdView = {
 
 				if (post.message) {
 					message = post.message;
-					//message = post.created_time;
 				}
 				else {
 					message = null;
 				}
 
 				if (post.image_url) {
-					url = post.image_url;
+					imageUrl = post.image_url[1];
+					imageUrlBig = post.image_url[0];
 				}
 				else {
-					url = null;
+					imageUrl = null;
+					imageUrlBig = null;
 				}
 
-				postTile = $('<div id="' + post.post_id + '" class="post-tile ui-corner-all ui-widget ui-widget-content ui-state-default"><div class="post-tile-primary-content"></div><div class="post-tile-secondary-content"></div></div>').data('image_url', url);
+				postTile = $('<div id="' + post.post_id + '" class="post-tile ui-corner-all ui-widget ui-widget-content ui-state-default"><div class="post-tile-primary-content"></div><div class="post-tile-secondary-content"></div></div>').data('image_url', imageUrlBig);
 				primaryContent = $(postTile).children('.post-tile-primary-content');
 				secondaryContent = $(postTile).children('.post-tile-secondary-content');
 
-				if (message && url) {
+				if (message && imageUrl) {
 					$(postTile).addClass('post-tile-multi');
-					$(primaryContent).css('background-image', 'url("' + url + '")');
+					$(primaryContent).css('background-image', 'url("' + imageUrl + '")');
 					$(secondaryContent).text(message);
 				}
 				else
-				if (message && !url) {
+				if (message && !imageUrl) {
 					$(postTile).addClass('post-tile-multi');
 					$(primaryContent).css('background-image', 'url("/img/no-image.png")');
 					$(secondaryContent).text(message);
 				}
 				else
-				if (!message && url) {
+				if (!message && imageUrl) {
 					$(postTile).addClass('post-tile-image');
-					$(primaryContent).css('background-image', 'url("' + url + '")');
+					$(primaryContent).css('background-image', 'url("' + imageUrl + '")');
 				}
 				else {
 					isEmpty = true;
