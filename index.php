@@ -50,7 +50,7 @@
 					</div>
 				</div>
 				<div id='group-feed' class='scroll-y'></div>
-				<div id='right-panel' class='ui-widget ui-widget-content scroll-y hidden'>
+				<div id='right-panel' class='floating-dialog ui-widget-content scroll-y hidden'>
 					<div id='panel-post'>
 						<div id='post-message-user'>
 							<div id='post-message-pic'></div>
