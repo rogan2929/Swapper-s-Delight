@@ -42,8 +42,8 @@ for ($i = 0; $i < count($postDetails['comments']); $i++) {
 
 
 
-$postDetails['action_links'] = $response['actions'];
+//$postDetails['action_links'] = $response['actions'];
 
 // Return the result.
-//echo json_encode($postDetails);
+echo json_encode($postDetails);
 ?>
