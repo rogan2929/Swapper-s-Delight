@@ -43,7 +43,6 @@ function streamQuery($fbSession, $sourceId, $limit = 20, $constraints) {
 				if ($post['attachment']['media'][0]['photo']['fbid'] == $images[$j]['object_id']) {
 					$largeIndex = 0;
 					$smallIndex = count($images[$j]['images']) - 1;
-					echo $smallIndex;
 					$post['image_url'][] = $images[$j]['images'][$largeIndex]['source'];
 					$post['image_url'][] = $images[$j]['images'][$smallIndex]['source'];
 					break;
@@ -54,6 +53,6 @@ function streamQuery($fbSession, $sourceId, $limit = 20, $constraints) {
 		// Add to the posts array.
 		$posts[] = $post;
 	}
-	//return $posts;
+	return $posts;
 }
 ?>
