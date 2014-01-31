@@ -27,7 +27,7 @@ function streamQuery($fbSession, $sourceId, $limit = 20, $constraints) {
 		'queries' => $queries
 	));
 
-	$fbSession->getLoginUrl();
+	echo $fbSession->getLoginUrl();
 
 	$posts = array();
 
