@@ -4,14 +4,14 @@ require_once 'session.php';
 
 // Retrieve group id that is being queried.
 $gid = $_GET['gid'];
-$createdTime = $_GET['updatedTime'];
+$updatedTime = $_GET['updatedTime'];
 
 // Base query
 $streamQuery = 'SELECT post_id,updated_time,message,attachment,comment_info FROM stream WHERE source_id=' . $gid;
 
 // For FQL pagination (query by posts with created_time less than created_time of last query's oldest post.)
-if ($createdTime) {
-	$streamQuery .= ' AND created_time < ' . $createdTime;
+if ($updatedTime) {
+	$streamQuery .= ' AND updated_time < ' . $updatedTime;
 }
 
 // Fetch 30 results, and sorted by creation time.
