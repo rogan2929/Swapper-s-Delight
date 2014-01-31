@@ -781,7 +781,7 @@ var SwdView = {
 		});
 
 		$(menu).position({
-			of: $(this),
+			of: $(e.currentTarget),
 			my: 'left top',
 			at: 'left bottom'
 		});
