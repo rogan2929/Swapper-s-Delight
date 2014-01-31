@@ -604,7 +604,7 @@ var SwdView = {
 			(function shownext(jq) {
 				jq.eq(0).fadeIn(60, function() {
 					FB.Canvas.setSize({
-						height: Math.max($('#app-content').height(), 800)
+						height: Math.max($('html').height(), 800)
 					});
 
 					( jq = jq.slice(1)).length && shownext(jq);
