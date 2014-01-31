@@ -89,6 +89,9 @@
 					</div>
 					<div class='ajax-loading-div'></div>
 				</div>
+				<div id='new-post-panel' class='floating-panel hidden'>
+					TEST
+				</div>
 			</div>
 
 			<div id='main-toolbar' class='ui-widget ui-widget-header'>
@@ -124,11 +127,6 @@
 					<a href='#'><span class='ui-icon ui-icon-circle-close'></span>Logout</a>
 				</li>
 			</ul>
-
-			<!--Dialogs-->
-			<div id='dialog-new-post' class='hidden' title='Create New Post'>
-				TEST
-			</div>
 		</div>
 
 		<div id='overlay-app-loading'>

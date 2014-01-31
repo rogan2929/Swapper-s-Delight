@@ -327,7 +327,7 @@ var SwdPresenter = {
 	},
 	// Event Handlers (onX(e, args))
 	onClickButtonNew: function(e, args) {
-		SwdView.showNewPostDialog();
+		SwdView.showFloatingPanel('#new-post-panel');
 	},
 	onClickButtonRefresh: function(e, args) {
 		switch (SwdPresenter.postType) {
@@ -346,7 +346,7 @@ var SwdPresenter = {
 	},
 	onClickHtml: function(e, args) {
 		SwdView.closeAllUiMenus();
-		SwdView.hidePostDetailsPanel();
+		SwdView.hideFloatingPanel('.floating-panel');
 	},
 	onClickMenuButton: function(e, args) {
 		SwdView.showUiMenu(e);
@@ -414,7 +414,8 @@ var SwdPresenter = {
 
 		e.stopPropagation();
 
-		SwdView.showPostDetailsPanel();
+		$('#post-details-panel .ajax-loading-div').show();
+		SwdView.showFloatingPanel('#post-details-panel');
 
 		SwdModel.getPostDetails(id, function(response) {
 			post = response;
@@ -557,17 +558,6 @@ var SwdView = {
 		$('.ui-menu').hide();
 	},
 	/***
-	 * Removes the post details panel from view.
-	 */
-	hidePostDetailsPanel: function() {
-		$('#post-details-panel').hide('slide', {
-			easing: 'easeInOutQuint',
-			direction: 'right'
-		}, 300, function() {
-			$('div.ui-widget-overlay').remove();
-		});
-	},
-	/***
 	 * Write posts to the page.
 	 * @param {type} posts
 	 */
@@ -581,7 +571,7 @@ var SwdView = {
 		var postTile;
 		var primaryContent;
 		var secondaryContent;
-		
+
 		SwdView.toggleFeedLoadingAjaxDiv();
 
 		// If there is a feed to display, then display it.
@@ -719,12 +709,21 @@ var SwdView = {
 		$('.button-nav').removeClass('selected-nav');
 		$('#' + id).addClass('selected-nav');
 	},
-	/***
-	 * Displays new post dialog box.
-	 */
-	showNewPostDialog: function() {
-		$('#dialog-new-post').dialog({
-			modal: true
+	showFloatingPanel: function(id) {
+		// Make the panel modal by summoning a ui-widget-overlay.
+		$('<div class="ui-widget-overlay ui-widget-front"></div>').hide().appendTo('body').fadeIn();
+
+		$(id).show('slide', {
+			easing: 'easeInOutQuint',
+			direction: 'down'
+		}, 300);
+	},
+	hideFloatingPanel: function(id) {
+		$(id).hide('slide', {
+			easing: 'easeInOutQuint',
+			direction: 'right'
+		}, 300, function() {
+			$('div.ui-widget-overlay').remove();
 		});
 	},
 	/***
@@ -790,20 +789,6 @@ var SwdView = {
 		$('#post-details-panel .ajax-loading-div').fadeOut();
 	},
 	/***
-	 * Brings the post details panel into view.
-	 */
-	showPostDetailsPanel: function() {
-		$('#post-details-panel .ajax-loading-div').show();
-
-		// Make the panel modal by summoning a ui-widget-overlay.
-		$('<div class="ui-widget-overlay ui-widget-front"></div>').hide().appendTo('body').fadeIn();
-
-		$('#post-details-panel').show('slide', {
-			easing: 'easeInOutQuint',
-			direction: 'down'
-		}, 300);
-	},
-	/***
 	 * Shows a Jquery UI menu.
 	 * @param {type} e
 	 */
@@ -833,7 +818,7 @@ var SwdView = {
 		});
 	},
 	/***
-	 * Shows or hides the main feed loading div. 
+	 * Shows or hides the main feed loading div.
 	 */
 	toggleFeedLoadingAjaxDiv: function() {
 		$('#feed-ajax-loading-div').fadeToggle();
