@@ -485,6 +485,12 @@ var SwdView = {
 				primary: 'ui-icon-comment'
 			}
 		});
+		
+		$('#button-refresh').button({
+			icons: {
+				primary: 'ui-icon-refresh'
+			}
+		});
 
 		$('#button-menu-daysback').button({
 			icons: {
