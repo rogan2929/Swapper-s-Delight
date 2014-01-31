@@ -164,7 +164,7 @@ textarea {
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    z-index: 1000px;
+    z-index: 1000;
 }
 
 .ajax-loading-div {
