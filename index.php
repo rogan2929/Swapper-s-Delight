@@ -97,6 +97,9 @@
 					<div id='button-new' class='left-margin'>
 						New
 					</div>
+					<div id='button-refresh' class='left-margin'>
+						Refresh
+					</div>
 				</div>
 				<div class='float-right right-margin'>
 					<div id='button-menu-main' class='menu-button'>

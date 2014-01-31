@@ -186,6 +186,7 @@ var SwdPresenter = {
 
 				// Install Event Handlers
 				SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
+				SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
 				SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
 				SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
 				SwdView.installHandler('onClickMenuItemGroup', SwdPresenter.onClickMenuItemGroup, '.menu-item-group', 'click');
@@ -329,6 +330,21 @@ var SwdPresenter = {
 	onClickButtonNew: function(e, args) {
 		SwdView.showNewPostDialog();
 	},
+	onClickButtonRefresh: function(e, args) {
+		switch (SwdPresenter.postType) {
+			case PostType.group:
+				SwdPresenter.loadNewestPosts(false);
+				break;
+			case PostType.myposts:
+				SwdPresenter.loadMyPosts();
+				break;
+			case PostType.pinned:
+				SwdPresenter.loadLikedPosts();
+				break;
+			case PostType.search:
+				break;
+		}
+	},
 	onClickHtml: function(e, args) {
 		SwdView.closeAllUiMenus();
 		SwdView.hideRightPanel();
@@ -398,7 +414,7 @@ var SwdPresenter = {
 		}
 
 		e.stopPropagation();
-		
+
 		SwdView.showRightPanel();
 
 		SwdModel.getPostDetails(id, function(response) {
@@ -769,7 +785,7 @@ var SwdView = {
 	 */
 	showRightPanel: function() {
 		$('#right-panel .ajax-loading-div').show();
-		
+
 		$('#right-panel').show('slide', {
 			easing: 'easeInOutQuint',
 			direction: 'right'
