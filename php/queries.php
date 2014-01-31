@@ -28,13 +28,14 @@ function streamQuery($sourceId, $limit = 20, $constraints) {
 		'method' => 'fql.multiquery',
 		'queries' => $queries
 	));
+	
+	echo $fbSession->getUser();
+	echo json_encode($response);
 
 	$posts = array();
 
 	$stream = $response[0]['fql_result_set'];
 	$images = $response[1]['fql_result_set'];
-
-	echo json_encode($response);
 
 	for ($i = 0; $i < count($stream); $i++) {
 		$post = $stream[$i];
