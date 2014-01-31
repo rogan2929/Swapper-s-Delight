@@ -283,13 +283,13 @@ var SwdPresenter = {
 		}
 		else {
 			updatedTime = null;
+			SwdView.clearPosts();
 		}
 
 		// Get posts and then display them.
 		SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, updatedTime, function(response) {
 			if (!loadNextPage) {
 				// Clear previous results, unless loading a new page.
-				SwdView.clearPosts();
 				SwdPresenter.oldestPost = null;
 			}
 
@@ -330,7 +330,7 @@ var SwdPresenter = {
 	},
 	onClickButtonRefresh: function(e, args) {
 		SwdView.showFeedLoadingAjaxDiv();
-		
+
 		switch (SwdPresenter.postType) {
 			case PostType.group:
 				SwdPresenter.loadNewestPosts(false);
@@ -550,7 +550,7 @@ var SwdView = {
 		});
 	},
 	clearPosts: function() {
-		$('#group-feed').empty();
+		$('#group-feed .post-tile').remove();
 	},
 	/***
 	 * Closes all Jquery UI menus.
@@ -627,7 +627,7 @@ var SwdView = {
 					$(postTile).hide().appendTo('#group-feed');
 				}
 			}
-			
+
 			SwdView.hideFeedLoadingAjaxDiv();
 
 			// Sleekly fade in the post tile elements.
