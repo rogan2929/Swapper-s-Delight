@@ -23,8 +23,6 @@ function streamQuery($sourceId, $limit = 20, $constraints) {
 		'streamQuery' => $streamQuery,
 		'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'
 	);
-	
-	echo json_encode($queries);
 
 	$response = $fbSession->api(array(
 		'method' => 'fql.multiquery',
@@ -35,6 +33,8 @@ function streamQuery($sourceId, $limit = 20, $constraints) {
 
 	$stream = $response[0]['fql_result_set'];
 	$images = $response[1]['fql_result_set'];
+
+	echo json_encode($response);
 
 	for ($i = 0; $i < count($stream); $i++) {
 		$post = $stream[$i];
