@@ -239,7 +239,7 @@ var SwdPresenter = {
 				else {
 					height = clientHeight - offsetTop - 70;
 				}
-				
+
 				SwdView.setRightPanelHeight(height);
 
 				// Detect scroll at bottom
@@ -774,7 +774,17 @@ var SwdView = {
 		e.stopPropagation();
 		menu = $(e.currentTarget).find('a').attr('href');
 
-		SwdView.positionMenus();
+		//SwdView.positionMenus(menu);
+		$(menu).css({
+			top: 0,
+			left: 0
+		});
+
+		$(menu).position({
+			of: $(this),
+			my: 'left top',
+			at: 'left bottom'
+		});
 
 		// Display the menu.
 		$(menu).show('slide', {
