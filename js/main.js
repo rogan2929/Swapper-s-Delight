@@ -182,12 +182,7 @@ var SwdPresenter = {
 				SwdPresenter.setSelectedGroup(SwdPresenter.groups[0]);
 				SwdView.addGroupsToMenu(SwdPresenter.groups);
 
-				/*
-				$('#popup-menu-groups').menu().position({
-					of: $('#button-menu-groups'),
-					my: 'left top',
-					at: 'left bottom'
-				});*/
+				$('#popup-menu-groups').menu();
 
 				// Install Event Handlers
 				SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
