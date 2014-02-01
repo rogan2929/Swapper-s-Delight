@@ -432,13 +432,13 @@ div.login-div {
 }
 
 #post-comment-text {
-	width: 100%;
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
 #post-comment-text > textarea {
 	border: transparent;
+	width: 100%;
 }
 
 /* JQuery UI Overrides */
