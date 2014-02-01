@@ -550,7 +550,7 @@ var SwdView = {
 		});
 	},
 	clearPosts: function() {
-		$('#group-feed .post-tile').remove();
+		$('#post-feed .post-tile').remove();
 	},
 	/***
 	 * Closes all Jquery UI menus.
@@ -624,7 +624,7 @@ var SwdView = {
 				}
 
 				if (!isEmpty) {
-					$(postTile).hide().appendTo('#group-feed');
+					$(postTile).hide().appendTo('#post-feed');
 				}
 			}
 
@@ -657,7 +657,7 @@ var SwdView = {
 			});
 
 			// Scroll up a tiny bit so the app is never at the bottom of the page after loading posts.
-			$('#group-feed').scrollTop($('#group-feed').scrollTop() - 1);
+			$('#post-feed').scrollTop($('#post-feed').scrollTop() - 1);
 
 			// Start polling page info again.
 			SwdPresenter.facebookPageInfoPoll();
