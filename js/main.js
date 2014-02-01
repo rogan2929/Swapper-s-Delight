@@ -257,12 +257,12 @@ var SwdPresenter = {
 				SwdView.setFloatingPanelHeight(height);
 
 				// Detect scroll at bottom
-				if (scrollTop >= $('#app-content').height() - clientHeight) {
-					//SwdPresenter.loadNewestPosts(true);
+				if (scrollTop > $('#app-content').height() - clientHeight) {
+					SwdPresenter.loadNewestPosts(true);
 				}
 				else {
 					// Only do another call if we are not loading more posts.
-					//setTimeout(SwdPresenter.facebookPageInfoPoll, 100);
+					setTimeout(SwdPresenter.facebookPageInfoPoll, 100);
 				}
 			}
 			else {
