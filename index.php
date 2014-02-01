@@ -53,7 +53,7 @@
 					<div id='feed-ajax-loading-div' class='ajax-loading-div hidden'></div>
 				</div>
 				<div id='post-details-panel' class='floating-panel ui-widget-content overflow-y hidden'>
-					<div id='panel-post'>
+					<div id='panel-post' class='overflow-y'>
 						<div id='post-message-user'>
 							<div id='post-message-pic'></div>
 							<div id='post-message-name'></div>
