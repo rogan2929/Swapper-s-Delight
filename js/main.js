@@ -258,11 +258,11 @@ var SwdPresenter = {
 
 				// Detect scroll at bottom
 				if (scrollTop >= $('#app-content').height() - clientHeight) {
-					SwdPresenter.loadNewestPosts(true);
+					//SwdPresenter.loadNewestPosts(true);
 				}
 				else {
 					// Only do another call if we are not loading more posts.
-					setTimeout(SwdPresenter.facebookPageInfoPoll, 100);
+					//setTimeout(SwdPresenter.facebookPageInfoPoll, 100);
 				}
 			}
 			else {
@@ -462,14 +462,6 @@ var SwdPresenter = {
 				alert('Unable to display post. It was most likely deleted.');
 			}
 		});
-	},
-	onScrollGroupFeed: function(e, args) {
-		// Check to see if the user has scrolled all the way to the bottom.
-		if (($(e.currentTarget).scrollTop() + $(e.currentTarget).innerHeight()) >= (e.currentTarget.scrollHeight)) {
-			SwdPresenter.loadNewestPosts(true);
-		}
-
-		// TODO: Scroll up to refresh.
 	},
 	onWindowResize: function(e, args) {
 		SwdView.positionMenus();
