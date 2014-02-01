@@ -86,8 +86,8 @@
 								No comments yet.
 							</div>
 							<div id='post-comment-list'></div>
-							<div class='ui-corner-all ui-widget ui-widget-content'>
-								<textarea id='post-comment-text'></textarea>
+							<div id='post-comment-text' class='ui-corner-all ui-widget ui-widget-content'>
+								<textarea></textarea>
 							</div>
 							<div id='post-button-comment' class='post-button'>
 								Comment
