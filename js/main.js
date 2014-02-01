@@ -339,12 +339,11 @@ var SwdPresenter = {
 	 * @param {type} id
 	 * @param {type} link
 	 */
-	sendFacebookMessage: function(id, link) {
+	sendFacebookMessage: function(id) {
 		FB.ui({
 			app_id: AppId,
 			to: id,
 			method: 'send',
-			link: "http://www.foxnews.com"
 		});
 	},
 	/***
@@ -435,9 +434,8 @@ var SwdPresenter = {
 		var permalink;
 		
 		id = $('#panel-post').data('actor_id');
-		permalink = $('#panel-post').data('permalink');
 		
-		SwdPresenter.sendFacebookMessage(id, permalink);
+		SwdPresenter.sendFacebookMessage(id);
 	},
 	onClickPostTile: function(e, args) {
 		var id;
@@ -823,7 +821,7 @@ var SwdView = {
 		}
 		
 		// Save for later consumption.
-		$('#panel-post').data('actor_id', post.actor_id).data('permalink', post.permalink);
+		$('#panel-post').data('actor_id', post.actor_id);
 		
 
 		$('#post-details-panel .ajax-loading-div').fadeOut();
