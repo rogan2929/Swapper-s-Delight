@@ -23,10 +23,10 @@ var AppId = '652991661414427';
  */
 var SwdModel = {
 	/**
-	 * Create a new post on the selected group's or groups' wall(s). 
+	 * Create a new post on the selected group's or groups' wall(s).
 	 */
 	createNewPost: function(callback) {
-		
+
 	},
 	/***
 	 * Get posts in the group that are liked.
@@ -276,7 +276,7 @@ var SwdPresenter = {
 	loadLikedPosts: function() {
 		SwdPresenter.resetFbCanvasSize();
 		SwdView.showFeedLoadingAjaxDiv();
-		
+
 		SwdModel.getLikedPosts(SwdPresenter.selectedGroup.gid, function(response) {
 			alert('Not yet implemented.');
 		});
@@ -299,15 +299,14 @@ var SwdPresenter = {
 	loadNewestPosts: function(loadNextPage) {
 		var updatedTime;
 
-		SwdPresenter.resetFbCanvasSize();
-		SwdView.showFeedLoadingAjaxDiv();
-
 		if (loadNextPage) {
 			updatedTime = SwdPresenter.oldestPost.updated_time;
 		}
 		else {
 			updatedTime = null;
 			SwdView.clearPosts();
+			SwdPresenter.resetFbCanvasSize();
+			SwdView.showFeedLoadingAjaxDiv();
 		}
 
 		// Get posts and then display them.
