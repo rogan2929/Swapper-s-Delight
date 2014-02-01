@@ -85,7 +85,7 @@
 							<div id='post-nocomments'>
 								No comments yet.
 							</div>
-							<div id='post-comment-list'></div>
+							<div id='post-comment-list' class='scroll-y'></div>
 							<div>
 								<textarea id='post-comment-text'></textarea>
 							</div>
