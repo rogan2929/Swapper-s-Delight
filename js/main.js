@@ -6,7 +6,7 @@
 var PostType = {
 	group: 0,
 	myposts: 1,
-	pinned: 2,
+	liked: 2,
 	search: 3
 };
 
@@ -367,7 +367,7 @@ var SwdPresenter = {
 			case PostType.myposts:
 				SwdPresenter.loadMyPosts();
 				break;
-			case PostType.pinned:
+			case PostType.liked:
 				SwdPresenter.loadLikedPosts();
 				break;
 			case PostType.search:
@@ -408,7 +408,7 @@ var SwdPresenter = {
 				SwdPresenter.loadMyPosts();
 				break;
 			case 'button-nav-liked':
-				SwdPresenter.postType = PostType.pinned;
+				SwdPresenter.postType = PostType.liked;
 				SwdPresenter.loadLikedPosts();
 				break;
 			case 'button-nav-search':
@@ -429,7 +429,14 @@ var SwdPresenter = {
 		alert($(e.currentTarget).attr('id'));
 	},
 	onClickPostButtonPm: function(e, args) {
-		alert($(e.currentTarget).attr('id'));
+		//alert($(e.currentTarget).attr('id'));
+		var id;
+		var link;
+		var postData = $('#panel-post').data('post');
+		
+		id = postData.id;
+		link = postData.link;
+		SwdPresenter.sendFacebookMessage(id, link);
 	},
 	onClickPostTile: function(e, args) {
 		var id;
@@ -813,6 +820,10 @@ var SwdView = {
 				$('#post-comment-list').append(comment);
 			}
 		}
+		
+		// Save for later consumption.
+		$('#panel-post').data('uid', post.user.uid).data('permalink', post.permalink);
+		
 
 		$('#post-details-panel .ajax-loading-div').fadeOut();
 	},
