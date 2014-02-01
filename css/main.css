@@ -434,6 +434,7 @@ div.login-div {
 #post-comment-text {
 	margin-top: 10px;
 	margin-bottom: 10px;
+	border-thickness: 2px;
 }
 
 #post-comment-text > textarea {
