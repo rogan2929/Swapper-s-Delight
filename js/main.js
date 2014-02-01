@@ -257,7 +257,7 @@ var SwdPresenter = {
 				SwdView.setFloatingPanelHeight(height);
 
 				// Detect scroll at bottom
-				if (scrollTop > $('#app-content').height() - clientHeight) {
+				if (scrollTop >= $('#app-content').height() - clientHeight) {
 					SwdPresenter.loadNewestPosts(true);
 				}
 				else {
