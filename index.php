@@ -72,7 +72,7 @@
 						<div id='post-button-bar'>
 							<!--
 							<div id='post-button-comment' class='post-button'>
-								Comment
+							Comment
 							</div>-->
 							<div id='post-button-pm' class='post-button'>
 								Message
@@ -81,17 +81,17 @@
 								Like
 							</div>
 						</div>
-						<div id='post-comments'>
+						<div id='post-comments' class='scroll-y'>
 							<div id='post-nocomments'>
 								No comments yet.
 							</div>
-							<div id='post-comment-list' class='scroll-y'></div>
-							<div>
-								<textarea id='post-comment-text'></textarea>
-							</div>
-							<div id='post-button-comment' class='post-button'>
-								Comment
-							</div>
+							<div id='post-comment-list'></div>
+						</div>
+						<div>
+							<textarea id='post-comment-text'></textarea>
+						</div>
+						<div id='post-button-comment' class='post-button'>
+							Comment
 						</div>
 					</div>
 					<div class='ajax-loading-div'></div>
