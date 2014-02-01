@@ -52,7 +52,7 @@
 				<div id='post-feed' class='scroll-y'>
 					<div id='feed-ajax-loading-div' class='ajax-loading-div hidden'></div>
 				</div>
-				<div id='post-details-panel' style='overflow: hidden;' class='floating-panel ui-widget-content hidden'>
+				<div id='post-details-panel' class='floating-panel ui-widget-content overflow-y hidden'>
 					<div id='panel-post'>
 						<div id='post-message-user'>
 							<div id='post-message-pic'></div>
@@ -81,17 +81,17 @@
 								Like
 							</div>
 						</div>
-						<div id='post-comments' class='scroll-y'>
+						<div id='post-comments'>
 							<div id='post-nocomments'>
 								No comments yet.
 							</div>
 							<div id='post-comment-list'></div>
-						</div>
-						<div>
-							<textarea id='post-comment-text'></textarea>
-						</div>
-						<div id='post-button-comment' class='post-button'>
-							Comment
+							<div>
+								<textarea id='post-comment-text'></textarea>
+							</div>
+							<div id='post-button-comment' class='post-button'>
+								Comment
+							</div>
 						</div>
 					</div>
 					<div class='ajax-loading-div'></div>
