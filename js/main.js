@@ -22,13 +22,28 @@ var AppId = '652991661414427';
  * Model for the Swapper's Delight program.
  */
 var SwdModel = {
+	/**
+	 * Create a new post on the selected group's or groups' wall(s). 
+	 */
+	createNewPost: function(callback) {
+		
+	},
 	/***
 	 * Get posts in the group that are liked.
 	 * @param {type} gid
 	 * @param {type} callback
 	 */
 	getLikedPosts: function(gid, callback) {
-		// TODO: liked-posts.php
+		$.ajax({
+			type: 'GET',
+			url: '/php/liked-posts.php?gid=' + gid,
+			success: function(response) {
+				callback.call(SwdModel, JSON.parse(response.responseText));
+			},
+			fail: function(response) {
+
+			}
+		});
 	},
 	/***
 	 * Query database for groups that the user has marked as 'BST' (Buy, Sell, Trade)
@@ -172,8 +187,6 @@ var SwdPresenter = {
 	 * Starts the application after init has finished.
 	 */
 	startApp: function() {
-		SwdView.showFeedLoadingAjaxDiv();
-
 		// Retrieve group info for logged in user.
 		SwdModel.getGroupInfo(function(response) {
 			SwdPresenter.groups = response;
@@ -261,14 +274,22 @@ var SwdPresenter = {
 	 * Load posts liked by user.
 	 */
 	loadLikedPosts: function() {
-
+		SwdPresenter.resetFbCanvasSize();
+		SwdView.showFeedLoadingAjaxDiv();
+		
+		SwdModel.getLikedPosts(SwdPresenter.selectedGroup.gid, function(response) {
+			alert('Not yet implemented.');
+		});
 	},
 	/***
 	 * Load posts owned by user.
 	 */
 	loadMyPosts: function() {
-		SwdModel.getMyPosts(SwdPresenter.currentUid, SwdPresenter.selectedGroup.gid, SwdPresenter.accessToken, function(response) {
-			alert(response.responseText);
+		SwdPresenter.resetFbCanvasSize();
+		SwdView.showFeedLoadingAjaxDiv();
+
+		SwdModel.getMyPosts(SwdPresenter.selectedGroup.gid, function(response) {
+			alert('Not yet implemented.');
 		});
 	},
 	/***
@@ -277,6 +298,9 @@ var SwdPresenter = {
 	 */
 	loadNewestPosts: function(loadNextPage) {
 		var updatedTime;
+
+		SwdPresenter.resetFbCanvasSize();
+		SwdView.showFeedLoadingAjaxDiv();
 
 		if (loadNextPage) {
 			updatedTime = SwdPresenter.oldestPost.updated_time;
@@ -301,6 +325,14 @@ var SwdPresenter = {
 			if (!loadNextPage) {
 				SwdPresenter.oldestPost = null;
 			}
+		});
+	},
+	/***
+	 * Reset Facebook Canvas Size to default value of 800
+	 */
+	resetFbCanvasSize: function() {
+		FB.setSize({
+			height: 800
 		});
 	},
 	/***
@@ -329,8 +361,6 @@ var SwdPresenter = {
 		SwdView.showFloatingPanel('#new-post-panel');
 	},
 	onClickButtonRefresh: function(e, args) {
-		SwdView.showFeedLoadingAjaxDiv();
-
 		switch (SwdPresenter.postType) {
 			case PostType.group:
 				SwdPresenter.loadNewestPosts(false);
