@@ -749,7 +749,7 @@ var SwdView = {
 	hideFloatingPanel: function(id) {
 		$(id).hide('slide', {
 			easing: 'easeInOutQuint',
-			direction: 'right'
+			direction: 'up'
 		}, 300, function() {
 			$('div.ui-widget-overlay').remove();
 		});
