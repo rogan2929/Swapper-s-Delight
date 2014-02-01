@@ -70,9 +70,10 @@
 							<span id='post-message-text'></span>
 						</div>
 						<div id='post-button-bar'>
+							<!--
 							<div id='post-button-comment' class='post-button'>
 								Comment
-							</div>
+							</div>-->
 							<div id='post-button-pm' class='post-button'>
 								Message
 							</div>
@@ -85,6 +86,12 @@
 								No comments yet.
 							</div>
 							<div id='post-comment-list'></div>
+							<div>
+								<input type="text"> 
+							</div>
+							<div id='post-button-comment' class='post-button'>
+								Comment
+							</div>
 						</div>
 					</div>
 					<div class='ajax-loading-div'></div>

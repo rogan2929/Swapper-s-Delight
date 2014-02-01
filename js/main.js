@@ -119,6 +119,18 @@ var SwdModel = {
 			}
 		});
 	},
+	/***
+	 * Like a post. 
+	 */
+	likePost: function() {
+		
+	},
+	postComment: function() {
+		
+	},
+	/***
+	 * Sync the server with the current session.
+	 */
 	startSession: function(callback) {
 		$.ajax({
 			type: 'GET',
@@ -130,6 +142,12 @@ var SwdModel = {
 
 			}
 		});
+	},
+	/***
+	 * Unlike a post. 
+	 */
+	unlikePost: function() {
+		
 	}
 };
 
@@ -821,7 +839,7 @@ var SwdView = {
 		}
 		
 		// Save for later consumption.
-		$('#panel-post').data('actor_id', post.actor_id);
+		$('#panel-post').data('actor_id', post.actor_id).data('comment', post.action_links[0]).data('like', post.action_links[1]);
 		
 
 		$('#post-details-panel .ajax-loading-div').fadeOut();
