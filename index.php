@@ -87,7 +87,7 @@
 							</div>
 							<div id='post-comment-list'></div>
 							<div>
-								<input type="text"> 
+								<textarea id='post-comment-text'></textarea>
 							</div>
 							<div id='post-button-comment' class='post-button'>
 								Comment
