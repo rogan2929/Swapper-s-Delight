@@ -331,7 +331,7 @@ var SwdPresenter = {
 	 * Reset Facebook Canvas Size to default value of 800
 	 */
 	resetFbCanvasSize: function() {
-		FB.setSize({
+		FB.Canvas.setSize({
 			height: 800
 		});
 	},
