@@ -838,6 +838,9 @@ var SwdView = {
 			}
 		}
 		
+		// Clear comment box.
+		$('#post-comment-text > textarea').text('');
+		
 		// Save for later consumption.
 		$('#panel-post').data('actor_id', post.actor_id).data('comment', post.action_links[0]).data('like', post.action_links[1]);
 		
