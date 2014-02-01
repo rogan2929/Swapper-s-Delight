@@ -822,7 +822,7 @@ var SwdView = {
 		}
 		
 		// Save for later consumption.
-		$('#panel-post').data('uid', post.actor_id).data('permalink', post.permalink);
+		$('#panel-post').data('actor_id', post.actor_id).data('permalink', post.permalink);
 		
 
 		$('#post-details-panel .ajax-loading-div').fadeOut();
