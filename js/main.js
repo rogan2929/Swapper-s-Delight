@@ -431,12 +431,12 @@ var SwdPresenter = {
 	onClickPostButtonPm: function(e, args) {
 		//alert($(e.currentTarget).attr('id'));
 		var id;
-		var link;
-		var postData = $('#panel-post').data('post');
+		var permalink;
 		
-		id = postData.id;
-		link = postData.link;
-		SwdPresenter.sendFacebookMessage(id, link);
+		id = $('#panel-post').data('actor_id');
+		permalink = $('#panel-post').data('permalink');
+		
+		SwdPresenter.sendFacebookMessage(id, permalink);
 	},
 	onClickPostTile: function(e, args) {
 		var id;
@@ -822,7 +822,7 @@ var SwdView = {
 		}
 		
 		// Save for later consumption.
-		$('#panel-post').data('uid', post.user.uid).data('permalink', post.permalink);
+		$('#panel-post').data('uid', post.actor_id).data('permalink', post.permalink);
 		
 
 		$('#post-details-panel .ajax-loading-div').fadeOut();
