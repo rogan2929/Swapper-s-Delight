@@ -172,7 +172,6 @@ textarea {
 	background-image: url('/img/ajax.gif');
 	background-position: center center;
 	background-repeat: no-repeat;
-	background-size: 100%;
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -397,6 +396,7 @@ div.right-toolbar-button {
    margin-left: 200px;
    margin-top: 60px;
    position: relative;
+   min-height: 730px;
 }
 
 #left-rail {
