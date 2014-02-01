@@ -52,7 +52,7 @@
 				<div id='post-feed' class='scroll-y'>
 					<div id='feed-ajax-loading-div' class='ajax-loading-div hidden'></div>
 				</div>
-				<div id='post-details-panel' class='floating-panel ui-widget-content hidden'>
+				<div id='post-details-panel' style='overflow: hidden;' class='floating-panel ui-widget-content hidden'>
 					<div id='panel-post'>
 						<div id='post-message-user'>
 							<div id='post-message-pic'></div>
