@@ -395,6 +395,7 @@ div.right-toolbar-button {
 #post-feed {
    margin-left: 200px;
    margin-top: 60px;
+   position: relative;
 }
 
 #left-rail {
