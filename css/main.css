@@ -431,6 +431,13 @@ div.login-div {
 	background: white;
 }
 
+#post-comment-text {
+	left: 0;
+	right: 0;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
 /* JQuery UI Overrides */
 
 /* Ellipses */
