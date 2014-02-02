@@ -127,7 +127,7 @@ var SwdModel = {
     shortenUrl: function(url, callback) {
         $.ajax({
             type: 'POST',
-            data: JSON.encode({longUrl: url}),
+            data: JSON.stringify({longUrl: url}),
             url: 'https://www.googleapis.com/urlshortener/v1/url',
             success: function(response) {
                 callback.call(SwdModel, response);
