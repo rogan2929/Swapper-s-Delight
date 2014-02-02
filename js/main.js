@@ -1,5 +1,4 @@
 "use strict";
-
 // "Enums"
 
 // PostType Enum
@@ -9,13 +8,11 @@ var PostType = {
     liked: 2,
     search: 3
 };
-
 // Prod AppId
 //var AppId = '1401018793479333';
 
 // Test AppId
 var AppId = '652991661414427';
-
 // http://stackoverflow.com/questions/1102215/mvp-pattern-with-javascript-framework
 
 /**
@@ -86,7 +83,6 @@ var SwdModel = {
      */
     getNewestPosts: function(gid, updatedTime, callback) {
         var url = '/php/new-posts.php?gid=' + gid;
-
         if (updatedTime) {
             url += '&updatedTime=' + updatedTime;
         }
@@ -128,6 +124,19 @@ var SwdModel = {
     postComment: function() {
 
     },
+    shortenUrl: function(url, callback) {
+        $.ajax({
+            type: 'POST',
+            data: JSON.encode({longUrl: url}),
+            url: 'https://www.googleapis.com/urlshortener/v1/url',
+            success: function(response) {
+                callback.call(SwdModel, response);
+            },
+            fail: function(response) {
+
+            }
+        });
+    },
     /***
      * Sync the server with the current session.
      */
@@ -150,7 +159,6 @@ var SwdModel = {
 
     }
 };
-
 /**
  * Presenter for the Swapper's Delight program.
  */
@@ -165,11 +173,9 @@ var SwdPresenter = {
      */
     init: function() {
         SwdView.initView();
-
         $.ajaxSetup({
             cache: true
         });
-
         // Fetch the FB JS API
         $.getScript('//connect.facebook.net/en_US/all.js', function() {
             FB.init({
@@ -177,9 +183,7 @@ var SwdPresenter = {
                 cookie: true,
                 status: true
             });
-
             $('#loginbutton,#feedbutton').removeAttr('disabled');
-
             // Try to get a session going if there isn't one already.
             FB.getLoginStatus(function(response) {
                 if (response.status === 'connected') {
@@ -208,13 +212,10 @@ var SwdPresenter = {
         // Retrieve group info for logged in user.
         SwdModel.getGroupInfo(function(response) {
             SwdPresenter.groups = response;
-
             if (SwdPresenter.groups) {
                 SwdPresenter.setSelectedGroup(SwdPresenter.groups[0]);
                 SwdView.addGroupsToMenu(SwdPresenter.groups);
-
                 $('#popup-menu-groups').menu();
-
                 // Install Event Handlers
                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
                 SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
@@ -229,7 +230,6 @@ var SwdPresenter = {
                 SwdView.installHandler('onClickPanelMessageUser', SwdPresenter.onClickPanelMessageUser, '#post-message-user', 'click');
                 SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
                 SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
-
                 SwdView.positionMenus();
             }
             else {
@@ -249,21 +249,16 @@ var SwdPresenter = {
             var clientHeight;
             var offset;
             var height;
-
             scrollTop = parseInt(pageInfo.scrollTop);
             offsetTop = parseInt(pageInfo.offsetTop);
             clientHeight = parseInt(pageInfo.clientHeight);
-
             // Calculate how far to offset things.
             offset = Math.max(scrollTop - offsetTop, 0);
-
             // Check to see if the offset has been updated.
             if (offset != SwdPresenter.prevOffset) {
                 SwdPresenter.prevOffset = offset;
-
                 // Update fixed divs
                 SwdView.setFixedDivs(offset);
-
                 // Update post-details-panel height
                 if (scrollTop > offsetTop) {
                     height = clientHeight - 10;
@@ -273,7 +268,6 @@ var SwdPresenter = {
                 }
 
                 SwdView.setFloatingPanelHeight(height);
-
                 // Detect scroll at bottom
                 if (scrollTop >= $('#app-content').height() - clientHeight) {
                     SwdPresenter.loadNewestPosts(true);
@@ -294,7 +288,6 @@ var SwdPresenter = {
     loadLikedPosts: function() {
         SwdPresenter.resetFbCanvasSize();
         SwdView.showFeedLoadingAjaxDiv();
-
         SwdModel.getLikedPosts(SwdPresenter.selectedGroup.gid, function(response) {
             alert('Not yet implemented.');
         });
@@ -305,7 +298,6 @@ var SwdPresenter = {
     loadMyPosts: function() {
         SwdPresenter.resetFbCanvasSize();
         SwdView.showFeedLoadingAjaxDiv();
-
         SwdModel.getMyPosts(SwdPresenter.selectedGroup.gid, function(response) {
             alert('Not yet implemented.');
         });
@@ -316,7 +308,6 @@ var SwdPresenter = {
      */
     loadNewestPosts: function(loadNextPage) {
         var updatedTime;
-
         if (loadNextPage) {
             updatedTime = SwdPresenter.oldestPost.updated_time;
         }
@@ -357,11 +348,12 @@ var SwdPresenter = {
      * @param {type} id
      * @param {type} link
      */
-    sendFacebookMessage: function(id) {
+    sendFacebookMessage: function(id, link) {
         FB.ui({
             app_id: AppId,
             to: id,
             method: 'send',
+            link: link
         });
     },
     /***
@@ -401,7 +393,6 @@ var SwdPresenter = {
     },
     onClickMenuItemGroup: function(e, args) {
         var id = $(e.currentTarget).attr('id');
-
         if (id === 'menu-item-choose-groups') {
             // TODO: Display group chooser dialog.
         }
@@ -415,7 +406,6 @@ var SwdPresenter = {
     },
     onClickNavButton: function(e, args) {
         var id = $(e.currentTarget).attr('id');
-
         switch (id) {
             case 'button-nav-group':
                 SwdPresenter.postType = PostType.group;
@@ -447,36 +437,32 @@ var SwdPresenter = {
         alert($(e.currentTarget).attr('id'));
     },
     onClickPostButtonPm: function(e, args) {
-        //alert($(e.currentTarget).attr('id'));
         var id;
         var permalink;
 
         id = $('#panel-post').data('actor_id');
+        permalink = $('#panel-post').data('permalink');
 
-        SwdPresenter.sendFacebookMessage(id);
+        SwdModel.shortenUrl(permalink, function(response) {
+            SwdPresenter.sendFacebookMessage(id, response.id);
+        });
     },
     onClickPostTile: function(e, args) {
         var id;
         var post;
-
         // Assuming one of the child elements of post-tile was clicked.
         id = $(e.currentTarget).parents('div.post-tile').attr('id');
-
         if (!id) {
             id = $(e.currentTarget).attr('id');
         }
 
         e.stopPropagation();
-
         $('#post-details-panel .ajax-loading-div').show();
         SwdView.showFloatingPanel('#post-details-panel');
-
         SwdModel.getPostDetails(id, function(response) {
             post = response;
-
             // Try to retrieve image URL from object.
             post['image_url'] = $('#' + id).data('image_url');
-
             if (post) {
                 SwdView.showPostDetails(post);
             }
@@ -490,7 +476,6 @@ var SwdPresenter = {
         SwdView.positionMenus();
     },
 };
-
 /**
  * View for the Swapper's Delight program.
  */
@@ -502,7 +487,6 @@ var SwdView = {
      */
     addGroupsToMenu: function(groups) {
         var i = 0;
-
         for (i = 0; i < groups.length; i++) {
             $('#popup-menu-groups').append('<li id="' + groups[i].gid + '" class="menu-item-group"><a href="#"><span class="ui-icon" style="background-image: url(' + groups[i].icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + groups[i].name + '</div></a></li>');
         }
@@ -513,70 +497,57 @@ var SwdView = {
     initView: function() {
         // Set up buttons
         $('.button-nav').button();
-
         $('#button-menu-main').button({
             icons: {
                 primary: 'ui-icon-gear'
             }
         });
-
         $('#button-menu-groups').button({
             icons: {
                 primary: 'ui-icon-contact'
             }
         });
-
         $('#button-new').button({
             icons: {
                 primary: 'ui-icon-comment'
             }
         });
-
         $('#button-refresh').button({
             icons: {
                 primary: 'ui-icon-refresh'
             }
         });
-
         $('#button-menu-daysback').button({
             icons: {
                 primary: 'ui-icon-calendar'
             }
         });
-
         $('#post-button-comment').button({
             icons: {
                 primary: 'ui-icon-comment'
             }
         });
-
         $('#post-button-pm').button({
             icons: {
                 primary: 'ui-icon-mail-closed'
             }
         });
-
         $('#post-button-like').button({
             icons: {
                 primary: 'ui-icon-pin-s'
             }
         });
-
         $('#post-message-user').hover(function() {
             $(this).removeClass('ui-state-default').addClass('ui-state-hover');
         }, function() {
             $(this).removeClass('ui-state-hover').addClass('ui-state-default');
         });
-
         $('#post-details-panel').click(function(e) {
             e.stopPropagation();
         });
-
         $('#post-message-user').button();
-
         // Init menus.
         $('#popup-menu-main').menu();
-
         // Fade out the div we are using to hide non-initted elements.
         $('#overlay-app-loading').fadeOut('fast');
     },
@@ -589,7 +560,6 @@ var SwdView = {
      */
     installHandler: function(name, handler, selector, event) {
         this.handlers[name] = handler;
-
         $(selector).bind(event, function(e, args) {
             SwdView.handlers[name].call(SwdPresenter, e, args);
         });
@@ -620,14 +590,11 @@ var SwdView = {
         var postTile;
         var primaryContent;
         var secondaryContent;
-
         // If there is a feed to display, then display it.
         if (posts) {
             for (i = 0; i < posts.length; i++) {
                 isEmpty = false;
-
                 post = posts[i];
-
                 if (post.message) {
                     message = post.message;
                 }
@@ -647,7 +614,6 @@ var SwdView = {
                 postTile = $('<div id="' + post.post_id + '" class="post-tile ui-corner-all ui-widget ui-widget-content ui-state-default"><div class="post-tile-primary-content"></div><div class="post-tile-secondary-content"></div></div>').data('image_url', imageUrlBig);
                 primaryContent = $(postTile).children('.post-tile-primary-content');
                 secondaryContent = $(postTile).children('.post-tile-secondary-content');
-
                 if (message && imageUrl) {
                     $(postTile).addClass('post-tile-multi');
                     $(primaryContent).css('background-image', 'url("' + imageUrl + '")');
@@ -674,7 +640,6 @@ var SwdView = {
             }
 
             SwdView.hideFeedLoadingAjaxDiv();
-
             // Sleekly fade in the post tile elements.
             // From: http://www.paulirish.com/2008/sequentially-chain-your-callbacks-in-jquery-two-ways/
             (function shownext(jq) {
@@ -682,7 +647,6 @@ var SwdView = {
                     FB.Canvas.setSize({
                         height: Math.max($('html').height(), 800)
                     });
-
                     (jq = jq.slice(1)).length && shownext(jq);
                 });
             })($('div.post-tile'));
@@ -700,10 +664,8 @@ var SwdView = {
             }, function() {
                 $(this).removeClass('ui-state-hover').addClass('ui-state-default');
             });
-
             // Scroll up a tiny bit so the app is never at the bottom of the page after loading posts.
             $('#post-feed').scrollTop($('#post-feed').scrollTop() - 1);
-
             // Start polling page info again.
             SwdPresenter.facebookPageInfoPoll();
         }
@@ -714,12 +676,10 @@ var SwdView = {
     positionMenus: function() {
         $('.menu-button').each(function() {
             var menu = $(this).find('a').attr('href');
-
             $(menu).css({
                 top: 0,
                 left: 0
             });
-
             $(menu).position({
                 of: $(this),
                 my: 'left top',
@@ -735,7 +695,6 @@ var SwdView = {
         $('#left-rail').animate({
             top: Math.max(offset + 60, 0)
         }, 100);
-
         $('#main-toolbar, #post-details-panel').animate({
             top: Math.max(offset, 0)
         }, 100);
@@ -764,7 +723,6 @@ var SwdView = {
     showFloatingPanel: function(id) {
         // Make the panel modal by summoning a ui-widget-overlay.
         $('<div class="ui-widget-overlay ui-widget-front"></div>').hide().appendTo('body').fadeIn();
-
         $(id).show('slide', {
             easing: 'easeInOutQuint',
             direction: 'down'
@@ -787,10 +745,8 @@ var SwdView = {
         var postImage;
         var i;
         var comment;
-
         if (post.image_url) {
             postImage = 'url("' + post.image_url + '")';
-
             // Hide the no-image container and display the post's attached image.
             $('#post-no-image').hide();
             $('#post-image').show();
@@ -814,13 +770,10 @@ var SwdView = {
         $('#post-message-name').text(post.user.first_name + ' ' + post.user.last_name);
         $('#post-message-user').data('src', post.user.profile_url);
         $('#post-message-text').text(post.message);
-
         $('#post-comment-list').empty();
         $('#post-nocomments').show();
-
         if (post.comments.length > 0) {
             $('#post-nocomments').hide();
-
             for (i = 0; i < post.comments.length; i++) {
                 // Set user image
                 if (post.comments[i].user.pic_square) {
@@ -831,20 +784,15 @@ var SwdView = {
                 }
 
                 comment = $('<div class="post-comment ui-corner-all ui-widget ui-widget-content"><div class="ui-state-default"><div class="post-comment-user-image"></div><a class="post-comment-user-name" href="' + post.comments[i].user.profile_url + '" target="_blank">' + post.comments[i].user.first_name + ' ' + post.comments[i].user.last_name + '</a></div>' + post.comments[i].text + '</div>');
-
                 $(comment).find('.post-comment-user-image').css('background-image', userImage);
-
                 $('#post-comment-list').append(comment);
             }
         }
 
         // Clear comment box.
         $('#post-comment-text > textarea').val('');
-
         // Save for later consumption.
-        $('#panel-post').data('actor_id', post.actor_id).data('comment', post.action_links[0]).data('like', post.action_links[1]);
-
-
+        $('#panel-post').data('actor_id', post.actor_id).data('permalink', post.permalink).data('comment', post.action_links[0]).data('like', post.action_links[1]);
         $('#post-details-panel .ajax-loading-div').fadeOut();
     },
     /***
@@ -853,22 +801,18 @@ var SwdView = {
      */
     showUiMenu: function(e) {
         var menu;
-
         e.stopPropagation();
         menu = $(e.currentTarget).find('a').attr('href');
-
         //SwdView.positionMenus(menu);
         $(menu).css({
             top: 0,
             left: 0
         });
-
         $(menu).position({
             of: $(e.currentTarget),
             my: 'left top',
             at: 'left bottom'
         });
-
         // Display the menu.
         $(menu).show('slide', {
             direction: 'up',
@@ -877,7 +821,6 @@ var SwdView = {
         });
     }
 };
-
 $(document).ready(function() {
     $.ajaxSetup({
         cache: true
