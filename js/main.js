@@ -130,7 +130,6 @@ var SwdModel = {
             data: JSON.stringify({longUrl: url}),
             url: 'https://www.googleapis.com/urlshortener/v1/url',
             contentType: 'application/json',
-            dataType: 'jsonp',
             success: function(response) {
                 callback.call(SwdModel, response);
             },
