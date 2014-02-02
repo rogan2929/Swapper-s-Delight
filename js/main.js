@@ -444,9 +444,7 @@ var SwdPresenter = {
         id = $('#panel-post').data('actor_id');
         permalink = $('#panel-post').data('permalink');
 
-        SwdModel.shortenUrl(permalink, function(response) {
-            SwdPresenter.sendFacebookMessage(id, response.id);
-        });
+        SwdPresenter.sendFacebookMessage(id, permalink);
     },
     onClickPostTile: function(e, args) {
         var id;
