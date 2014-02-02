@@ -354,7 +354,7 @@ var SwdPresenter = {
             app_id: AppId,
             to: id,
             method: 'send',
-            link: 'http://goo.gl/Xi9teb'
+            link: 'https://www.facebook.com/groups/120696471425768/permalink/261305600698187/'
         });
     },
     /***
