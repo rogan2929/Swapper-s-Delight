@@ -279,7 +279,7 @@ var SwdPresenter = {
 
                     // Detect scroll at bottom
                     if (scrollTop >= scrollPos && scrollPos >= 0) {
-                        alert(scrollTop + ' ' + $('#app-content').height() + ' ' + clientHeight);
+                        //alert(scrollTop + ' ' + $('#app-content').height() + ' ' + clientHeight);
                         SwdPresenter.loadNewestPosts(true);
                     }
                 }
