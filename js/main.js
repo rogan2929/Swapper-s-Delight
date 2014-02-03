@@ -134,7 +134,10 @@ var SwdModel = {
      * @param {type} callback
      */
     postComment: function(url, comment, callback) {
-        alert(url + ' ' + comment);
+        //alert(url + ' ' + comment);
+        $.post(url, JSON.stringify({message: comment}), function(response) {
+            alert(response);
+        });
     },
     /***
      * Sync the server with the current session.
@@ -471,10 +474,10 @@ var SwdPresenter = {
     },
     onClickPostButtonComment: function(e, args) {
         var url, comment;
-        
+
         url = $('#panel-post').data('comment');
         comment = $('#post-comment-text > textarea').val();
-        
+
         // Post the comment.
         SwdModel.postComment(url, comment, function(response) {
             // TODO: Update View
@@ -482,9 +485,9 @@ var SwdPresenter = {
     },
     onClickPostButtonLike: function(e, args) {
         var url;
-        
+
         url = $('#panel-post').data('like');
-        
+
         // Post the comment.
         SwdModel.likePost(url, function(response) {
             // TODO: Update View
@@ -795,7 +798,7 @@ var SwdView = {
             $('#post-image').hide();
             $('#post-no-image').show();
         }
-        
+
         $('#post-permalink > a').attr('href', post.permalink).text(post.permalink);
 
         if (post.user.pic_square) {
@@ -824,7 +827,7 @@ var SwdView = {
 
                 //timeStamp = $.datepicker.formatDate('DD, mm/dd/yy at HH:MM', new Date(post.comments[i].time * 1000));
                 timeStamp = new moment(new Date(post.comments[i].time * 1000));
-                
+
 
                 comment = $('<div class="post-comment ui-corner-all ui-widget ui-widget-content"><div class="ui-state-default"><div class="post-comment-user-image"></div><div class="post-comment-header"><p class="wrapper"><a class="post-comment-user-name" href="' + post.comments[i].user.profile_url + '" target="_blank">' + post.comments[i].user.first_name + ' ' + post.comments[i].user.last_name + '</a><span class="timestamp">' + timeStamp.calendar() + '</span></p></div></div>' + post.comments[i].text + '</div>');
                 $(comment).find('.post-comment-user-image').css('background-image', userImage);
