@@ -117,13 +117,21 @@ var SwdModel = {
         });
     },
     /***
-     * Like a post. 
+     * Like a post.
+     * @param {type} url
+     * @param {type} callback
      */
-    likePost: function() {
-
+    likePost: function(url, callback) {
+        alert(url);
     },
-    postComment: function() {
-
+    /***
+     * Post a comment on a post.
+     * @param {type} url
+     * @param {type} comment
+     * @param {type} callback
+     */
+    postComment: function(url, comment, callback) {
+        alert(url + ' ' + comment);
     },
     /***
      * Sync the server with the current session.
@@ -459,10 +467,25 @@ var SwdPresenter = {
         window.open(profileUrl);
     },
     onClickPostButtonComment: function(e, args) {
-        alert($(e.currentTarget).attr('id'));
+        var url, comment;
+        
+        url = $('#panel-post').data('comment');
+        comment = $('#post-comment-text > textarea').val();
+        
+        // Post the comment.
+        SwdModel.postComment(url, comment, function(response) {
+            // TODO: Update View
+        });
     },
     onClickPostButtonLike: function(e, args) {
-        alert($(e.currentTarget).attr('id'));
+        var url;
+        
+        url = $('#panel-post').data('like');
+        
+        // Post the comment.
+        SwdModel.likePost(url, function(response) {
+            // TODO: Update View
+        });
     },
     onClickPostButtonPm: function(e, args) {
         var id;
