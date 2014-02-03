@@ -242,48 +242,50 @@ var SwdPresenter = {
      * Periodically call FB.Canvas.getPageInfo in order to dynmically update the UI within the canvas
      * iframe.
      */
-    facebookPageInfoPoll: function() {
-        FB.Canvas.getPageInfo(function(pageInfo) {
-            var scrollTop;
-            var offsetTop;
-            var clientHeight;
-            var offset;
-            var height;
-            scrollTop = parseInt(pageInfo.scrollTop);
-            offsetTop = parseInt(pageInfo.offsetTop);
-            clientHeight = parseInt(pageInfo.clientHeight);
+    facebookPageInfoPoll: function(stop) {
+        if (!stop) {
 
-            // Calculate how far to offset things.
-            offset = Math.max(scrollTop - offsetTop, 0);
+            FB.Canvas.getPageInfo(function(pageInfo) {
+                var scrollTop;
+                var offsetTop;
+                var clientHeight;
+                var offset;
+                var height;
+                scrollTop = parseInt(pageInfo.scrollTop);
+                offsetTop = parseInt(pageInfo.offsetTop);
+                clientHeight = parseInt(pageInfo.clientHeight);
 
-            // Check to see if the offset has been updated.
-            if (offset !== SwdPresenter.prevOffset) {
-                SwdPresenter.prevOffset = offset;
-                // Update fixed divs
-                SwdView.setFixedDivs(offset);
-                // Update post-details-panel height
-                if (scrollTop > offsetTop) {
-                    height = clientHeight - 10;
-                }
-                else {
-                    height = clientHeight - offsetTop - 10;
-                }
+                // Calculate how far to offset things.
+                offset = Math.max(scrollTop - offsetTop, 0);
 
-                SwdView.setFloatingPanelHeight(height);
+                // Check to see if the offset has been updated.
+                if (offset !== SwdPresenter.prevOffset) {
+                    SwdPresenter.prevOffset = offset;
+                    // Update fixed divs
+                    SwdView.setFixedDivs(offset);
+                    // Update post-details-panel height
+                    if (scrollTop > offsetTop) {
+                        height = clientHeight - 10;
+                    }
+                    else {
+                        height = clientHeight - offsetTop - 10;
+                    }
 
-                // Detect scroll at bottom
-                if (scrollTop >= $('#app-content').height() - clientHeight) {
-                    SwdPresenter.loadNewestPosts(true);
-                }
-                else {
+                    SwdView.setFloatingPanelHeight(height);
+
+                    // Detect scroll at bottom
+                    if (scrollTop >= $('#app-content').height() - clientHeight) {
+                        SwdPresenter.loadNewestPosts(true);
+                    }
+                    
                     // Only do another call if we are not loading more posts.
                     setTimeout(SwdPresenter.facebookPageInfoPoll, 100);
                 }
-            }
-            else {
-                setTimeout(SwdPresenter.facebookPageInfoPoll, 100);
-            }
-        });
+                else {
+                    setTimeout(SwdPresenter.facebookPageInfoPoll, 100);
+                }
+            });
+        }
     },
     /***
      * Load posts liked by user.
@@ -313,6 +315,8 @@ var SwdPresenter = {
      */
     loadNewestPosts: function(loadNextPage) {
         var updatedTime;
+        
+        SwdPresenter.facebookPageInfoPoll(true);
 
         if (loadNextPage) {
             if (SwdPresenter.oldestPost) {
@@ -328,7 +332,7 @@ var SwdPresenter = {
             SwdPresenter.resetFbCanvasSize();
             SwdView.showFeedLoadingAjaxDiv();
         }
-        
+
         alert(updatedTime);
 
         // Get posts and then display them.
@@ -675,7 +679,7 @@ var SwdView = {
             });
 
             // Start polling page info again.
-            SwdPresenter.facebookPageInfoPoll();
+            SwdPresenter.facebookPageInfoPoll(false);
         }
     },
     /***
