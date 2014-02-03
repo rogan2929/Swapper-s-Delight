@@ -669,7 +669,7 @@ var SwdView = {
                     if (i === posts.length - 1) {
                         // Finished animating display of post tiles.
                         FB.Canvas.setSize({
-                            height: Math.max($('#app-content').height(), 800)
+                            height: Math.max($('html').height(), 800)
                         });
 
                         // Start polling page info again.
