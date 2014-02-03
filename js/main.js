@@ -310,7 +310,7 @@ var SwdPresenter = {
     loadNewestPosts: function(loadNextPage) {
         var updatedTime;
         
-        if (loadNextPage) {
+        if (loadNextPage === true) {
             alert(SwdPresenter.oldestPost);
             updatedTime = SwdPresenter.oldestPost.updated_time;
         }
