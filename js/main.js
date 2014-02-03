@@ -275,8 +275,8 @@ var SwdPresenter = {
                     SwdView.setFloatingPanelHeight(height);
 
                     // Detect scroll at bottom
-                    if (scrollTop >= $('#app-content').height() - clientHeight) {
-                        alert(scrollTop + ' ' + $('#app-content').height() + ' ' + clientHeight);
+                    if (scrollTop >= $('html').height() - clientHeight) {
+                        alert(scrollTop + ' ' + $('html').height() + ' ' + clientHeight);
                         SwdPresenter.loadNewestPosts(true);
                     }
                 }
