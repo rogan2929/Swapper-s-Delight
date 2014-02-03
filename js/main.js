@@ -157,7 +157,7 @@ var SwdPresenter = {
     selectedGroup: null,
     groups: null,
     prevOffset: null,
-    loadInProgress: true,
+    loadInProgress: false,
     /**
      * Entry point of program.
      */
