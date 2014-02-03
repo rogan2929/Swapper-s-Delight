@@ -29,6 +29,8 @@ for ($i = 0; $i < count($groups); $i++) {
     $groups[$i]['marked'] = $marked;
 }
 
+echo json_encode($groups);
+
 //$queries = array();
 //
 //// Construct a multi-query
