@@ -130,7 +130,15 @@ textarea {
     -webkit-overflow-scrolling: touch
 }
 
-.timestamp {
+.post-comment-header .wrapper {
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 30px;
+    position: absolute;
+}
+
+.post-comment-header .timestamp {
     display: block;
     font-weight: normal;
     color: black;
@@ -376,13 +384,8 @@ textarea {
 }
 
 .post-comment-header {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 60px;
-    height: 1em;
-    margin-top: auto;
-    margin-bottom: auto;
+    height: 100%;
+    margin-left: 60px;
 }
 
 .post-comment a:hover {
