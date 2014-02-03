@@ -124,22 +124,9 @@ var SwdModel = {
     postComment: function() {
 
     },
-    shortenUrl: function(url, callback) {
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify({longUrl: url}),
-            url: 'https://www.googleapis.com/urlshortener/v1/url',
-            contentType: 'application/json',
-            success: function(response) {
-                callback.call(SwdModel, response);
-            },
-            fail: function(response) {
-
-            }
-        });
-    },
     /***
      * Sync the server with the current session.
+     * @param {type} callback
      */
     startSession: function(callback) {
         $.ajax({
