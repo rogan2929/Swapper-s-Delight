@@ -11,6 +11,7 @@ $selectedGroups = array(
 );
 
 echo 'TEST';
+echo $fbSession->getUser();
 
 // Retrieve all groups.
 $response = $fbSession->api('/me/groups?fields=id,name,icon');
