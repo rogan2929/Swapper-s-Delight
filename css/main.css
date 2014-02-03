@@ -373,7 +373,7 @@ textarea {
     display: inline-block;
 }
 
-.post-comment-user-header {
+.post-comment-header {
     position: absolute;
     top: 0;
     bottom: 0;
