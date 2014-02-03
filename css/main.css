@@ -334,7 +334,7 @@ textarea {
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    width: 212px;
+    width: 236px;
 }
 
 /*#post-permalink {
@@ -472,7 +472,7 @@ div.login-div {
 /* JQuery UI Overrides */
 
 .post-button {
-    min-width: 100px;
+    min-width: 112px;
 }
 
 /* Ellipses */
