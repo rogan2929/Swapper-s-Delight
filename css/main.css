@@ -330,12 +330,11 @@ textarea {
 }
 
 #post-button-bar > div {
-    position: absolute;
     left: 0;
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    width: 100px;
+    width: 210px;
 }
 
 /*#post-permalink {
@@ -419,10 +418,6 @@ div.right-toolbar-button {
     display: none;
 }
 
-.menu-button {
-    width: auto !important;
-}
-
 #post-feed {
     margin-left: 200px;
     margin-top: 60px;
@@ -449,7 +444,7 @@ div.right-toolbar-button {
 }
 
 .button-nav {
-    width: 100% !important;
+    width: 100%;
     margin-top: 4px;
 }
 
@@ -476,7 +471,7 @@ div.login-div {
 
 /* JQuery UI Overrides */
 
-.ui-button.ui-widget {
+.post-button {
     width: 100px;
 }
 
