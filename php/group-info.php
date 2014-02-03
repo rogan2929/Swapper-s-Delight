@@ -12,23 +12,22 @@ $selectedGroups = array(
 
 // Retrieve all groups.
 $response = $fbSession->api('/me/groups?fields=id,name,icon');
+$groups = $response['data'];
 
-echo json_encode($response);
-
-//// Iterate through returned groups and determine if they have been marked or not.
-//for ($i = 0; $i < count($response); $i++) {
-//    $marked = false;
-//    
-//    for ($j = 0; $j < count($selectedGroups); $j++) {
-//        if ($selectedGroups[$j] == $response[$i]['id']) {
-//            $marked = true;
-//            break;
-//        }
-//    }
-//    
-//    // Insert additional field indicating if the group has been marked as a "BST" group.
-//    $response[$i]['marked'] = $marked;
-//}
+// Iterate through returned groups and determine if they have been marked or not.
+for ($i = 0; $i < count($groups); $i++) {
+    $marked = false;
+    
+    for ($j = 0; $j < count($selectedGroups); $j++) {
+        if ($selectedGroups[$j] == $groups[$i]['id']) {
+            $marked = true;
+            break;
+        }
+    }
+    
+    // Insert additional field indicating if the group has been marked as a "BST" group.
+    $groups[$i]['marked'] = $marked;
+}
 
 //$queries = array();
 //
