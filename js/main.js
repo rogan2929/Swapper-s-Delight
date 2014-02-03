@@ -796,7 +796,8 @@ var SwdView = {
                     userImage = '';
                 }
 
-                timeStamp = new Date(post.comments[i].time * 1000);
+                //timeStamp = (new Date(post.comments[i].time * 1000)).format("dddd, mmmm dS, yyyy, h:MM:ss TT");
+                timeStamp = $.datepicker.formatDate('yy-mm-dd', new Date(post.comments[i].time * 1000));
 
                 comment = $('<div class="post-comment ui-corner-all ui-widget ui-widget-content"><div class="ui-state-default"><div class="post-comment-user-image"></div><div class="post-comment-header"><a class="post-comment-user-name" href="' + post.comments[i].user.profile_url + '" target="_blank">' + post.comments[i].user.first_name + ' ' + post.comments[i].user.last_name + '</a><span class="timestamp">  at ' + timeStamp + '</span></div></div>' + post.comments[i].text + '</div>');
                 $(comment).find('.post-comment-user-image').css('background-image', userImage);
