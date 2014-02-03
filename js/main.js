@@ -495,7 +495,7 @@ var SwdPresenter = {
         //ppermalink = $('#panel-post').data('comment');
         
         //permalink = 'https://swappersdelight-test.azurewebsites.net/php/blank.php';
-        permalink = 'http://on.fb.me/1fUgaS1';
+        permalink = 'http://bit.ly/1aXsWl3';
 
         SwdPresenter.sendFacebookMessage(id, permalink);
     },
