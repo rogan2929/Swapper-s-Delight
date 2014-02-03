@@ -321,10 +321,10 @@ textarea {
     height: 200px;
 }
 
-#post-permalink {
+/*#post-permalink {
     margin-top: 1em;
-    /*    font-size: 0.9em;*/
-}
+        font-size: 0.9em;
+}*/
 
 /*#post-no-image-container > span {
     font-style: italic;

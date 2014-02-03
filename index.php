@@ -62,12 +62,14 @@
                             <div id='post-no-image' class='hidden'>
                                 <div></div>
                                 <span>This post does not have a photo, or the owner of this post has chosen not to give permission for applications like Swapper's Delight to view it. Click the link below to see the original Facebook posting.</span>
-                                <a id='post-permalink' class='wrappable-link' target='_blank'></a>
                             </div>
                             <div id='post-image'></div>
                         </div>
                         <div id='post-message' class='ui-widget ui-widget-content ui-corner-all'>
                             <span id='post-message-text'></span>
+                        </div>
+                        <div  id='post-permalink'>
+                            <a target='_blank'></a>
                         </div>
                         <div id='post-button-bar'>
                             <!--

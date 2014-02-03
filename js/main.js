@@ -767,7 +767,7 @@ var SwdView = {
         }
         else {
             // Show the no-image notification.
-            $('#post-permalink').attr('href', post.permalink).text(post.permalink);
+            $('#post-permalink > a').attr('href', post.permalink).text(post.permalink);
             $('#post-image').hide();
             $('#post-no-image').show();
         }
