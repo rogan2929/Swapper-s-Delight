@@ -275,8 +275,8 @@ var SwdPresenter = {
                     SwdView.setFloatingPanelHeight(height);
 
                     // Detect scroll at bottom
-                    if (scrollTop >= $('html').height() - clientHeight) {
-                        alert(scrollTop + ' ' + $('html').height() + ' ' + clientHeight);
+                    if (scrollTop >= $('#app-content').height() - clientHeight) {
+                        alert(scrollTop + ' ' + $('#app-content').height() + ' ' + clientHeight);
                         SwdPresenter.loadNewestPosts(true);
                     }
                 }
@@ -666,7 +666,7 @@ var SwdView = {
                     if (i === posts.length - 1) {
                         // Finished animating display of post tiles.
                         FB.Canvas.setSize({
-                            height: Math.max($('html').height(), 800)
+                            height: Math.max($('#app-content').height(), 800)
                         });
 
                         // Start polling page info again.
