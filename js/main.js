@@ -252,6 +252,7 @@ var SwdPresenter = {
                 var clientHeight;
                 var offset;
                 var height;
+                var scrollPos;
                 scrollTop = parseInt(pageInfo.scrollTop);
                 offsetTop = parseInt(pageInfo.offsetTop);
                 clientHeight = parseInt(pageInfo.clientHeight);
@@ -273,9 +274,11 @@ var SwdPresenter = {
                     }
 
                     SwdView.setFloatingPanelHeight(height);
+                    
+                    scrollPos = $('#app-content').height() - clientHeight;
 
                     // Detect scroll at bottom
-                    if (scrollTop >= $('#app-content').height() - clientHeight) {
+                    if (scrollTop >= scrollPos && scrollPos >= 0) {
                         alert(scrollTop + ' ' + $('#app-content').height() + ' ' + clientHeight);
                         SwdPresenter.loadNewestPosts(true);
                     }
