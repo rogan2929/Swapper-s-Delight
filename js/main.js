@@ -274,7 +274,7 @@ var SwdPresenter = {
                     }
 
                     SwdView.setFloatingPanelHeight(height);
-                    
+
                     scrollPos = $('#app-content').height() - clientHeight;
 
                     // Detect scroll at bottom
@@ -666,19 +666,10 @@ var SwdView = {
             // From: http://www.paulirish.com/2008/sequentially-chain-your-callbacks-in-jquery-two-ways/
             (function shownext(jq) {
                 jq.eq(0).fadeIn(60, function() {
-                    if (i === posts.length - 1) {
-                        // Finished animating display of post tiles.
-                        FB.Canvas.setSize({
-                            height: Math.max($('html').height(), 800)
-                        });
-
-                        // Start polling page info again.
-                        SwdPresenter.facebookPageInfoPoll();
-                    }
-
-                    // Increment counter.
-                    i++;
-
+                    // Finished animating display of post tiles.
+                    FB.Canvas.setSize({
+                        height: Math.max($('html').height(), 800)
+                    });
                     (jq = jq.slice(1)).length && shownext(jq);
                 });
             })($('div.post-tile'));
@@ -690,6 +681,8 @@ var SwdView = {
             }, function() {
                 $(this).removeClass('ui-state-hover').addClass('ui-state-default');
             });
+
+            SwdPresenter.facebookPageInfoPoll();
         }
     },
     /***
