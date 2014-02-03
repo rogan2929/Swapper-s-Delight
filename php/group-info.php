@@ -10,24 +10,42 @@ $selectedGroups = array(
     '575530119133790'
 );
 
-$queries = array();
+// Retrieve all groups.
+$response = $fbSession.api('/me/groups');
 
-// Construct a multi-query
-foreach ($selectedGroups as $gid) {
-    $queries[$gid] = ('SELECT gid,name,icon FROM group WHERE gid=' . $gid);
-}
-
-// Make an FQL call.
-$response = $fbSession->api(array(
-    'method' => 'fql.multiquery',
-    'queries' => $queries
-        ));
-
-$groups = array();
-
+// Iterate through returned groups and determine if they have been marked or not.
 for ($i = 0; $i < count($response); $i++) {
-    $groups[$i] = $response[$i]['fql_result_set'][0];
+    $marked = false;
+    
+    for ($j = 0; $j < count($selectedGroups); $j++) {
+        if ($selectedGroups[$j] == $response[$i]['id']) {
+            $marked = true;
+            break;
+        }
+    }
+    
+    // Insert additional field indicating if the group has been marked as a "BST" group.
+    $response[$i]['marked'] = $marked;
 }
+
+//$queries = array();
+//
+//// Construct a multi-query
+//foreach ($selectedGroups as $gid) {
+//    $queries[$gid] = ('SELECT gid,name,icon FROM group WHERE gid=' . $gid);
+//}
+//
+//// Make an FQL call.
+//$response = $fbSession->api(array(
+//    'method' => 'fql.multiquery',
+//    'queries' => $queries
+//        ));
+//
+//$groups = array();
+//
+//for ($i = 0; $i < count($response); $i++) {
+//    $groups[$i] = $response[$i]['fql_result_set'][0];
+//}
 
 // Pass the data on to the client.
 echo json_encode($groups);

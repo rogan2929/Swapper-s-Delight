@@ -8,6 +8,7 @@ var PostType = {
     liked: 2,
     search: 3
 };
+
 // Prod AppId
 //var AppId = '1401018793479333';
 
@@ -43,7 +44,7 @@ var SwdModel = {
         });
     },
     /***
-     * Query database for groups that the user has marked as 'BST' (Buy, Sell, Trade)
+     * Query database for groups that the user is a member of.
      * @param {type} callback
      */
     getGroupInfo: function(callback) {
@@ -197,12 +198,24 @@ var SwdPresenter = {
      * Starts the application after init has finished.
      */
     startApp: function() {
+        var i, selectedGroups;
+        
         // Retrieve group info for logged in user.
         SwdModel.getGroupInfo(function(response) {
             SwdPresenter.groups = response;
+            
+            selectedGroups = [];
+            
+            // Find groups that have been marked as 'BST'
+            for (i = 0; i < SwdPresenter.groups.length; i++) {
+                if (SwdPresenter.groups[i].marked) {
+                    selectedGroups.push(SwdPresenter.groups[i]);
+                }
+            }
+            
             if (SwdPresenter.groups) {
-                SwdPresenter.setSelectedGroup(SwdPresenter.groups[0]);
-                SwdView.addGroupsToMenu(SwdPresenter.groups);
+                SwdPresenter.setSelectedGroup(selectedGroups[0]);
+                SwdView.addGroupsToMenu(selectedGroups);
                 $('#popup-menu-groups').menu();
                 // Install Event Handlers
                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
@@ -380,13 +393,23 @@ var SwdPresenter = {
         SwdView.showUiMenu(e);
     },
     onClickMenuItemGroup: function(e, args) {
-        var id = $(e.currentTarget).attr('id');
+        var i, id, group;
+        
+        id = $(e.currentTarget).attr('id');
+        
         if (id === 'menu-item-choose-groups') {
             // TODO: Display group chooser dialog.
         }
         else {
+            for (i = 0; i < SwdPresenter.groups.length; i++) {
+                if (id === SwdPresenter.groups[i].id) {
+                    group = SwdPresenter.groups[i];
+                    break;
+                }
+            }
+            
             // Set selected group and load its feed.
-            SwdPresenter.setSelectedGroup(id);
+            SwdPresenter.setSelectedGroup(group);
         }
     },
     onClickMenuItemMain: function(e, args) {
