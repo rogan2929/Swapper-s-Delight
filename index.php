@@ -65,11 +65,11 @@
                             </div>
                             <div id='post-image'></div>
                         </div>
+                        <div id='post-permalink' class='ui-widget ui-widget-content ui-corner-all'>
+                            <a class='wrappable-link' target='_blank'></a>
+                        </div>
                         <div id='post-message' class='ui-widget ui-widget-content ui-corner-all'>
                             <span id='post-message-text'></span>
-                        </div>
-                        <div id='post-permalink'>
-                            <a class='wrappable-link' target='_blank'></a>
                         </div>
                         <div id='post-button-bar'>
                             <!--
