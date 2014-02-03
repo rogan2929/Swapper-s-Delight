@@ -253,10 +253,12 @@ var SwdPresenter = {
             scrollTop = parseInt(pageInfo.scrollTop);
             offsetTop = parseInt(pageInfo.offsetTop);
             clientHeight = parseInt(pageInfo.clientHeight);
+            
             // Calculate how far to offset things.
             offset = Math.max(scrollTop - offsetTop, 0);
+            
             // Check to see if the offset has been updated.
-            if (offset != SwdPresenter.prevOffset) {
+            if (offset !== SwdPresenter.prevOffset) {
                 SwdPresenter.prevOffset = offset;
                 // Update fixed divs
                 SwdView.setFixedDivs(offset);
@@ -269,6 +271,7 @@ var SwdPresenter = {
                 }
 
                 SwdView.setFloatingPanelHeight(height);
+                
                 // Detect scroll at bottom
                 if (scrollTop >= $('#app-content').height() - clientHeight) {
                     SwdPresenter.loadNewestPosts(true);
