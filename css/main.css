@@ -131,6 +131,7 @@ textarea {
 }
 
 .timestamp {
+    display: block;
     font-weight: normal;
     color: black;
 }
