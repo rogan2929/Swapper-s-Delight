@@ -135,9 +135,8 @@ var SwdModel = {
      */
     postComment: function(url, comment, callback) {
         //alert(url + ' ' + comment);
-        $.post(url, JSON.stringify({message: comment}), function(response) {
-            alert(response);
-        });
+        //$.post(url, JSON.stringify({message: comment}), callback);
+        FB.api(url, 'POST', {'message': comment}, callback);
     },
     /***
      * Sync the server with the current session.
