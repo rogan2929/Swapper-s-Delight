@@ -157,6 +157,7 @@ var SwdPresenter = {
     selectedGroup: null,
     groups: null,
     prevOffset: null,
+    loadInProgress: null,
     /**
      * Entry point of program.
      */
@@ -199,20 +200,20 @@ var SwdPresenter = {
      */
     startApp: function() {
         var i, selectedGroups;
-        
+
         // Retrieve group info for logged in user.
         SwdModel.getGroupInfo(function(response) {
             SwdPresenter.groups = response;
-            
+
             selectedGroups = [];
-            
+
             // Find groups that have been marked as 'BST'
             for (i = 0; i < SwdPresenter.groups.length; i++) {
                 if (SwdPresenter.groups[i].marked) {
                     selectedGroups.push(SwdPresenter.groups[i]);
                 }
             }
-            
+
             if (SwdPresenter.groups) {
                 SwdPresenter.setSelectedGroup(selectedGroups[0]);
                 SwdView.addGroupsToMenu(selectedGroups);
@@ -252,10 +253,10 @@ var SwdPresenter = {
             scrollTop = parseInt(pageInfo.scrollTop);
             offsetTop = parseInt(pageInfo.offsetTop);
             clientHeight = parseInt(pageInfo.clientHeight);
-            
+
             // Calculate how far to offset things.
             offset = Math.max(scrollTop - offsetTop, 0);
-            
+
             // Check to see if the offset has been updated.
             if (offset !== SwdPresenter.prevOffset) {
                 SwdPresenter.prevOffset = offset;
@@ -270,7 +271,7 @@ var SwdPresenter = {
                 }
 
                 SwdView.setFloatingPanelHeight(height);
-                
+
                 // Detect scroll at bottom
                 if (scrollTop >= $('#app-content').height() - clientHeight) {
                     SwdPresenter.loadNewestPosts(true);
@@ -291,7 +292,9 @@ var SwdPresenter = {
     loadLikedPosts: function() {
         SwdPresenter.resetFbCanvasSize();
         SwdView.showFeedLoadingAjaxDiv();
+
         SwdModel.getLikedPosts(SwdPresenter.selectedGroup.id, function(response) {
+            SwdPresenter.loadInProgress = false;
             alert('Not yet implemented.');
         });
     },
@@ -301,6 +304,7 @@ var SwdPresenter = {
     loadMyPosts: function() {
         SwdPresenter.resetFbCanvasSize();
         SwdView.showFeedLoadingAjaxDiv();
+
         SwdModel.getMyPosts(SwdPresenter.selectedGroup.id, function(response) {
             alert('Not yet implemented.');
         });
@@ -311,34 +315,38 @@ var SwdPresenter = {
      */
     loadNewestPosts: function(loadNextPage) {
         var updatedTime;
-        
-        if (loadNextPage) {
-            alert(SwdPresenter.oldestPost);
-            updatedTime = SwdPresenter.oldestPost.updated_time;
-        }
-        else {
-            updatedTime = null;
-            SwdView.clearPosts();
-            SwdPresenter.resetFbCanvasSize();
-            SwdView.showFeedLoadingAjaxDiv();
-        }
 
-        // Get posts and then display them.
-        SwdModel.getNewestPosts(SwdPresenter.selectedGroup.id, updatedTime, function(response) {
-            if (!loadNextPage) {
-                // Clear previous results, unless loading a new page.
-                SwdPresenter.oldestPost = null;
+        if (SwdPresenter.loadInProgress !== true) {
+            SwdPresenter.loadInProgress = true;
+            
+            if (loadNextPage) {
+                alert(SwdPresenter.oldestPost);
+                updatedTime = SwdPresenter.oldestPost.updated_time;
+            }
+            else {
+                updatedTime = null;
+                SwdView.clearPosts();
+                SwdPresenter.resetFbCanvasSize();
+                SwdView.showFeedLoadingAjaxDiv();
             }
 
-            if (response) {
-                SwdPresenter.oldestPost = response[response.length - 1];
-                SwdView.populatePosts(response);
-            }
-            else
-            if (!loadNextPage) {
-                SwdPresenter.oldestPost = null;
-            }
-        });
+            // Get posts and then display them.
+            SwdModel.getNewestPosts(SwdPresenter.selectedGroup.id, updatedTime, function(response) {
+                if (!loadNextPage) {
+                    // Clear previous results, unless loading a new page.
+                    SwdPresenter.oldestPost = null;
+                }
+
+                if (response) {
+                    SwdPresenter.oldestPost = response[response.length - 1];
+                    SwdView.populatePosts(response);
+                }
+                else
+                if (!loadNextPage) {
+                    SwdPresenter.oldestPost = null;
+                }
+            });
+        }
     },
     /***
      * Reset Facebook Canvas Size to default value of 800
@@ -398,9 +406,9 @@ var SwdPresenter = {
     },
     onClickMenuItemGroup: function(e, args) {
         var i, id, group;
-        
+
         id = $(e.currentTarget).attr('id');
-        
+
         if (id === 'menu-item-choose-groups') {
             // TODO: Display group chooser dialog.
         }
@@ -411,7 +419,7 @@ var SwdPresenter = {
                     break;
                 }
             }
-            
+
             // Set selected group and load its feed.
             SwdPresenter.setSelectedGroup(group);
         }
@@ -594,15 +602,8 @@ var SwdView = {
      * @param {type} posts
      */
     populatePosts: function(posts) {
-        var i;
-        var isEmpty;
-        var imageUrl;
-        var imageUrlBig;
-        var message;
-        var post;
-        var postTile;
-        var primaryContent;
-        var secondaryContent;
+        var i, isEmpty, imageUrl, imageUrlBig, message, post, postTile, primaryContent, secondaryContent;
+
         // If there is a feed to display, then display it.
         if (posts) {
             for (i = 0; i < posts.length; i++) {
@@ -653,7 +654,7 @@ var SwdView = {
             }
 
             SwdView.hideFeedLoadingAjaxDiv();
-            
+
             // Sleekly fade in the post tile elements.
             // From: http://www.paulirish.com/2008/sequentially-chain-your-callbacks-in-jquery-two-ways/
             (function shownext(jq) {
@@ -672,12 +673,12 @@ var SwdView = {
             }, function() {
                 $(this).removeClass('ui-state-hover').addClass('ui-state-default');
             });
-            
-            // Scroll up a tiny bit so the app is never at the bottom of the page after loading posts.
-            $('#post-feed').scrollTop($('#post-feed').scrollTop() - 1);
-            
+
+            // Signal that work is done.
+            SwdPresenter.loadInProgress = false;
+
             // Start polling page info again.
-            //SwdPresenter.facebookPageInfoPoll();
+            SwdPresenter.facebookPageInfoPoll();
         }
     },
     /***
@@ -752,7 +753,7 @@ var SwdView = {
      */
     showPostDetails: function(post) {
         var userImage, postImage, i, comment, timeStamp;
-        
+
         if (post.image_url) {
             postImage = 'url("' + post.image_url + '")';
             // Hide the no-image container and display the post's attached image.
@@ -790,7 +791,7 @@ var SwdView = {
                 else {
                     userImage = '';
                 }
-                
+
                 timeStamp = new Date(post.comments[i].time * 1000);
 
                 comment = $('<div class="post-comment ui-corner-all ui-widget ui-widget-content"><div class="ui-state-default"><div class="post-comment-user-image"></div><div class="post-comment-header"><a class="post-comment-user-name" href="' + post.comments[i].user.profile_url + '" target="_blank">' + post.comments[i].user.first_name + ' ' + post.comments[i].user.last_name + '</a><span class="timestamp">  at ' + timeStamp + '</span></div></div>' + post.comments[i].text + '</div>');
