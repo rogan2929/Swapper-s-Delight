@@ -472,7 +472,7 @@ div.login-div {
 /* JQuery UI Overrides */
 
 .post-button {
-    width: 100px;
+    min-width: 100px;
 }
 
 /* Ellipses */
