@@ -325,6 +325,10 @@ textarea {
     padding: 7px;
 }
 
+#post-button-bar {
+    text-align: right;
+}
+
 /*#post-permalink {
     margin-top: 1em;
         font-size: 0.9em;
