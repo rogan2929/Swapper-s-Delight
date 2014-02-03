@@ -382,7 +382,8 @@ var SwdPresenter = {
             app_id: AppId,
             to: id,
             method: 'send',
-            link: link
+            link: link,
+            display: 'popup'
         });
     },
     /***
