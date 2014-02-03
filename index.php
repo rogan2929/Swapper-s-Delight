@@ -72,10 +72,6 @@
                             <span id='post-message-text'></span>
                         </div>
                         <div id='post-button-bar'>
-                            <!--
-                            <div id='post-button-comment' class='post-button'>
-                            Comment
-                            </div>-->
                             <div id='post-button-pm' class='post-button'>
                                 Message
                             </div>
