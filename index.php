@@ -72,11 +72,13 @@
                             <span id='post-message-text'></span>
                         </div>
                         <div id='post-button-bar'>
-                            <div id='post-button-pm' class='post-button'>
-                                Message
-                            </div>
-                            <div id='post-button-like' class='post-button'>
-                                Like
+                            <div>
+                                <div id='post-button-pm' class='post-button'>
+                                    Message
+                                </div>
+                                <div id='post-button-like' class='post-button'>
+                                    Like
+                                </div>
                             </div>
                         </div>
                         <div id='post-comments'>
