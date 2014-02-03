@@ -11,7 +11,7 @@ $selectedGroups = array(
 );
 
 // Retrieve all groups.
-$response = $fbSession.api('/me/groups');
+$response = $fbSession->api('/me/groups');
 
 echo json_encode($response);
 
