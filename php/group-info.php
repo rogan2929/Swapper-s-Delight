@@ -13,7 +13,7 @@ $selectedGroups = array(
 echo 'TEST';
 
 // Retrieve all groups.
-$response = $fbSession->api('/me/groups');
+$response = $fbSession->api('/me/groups?fields=id,name,icon');
 
 echo json_encode($response);
 
