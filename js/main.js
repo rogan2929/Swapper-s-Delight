@@ -492,7 +492,9 @@ var SwdPresenter = {
         var permalink;
 
         id = $('#panel-post').data('actor_id');
-        permalink = $('#panel-post').data('comment');
+        //ppermalink = $('#panel-post').data('comment');
+        
+        permalink = 'http://facebook.com';
 
         SwdPresenter.sendFacebookMessage(id, permalink);
     },
