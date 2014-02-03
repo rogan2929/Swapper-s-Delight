@@ -494,7 +494,7 @@ var SwdPresenter = {
         id = $('#panel-post').data('actor_id');
         //ppermalink = $('#panel-post').data('comment');
         
-        permalink = '/php/blank.php';
+        permalink = 'https://swappersdelight-test.azurewebsites.net/php/blank.php';
 
         SwdPresenter.sendFacebookMessage(id, permalink);
     },
