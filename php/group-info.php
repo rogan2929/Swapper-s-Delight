@@ -10,11 +10,10 @@ $selectedGroups = array(
     '575530119133790'
 );
 
-echo 'TEST';
-echo $fbSession->getUser();
-
 // Retrieve all groups.
 $response = $fbSession->api('/me/groups?fields=id,name,icon');
+
+echo error_get_last();
 
 echo json_encode($response);
 
