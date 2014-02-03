@@ -10,6 +10,8 @@ $selectedGroups = array(
     '575530119133790'
 );
 
+echo 'TEST';
+
 // Retrieve all groups.
 $response = $fbSession->api('/me/groups');
 
