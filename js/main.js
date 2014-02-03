@@ -792,10 +792,11 @@ var SwdView = {
         }
         else {
             // Show the no-image notification.
-            $('#post-permalink > a').attr('href', post.permalink).text(post.permalink);
             $('#post-image').hide();
             $('#post-no-image').show();
         }
+        
+        $('#post-permalink > a').attr('href', post.permalink).text(post.permalink);
 
         if (post.user.pic_square) {
             userImage = 'url("' + post.user.pic_square + '")';
