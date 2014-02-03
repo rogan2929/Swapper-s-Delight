@@ -314,8 +314,6 @@ var SwdPresenter = {
     loadNewestPosts: function(loadNextPage) {
         var updatedTime;
 
-        alert('Loading...');
-
         if (loadNextPage) {
             if (SwdPresenter.oldestPost) {
                 updatedTime = SwdPresenter.oldestPost.updated_time;
@@ -330,6 +328,8 @@ var SwdPresenter = {
             SwdPresenter.resetFbCanvasSize();
             SwdView.showFeedLoadingAjaxDiv();
         }
+        
+        alert(updatedTime);
 
         // Get posts and then display them.
         SwdModel.getNewestPosts(SwdPresenter.selectedGroup.id, updatedTime, function(response) {
