@@ -472,6 +472,10 @@ div.login-div {
 
 /* JQuery UI Overrides */
 
+.ui-button.ui-widget {
+    width: 100px;
+}
+
 /* Ellipses */
 
 p { 
