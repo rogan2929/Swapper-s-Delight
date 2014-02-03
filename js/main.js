@@ -832,7 +832,7 @@ var SwdView = {
         // Clear comment box.
         $('#post-comment-text > textarea').val('');
         // Save for later consumption.
-        $('#panel-post').data('actor_id', post.actor_id).data('permalink', post.permalink).data('comment', post.action_links[0]).data('like', post.action_links[1]);
+        $('#panel-post').data('actor_id', post.actor_id).data('permalink', post.permalink).data('comment', post.action_links[0].link).data('like', post.action_links[1].link);
         $('#post-details-panel .ajax-loading-div').fadeOut();
     },
     /***
