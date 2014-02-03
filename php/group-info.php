@@ -13,6 +13,8 @@ $selectedGroups = array(
 // Retrieve all groups.
 $response = $fbSession.api('/me/groups');
 
+echo json_encode($response);
+
 // Iterate through returned groups and determine if they have been marked or not.
 for ($i = 0; $i < count($response); $i++) {
     $marked = false;
