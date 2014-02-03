@@ -276,6 +276,7 @@ var SwdPresenter = {
 
                     // Detect scroll at bottom
                     if (scrollTop >= $('#app-content').height() - clientHeight) {
+                        alert(scrollTop + ' ' + $('#app-content').height() + ' ' + clientHeight);
                         SwdPresenter.loadNewestPosts(true);
                     }
                 }
@@ -314,6 +315,7 @@ var SwdPresenter = {
     loadNewestPosts: function(loadNextPage) {
         var updatedTime;
 
+        // Pause window data polling.
         SwdPresenter.facebookPageInfoPoll(true);
 
         if (loadNextPage) {
@@ -330,8 +332,6 @@ var SwdPresenter = {
             SwdPresenter.resetFbCanvasSize();
             SwdView.showFeedLoadingAjaxDiv();
         }
-
-        alert(updatedTime);
 
         // Get posts and then display them.
         SwdModel.getNewestPosts(SwdPresenter.selectedGroup.id, updatedTime, function(response) {
