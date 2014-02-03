@@ -289,7 +289,7 @@ var SwdPresenter = {
     loadLikedPosts: function() {
         SwdPresenter.resetFbCanvasSize();
         SwdView.showFeedLoadingAjaxDiv();
-        SwdModel.getLikedPosts(SwdPresenter.selectedGroup.gid, function(response) {
+        SwdModel.getLikedPosts(SwdPresenter.selectedGroup.id, function(response) {
             alert('Not yet implemented.');
         });
     },
@@ -299,7 +299,7 @@ var SwdPresenter = {
     loadMyPosts: function() {
         SwdPresenter.resetFbCanvasSize();
         SwdView.showFeedLoadingAjaxDiv();
-        SwdModel.getMyPosts(SwdPresenter.selectedGroup.gid, function(response) {
+        SwdModel.getMyPosts(SwdPresenter.selectedGroup.id, function(response) {
             alert('Not yet implemented.');
         });
     },
@@ -320,7 +320,7 @@ var SwdPresenter = {
         }
 
         // Get posts and then display them.
-        SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, updatedTime, function(response) {
+        SwdModel.getNewestPosts(SwdPresenter.selectedGroup.id, updatedTime, function(response) {
             if (!loadNextPage) {
                 // Clear previous results, unless loading a new page.
                 SwdPresenter.oldestPost = null;
@@ -497,7 +497,7 @@ var SwdView = {
     addGroupsToMenu: function(groups) {
         var i = 0;
         for (i = 0; i < groups.length; i++) {
-            $('#popup-menu-groups').append('<li id="' + groups[i].gid + '" class="menu-item-group"><a href="#"><span class="ui-icon" style="background-image: url(' + groups[i].icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + groups[i].name + '</div></a></li>');
+            $('#popup-menu-groups').append('<li id="' + groups[i].id + '" class="menu-item-group"><a href="#"><span class="ui-icon" style="background-image: url(' + groups[i].icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + groups[i].name + '</div></a></li>');
         }
     },
     /**
