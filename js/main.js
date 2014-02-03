@@ -494,7 +494,7 @@ var SwdPresenter = {
         id = $('#panel-post').data('actor_id');
         //ppermalink = $('#panel-post').data('comment');
         
-        permalink = 'http://facebook.com';
+        permalink = 'http://www.foxnews.com/';
 
         SwdPresenter.sendFacebookMessage(id, permalink);
     },
