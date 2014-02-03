@@ -246,7 +246,6 @@ var SwdPresenter = {
         FB.Canvas.getPageInfo(function(pageInfo) {
             var scrollTop;
             var offsetTop;
-            var windowHeight;
             var clientHeight;
             var offset;
             var height;
@@ -313,7 +312,7 @@ var SwdPresenter = {
     loadNewestPosts: function(loadNextPage) {
         var updatedTime;
         
-        if (loadNextPage === true) {
+        if (loadNextPage) {
             alert(SwdPresenter.oldestPost);
             updatedTime = SwdPresenter.oldestPost.updated_time;
         }
@@ -654,6 +653,7 @@ var SwdView = {
             }
 
             SwdView.hideFeedLoadingAjaxDiv();
+            
             // Sleekly fade in the post tile elements.
             // From: http://www.paulirish.com/2008/sequentially-chain-your-callbacks-in-jquery-two-ways/
             (function shownext(jq) {
@@ -664,12 +664,6 @@ var SwdView = {
                     (jq = jq.slice(1)).length && shownext(jq);
                 });
             })($('div.post-tile'));
-            /*
-             $('div.post-tile').fadeIn(100, function() {
-             FB.Canvas.setSize({
-             height: $('#app-content').height()
-             });
-             });*/
 
             // Associate the click event handler for newly created posts.
             $('.post-tile > *').click(SwdView.handlers['onClickPostTile']);
@@ -678,10 +672,12 @@ var SwdView = {
             }, function() {
                 $(this).removeClass('ui-state-hover').addClass('ui-state-default');
             });
+            
             // Scroll up a tiny bit so the app is never at the bottom of the page after loading posts.
             $('#post-feed').scrollTop($('#post-feed').scrollTop() - 1);
+            
             // Start polling page info again.
-            SwdPresenter.facebookPageInfoPoll();
+            //SwdPresenter.facebookPageInfoPoll();
         }
     },
     /***
