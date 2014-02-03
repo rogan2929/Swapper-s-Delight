@@ -129,6 +129,11 @@ textarea {
     -webkit-overflow-scrolling: touch
 }
 
+.timestamp {
+    font-weight: normal;
+    color: black;
+}
+
 .selected-nav {
     color: #ffffff !important;
     text-decoration: none !important;

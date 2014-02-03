@@ -750,10 +750,8 @@ var SwdView = {
      * @param {type} post Post to load into floating post details panel.
      */
     showPostDetails: function(post) {
-        var userImage;
-        var postImage;
-        var i;
-        var comment;
+        var userImage, postImage, i, comment, timeStamp;
+        
         if (post.image_url) {
             postImage = 'url("' + post.image_url + '")';
             // Hide the no-image container and display the post's attached image.
@@ -791,8 +789,10 @@ var SwdView = {
                 else {
                     userImage = '';
                 }
+                
+                timeStamp = new Date(post.comments[i].time * 1000);
 
-                comment = $('<div class="post-comment ui-corner-all ui-widget ui-widget-content"><div class="ui-state-default"><div class="post-comment-user-image"></div><a class="post-comment-user-name" href="' + post.comments[i].user.profile_url + '" target="_blank">' + post.comments[i].user.first_name + ' ' + post.comments[i].user.last_name + '</a> at <span>' + new Date(post.comments[i].time * 1000) + '</span></div>' + post.comments[i].text + '</div>');
+                comment = $('<div class="post-comment ui-corner-all ui-widget ui-widget-content"><div class="ui-state-default"><div class="post-comment-user-image"></div><a class="post-comment-user-name" href="' + post.comments[i].user.profile_url + '" target="_blank">' + post.comments[i].user.first_name + ' ' + post.comments[i].user.last_name + '</a><span class="timestamp">  at ' + timeStamp + '</span></div>' + post.comments[i].text + '</div>');
                 $(comment).find('.post-comment-user-image').css('background-image', userImage);
                 $('#post-comment-list').append(comment);
             }
