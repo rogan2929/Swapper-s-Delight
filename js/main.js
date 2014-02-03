@@ -157,7 +157,6 @@ var SwdPresenter = {
     selectedGroup: null,
     groups: null,
     prevOffset: null,
-    loadInProgress: false,
     /**
      * Entry point of program.
      */
@@ -294,7 +293,6 @@ var SwdPresenter = {
         SwdView.showFeedLoadingAjaxDiv();
 
         SwdModel.getLikedPosts(SwdPresenter.selectedGroup.id, function(response) {
-            SwdPresenter.loadInProgress = false;
             alert('Not yet implemented.');
         });
     },
@@ -316,37 +314,39 @@ var SwdPresenter = {
     loadNewestPosts: function(loadNextPage) {
         var updatedTime;
 
-        if (SwdPresenter.loadInProgress !== true) {
-            SwdPresenter.loadInProgress = true;
-            
-            if (loadNextPage) {
-                alert(SwdPresenter.oldestPost);
+        alert('Loading...');
+
+        if (loadNextPage) {
+            if (SwdPresenter.oldestPost) {
                 updatedTime = SwdPresenter.oldestPost.updated_time;
             }
             else {
                 updatedTime = null;
-                SwdView.clearPosts();
-                SwdPresenter.resetFbCanvasSize();
-                SwdView.showFeedLoadingAjaxDiv();
+            }
+        }
+        else {
+            updatedTime = null;
+            SwdView.clearPosts();
+            SwdPresenter.resetFbCanvasSize();
+            SwdView.showFeedLoadingAjaxDiv();
+        }
+
+        // Get posts and then display them.
+        SwdModel.getNewestPosts(SwdPresenter.selectedGroup.id, updatedTime, function(response) {
+            if (!loadNextPage) {
+                // Clear previous results, unless loading a new page.
+                SwdPresenter.oldestPost = null;
             }
 
-            // Get posts and then display them.
-            SwdModel.getNewestPosts(SwdPresenter.selectedGroup.id, updatedTime, function(response) {
-                if (!loadNextPage) {
-                    // Clear previous results, unless loading a new page.
-                    SwdPresenter.oldestPost = null;
-                }
-
-                if (response) {
-                    SwdPresenter.oldestPost = response[response.length - 1];
-                    SwdView.populatePosts(response);
-                }
-                else
-                if (!loadNextPage) {
-                    SwdPresenter.oldestPost = null;
-                }
-            });
-        }
+            if (response) {
+                SwdPresenter.oldestPost = response[response.length - 1];
+                SwdView.populatePosts(response);
+            }
+            else
+            if (!loadNextPage) {
+                SwdPresenter.oldestPost = null;
+            }
+        });
     },
     /***
      * Reset Facebook Canvas Size to default value of 800
@@ -673,9 +673,6 @@ var SwdView = {
             }, function() {
                 $(this).removeClass('ui-state-hover').addClass('ui-state-default');
             });
-
-            // Signal that work is done.
-            SwdPresenter.loadInProgress = false;
 
             // Start polling page info again.
             SwdPresenter.facebookPageInfoPoll();
