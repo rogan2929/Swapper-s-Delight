@@ -358,7 +358,7 @@ var SwdPresenter = {
      */
     resetFbCanvasSize: function() {
         FB.Canvas.setSize({
-            height: 800
+            height: 810
         });
     },
     /***
@@ -668,7 +668,7 @@ var SwdView = {
                 jq.eq(0).fadeIn(60, function() {
                     // Finished animating display of post tiles.
                     FB.Canvas.setSize({
-                        height: Math.max($('html').height(), 800)
+                        height: Math.max($('html').height(), 810)
                     });
                     (jq = jq.slice(1)).length && shownext(jq);
                 });
