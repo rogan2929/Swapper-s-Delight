@@ -419,6 +419,10 @@ div.right-toolbar-button {
     display: none;
 }
 
+.menu-button {
+    width: auto !important;
+}
+
 #post-feed {
     margin-left: 200px;
     margin-top: 60px;
@@ -445,7 +449,7 @@ div.right-toolbar-button {
 }
 
 .button-nav {
-    width: 100%;
+    width: 100% !important;
     margin-top: 4px;
 }
 
