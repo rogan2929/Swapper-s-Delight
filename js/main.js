@@ -241,6 +241,7 @@ var SwdPresenter = {
     /***
      * Periodically call FB.Canvas.getPageInfo in order to dynmically update the UI within the canvas
      * iframe.
+     * @param {type} stop
      */
     facebookPageInfoPoll: function(stop) {
         if (!stop) {
@@ -277,13 +278,10 @@ var SwdPresenter = {
                     if (scrollTop >= $('#app-content').height() - clientHeight) {
                         SwdPresenter.loadNewestPosts(true);
                     }
-                    
-                    // Only do another call if we are not loading more posts.
-                    setTimeout(SwdPresenter.facebookPageInfoPoll, 100);
                 }
-                else {
-                    setTimeout(SwdPresenter.facebookPageInfoPoll, 100);
-                }
+
+                // Call the polling function again after 100ms.
+                setTimeout(SwdPresenter.facebookPageInfoPoll, 100);
             });
         }
     },
@@ -315,7 +313,7 @@ var SwdPresenter = {
      */
     loadNewestPosts: function(loadNextPage) {
         var updatedTime;
-        
+
         SwdPresenter.facebookPageInfoPoll(true);
 
         if (loadNextPage) {
@@ -606,7 +604,7 @@ var SwdView = {
      * @param {type} posts
      */
     populatePosts: function(posts) {
-        var i, isEmpty, imageUrl, imageUrlBig, message, post, postTile, primaryContent, secondaryContent;
+        var i, isEmpty, imageUrl, imageUrlBig, message, post, postTile, primaryContent, secondaryContent, count;
 
         // If there is a feed to display, then display it.
         if (posts) {
@@ -659,13 +657,25 @@ var SwdView = {
 
             SwdView.hideFeedLoadingAjaxDiv();
 
+            i = 0;
+
             // Sleekly fade in the post tile elements.
             // From: http://www.paulirish.com/2008/sequentially-chain-your-callbacks-in-jquery-two-ways/
             (function shownext(jq) {
                 jq.eq(0).fadeIn(60, function() {
-                    FB.Canvas.setSize({
-                        height: Math.max($('html').height(), 800)
-                    });
+                    if (i === posts.length - 1) {
+                        // Finished animating display of post tiles.
+                        FB.Canvas.setSize({
+                            height: Math.max($('html').height(), 800)
+                        });
+
+                        // Start polling page info again.
+                        SwdPresenter.facebookPageInfoPoll();
+                    }
+
+                    // Increment counter.
+                    i++;
+
                     (jq = jq.slice(1)).length && shownext(jq);
                 });
             })($('div.post-tile'));
@@ -677,9 +687,6 @@ var SwdView = {
             }, function() {
                 $(this).removeClass('ui-state-hover').addClass('ui-state-default');
             });
-
-            // Start polling page info again.
-            SwdPresenter.facebookPageInfoPoll(false);
         }
     },
     /***
