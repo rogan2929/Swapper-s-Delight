@@ -321,6 +321,10 @@ textarea {
     height: 200px;
 }
 
+#post-permalink {
+    padding: 7px;
+}
+
 /*#post-permalink {
     margin-top: 1em;
         font-size: 0.9em;
