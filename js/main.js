@@ -11,9 +11,12 @@ var PostType = {
 
 // Prod AppId
 //var AppId = '1401018793479333';
+//var AppUrl = 'TODO: '
 
 // Test AppId
 var AppId = '652991661414427';
+var AppUrl = 'http://bit.ly/1aXsWl3'
+
 // http://stackoverflow.com/questions/1102215/mvp-pattern-with-javascript-framework
 
 /**
@@ -489,15 +492,11 @@ var SwdPresenter = {
     },
     onClickPostButtonPm: function(e, args) {
         var id;
-        var permalink;
 
         id = $('#panel-post').data('actor_id');
-        //ppermalink = $('#panel-post').data('comment');
-        
-        //permalink = 'https://swappersdelight-test.azurewebsites.net/php/blank.php';
-        permalink = 'http://bit.ly/1aXsWl3';
 
-        SwdPresenter.sendFacebookMessage(id, permalink);
+        // Yes, shamelessly plug the app.
+        SwdPresenter.sendFacebookMessage(id, AppUrl);
     },
     onClickPostTile: function(e, args) {
         var id;
