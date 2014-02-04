@@ -138,6 +138,7 @@ var SwdModel = {
         $.ajax({
             type: 'POST',
             url: '/php/post-comment.php',
+            contentType: 'application/json',
             data: JSON.stringify({
                 postId: postId,
                 comment: comment
