@@ -25,57 +25,58 @@ var AppUrl = 'http://bit.ly/1aXsWl3'
 var SwdModel = {
     /**
      * Create a new post on the selected group's or groups' wall(s).
+     * @param {type} callbacks
      */
-    createNewPost: function(callback) {
+    createNewPost: function(callbacks) {
 
     },
     /***
      * Get posts in the group that are liked.
      * @param {type} gid
-     * @param {type} callback
+     * @param {type} callbacks
      */
-    getLikedPosts: function(gid, callback) {
+    getLikedPosts: function(gid, callbacks) {
         $.ajax({
             type: 'GET',
             url: '/php/liked-posts.php?gid=' + gid,
             success: function(response) {
-                callback.call(SwdModel, JSON.parse(response.responseText));
+                callbacks.success.call(SwdModel, JSON.parse(response));
             },
             fail: function(response) {
-
+                callbacks.fail.call(SwdModel, JSON.parse(response));
             }
         });
     },
     /***
      * Query database for groups that the user is a member of.
-     * @param {type} callback
+     * @param {type} callbacks
      */
-    getGroupInfo: function(callback) {
+    getGroupInfo: function(callbacks) {
         $.ajax({
             type: 'GET',
             url: '/php/group-info.php',
             success: function(response) {
-                callback.call(SwdModel, JSON.parse(response));
+                callbacks.success.call(SwdModel, JSON.parse(response));
             },
             fail: function(response) {
-
+                callbacks.fail.call(SwdModel, JSON.parse(response));
             }
         });
     },
     /***
      * Get posts that are owned by the current user in the provided group. Go back 42 days.
      * @param {type} gid
-     * @param {type} callback
+     * @param {type} callbacks
      */
-    getMyPosts: function(gid, callback) {
+    getMyPosts: function(gid, callbacks) {
         $.ajax({
             type: 'GET',
             url: '/php/my-posts.php?gid=' + gid,
             success: function(response) {
-                callback.call(SwdModel, JSON.parse(response.responseText));
+                callbacks.success.call(SwdModel, JSON.parse(response));
             },
             fail: function(response) {
-
+                callbacks.fail.call(SwdModel, JSON.parse(response));
             }
         });
     },
@@ -83,9 +84,9 @@ var SwdModel = {
      * AJAX call to FB group feed.
      * @param {type} gid Group id whose posts are to be retrieved.
      * @param {type} updatedTime
-     * @param {type} callback Completed callback function.
+     * @param {type} callbacks Completed callback function.
      */
-    getNewestPosts: function(gid, updatedTime, callback) {
+    getNewestPosts: function(gid, updatedTime, callbacks) {
         var url = '/php/new-posts.php?gid=' + gid;
         if (updatedTime) {
             url += '&updatedTime=' + updatedTime;
@@ -95,69 +96,80 @@ var SwdModel = {
             type: 'GET',
             url: url,
             success: function(response) {
-                callback.call(SwdModel, JSON.parse(response));
+                callbacks.success.call(SwdModel, JSON.parse(response));
             },
             fail: function(response) {
-
+                callbacks.fail.call(SwdModel, JSON.parse(response));
             }
         });
     },
     /***
      * Get details for the given post.
      * @param {type} postId
-     * @param {type} callback
+     * @param {type} callbacks
      */
-    getPostDetails: function(postId, callback) {
+    getPostDetails: function(postId, callbacks) {
         $.ajax({
             type: 'GET',
             url: '/php/post-details.php?postId=' + postId,
             success: function(response) {
-                callback.call(SwdModel, JSON.parse(response));
+                callbacks.success.call(SwdModel, JSON.parse(response));
             },
             fail: function(response) {
-
+                callbacks.fail.call(SwdModel, JSON.parse(response));
             }
         });
     },
     /***
      * Like a post.
-     * @param {type} url
-     * @param {type} callback
+     * @param {type} id
+     * @param {type} callbacks
      */
-    likePost: function(url, callback) {
-        alert(url);
+    likePost: function(id, callbacks) {
+        alert(id);
     },
     /***
      * Post a comment on a post.
-     * @param {type} url
+     * @param {type} postId
      * @param {type} comment
-     * @param {type} callback
+     * @param {type} callbacks
      */
-    postComment: function(url, comment, callback) {
-        //alert(url + ' ' + comment);
-        //$.post(url, JSON.stringify({message: comment}), callback);
-        FB.api(url, 'POST', {'message': comment}, callback);
+    postComment: function(postId, comment, callbacks) {
+        $.ajax({
+            type: 'POST',
+            url: '/php/post-comment.php',
+            data: JSON.stringify({
+                postId: postId,
+                comment: comment
+            }),
+            success: function(response) {
+                callbacks.success.call(SwdModel, JSON.parse(response));
+            },
+            fail: function(response) {
+                callbacks.fail.call(SwdModel, JSON.parse(response));
+            }
+        });
     },
     /***
      * Sync the server with the current session.
-     * @param {type} callback
+     * @param {type} callbacks
      */
-    startSession: function(callback) {
+    startSession: function(callbacks) {
         $.ajax({
             type: 'GET',
             url: '/php/session.php',
             success: function(response) {
-                callback.call(SwdModel, response);
+                callbacks.success.call(SwdModel, JSON.parse(response));
             },
             fail: function(response) {
-
+                callbacks.fail.call(SwdModel, JSON.parse(response));
             }
         });
     },
     /***
      * Unlike a post. 
      */
-    unlikePost: function() {
+    unlikePost: function(postId, callbacks) {
 
     }
 };
@@ -189,15 +201,25 @@ var SwdPresenter = {
             // Try to get a session going if there isn't one already.
             FB.getLoginStatus(function(response) {
                 if (response.status === 'connected') {
-                    SwdModel.startSession(function() {
-                        SwdPresenter.startApp();
+                    SwdModel.startSession({
+                        success: function() {
+                            SwdPresenter.startApp();
+                        },
+                        fail: function(response) {
+                            SwdView.showError(response);
+                        }
                     });
                 }
                 else {
                     FB.login(function(response) {
                         if (response.status === 'connected') {
-                            SwdModel.startSession(function() {
-                                SwdPresenter.startApp();
+                            SwdModel.startSession({
+                                success: function() {
+                                    SwdPresenter.startApp();
+                                },
+                                fail: function(response) {
+                                    SwdView.showError(response);
+                                }
                             });
                         }
                     }, {
@@ -214,40 +236,45 @@ var SwdPresenter = {
         var i, selectedGroups;
 
         // Retrieve group info for logged in user.
-        SwdModel.getGroupInfo(function(response) {
-            SwdPresenter.groups = response;
+        SwdModel.getGroupInfo({
+            success: function(response) {
+                SwdPresenter.groups = response;
 
-            selectedGroups = [];
+                selectedGroups = [];
 
-            // Find groups that have been marked as 'BST'
-            for (i = 0; i < SwdPresenter.groups.length; i++) {
-                if (SwdPresenter.groups[i].marked) {
-                    selectedGroups.push(SwdPresenter.groups[i]);
+                // Find groups that have been marked as 'BST'
+                for (i = 0; i < SwdPresenter.groups.length; i++) {
+                    if (SwdPresenter.groups[i].marked) {
+                        selectedGroups.push(SwdPresenter.groups[i]);
+                    }
                 }
-            }
 
-            if (SwdPresenter.groups) {
-                SwdPresenter.setSelectedGroup(selectedGroups[0]);
-                SwdView.addGroupsToMenu(selectedGroups);
-                $('#popup-menu-groups').menu();
-                // Install Event Handlers
-                SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
-                SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
-                SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
-                SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
-                SwdView.installHandler('onClickMenuItemGroup', SwdPresenter.onClickMenuItemGroup, '.menu-item-group', 'click');
-                SwdView.installHandler('onClickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item-main', 'click');
-                SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.button-nav', 'click');
-                SwdView.installHandler('onClickPostButtonComment', SwdPresenter.onClickPostButtonComment, '#post-button-comment', 'click');
-                SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
-                SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
-                SwdView.installHandler('onClickPanelMessageUser', SwdPresenter.onClickPanelMessageUser, '#post-message-user', 'click');
-                SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
-                SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
-                SwdView.positionMenus();
-            }
-            else {
-                // Have the view prompt the user to edit BST groups.
+                if (SwdPresenter.groups) {
+                    SwdPresenter.setSelectedGroup(selectedGroups[0]);
+                    SwdView.addGroupsToMenu(selectedGroups);
+                    $('#popup-menu-groups').menu();
+                    // Install Event Handlers
+                    SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
+                    SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
+                    SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
+                    SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
+                    SwdView.installHandler('onClickMenuItemGroup', SwdPresenter.onClickMenuItemGroup, '.menu-item-group', 'click');
+                    SwdView.installHandler('onClickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item-main', 'click');
+                    SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.button-nav', 'click');
+                    SwdView.installHandler('onClickPostButtonComment', SwdPresenter.onClickPostButtonComment, '#post-button-comment', 'click');
+                    SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
+                    SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
+                    SwdView.installHandler('onClickPanelMessageUser', SwdPresenter.onClickPanelMessageUser, '#post-message-user', 'click');
+                    SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
+                    SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
+                    SwdView.positionMenus();
+                }
+                else {
+                    // Have the view prompt the user to edit BST groups.
+                }
+            },
+            fail: function(response) {
+                SwdView.showError(response);
             }
         });
     },
@@ -309,8 +336,13 @@ var SwdPresenter = {
         SwdPresenter.resetFbCanvasSize();
         SwdView.showFeedLoadingAjaxDiv();
 
-        SwdModel.getLikedPosts(SwdPresenter.selectedGroup.id, function(response) {
-            alert('Not yet implemented.');
+        SwdModel.getLikedPosts(SwdPresenter.selectedGroup.id, {
+            success: function(response) {
+                alert('Not yet implemented.');
+            },
+            fail: function(response) {
+                SwdView.showError(response);
+            }
         });
     },
     /***
@@ -320,8 +352,13 @@ var SwdPresenter = {
         SwdPresenter.resetFbCanvasSize();
         SwdView.showFeedLoadingAjaxDiv();
 
-        SwdModel.getMyPosts(SwdPresenter.selectedGroup.id, function(response) {
-            alert('Not yet implemented.');
+        SwdModel.getMyPosts(SwdPresenter.selectedGroup.id, {
+            success: function(response) {
+                alert('Not yet implemented.');
+            },
+            fail: function(response) {
+                SwdView.showError(response);
+            }
         });
     },
     /***
@@ -350,19 +387,24 @@ var SwdPresenter = {
         }
 
         // Get posts and then display them.
-        SwdModel.getNewestPosts(SwdPresenter.selectedGroup.id, updatedTime, function(response) {
-            if (!loadNextPage) {
-                // Clear previous results, unless loading a new page.
-                SwdPresenter.oldestPost = null;
-            }
+        SwdModel.getNewestPosts(SwdPresenter.selectedGroup.id, updatedTime, {
+            success: function(response) {
+                if (!loadNextPage) {
+                    // Clear previous results, unless loading a new page.
+                    SwdPresenter.oldestPost = null;
+                }
 
-            if (response) {
-                SwdPresenter.oldestPost = response[response.length - 1];
-                SwdView.populatePosts(response);
-            }
-            else
-            if (!loadNextPage) {
-                SwdPresenter.oldestPost = null;
+                if (response) {
+                    SwdPresenter.oldestPost = response[response.length - 1];
+                    SwdView.populatePosts(response);
+                }
+                else
+                if (!loadNextPage) {
+                    SwdPresenter.oldestPost = null;
+                }
+            },
+            fail: function(response) {
+                SwdView.showError(response);
             }
         });
     },
@@ -472,24 +514,35 @@ var SwdPresenter = {
         window.open(profileUrl);
     },
     onClickPostButtonComment: function(e, args) {
-        var url, comment;
+        var id, comment;
 
-        url = $('#panel-post').data('comment');
+        id = $('#panel-post').data('id');
         comment = $('#post-comment-text > textarea').val();
 
         // Post the comment.
-        SwdModel.postComment(url, comment, function(response) {
-            // TODO: Update View
+        SwdModel.postComment(id, comment, {
+            success: function(response) {
+                SwdView.addPostComment(response);
+                SwdView.clearPostCommentText();
+            },
+            fail: function(response) {
+                SwdView.showError(response);
+            }
         });
     },
     onClickPostButtonLike: function(e, args) {
-        var url;
+        var id;
 
-        url = $('#panel-post').data('like');
+        id = $('#panel-post').data('id');
 
         // Post the comment.
-        SwdModel.likePost(url, function(response) {
-            // TODO: Update View
+        SwdModel.likePost(id, {
+            success: function(response) {
+                // TODO: Update View
+            },
+            fail: function(response) {
+                SwdView.showError(response);
+            }
         });
     },
     onClickPostButtonPm: function(e, args) {
@@ -512,16 +565,21 @@ var SwdPresenter = {
         e.stopPropagation();
         $('#post-details-panel .ajax-loading-div').show();
         SwdView.showFloatingPanel('#post-details-panel');
-        SwdModel.getPostDetails(id, function(response) {
-            post = response;
-            // Try to retrieve image URL from object.
-            post['image_url'] = $('#' + id).data('image_url');
-            if (post) {
-                SwdView.showPostDetails(post);
-            }
-            else {
-                // TODO: Do a real error message.
-                alert('Unable to display post. It was most likely deleted.');
+        SwdModel.getPostDetails(id, {
+            success: function(response) {
+                post = response;
+                // Try to retrieve image URL from object.
+                post['image_url'] = $('#' + id).data('image_url');
+                if (post) {
+                    SwdView.showPostDetails(post);
+                }
+                else {
+                    // TODO: Do a real error message.
+                    alert('Unable to display post. It was most likely deleted.');
+                }
+            },
+            fail: function(response) {
+                SwdView.showError(response);
             }
         });
     },
@@ -543,6 +601,22 @@ var SwdView = {
         for (i = 0; i < groups.length; i++) {
             $('#popup-menu-groups').append('<li id="' + groups[i].id + '" class="menu-item-group"><a href="#"><span class="ui-icon" style="background-image: url(' + groups[i].icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + groups[i].name + '</div></a></li>');
         }
+    },
+    addPostComment: function(comment) {
+        // Set user image
+        if (post.comments[i].user.pic_square) {
+            userImage = 'url("' + post.comments[i].user.pic_square + '")';
+        }
+        else {
+            userImage = '';
+        }
+
+        //timeStamp = $.datepicker.formatDate('DD, mm/dd/yy at HH:MM', new Date(post.comments[i].time * 1000));
+        timeStamp = new moment(new Date(post.comments[i].time * 1000));
+
+        comment = $('<div class="post-comment ui-corner-all ui-widget ui-widget-content"><div class="ui-state-default"><div class="post-comment-user-image"></div><div class="post-comment-header"><p class="wrapper"><a class="post-comment-user-name" href="' + post.comments[i].user.profile_url + '" target="_blank">' + post.comments[i].user.first_name + ' ' + post.comments[i].user.last_name + '</a><span class="timestamp">' + timeStamp.calendar() + '</span></p></div></div>' + post.comments[i].text + '</div>');
+        $(comment).find('.post-comment-user-image').css('background-image', userImage);
+        $('#post-comment-list').append(comment);
     },
     /**
      * Init function for SwdView.
@@ -617,8 +691,17 @@ var SwdView = {
             SwdView.handlers[name].call(SwdPresenter, e, args);
         });
     },
+    /***
+     * Clear all posts from the view.
+     */
     clearPosts: function() {
         $('#post-feed .post-tile').remove();
+    },
+    /***
+     * Clear comment box.
+     */
+    clearPostCommentText: function() {
+        $('#post-comment-text > textarea').val('');
     },
     /***
      * Closes all Jquery UI menus.
@@ -759,6 +842,13 @@ var SwdView = {
         $('.button-nav').removeClass('selected-nav');
         $('#' + id).addClass('selected-nav');
     },
+    /***
+     * Displays a lovely error message. Something which the user loves.
+     * @param {type} message
+     */
+    showError: function(message) {
+
+    },
     showFeedLoadingAjaxDiv: function() {
         $('#feed-ajax-loading-div').fadeIn();
     },
@@ -813,31 +903,19 @@ var SwdView = {
         $('#post-message-text').text(post.message);
         $('#post-comment-list').empty();
         $('#post-nocomments').show();
+
         if (post.comments.length > 0) {
             $('#post-nocomments').hide();
+
             for (i = 0; i < post.comments.length; i++) {
-                // Set user image
-                if (post.comments[i].user.pic_square) {
-                    userImage = 'url("' + post.comments[i].user.pic_square + '")';
-                }
-                else {
-                    userImage = '';
-                }
-
-                //timeStamp = $.datepicker.formatDate('DD, mm/dd/yy at HH:MM', new Date(post.comments[i].time * 1000));
-                timeStamp = new moment(new Date(post.comments[i].time * 1000));
-
-
-                comment = $('<div class="post-comment ui-corner-all ui-widget ui-widget-content"><div class="ui-state-default"><div class="post-comment-user-image"></div><div class="post-comment-header"><p class="wrapper"><a class="post-comment-user-name" href="' + post.comments[i].user.profile_url + '" target="_blank">' + post.comments[i].user.first_name + ' ' + post.comments[i].user.last_name + '</a><span class="timestamp">' + timeStamp.calendar() + '</span></p></div></div>' + post.comments[i].text + '</div>');
-                $(comment).find('.post-comment-user-image').css('background-image', userImage);
-                $('#post-comment-list').append(comment);
+                SwdView.addPostComment(post.comments[i]);
             }
         }
 
-        // Clear comment box.
-        $('#post-comment-text > textarea').val('');
-        // Save for later consumption.
-        $('#panel-post').data('actor_id', post.actor_id).data('permalink', post.permalink).data('comment', post.action_links[0].link).data('like', post.action_links[1].link);
+        SwdView.clearPostCommentText();
+
+        // Save some data for later consumption.
+        $('#panel-post').data('actor_id', post.actor_id).data('permalink', post.permalink).data('id', post.id);
         $('#post-details-panel .ajax-loading-div').fadeOut();
     },
     /***
