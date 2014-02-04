@@ -8,7 +8,7 @@ require_once ("facebook.php");
 $appId = '652991661414427';
 $appSecret = 'b8447ce73d2dcfccde6e30931cfb0a90';
 
-$cookie = preg_replace("/^\"|\"$/i", "", $_COOKIE['fbs_' . $appId]);
+$cookie = preg_replace("/^\"|\"$/i", "", $_COOKIE['fbsr_' . $appId]);
 parse_str($cookie, $data);
 
 // Startup the Facebook object
