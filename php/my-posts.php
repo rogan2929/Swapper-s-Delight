@@ -28,8 +28,13 @@ if (count($posts) > 0) {
     $oldest = $posts[count($posts) - 1]['updated_time'];
 }
 
+echo $oldest . '\n';
+
 // Keep getting more posts until the old post is older than $oldestAllowed
 while ($oldest >= $oldestAllowed) {
+    echo $oldest . '\n';
+    echo $oldestAllowed . '\n';
+    
     // Build the array of post objects.
     $batch = streamQuery($fbSession, $gid, $constraints, $updatedTime, 50);
 
@@ -46,4 +51,4 @@ while ($oldest >= $oldestAllowed) {
     
 }
 
-echo json_encode($posts);
+//echo json_encode($posts);
