@@ -2,8 +2,8 @@
 
 require_once 'session.php';
 
-$postId = $_POST['postId'];
-$comment = $_POST['comment'];
+$postId = $_POST["postId"];
+$comment = $_POST["comment"];
 
 echo $postId;
 
