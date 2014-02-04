@@ -291,7 +291,7 @@ var SwdPresenter = {
         if (!stop) {
             FB.Canvas.getPageInfo(function(pageInfo) {
                 var scrollTop, offsetTop, clientHeight, offset, height, scrollPos;
-                
+
                 scrollTop = parseInt(pageInfo.scrollTop);
                 offsetTop = parseInt(pageInfo.offsetTop);
                 clientHeight = parseInt(pageInfo.clientHeight);
@@ -319,7 +319,7 @@ var SwdPresenter = {
                     // Detect scroll at bottom
                     if (scrollTop >= scrollPos && scrollPos >= 0) {
                         //alert(scrollTop + ' ' + $('#app-content').height() + ' ' + clientHeight);
-                        SwdPresenter.loadNewestPosts(true);
+                        SwdPresenter.loadPosts(true);
                     }
                 }
 
@@ -351,7 +351,7 @@ var SwdPresenter = {
         SwdView.clearPosts();
         SwdPresenter.resetFbCanvasSize();
         SwdView.showFeedLoadingAjaxDiv();
-        
+
         SwdPresenter.oldestPost = null;
 
         SwdModel.getMyPosts(SwdPresenter.selectedGroup.id, {
@@ -411,6 +411,25 @@ var SwdPresenter = {
         });
     },
     /***
+     * High level post loading function.
+     * @param {type} nextPage
+     */
+    loadPosts: function(nextPage) {
+        switch (SwdPresenter.postType) {
+            case PostType.group:
+                SwdPresenter.loadNewestPosts(nextPage);
+                break;
+            case PostType.myposts:
+                SwdPresenter.loadMyPosts();
+                break;
+            case PostType.liked:
+                SwdPresenter.loadLikedPosts();
+                break;
+            case PostType.search:
+                break;
+        }
+    },
+    /***
      * Reset Facebook Canvas Size to default value of 800
      */
     resetFbCanvasSize: function() {
@@ -437,7 +456,7 @@ var SwdPresenter = {
      */
     setSelectedGroup: function(group) {
         SwdPresenter.selectedGroup = group;
-        SwdPresenter.loadNewestPosts(false);
+        SwdPresenter.loadPosts(false);
         SwdView.setGroupButtonText(group.name);
     },
     // Event Handlers (onX(e, args))
@@ -445,19 +464,7 @@ var SwdPresenter = {
         SwdView.showFloatingPanel('#new-post-panel');
     },
     onClickButtonRefresh: function(e, args) {
-        switch (SwdPresenter.postType) {
-            case PostType.group:
-                SwdPresenter.loadNewestPosts(false);
-                break;
-            case PostType.myposts:
-                SwdPresenter.loadMyPosts();
-                break;
-            case PostType.liked:
-                SwdPresenter.loadLikedPosts();
-                break;
-            case PostType.search:
-                break;
-        }
+        SwdPresenter.loadPosts(false);
     },
     onClickHtml: function(e, args) {
         SwdView.closeAllUiMenus();
@@ -491,24 +498,23 @@ var SwdPresenter = {
     },
     onClickNavButton: function(e, args) {
         var id = $(e.currentTarget).attr('id');
+        
         switch (id) {
             case 'button-nav-group':
                 SwdPresenter.postType = PostType.group;
-                SwdPresenter.loadNewestPosts(false);
                 break;
             case 'button-nav-myposts':
                 SwdPresenter.postType = PostType.myposts;
-                SwdPresenter.loadMyPosts();
                 break;
             case 'button-nav-liked':
                 SwdPresenter.postType = PostType.liked;
-                SwdPresenter.loadLikedPosts();
                 break;
             case 'button-nav-search':
                 SwdPresenter.postType = PostType.search;
                 break;
         }
 
+        SwdPresenter.loadPosts(false);
         SwdView.setSelectedPostType(id);
     },
     onClickPanelMessageUser: function(e, args) {
@@ -607,7 +613,7 @@ var SwdView = {
     },
     addPostComment: function(comment) {
         var commentDiv, timeStamp, userImage;
-        
+
         // Set user image
         if (comment.user.pic_square) {
             userImage = 'url("' + comment.user.pic_square + '")';
