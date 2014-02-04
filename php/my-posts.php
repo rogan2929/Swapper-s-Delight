@@ -7,7 +7,7 @@ $gid = $_GET['gid'];
 $updatedTime = $_GET['updatedTime'];
 
 // Get FB user id.
-$uid = $fbSession->GetUser();
+$uid = $fbSession->getUser();
 
 $constraints = array();
 
