@@ -27,6 +27,9 @@ $posts = streamQuery($fbSession, $gid, $constraints, $updatedTime, 50);
 if (count($posts) > 0) {
     $oldest = $posts[count($posts) - 1]['updated_time'];
 
+    echo $oldest . '\r\n';
+    echo $oldestAllowed . '\r\n';
+
     // Keep getting more posts until the old post is older than $oldestAllowed
     while ($oldest >= $oldestAllowed) {
         // Build the array of post objects.
