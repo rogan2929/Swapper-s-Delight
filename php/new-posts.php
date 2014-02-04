@@ -7,6 +7,8 @@ require_once 'queries.php';
 $gid = $_GET['gid'];
 $updatedTime = $_GET['updatedTime'];
 
+echo 'TEST';
+
 $posts = streamQuery($fbSession, $gid, array(), $updatedTime, 20);
 
 // Return the result.
