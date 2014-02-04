@@ -15,7 +15,7 @@ var PostType = {
 
 // Test AppId
 var AppId = '652991661414427';
-var AppUrl = 'http://bit.ly/1aXsWl3'
+var AppUrl = 'http://bit.ly/1aXsWl3';
 
 // http://stackoverflow.com/questions/1102215/mvp-pattern-with-javascript-framework
 
@@ -168,6 +168,8 @@ var SwdModel = {
     },
     /***
      * Unlike a post. 
+     * @param {type} postId
+     * @param {type} callbacks
      */
     unlikePost: function(postId, callbacks) {
 
@@ -585,7 +587,7 @@ var SwdPresenter = {
     },
     onWindowResize: function(e, args) {
         SwdView.positionMenus();
-    },
+    }
 };
 /**
  * View for the Swapper's Delight program.
