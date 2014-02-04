@@ -29,26 +29,27 @@ if (count($posts) > 0) {
 }
 
 echo $oldest . '\n';
+echo $oldestAllowed . '\n';
 
-// Keep getting more posts until the old post is older than $oldestAllowed
-while ($oldest >= $oldestAllowed) {
-    echo $oldest . '\n';
-    echo $oldestAllowed . '\n';
-    
-    // Build the array of post objects.
-    $batch = streamQuery($fbSession, $gid, $constraints, $updatedTime, 50);
-
-    if (count($batch) > 0) {
-        $oldest = $batch[count($batch) - 1]['updated_time'];
-        
-        // Add the batch to what posts we already have.
-        $posts = array_merge($posts, $batch);
-    }
-    else {
-        // Break the loop.
-        $oldest = 0;
-    }
-    
-}
+//// Keep getting more posts until the old post is older than $oldestAllowed
+//while ($oldest >= $oldestAllowed) {
+//    echo $oldest . '\n';
+//    echo $oldestAllowed . '\n';
+//    
+//    // Build the array of post objects.
+//    $batch = streamQuery($fbSession, $gid, $constraints, $updatedTime, 50);
+//
+//    if (count($batch) > 0) {
+//        $oldest = $batch[count($batch) - 1]['updated_time'];
+//        
+//        // Add the batch to what posts we already have.
+//        $posts = array_merge($posts, $batch);
+//    }
+//    else {
+//        // Break the loop.
+//        $oldest = 0;
+//    }
+//    
+//}
 
 //echo json_encode($posts);
