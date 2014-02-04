@@ -19,6 +19,8 @@ $fbSession = new Facebook(array(
 
 $fbSession->setAccessToken($_COOKIE['fbsr_' . $appId]);
 
+echo $fbSession->getAccessToken();
+
 //try {
 //    // Test the connectivity waters...
 //    $me = $fbSession->api('/me');
