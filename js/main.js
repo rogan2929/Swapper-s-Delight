@@ -140,10 +140,11 @@ var SwdModel = {
             url: '/php/post-comment.php',
             contentType: 'application/json',
             dataType: 'json',
-            data: {
-                'postId': postId,
-                'comment': comment
-            },
+            data: { postId: 'blah' },
+//            data: {
+//                'postId': postId,
+//                'comment': comment
+//            },
             success: function(response) {
                 callbacks.success.call(SwdModel, JSON.parse(response));
             },
