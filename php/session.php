@@ -19,13 +19,15 @@ $fbSession = new Facebook(array(
 
 //$fbSession->setAccessToken($data['access_token']);
 
-//try {
-//    // Test the connectivity waters...
-//    $me = $fbSession->api('/me');
-//} catch (FacebookApiException $e) {
-//    error_log($e->getType());
-//    error_log($e->getMessage());
-//}
+try {
+    // Test the connectivity waters...
+    $me = $fbSession->api('/me');
+} catch (FacebookApiException $e) {
+    $loginUrl = $fbSession->getLoginUrl(array('scope' => 'user_groups,user_likes'));
+    header('Location: ' . $loginUrl);
+    error_log($e->getType());
+    error_log($e->getMessage());
+}
 
 /*
   if ($fbSession->getUser()) {
