@@ -34,42 +34,42 @@ function streamQuery($fbSession, $sourceId, $constraints, $updatedTime, $limit =
 
     //echo $fbSession->getAccessToken();
 
-    try {
-        // Test the connectivity waters...
-        $me = $fbSession->api('/me');
-    } catch (FacebookApiException $e) {
-        echo $e->getType();
-        echo $e->getMessage();
-    }
-
-//    $response = $fbSession->api(array(
-//        'method' => 'fql.multiquery',
-//        'queries' => $queries
-//    ));
-//
-//    $posts = array();
-//
-//    $stream = $response[0]['fql_result_set'];
-//    $images = $response[1]['fql_result_set'];
-//
-//    for ($i = 0; $i < count($stream); $i++) {
-//        $post = $stream[$i];
-//
-//        $post['image_url'] = null;
-//
-//        // For posts with an image, look for associate image data.
-//        if ($post['attachment'] && $post['attachment']['media'] && $post['attachment']['media'][0] && $post['attachment']['media'][0]['photo']) {
-//            for ($j = 0; $j < count($images); $j++) {
-//                if ($post['attachment']['media'][0]['photo']['fbid'] == $images[$j]['object_id']) {
-//                    $post['image_url'][] = $images[$j]['images'][0]['source'];
-//                    $post['image_url'][] = $images[$j]['images'][0]['source'];
-//                    break;
-//                }
-//            }
-//        }
-//
-//        // Add to the posts array.
-//        $posts[] = $post;
+//    try {
+//        // Test the connectivity waters...
+//        $me = $fbSession->api('/me');
+//    } catch (FacebookApiException $e) {
+//        echo $e->getType();
+//        echo $e->getMessage();
 //    }
-//    return $posts;
+
+    $response = $fbSession->api(array(
+        'method' => 'fql.multiquery',
+        'queries' => $queries
+    ));
+
+    $posts = array();
+
+    $stream = $response[0]['fql_result_set'];
+    $images = $response[1]['fql_result_set'];
+
+    for ($i = 0; $i < count($stream); $i++) {
+        $post = $stream[$i];
+
+        $post['image_url'] = null;
+
+        // For posts with an image, look for associate image data.
+        if ($post['attachment'] && $post['attachment']['media'] && $post['attachment']['media'][0] && $post['attachment']['media'][0]['photo']) {
+            for ($j = 0; $j < count($images); $j++) {
+                if ($post['attachment']['media'][0]['photo']['fbid'] == $images[$j]['object_id']) {
+                    $post['image_url'][] = $images[$j]['images'][0]['source'];
+                    $post['image_url'][] = $images[$j]['images'][0]['source'];
+                    break;
+                }
+            }
+        }
+
+        // Add to the posts array.
+        $posts[] = $post;
+    }
+    return $posts;
 }
