@@ -23,6 +23,7 @@ try {
 } catch (FacebookApiException $e) {
 //    $loginUrl = $fbSession->getLoginUrl(array('scope' => 'user_groups,user_likes'));
 //    echo '<div class="login-div">Please <a href="' . $loginUrl . '">login.</a></div>';
+    echo $fbSession->getAccessToken();
     echo $e->getType();
     echo $e->getMessage();
 }
