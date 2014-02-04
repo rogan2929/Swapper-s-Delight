@@ -526,6 +526,7 @@ var SwdPresenter = {
         // Post the comment.
         SwdModel.postComment(id, comment, {
             success: function(response) {
+                alert(response.postId + ' ' + response.comment);
                 SwdView.addPostComment(response);
                 SwdView.clearPostCommentText();
             },
