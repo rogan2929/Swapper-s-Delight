@@ -7,7 +7,7 @@ $comment = $_POST['comment'];
 
 $response = array( 'postId' => $postId, 'comment' => $comment);
 
-json_encode($response);
+echo json_encode($response);
 
 // Post the comment and get the response
 //$response = $fbSession->api('/' . $postId, 'POST', array('message' => $comment));
