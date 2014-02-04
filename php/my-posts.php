@@ -1,7 +1,19 @@
 <?php
 
-require_once 'session.php';
+//require_once 'session.php';
 require_once 'queries.php';
+
+$appId = '652991661414427';
+$appSecret = 'b8447ce73d2dcfccde6e30931cfb0a90';
+
+$cookie = preg_replace("/^\"|\"$/i", "", $_COOKIE['fbs_' . $appId]);
+parse_str($cookie, $data);
+
+// Startup the Facebook object
+$fbSession = new Facebook(array(
+    'appId' => $appId,
+    'secret' => $appSecret
+        ));
 
 $gid = $_GET['gid'];
 $updatedTime = $_GET['updatedTime'];
