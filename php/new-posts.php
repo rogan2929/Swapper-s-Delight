@@ -7,19 +7,7 @@ require_once 'queries.php';
 $gid = $_GET['gid'];
 $updatedTime = $_GET['updatedTime'];
 
-$constraints = array();
-
-// For FQL pagination (query by posts with created_time less than created_time of last query's oldest post.)
-if ($updatedTime) {
-    // Add to the constraints array.
-    $constraints[] = array(
-        'field' => 'updated_time',
-        'operator' => '<',
-        'value' => $updatedTime
-    );
-}
-
-$posts = streamQuery($fbSession, $gid, $constraints, 20);
+$posts = streamQuery($fbSession, $gid, $constraints, $updatedTime, 20);
 
 // Return the result.
 echo json_encode($posts);

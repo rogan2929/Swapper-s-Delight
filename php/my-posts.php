@@ -18,15 +18,6 @@ $constraints[] = array(
     'value' => $uid
 );
 
-if ($updatedTime) {
-    // Add to the constraints array.
-    $constraints[] = array(
-        'field' => 'updated_time',
-        'operator' => '<',
-        'value' => $updatedTime
-    );
-}
-
-$posts = streamQuery($fbSession, $gid, $constraints, 20);
+$posts = streamQuery($fbSession, $gid, $constraints, $updatedTime, 20);
 
 echo json_encode($posts);

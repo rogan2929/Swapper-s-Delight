@@ -4,14 +4,27 @@
  * Reusable funciton that executes an FQL query against the given stream.
  */
 
-function streamQuery($fbSession, $sourceId, $constraints, $limit = 20) {
+function streamQuery($fbSession, $sourceId, $constraints, $updatedTime, $limit = 20) {
     $streamQuery = 'SELECT post_id,updated_time,message,attachment,comment_info FROM stream WHERE source_id=' . $sourceId;
 
+    // Check for constraints.
     if ($constraints) {
         for ($i = 0; $i < count($constraints); $i++) {
             $constraint = $constraints[$i];
             $streamQuery .= ' AND ' . $constraint['field'] . ' ' . $constraint['operator'] . ' ' . $constraint['value'];
         }
+    }
+    else {
+        $constraints = array();
+    }
+
+    if ($updatedTime) {
+        // Add to the constraints array.
+        $constraints[] = array(
+            'field' => 'updated_time',
+            'operator' => '<',
+            'value' => $updatedTime
+        );
     }
 
     // Fetch 20 results, and sorted by creation time.
