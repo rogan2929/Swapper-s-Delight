@@ -15,8 +15,6 @@ function streamQuery($fbSession, $sourceId, $constraints, $updatedTime, $limit =
             'value' => $updatedTime
         );
     }
-    
-    echo json_encode($constraints);
 
     // Check for constraints.
     for ($i = 0; $i < count($constraints); $i++) {
