@@ -1,7 +1,7 @@
 <?php
 
-require 'session.php';
-require 'queries.php';
+require_once 'session.php';
+require_once 'queries.php';
 
 $gid = $_GET['gid'];
 $updatedTime = $_GET['updatedTime'];
@@ -17,6 +17,8 @@ $constraints[] = array(
     'operator' => '=',
     'value' => $uid
 );
+
+var_dump($fbSession);
 
 $posts = streamQuery($fbSession, $gid, $constraints, $updatedTime, 20);
 
