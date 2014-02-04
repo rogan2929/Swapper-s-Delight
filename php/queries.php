@@ -25,8 +25,6 @@ function streamQuery($fbSession, $sourceId, $constraints, $updatedTime, $limit =
         $constraint = $constraints[$i];
         $streamQuery .= ' AND ' . $constraint['field'] . ' ' . $constraint['operator'] . ' ' . $constraint['value'];
     }
-    
-    echo json_encode($constraints);
 
     // Fetch 20 results, and sorted by creation time.
     $streamQuery .= ' ORDER BY updated_time DESC LIMIT ' . $limit;
@@ -35,6 +33,8 @@ function streamQuery($fbSession, $sourceId, $constraints, $updatedTime, $limit =
         'streamQuery' => $streamQuery,
         'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'
     );
+    
+    echo json_encode($queries);
 
     $response = $fbSession->api(array(
         'method' => 'fql.multiquery',
