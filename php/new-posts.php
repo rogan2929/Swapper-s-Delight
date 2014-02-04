@@ -1,7 +1,7 @@
 <?php
 
-require_once 'session.php';
-require_once 'queries.php';
+require 'session.php';
+require 'queries.php';
 
 // Retrieve group id that is being queried.
 $gid = $_GET['gid'];

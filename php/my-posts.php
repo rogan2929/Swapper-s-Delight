@@ -1,7 +1,7 @@
 <?php
 
-require_once 'session.php';
-require_once 'queries.php';
+require 'session.php';
+require 'queries.php';
 
 $gid = $_GET['gid'];
 $updatedTime = $_GET['updatedTime'];
