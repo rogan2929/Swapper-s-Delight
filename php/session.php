@@ -8,15 +8,15 @@ require_once ("facebook.php");
 $appId = '652991661414427';
 $appSecret = 'b8447ce73d2dcfccde6e30931cfb0a90';
 
-if (!$fbSession) {
+if (!isset($_REQUEST['signed_request'])) {
+    echo 'BLAH';
+    
     // Start up the Facebook object
     $fbSession = new Facebook(array(
         'appId' => $appId,
         'secret' => $appSecret,
         'cookie' => true
     ));
-    
-    echo 'NEW SESSION';
 }
 
 try {
