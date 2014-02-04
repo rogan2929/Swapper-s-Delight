@@ -348,6 +348,7 @@ var SwdPresenter = {
      * Load posts owned by user.
      */
     loadMyPosts: function() {
+        SwdView.clearPosts();
         SwdPresenter.resetFbCanvasSize();
         SwdView.showFeedLoadingAjaxDiv();
         
