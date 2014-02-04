@@ -522,8 +522,6 @@ var SwdPresenter = {
 
         id = $('#panel-post').data('id');
         comment = $('#post-comment-text > textarea').val();
-        
-        alert(id);
 
         // Post the comment.
         SwdModel.postComment(id, comment, {
@@ -924,7 +922,7 @@ var SwdView = {
         SwdView.clearPostCommentText();
 
         // Save some data for later consumption.
-        $('#panel-post').data('actor_id', post.actor_id).data('permalink', post.permalink).data('id', post.id);
+        $('#panel-post').data('actor_id', post.actor_id).data('permalink', post.permalink).data('id', post.post_id);
         $('#post-details-panel .ajax-loading-div').fadeOut();
     },
     /***
