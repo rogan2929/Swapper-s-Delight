@@ -8,17 +8,14 @@ require_once ("facebook.php");
 $appId = '652991661414427';
 $appSecret = 'b8447ce73d2dcfccde6e30931cfb0a90';
 
-//$cookie = preg_replace("/^\"|\"$/i", "", $_COOKIE['fbsr_' . $appId]);
-//parse_str($cookie, $data);
-
-// Start up the Facebook object
-$fbSession = new Facebook(array(
-    'appId' => $appId,
-    'secret' => $appSecret,
-    'cookie' => true
-        ));
-
-//$fbSession->setAccessToken($_COOKIE['fbsr_' . $appId]);
+if (!$fbSession) {
+    // Start up the Facebook object
+    $fbSession = new Facebook(array(
+        'appId' => $appId,
+        'secret' => $appSecret,
+        'cookie' => true
+    ));
+}
 
 try {
     // Test the connectivity waters...
