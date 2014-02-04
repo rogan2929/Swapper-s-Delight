@@ -7,16 +7,16 @@ $gid = $_GET['gid'];
 // Get FB user id.
 $uid = $fbSession->GetUser();
 
-echo $uid;
+$constraints = array();
 
-//$constraints = array();
-//
-//// Create the constraints array.
-//$constraints[] = array(
-//    'field' => 'actor_id',
-//    'operator' => '=',
-//    'value' => $uid
-//);
+// Create the constraints array.
+$constraints[] = array(
+    'field' => 'actor_id',
+    'operator' => '=',
+    'value' => $uid
+);
+
+echo json_encode($constraints);
 
 //$posts = streamQuery($fbSession, $gid, $constraints, 20);
 
