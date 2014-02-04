@@ -25,6 +25,8 @@ function streamQuery($fbSession, $sourceId, $constraints, $updatedTime, $limit =
         $constraint = $constraints[$i];
         $streamQuery .= ' AND ' . $constraint['field'] . ' ' . $constraint['operator'] . ' ' . $constraint['value'];
     }
+    
+    echo json_encode($constraints);
 
     // Fetch 20 results, and sorted by creation time.
     $streamQuery .= ' ORDER BY updated_time DESC LIMIT ' . $limit;
