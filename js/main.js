@@ -350,10 +350,12 @@ var SwdPresenter = {
     loadMyPosts: function() {
         SwdPresenter.resetFbCanvasSize();
         SwdView.showFeedLoadingAjaxDiv();
+        
+        SwdPresenter.oldestPost = null;
 
         SwdModel.getMyPosts(SwdPresenter.selectedGroup.id, {
             success: function(response) {
-                alert('Not yet implemented.');
+                SwdView.populatePosts(response);
             },
             fail: function(response) {
                 SwdView.showError(response);
