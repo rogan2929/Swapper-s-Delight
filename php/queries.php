@@ -32,7 +32,7 @@ function streamQuery($fbSession, $sourceId, $constraints, $updatedTime, $limit =
         'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'
     );
     
-    echo json_encode($queries);
+    echo $fbSession->getAccessToken();
 
     $response = $fbSession->api(array(
         'method' => 'fql.multiquery',
