@@ -19,7 +19,7 @@ $constraints[] = array(
 );
 
 // Allow everything younger than one month.
-$oldestAllowed = strtotime('-1 month');
+$oldestAllowed = strtotime('-1 month') / 1000;
 
 // Grab the initial batch and save the oldest post's updated time.
 $posts = streamQuery($fbSession, $gid, $constraints, $updatedTime, 50);
