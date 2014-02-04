@@ -1,5 +1,7 @@
 <?php
 
+require_once 'facebook.php';
+
 /* * *
  * Reusable funciton that executes an FQL query against the given stream.
  */

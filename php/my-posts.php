@@ -18,8 +18,6 @@ $constraints[] = array(
     'value' => $uid
 );
 
-var_dump($fbSession);
-
 $posts = streamQuery($fbSession, $gid, $constraints, $updatedTime, 20);
 
 echo json_encode($posts);
