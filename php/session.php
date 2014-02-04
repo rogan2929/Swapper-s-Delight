@@ -24,7 +24,7 @@ try {
     $me = $fbSession->api('/me');
 } catch (FacebookApiException $e) {
     $loginUrl = $fbSession->getLoginUrl(array('scope' => 'user_groups,user_likes'));
-    header('Location: ' . $loginUrl);
+    echo '<div class="login-div">Please <a href="' . $loginUrl . '">login.</a></div>';
     error_log($e->getType());
     error_log($e->getMessage());
 }
