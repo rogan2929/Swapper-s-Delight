@@ -159,7 +159,7 @@ var SwdModel = {
             type: 'GET',
             url: '/php/session.php',
             success: function(response) {
-                callbacks.success.call(SwdModel, JSON.parse(response));
+                callbacks.success.call(SwdModel);
             },
             fail: function(response) {
                 callbacks.fail.call(SwdModel, JSON.parse(response));
