@@ -32,36 +32,37 @@ function streamQuery($fbSession, $sourceId, $constraints, $updatedTime, $limit =
         'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'
     );
     
-    echo $fbSession->getAccessToken();
+    //echo $fbSession->getAccessToken();
+    echo $fbSession->api('/me');
 
-    $response = $fbSession->api(array(
-        'method' => 'fql.multiquery',
-        'queries' => $queries
-    ));
-
-    $posts = array();
-
-    $stream = $response[0]['fql_result_set'];
-    $images = $response[1]['fql_result_set'];
-
-    for ($i = 0; $i < count($stream); $i++) {
-        $post = $stream[$i];
-
-        $post['image_url'] = null;
-
-        // For posts with an image, look for associate image data.
-        if ($post['attachment'] && $post['attachment']['media'] && $post['attachment']['media'][0] && $post['attachment']['media'][0]['photo']) {
-            for ($j = 0; $j < count($images); $j++) {
-                if ($post['attachment']['media'][0]['photo']['fbid'] == $images[$j]['object_id']) {
-                    $post['image_url'][] = $images[$j]['images'][0]['source'];
-                    $post['image_url'][] = $images[$j]['images'][0]['source'];
-                    break;
-                }
-            }
-        }
-
-        // Add to the posts array.
-        $posts[] = $post;
-    }
-    return $posts;
+//    $response = $fbSession->api(array(
+//        'method' => 'fql.multiquery',
+//        'queries' => $queries
+//    ));
+//
+//    $posts = array();
+//
+//    $stream = $response[0]['fql_result_set'];
+//    $images = $response[1]['fql_result_set'];
+//
+//    for ($i = 0; $i < count($stream); $i++) {
+//        $post = $stream[$i];
+//
+//        $post['image_url'] = null;
+//
+//        // For posts with an image, look for associate image data.
+//        if ($post['attachment'] && $post['attachment']['media'] && $post['attachment']['media'][0] && $post['attachment']['media'][0]['photo']) {
+//            for ($j = 0; $j < count($images); $j++) {
+//                if ($post['attachment']['media'][0]['photo']['fbid'] == $images[$j]['object_id']) {
+//                    $post['image_url'][] = $images[$j]['images'][0]['source'];
+//                    $post['image_url'][] = $images[$j]['images'][0]['source'];
+//                    break;
+//                }
+//            }
+//        }
+//
+//        // Add to the posts array.
+//        $posts[] = $post;
+//    }
+//    return $posts;
 }
