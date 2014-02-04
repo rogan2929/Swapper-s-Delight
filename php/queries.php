@@ -31,9 +31,16 @@ function streamQuery($fbSession, $sourceId, $constraints, $updatedTime, $limit =
         'streamQuery' => $streamQuery,
         'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'
     );
-    
+
     //echo $fbSession->getAccessToken();
-    echo $fbSession->api('/me');
+
+    try {
+        // Test the connectivity waters...
+        $me = $fbSession->api('/me');
+    } catch (FacebookApiException $e) {
+        error_log($e->getType());
+        error_log($e->getMessage());
+    }
 
 //    $response = $fbSession->api(array(
 //        'method' => 'fql.multiquery',
