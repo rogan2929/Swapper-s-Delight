@@ -8,7 +8,6 @@ function streamQuery($fbSession, $sourceId, $constraints, $limit = 20) {
     $streamQuery = 'SELECT post_id,updated_time,message,attachment,comment_info FROM stream WHERE source_id=' . $sourceId;
 
     if ($constraints) {
-        //$streamQuery .= $constraints;
         for ($i = 0; $i < count($constraints); $i++) {
             $constraint = $constraints[$i];
             $streamQuery .= ' AND ' . $constraint['field'] . ' ' . $constraint['operator'] . ' ' . $constraint['value'];

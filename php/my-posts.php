@@ -16,8 +16,6 @@ $constraints[] = array(
     'value' => $uid
 );
 
-echo json_encode($constraints);
+$posts = streamQuery($fbSession, $gid, $constraints, 20);
 
-//$posts = streamQuery($fbSession, $gid, $constraints, 20);
-
-//echo json_encode($posts);
+echo json_encode($posts);
