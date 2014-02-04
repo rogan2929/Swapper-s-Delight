@@ -38,10 +38,9 @@ for ($i = 0; $i < count($postDetails['comments']); $i++) {
 }
 
 // Query action links for the given post. (FQL's action_links column always returns null. Suspect a bug.)
-$response = $fbSession->api('/' . $postId . '?fields=actions');
+$actions = $fbSession->api('/' . $postId . '?fields=actions');
 
-$postDetails['action_links'] = $response['actions'];
+$postDetails['action_links'] = $actions['actions'];
 
 // Return the result.
 echo json_encode($postDetails);
-?>

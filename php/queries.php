@@ -54,5 +54,3 @@ function streamQuery($fbSession, $sourceId, $constraints, $limit = 20) {
     }
     return $posts;
 }
-
-?>

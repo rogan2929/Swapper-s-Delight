@@ -23,4 +23,3 @@ $posts = streamQuery($fbSession, $gid, $constraints, 20);
 
 // Return the result.
 echo json_encode($posts);
-?>

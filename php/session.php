@@ -48,4 +48,3 @@ $fbSession->setAccessToken($data['access_token']);
   //header('Location: ' . $loginUrl);
 
   } */
-?>

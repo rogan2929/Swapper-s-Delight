@@ -141,8 +141,8 @@ var SwdModel = {
             contentType: 'application/json',
             dataType: 'json',
             data: {
-                postId: postId,
-                comment: comment
+                'postId': postId,
+                'comment': comment
             },
             success: function(response) {
                 callbacks.success.call(SwdModel, JSON.parse(response));
