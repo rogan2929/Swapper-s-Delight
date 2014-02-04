@@ -38,8 +38,8 @@ function streamQuery($fbSession, $sourceId, $constraints, $updatedTime, $limit =
         // Test the connectivity waters...
         $me = $fbSession->api('/me');
     } catch (FacebookApiException $e) {
-        error_log($e->getType());
-        error_log($e->getMessage());
+        echo $e->getType();
+        echo $e->getMessage();
     }
 
 //    $response = $fbSession->api(array(
