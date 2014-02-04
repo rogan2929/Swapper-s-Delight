@@ -7,10 +7,6 @@
 function streamQuery($fbSession, $sourceId, $constraints, $updatedTime, $limit = 20) {
     $streamQuery = 'SELECT post_id,updated_time,message,attachment,comment_info FROM stream WHERE source_id=' . $sourceId;
 
-    if (!$constraints) {
-        $constraints = array();
-    }
-
     if ($updatedTime) {
         // Add to the constraints array.
         $constraints[] = array(
@@ -19,6 +15,8 @@ function streamQuery($fbSession, $sourceId, $constraints, $updatedTime, $limit =
             'value' => $updatedTime
         );
     }
+    
+    echo json_encode($constraints);
 
     // Check for constraints.
     for ($i = 0; $i < count($constraints); $i++) {
