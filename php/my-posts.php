@@ -1,6 +1,7 @@
 <?php
 
 require_once 'session.php';
+require_once 'queries.php';
 
 $gid = $_GET['gid'];
 

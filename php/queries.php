@@ -16,8 +16,6 @@ function streamQuery($fbSession, $sourceId, $constraints, $limit = 20) {
 
     // Fetch 20 results, and sorted by creation time.
     $streamQuery .= ' ORDER BY updated_time DESC LIMIT ' . $limit;
-    
-    echo $streamQuery;
 
     $queries = array(
         'streamQuery' => $streamQuery,
