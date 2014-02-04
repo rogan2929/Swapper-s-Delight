@@ -605,20 +605,22 @@ var SwdView = {
         }
     },
     addPostComment: function(comment) {
+        var commentDiv, timeStamp, userImage;
+        
         // Set user image
-        if (post.comments[i].user.pic_square) {
-            userImage = 'url("' + post.comments[i].user.pic_square + '")';
+        if (comment.user.pic_square) {
+            userImage = 'url("' + comment.user.pic_square + '")';
         }
         else {
             userImage = '';
         }
 
         //timeStamp = $.datepicker.formatDate('DD, mm/dd/yy at HH:MM', new Date(post.comments[i].time * 1000));
-        timeStamp = new moment(new Date(post.comments[i].time * 1000));
+        timeStamp = new moment(new Date(comment.time * 1000));
 
-        comment = $('<div class="post-comment ui-corner-all ui-widget ui-widget-content"><div class="ui-state-default"><div class="post-comment-user-image"></div><div class="post-comment-header"><p class="wrapper"><a class="post-comment-user-name" href="' + post.comments[i].user.profile_url + '" target="_blank">' + post.comments[i].user.first_name + ' ' + post.comments[i].user.last_name + '</a><span class="timestamp">' + timeStamp.calendar() + '</span></p></div></div>' + post.comments[i].text + '</div>');
-        $(comment).find('.post-comment-user-image').css('background-image', userImage);
-        $('#post-comment-list').append(comment);
+        commentDiv = $('<div class="post-comment ui-corner-all ui-widget ui-widget-content"><div class="ui-state-default"><div class="post-comment-user-image"></div><div class="post-comment-header"><p class="wrapper"><a class="post-comment-user-name" href="' + comment.user.profile_url + '" target="_blank">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><span class="timestamp">' + timeStamp.calendar() + '</span></p></div></div>' + comment.text + '</div>');
+        $(commentDiv).find('.post-comment-user-image').css('background-image', userImage);
+        $('#post-comment-list').append(commentDiv);
     },
     /**
      * Init function for SwdView.
@@ -719,7 +721,7 @@ var SwdView = {
      * @param {type} posts
      */
     populatePosts: function(posts) {
-        var i, isEmpty, imageUrl, imageUrlBig, message, post, postTile, primaryContent, secondaryContent, count;
+        var i, isEmpty, imageUrl, imageUrlBig, message, post, postTile, primaryContent, secondaryContent;
 
         // If there is a feed to display, then display it.
         if (posts) {
@@ -875,7 +877,7 @@ var SwdView = {
      * @param {type} post Post to load into floating post details panel.
      */
     showPostDetails: function(post) {
-        var userImage, postImage, i, comment, timeStamp;
+        var userImage, postImage, i;
 
         if (post.image_url) {
             postImage = 'url("' + post.image_url + '")';
