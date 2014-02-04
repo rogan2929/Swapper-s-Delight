@@ -139,7 +139,7 @@ var SwdModel = {
             type: 'POST',
             url: '/php/post-comment.php',
             contentType: 'application/json',
-            dataType: 'json',
+            //dataType: 'json',
             data: { postId: 'blah' },
 //            data: {
 //                'postId': postId,
