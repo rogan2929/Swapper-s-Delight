@@ -15,6 +15,8 @@ $fbSession = new Facebook(array(
     'secret' => $appSecret
         ));
 
+$fbSession->setAccessToken($data['access_token']);
+
 $gid = $_GET['gid'];
 $updatedTime = $_GET['updatedTime'];
 

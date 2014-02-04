@@ -17,7 +17,7 @@ $fbSession = new Facebook(array(
     'secret' => $appSecret
         ));
 
-//$fbSession->setAccessToken($data['access_token']);
+$fbSession->setAccessToken($data['access_token']);
 
 //try {
 //    // Test the connectivity waters...

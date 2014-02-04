@@ -15,6 +15,8 @@ $fbSession = new Facebook(array(
     'secret' => $appSecret
         ));
 
+$fbSession->setAccessToken($data['access_token']);
+
 // Retrieve group id that is being queried.
 $gid = $_GET['gid'];
 $updatedTime = $_GET['updatedTime'];
