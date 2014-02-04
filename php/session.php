@@ -4,7 +4,6 @@ require_once ("facebook.php");
 
 // Prod AppId and Secret
 //$appId = '1401018793479333';
-
 // Test AppId and Secret
 $appId = '652991661414427';
 $appSecret = 'b8447ce73d2dcfccde6e30931cfb0a90';
@@ -19,6 +18,15 @@ $fbSession = new Facebook(array(
         ));
 
 $fbSession->setAccessToken($data['access_token']);
+
+try {
+    // Test the connectivity waters...
+    $me = $fbSession->api('/me');
+} catch (FacebookApiException $e) {
+    error_log($e->getType());
+    error_log($e->getMessage());
+}
+
 /*
   if ($fbSession->getUser()) {
 
