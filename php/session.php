@@ -19,17 +19,15 @@ $fbSession = new Facebook(array(
 
 $fbSession->setAccessToken($_COOKIE['fbsr_' . $appId]);
 
-echo $fbSession->getAccessToken();
-
-//try {
-//    // Test the connectivity waters...
-//    $me = $fbSession->api('/me');
-//} catch (FacebookApiException $e) {
+try {
+    // Test the connectivity waters...
+    $me = $fbSession->api('/me');
+} catch (FacebookApiException $e) {
 //    $loginUrl = $fbSession->getLoginUrl(array('scope' => 'user_groups,user_likes'));
 //    echo '<div class="login-div">Please <a href="' . $loginUrl . '">login.</a></div>';
-//    error_log($e->getType());
-//    error_log($e->getMessage());
-//}
+    echo $e->getType();
+    echo $e->getMessage();
+}
 
 /*
   if ($fbSession->getUser()) {
