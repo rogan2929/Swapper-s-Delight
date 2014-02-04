@@ -24,6 +24,8 @@ $oldestAllowed = strtotime('-1 month');
 // Grab the initial batch and save the oldest post's updated time.
 $posts = streamQuery($fbSession, $gid, $constraints, $updatedTime, 50);
 
+echo json_encode($posts);
+
 if (count($posts) > 0) {
     $oldest = $posts[count($posts) - 1]['updated_time'];
 }
