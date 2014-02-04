@@ -15,9 +15,9 @@ if (!$fbSession) {
         'secret' => $appSecret,
         'cookie' => true
     ));
+    
+    echo 'NEW SESSION';
 }
-
-echo $fbSession->getAccessToken();
 
 try {
     // Test the connectivity waters...
