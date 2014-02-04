@@ -33,12 +33,19 @@ var SwdModel = {
     /***
      * Get posts in the group that are liked.
      * @param {type} gid
+     * @param {type} updatedTime
      * @param {type} callbacks
      */
-    getLikedPosts: function(gid, callbacks) {
+    getLikedPosts: function(gid, updatedTime, callbacks) {
+        var url = '/php/liked-posts.php?gid=' + gid;
+
+        if (updatedTime) {
+            url += '&updatedTime=' + updatedTime;
+        }
+
         $.ajax({
             type: 'GET',
-            url: '/php/liked-posts.php?gid=' + gid,
+            url: url,
             success: function(response) {
                 callbacks.success.call(SwdModel, JSON.parse(response));
             },
@@ -66,12 +73,19 @@ var SwdModel = {
     /***
      * Get posts that are owned by the current user in the provided group. Go back 42 days.
      * @param {type} gid
+     * @param {type} updatedTime
      * @param {type} callbacks
      */
-    getMyPosts: function(gid, callbacks) {
+    getMyPosts: function(gid, updatedTime, callbacks) {
+        var url = '/php/my-posts.php?gid=' + gid;
+
+        if (updatedTime) {
+            url += '&updatedTime=' + updatedTime;
+        }
+
         $.ajax({
             type: 'GET',
-            url: '/php/my-posts.php?gid=' + gid,
+            url: url,
             success: function(response) {
                 callbacks.success.call(SwdModel, JSON.parse(response));
             },
@@ -88,6 +102,7 @@ var SwdModel = {
      */
     getNewestPosts: function(gid, updatedTime, callbacks) {
         var url = '/php/new-posts.php?gid=' + gid;
+        
         if (updatedTime) {
             url += '&updatedTime=' + updatedTime;
         }
@@ -331,13 +346,10 @@ var SwdPresenter = {
     /***
      * Load posts liked by user.
      */
-    loadLikedPosts: function() {
-        SwdPresenter.resetFbCanvasSize();
-        SwdView.showFeedLoadingAjaxDiv();
-
-        SwdModel.getLikedPosts(SwdPresenter.selectedGroup.id, {
+    loadLikedPosts: function(loadNextPage, updatedTime) {
+        SwdModel.getLikedPosts(SwdPresenter.selectedGroup.id, updatedTime, {
             success: function(response) {
-                alert('Not yet implemented.');
+                SwdPresenter.loadPostsComplete(loadNextPage, response);
             },
             fail: function(response) {
                 SwdView.showError(response);
@@ -347,16 +359,10 @@ var SwdPresenter = {
     /***
      * Load posts owned by user.
      */
-    loadMyPosts: function() {
-        SwdView.clearPosts();
-        SwdPresenter.resetFbCanvasSize();
-        SwdView.showFeedLoadingAjaxDiv();
-
-        SwdPresenter.oldestPost = null;
-
-        SwdModel.getMyPosts(SwdPresenter.selectedGroup.id, {
+    loadMyPosts: function(loadNextPage, updatedTime) {
+        SwdModel.getMyPosts(SwdPresenter.selectedGroup.id, updatedTime, {
             success: function(response) {
-                SwdView.populatePosts(response);
+                SwdPresenter.loadPostsComplete(loadNextPage, response);
             },
             fail: function(response) {
                 SwdView.showError(response);
@@ -367,7 +373,22 @@ var SwdPresenter = {
      * Load feed for the current group.
      * @param {type} loadNextPage
      */
-    loadNewestPosts: function(loadNextPage) {
+    loadNewestPosts: function(loadNextPage, updatedTime) {
+        // Get posts and then display them.
+        SwdModel.getNewestPosts(SwdPresenter.selectedGroup.id, updatedTime, {
+            success: function(response) {
+                SwdPresenter.loadPostsComplete(loadNextPage, response);
+            },
+            fail: function(response) {
+                SwdView.showError(response);
+            }
+        });
+    },
+    /***
+     * High level post loading function.
+     * @param {type} loadNextPage
+     */
+    loadPosts: function(loadNextPage) {
         var updatedTime;
 
         // Pause window data polling.
@@ -388,45 +409,33 @@ var SwdPresenter = {
             SwdView.showFeedLoadingAjaxDiv();
         }
 
-        // Get posts and then display them.
-        SwdModel.getNewestPosts(SwdPresenter.selectedGroup.id, updatedTime, {
-            success: function(response) {
-                if (!loadNextPage) {
-                    // Clear previous results, unless loading a new page.
-                    SwdPresenter.oldestPost = null;
-                }
-
-                if (response) {
-                    SwdPresenter.oldestPost = response[response.length - 1];
-                    SwdView.populatePosts(response);
-                }
-                else
-                if (!loadNextPage) {
-                    SwdPresenter.oldestPost = null;
-                }
-            },
-            fail: function(response) {
-                SwdView.showError(response);
-            }
-        });
-    },
-    /***
-     * High level post loading function.
-     * @param {type} nextPage
-     */
-    loadPosts: function(nextPage) {
         switch (SwdPresenter.postType) {
             case PostType.group:
-                SwdPresenter.loadNewestPosts(nextPage);
+                SwdPresenter.loadNewestPosts(loadNextPage, updatedTime);
                 break;
             case PostType.myposts:
-                SwdPresenter.loadMyPosts();
+                SwdPresenter.loadMyPosts(loadNextPage, updatedTime);
                 break;
             case PostType.liked:
-                SwdPresenter.loadLikedPosts();
+                SwdPresenter.loadLikedPosts(loadNextPage, updatedTime);
                 break;
             case PostType.search:
                 break;
+        }
+    },
+    loadPostsComplete: function(loadNextPage, response) {
+        if (!loadNextPage) {
+            // Clear previous results, unless loading a new page.
+            SwdPresenter.oldestPost = null;
+        }
+
+        if (response) {
+            SwdPresenter.oldestPost = response[response.length - 1];
+            SwdView.populatePosts(response);
+        }
+        else
+        if (!loadNextPage) {
+            SwdPresenter.oldestPost = null;
         }
     },
     /***
@@ -498,7 +507,7 @@ var SwdPresenter = {
     },
     onClickNavButton: function(e, args) {
         var id = $(e.currentTarget).attr('id');
-        
+
         switch (id) {
             case 'button-nav-group':
                 SwdPresenter.postType = PostType.group;
