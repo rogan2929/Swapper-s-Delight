@@ -5,6 +5,8 @@ require_once 'session.php';
 $postId = $_POST['postId'];
 $comment = $_POST['comment'];
 
+echo $postId;
+
 //echo json_encode($_POST);
 
 //$response = array('postId' => $postId, 'comment' => $comment);
