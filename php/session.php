@@ -15,12 +15,11 @@ $fbSession = new Facebook(array(
     'cookie' => true
         ));
 
+// Save or retrieve the accessToken.
 if (!isset($_SESSION['accessToken'])) {
-    echo 'SET';
     $_SESSION['accessToken'] = $fbSession->getAccessToken();
 }
 else {
-    echo 'GET';
     $fbSession->setAccessToken($_SESSION['accessToken']);
 }
 
