@@ -5,12 +5,8 @@ require_once 'session.php';
 $postId = $_POST['postId'];
 $comment = $_POST['comment'];
 
-echo $postId;
-
-//echo json_encode($_POST);
-
-//$response = array('postId' => $postId, 'comment' => $comment);
-//echo json_encode($response);
+$response = array('postId' => $postId, 'comment' => $comment);
+echo json_encode($response);
 
 // Post the comment and get the response
 //$id = $fbSession->api('/' . $postId, 'POST', array('message' => $comment));

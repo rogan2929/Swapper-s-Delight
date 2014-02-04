@@ -139,12 +139,11 @@ var SwdModel = {
             type: 'POST',
             url: '/php/post-comment.php',
             //contentType: 'application/json',
-            //dataType: 'json',
-            data: { postId: 'blah' },
-//            data: {
-//                'postId': postId,
-//                'comment': comment
-//            },
+            dataType: 'json',
+            data: {
+                'postId': postId,
+                'comment': comment
+            },
             success: function(response) {
                 callbacks.success.call(SwdModel, JSON.parse(response));
             },
@@ -523,6 +522,8 @@ var SwdPresenter = {
 
         id = $('#panel-post').data('id');
         comment = $('#post-comment-text > textarea').val();
+        
+        alert(id);
 
         // Post the comment.
         SwdModel.postComment(id, comment, {
