@@ -63,7 +63,7 @@ var SwdModel = {
             type: 'GET',
             url: '/php/group-info.php',
             success: function(response) {
-                callbacks.success.call(SwdModel, JSON.parse(response));
+                starcallbacks.success.call(SwdModel, JSON.parse(response));
             },
             fail: function(response) {
                 callbacks.fail.call(SwdModel, JSON.parse(response));
@@ -171,18 +171,18 @@ var SwdModel = {
      * Sync the server with the current session.
      * @param {type} callbacks
      */
-    startSession: function(callbacks) {
-        $.ajax({
-            type: 'GET',
-            url: '/php/session.php',
-            success: function(response) {
-                callbacks.success.call(SwdModel);
-            },
-            fail: function(response) {
-                callbacks.fail.call(SwdModel, JSON.parse(response));
-            }
-        });
-    },
+//    startSession: function(callbacks) {
+//        $.ajax({
+//            type: 'GET',
+//            url: '/php/session.php',
+//            success: function(response) {
+//                callbacks.success.call(SwdModel);
+//            },
+//            fail: function(response) {
+//                callbacks.fail.call(SwdModel, JSON.parse(response));
+//            }
+//        });
+//    },
     /***
      * Unlike a post. 
      * @param {type} postId
@@ -220,26 +220,12 @@ var SwdPresenter = {
             // Try to get a session going if there isn't one already.
             FB.getLoginStatus(function(response) {
                 if (response.status === 'connected') {
-                    SwdModel.startSession({
-                        success: function() {
-                            SwdPresenter.startApp();
-                        },
-                        fail: function(response) {
-                            SwdView.showError(response);
-                        }
-                    });
+                    SwdPresenter.startApp();
                 }
                 else {
                     FB.login(function(response) {
                         if (response.status === 'connected') {
-                            SwdModel.startSession({
-                                success: function() {
-                                    SwdPresenter.startApp();
-                                },
-                                fail: function(response) {
-                                    SwdView.showError(response);
-                                }
-                            });
+                            SwdPresenter.startApp();
                         }
                     }, {
                         scope: 'user_groups,user_likes'

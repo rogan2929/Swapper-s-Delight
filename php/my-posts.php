@@ -34,8 +34,6 @@ $constraints[] = array(
 // Grab the initial batch and save the oldest post's updated time.
 //$posts = streamQuery($fbSession, $gid, $constraints, null, 25);
 
-
-
 //if (count($posts) > 0) {
 //    $oldest = $posts[count($posts) - 1]['updated_time'];
 //
