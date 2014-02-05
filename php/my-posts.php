@@ -25,11 +25,7 @@ $constraints[] = array(
     'value' => $uid
 );
 
-$constraints[] = array(
-    'field' => 'updated_time',
-    'operator' => '>=',
-    'value' => $oldestAllowed
-);
+
 
 // Grab the initial batch and save the oldest post's updated time.
 //$posts = streamQuery($fbSession, $gid, $constraints, null, 25);
