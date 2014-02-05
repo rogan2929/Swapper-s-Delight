@@ -1,10 +1,10 @@
 <?php
 
 /* * *
- * Reusable funciton that executes an FQL query against the given stream.
+ * Build a 'streamQuery' FQL multi-query.
  */
 
-function streamQuery($fbSession, $sourceId, $constraints, $limit = 20) {
+function buildStreamQuery($sourceId, $constraints, $limit = 20) {
     $streamQuery = 'SELECT post_id,updated_time,message,attachment,comment_info FROM stream WHERE source_id=' . $sourceId;
 
     // Check for constraints.
@@ -21,11 +21,29 @@ function streamQuery($fbSession, $sourceId, $constraints, $limit = 20) {
         'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'
     );
 
+    return $queries;
+}
+
+/* * *
+ * Reusable, generic function that executes an FQL query against the given stream.
+ */
+
+function streamQuery($fbSession, $sourceId, $constraints, $limit = 20) {
+    $queries = buildStreamQuery($sourceId, $constraints, $limit);
+
     $response = $fbSession->api(array(
         'method' => 'fql.multiquery',
         'queries' => $queries
     ));
 
+    return processStreamQuery($response);
+}
+
+/* * *
+ * Take a response and construct post objects out of it.
+ */
+
+function processStreamQuery($response) {
     $posts = array();
 
     $stream = $response[0]['fql_result_set'];

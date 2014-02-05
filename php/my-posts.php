@@ -25,6 +25,8 @@ $actorConstraint = array(
     'value' => $uid
 );
 
+$batch = array();
+
 $posts = array();
 
 // Construct the FB batch request
@@ -42,16 +44,17 @@ for ($i = 0; $i < $batchRunCount; $i++) {
         'operator' => '>=',
         'value' => $windowEnd
     );
-
-    echo json_encode($constraints);
-    echo '<br/>';
-
-    // Pull the batch in.
-    //$batch = streamQuery($fbSession, $gid, $constraints, $batchSize);
-    //$posts = array_merge($posts, $batch);
+    
+    $batch[] = buildStreamQuery($sourceId, $constraints, $batchSize);
 
     $windowStart -= $windowSize;
     $windowEnd -= $windowSize;
 }
+
+$params = array(
+    'batch' => '[' . implode(',', $batch) . ']'
+);
+
+echo $params;
 
 //echo json_encode($posts);
