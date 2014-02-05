@@ -51,7 +51,7 @@ for ($i = 0; $i < $batchRunCount; $i++) {
     $windowStart -= $windowSize;
     $windowEnd -= $windowSize;
     
-    echo $windowStart + ' ' + $windowEnd;
+    echo $windowStart + ' ';
 }
 
 //echo json_encode($posts);
