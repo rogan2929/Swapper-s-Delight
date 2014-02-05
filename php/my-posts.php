@@ -44,14 +44,15 @@ for ($i = 0; $i < $batchRunCount; $i++) {
         )
     );
     
+    echo json_encode($constraints);
+    echo '<br/>';
+    
     // Pull the batch in.
     $batch = streamQuery($fbSession, $gid, $constraints, $batchSize);
     $posts = array_merge($posts, $batch);
     
     $windowStart -= $windowSize;
     $windowEnd -= $windowSize;
-    
-    echo $windowStart + ' ';
 }
 
 //echo json_encode($posts);
