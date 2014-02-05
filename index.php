@@ -87,7 +87,7 @@
                             </div>
                             <div id='post-comment-list'></div>
                             <div id='post-comment-text' class='ui-corner-all ui-widget ui-widget-content'>
-                                <textarea></textarea>
+                                <textarea placeholder='Add a comment...'></textarea>
                             </div>
                             <div id='post-button-comment' class='post-button'>
                                 Comment
