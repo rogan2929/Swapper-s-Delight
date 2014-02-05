@@ -124,9 +124,9 @@
             <!--Menus-->
 
             <ul id='popup-menu-groups' class='menu'>
-                <li id='menu-item-choose-groups' class='menu-item-group'>
+<!--                <li id='menu-item-choose-groups' class='menu-item-group'>
                     <a href='#'><span class='ui-icon ui-icon-check'></span>Edit Groups...</a>
-                </li>
+                </li>-->
             </ul>
 
             <ul id='popup-menu-main' class='menu'>
