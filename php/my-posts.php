@@ -52,6 +52,8 @@ for ($i = 0; $i < $batchRunCount; $i++) {
     $windowEnd -= $windowSize;
 }
 
+echo json_encode($posts);
+
 // Grab the initial batch and save the oldest post's updated time.
 //$posts = streamQuery($fbSession, $gid, $constraints, null, 25);
 
