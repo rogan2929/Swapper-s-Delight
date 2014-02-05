@@ -63,7 +63,7 @@ var SwdModel = {
             type: 'GET',
             url: '/php/group-info.php',
             success: function(response) {
-                starcallbacks.success.call(SwdModel, JSON.parse(response));
+                callbacks.success.call(SwdModel, JSON.parse(response));
             },
             fail: function(response) {
                 callbacks.fail.call(SwdModel, JSON.parse(response));
