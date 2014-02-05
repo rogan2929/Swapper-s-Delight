@@ -478,7 +478,7 @@ var SwdPresenter = {
         }
         else {
             for (i = 0; i < SwdPresenter.groups.length; i++) {
-                if (id === SwdPresenter.groups[i].id) {
+                if (id === SwdPresenter.groups[i].gid) {
                     group = SwdPresenter.groups[i];
                     break;
                 }
@@ -603,7 +603,7 @@ var SwdView = {
     addGroupsToMenu: function(groups) {
         var i = 0;
         for (i = 0; i < groups.length; i++) {
-            $('#popup-menu-groups').append('<li id="' + groups[i].id + '" class="menu-item-group"><a href="#"><span class="ui-icon" style="background-image: url(' + groups[i].icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + groups[i].name + '</div></a></li>');
+            $('#popup-menu-groups').append('<li id="' + groups[i].gid + '" class="menu-item-group"><a href="#"><span class="ui-icon" style="background-image: url(' + groups[i].icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + groups[i].name + '</div></a></li>');
         }
     },
     addPostComment: function(comment) {
