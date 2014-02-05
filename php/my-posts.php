@@ -5,13 +5,11 @@ require_once 'queries.php';
 
 $gid = $_GET['gid'];
 //$updatedTime = $_GET['updatedTime'];
-
 // Get FB user id.
 $uid = $fbSession->getUser();
 
 // Allow everything younger than one month.
 //$oldestAllowed = strtotime('-1 month');
-
 // Define the initial window to search within.
 $windowSize = 3600 * 24;    // 1 Day
 $windowStart = time();
@@ -29,28 +27,29 @@ $actorConstraint = array(
 
 $posts = array();
 
+// Construct the FB batch request
 for ($i = 0; $i < $batchRunCount; $i++) {
-    $constraints = array(
-        [0] => $actorConstraint,
-        [1] => array(       // Window start constraint
-            'field' => 'updated_time',
-            'operator' => '<=',
-            'value' => $windowStart
-        ),
-        [2] => array(       // Window end constraint
-            'field' => 'updated_time',
-            'operator' => '>=',
-            'value' => $windowEnd
-        )
+    $constraints = array();
+
+    $constraints[] = $actorConstraint;
+    $constraints[] = array(// Window start constraint
+        'field' => 'updated_time',
+        'operator' => '<=',
+        'value' => $windowStart
     );
-    
+    $constraints[] = array(// Window end constraint
+        'field' => 'updated_time',
+        'operator' => '>=',
+        'value' => $windowEnd
+    );
+
     echo json_encode($constraints);
     echo '<br/>';
-    
+
     // Pull the batch in.
-    $batch = streamQuery($fbSession, $gid, $constraints, $batchSize);
-    $posts = array_merge($posts, $batch);
-    
+    //$batch = streamQuery($fbSession, $gid, $constraints, $batchSize);
+    //$posts = array_merge($posts, $batch);
+
     $windowStart -= $windowSize;
     $windowEnd -= $windowSize;
 }
