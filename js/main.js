@@ -333,7 +333,7 @@ var SwdPresenter = {
      * Load posts liked by user.
      */
     loadLikedPosts: function(loadNextPage, updatedTime) {
-        SwdModel.getLikedPosts(SwdPresenter.selectedGroup.id, updatedTime, {
+        SwdModel.getLikedPosts(SwdPresenter.selectedGroup.gid, updatedTime, {
             success: function(response) {
                 SwdPresenter.loadPostsComplete(loadNextPage, response);
             },
@@ -346,7 +346,7 @@ var SwdPresenter = {
      * Load posts owned by user.
      */
     loadMyPosts: function(loadNextPage, updatedTime) {
-        SwdModel.getMyPosts(SwdPresenter.selectedGroup.id, updatedTime, {
+        SwdModel.getMyPosts(SwdPresenter.selectedGroup.gid, updatedTime, {
             success: function(response) {
                 SwdPresenter.loadPostsComplete(loadNextPage, response);
             },
@@ -361,7 +361,7 @@ var SwdPresenter = {
      */
     loadNewestPosts: function(loadNextPage, updatedTime) {
         // Get posts and then display them.
-        SwdModel.getNewestPosts(SwdPresenter.selectedGroup.id, updatedTime, {
+        SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, updatedTime, {
             success: function(response) {
                 SwdPresenter.loadPostsComplete(loadNextPage, response);
             },
