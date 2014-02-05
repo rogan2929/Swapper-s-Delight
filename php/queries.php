@@ -30,16 +30,6 @@ function streamQuery($fbSession, $sourceId, $constraints, $updatedTime, $limit =
         'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'
     );
 
-    //echo $fbSession->getAccessToken();
-
-//    try {
-//        // Test the connectivity waters...
-//        $me = $fbSession->api('/me');
-//    } catch (FacebookApiException $e) {
-//        echo $e->getType();
-//        echo $e->getMessage();
-//    }
-
     $response = $fbSession->api(array(
         'method' => 'fql.multiquery',
         'queries' => $queries
