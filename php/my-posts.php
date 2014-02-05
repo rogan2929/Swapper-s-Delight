@@ -4,10 +4,17 @@ require_once 'session.php';
 require_once 'queries.php';
 
 $gid = $_GET['gid'];
-$updatedTime = $_GET['updatedTime'];
+//$updatedTime = $_GET['updatedTime'];
 
 // Get FB user id.
 $uid = $fbSession->getUser();
+
+// Allow everything younger than one month.
+//$oldestAllowed = strtotime('-1 month');
+$oneWeek = strtotime('-1 week');
+$twoWeeks = strtotime('-2 week');
+$threeWeeks = strtotime('-3 week');
+$fourWeeks = strtotime('-4 week');
 
 $constraints = array();
 
@@ -18,11 +25,16 @@ $constraints[] = array(
     'value' => $uid
 );
 
-// Allow everything younger than one month.
-$oldestAllowed = strtotime('-1 month');
+$constraints[] = array(
+    'field' => 'updated_time',
+    'operator' => '>=',
+    'value' => $oldestAllowed
+);
 
 // Grab the initial batch and save the oldest post's updated time.
-$posts = streamQuery($fbSession, $gid, $constraints, null, 1000);
+//$posts = streamQuery($fbSession, $gid, $constraints, null, 25);
+
+
 
 //if (count($posts) > 0) {
 //    $oldest = $posts[count($posts) - 1]['updated_time'];
@@ -46,4 +58,4 @@ $posts = streamQuery($fbSession, $gid, $constraints, null, 1000);
 //    }
 //}
 
-echo json_encode($posts);
+//echo json_encode($posts);

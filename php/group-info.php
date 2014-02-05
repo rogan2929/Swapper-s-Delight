@@ -16,14 +16,14 @@ $groups = $response['data'];
 
 // Iterate through returned groups and determine if they have been marked or not.
 for ($i = 0; $i < count($groups); $i++) {
-    $marked = false;
+    $marked = true;
     
-    for ($j = 0; $j < count($selectedGroups); $j++) {
-        if ($selectedGroups[$j] == $groups[$i]['id']) {
-            $marked = true;
-            break;
-        }
-    }
+//    for ($j = 0; $j < count($selectedGroups); $j++) {
+//        if ($selectedGroups[$j] == $groups[$i]['id']) {
+//            $marked = true;
+//            break;
+//        }
+//    }
     
     // Insert additional field indicating if the group has been marked as a "BST" group.
     $groups[$i]['marked'] = $marked;
