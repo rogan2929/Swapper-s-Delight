@@ -18,7 +18,7 @@ if ($updatedTime) {
     );
 }
 
-$posts = streamQuery($fbSession, $gid, $constraints, 50);
+$posts = streamQuery($fbSession, $gid, $constraints, 30);
 
 // Return the result.
 echo json_encode($posts);
