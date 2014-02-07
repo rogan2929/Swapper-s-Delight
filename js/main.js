@@ -218,7 +218,10 @@ var SwdPresenter = {
             });
             $('#loginbutton,#feedbutton').removeAttr('disabled');
             
-            SwdPresenter.startApp();
+            FB.Event.subscribe('auth.login', function(response) {
+                SwdPresenter.startApp();
+            });
+            
             
 //            // Try to get a session going if there isn't one already.
 //            FB.getLoginStatus(function(response) {
