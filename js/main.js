@@ -218,7 +218,7 @@ var SwdPresenter = {
             });
             $('#loginbutton,#feedbutton').removeAttr('disabled');
             
-            FB.Event.subscribe('auth.login', function(response) {
+            FB.Event.subscribe('auth.authResponseChange', function(response) {
                 SwdPresenter.startApp();
             });
             
