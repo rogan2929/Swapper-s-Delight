@@ -455,9 +455,9 @@ var SwdPresenter = {
         SwdView.setGroupButtonText(group.name);
     },
     // Event Handlers (onX(e, args))
-    onFBauthResponseChange: function(url, html_element) {
-        alert('TEST');
-    },
+//    onFBauthResponseChange: function(url, html_element) {
+//        alert('TEST');
+//    },
     onClickButtonNew: function(e, args) {
         SwdView.showFloatingPanel('#new-post-panel');
     },
