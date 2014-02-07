@@ -15,6 +15,26 @@ $fbSession = new Facebook(array(
     'cookie' => true
         ));
 
+// Save or retrieve the accessToken.
+if (!isset($_SESSION['accessToken'])) {
+    $_SESSION['accessToken'] = $fbSession->getAccessToken();
+}
+else {
+    $fbSession->setAccessToken($_SESSION['accessToken']);
+}
+
+// Test the access token.
+try {
+    // Test the connectivity waters...
+    $me = $fbSession->api('/me');
+} catch (FacebookApiException $e) {
+    //echo $e->getType();
+    //echo $e->getMessage();
+    
+    // An error occurred, so refresh the access token.
+    $_SESSION['accessToken'] = $fbSession->getAccessToken();
+}
+
 //// Test the access token.
 //try {
 //    // Test the connectivity waters...
