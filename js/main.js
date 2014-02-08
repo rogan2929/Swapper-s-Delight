@@ -328,6 +328,10 @@ var SwdPresenter = {
                         //alert(scrollTop + ' ' + $('#app-content').height() + ' ' + clientHeight);
                         SwdPresenter.loadPosts(true);
                     }
+                    
+                    FB.Canvas.setSize({
+                        height: Math.max($('html').height(), 810)
+                    });
                 }
 
                 // Call the polling function again after 100ms.
@@ -791,10 +795,6 @@ var SwdView = {
             // From: http://www.paulirish.com/2008/sequentially-chain-your-callbacks-in-jquery-two-ways/
             (function shownext(jq) {
                 jq.eq(0).fadeIn(60, function() {
-                    // Finished animating display of post tiles.
-                    FB.Canvas.setSize({
-                        height: Math.max($('html').height(), 810)
-                    });
                     (jq = jq.slice(1)).length && shownext(jq);
                 });
             })($('div.post-tile'));
