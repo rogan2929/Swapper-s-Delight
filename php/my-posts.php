@@ -55,6 +55,6 @@ $params = array(
     'batch' => '[' . implode(',', $batch) . ']'
 );
 
-echo $params;
+echo json_encode($params);
 
 //echo json_encode($posts);
