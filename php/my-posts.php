@@ -25,9 +25,11 @@ $actorConstraint = array(
     'value' => $uid
 );
 
-$batch = array();
+//$batch = array();
 
 $posts = array();
+
+$queries = array();
 
 // Construct the FB batch request
 for ($i = 0; $i < $batchRunCount; $i++) {
@@ -45,14 +47,17 @@ for ($i = 0; $i < $batchRunCount; $i++) {
         'value' => $windowEnd
     );
     
-    echo json_encode(array('method' => 'GET', 'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($sourceId, $constraints, $batchSize))));
-    echo '<br/>';
+    //echo json_encode(array('method' => 'GET', 'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($sourceId, $constraints, $batchSize))));
+    //echo '<br/>';
     
     //$batch[] = array('method' => 'GET', 'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($sourceId, $constraints, $batchSize)));
+    $queries[] = buildStreamQuery($sourceId, $constraints, $batchSize);
 
     $windowStart -= $windowSize;
     $windowEnd -= $windowSize;
 }
+
+echo json_encode($queries);
 
 //$response = $fbSession->api('/?batch=' . json_encode($batch), 'POST');
 
