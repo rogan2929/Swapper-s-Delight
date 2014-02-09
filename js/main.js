@@ -102,7 +102,7 @@ var SwdModel = {
      */
     getNewestPosts: function(gid, updatedTime, callbacks) {
         var url = '/php/new-posts.php?gid=' + gid;
-        
+
         if (updatedTime) {
             url += '&updatedTime=' + updatedTime;
         }
@@ -201,6 +201,7 @@ var SwdPresenter = {
     selectedGroup: null,
     groups: null,
     prevOffset: null,
+    clientHeight: null,
     /**
      * Entry point of program.
      */
@@ -217,12 +218,12 @@ var SwdPresenter = {
                 status: true
             });
             $('#loginbutton,#feedbutton').removeAttr('disabled');
-            
+
             FB.Event.subscribe('auth.authResponseChange', function(response) {
                 SwdPresenter.startApp();
             });
-            
-            
+
+
 //            // Try to get a session going if there isn't one already.
 //            FB.getLoginStatus(function(response) {
 //                if (response.status === 'connected') {
@@ -303,6 +304,8 @@ var SwdPresenter = {
                 offsetTop = parseInt(pageInfo.offsetTop);
                 clientHeight = parseInt(pageInfo.clientHeight);
 
+                SwdPresenter.clientHeight = clientHeight;
+
                 // Calculate how far to offset things.
                 offset = Math.max(scrollTop - offsetTop, 0);
 
@@ -328,10 +331,10 @@ var SwdPresenter = {
                         //alert(scrollTop + ' ' + $('#app-content').height() + ' ' + clientHeight);
                         SwdPresenter.loadPosts(true);
                     }
-                    
+
                     FB.Canvas.setSize({
                         height: Math.max($('html').height(), clientHeight)
-                        //height: Math.max(clientHeight, 810)
+                                //height: Math.max(clientHeight, 810)
                     });
                 }
 
@@ -796,6 +799,10 @@ var SwdView = {
             // From: http://www.paulirish.com/2008/sequentially-chain-your-callbacks-in-jquery-two-ways/
             (function shownext(jq) {
                 jq.eq(0).fadeIn(60, function() {
+                    FB.Canvas.setSize({
+                        height: Math.max($('html').height(), SwdPresenter.clientHeight)
+                                //height: Math.max(clientHeight, 810)
+                    });
                     (jq = jq.slice(1)).length && shownext(jq);
                 });
             })($('div.post-tile'));
