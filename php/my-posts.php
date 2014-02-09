@@ -45,13 +45,13 @@ for ($i = 0; $i < $batchRunCount; $i++) {
         'value' => $windowEnd
     );
     
-    $batch[] = array('method' => 'fql.query', buildStreamQuery($sourceId, $constraints, $batchSize));
+    $batch[] = array('method' => 'GET', 'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($sourceId, $constraints, $batchSize)));
 
     $windowStart -= $windowSize;
     $windowEnd -= $windowSize;
 }
 
-$response = $fbSession->api('?batch='.json_encode($batch), 'POST');
+$response = $fbSession->api('/?batch=' . json_encode($batch), 'POST');
 
 echo json_encode($response);
 
