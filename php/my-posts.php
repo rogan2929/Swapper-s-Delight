@@ -45,7 +45,11 @@ for ($i = 0; $i < $batchRunCount; $i++) {
         'value' => $windowEnd
     );
     
-    $batch[] = buildStreamQuery($sourceId, $constraints, $batchSize);
+    //$batch[] = buildStreamQuery($sourceId, $constraints, $batchSize);
+    $batchItem = buildStreamQuery($sourceId, $constraints, $batchSize);
+    
+    echo json_encode($batchItem);
+    echo "<br/>";
 
     $windowStart -= $windowSize;
     $windowEnd -= $windowSize;
@@ -55,6 +59,6 @@ $params = array(
     'batch' => '[' . implode(',', $batch) . ']'
 );
 
-echo json_encode($params);
+echo $params;
 
 //echo json_encode($posts);
