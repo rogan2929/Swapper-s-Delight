@@ -23,8 +23,7 @@ $postDetails['user'] = $response[2]['fql_result_set'][0];
 $postDetails['comments'] = $response[1]['fql_result_set'];
 
 if ($postDetails['message']) {
-    //$postDetails['message'] = str_replace('\n', '<br/>', $postDetails['message']);
-    $postDetails['message'] = 'TEST';
+    $postDetails['message'] = str_replace("\n", "<br/>", $postDetails['message']);
 }
 
 $commentUserData = array();
