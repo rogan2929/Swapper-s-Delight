@@ -77,9 +77,9 @@ $params = array(
     'batch' => json_encode($queries)
 );
 
-echo json_encode($params);
+//echo json_encode($params);
 
-//$response = $fbSession->api('/', 'POST', $params);
+$response = $fbSession->api('/', 'POST', $params);
 
 //echo json_encode($response);
 
