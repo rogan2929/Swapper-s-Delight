@@ -46,7 +46,10 @@ for ($i = 0; $i < $batchRunCount; $i++) {
         'value' => $windowEnd
     );
     
-    $queries[] = array('method' => 'POST', 'relative_url' => '/method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints, $batchSize)));
+    $queries[] = array(
+        'method' => 'POST', 
+        'relative_url' => '/method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints, $batchSize))
+    );
     
     
     
@@ -58,14 +61,20 @@ for ($i = 0; $i < $batchRunCount; $i++) {
     $windowEnd -= $windowSize;
 }
 
-echo json_encode($queries);
+//echo json_encode($queries);
 
 //$queries = array(
 //    array('method' => 'GET', 'relative_url' => '/me'),
 //    array('method' => 'GET', 'relative_url' => '/me/groups'),
 //);
 
-$response = $fbSession->api('?batch=' . json_encode($queries), 'POST');
+$queries = array(
+    array('method' => 'POST', 'relative_url' => 'method/fql.query=' . json_encode(buildStreamQuery($gid, $constraints)))
+);
+
+echo json_encode($queries);
+
+//$response = $fbSession->api('?batch=' . json_encode($queries), 'POST');
 //$post_url = "https://graph.facebook.com/" . "?batch=" . json_encode($queries) . "&access_token=" . $fbSession->getAccessToken() . "&method=post";
 
 //curl -k -F 'access_token=' . $fbSession->getAccessToken() -F 'batch=' . json_encode($queries) https://graph.facebook.com
