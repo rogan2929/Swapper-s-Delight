@@ -58,7 +58,7 @@ for ($i = 0; $i < $batchRunCount; $i++) {
     $windowEnd -= $windowSize;
 }
 
-//echo json_encode($queries);
+echo json_encode($queries);
 
 //$queries = array(
 //    array('method' => 'GET', 'relative_url' => '/me'),
