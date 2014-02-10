@@ -245,13 +245,15 @@ var SwdPresenter = {
      * Starts the application after init has finished.
      */
     startApp: function() {
-        var i;
+        var i, selectedGroups;
 
         if (!SwdPresenter.groups) {
             // Retrieve group info for logged in user.
             SwdModel.getGroupInfo({
                 success: function(response) {
                     SwdPresenter.groups = response;
+                    
+                    selectedGroups = [];
 
                     // Find groups that have been marked as 'BST'
                     for (i = 0; i < SwdPresenter.groups.length; i++) {
