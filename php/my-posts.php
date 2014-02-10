@@ -61,11 +61,11 @@ $response = $fbSession->api('/', 'POST', array(
     'include_headers' => false
 ));
 
-//echo json_encode($response);
+$posts = array();
 
 for ($i = 0; $i < count($response); $i++) {
-    echo json_encode($response[$i]);
+    echo json_encode($response[$i]['body']);
     echo '<br/><br/>';
 }
 
-//echo json_encode($posts);
+echo json_encode($posts);
