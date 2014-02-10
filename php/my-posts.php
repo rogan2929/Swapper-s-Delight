@@ -57,7 +57,7 @@ for ($i = 0; $i < $batchRunCount; $i++) {
     
     $response = streamQuery($fbSession, $sourceId, $constraints, $batchSize);
     
-    echo count($response);
+    echo json_encode($constraints);
     echo '<br/>';
     
     //$posts = array_merge($posts, $response);
