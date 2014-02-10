@@ -26,6 +26,11 @@ $commentUserData = array();
 
 // For each comment, attach user data to it.
 for ($i = 0; $i < count($postDetails['comments']); $i++) {
+    // Replace any line breaks with <br/>
+    if ($postDetails['comments'][$i]['text']) {
+        $postDetails['comments'][$i]['text'] = str_replace('\n', '<br/>', $postDetails['comments'][$i]['text']);
+    }
+    
     for ($j = 0; $j < count($response[3]['fql_result_set']); $j++) {
         $userDataObject = $response[3]['fql_result_set'][$j];
 
