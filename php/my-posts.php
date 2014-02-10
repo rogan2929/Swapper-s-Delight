@@ -16,7 +16,7 @@ $windowSize = 3600 * 24;    // 1 Day
 $windowStart = time();
 $windowEnd = $windowStart - $windowSize;
 
-$batchSize = 500;
+$batchSize = 100;
 $batchRunCount = 30;
 
 // Create the constraints array.
@@ -69,7 +69,7 @@ for ($i = 0; $i < count($response); $i++) {
     //echo json_encode(processStreamQuery(json_decode($response[$i]['body'])));
     $result = json_decode($response[$i]['body']);
     
-    echo $result[0];
+    echo json_encode($result[0]);
     echo '<br/><br/>';
     
     //processStreamQuery($result);
