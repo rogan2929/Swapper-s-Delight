@@ -68,10 +68,10 @@ for ($i = 0; $i < $batchRunCount; $i++) {
 //    array('method' => 'GET', 'relative_url' => '/me/groups'),
 //);
 
-$queries = array(
-    array('method' => 'POST', 'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints))),
-    array('method' => 'POST', 'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints)))
-);
+//$queries = array(
+//    array('method' => 'POST', 'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints))),
+//    array('method' => 'POST', 'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints)))
+//);
 
 $params = array(
     'batch' => json_encode($queries)
@@ -79,8 +79,8 @@ $params = array(
 
 echo json_encode($params);
 
-$response = $fbSession->api('/', 'POST', $params);
+//$response = $fbSession->api('/', 'POST', $params);
 
-echo json_encode($response);
+//echo json_encode($response);
 
 //echo json_encode($posts);
