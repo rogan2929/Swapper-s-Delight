@@ -309,17 +309,21 @@ textarea {
 }
 
 #post-no-image {
-    height: 300px;
+    background-position: center center;
+/*    background-size: 50%;*/
+    background-repeat: no-repeat;
+    background-image: url("/img/no-image.png");
+    height: 350px;
 
 }
 
-#post-no-image > div {
+/*#post-no-image > div {
     background-position: center center;
     background-size: 50%;
     background-repeat: no-repeat;
     background-image: url("/img/no-image.png");
     height: 200px;
-}
+}*/
 
 #post-permalink {
     padding: 7px;
