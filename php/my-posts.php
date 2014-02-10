@@ -69,7 +69,8 @@ for ($i = 0; $i < count($response); $i++) {
     //echo json_encode(processStreamQuery(json_decode($response[$i]['body'])));
     $result = json_decode($response[$i]['body']);
     
-    echo json_encode($result);
+    echo json_encode($result[0]['fql_result_set']);
+    echo '<br/><br/>';
     
     //processStreamQuery($result);
 }
