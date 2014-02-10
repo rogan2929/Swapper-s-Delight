@@ -72,9 +72,13 @@ $queries = array(
     array('method' => 'POST', 'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints)))
 );
 
-echo json_encode($queries);
+$params = array(
+    'batch' => json_encode($queries)
+);
 
-$response = $fbSession->api('?batch=' . json_encode($queries), 'POST');
+echo json_encode($params);
+
+$response = $fbSession->api('/', 'POST', $params);
 
 echo json_encode($response);
 
