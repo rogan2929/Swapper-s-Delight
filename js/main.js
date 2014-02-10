@@ -33,15 +33,10 @@ var SwdModel = {
     /***
      * Get posts in the group that are liked.
      * @param {type} gid
-     * @param {type} updatedTime
      * @param {type} callbacks
      */
-    getLikedPosts: function(gid, updatedTime, callbacks) {
+    getLikedPosts: function(gid, callbacks) {
         var url = '/php/liked-posts.php?gid=' + gid;
-
-        if (updatedTime) {
-            url += '&updatedTime=' + updatedTime;
-        }
 
         $.ajax({
             type: 'GET',
@@ -73,15 +68,10 @@ var SwdModel = {
     /***
      * Get posts that are owned by the current user in the provided group. Go back 42 days.
      * @param {type} gid
-     * @param {type} updatedTime
      * @param {type} callbacks
      */
-    getMyPosts: function(gid, updatedTime, callbacks) {
+    getMyPosts: function(gid, callbacks) {
         var url = '/php/my-posts.php?gid=' + gid;
-
-        if (updatedTime) {
-            url += '&updatedTime=' + updatedTime;
-        }
 
         $.ajax({
             type: 'GET',
@@ -252,7 +242,7 @@ var SwdPresenter = {
             SwdModel.getGroupInfo({
                 success: function(response) {
                     SwdPresenter.groups = response;
-                    
+
                     selectedGroups = [];
 
                     // Find groups that have been marked as 'BST'
@@ -348,8 +338,8 @@ var SwdPresenter = {
     /***
      * Load posts liked by user.
      */
-    loadLikedPosts: function(loadNextPage, updatedTime) {
-        SwdModel.getLikedPosts(SwdPresenter.selectedGroup.gid, updatedTime, {
+    loadLikedPosts: function(loadNextPage) {
+        SwdModel.getLikedPosts(SwdPresenter.selectedGroup.gid, {
             success: function(response) {
                 SwdPresenter.loadPostsComplete(loadNextPage, response);
             },
@@ -361,8 +351,8 @@ var SwdPresenter = {
     /***
      * Load posts owned by user.
      */
-    loadMyPosts: function(loadNextPage, updatedTime) {
-        SwdModel.getMyPosts(SwdPresenter.selectedGroup.gid, updatedTime, {
+    loadMyPosts: function() {
+        SwdModel.getMyPosts(SwdPresenter.selectedGroup.gid, {
             success: function(response) {
                 SwdPresenter.loadPostsComplete(loadNextPage, response);
             },
@@ -416,10 +406,18 @@ var SwdPresenter = {
                 SwdPresenter.loadNewestPosts(loadNextPage, updatedTime);
                 break;
             case PostType.myposts:
-                SwdPresenter.loadMyPosts(loadNextPage, updatedTime);
+                if (!loadNextPage) {
+                    // This request is so intensive, that it's best to return everything at once, rather
+                    // than implement paging.
+                    SwdPresenter.loadMyPosts();
+                }
                 break;
             case PostType.liked:
-                SwdPresenter.loadLikedPosts(loadNextPage, updatedTime);
+                if (!loadNextPage) {
+                    // This request is so intensive, that it's best to return everything at once, rather
+                    // than implement paging.
+                    SwdPresenter.loadLikedPosts();
+                }
                 break;
             case PostType.search:
                 break;
@@ -621,9 +619,9 @@ var SwdView = {
      */
     addGroupsToMenu: function(groups) {
         var i = 0;
-        
+
         $('#menu-item-no-groups').hide();
-        
+
         for (i = 0; i < groups.length; i++) {
             $('#popup-menu-groups').append('<li id="' + groups[i].gid + '" class="menu-item-group"><a href="#"><span class="ui-icon" style="background-image: url(' + groups[i].icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + groups[i].name + '</div></a></li>');
         }

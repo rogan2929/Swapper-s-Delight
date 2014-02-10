@@ -26,8 +26,6 @@ $actorConstraint = array(
     'value' => $uid
 );
 
-//$batch = array();
-
 $posts = array();
 
 $queries = array();
@@ -48,9 +46,11 @@ for ($i = 0; $i < $batchRunCount; $i++) {
         'value' => $windowEnd
     );
     
-    $response = streamQuery($fbSession, $gid, $constraints, $batchSize);
     
-    $posts = array_merge($posts, $response);
+    
+    //$response = streamQuery($fbSession, $gid, $constraints, $batchSize);
+    
+    //$posts = array_merge($posts, $response);
 
     $windowStart -= $windowSize;
     $windowEnd -= $windowSize;
