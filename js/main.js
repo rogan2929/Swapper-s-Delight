@@ -245,50 +245,50 @@ var SwdPresenter = {
      * Starts the application after init has finished.
      */
     startApp: function() {
-        var i, selectedGroups;
+        var i;
 
-        // Retrieve group info for logged in user.
-        SwdModel.getGroupInfo({
-            success: function(response) {
-                SwdPresenter.groups = response;
+        if (!SwdPresenter.groups) {
+            // Retrieve group info for logged in user.
+            SwdModel.getGroupInfo({
+                success: function(response) {
+                    SwdPresenter.groups = response;
 
-                selectedGroups = [];
-
-                // Find groups that have been marked as 'BST'
-                for (i = 0; i < SwdPresenter.groups.length; i++) {
-                    if (SwdPresenter.groups[i].marked) {
-                        selectedGroups.push(SwdPresenter.groups[i]);
+                    // Find groups that have been marked as 'BST'
+                    for (i = 0; i < SwdPresenter.groups.length; i++) {
+                        if (SwdPresenter.groups[i].marked) {
+                            selectedGroups.push(SwdPresenter.groups[i]);
+                        }
                     }
-                }
 
-                if (SwdPresenter.groups) {
-                    SwdPresenter.setSelectedGroup(selectedGroups[0]);
-                    SwdView.addGroupsToMenu(selectedGroups);
-                    $('#popup-menu-groups').menu();
-                    // Install Event Handlers
-                    SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
-                    SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
-                    SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
-                    SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
-                    SwdView.installHandler('onClickMenuItemGroup', SwdPresenter.onClickMenuItemGroup, '.menu-item-group', 'click');
-                    SwdView.installHandler('onClickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item-main', 'click');
-                    SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.button-nav', 'click');
-                    SwdView.installHandler('onClickPostButtonComment', SwdPresenter.onClickPostButtonComment, '#post-button-comment', 'click');
-                    SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
-                    SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
-                    SwdView.installHandler('onClickPanelMessageUser', SwdPresenter.onClickPanelMessageUser, '#post-message-user', 'click');
-                    SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
-                    SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
-                    SwdView.positionMenus();
+                    if (SwdPresenter.groups) {
+                        SwdPresenter.setSelectedGroup(selectedGroups[0]);
+                        SwdView.addGroupsToMenu(selectedGroups);
+                        $('#popup-menu-groups').menu();
+                        // Install Event Handlers
+                        SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
+                        SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
+                        SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
+                        SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
+                        SwdView.installHandler('onClickMenuItemGroup', SwdPresenter.onClickMenuItemGroup, '.menu-item-group', 'click');
+                        SwdView.installHandler('onClickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item-main', 'click');
+                        SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.button-nav', 'click');
+                        SwdView.installHandler('onClickPostButtonComment', SwdPresenter.onClickPostButtonComment, '#post-button-comment', 'click');
+                        SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
+                        SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
+                        SwdView.installHandler('onClickPanelMessageUser', SwdPresenter.onClickPanelMessageUser, '#post-message-user', 'click');
+                        SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
+                        SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
+                        SwdView.positionMenus();
+                    }
+                    else {
+                        // Have the view prompt the user to edit BST groups.
+                    }
+                },
+                fail: function(response) {
+                    SwdView.showError(response);
                 }
-                else {
-                    // Have the view prompt the user to edit BST groups.
-                }
-            },
-            fail: function(response) {
-                SwdView.showError(response);
-            }
-        });
+            });
+        }
     },
     /***
      * Periodically call FB.Canvas.getPageInfo in order to dynmically update the UI within the canvas
