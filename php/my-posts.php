@@ -6,7 +6,8 @@ require_once 'queries.php';
 $gid = $_GET['gid'];
 //$updatedTime = $_GET['updatedTime'];
 // Get FB user id.
-$uid = $fbSession->getUser();
+//$uid = $fbSession->getUser();
+$uid = '1332932817';
 
 // Allow everything younger than one month.
 //$oldestAllowed = strtotime('-1 month');
