@@ -66,7 +66,7 @@ $posts = array();
 // Sift through the results.
 for ($i = 0; $i < count($response); $i++) {
     //$posts = array_merge($posts, processStreamQuery($response[$i]['body']));
-    echo json_encode($response[$i]['body']);
+    echo json_encode(processStreamQuery($response[$i]['body']));
     echo '<br/><br/>';
 }
 
