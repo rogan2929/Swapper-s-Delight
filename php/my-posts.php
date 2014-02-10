@@ -53,12 +53,12 @@ for ($i = 0; $i < $batchRunCount; $i++) {
     
     //$batch[] = array('method' => 'GET', 'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($sourceId, $constraints, $batchSize)));
     //$queries[] = buildStreamQuery($sourceId, $constraints, $batchSize);
-    $query = buildStreamQuery($gid, $constraints, $batchSize);
+    //$query = buildStreamQuery($gid, $constraints, $batchSize);
     
-    //$response = streamQuery($fbSession, $sourceId, $constraints, $batchSize);
+    $response = streamQuery($fbSession, $gid, $constraints, $batchSize);
     
     //echo json_encode($constraints);
-    echo json_encode($query);
+    echo json_encode($response);
     echo '<br/>';
     
     //$posts = array_merge($posts, $response);

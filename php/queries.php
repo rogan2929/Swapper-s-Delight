@@ -35,8 +35,6 @@ function streamQuery($fbSession, $sourceId, $constraints, $limit = 20) {
         'method' => 'fql.multiquery',
         'queries' => $queries
     ));
-    
-    echo json_encode($response);
 
     return processStreamQuery($response);
 }
