@@ -69,6 +69,7 @@ for ($i = 0; $i < $batchRunCount; $i++) {
 //);
 
 $queries = array(
+    array('method' => 'POST', 'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints))),
     array('method' => 'POST', 'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints)))
 );
 
