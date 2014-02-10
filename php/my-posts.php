@@ -69,7 +69,7 @@ for ($i = 0; $i < count($response); $i++) {
     //echo json_encode(processStreamQuery(json_decode($response[$i]['body'])));
     $result = json_decode($response[$i]['body']);
     
-    echo json_encode($result[0]);
+    echo json_encode($result[1]);
     echo '<br/><br/>';
     
     //processStreamQuery($result);
