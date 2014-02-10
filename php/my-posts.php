@@ -55,9 +55,9 @@ for ($i = 0; $i < $batchRunCount; $i++) {
     //$queries[] = buildStreamQuery($sourceId, $constraints, $batchSize);
     //$query = buildStreamQuery($sourceId, $constraints, $batchSize);
     
-    $response = streamQuery($fbSession, $sourceId, $constraints, $batchSize);
+    //$response = streamQuery($fbSession, $sourceId, $constraints, $batchSize);
     
-    $posts = array_merge($posts, $response);
+    //$posts = array_merge($posts, $response);
 
     $windowStart -= $windowSize;
     $windowEnd -= $windowSize;
