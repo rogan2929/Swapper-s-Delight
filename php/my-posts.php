@@ -72,15 +72,10 @@ $queries = array(
     array('method' => 'POST', 'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints)))
 );
 
-//echo json_encode($queries);
+echo json_encode($queries);
 
 $response = $fbSession->api('?batch=' . json_encode($queries), 'POST');
-//$post_url = "https://graph.facebook.com/" . "?batch=" . json_encode($queries) . "&access_token=" . $fbSession->getAccessToken() . "&method=post";
-
-//curl -k -F 'access_token=' . $fbSession->getAccessToken() -F 'batch=' . json_encode($queries) https://graph.facebook.com
 
 echo json_encode($response);
-
-//echo json_encode($response);
 
 //echo json_encode($posts);
