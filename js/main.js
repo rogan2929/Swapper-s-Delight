@@ -328,8 +328,8 @@ var SwdPresenter = {
 
                     scrollPos = $('#app-content').height() - clientHeight;
 
-                    // Detect scroll at bottom
-                    if (scrollTop >= scrollPos * 0.75 && scrollPos * 0.75 >= 0) {
+                    // Detect scroll at bottom 15% of page.
+                    if (scrollTop >= scrollPos * 0.85 && scrollPos * 0.85 >= 0) {
                         //alert(scrollTop + ' ' + $('#app-content').height() + ' ' + clientHeight);
                         SwdPresenter.loadPosts(true);
                     }
