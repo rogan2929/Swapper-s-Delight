@@ -60,7 +60,7 @@ for ($i = 0; $i < $batchRunCount; $i++) {
 
 //echo json_encode($queries);
 
-$response = $fbSession->api('/?batch=' . json_encode($queries), 'POST');
+$response = $fbSession->api('?batch=' . json_encode($queries), 'POST');
 //$post_url = "https://graph.facebook.com/" . "?batch=" . json_encode($queries) . "&access_token=" . $fbSession->getAccessToken() . "&method=post";
 
 //curl -k -F 'access_token=' . $fbSession->getAccessToken() -F 'batch=' . json_encode($queries) https://graph.facebook.com
