@@ -81,6 +81,6 @@ $params = array(
 
 $response = $fbSession->api('/', 'POST', $params);
 
-//echo json_encode($response);
+echo json_encode($response);
 
 //echo json_encode($posts);
