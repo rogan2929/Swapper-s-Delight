@@ -49,7 +49,7 @@ function processStreamQuery($response) {
     $stream = $response[0]['fql_result_set'];
     $images = $response[1]['fql_result_set'];
     
-    echo json_encode($stream);
+    echo json_encode($response);
 
     for ($i = 0; $i < count($stream); $i++) {
         $post = $stream[$i];
