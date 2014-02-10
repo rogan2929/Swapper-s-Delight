@@ -65,7 +65,7 @@ $response = $fbSession->api('/?batch=' . json_encode($queries), 'POST');
 
 //curl -k -F 'access_token=' . $fbSession->getAccessToken() -F 'batch=' . json_encode($queries) https://graph.facebook.com
 
-echo $post_url;
+echo json_encode($response);
 
 //echo json_encode($response);
 
