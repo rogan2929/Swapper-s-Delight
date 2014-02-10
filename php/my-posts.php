@@ -63,9 +63,9 @@ $response = $fbSession->api('/', 'POST', array(
 
 $posts = array();
 
+// Sift through the results.
 for ($i = 0; $i < count($response); $i++) {
-    echo json_encode($response[$i]['body']);
-    echo '<br/><br/>';
+    $posts = array_merge($posts, processStreamQuery($response[$i]['body']));
 }
 
 echo json_encode($posts);
