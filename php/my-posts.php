@@ -60,7 +60,7 @@ for ($i = 0; $i < $batchRunCount; $i++) {
 
 //echo json_encode($queries);
 
-$response = $fbSession->api('?batch', json_encode($queries), 'POST');
+$response = $fbSession->api('/?batch', json_encode($queries), 'POST');
 
 echo json_encode($response);
 
