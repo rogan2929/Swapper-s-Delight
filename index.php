@@ -124,6 +124,9 @@
             <!--Menus-->
 
             <ul id='popup-menu-groups' class='menu'>
+                <li id='menu-item-no-groups' class='menu-item-group'>
+                    <a href='#'><span class='ui-icon ui-icon-check'></span>You're not a member of any Facebook groups.</a>
+                </li>
 <!--                <li id='menu-item-choose-groups' class='menu-item-group'>
                     <a href='#'><span class='ui-icon ui-icon-check'></span>Edit Groups...</a>
                 </li>-->
