@@ -48,7 +48,7 @@ for ($i = 0; $i < $batchRunCount; $i++) {
     
     $queries[] = array(
         'method' => 'POST', 
-        'relative_url' => '/method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints, $batchSize))
+        'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints, $batchSize))
     );
     
     
