@@ -50,36 +50,16 @@ for ($i = 0; $i < $batchRunCount; $i++) {
         'method' => 'POST', 
         'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints, $batchSize))
     );
-    
-    
-    
-    //$response = streamQuery($fbSession, $gid, $constraints, $batchSize);
-    
-    //$posts = array_merge($posts, $response);
 
     $windowStart -= $windowSize;
     $windowEnd -= $windowSize;
 }
 
-//echo json_encode($queries);
-
-//$queries = array(
-//    array('method' => 'GET', 'relative_url' => '/me'),
-//    array('method' => 'GET', 'relative_url' => '/me/groups'),
-//);
-
-//$queries = array(
-//    array('method' => 'POST', 'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints))),
-//    array('method' => 'POST', 'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints)))
-//);
-
-$params = array(
-    'batch' => json_encode($queries)
-);
-
-//echo json_encode($params);
-
-$response = $fbSession->api('/', 'POST', $params);
+// Call the batch query.
+$response = $fbSession->api('/', 'POST', array(
+    'batch' => json_encode($queries),
+    'include_headers' => false
+));
 
 echo json_encode($response);
 
