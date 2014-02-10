@@ -928,7 +928,7 @@ var SwdView = {
         $('#post-message-pic').css('background-image', userImage);
         $('#post-message-name').text(post.user.first_name + ' ' + post.user.last_name);
         $('#post-message-user').data('src', post.user.profile_url);
-        $('#post-message-text').text(post.message);
+        $('#post-message-text').html(post.message);
         $('#post-comment-list').empty();
         $('#post-nocomments').show();
 
