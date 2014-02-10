@@ -16,7 +16,7 @@ $windowSize = 3600 * 24;    // 1 Day
 $windowStart = time();
 $windowEnd = $windowStart - $windowSize;
 
-$batchSize = 100;
+$batchSize = 500;
 $batchRunCount = 30;
 
 // Create the constraints array.
@@ -52,13 +52,18 @@ for ($i = 0; $i < $batchRunCount; $i++) {
     //echo '<br/>';
     
     //$batch[] = array('method' => 'GET', 'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($sourceId, $constraints, $batchSize)));
-    $queries[] = buildStreamQuery($sourceId, $constraints, $batchSize);
+    //$queries[] = buildStreamQuery($sourceId, $constraints, $batchSize);
+    //$query = buildStreamQuery($sourceId, $constraints, $batchSize);
+    
+    $response = streamQuery($fbSession, $sourceId, $constraints, $batchSize);
+    
+    $posts = array_merge($posts, $response);
 
     $windowStart -= $windowSize;
     $windowEnd -= $windowSize;
 }
 
-echo json_encode($queries);
+echo json_encode($posts);
 
 //$response = $fbSession->api('/?batch=' . json_encode($batch), 'POST');
 
