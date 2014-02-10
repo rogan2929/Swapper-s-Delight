@@ -46,6 +46,8 @@ for ($i = 0; $i < $batchRunCount; $i++) {
         'value' => $windowEnd
     );
     
+    $queries[] = array('method' => 'POST', 'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints, $batchSize)));
+    
     
     
     //$response = streamQuery($fbSession, $gid, $constraints, $batchSize);
@@ -56,4 +58,6 @@ for ($i = 0; $i < $batchRunCount; $i++) {
     $windowEnd -= $windowSize;
 }
 
-echo json_encode($posts);
+echo json_encode($queries);
+
+//echo json_encode($posts);
