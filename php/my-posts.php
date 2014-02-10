@@ -55,7 +55,10 @@ for ($i = 0; $i < $batchRunCount; $i++) {
     //$queries[] = buildStreamQuery($sourceId, $constraints, $batchSize);
     //$query = buildStreamQuery($sourceId, $constraints, $batchSize);
     
-    //$response = streamQuery($fbSession, $sourceId, $constraints, $batchSize);
+    $response = streamQuery($fbSession, $sourceId, $constraints, $batchSize);
+    
+    echo count($response);
+    echo '<br/>';
     
     //$posts = array_merge($posts, $response);
 
