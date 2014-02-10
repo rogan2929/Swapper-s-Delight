@@ -4,7 +4,7 @@ require_once 'session.php';
 require_once 'queries.php';
 
 $gid = $_GET['gid'];
-//$updatedTime = $_GET['updatedTime'];
+
 // Get FB user id.
 //$uid = $fbSession->getUser();
 $uid = '1332932817';
@@ -53,7 +53,7 @@ for ($i = 0; $i < $batchRunCount; $i++) {
     
     //$batch[] = array('method' => 'GET', 'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($sourceId, $constraints, $batchSize)));
     //$queries[] = buildStreamQuery($sourceId, $constraints, $batchSize);
-    $query = buildStreamQuery($sourceId, $constraints, $batchSize);
+    $query = buildStreamQuery($gid, $constraints, $batchSize);
     
     //$response = streamQuery($fbSession, $sourceId, $constraints, $batchSize);
     
