@@ -61,6 +61,8 @@ $response = $fbSession->api('/', 'POST', array(
 
 $posts = array();
 
+echo $response;
+
 // Sift through the results.
 for ($i = 0; $i < count($response); $i++) {
     $result = json_decode($response[$i]['body'], true);
