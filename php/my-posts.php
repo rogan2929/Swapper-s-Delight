@@ -16,7 +16,7 @@ $windowSize = 3600 * 24;    // 1 Day
 $windowStart = time();
 $windowEnd = $windowStart - $windowSize;
 
-$batchSize = 500;
+$batchSize = 100;
 $batchRunCount = 30;
 
 // Create the constraints array.
