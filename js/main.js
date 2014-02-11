@@ -341,7 +341,7 @@ var SwdPresenter = {
     loadLikedPosts: function() {
         SwdModel.getLikedPosts(SwdPresenter.selectedGroup.gid, {
             success: function(response) {
-                SwdPresenter.loadPostsComplete(response);
+                SwdPresenter.loadPostsComplete(null, response);
             },
             fail: function(response) {
                 SwdView.showError(response);
@@ -354,7 +354,7 @@ var SwdPresenter = {
     loadMyPosts: function() {
         SwdModel.getMyPosts(SwdPresenter.selectedGroup.gid, {
             success: function(response) {
-                SwdPresenter.loadPostsComplete(response);
+                SwdPresenter.loadPostsComplete(null, response);
             },
             fail: function(response) {
                 SwdView.showError(response);
