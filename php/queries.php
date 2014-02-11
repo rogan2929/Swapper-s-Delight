@@ -46,15 +46,12 @@ function streamQuery($fbSession, $sourceId, $constraints, $limit = 20) {
 function processStreamQuery($stream, $images) {
     $posts = array();
     
-    echo json_encode($stream);
-    echo json_encode($images);
-    
-//    for ($i = 0; $i < count($stream); $i++) {
-//        $post = $stream[$i];
-//
-//        $post['image_url'] = null;
-//
-//        // For posts with an image, look for associate image data.
+    for ($i = 0; $i < count($stream); $i++) {
+        $post = $stream[$i];
+
+        $post['image_url'] = null;
+
+        // For posts with an image, look for associate image data.
 //        if ($post['attachment'] && $post['attachment']['media'] && $post['attachment']['media'][0] && $post['attachment']['media'][0]['photo']) {
 //            for ($j = 0; $j < count($images); $j++) {
 //                if ($post['attachment']['media'][0]['photo']['fbid'] == $images[$j]['object_id']) {
@@ -64,14 +61,14 @@ function processStreamQuery($stream, $images) {
 //                }
 //            }
 //        }
-//        
-//        // Replace any line breaks with <br/>
-//        if ($post['message']) {
-//            $post['message'] = str_replace('\n', '<br/>', $post['message']);
-//        }
-//
-//        // Add to the posts array.
-//        $posts[] = $post;
-//    }
+        
+        // Replace any line breaks with <br/>
+        if ($post['message']) {
+            $post['message'] = str_replace('\n', '<br/>', $post['message']);
+        }
+
+        // Add to the posts array.
+        $posts[] = $post;
+    }
     return $posts;
 }
