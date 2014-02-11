@@ -53,7 +53,7 @@ for ($i = 0; $i < $batchRunCount; $i++) {
     $windowEnd -= $windowSize;
 }
 
-echo json_encode($queries);
+//echo json_encode($queries);
 
 // Call the batch query.
 $response = $fbSession->api('/', 'POST', array(
