@@ -72,7 +72,8 @@ try {
         //var_dump($result);
         //echo '<br/><br/>';
 
-        echo json_encode(processStreamQuery($result));
+        //echo json_encode(processStreamQuery($result));
+        echo json_encode($result);
         echo '<br/><br/>';
     }
 } catch (Exception $ex) {
