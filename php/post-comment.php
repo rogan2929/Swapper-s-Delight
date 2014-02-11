@@ -14,7 +14,7 @@ $queries = array(
     'commentUserQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url FROM user WHERE uid IN (SELECT fromid FROM #commentQuery)'
 );
 
-echo $id;
+echo json_encode($id);
 
 // Query Facebook's servers for the necessary data.
 //$response = $fbSession->api(array(
