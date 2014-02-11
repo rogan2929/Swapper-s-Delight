@@ -395,13 +395,16 @@ var SwdPresenter = {
 
         if (loadNextPage) {
             if (SwdPresenter.oldestPost) {
+                alert('a');
                 updatedTime = SwdPresenter.oldestPost.updated_time;
             }
             else {
+                alert('b');
                 updatedTime = null;
             }
         }
         else {
+            alert('c');
             updatedTime = null;
             SwdView.clearPosts();
             SwdPresenter.resetFbCanvasSize();
@@ -410,7 +413,6 @@ var SwdPresenter = {
 
         switch (SwdPresenter.postType) {
             case PostType.group:
-                alert(updatedTime);
                 SwdPresenter.loadNewestPosts(loadNextPage, updatedTime);
                 break;
             case PostType.myposts:
