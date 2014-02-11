@@ -14,13 +14,15 @@ $queries = array(
     'commentUserQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url FROM user WHERE uid IN (SELECT fromid FROM #commentQuery)'
 );
 
-// Query Facebook's servers for the necessary data.
-$response = $fbSession->api(array(
-    'method' => 'fql.multiquery',
-    'queries' => $queries
-        ));
+echo $id;
 
-echo json_encode($response);
+// Query Facebook's servers for the necessary data.
+//$response = $fbSession->api(array(
+//    'method' => 'fql.multiquery',
+//    'queries' => $queries
+//        ));
+//
+//echo json_encode($response);
 
 // Construct a return object.
 //$newComment = $response[0]['fql_result_set'][0];
