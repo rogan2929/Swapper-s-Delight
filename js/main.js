@@ -200,9 +200,11 @@ var SwdPresenter = {
      */
     init: function() {
         SwdView.initView();
+        
         $.ajaxSetup({
             cache: true
         });
+        
         // Fetch the FB JS API
         $.getScript('//connect.facebook.net/en_US/all.js', function() {
             FB.init({
@@ -210,6 +212,7 @@ var SwdPresenter = {
                 cookie: true,
                 status: true
             });
+            
             $('#loginbutton,#feedbutton').removeAttr('disabled');
 
             FB.Event.subscribe('auth.authResponseChange', function(response) {
