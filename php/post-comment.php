@@ -8,12 +8,10 @@ $comment = $_POST['comment'];
 // Post the comment and get the response
 $id = $fbSession->api('/' . $postId . '/comments', 'POST', array('message' => $comment));
 
-$uid = $fbSession->GetUser();
-
 // Get the comment and associated user data...
 $queries = array(
-    'commentsQuery' => 'SELECT fromid,text,text_tags,attachment,time FROM comment WHERE post_id="' . $id . '"',
-    'commentUserQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url FROM user WHERE uid=' . $uid
+    'commentsQuery' => 'SELECT fromid,text,text_tags,attachment,time FROM comment WHERE post_id="' . $postId . '" AND id=' . $id,
+    'commentUserQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url FROM user WHERE uid IN (SELECT fromid FROM #commentsQuery)'
 );
 
 // Query Facebook's servers for the necessary data.
