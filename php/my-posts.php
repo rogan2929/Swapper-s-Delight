@@ -16,7 +16,7 @@ $windowSize = 3600 * 24;    // 1 Day
 $windowStart = time();
 $windowEnd = $windowStart - $windowSize;
 
-$batchSize = 100;
+$batchSize = 500;
 $batchRunCount = 30;
 
 // Create the constraints array.
@@ -25,8 +25,6 @@ $actorConstraint = array(
     'operator' => '=',
     'value' => $uid
 );
-
-$posts = array();
 
 $queries = array();
 
@@ -70,10 +68,11 @@ for ($i = 0; $i < count($response); $i++) {
     $result = json_decode($response[$i]['body']);
     
     //echo json_encode($result[1]);
-    var_dump($result);
-    echo '<br/><br/>';
+    //var_dump($result);
+    //echo '<br/><br/>';
     
-    //processStreamQuery($result);
+    echo json_encode(processStreamQuery($result));
+    echo '<br/><br/>';
 }
 
 //echo json_encode($posts);
