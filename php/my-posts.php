@@ -9,7 +9,6 @@ $gid = $_GET['gid'];
 $uid = $fbSession->getUser();
 //$uid = '673133235';
 //$uid = '1332932817';
-
 // Allow everything younger than one month.
 //$oldestAllowed = strtotime('-1 month');
 // Define the initial window to search within.
@@ -55,16 +54,20 @@ for ($i = 0; $i < $batchRunCount; $i++) {
 }
 
 // Call the batch query.
-$response = $fbSession->api('/', 'POST', array(
-    'batch' => json_encode($queries),
-    'include_headers' => false
-        ));
+try {
+    $response = $fbSession->api('/', 'POST', array(
+        'batch' => json_encode($queries),
+        'include_headers' => false
+    ));
+} catch (Exception $ex) {
+    echo $ex->getMessage();
+}
 
 $posts = array();
 
 // Sift through the results.
 for ($i = 0; $i < count($response); $i++) {
-    $result = json_decode($response[$i]['body'], true);    
+    $result = json_decode($response[$i]['body'], true);
     $posts = array_merge($posts, processStreamQuery($result[0]['fql_result_set'], $result[1]['fql_result_set']));
 }
 
