@@ -410,6 +410,7 @@ var SwdPresenter = {
 
         switch (SwdPresenter.postType) {
             case PostType.group:
+                alert(updatedTime);
                 SwdPresenter.loadNewestPosts(loadNextPage, updatedTime);
                 break;
             case PostType.myposts:
