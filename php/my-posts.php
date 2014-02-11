@@ -61,23 +61,23 @@ $response = $fbSession->api('/', 'POST', array(
 
 $posts = array();
 
-// Sift through the results.
-for ($i = 0; $i < count($response); $i++) {
-    //$posts = array_merge($posts, processStreamQuery($response[$i]['body']));
-    //echo json_encode(processStreamQuery(json_decode($response[$i]['body'])));
-    $result = json_decode($response[$i]['body']);
+try {
+    // Sift through the results.
+    for ($i = 0; $i < count($response); $i++) {
+        //$posts = array_merge($posts, processStreamQuery($response[$i]['body']));
+        //echo json_encode(processStreamQuery(json_decode($response[$i]['body'])));
+        $result = json_decode($response[$i]['body']);
 
-    //echo json_encode($result[1]);
-    //var_dump($result);
-    //echo '<br/><br/>';
+        //echo json_encode($result[1]);
+        //var_dump($result);
+        //echo '<br/><br/>';
 
-    try {
         echo json_encode(processStreamQuery($result));
         echo '<br/><br/>';
-    } catch (Exception $ex) {
-        echo $ex->getMessage();
-        echo '<br/><br/>';
     }
+} catch (Exception $ex) {
+    echo $ex->getMessage();
 }
+
 
 //echo json_encode($posts);
