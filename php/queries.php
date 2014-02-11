@@ -36,18 +36,15 @@ function streamQuery($fbSession, $sourceId, $constraints, $limit = 20) {
         'queries' => $queries
     ));
 
-    return processStreamQuery($response);
+    return processStreamQuery($response[0]['fql_result_set'], $response[1]['fql_result_set']);
 }
 
 /* * *
  * Take a response and construct post objects out of it.
  */
 
-function processStreamQuery($response) {
+function processStreamQuery($stream, $images) {
     $posts = array();
-
-    $stream = $response[0]['fql_result_set'];
-    $images = $response[1]['fql_result_set'];
 
     for ($i = 0; $i < count($stream); $i++) {
         $post = $stream[$i];
