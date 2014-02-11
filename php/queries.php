@@ -70,5 +70,6 @@ function processStreamQuery($stream, $images) {
         // Add to the posts array.
         $posts[] = $post;
     }
+    
     return $posts;
 }
