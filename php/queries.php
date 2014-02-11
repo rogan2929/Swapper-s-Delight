@@ -48,27 +48,24 @@ function processStreamQuery($stream, $images) {
     
     for ($i = 0; $i < count($stream); $i++) {
         $post = $stream[$i];
-        
-        echo var_dump($post);
-        echo '<br/><br/>';
 
-//        $post['image_url'] = null;
-//
-//        // For posts with an image, look for associate image data.
-//        if ($post['attachment'] && $post['attachment']['media'] && $post['attachment']['media'][0] && $post['attachment']['media'][0]['photo']) {
-//            for ($j = 0; $j < count($images); $j++) {
-//                if ($post['attachment']['media'][0]['photo']['fbid'] == $images[$j]['object_id']) {
-//                    $post['image_url'][] = $images[$j]['images'][0]['source'];
-//                    $post['image_url'][] = $images[$j]['images'][0]['source'];
-//                    break;
-//                }
-//            }
-//        }
-//        
-//        // Replace any line breaks with <br/>
-//        if ($post['message']) {
-//            $post['message'] = str_replace('\n', '<br/>', $post['message']);
-//        }
+        $post['image_url'] = null;
+
+        // For posts with an image, look for associate image data.
+        if ($post['attachment'] && $post['attachment']['media'] && $post['attachment']['media'][0] && $post['attachment']['media'][0]['photo']) {
+            for ($j = 0; $j < count($images); $j++) {
+                if ($post['attachment']['media'][0]['photo']['fbid'] == $images[$j]['object_id']) {
+                    $post['image_url'][] = $images[$j]['images'][0]['source'];
+                    $post['image_url'][] = $images[$j]['images'][0]['source'];
+                    break;
+                }
+            }
+        }
+        
+        // Replace any line breaks with <br/>
+        if ($post['message']) {
+            $post['message'] = str_replace('\n', '<br/>', $post['message']);
+        }
 
         // Add to the posts array.
         $posts[] = $post;
