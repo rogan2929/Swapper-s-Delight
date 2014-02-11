@@ -6,7 +6,7 @@ $postId = $_POST['postId'];
 $comment = $_POST['comment'];
 
 // Post the comment and get the response
-$id = $fbSession->api('/' . $postId, 'POST', array('message' => $comment));
+$id = $fbSession->api('/' . $postId . '/comments', 'POST', array('message' => $comment));
 
 echo $id;
 
