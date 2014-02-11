@@ -20,8 +20,6 @@ $response = $fbSession->api(array(
     'queries' => $queries
         ));
 
-echo json_encode($response);
-
 // Construct a return object.
 $newComment = $response[0]['fql_result_set'][0];
 $newComment['user'] = $response[1]['fql_result_set'][0];
