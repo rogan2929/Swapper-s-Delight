@@ -65,9 +65,9 @@ $posts = array();
 for ($i = 0; $i < count($response); $i++) {
     $result = json_decode($response[$i]['body']);
     //$posts = array_merge($posts, json_encode(processStreamQuery($result[0]->fql_result_set, $result[1]->fql_result_set)));
-    echo json_encode(processStreamQuery($result[0]->fql_result_set, $result[1]->fql_result_set));
-    //echo json_encode($result[0]->fql_result_set);
-    //echo json_encode($result[1]->fql_result_set);
+    //echo json_encode(processStreamQuery($result[0]->fql_result_set, $result[1]->fql_result_set));
+    echo json_encode($result[0]->fql_result_set);
+    echo json_encode($result[1]->fql_result_set);
     //echo '<br/><br/>';
 }
 
