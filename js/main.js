@@ -67,11 +67,12 @@ var SwdModel = {
     },
     /***
      * Get posts that are owned by the current user in the provided group. Go back 42 days.
+     * @param {type} uid
      * @param {type} gid
      * @param {type} callbacks
      */
-    getMyPosts: function(gid, callbacks) {
-        var url = '/php/my-posts.php?gid=' + gid;
+    getMyPosts: function(uid, gid, callbacks) {
+        var url = '/php/my-posts.php?gid=' + gid + '&uid=' + uid;
 
         $.ajax({
             type: 'GET',
@@ -192,6 +193,7 @@ var SwdPresenter = {
     groups: null,
     prevOffset: null,
     clientHeight: null,
+    uid: null,
     /**
      * Entry point of program.
      */
@@ -210,6 +212,7 @@ var SwdPresenter = {
             $('#loginbutton,#feedbutton').removeAttr('disabled');
 
             FB.Event.subscribe('auth.authResponseChange', function(response) {
+                SwdPresenter.uid = response.authResponse.userID;
                 SwdPresenter.startApp();
             });
 
@@ -352,7 +355,7 @@ var SwdPresenter = {
      * Load posts owned by user.
      */
     loadMyPosts: function() {
-        SwdModel.getMyPosts(SwdPresenter.selectedGroup.gid, {
+        SwdModel.getMyPosts(SwdPresenter.uid, SwdPresenter.selectedGroup.gid, {
             success: function(response) {
                 SwdPresenter.loadPostsComplete(null, response);
             },
