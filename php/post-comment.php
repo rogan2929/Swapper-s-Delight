@@ -10,22 +10,20 @@ $id = $fbSession->api('/' . $postId . '/comments', 'POST', array('message' => $c
 
 // Get the comment and associated user data...
 $queries = array(
-    'commentQuery' => 'SELECT fromid,text,text_tags,attachment,time FROM comment WHERE id=' . $id,
+    'commentQuery' => 'SELECT fromid,text,text_tags,attachment,time FROM comment WHERE id=' . $id['id'],
     'commentUserQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url FROM user WHERE uid IN (SELECT fromid FROM #commentQuery)'
 );
 
-echo json_encode($id);
-
 // Query Facebook's servers for the necessary data.
-//$response = $fbSession->api(array(
-//    'method' => 'fql.multiquery',
-//    'queries' => $queries
-//        ));
-//
-//echo json_encode($response);
+$response = $fbSession->api(array(
+    'method' => 'fql.multiquery',
+    'queries' => $queries
+        ));
+
+echo json_encode($response);
 
 // Construct a return object.
-//$newComment = $response[0]['fql_result_set'][0];
-//$newComment['user'] = $response[1]['fql_result_set'][0];
-//
-//echo json_encode($newComment);
+$newComment = $response[0]['fql_result_set'][0];
+$newComment['user'] = $response[1]['fql_result_set'][0];
+
+echo json_encode($newComment);
