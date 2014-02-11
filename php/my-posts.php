@@ -16,7 +16,7 @@ $windowSize = 3600 * 24;    // 1 Day
 $windowStart = time();
 $windowEnd = $windowStart - $windowSize;
 
-$batchSize = 100;
+$batchSize = 500;
 $batchRunCount = 30;
 
 // Create the constraints array.
@@ -64,11 +64,7 @@ $posts = array();
 // Sift through the results.
 for ($i = 0; $i < count($response); $i++) {
     $result = json_decode($response[$i]['body'], true);
-    //$posts = array_merge($posts, json_encode(processStreamQuery($result[0]['fql_result_set'], $result[1]['fql_result_set'])));
     $posts = array_merge($posts, processStreamQuery($result[0]['fql_result_set'], $result[1]['fql_result_set']));
-    
-    //echo json_encode($result[0]['fql_result_set']);
-    //echo json_encode($result[1]['fql_result_set']);
 }
 
 echo json_encode($posts);
