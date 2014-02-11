@@ -6,9 +6,10 @@ require_once 'queries.php';
 $gid = $_GET['gid'];
 
 // Get FB user id.
-$uid = $fbSession->getUser();
-//$uid = '673133235';
+//$uid = $fbSession->getUser();
+$uid = '673133235';
 //$uid = '1332932817';
+
 // Allow everything younger than one month.
 //$oldestAllowed = strtotime('-1 month');
 // Define the initial window to search within.
@@ -54,14 +55,10 @@ for ($i = 0; $i < $batchRunCount; $i++) {
 }
 
 // Call the batch query.
-try {
-    $response = $fbSession->api('/', 'POST', array(
-        'batch' => json_encode($queries),
-        'include_headers' => false
-    ));
-} catch (Exception $ex) {
-    echo $ex->getMessage();
-}
+$response = $fbSession->api('/', 'POST', array(
+    'batch' => json_encode($queries),
+    'include_headers' => false
+        ));
 
 $posts = array();
 
