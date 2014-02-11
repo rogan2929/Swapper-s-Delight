@@ -338,10 +338,10 @@ var SwdPresenter = {
     /***
      * Load posts liked by user.
      */
-    loadLikedPosts: function(loadNextPage) {
+    loadLikedPosts: function() {
         SwdModel.getLikedPosts(SwdPresenter.selectedGroup.gid, {
             success: function(response) {
-                SwdPresenter.loadPostsComplete(loadNextPage, response);
+                SwdPresenter.loadPostsComplete(response);
             },
             fail: function(response) {
                 SwdView.showError(response);
@@ -354,7 +354,7 @@ var SwdPresenter = {
     loadMyPosts: function() {
         SwdModel.getMyPosts(SwdPresenter.selectedGroup.gid, {
             success: function(response) {
-                SwdPresenter.loadPostsComplete(loadNextPage, response);
+                SwdPresenter.loadPostsComplete(response);
             },
             fail: function(response) {
                 SwdView.showError(response);
@@ -407,15 +407,13 @@ var SwdPresenter = {
                 break;
             case PostType.myposts:
                 if (!loadNextPage) {
-                    // This request is so intensive, that it's best to return everything at once, rather
-                    // than implement paging.
+                    // This request is so intensive, that it's best to return everything at once, rather than implement paging.
                     SwdPresenter.loadMyPosts();
                 }
                 break;
             case PostType.liked:
                 if (!loadNextPage) {
-                    // This request is so intensive, that it's best to return everything at once, rather
-                    // than implement paging.
+                    // This request is so intensive, that it's best to return everything at once, rather than implement paging.
                     SwdPresenter.loadLikedPosts();
                 }
                 break;
