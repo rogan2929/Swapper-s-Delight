@@ -48,8 +48,11 @@ function processStreamQuery($stream, $images) {
     
     for ($i = 0; $i < count($stream); $i++) {
         $post = $stream[$i];
+        
+        echo var_dump($post);
+        echo '<br/><br/>';
 
-        $post['image_url'] = null;
+//        $post['image_url'] = null;
 //
 //        // For posts with an image, look for associate image data.
 //        if ($post['attachment'] && $post['attachment']['media'] && $post['attachment']['media'][0] && $post['attachment']['media'][0]['photo']) {
