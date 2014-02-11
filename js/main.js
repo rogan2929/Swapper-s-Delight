@@ -647,7 +647,8 @@ var SwdView = {
 
         commentDiv = $('<div class="post-comment ui-corner-all ui-widget ui-widget-content"><div class="ui-state-default"><div class="post-comment-user-image"></div><div class="post-comment-header"><p class="wrapper"><a class="post-comment-user-name" href="' + comment.user.profile_url + '" target="_blank">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><span class="timestamp">' + timeStamp.calendar() + '</span></p></div></div>' + comment.text + '</div>');
         $(commentDiv).find('.post-comment-user-image').css('background-image', userImage);
-        $('#post-comment-list').append(commentDiv);
+        $(commentDiv).hide().appendTo('#post-comment-list').fadeIn();
+        //$('#post-comment-list').append(commentDiv);
     },
     /**
      * Init function for SwdView.
