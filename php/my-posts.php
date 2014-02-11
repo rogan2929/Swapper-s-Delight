@@ -53,6 +53,8 @@ for ($i = 0; $i < $batchRunCount; $i++) {
     $windowEnd -= $windowSize;
 }
 
+echo json_encode($queries);
+
 // Call the batch query.
 $response = $fbSession->api('/', 'POST', array(
     'batch' => json_encode($queries),
@@ -63,12 +65,8 @@ $posts = array();
 
 // Sift through the results.
 for ($i = 0; $i < count($response); $i++) {
-    $result = json_decode($response[$i]['body'], true);
-    
-    echo json_encode($result);
-    echo '<br/><br/>';
-    
-    //$posts = array_merge($posts, processStreamQuery($result[0]['fql_result_set'], $result[1]['fql_result_set']));
+    $result = json_decode($response[$i]['body'], true);    
+    $posts = array_merge($posts, processStreamQuery($result[0]['fql_result_set'], $result[1]['fql_result_set']));
 }
 
 echo json_encode($posts);
