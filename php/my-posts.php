@@ -6,7 +6,8 @@ require_once 'queries.php';
 $gid = $_GET['gid'];
 
 // Get FB user id.
-$uid = $fbSession->getUser();
+//$uid = $fbSession->getUser();
+$uid = '673133235';
 //$uid = '1332932817';
 
 // Allow everything younger than one month.
@@ -52,8 +53,6 @@ for ($i = 0; $i < $batchRunCount; $i++) {
     $windowStart -= $windowSize;
     $windowEnd -= $windowSize;
 }
-
-//echo json_encode($queries);
 
 // Call the batch query.
 $response = $fbSession->api('/', 'POST', array(
