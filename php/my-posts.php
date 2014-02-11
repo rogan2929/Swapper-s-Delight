@@ -73,7 +73,7 @@ try {
         //echo '<br/><br/>';
 
         //echo json_encode(processStreamQuery($result));
-        echo json_encode($result[0]['fql_query_night']);
+        echo json_encode($result[0]);
         echo '<br/><br/>';
     }
 } catch (Exception $ex) {
