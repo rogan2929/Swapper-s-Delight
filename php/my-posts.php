@@ -4,12 +4,7 @@ require_once 'session.php';
 require_once 'queries.php';
 
 $gid = $_GET['gid'];
-$uid = $_GET['uid'];
-
-// Get FB user id.
-//$uid = $fbSession->getUser();
-//$uid = '673133235';
-//$uid = '1332932817';
+$uid = $_GET['uid'];    // For some reason, calling $fbSession->getUser() kills the access token. So, we cheated.
 
 // Allow everything younger than one month.
 //$oldestAllowed = strtotime('-1 month');

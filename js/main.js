@@ -32,11 +32,12 @@ var SwdModel = {
     },
     /***
      * Get posts in the group that are liked.
+     * @param {type} uid
      * @param {type} gid
      * @param {type} callbacks
      */
-    getLikedPosts: function(gid, callbacks) {
-        var url = '/php/liked-posts.php?gid=' + gid;
+    getLikedPosts: function(uid, gid, callbacks) {
+        var url = '/php/liked-posts.php?gid=' + gid + '&uid=' + uid;
 
         $.ajax({
             type: 'GET',
@@ -342,7 +343,7 @@ var SwdPresenter = {
      * Load posts liked by user.
      */
     loadLikedPosts: function() {
-        SwdModel.getLikedPosts(SwdPresenter.selectedGroup.gid, {
+        SwdModel.getLikedPosts(SwdPresenter.uid, SwdPresenter.selectedGroup.gid, {
             success: function(response) {
                 SwdPresenter.loadPostsComplete(null, response);
             },
