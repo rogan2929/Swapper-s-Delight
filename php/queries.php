@@ -46,9 +46,6 @@ function streamQuery($fbSession, $sourceId, $constraints, $limit = 20) {
 function processStreamQuery($stream, $images) {
     $posts = array();
     
-    echo json_encode($stream);
-    echo json_encode($images);
-    
     for ($i = 0; $i < count($stream); $i++) {
         $post = $stream[$i];
 
