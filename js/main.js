@@ -215,27 +215,28 @@ var SwdPresenter = {
             
             $('#loginbutton,#feedbutton').removeAttr('disabled');
 
-            FB.Event.subscribe('auth.authResponseChange', function(response) {
-                SwdPresenter.uid = response.authResponse.userID;
-                SwdPresenter.startApp();
-            });
-
-
-//            // Try to get a session going if there isn't one already.
-//            FB.getLoginStatus(function(response) {
-//                if (response.status === 'connected') {
-//                    SwdPresenter.startApp();
-//                }
-//                else {
-//                    FB.login(function(response) {
-//                        if (response.status === 'connected') {
-//                            SwdPresenter.startApp();
-//                        }
-//                    }, {
-//                        scope: 'user_groups,user_likes'
-//                    });
-//                }
+//            FB.Event.subscribe('auth.authResponseChange', function(response) {
+//                //SwdPresenter.uid = response.authResponse.userID;
+//                //SwdPresenter.startApp();
 //            });
+
+            // Try to get a session going if there isn't one already.
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    SwdPresenter.uid = response.authResponse.userID;
+                    SwdPresenter.startApp();
+                }
+                else {
+                    FB.login(function(response) {
+                        if (response.status === 'connected') {
+                            SwdPresenter.uid = response.authResponse.userID;
+                            SwdPresenter.startApp();
+                        }
+                    }, {
+                        scope: 'user_groups,user_likes,publish_stream'
+                    });
+                }
+            });
         });
     },
     /***
