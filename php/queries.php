@@ -47,9 +47,8 @@ function processStreamQuery($stream, $images) {
     $posts = array();
     
     for ($i = 0; $i < count($stream); $i++) {
-        echo json_encode($stream[$i]);
-//        $post = $stream[$i];
-//
+        $post = $stream[$i];
+
 //        $post['image_url'] = null;
 //
 //        // For posts with an image, look for associate image data.
@@ -67,9 +66,9 @@ function processStreamQuery($stream, $images) {
 //        if ($post['message']) {
 //            $post['message'] = str_replace('\n', '<br/>', $post['message']);
 //        }
-//
-//        // Add to the posts array.
-//        $posts[] = $post;
+
+        // Add to the posts array.
+        $posts[] = $post;
     }
     return $posts;
 }
