@@ -64,10 +64,13 @@ $posts = array();
 // Sift through the results.
 for ($i = 0; $i < count($response); $i++) {
     $result = json_decode($response[$i]['body']);
+    
+    $stream = $result[0]->fql_result_set;
+    $images = $result[1]->fql_result_set;
     //$posts = array_merge($posts, json_encode(processStreamQuery($result[0]->fql_result_set, $result[1]->fql_result_set)));
-    //echo json_encode(processStreamQuery($result[0]->fql_result_set, $result[1]->fql_result_set));
-    echo json_encode($result[0]->fql_result_set);
-    echo json_encode($result[1]->fql_result_set);
+    echo json_encode(processStreamQuery($stream, $images));
+    //echo json_encode($stream);
+    //echo json_encode($images);
     //echo '<br/><br/>';
 }
 
