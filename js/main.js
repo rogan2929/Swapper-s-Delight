@@ -250,7 +250,7 @@ var SwdPresenter = {
             SwdModel.getGroupInfo({
                 success: function(response) {
                     SwdView.toggleAjaxLoadingDiv('body', false);
-                    
+
                     SwdPresenter.groups = response;
 
                     selectedGroups = [];
@@ -319,7 +319,7 @@ var SwdPresenter = {
                 SwdPresenter.prevOffset = offset;
                 // Update fixed divs
                 SwdView.setFixedDivs(offset);
-                
+
                 // Update floating panel height
                 if (scrollTop > offsetTop) {
                     height = clientHeight - 10;
@@ -458,7 +458,7 @@ var SwdPresenter = {
     refreshFbCanvasSize: function() {
         FB.Canvas.getPageInfo(function(pageInfo) {
             SwdPresenter.clientHeight = parseInt(pageInfo.clientHeight);
-            
+
             FB.Canvas.setSize({
                 height: Math.max($('html').height(), SwdPresenter.clientHeight)
             });
@@ -636,8 +636,27 @@ var SwdPresenter = {
         });
     },
     onKeyUpCommentTextarea: function(e, args) {
-        if (e.which == 13 && !e.ctrlKey) {
-            alert('test');
+        var id, comment;
+
+        if (e.which === 13 && !e.ctrlKey) {
+            e.preventDefault();
+
+            id = $('#panel-post').data('id');
+            comment = $('#post-comment-text > textarea').val();
+
+            // Show the ajax loading div.
+            SwdView.toggleAjaxLoadingDiv('#post-comment-text', true);
+
+            // Post the comment.
+            SwdModel.postComment(id, comment, {
+                success: function(response) {
+                    SwdView.addPostComment(response);
+                    SwdView.clearPostCommentText();
+                },
+                fail: function(response) {
+                    SwdView.showError(response);
+                }
+            });
         }
     },
     onWindowResize: function(e, args) {
@@ -738,7 +757,7 @@ var SwdView = {
         $('#post-message-user').button();
         // Init menus.
         $('#popup-menu-main').menu();
-        
+
         // Fade out the div we are using to hide non-initted elements.
         //$('#overlay-app-loading').fadeOut('fast');
     },
