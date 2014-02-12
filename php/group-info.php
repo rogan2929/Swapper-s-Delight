@@ -45,4 +45,6 @@ for ($i = 0; $i < count($groups); $i++) {
 //    $groups[$i]['marked'] = $marked;
 //}
 
+sleep(10);
+
 echo json_encode($groups);
