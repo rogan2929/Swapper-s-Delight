@@ -498,9 +498,6 @@ var SwdPresenter = {
         SwdView.toggleFloatingPanel('#select-group-panel', true);
     },
     // Event Handlers (onX(e, args))
-//    onFBauthResponseChange: function(url, html_element) {
-//        alert('TEST');
-//    },
     onClickButtonNew: function(e, args) {
         SwdView.toggleFloatingPanel('#new-post-panel', true);
     },
