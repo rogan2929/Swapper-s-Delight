@@ -88,14 +88,14 @@
                             <div id='post-comment-list'></div>
                             <div id='post-comment-text' class='ui-corner-all ui-widget ui-widget-content'>
                                 <textarea placeholder='Add a comment...'></textarea>
-                                <div class='ajax-loading-div'></div>
+                                <div class='ajax-loading-div hidden'></div>
                             </div>
                             <div id='post-button-comment' class='post-button'>
                                 Comment
                             </div>
                         </div>
                     </div>
-                    <div class='ajax-loading-div'></div>
+                    <div class='ajax-loading-div hidden'></div>
                 </div>
                 <div id='new-post-panel' class='floating-panel ui-widget-content scroll-y hidden'>
                     TEST
