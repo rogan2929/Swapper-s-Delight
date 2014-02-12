@@ -194,6 +194,7 @@ var SwdPresenter = {
     prevOffset: null,
     clientHeight: null,
     uid: null,
+    currentlyLoading: false,
     /**
      * Entry point of program.
      */
@@ -391,7 +392,8 @@ var SwdPresenter = {
         var updatedTime;
 
         if (!SwdPresenter.currentlyLoading) {
-
+            SwdPresenter.currentlyLoading = true;
+            
             if (loadNextPage && SwdPresenter.oldestPost) {
                 console.log('Loading next page.');
                 updatedTime = SwdPresenter.oldestPost.updated_time;
@@ -821,7 +823,7 @@ var SwdView = {
                 $(this).removeClass('ui-state-hover').addClass('ui-state-default');
             });
 
-            SwdPresenter.facebookPageInfoPoll();
+            SwdPresenter.currentlyLoading = false;
         }
     },
     /***
