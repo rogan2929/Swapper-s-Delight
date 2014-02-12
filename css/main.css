@@ -196,10 +196,19 @@ textarea {
     padding-right: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
+    display: block;
 }
 
-.selection-item .select-group-item span {
+.selection-item.ui-button-text {
+    text-align: left;
+}
+
+.selection-item.ui-icon {
     display: inline-block;
+}
+
+.selection-item div {
+    margin-left: 10px;
 }
 
 .body.row {
