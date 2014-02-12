@@ -251,6 +251,9 @@ var SwdPresenter = {
                     SwdPresenter.groups = response;
 
                     selectedGroups = [];
+                    
+                    // Call the polling function again after 100ms.
+                    SwdPresenter.facebookPageInfoPoll;
 
                     // Find groups that have been marked as 'BST'
                     for (i = 0; i < SwdPresenter.groups.length; i++) {
@@ -330,14 +333,15 @@ var SwdPresenter = {
                         //alert(scrollTop + ' ' + $('#app-content').height() + ' ' + clientHeight);
                         SwdPresenter.loadPosts(true);
                     }
+                    else {
+                        // Call the polling function again after 100ms.
+                        setTimeout(SwdPresenter.facebookPageInfoPoll, 100);
+                    }
 
                     FB.Canvas.setSize({
                         height: Math.max($('html').height(), clientHeight)
                                 //height: Math.max(clientHeight, 810)
                     });
-
-                    // Call the polling function again after 100ms.
-                    setTimeout(SwdPresenter.facebookPageInfoPoll, 100);
                 }
             });
         }
@@ -391,7 +395,7 @@ var SwdPresenter = {
         var updatedTime;
 
         // Pause window data polling.
-        SwdPresenter.facebookPageInfoPoll(true);
+        //SwdPresenter.facebookPageInfoPoll(true);
 
         if (loadNextPage && SwdPresenter.oldestPost) {
             console.log('Loading Next Page');
@@ -827,7 +831,7 @@ var SwdView = {
                 $(this).removeClass('ui-state-hover').addClass('ui-state-default');
             });
 
-            SwdPresenter.facebookPageInfoPoll();
+            //SwdPresenter.facebookPageInfoPoll();
         }
     },
     /***
