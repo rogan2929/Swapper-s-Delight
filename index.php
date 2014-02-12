@@ -101,8 +101,8 @@
                     TEST
                 </div>
                 <div id='select-group-panel' class='floating-panel ui-widget-content scroll-y hidden'>
-                    <ul id='select-group-list'>
-                        <li id='menu-item-no-groups'>
+                    <ul id='select-group-list' class='selection-list'>
+                        <li id='menu-item-no-groups' class='select-group-item'>
                             <a href='#'><span class='ui-icon ui-icon-check'></span>You're not a member of any Facebook groups.</a>
                         </li>
                     </ul>
@@ -130,12 +130,6 @@
             </div>
 
             <!--Menus-->
-
-            <!--            <ul id='popup-menu-groups' class='menu'>
-                            <li id='menu-item-no-groups' class='menu-item-group'>
-                                <a href='#'><span class='ui-icon ui-icon-check'></span>You're not a member of any Facebook groups.</a>
-                            </li>
-                        </ul>-->
 
             <ul id='popup-menu-main' class='menu'>
                 <li id='menu-item-logout' class='menu-item-main'>

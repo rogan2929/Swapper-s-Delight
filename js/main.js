@@ -267,7 +267,7 @@ var SwdPresenter = {
 
                     if (SwdPresenter.groups) {
                         SwdPresenter.setSelectedGroup(selectedGroups[0]);
-                        SwdView.addGroupsToMenu(selectedGroups);
+                        SwdView.addGroupsToSelectPanel(selectedGroups);
                         
                         // Install Event Handlers
                         SwdView.installHandler('onClickButtonGroups', SwdPresenter.onClickButtonGroups, '#button-groups', 'click');
@@ -275,7 +275,6 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
                         SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
                         SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
-                        SwdView.installHandler('onClickMenuItemGroup', SwdPresenter.onClickMenuItemGroup, '.menu-item-group', 'click');
                         SwdView.installHandler('onClickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item-main', 'click');
                         SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.button-nav', 'click');
                         SwdView.installHandler('onClickPostButtonComment', SwdPresenter.onClickPostButtonComment, '#post-button-comment', 'click');
@@ -517,26 +516,26 @@ var SwdPresenter = {
     onClickMenuButton: function(e, args) {
         SwdView.showUiMenu(e);
     },
-    onClickMenuItemGroup: function(e, args) {
-        var i, id, group;
-
-        id = $(e.currentTarget).attr('id');
-
-        if (id === 'menu-item-choose-groups') {
-            // TODO: Display group chooser dialog.
-        }
-        else {
-            for (i = 0; i < SwdPresenter.groups.length; i++) {
-                if (id === SwdPresenter.groups[i].gid) {
-                    group = SwdPresenter.groups[i];
-                    break;
-                }
-            }
-
-            // Set selected group and load its feed.
-            SwdPresenter.setSelectedGroup(group);
-        }
-    },
+//    onClickMenuItemGroup: function(e, args) {
+//        var i, id, group;
+//
+//        id = $(e.currentTarget).attr('id');
+//
+//        if (id === 'menu-item-choose-groups') {
+//            // TODO: Display group chooser dialog.
+//        }
+//        else {
+//            for (i = 0; i < SwdPresenter.groups.length; i++) {
+//                if (id === SwdPresenter.groups[i].gid) {
+//                    group = SwdPresenter.groups[i];
+//                    break;
+//                }
+//            }
+//
+//            // Set selected group and load its feed.
+//            SwdPresenter.setSelectedGroup(group);
+//        }
+//    },
     onClickMenuItemMain: function(e, args) {
         var id = $(e.currentTarget).attr('id');
     },
@@ -679,7 +678,7 @@ var SwdView = {
      * Add group to Group Select Menu.
      * @param {type} groups
      */
-    addGroupsToMenu: function(groups) {
+    addGroupsToSelectPanel: function(groups) {
         var i = 0;
 
         $('#menu-item-no-groups').hide();

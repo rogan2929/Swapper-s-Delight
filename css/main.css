@@ -187,6 +187,14 @@ textarea {
     z-index: 1000;
 }
 
+.selection-list {
+    list-style: none;
+}
+
+.select-group-item {
+    padding: 20px;
+}
+
 .body.row {
     top: 60px;
     bottom: 0;
