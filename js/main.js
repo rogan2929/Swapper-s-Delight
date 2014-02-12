@@ -282,6 +282,7 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
                         SwdView.installHandler('onClickPanelMessageUser', SwdPresenter.onClickPanelMessageUser, '#post-message-user', 'click');
                         SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
+                        SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
                         SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#post-comment-text > textarea', 'keyup')
                         SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
                         SwdView.positionMenus();
@@ -516,26 +517,6 @@ var SwdPresenter = {
     onClickMenuButton: function(e, args) {
         SwdView.showUiMenu(e);
     },
-//    onClickMenuItemGroup: function(e, args) {
-//        var i, id, group;
-//
-//        id = $(e.currentTarget).attr('id');
-//
-//        if (id === 'menu-item-choose-groups') {
-//            // TODO: Display group chooser dialog.
-//        }
-//        else {
-//            for (i = 0; i < SwdPresenter.groups.length; i++) {
-//                if (id === SwdPresenter.groups[i].gid) {
-//                    group = SwdPresenter.groups[i];
-//                    break;
-//                }
-//            }
-//
-//            // Set selected group and load its feed.
-//            SwdPresenter.setSelectedGroup(group);
-//        }
-//    },
     onClickMenuItemMain: function(e, args) {
         var id = $(e.currentTarget).attr('id');
     },
@@ -639,6 +620,27 @@ var SwdPresenter = {
             }
         });
     },
+    onClickSelectGroup: function(e, args) {
+        alert('test');
+        //        var i, id, group;
+//
+//        id = $(e.currentTarget).attr('id');
+//
+//        if (id === 'menu-item-choose-groups') {
+//            // TODO: Display group chooser dialog.
+//        }
+//        else {
+//            for (i = 0; i < SwdPresenter.groups.length; i++) {
+//                if (id === SwdPresenter.groups[i].gid) {
+//                    group = SwdPresenter.groups[i];
+//                    break;
+//                }
+//            }
+//
+//            // Set selected group and load its feed.
+//            SwdPresenter.setSelectedGroup(group);
+//        }
+    },
     onKeyUpCommentTextarea: function(e, args) {
         var id, comment;
 
@@ -684,10 +686,10 @@ var SwdView = {
         $('#menu-item-no-groups').hide();
 
         for (i = 0; i < groups.length; i++) {
-            $('#select-group-list').append('<li id="' + groups[i].gid + '" class="selection-item select-group-item"><span class="ui-icon" style="background-image: url(' + groups[i].icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + groups[i].name + '</div></li>');
+            $('#select-group-list').append('<li id="' + groups[i].gid + '" class="selection-item select-group"><span class="ui-icon" style="background-image: url(' + groups[i].icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + groups[i].name + '</div></li>');
         }
         
-        $('.select-group-item').button();
+        $('.selection-item.select-group').button();
     },
     addPostComment: function(comment) {
         var commentDiv, timeStamp, userImage;
