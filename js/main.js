@@ -686,6 +686,8 @@ var SwdView = {
         for (i = 0; i < groups.length; i++) {
             $('#select-group-list').append('<li id="' + groups[i].gid + '" class="selection-item select-group-item"><span class="ui-icon" style="background-image: url(' + groups[i].icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + groups[i].name + '</div></li>');
         }
+        
+        $('.selection-item .select-group-item').button();
     },
     addPostComment: function(comment) {
         var commentDiv, timeStamp, userImage;
