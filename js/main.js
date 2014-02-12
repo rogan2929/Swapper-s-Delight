@@ -1062,7 +1062,7 @@ var SwdView = {
         else {
             $(id).hide('slide', {
                 easing: 'easeInOutQuint',
-                direction: 'up'
+                direction: 'down'
             }, 300, function() {
                 $('div.ui-widget-overlay').remove();
             });
