@@ -268,7 +268,7 @@ var SwdPresenter = {
                     if (SwdPresenter.groups) {
                         SwdPresenter.setSelectedGroup(selectedGroups[0]);
                         SwdView.addGroupsToMenu(selectedGroups);
-                        $('#popup-menu-groups').menu();
+                        
                         // Install Event Handlers
                         SwdView.installHandler('onClickButtonGroups', SwdPresenter.onClickButtonGroups, '#button-groups', 'click');
                         SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
@@ -685,7 +685,7 @@ var SwdView = {
         $('#menu-item-no-groups').hide();
 
         for (i = 0; i < groups.length; i++) {
-            $('#popup-menu-groups').append('<li id="' + groups[i].gid + '" class="menu-item-group"><a href="#"><span class="ui-icon" style="background-image: url(' + groups[i].icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + groups[i].name + '</div></a></li>');
+            $('#select-group-list').append('<li id="' + groups[i].gid + '" class="select-group-item"><a href="#"><span class="ui-icon" style="background-image: url(' + groups[i].icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + groups[i].name + '</div></a></li>');
         }
     },
     addPostComment: function(comment) {
