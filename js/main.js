@@ -821,7 +821,7 @@ var SwdView = {
 //                    (jq = jq.slice(1)).length && shownext(jq);
 //                });
 //            })($('div.post-tile'));
-            $('div.post-tile').show();
+            $('div.post-tile').fadeIn(200);
 
             // Associate the click event handler for newly created posts.
             $('.post-tile > *').click(SwdView.handlers['onClickPostTile']);
