@@ -191,8 +191,15 @@ textarea {
     list-style: none;
 }
 
-.select-group-item {
-    padding: 20px;
+.selection-item {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.selection-item .select-group-item span {
+    display: inline-block;
 }
 
 .body.row {
