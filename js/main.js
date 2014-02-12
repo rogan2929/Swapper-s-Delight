@@ -713,55 +713,68 @@ var SwdView = {
     initView: function() {
         // Set up buttons
         $('.button-nav').button();
+        
         $('#button-menu-main').button({
             icons: {
                 primary: 'ui-icon-gear'
             }
         });
+        
         $('#button-groups').button({
             icons: {
                 primary: 'ui-icon-contact'
             }
         });
+        
         $('#button-new').button({
             icons: {
                 primary: 'ui-icon-comment'
             }
         });
+        
         $('#button-refresh').button({
             icons: {
                 primary: 'ui-icon-refresh'
             }
         });
+        
         $('#button-menu-daysback').button({
             icons: {
                 primary: 'ui-icon-calendar'
             }
         });
+        
         $('#post-button-comment').button({
             icons: {
                 primary: 'ui-icon-comment'
             }
         });
+        
         $('#post-button-pm').button({
             icons: {
                 primary: 'ui-icon-mail-closed'
             }
         });
+        
         $('#post-button-like').button({
             icons: {
                 primary: 'ui-icon-pin-s'
             }
         });
+        
         $('#post-message-user').hover(function() {
             $(this).removeClass('ui-state-default').addClass('ui-state-hover');
         }, function() {
             $(this).removeClass('ui-state-hover').addClass('ui-state-default');
         });
-        $('#post-details-panel').click(function(e) {
+        
+        $('.floating-panel').click(function(e) {
+            // Prevent floating panels from closing whenever they are clicked on.
             e.stopPropagation();
         });
+        
         $('#post-message-user').button();
+        
         // Init menus.
         $('#popup-menu-main').menu();
 
