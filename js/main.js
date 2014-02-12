@@ -635,7 +635,7 @@ var SwdPresenter = {
     onKeyUpCommentTextarea: function(e, args) {
         var id, comment;
 
-        if (e.which === 13 && !e.ctrlKey) {
+        if (e.which === 13 && !e.shiftKey) {
             e.preventDefault();
 
             id = $('#panel-post').data('id');
@@ -655,6 +655,8 @@ var SwdPresenter = {
                 }
             });
         }
+        
+        return true;
     },
     onWindowResize: function(e, args) {
         SwdView.positionMenus();
