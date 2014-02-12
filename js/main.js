@@ -199,11 +199,11 @@ var SwdPresenter = {
      */
     init: function() {
         SwdView.initView();
-        
+
         $.ajaxSetup({
             cache: true
         });
-        
+
         // Fetch the FB JS API
         $.getScript('//connect.facebook.net/en_US/all.js', function() {
             FB.init({
@@ -211,7 +211,7 @@ var SwdPresenter = {
                 cookie: true,
                 status: true
             });
-            
+
             $('#loginbutton,#feedbutton').removeAttr('disabled');
 
 //            FB.Event.subscribe('auth.authResponseChange', function(response) {
@@ -335,10 +335,10 @@ var SwdPresenter = {
                         height: Math.max($('html').height(), clientHeight)
                                 //height: Math.max(clientHeight, 810)
                     });
-                }
 
-                // Call the polling function again after 100ms.
-                setTimeout(SwdPresenter.facebookPageInfoPoll, 100);
+                    // Call the polling function again after 100ms.
+                    setTimeout(SwdPresenter.facebookPageInfoPoll, 100);
+                }
             });
         }
     },
