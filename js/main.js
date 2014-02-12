@@ -338,9 +338,9 @@ var SwdPresenter = {
                     height: Math.max($('html').height(), clientHeight)
                             //height: Math.max(clientHeight, 810)
                 });
-
-                setTimeout(SwdPresenter.facebookPageInfoPoll, 100);
             }
+
+            setTimeout(SwdPresenter.facebookPageInfoPoll, 100);
         });
     },
     /***
@@ -393,7 +393,7 @@ var SwdPresenter = {
 
         if (!SwdPresenter.currentlyLoading) {
             SwdPresenter.currentlyLoading = true;
-            
+
             if (loadNextPage && SwdPresenter.oldestPost) {
                 console.log('Loading next page.');
                 updatedTime = SwdPresenter.oldestPost.updated_time;
@@ -427,6 +427,11 @@ var SwdPresenter = {
             }
         }
     },
+    /***
+     * Function to wrap up any kind of post loading.
+     * @param {type} loadNextPage
+     * @param {type} response
+     */
     loadPostsComplete: function(loadNextPage, response) {
         if (!loadNextPage) {
             // Clear previous results, unless loading a new page.
@@ -434,11 +439,13 @@ var SwdPresenter = {
         }
 
         if (response) {
+            // If a response came through, then display the posts.
             SwdPresenter.oldestPost = response[response.length - 1];
             SwdView.populatePosts(response);
         }
         else
         if (!loadNextPage) {
+            // Otherwise, clear the previous oldest post.
             SwdPresenter.oldestPost = null;
         }
     },
