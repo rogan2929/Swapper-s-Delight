@@ -211,6 +211,11 @@ textarea {
     margin-left: 10px !important;
 }
 
+.floating-panel.left-panel {
+    margin-left: 0 !important;
+    width: 300px !important;
+}
+
 .body.row {
     top: 60px;
     bottom: 0;
