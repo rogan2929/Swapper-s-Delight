@@ -395,16 +395,13 @@ var SwdPresenter = {
 
         if (loadNextPage) {
             if (SwdPresenter.oldestPost) {
-                console.log('loadNextPage');
                 updatedTime = SwdPresenter.oldestPost.updated_time;
             }
-            else {
-                console.log('loadNextPage-null');
-                updatedTime = null;
-            }
+//            else {
+//                updatedTime = null;
+//            }
         }
         else {
-            console.log('Not loadNextPage');
             updatedTime = null;
             SwdView.clearPosts();
             SwdPresenter.resetFbCanvasSize();
