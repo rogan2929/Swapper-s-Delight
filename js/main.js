@@ -393,10 +393,11 @@ var SwdPresenter = {
         // Pause window data polling.
         SwdPresenter.facebookPageInfoPoll(true);
 
-        if (loadNextPage) {
-            if (SwdPresenter.oldestPost) {
-                updatedTime = SwdPresenter.oldestPost.updated_time;
-            }
+        if (loadNextPage && SwdPresenter.oldestPost) {
+            updatedTime = SwdPresenter.oldestPost.updated_time;
+//            if (SwdPresenter.oldestPost) {
+//                updatedTime = SwdPresenter.oldestPost.updated_time;
+//            }
 //            else {
 //                updatedTime = null;
 //            }
