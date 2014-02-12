@@ -296,7 +296,6 @@ var SwdPresenter = {
     /***
      * Periodically call FB.Canvas.getPageInfo in order to dynmically update the UI within the canvas
      * iframe.
-     * @param {type} stop
      */
     facebookPageInfoPoll: function() {
         FB.Canvas.getPageInfo(function(pageInfo) {
@@ -336,7 +335,6 @@ var SwdPresenter = {
 
                 FB.Canvas.setSize({
                     height: Math.max($('html').height(), clientHeight)
-                            //height: Math.max(clientHeight, 810)
                 });
             }
 
@@ -448,6 +446,18 @@ var SwdPresenter = {
             // Otherwise, clear the previous oldest post.
             SwdPresenter.oldestPost = null;
         }
+    },
+    /***
+     * Refresh FB canvas size.
+     */
+    refreshFbCanvasSize: function() {
+        FB.Canvas.getPageInfo(function(pageInfo) {
+            SwdPresenter.clientHeight = parseInt(pageInfo.clientHeight);
+            
+            FB.Canvas.setSize({
+                height: Math.max($('html').height(), SwdPresenter.clientHeight)
+            });
+        });
     },
     /***
      * Reset Facebook Canvas Size to default value of 800
@@ -808,8 +818,6 @@ var SwdView = {
 
             SwdView.toggleAjaxLoadingDiv('#post-feed', false);
 
-            i = 0;
-
             // Sleekly fade in the post tile elements.
             // From: http://www.paulirish.com/2008/sequentially-chain-your-callbacks-in-jquery-two-ways/
 //            (function shownext(jq) {
@@ -821,7 +829,10 @@ var SwdView = {
 //                    (jq = jq.slice(1)).length && shownext(jq);
 //                });
 //            })($('div.post-tile'));
-            $('div.post-tile').fadeIn(200);
+            $('div.post-tile').fadeIn(200, function() {
+                // Refresh FB canvas when fade in completes.
+                SwdPresenter.refreshFbCanvasSize();
+            });
 
             // Associate the click event handler for newly created posts.
             $('.post-tile > *').click(SwdView.handlers['onClickPostTile']);
