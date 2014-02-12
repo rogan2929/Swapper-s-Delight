@@ -249,6 +249,8 @@ var SwdPresenter = {
             // Retrieve group info for logged in user.
             SwdModel.getGroupInfo({
                 success: function(response) {
+                    SwdView.toggleAjaxLoadingDiv('body', false);
+                    
                     SwdPresenter.groups = response;
 
                     selectedGroups = [];
@@ -725,8 +727,9 @@ var SwdView = {
         $('#post-message-user').button();
         // Init menus.
         $('#popup-menu-main').menu();
+        
         // Fade out the div we are using to hide non-initted elements.
-        $('#overlay-app-loading').fadeOut('fast');
+        //$('#overlay-app-loading').fadeOut('fast');
     },
     /**
      * Installs an event handler and connects it to the presenter.
