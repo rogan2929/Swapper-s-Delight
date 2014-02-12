@@ -251,7 +251,7 @@ var SwdPresenter = {
                     SwdPresenter.groups = response;
 
                     selectedGroups = [];
-                    
+
                     // Call the polling function again after 100ms.
                     SwdPresenter.facebookPageInfoPoll();
 
@@ -297,54 +297,50 @@ var SwdPresenter = {
      * iframe.
      * @param {type} stop
      */
-    facebookPageInfoPoll: function(stop) {
-        if (!stop) {
-            FB.Canvas.getPageInfo(function(pageInfo) {
-                var scrollTop, offsetTop, clientHeight, offset, height, scrollPos;
+    facebookPageInfoPoll: function() {
+        FB.Canvas.getPageInfo(function(pageInfo) {
+            var scrollTop, offsetTop, clientHeight, offset, height, scrollPos;
 
-                scrollTop = parseInt(pageInfo.scrollTop);
-                offsetTop = parseInt(pageInfo.offsetTop);
-                clientHeight = parseInt(pageInfo.clientHeight);
+            scrollTop = parseInt(pageInfo.scrollTop);
+            offsetTop = parseInt(pageInfo.offsetTop);
+            clientHeight = parseInt(pageInfo.clientHeight);
 
-                SwdPresenter.clientHeight = clientHeight;
+            SwdPresenter.clientHeight = clientHeight;
 
-                // Calculate how far to offset things.
-                offset = Math.max(scrollTop - offsetTop, 0);
+            // Calculate how far to offset things.
+            offset = Math.max(scrollTop - offsetTop, 0);
 
-                // Check to see if the offset has been updated.
-                if (offset !== SwdPresenter.prevOffset) {
-                    SwdPresenter.prevOffset = offset;
-                    // Update fixed divs
-                    SwdView.setFixedDivs(offset);
-                    // Update post-details-panel height
-                    if (scrollTop > offsetTop) {
-                        height = clientHeight - 10;
-                    }
-                    else {
-                        height = clientHeight - offsetTop - 10;
-                    }
-
-                    SwdView.setFloatingPanelHeight(height);
-
-                    scrollPos = $('#app-content').height() - clientHeight;
-
-                    // Detect scroll at bottom 10% of page.
-                    if (scrollTop >= scrollPos && scrollPos >= 0) {
-                        //alert(scrollTop + ' ' + $('#app-content').height() + ' ' + clientHeight);
-                        SwdPresenter.loadPosts(true);
-                    }
-                    else {
-                        // Call the polling function again after 100ms.
-                        setTimeout(SwdPresenter.facebookPageInfoPoll, 100);
-                    }
-
-                    FB.Canvas.setSize({
-                        height: Math.max($('html').height(), clientHeight)
-                                //height: Math.max(clientHeight, 810)
-                    });
+            // Check to see if the offset has been updated.
+            if (offset !== SwdPresenter.prevOffset) {
+                SwdPresenter.prevOffset = offset;
+                // Update fixed divs
+                SwdView.setFixedDivs(offset);
+                // Update post-details-panel height
+                if (scrollTop > offsetTop) {
+                    height = clientHeight - 10;
                 }
-            });
-        }
+                else {
+                    height = clientHeight - offsetTop - 10;
+                }
+
+                SwdView.setFloatingPanelHeight(height);
+
+                scrollPos = $('#app-content').height() - clientHeight;
+
+                // Detect scroll at bottom 10% of page.
+                if (scrollTop >= scrollPos && scrollPos >= 0) {
+                    //alert(scrollTop + ' ' + $('#app-content').height() + ' ' + clientHeight);
+                    SwdPresenter.loadPosts(true);
+                }
+
+                FB.Canvas.setSize({
+                    height: Math.max($('html').height(), clientHeight)
+                            //height: Math.max(clientHeight, 810)
+                });
+
+                setTimeout(SwdPresenter.facebookPageInfoPoll, 100);
+            }
+        });
     },
     /***
      * Load posts liked by user.
@@ -394,45 +390,39 @@ var SwdPresenter = {
     loadPosts: function(loadNextPage) {
         var updatedTime;
 
-        // Pause window data polling.
-        //SwdPresenter.facebookPageInfoPoll(true);
+        if (!SwdPresenter.currentlyLoading) {
 
-        if (loadNextPage && SwdPresenter.oldestPost) {
-            console.log('Loading Next Page');
-            updatedTime = SwdPresenter.oldestPost.updated_time;
-//            if (SwdPresenter.oldestPost) {
-//                updatedTime = SwdPresenter.oldestPost.updated_time;
-//            }
-//            else {
-//                updatedTime = null;
-//            }
-        }
-        else {
-            console.log('Loading new content.');
-            updatedTime = null;
-            SwdView.clearPosts();
-            SwdPresenter.resetFbCanvasSize();
-            SwdView.showFeedLoadingAjaxDiv();
-        }
+            if (loadNextPage && SwdPresenter.oldestPost) {
+                console.log('Loading next page.');
+                updatedTime = SwdPresenter.oldestPost.updated_time;
+            }
+            else {
+                console.log('Loading new content.');
+                updatedTime = null;
+                SwdView.clearPosts();
+                SwdPresenter.resetFbCanvasSize();
+                SwdView.showFeedLoadingAjaxDiv();
+            }
 
-        switch (SwdPresenter.postType) {
-            case PostType.group:
-                SwdPresenter.loadNewestPosts(loadNextPage, updatedTime);
-                break;
-            case PostType.myposts:
-                if (!loadNextPage) {
-                    // This request is so intensive, that it's best to return everything at once, rather than implement paging.
-                    SwdPresenter.loadMyPosts();
-                }
-                break;
-            case PostType.liked:
-                if (!loadNextPage) {
-                    // This request is so intensive, that it's best to return everything at once, rather than implement paging.
-                    SwdPresenter.loadLikedPosts();
-                }
-                break;
-            case PostType.search:
-                break;
+            switch (SwdPresenter.postType) {
+                case PostType.group:
+                    SwdPresenter.loadNewestPosts(loadNextPage, updatedTime);
+                    break;
+                case PostType.myposts:
+                    if (!loadNextPage) {
+                        // This request is so intensive, that it's best to return everything at once, rather than implement paging.
+                        SwdPresenter.loadMyPosts();
+                    }
+                    break;
+                case PostType.liked:
+                    if (!loadNextPage) {
+                        // This request is so intensive, that it's best to return everything at once, rather than implement paging.
+                        SwdPresenter.loadLikedPosts();
+                    }
+                    break;
+                case PostType.search:
+                    break;
+            }
         }
     },
     loadPostsComplete: function(loadNextPage, response) {
