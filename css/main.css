@@ -407,14 +407,14 @@ textarea {
 }
 
 .post-comment {
-/*    margin-bottom: 5px;*/
+    margin-bottom: 5px;
     padding: 5px;
-    font-size: 0.9em !important;
+/*    font-size: 0.9em !important;*/
 }
 
 .post-comment .ui-state-default {
     padding: 5px;
-    margin-bottom: 5px;
+/*    margin-bottom: 5px;*/
     position: relative;
 }
 
@@ -437,7 +437,7 @@ textarea {
 }
 
 .post-comment .ui-widget-content {
-    padding: 2px;
+    padding: 3px;
 }
 
 div.right-toolbar-button {
