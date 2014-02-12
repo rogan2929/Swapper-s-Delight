@@ -253,7 +253,7 @@ var SwdPresenter = {
                     selectedGroups = [];
                     
                     // Call the polling function again after 100ms.
-                    SwdPresenter.facebookPageInfoPoll;
+                    SwdPresenter.facebookPageInfoPoll();
 
                     // Find groups that have been marked as 'BST'
                     for (i = 0; i < SwdPresenter.groups.length; i++) {
@@ -831,7 +831,7 @@ var SwdView = {
                 $(this).removeClass('ui-state-hover').addClass('ui-state-default');
             });
 
-            //SwdPresenter.facebookPageInfoPoll();
+            SwdPresenter.facebookPageInfoPoll();
         }
     },
     /***
