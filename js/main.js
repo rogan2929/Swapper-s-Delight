@@ -621,25 +621,26 @@ var SwdPresenter = {
         });
     },
     onClickSelectGroup: function(e, args) {
-        alert('test');
-        //        var i, id, group;
-//
-//        id = $(e.currentTarget).attr('id');
-//
-//        if (id === 'menu-item-choose-groups') {
-//            // TODO: Display group chooser dialog.
-//        }
-//        else {
-//            for (i = 0; i < SwdPresenter.groups.length; i++) {
-//                if (id === SwdPresenter.groups[i].gid) {
-//                    group = SwdPresenter.groups[i];
-//                    break;
-//                }
-//            }
-//
-//            // Set selected group and load its feed.
-//            SwdPresenter.setSelectedGroup(group);
-//        }
+        var i, id, group;
+
+        id = $(e.currentTarget).attr('id');
+
+        if (id === 'select-group-choose') {
+            // TODO: Display group chooser dialog.
+        }
+        else {
+            for (i = 0; i < SwdPresenter.groups.length; i++) {
+                if (id === SwdPresenter.groups[i].gid) {
+                    group = SwdPresenter.groups[i];
+                    break;
+                }
+            }
+
+            // Set selected group and load its feed.
+            SwdPresenter.setSelectedGroup(group);
+            
+            SwdView.toggleFloatingPanel('#select-group-panel', false);
+        }
     },
     onKeyUpCommentTextarea: function(e, args) {
         var id, comment;
@@ -683,7 +684,7 @@ var SwdView = {
     addGroupsToSelectPanel: function(groups) {
         var i = 0;
 
-        $('#menu-item-no-groups').hide();
+        $('#select-group-no-groups').hide();
 
         for (i = 0; i < groups.length; i++) {
             $('#select-group-list').append('<li id="' + groups[i].gid + '" class="selection-item select-group"><span class="ui-icon" style="background-image: url(' + groups[i].icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + groups[i].name + '</div></li>');
