@@ -23,7 +23,7 @@ $postDetails['user'] = $response[2]['fql_result_set'][0];
 $postDetails['comments'] = $response[1]['fql_result_set'];
 
 if ($postDetails['message']) {
-    //$postDetails['message'] = str_replace('\n', '<br//>', $postDetails['message']);
+    // Replace new line characters with <br/>
     $postDetails['message'] = nl2br($postDetails['message']);
 }
 
@@ -33,7 +33,7 @@ $commentUserData = array();
 for ($i = 0; $i < count($postDetails['comments']); $i++) {
     // Replace any line breaks with <br/>
     if ($postDetails['comments'][$i]['text']) {
-        $postDetails['comments'][$i]['text'] = str_replace('\n', '<br/>', $postDetails['comments'][$i]['text']);
+        $postDetails['comments'][$i]['text'] = nl2br($postDetails['comments'][$i]['text']);
     }
     
     for ($j = 0; $j < count($response[3]['fql_result_set']); $j++) {

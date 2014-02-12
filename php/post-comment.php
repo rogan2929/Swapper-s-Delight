@@ -24,4 +24,9 @@ $response = $fbSession->api(array(
 $newComment = $response[0]['fql_result_set'][0];
 $newComment['user'] = $response[1]['fql_result_set'][0];
 
+// Replace any line breaks with <br/>
+if ($newComment['text']) {
+    $newComment['text'] = nl2br($newComment['text']);
+}
+
 echo json_encode($newComment);
