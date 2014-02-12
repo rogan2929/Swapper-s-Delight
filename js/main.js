@@ -318,7 +318,8 @@ var SwdPresenter = {
                 SwdPresenter.prevOffset = offset;
                 // Update fixed divs
                 SwdView.setFixedDivs(offset);
-                // Update post-details-panel height
+                
+                // Update floating panel height
                 if (scrollTop > offsetTop) {
                     height = clientHeight - 10;
                 }
@@ -877,12 +878,12 @@ var SwdView = {
         $('#left-rail').animate({
             top: Math.max(offset + 60, 0)
         }, 100);
-        $('#main-toolbar, #post-details-panel').animate({
+        $('#main-toolbar, .floating-panel').animate({
             top: Math.max(offset, 0)
         }, 100);
     },
     /***
-     * Dynamically calculate the height of #post-details-panel, based on how large the FB canvas is.
+     * Dynamically calculate the height of all floating panels, based on how large the FB canvas is.
      * @param {type} height
      */
     setFloatingPanelHeight: function(height) {
