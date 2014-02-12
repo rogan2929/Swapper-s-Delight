@@ -60,8 +60,8 @@
                         </div>
                         <div id='post-image-container' class='ui-widget ui-widget-content ui-corner-all'>
                             <div id='post-no-image' class='hidden'>
-<!--                                <div></div>
-                                <span>This post does not have a photo, or the owner of this post has chosen not to give permission for applications like Swapper's Delight to view it. Click the link below to see the original Facebook posting.</span>-->
+                                <!--                                <div></div>
+                                                                <span>This post does not have a photo, or the owner of this post has chosen not to give permission for applications like Swapper's Delight to view it. Click the link below to see the original Facebook posting.</span>-->
                             </div>
                             <div id='post-image'></div>
                         </div>
@@ -101,14 +101,14 @@
                     TEST
                 </div>
                 <div id='select-group-panel' class='floating-panel ui-widget-content scroll-y hidden'>
-                    
+                    Groups.
                 </div>
             </div>
 
             <div id='main-toolbar' class='ui-widget ui-widget-header'>
                 <div class='float-left left-margin'>
-                    <div id='button-menu-groups' class='menu-button'>
-                        <a href='#popup-menu-groups'>Select a Group</a>
+                    <div id='button-groups' class='left-margin'>
+                        Select a Group
                     </div>
                     <div id='button-new' class='left-margin'>
                         New
@@ -127,14 +127,11 @@
 
             <!--Menus-->
 
-            <ul id='popup-menu-groups' class='menu'>
+<!--            <ul id='popup-menu-groups' class='menu'>
                 <li id='menu-item-no-groups' class='menu-item-group'>
                     <a href='#'><span class='ui-icon ui-icon-check'></span>You're not a member of any Facebook groups.</a>
                 </li>
-<!--                <li id='menu-item-choose-groups' class='menu-item-group'>
-                    <a href='#'><span class='ui-icon ui-icon-check'></span>Edit Groups...</a>
-                </li>-->
-            </ul>
+            </ul>-->
 
             <ul id='popup-menu-main' class='menu'>
                 <li id='menu-item-logout' class='menu-item-main'>

@@ -270,6 +270,7 @@ var SwdPresenter = {
                         SwdView.addGroupsToMenu(selectedGroups);
                         $('#popup-menu-groups').menu();
                         // Install Event Handlers
+                        SwdView.installHandler('onClickButtonGroups', SwdPresenter.onClickButtonGroups, '#button-groups', 'click');
                         SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
                         SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
                         SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
@@ -491,6 +492,9 @@ var SwdPresenter = {
         SwdPresenter.loadPosts(false);
         SwdView.setGroupButtonText(group.name);
     },
+    onClickButtonGroups: function(e, args) {
+        SwdView.toggleFloatingPanel('#select-group-panel', true);
+    },
     // Event Handlers (onX(e, args))
 //    onFBauthResponseChange: function(url, html_element) {
 //        alert('TEST');
@@ -681,7 +685,7 @@ var SwdView = {
                 primary: 'ui-icon-gear'
             }
         });
-        $('#button-menu-groups').button({
+        $('#button-groups').button({
             icons: {
                 primary: 'ui-icon-contact'
             }
@@ -889,7 +893,7 @@ var SwdView = {
      * @param {type} text Text to display inside the button.
      */
     setGroupButtonText: function(text) {
-        $('#button-menu-groups span a').text(text);
+        $('#button-groups span').text(text);
     },
     setSelectedPostType: function(id) {
         $('.button-nav').removeClass('selected-nav');
