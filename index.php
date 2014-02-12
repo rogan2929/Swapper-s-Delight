@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 <div id='post-feed' class='scroll-y'>
-                    <div id='feed-ajax-loading-div' class='ajax-loading-div hidden'></div>
+                    <div class='ajax-loading-div hidden'></div>
                 </div>
                 <div id='post-details-panel' class='floating-panel ui-widget-content scroll-y hidden'>
                     <div id='panel-post'>
@@ -88,6 +88,7 @@
                             <div id='post-comment-list'></div>
                             <div id='post-comment-text' class='ui-corner-all ui-widget ui-widget-content'>
                                 <textarea placeholder='Add a comment...'></textarea>
+                                <div class='ajax-loading-div'></div>
                             </div>
                             <div id='post-button-comment' class='post-button'>
                                 Comment
@@ -96,8 +97,11 @@
                     </div>
                     <div class='ajax-loading-div'></div>
                 </div>
-                <div id='new-post-panel' class='floating-panel hidden'>
+                <div id='new-post-panel' class='floating-panel ui-widget-content scroll-y hidden'>
                     TEST
+                </div>
+                <div id='select-group-panel' class='floating-panel ui-widget-content scroll-y hidden'>
+                    
                 </div>
             </div>
 

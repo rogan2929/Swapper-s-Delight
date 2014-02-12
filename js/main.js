@@ -403,7 +403,7 @@ var SwdPresenter = {
                 updatedTime = null;
                 SwdView.clearPosts();
                 SwdPresenter.resetFbCanvasSize();
-                SwdView.showFeedLoadingAjaxDiv();
+                SwdView.toggleAjaxLoadingDiv('#post-feed', true);
             }
 
             switch (SwdPresenter.postType) {
@@ -484,14 +484,14 @@ var SwdPresenter = {
 //        alert('TEST');
 //    },
     onClickButtonNew: function(e, args) {
-        SwdView.showFloatingPanel('#new-post-panel');
+        SwdView.toggleFloatingPanel('#new-post-panel', true);
     },
     onClickButtonRefresh: function(e, args) {
         SwdPresenter.loadPosts(false);
     },
     onClickHtml: function(e, args) {
         SwdView.closeAllUiMenus();
-        SwdView.hideFloatingPanel('.floating-panel');
+        SwdView.toggleFloatingPanel('.floating-panel', false);
     },
     onClickMenuButton: function(e, args) {
         SwdView.showUiMenu(e);
@@ -550,10 +550,12 @@ var SwdPresenter = {
         id = $('#panel-post').data('id');
         comment = $('#post-comment-text > textarea').val();
 
+        // Show the ajax loading div.
+        SwdView.toggleAjaxLoadingDiv('#post-comment-text', true);
+
         // Post the comment.
         SwdModel.postComment(id, comment, {
             success: function(response) {
-                //alert(response.postId + ' ' + response.comment);
                 SwdView.addPostComment(response);
                 SwdView.clearPostCommentText();
             },
@@ -595,8 +597,8 @@ var SwdPresenter = {
         }
 
         e.stopPropagation();
-        $('#post-details-panel .ajax-loading-div').show();
-        SwdView.showFloatingPanel('#post-details-panel');
+        SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
+        SwdView.toggleFloatingPanel('#post-details-panel', true);
         SwdModel.getPostDetails(id, {
             success: function(response) {
                 post = response;
@@ -740,15 +742,13 @@ var SwdView = {
      */
     clearPostCommentText: function() {
         $('#post-comment-text > textarea').val('');
+        SwdView.toggleAjaxLoadingDiv('#post-comment-text', false);
     },
     /***
      * Closes all Jquery UI menus.
      */
     closeAllUiMenus: function() {
         $('.ui-menu').hide();
-    },
-    hideFeedLoadingAjaxDiv: function() {
-        $('#feed-ajax-loading-div').fadeOut();
     },
     /***
      * Write posts to the page.
@@ -806,7 +806,7 @@ var SwdView = {
                 }
             }
 
-            SwdView.hideFeedLoadingAjaxDiv();
+            SwdView.toggleAjaxLoadingDiv('#post-feed', false);
 
             i = 0;
 
@@ -888,25 +888,6 @@ var SwdView = {
     showError: function(message) {
 
     },
-    showFeedLoadingAjaxDiv: function() {
-        $('#feed-ajax-loading-div').fadeIn();
-    },
-    showFloatingPanel: function(id) {
-        // Make the panel modal by summoning a ui-widget-overlay.
-        $('<div class="ui-widget-overlay ui-widget-front"></div>').hide().appendTo('body').fadeIn();
-        $(id).show('slide', {
-            easing: 'easeInOutQuint',
-            direction: 'down'
-        }, 300);
-    },
-    hideFloatingPanel: function(id) {
-        $(id).hide('slide', {
-            easing: 'easeInOutQuint',
-            direction: 'up'
-        }, 300, function() {
-            $('div.ui-widget-overlay').remove();
-        });
-    },
     /***
      * Shows the post details for the selected post.
      * @param {type} post Post to load into floating post details panel.
@@ -955,7 +936,7 @@ var SwdView = {
 
         // Save some data for later consumption.
         $('#panel-post').data('actor_id', post.actor_id).data('permalink', post.permalink).data('id', post.post_id);
-        $('#post-details-panel .ajax-loading-div').fadeOut();
+        SwdView.toggleAjaxLoadingDiv('#post-details-panel', false);
     },
     /***
      * Shows a Jquery UI menu.
@@ -965,7 +946,7 @@ var SwdView = {
         var menu;
         e.stopPropagation();
         menu = $(e.currentTarget).find('a').attr('href');
-        //SwdView.positionMenus(menu);
+
         $(menu).css({
             top: 0,
             left: 0
@@ -975,12 +956,49 @@ var SwdView = {
             my: 'left top',
             at: 'left bottom'
         });
+
         // Display the menu.
         $(menu).show('slide', {
             direction: 'up',
             duration: 300,
             easing: 'easeInOutQuint'
         });
+    },
+    /***
+     * Show or hide an ajax loading div element.
+     * @param {type} parent
+     * @param {type} show
+     */
+    toggleAjaxLoadingDiv: function(parent, show) {
+        if (show) {
+            $(parent + ' .ajax-loading-div').fadeIn(100);
+        }
+        else {
+            $(parent + ' .ajax-loading-div').fadeOut(100);
+        }
+    },
+    /***
+     * Shows or hides a 'floating panel'
+     * @param {type} id
+     * @param {type} show
+     */
+    toggleFloatingPanel: function(id, show) {
+        if (show) {
+            // Make the panel modal by summoning a ui-widget-overlay.
+            $('<div class="ui-widget-overlay ui-widget-front"></div>').hide().appendTo('body').fadeIn();
+            $(id).show('slide', {
+                easing: 'easeInOutQuint',
+                direction: 'down'
+            }, 300);
+        }
+        else {
+            $(id).hide('slide', {
+                easing: 'easeInOutQuint',
+                direction: 'up'
+            }, 300, function() {
+                $('div.ui-widget-overlay').remove();
+            });
+        }
     }
 };
 $(document).ready(function() {
