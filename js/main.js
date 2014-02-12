@@ -394,6 +394,7 @@ var SwdPresenter = {
         SwdPresenter.facebookPageInfoPoll(true);
 
         if (loadNextPage && SwdPresenter.oldestPost) {
+            console.log('Loading Next Page');
             updatedTime = SwdPresenter.oldestPost.updated_time;
 //            if (SwdPresenter.oldestPost) {
 //                updatedTime = SwdPresenter.oldestPost.updated_time;
@@ -403,6 +404,7 @@ var SwdPresenter = {
 //            }
         }
         else {
+            console.log('Loading new content.');
             updatedTime = null;
             SwdView.clearPosts();
             SwdPresenter.resetFbCanvasSize();
