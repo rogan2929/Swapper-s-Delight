@@ -495,10 +495,16 @@ var SwdPresenter = {
         SwdView.setGroupButtonText(group.name);
     },
     onClickButtonGroups: function(e, args) {
+        // Prevent the event from bubbling up the DOM and closing the floating panel.
+        e.stopPropagation();
+        
         SwdView.toggleFloatingPanel('#select-group-panel', true);
     },
     // Event Handlers (onX(e, args))
     onClickButtonNew: function(e, args) {
+        // Prevent the event from bubbling up the DOM and closing the floating panel.
+        e.stopPropagation();
+        
         SwdView.toggleFloatingPanel('#new-post-panel', true);
     },
     onClickButtonRefresh: function(e, args) {
@@ -611,7 +617,9 @@ var SwdPresenter = {
             id = $(e.currentTarget).attr('id');
         }
 
+        // Prevent the event from bubbling up the DOM and immediately causing the displayed panel to close.
         e.stopPropagation();
+        
         SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
         SwdView.toggleFloatingPanel('#post-details-panel', true);
         SwdModel.getPostDetails(id, {
