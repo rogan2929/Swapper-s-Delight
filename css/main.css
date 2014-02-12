@@ -407,7 +407,7 @@ textarea {
 }
 
 .post-comment {
-    margin-bottom: 5px;
+/*    margin-bottom: 5px;*/
     padding: 5px;
     font-size: 0.9em !important;
 }
@@ -434,6 +434,10 @@ textarea {
 
 .post-comment a:hover {
     text-decoration: underline;
+}
+
+.post-comment .ui-widget-content {
+    padding: 2px;
 }
 
 div.right-toolbar-button {
