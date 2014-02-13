@@ -1052,14 +1052,14 @@ var SwdView = {
         if (show) {
             // Make the panel modal by summoning a ui-widget-overlay.
             $('<div class="ui-widget-overlay ui-widget-front"></div>').hide().appendTo('body').fadeIn();
-            $(id).fadeIn();
+            $(id).fadeIn(150);
 //            $(id).show('slide', {
 //                easing: 'easeInOutQuint',
 //                direction: 'down'
 //            }, 300);
         }
         else {
-            $(id).fadeOut(function() {
+            $(id).fadeOut(150, function() {
                 $('div.ui-widget-overlay').remove();
             })
 //            $(id).hide('slide', {
