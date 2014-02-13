@@ -1037,10 +1037,12 @@ var SwdView = {
      */
     toggleAjaxLoadingDiv: function(parent, show) {
         if (show) {
-            $(parent + ' .ajax-loading-div').fadeIn(100);
+            //$(parent + ' .ajax-loading-div').fadeIn(100);
+            $(parent + ' .ajax-loading-div').show();
         }
         else {
-            $(parent + ' .ajax-loading-div').fadeOut(100);
+            //$(parent + ' .ajax-loading-div').fadeOut(100);
+            $(parent + ' .ajax-loading-div').hide();
         }
     },
     /***
