@@ -268,7 +268,7 @@ var SwdPresenter = {
                     if (SwdPresenter.groups) {
                         SwdPresenter.setSelectedGroup(selectedGroups[0]);
                         SwdView.addGroupsToSelectPanel(selectedGroups);
-                        
+
                         // Install Event Handlers
                         SwdView.installHandler('onClickButtonGroups', SwdPresenter.onClickButtonGroups, '#button-groups', 'click');
                         SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
@@ -497,14 +497,14 @@ var SwdPresenter = {
     onClickButtonGroups: function(e, args) {
         // Prevent the event from bubbling up the DOM and closing the floating panel.
         e.stopPropagation();
-        
+
         SwdView.toggleFloatingPanel('#select-group-panel', true);
     },
     // Event Handlers (onX(e, args))
     onClickButtonNew: function(e, args) {
         // Prevent the event from bubbling up the DOM and closing the floating panel.
         e.stopPropagation();
-        
+
         SwdView.toggleFloatingPanel('#new-post-panel', true);
     },
     onClickButtonRefresh: function(e, args) {
@@ -599,7 +599,7 @@ var SwdPresenter = {
 
         // Prevent the event from bubbling up the DOM and immediately causing the displayed panel to close.
         e.stopPropagation();
-        
+
         SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
         SwdView.toggleFloatingPanel('#post-details-panel', true);
         SwdModel.getPostDetails(id, {
@@ -638,7 +638,7 @@ var SwdPresenter = {
 
             // Set selected group and load its feed.
             SwdPresenter.setSelectedGroup(group);
-            
+
             SwdView.toggleFloatingPanel('#select-group-panel', false);
         }
     },
@@ -665,7 +665,7 @@ var SwdPresenter = {
                 }
             });
         }
-        
+
         return true;
     },
     onWindowResize: function(e, args) {
@@ -689,7 +689,7 @@ var SwdView = {
         for (i = 0; i < groups.length; i++) {
             $('#select-group-list').append('<li id="' + groups[i].gid + '" class="selection-item select-group"><span class="ui-icon" style="background-image: url(' + groups[i].icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + groups[i].name + '</div></li>');
         }
-        
+
         $('.selection-item.select-group').button();
     },
     addPostComment: function(comment) {
@@ -717,68 +717,68 @@ var SwdView = {
     initView: function() {
         // Set up buttons
         $('.button-nav').button();
-        
+
         $('#button-menu-main').button({
             icons: {
                 primary: 'ui-icon-gear'
             }
         });
-        
+
         $('#button-groups').button({
             icons: {
                 primary: 'ui-icon-contact'
             }
         });
-        
+
         $('#button-new').button({
             icons: {
                 primary: 'ui-icon-comment'
             }
         });
-        
+
         $('#button-refresh').button({
             icons: {
                 primary: 'ui-icon-refresh'
             }
         });
-        
+
         $('#button-menu-daysback').button({
             icons: {
                 primary: 'ui-icon-calendar'
             }
         });
-        
+
         $('#post-button-comment').button({
             icons: {
                 primary: 'ui-icon-comment'
             }
         });
-        
+
         $('#post-button-pm').button({
             icons: {
                 primary: 'ui-icon-mail-closed'
             }
         });
-        
+
         $('#post-button-like').button({
             icons: {
                 primary: 'ui-icon-pin-s'
             }
         });
-        
+
         $('#post-message-user').hover(function() {
             $(this).removeClass('ui-state-default').addClass('ui-state-hover');
         }, function() {
             $(this).removeClass('ui-state-hover').addClass('ui-state-default');
         });
-        
+
         $('.floating-panel').click(function(e) {
             // Prevent floating panels from closing whenever they are clicked on.
             e.stopPropagation();
         });
-        
+
         $('#post-message-user').button();
-        
+
         // Init menus.
         $('#popup-menu-main').menu();
 
@@ -1052,18 +1052,22 @@ var SwdView = {
         if (show) {
             // Make the panel modal by summoning a ui-widget-overlay.
             $('<div class="ui-widget-overlay ui-widget-front"></div>').hide().appendTo('body').fadeIn();
-            $(id).show('slide', {
-                easing: 'easeInOutQuint',
-                direction: 'down'
-            }, 300);
+            $(id).fadeIn();
+//            $(id).show('slide', {
+//                easing: 'easeInOutQuint',
+//                direction: 'down'
+//            }, 300);
         }
         else {
-            $(id).hide('slide', {
-                easing: 'easeInOutQuint',
-                direction: 'down'
-            }, 300, function() {
+            $(id).fadeOut(function() {
                 $('div.ui-widget-overlay').remove();
-            });
+            })
+//            $(id).hide('slide', {
+//                easing: 'easeInOutQuint',
+//                direction: 'down'
+//            }, 300, function() {
+//                $('div.ui-widget-overlay').remove();
+//            });
         }
     }
 };
