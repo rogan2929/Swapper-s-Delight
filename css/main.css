@@ -217,7 +217,7 @@ textarea {
 
 .floating-panel.left-panel {
     margin-left: 0 !important;
-    width: 400px !important;
+    min-width: 300px !important;
 }
 
 .body.row {
