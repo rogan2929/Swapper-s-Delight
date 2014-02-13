@@ -822,7 +822,7 @@ var SwdView = {
      * @param {type} posts
      */
     populatePosts: function(posts) {
-        var i, isEmpty, imageUrl, imageUrlBig, message, post, postTile, primaryContent, secondaryContent;
+        var i, isEmpty, imageUrl, message, post, postTile, primaryContent, secondaryContent;
 
         // If there is a feed to display, then display it.
         if (posts) {
@@ -837,15 +837,13 @@ var SwdView = {
                 }
 
                 if (post.image_url) {
-                    imageUrl = post.image_url[1];
-                    imageUrlBig = post.image_url[0];
+                    imageUrl = post.image_url[0];
                 }
                 else {
                     imageUrl = null;
-                    imageUrlBig = null;
                 }
 
-                postTile = $('<div id="' + post.post_id + '" class="post-tile ui-corner-all ui-widget ui-widget-content ui-state-default"><div class="post-tile-primary-content"></div><div class="post-tile-secondary-content"></div></div>').data('image_url', imageUrlBig);
+                postTile = $('<div id="' + post.post_id + '" class="post-tile ui-corner-all ui-widget ui-widget-content ui-state-default"><div class="post-tile-primary-content"></div><div class="post-tile-secondary-content"></div></div>').data('image_url', imageUrl);
                 primaryContent = $(postTile).children('.post-tile-primary-content');
                 secondaryContent = $(postTile).children('.post-tile-secondary-content');
                 if (message && imageUrl) {

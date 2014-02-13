@@ -45,23 +45,12 @@ function streamQuery($fbSession, $sourceId, $constraints, $limit = 20) {
 
 function processStreamQuery($stream, $images) {
     $posts = array();
-    
+
     for ($i = 0; $i < count($stream); $i++) {
         $post = $stream[$i];
 
-        $post['image_url'] = null;
+        $post['image_url'] = getImageUrlArray($post, $images);
 
-        // For posts with an image, look for associate image data.
-        if ($post['attachment'] && $post['attachment']['media'] && $post['attachment']['media'][0] && $post['attachment']['media'][0]['photo']) {
-            for ($j = 0; $j < count($images); $j++) {
-                if ($post['attachment']['media'][0]['photo']['fbid'] == $images[$j]['object_id']) {
-                    $post['image_url'][] = $images[$j]['images'][0]['source'];
-                    $post['image_url'][] = $images[$j]['images'][0]['source'];
-                    break;
-                }
-            }
-        }
-        
         // Replace any line breaks with <br/>
         if ($post['message']) {
             $post['message'] = str_replace('\n', '<br/>', $post['message']);
@@ -70,6 +59,49 @@ function processStreamQuery($stream, $images) {
         // Add to the posts array.
         $posts[] = $post;
     }
-    
+
     return $posts;
+}
+
+function getImageUrlArray($post, $images) {
+    // For posts with an image, look for associated image data.
+//        if ($post['attachment'] && $post['attachment']['media'] && $post['attachment']['media'][0] && $post['attachment']['media'][0]['photo']) {
+//            for ($k = 0; $k < count($images); $k++) {
+//                if ($post['attachment']['media'][0]['photo']['fbid'] == $images[$k]['object_id']) {
+//                    $post['image_url'][] = $images[$k]['images'][0]['source'];
+//                    //$post['image_url'][] = $images[$j]['images'][0]['source'];
+//                    break;
+//                }
+//            }
+//        }
+    
+    $imageUrls = array();
+
+    if ($post['attachment']) {
+        // For posts with an image, look for associated image data.
+        for ($i = 0; $i < count($post['attachment']); $i++) {
+            if ($post['attachment']['media'] && $post['attachment']['media'][$i] && $post['attachment']['media'][$i]['photo']) {
+                // Get image's unique Facebook Id
+                $fbid = $post['attachment']['media'][$i]['photo']['fbid'];
+                
+                // Find the image url from the given Facebook ID
+                $post['image_url'][] = getImageUrlFromFbId($fbid, $images);
+            }
+        }
+    }
+    
+    return $imageUrls;
+}
+
+function getImageUrlFromFbId($fbid, $images) {
+    $imageUrl = null;
+    
+    for ($i = 0; $i < count($images); $i++) {
+        if ($fbid == $images[$i]['object_id']) {
+            $imageUrl = $images[$i]['images'][0]['source'];
+            break;
+        }
+    }
+    
+    return $imageUrl;
 }
