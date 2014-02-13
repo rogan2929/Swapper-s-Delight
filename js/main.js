@@ -1059,9 +1059,8 @@ var SwdView = {
 //            }, 300);
         }
         else {
-            $(id).fadeOut(150, function() {
-                $('div.ui-widget-overlay').remove();
-            })
+            $(id).hide();
+            $('div.ui-widget-overlay').remove();
 //            $(id).hide('slide', {
 //                easing: 'easeInOutQuint',
 //                direction: 'down'
