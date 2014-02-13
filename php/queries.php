@@ -84,8 +84,6 @@ function getImageUrlArray($post, $images) {
                 // Get image's unique Facebook Id
                 $fbid = $post['attachment']['media'][$i]['photo']['fbid'];
                 
-                echo 'POST_ID: ' . $post['post_id'] . ', FBID: ' . $fbid . '<br/><br/>';
-                
                 // Find the image url from the given Facebook ID
                 $post['image_url'][] = getImageUrlFromFbId($fbid, $images);
             }
@@ -101,6 +99,7 @@ function getImageUrlFromFbId($fbid, $images) {
     for ($i = 0; $i < count($images); $i++) {
         if ($fbid == $images[$i]['object_id']) {
             $imageUrl = $images[$i]['images'][0]['source'];
+            echo $imageUrl . '<br/>';
             break;
         }
     }
