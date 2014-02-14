@@ -56,8 +56,10 @@
                     <div id='panel-post' class='floating-panel-content ui-widget-content'>
                         <div id='panel-post-left' class='panel-post-column scroll-y'>
                             <div id='post-message-user'>
-                                <div id='post-message-pic'></div>
-                                <div id='post-message-name'></div>
+                                <div class='wrapper'>
+                                    <div id='post-message-pic'></div>
+                                    <div id='post-message-name'></div>
+                                </div>
                             </div>
                             <div id='post-image-container' class='ui-widget ui-widget-content ui-corner-all'>
                                 <div id='post-no-image' class='hidden'>

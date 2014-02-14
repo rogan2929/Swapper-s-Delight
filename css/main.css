@@ -138,6 +138,14 @@ textarea {
     position: absolute;
 }
 
+#post-message-user .wrapper {
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 2.8em;
+    position: absolute;
+}
+
 .post-comment-header .timestamp {
     display: block;
     font-weight: normal;
