@@ -280,7 +280,7 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickPostButtonComment', SwdPresenter.onClickPostButtonComment, '#post-button-comment > div', 'click');
                         SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
                         SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
-                        SwdView.installHandler('onClickPanelMessageUser', SwdPresenter.onClickPanelMessageUser, '#post-message-user', 'click');
+                        //SwdView.installHandler('onClickPanelMessageUser', SwdPresenter.onClickPanelMessageUser, '#post-message-user', 'click');
                         SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
                         SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
                         SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#post-comment-text > textarea', 'keyup')
@@ -778,11 +778,11 @@ var SwdView = {
             }
         });
 
-        $('#post-message-user').hover(function() {
-            $(this).removeClass('ui-state-default').addClass('ui-state-hover');
-        }, function() {
-            $(this).removeClass('ui-state-hover').addClass('ui-state-default');
-        });
+//        $('#post-message-user').hover(function() {
+//            $(this).removeClass('ui-state-default').addClass('ui-state-hover');
+//        }, function() {
+//            $(this).removeClass('ui-state-hover').addClass('ui-state-default');
+//        });
 
         $('.floating-panel').click(function(e) {
             // Prevent floating panels from closing whenever they are clicked on.
