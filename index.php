@@ -93,11 +93,11 @@
                                     Comment
                                 </div>
                             </div>
+                            <span id='post-comment-heading'>Viewing all comments, newest first.</span>
                             <div id='post-comments'>
                                 <div id='post-nocomments'>
                                     No comments yet.
                                 </div>
-                                <div id='post-comment-heading'>Viewing all comments, newest first.</div>
                                 <div id='post-comment-list'>
                                 </div>
                             </div>
