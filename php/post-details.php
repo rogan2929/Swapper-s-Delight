@@ -29,7 +29,9 @@ if ($post['message']) {
     $post['message'] = nl2br($post['message']);
 }
 
-$post['image_url'] = getImageUrlArray($post, $images);
+echo var_dump($images);
+
+//$post['image_url'] = getImageUrlArray($post, $images);
 
 //echo json_encode($post);
 
