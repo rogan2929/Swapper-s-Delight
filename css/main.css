@@ -140,17 +140,19 @@ textarea {
 
 #post-message-header {
     position: relative;
+    height: 100%;
+    margin-left: 60px;
 }
 
 #post-message-header .wrapper {
     top: 0;
     bottom: 0;
     margin: auto;
-    height: 2.8em;
+    height: 6.8em;
     position: absolute;
 }
 
-.post-comment-header .timestamp {
+.post-comment-header,#post-message-header .timestamp {
     display: block;
     font-weight: normal;
     color: black;
@@ -465,6 +467,7 @@ textarea {
 
 #post-message-user {
     width: 100%;
+    padding: 5px;
 }
 
 #post-message-name {
