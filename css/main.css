@@ -188,7 +188,7 @@ textarea {
 
 .floating-panel-content > #panel-post-left {
     left: 0;
-    right: 310px;
+    right: 300px;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -201,6 +201,7 @@ textarea {
     position: absolute;
     top: 0;
     bottom: 0;
+    padding: 10px;
 }
 
 .ajax-loading-div {
@@ -328,6 +329,9 @@ textarea {
     word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
 
+.panel-post-column > * {
+    margin-bottom: 10px;
+}
 
 .floating-panel-content > * {
     margin-bottom: 10px;
