@@ -836,6 +836,8 @@ var SwdView = {
 
         // If there is a feed to display, then display it.
         if (posts) {
+            $('#post-feed-noposts').hide();
+
             for (i = 0; i < posts.length; i++) {
                 isEmpty = false;
                 post = posts[i];
@@ -906,9 +908,12 @@ var SwdView = {
             }, function() {
                 $(this).removeClass('ui-state-hover').addClass('ui-state-default');
             });
-
-            SwdPresenter.currentlyLoading = false;
         }
+        else {
+            $('#post-feed-noposts').show();
+        }
+
+        SwdPresenter.currentlyLoading = false;
     },
     /***
      * Sets menu positions.

@@ -50,6 +50,7 @@
                 </div>
                 <div id='post-feed' class='scroll-y'>
                     <div class='ajax-loading-div hidden'></div>
+                    <div id='post-feed-noposts'>No posts were found.</div>
                 </div>
                 <div id='post-details-panel' class='floating-panel hidden'>
                     <div id='panel-post' class='floating-panel-content ui-widget-content'>

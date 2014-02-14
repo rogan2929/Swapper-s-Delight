@@ -246,6 +246,16 @@ textarea {
     width: 500px !important;
 }
 
+#post-feed-noposts {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    font-size: 3em;
+    color: #a7a7a7;
+}
+
 .body.row {
     top: 60px;
     bottom: 0;
