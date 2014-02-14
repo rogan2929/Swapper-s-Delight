@@ -29,34 +29,36 @@ if ($post['message']) {
     $post['message'] = nl2br($post['message']);
 }
 
-$post['image_url'] = getImageUrlArray($post, $images);
+//$post['image_url'] = getImageUrlArray($post, $images);
 
 //echo json_encode($post);
 
-$commentUserData = array();
+echo 'blah';
 
-// For each comment, attach user data to it.
-for ($i = 0; $i < count($post['comments']); $i++) {
-    // Replace any line breaks with <br/>
-    if ($post['comments'][$i]['text']) {
-        $post['comments'][$i]['text'] = nl2br($post['comments'][$i]['text']);
-    }
-    
-    for ($j = 0; $j < count($response[4]['fql_result_set']); $j++) {
-        $userDataObject = $response[4]['fql_result_set'][$j];
-
-        // See if the comment is from the user.
-        if ($post['comments'][$i]['fromid'] == $userDataObject['uid']) {
-            $post['comments'][$i]['user'] = $userDataObject;
-            break;
-        }
-    }
-}
-
-// Query action links for the given post. (FQL's action_links column always returns null. Suspect a bug.)
-$actions = $fbSession->api('/' . $postId . '?fields=actions');
-
-$post['action_links'] = $actions['actions'];
-
-// Return the result.
-echo json_encode($post);
+//$commentUserData = array();
+//
+//// For each comment, attach user data to it.
+//for ($i = 0; $i < count($post['comments']); $i++) {
+//    // Replace any line breaks with <br/>
+//    if ($post['comments'][$i]['text']) {
+//        $post['comments'][$i]['text'] = nl2br($post['comments'][$i]['text']);
+//    }
+//    
+//    for ($j = 0; $j < count($response[4]['fql_result_set']); $j++) {
+//        $userDataObject = $response[4]['fql_result_set'][$j];
+//
+//        // See if the comment is from the user.
+//        if ($post['comments'][$i]['fromid'] == $userDataObject['uid']) {
+//            $post['comments'][$i]['user'] = $userDataObject;
+//            break;
+//        }
+//    }
+//}
+//
+//// Query action links for the given post. (FQL's action_links column always returns null. Suspect a bug.)
+//$actions = $fbSession->api('/' . $postId . '?fields=actions');
+//
+//$post['action_links'] = $actions['actions'];
+//
+//// Return the result.
+//echo json_encode($post);
