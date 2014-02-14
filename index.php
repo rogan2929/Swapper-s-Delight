@@ -51,8 +51,8 @@
                 <div id='post-feed' class='scroll-y'>
                     <div class='ajax-loading-div hidden'></div>
                 </div>
-                <div id='post-details-panel' class='floating-panel ui-widget-content scroll-y hidden'>
-                    <div id='panel-post'>
+                <div id='post-details-panel' class='floating-panel hidden'>
+                    <div id='panel-post' class='floating-panel-content ui-widget-content scroll-y'>
                         <div id='post-message-user'>
                             <div id='post-message-pic'></div>
                             <div id='post-message-name'></div>
@@ -96,15 +96,17 @@
                     </div>
                     <div class='ajax-loading-div hidden'></div>
                 </div>
-                <div id='new-post-panel' class='floating-panel ui-widget-content scroll-y hidden'>
-                    TEST
+                <div id='new-post-panel' class='floating-panel hidden'>
+                    <div class='floating-panel-content ui-widget-content scroll-y'></div>
                 </div>
-                <div id='select-group-panel' class='floating-panel middle-panel ui-widget-content scroll-y hidden'>
-                    <ul id='select-group-list' class='selection-list'>
-                        <li id='select-group-no-groups' class='selection-item select-group'>
-                            <span class='ui-icon ui-icon-check'></span>You're not a member of any Facebook groups.
-                        </li>
-                    </ul>
+                <div id='select-group-panel' class='floating-panel hidden'>
+                    <div class='floating-panel-content ui-widget-content scroll-y'>
+                        <ul id='select-group-list' class='selection-list'>
+                            <li id='select-group-no-groups' class='selection-item select-group'>
+                                <span class='ui-icon ui-icon-check'></span>You're not a member of any Facebook groups.
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
