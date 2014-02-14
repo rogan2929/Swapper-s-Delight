@@ -165,7 +165,7 @@ textarea {
 }
 
 .floating-panel {
-    width: 700px;
+    width: 1000px;
     background: transparent;
     position: fixed;
     left: 0;
@@ -182,6 +182,16 @@ textarea {
     bottom: 25px;
     top: 25px;
     left: 0;
+    right: 0;
+}
+
+.floating-panel-content > .panel-post-left {
+    left: 0;
+    right: 226px;
+}
+
+.floating-panel-content > .panel-post-right {
+    width: 200px;
     right: 0;
 }
 
