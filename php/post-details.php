@@ -29,6 +29,8 @@ if ($post['message']) {
     $post['message'] = nl2br($post['message']);
 }
 
+$post['image_url'] = 'TEST';
+
 echo json_encode($post);
 
 //$post['image_url'] = getImageUrlArray($post, $images);
