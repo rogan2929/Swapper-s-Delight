@@ -97,7 +97,9 @@
                                 <div id='post-nocomments'>
                                     No comments yet.
                                 </div>
-                                <div id='post-comment-list'></div>
+                                <div id='post-comment-heading'>Viewing all comments, newest first.</div>
+                                <div id='post-comment-list'>
+                                </div>
                             </div>
                         </div>
                         <div class='ajax-loading-div hidden'></div>
