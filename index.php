@@ -59,7 +59,7 @@
                                 <div id='post-message-pic'></div>
                                 <div id='post-message-header'>
                                     <p class='wrapper'>
-                                        <a id='post-message-name'></a>
+                                        <a id='post-message-name' target='_blank'></a>
                                         <span class='timestamp'>Today</span>
                                     </p>
                                 </div>
