@@ -52,7 +52,7 @@
                     <div class='ajax-loading-div hidden'></div>
                 </div>
                 <div id='post-details-panel' class='floating-panel hidden'>
-                    <div id='panel-post' class='floating-panel-content ui-widget-content scroll-y'>
+                    <div id='panel-post' class='floating-panel-content ui-widget-content'>
                         <div id='panel-post-left' class='scroll-y'>
                             <div id='post-message-user'>
                                 <div id='post-message-pic'></div>
