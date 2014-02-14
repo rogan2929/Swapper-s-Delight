@@ -834,6 +834,8 @@ var SwdView = {
     populatePosts: function(posts) {
         var i, isEmpty, imageUrl, message, post, postTile, primaryContent, secondaryContent;
 
+        SwdView.toggleAjaxLoadingDiv('#post-feed', false);
+
         // If there is a feed to display, then display it.
         if (posts && posts.length > 0) {
             $('#post-feed-noposts').hide();
@@ -882,8 +884,6 @@ var SwdView = {
                     $(postTile).hide().appendTo('#post-feed');
                 }
             }
-
-            SwdView.toggleAjaxLoadingDiv('#post-feed', false);
 
             // Sleekly fade in the post tile elements.
             // From: http://www.paulirish.com/2008/sequentially-chain-your-callbacks-in-jquery-two-ways/
