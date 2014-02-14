@@ -182,6 +182,8 @@ textarea {
     position: absolute;
     bottom: 50px;
     top: 50px;
+    left: 0;
+    right: 0;
 }
 
 .ajax-loading-div {
