@@ -246,6 +246,10 @@ textarea {
     width: 500px !important;
 }
 
+#post-comment-heading {
+    color: #737373;
+}
+
 #post-feed-noposts {
     position: absolute;
     left: 0;
