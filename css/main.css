@@ -219,7 +219,7 @@ textarea {
 }
 
 .floating-panel.middle-panel {
-    height: 400px;
+    width: 400px !important;
 }
 
 .body.row {
