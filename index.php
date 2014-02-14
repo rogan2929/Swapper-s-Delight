@@ -53,13 +53,10 @@
                 </div>
                 <div id='post-details-panel' class='floating-panel hidden'>
                     <div id='panel-post' class='floating-panel-content ui-widget-content'>
-                        <div id='panel-post-left' class='scroll-y'>
+                        <div id='panel-post-left' class='panel-post-column scroll-y'>
                             <div id='post-message-user'>
                                 <div id='post-message-pic'></div>
                                 <div id='post-message-name'></div>
-                            </div>
-                            <div id='post-permalink' class='ui-widget ui-widget-content ui-corner-all'>
-                                <a class='wrappable-link' target='_blank'></a>
                             </div>
                             <div id='post-image-container' class='ui-widget ui-widget-content ui-corner-all'>
                                 <div id='post-no-image' class='hidden'>
@@ -67,6 +64,9 @@
                                                                     <span>This post does not have a photo, or the owner of this post has chosen not to give permission for applications like Swapper's Delight to view it. Click the link below to see the original Facebook posting.</span>-->
                                 </div>
                                 <div id='post-image'></div>
+                            </div>
+                            <div id='post-permalink' class='ui-widget ui-widget-content ui-corner-all'>
+                                <a class='wrappable-link' target='_blank'></a>
                             </div>
                             <div id='post-message' class='ui-widget ui-widget-content ui-corner-all'>
                                 <div id='post-message-text'></div>
@@ -82,7 +82,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id='panel-post-right' class='scroll-y'>
+                        <div id='panel-post-right' class='panel-post-column scroll-y'>
                             <div id='post-comment-text' class='ui-corner-all ui-widget ui-widget-content'>
                                 <textarea placeholder='Add a comment...'></textarea>
                                 <div class='ajax-loading-div hidden'></div>

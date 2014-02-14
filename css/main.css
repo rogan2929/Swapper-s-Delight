@@ -192,6 +192,7 @@ textarea {
     position: absolute;
     top: 0;
     bottom: 0;
+    padding: 10px;
 }
 
 .floating-panel-content > #panel-post-right {
@@ -515,8 +516,6 @@ div.login-div {
 }
 
 #post-comment-text {
-    margin-top: 10px;
-    margin-bottom: 10px;
     border-width: 2px;
     height: 4.5em;
     padding: 2px;
