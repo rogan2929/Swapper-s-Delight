@@ -185,12 +185,12 @@ textarea {
     right: 0;
 }
 
-.floating-panel-content > .panel-post-left {
+.floating-panel-content > #panel-post-left {
     left: 0;
     right: 226px;
 }
 
-.floating-panel-content > .panel-post-right {
+.floating-panel-content > #panel-post-right {
     width: 200px;
     right: 0;
 }
