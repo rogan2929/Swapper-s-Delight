@@ -70,6 +70,10 @@
                         <div id='post-message' class='ui-widget ui-widget-content ui-corner-all'>
                             <div id='post-message-text'></div>
                         </div>
+                        <div id='post-comment-text' class='ui-corner-all ui-widget ui-widget-content'>
+                            <textarea placeholder='Add a comment...'></textarea>
+                            <div class='ajax-loading-div hidden'></div>
+                        </div>
                         <div id='post-button-bar'>
                             <div>
                                 <div id='post-button-comment' class='post-button'>
@@ -82,10 +86,6 @@
                                     Like
                                 </div>
                             </div>
-                        </div>
-                        <div id='post-comment-text' class='ui-corner-all ui-widget ui-widget-content'>
-                            <textarea placeholder='Add a comment...'></textarea>
-                            <div class='ajax-loading-div hidden'></div>
                         </div>
                         <div id='post-comments'>
                             <div id='post-nocomments'>
