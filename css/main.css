@@ -187,11 +187,14 @@ textarea {
 
 .floating-panel-content > #panel-post-left {
     left: 0;
-    right: 226px;
+    right: 310px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
 }
 
 .floating-panel-content > #panel-post-right {
-    width: 200px;
+    width: 300px;
     right: 0;
 }
 
