@@ -183,6 +183,7 @@ textarea {
     top: 25px;
     left: 0;
     right: 0;
+    overflow-y: hidden;
 }
 
 .ajax-loading-div {
