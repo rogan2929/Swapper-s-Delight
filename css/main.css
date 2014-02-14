@@ -248,6 +248,7 @@ textarea {
 
 #post-comment-heading {
     color: #737373;
+    display: block;
 }
 
 #post-feed-noposts {
