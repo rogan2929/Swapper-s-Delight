@@ -591,10 +591,10 @@ var SwdPresenter = {
     onClickPostTile: function(e, args) {
         var id;
         var post;
-        
+
         // Assuming one of the child elements of post-tile was clicked.
         id = $(e.currentTarget).parents('div.post-tile').attr('id');
-        
+
         if (!id) {
             id = $(e.currentTarget).attr('id');
         }
@@ -604,14 +604,14 @@ var SwdPresenter = {
 
         SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
         SwdView.toggleFloatingPanel('#post-details-panel', true);
-        
+
         SwdModel.getPostDetails(id, {
             success: function(response) {
                 post = response;
-                
+
                 // Try to retrieve image URL from object.
                 //post['image_url'] = $('#' + id).data('image_url');
-                
+
                 if (post) {
                     SwdView.showPostDetails(post);
                 }
@@ -706,6 +706,11 @@ var SwdView = {
         }
         else {
             userImage = '';
+        }
+
+        // Hide the 'no comments' div.
+        if ($('#post-nocomments').is(':visible')) {
+            $('#post-nocomments').hide();
         }
 
         //timeStamp = $.datepicker.formatDate('DD, mm/dd/yy at HH:MM', new Date(post.comments[i].time * 1000));
@@ -930,7 +935,7 @@ var SwdView = {
         $('#left-rail').animate({
             top: Math.max(offset + 60, 0)
         }, 100);
-        
+
         $('#main-toolbar, .floating-panel').animate({
             top: Math.max(offset, 0)
         }, 100);
@@ -970,7 +975,7 @@ var SwdView = {
         // Display the post's image, or the no-image placeholder.
         if (post.image_url && post.image_url.length > 0) {
             postImage = 'url("' + post.image_url[0] + '")';
-            
+
             // Hide the no-image container and display the post's attached image.
             $('#post-no-image').hide();
             $('#post-image').show();
@@ -999,8 +1004,6 @@ var SwdView = {
         $('#post-nocomments').show();
 
         if (post.comments.length > 0) {
-            $('#post-nocomments').hide();
-
             for (i = 0; i < post.comments.length; i++) {
                 SwdView.addPostComment(post.comments[i]);
             }
