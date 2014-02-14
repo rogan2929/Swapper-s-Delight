@@ -35,7 +35,7 @@ if ($post['message']) {
     $post['message'] = nl2br($post['message']);
 }
 
-$post['image_url'] = getImageUrlArray($post, $images);
+//$post['image_url'] = getImageUrlArray($post, $images);
 
 $commentUserData = array();
 
