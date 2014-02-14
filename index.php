@@ -57,15 +57,15 @@
                             <div id='post-message-pic'></div>
                             <div id='post-message-name'></div>
                         </div>
+                        <div id='post-permalink' class='ui-widget ui-widget-content ui-corner-all'>
+                            <a class='wrappable-link' target='_blank'></a>
+                        </div>
                         <div id='post-image-container' class='ui-widget ui-widget-content ui-corner-all'>
                             <div id='post-no-image' class='hidden'>
                                 <!--                                <div></div>
                                                                 <span>This post does not have a photo, or the owner of this post has chosen not to give permission for applications like Swapper's Delight to view it. Click the link below to see the original Facebook posting.</span>-->
                             </div>
                             <div id='post-image'></div>
-                        </div>
-                        <div id='post-permalink' class='ui-widget ui-widget-content ui-corner-all'>
-                            <a class='wrappable-link' target='_blank'></a>
                         </div>
                         <div id='post-message' class='ui-widget ui-widget-content ui-corner-all'>
                             <div id='post-message-text'></div>
