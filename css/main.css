@@ -396,7 +396,13 @@ textarea {
     width: 236px;
 }
 
-.centered-h {
+#post-button-comment {
+    position: relative;
+}
+
+#post-button-comment > div {
+    width: 130px;
+    position: absolute;
     left: 0;
     right: 0;
     margin-left: auto;

@@ -87,9 +87,11 @@
                                 <textarea placeholder='Add a comment...'></textarea>
                                 <div class='ajax-loading-div hidden'></div>
                             </div>
-                                <div id='post-button-comment' class='post-button centered-h'>
+                            <div id='post-button-comment'>
+                                <div class='post-button'>
                                     Comment
                                 </div>
+                            </div>
                             <div id='post-comments'>
                                 <div id='post-nocomments'>
                                     No comments yet.
