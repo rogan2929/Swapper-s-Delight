@@ -505,7 +505,7 @@ textarea {
     margin-left: 60px;
 }
 
-.post-comment a:hover {
+.post-comment a:hover, #post-message-user a:hover {
     text-decoration: underline;
 }
 
