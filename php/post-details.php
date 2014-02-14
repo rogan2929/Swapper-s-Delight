@@ -1,6 +1,7 @@
 <?php
 
 require_once 'session.php';
+require_once 'queries.php';
 
 $postId = $_GET['postId'];
 
@@ -29,13 +30,7 @@ if ($post['message']) {
     $post['message'] = nl2br($post['message']);
 }
 
-$post['image_url'] = 'TEST';
-
-echo json_encode($post);
-
-//$post['image_url'] = getImageUrlArray($post, $images);
-
-//echo json_encode($post);
+$post['image_url'] = getImageUrlArray($post, $images);
 
 //$commentUserData = array();
 //
@@ -63,4 +58,4 @@ echo json_encode($post);
 //$post['action_links'] = $actions['actions'];
 //
 //// Return the result.
-//echo json_encode($post);
+echo json_encode($post);
