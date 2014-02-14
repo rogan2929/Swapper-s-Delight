@@ -99,7 +99,7 @@
                 <div id='new-post-panel' class='floating-panel ui-widget-content scroll-y hidden'>
                     TEST
                 </div>
-                <div id='select-group-panel' class='floating-panel left-panel ui-widget-content scroll-y hidden'>
+                <div id='select-group-panel' class='floating-panel middle-panel ui-widget-content scroll-y hidden'>
                     <ul id='select-group-list' class='selection-list'>
                         <li id='select-group-no-groups' class='selection-item select-group'>
                             <span class='ui-icon ui-icon-check'></span>You're not a member of any Facebook groups.
