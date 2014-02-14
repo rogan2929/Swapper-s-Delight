@@ -591,8 +591,10 @@ var SwdPresenter = {
     onClickPostTile: function(e, args) {
         var id;
         var post;
+        
         // Assuming one of the child elements of post-tile was clicked.
         id = $(e.currentTarget).parents('div.post-tile').attr('id');
+        
         if (!id) {
             id = $(e.currentTarget).attr('id');
         }
@@ -602,11 +604,14 @@ var SwdPresenter = {
 
         SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
         SwdView.toggleFloatingPanel('#post-details-panel', true);
+        
         SwdModel.getPostDetails(id, {
             success: function(response) {
                 post = response;
+                
                 // Try to retrieve image URL from object.
-                post['image_url'] = $('#' + id).data('image_url');
+                //post['image_url'] = $('#' + id).data('image_url');
+                
                 if (post) {
                     SwdView.showPostDetails(post);
                 }
@@ -843,7 +848,7 @@ var SwdView = {
                     imageUrl = null;
                 }
 
-                postTile = $('<div id="' + post.post_id + '" class="post-tile ui-corner-all ui-widget ui-widget-content ui-state-default"><div class="post-tile-primary-content"></div><div class="post-tile-secondary-content"></div></div>').data('image_url', imageUrl);
+                postTile = $('<div id="' + post.post_id + '" class="post-tile ui-corner-all ui-widget ui-widget-content ui-state-default"><div class="post-tile-primary-content"></div><div class="post-tile-secondary-content"></div></div>');//.data('image_url', imageUrl);
                 primaryContent = $(postTile).children('.post-tile-primary-content');
                 secondaryContent = $(postTile).children('.post-tile-secondary-content');
                 if (message && imageUrl) {
@@ -961,8 +966,10 @@ var SwdView = {
     showPostDetails: function(post) {
         var userImage, postImage, i;
 
-        if (post.image_url) {
-            postImage = 'url("' + post.image_url + '")';
+        // Display the post's image, or the no-image placeholder.
+        if (post.image_url && post.image_url.length > 0) {
+            postImage = 'url("' + post.image_url[0] + '")';
+            
             // Hide the no-image container and display the post's attached image.
             $('#post-no-image').hide();
             $('#post-image').show();

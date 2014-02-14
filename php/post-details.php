@@ -5,7 +5,8 @@ require_once 'session.php';
 $postId = $_GET['postId'];
 
 $queries = array(
-    'detailsQuery' => 'SELECT post_id,message,actor_id,permalink,like_info,share_info,comment_info,tagged_ids FROM stream WHERE post_id="' . $postId . '"',
+    'detailsQuery' => 'SELECT post_id,message,actor_id,permalink,like_info,share_info,comment_info,tagged_ids,attachment FROM stream WHERE post_id="' . $postId . '"',
+    'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #detailsQuery)',
     'userQuery' => 'SELECT last_name,first_name,pic_square,profile_url FROM user WHERE uid IN (SELECT actor_id FROM #detailsQuery)',
     'commentsQuery' => 'SELECT fromid,text,text_tags,attachment,time FROM comment WHERE post_id IN (SELECT post_id FROM #detailsQuery)',
     'commentUserQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url FROM user WHERE uid IN (SELECT fromid FROM #commentsQuery)'
@@ -18,30 +19,34 @@ $response = $fbSession->api(array(
         ));
 
 // Construct a return object.
-$postDetails = $response[0]['fql_result_set'][0];
-$postDetails['user'] = $response[2]['fql_result_set'][0];
-$postDetails['comments'] = $response[1]['fql_result_set'];
+$post = $response[0]['fql_result_set'][0];
+$post['user'] = $response[3]['fql_result_set'][0];
+$post['comments'] = $response[2]['fql_result_set'];
 
-if ($postDetails['message']) {
+$images = $response[1]['fql_result_set'];
+
+if ($post['message']) {
     // Replace new line characters with <br/>
-    $postDetails['message'] = nl2br($postDetails['message']);
+    $post['message'] = nl2br($post['message']);
 }
+
+$post['image_url'] = getImageUrlArray($post, $images);
 
 $commentUserData = array();
 
 // For each comment, attach user data to it.
-for ($i = 0; $i < count($postDetails['comments']); $i++) {
+for ($i = 0; $i < count($post['comments']); $i++) {
     // Replace any line breaks with <br/>
-    if ($postDetails['comments'][$i]['text']) {
-        $postDetails['comments'][$i]['text'] = nl2br($postDetails['comments'][$i]['text']);
+    if ($post['comments'][$i]['text']) {
+        $post['comments'][$i]['text'] = nl2br($post['comments'][$i]['text']);
     }
     
-    for ($j = 0; $j < count($response[3]['fql_result_set']); $j++) {
-        $userDataObject = $response[3]['fql_result_set'][$j];
+    for ($j = 0; $j < count($response[4]['fql_result_set']); $j++) {
+        $userDataObject = $response[4]['fql_result_set'][$j];
 
         // See if the comment is from the user.
-        if ($postDetails['comments'][$i]['fromid'] == $userDataObject['uid']) {
-            $postDetails['comments'][$i]['user'] = $userDataObject;
+        if ($post['comments'][$i]['fromid'] == $userDataObject['uid']) {
+            $post['comments'][$i]['user'] = $userDataObject;
             break;
         }
     }
@@ -50,7 +55,7 @@ for ($i = 0; $i < count($postDetails['comments']); $i++) {
 // Query action links for the given post. (FQL's action_links column always returns null. Suspect a bug.)
 $actions = $fbSession->api('/' . $postId . '?fields=actions');
 
-$postDetails['action_links'] = $actions['actions'];
+$post['action_links'] = $actions['actions'];
 
 // Return the result.
-echo json_encode($postDetails);
+echo json_encode($post);

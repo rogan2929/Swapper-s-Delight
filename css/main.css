@@ -213,10 +213,10 @@ textarea {
     margin-left: 10px !important;
 }
 
-.floating-panel.left-panel {
+/*.floating-panel.left-panel {
     margin-left: 0 !important;
     min-width: 300px !important;
-}
+}*/
 
 .floating-panel.middle-panel {
     width: 400px !important;
