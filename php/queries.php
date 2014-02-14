@@ -68,9 +68,10 @@ function processStreamQuery($stream, $images) {
  */
 function getImageUrlArray($post, $images) {
     $imageUrls = array();
+    
+    echo 'TEST';
 
     if ($post['attachment'] && $post['attachment']['media']) {
-        echo 'TEST';
 //        // For posts with an image, look for associated image data.
 //        for ($i = 0; $i < count($post['attachment']); $i++) {
 //            if ($post['attachment']['media'][$i] && $post['attachment']['media'][$i]['photo']) {
