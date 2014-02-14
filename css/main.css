@@ -167,7 +167,7 @@ textarea {
 .floating-panel {
     width: 700px;
     background: transparent;
-    position: fixed;
+    position: relative;
     left: 0;
     right: 0;
     margin-left: auto;
@@ -177,7 +177,11 @@ textarea {
 
 .floating-panel.floating-panel-content {
     border: 5px solid #ccc;
-    margin: 100px;
+    position: absolute;
+    left: 100px;
+    right: 100px;
+    bottom: 100px;
+    top: 100px;
 }
 
 .ajax-loading-div {
@@ -217,11 +221,6 @@ textarea {
 .selection-item div {
     margin-left: 10px !important;
 }
-
-/*.floating-panel.left-panel {
-    margin-left: 0 !important;
-    min-width: 300px !important;
-}*/
 
 .floating-panel.middle-panel {
     width: 400px !important;
