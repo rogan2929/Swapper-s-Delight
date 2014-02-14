@@ -84,7 +84,6 @@
                             <div id='post-nocomments'>
                                 No comments yet.
                             </div>
-                            <div id='post-comment-list'></div>
                             <div id='post-comment-text' class='ui-corner-all ui-widget ui-widget-content'>
                                 <textarea placeholder='Add a comment...'></textarea>
                                 <div class='ajax-loading-div hidden'></div>
@@ -92,6 +91,7 @@
                             <div id='post-button-comment' class='post-button'>
                                 Comment
                             </div>
+                            <div id='post-comment-list'></div>
                         </div>
                         <div class='ajax-loading-div hidden'></div>
                     </div>
