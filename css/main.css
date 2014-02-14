@@ -176,12 +176,11 @@ textarea {
 }
 
 .floating-panel > .floating-panel-content {
-    padding: 20px;
     border: 5px solid #ccc;
     border-radius: 5px;
     position: absolute;
-    bottom: 50px;
-    top: 50px;
+    bottom: 25px;
+    top: 25px;
     left: 0;
     right: 0;
 }
