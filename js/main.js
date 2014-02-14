@@ -554,16 +554,18 @@ var SwdPresenter = {
         // Show the ajax loading div.
         SwdView.toggleAjaxLoadingDiv('#post-comment-text', true);
 
-        // Post the comment.
-        SwdModel.postComment(id, comment, {
-            success: function(response) {
-                SwdView.addPostComment(response);
-                SwdView.clearPostCommentText();
-            },
-            fail: function(response) {
-                SwdView.showError(response);
-            }
-        });
+        // Post the comment, if it's not empty.
+        if (comment) {
+            SwdModel.postComment(id, comment, {
+                success: function(response) {
+                    SwdView.addPostComment(response);
+                    SwdView.clearPostCommentText();
+                },
+                fail: function(response) {
+                    SwdView.showError(response);
+                }
+            });
+        }
     },
     onClickPostButtonLike: function(e, args) {
         var id;
