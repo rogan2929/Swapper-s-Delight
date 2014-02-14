@@ -398,10 +398,11 @@ textarea {
 
 #post-button-comment {
     position: relative;
+    height: 30px;
 }
 
 #post-button-comment > div {
-    width: 130px;
+    width: 115px;
     position: absolute;
     left: 0;
     right: 0;
