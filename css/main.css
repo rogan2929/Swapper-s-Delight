@@ -167,7 +167,7 @@ textarea {
 .floating-panel {
     width: 700px;
     background: transparent;
-    position: relative;
+    position: fixed;
     left: 0;
     right: 0;
     margin-left: auto;
@@ -176,12 +176,12 @@ textarea {
 }
 
 .floating-panel > .floating-panel-content {
+    padding: 20px;
     border: 5px solid #ccc;
+    border-radius: 5px;
     position: absolute;
-    left: 100px;
-    right: 100px;
-    bottom: 100px;
-    top: 100px;
+    bottom: 50px;
+    top: 50px;
 }
 
 .ajax-loading-div {
