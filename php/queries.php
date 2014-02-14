@@ -63,18 +63,10 @@ function processStreamQuery($stream, $images) {
     return $posts;
 }
 
+/***
+ * For posts with an image, look for associated image data.
+ */
 function getImageUrlArray($post, $images) {
-    // For posts with an image, look for associated image data.
-//        if ($post['attachment'] && $post['attachment']['media'] && $post['attachment']['media'][0] && $post['attachment']['media'][0]['photo']) {
-//            for ($k = 0; $k < count($images); $k++) {
-//                if ($post['attachment']['media'][0]['photo']['fbid'] == $images[$k]['object_id']) {
-//                    $post['image_url'][] = $images[$k]['images'][0]['source'];
-//                    //$post['image_url'][] = $images[$j]['images'][0]['source'];
-//                    break;
-//                }
-//            }
-//        }
-    
     $imageUrls = array();
 
     if ($post['attachment'] && $post['attachment']['media']) {
@@ -85,7 +77,8 @@ function getImageUrlArray($post, $images) {
                 $fbid = $post['attachment']['media'][$i]['photo']['fbid'];
                 
                 // Find the image url from the given Facebook ID
-                $imageUrls[] = getImageUrlFromFbId($fbid, $images);
+                //$imageUrls[] = getImageUrlFromFbId($fbid, $images);
+                $imageUrls[] = 'image: ' . $i . '<br/><br/>';
             }
         }
     }

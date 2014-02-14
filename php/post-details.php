@@ -31,7 +31,7 @@ if ($post['message']) {
 
 $post['image_url'] = getImageUrlArray($post, $images);
 
-echo json_encode($post);
+//echo json_encode($post);
 
 $commentUserData = array();
 
