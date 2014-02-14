@@ -507,6 +507,7 @@ textarea {
 
 .post-comment a:hover, #post-message-user a:hover {
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .post-comment .ui-widget-content {
