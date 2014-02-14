@@ -173,6 +173,8 @@ textarea {
     margin-left: auto;
     margin-right: auto;
     z-index: 1000;
+    margin-top: 100px;
+    margin-bottom: 100px;
 }
 
 .ajax-loading-div {

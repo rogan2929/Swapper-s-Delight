@@ -328,9 +328,7 @@ var SwdPresenter = {
                     height = clientHeight - offsetTop - 10;
                 }
 
-                // Set floating panel heights
                 SwdView.setFloatingPanelHeight(height);
-                SwdView.setFloatingPanelPosition(height)
 
                 scrollPos = $('#app-content').height() - clientHeight;
 
@@ -933,7 +931,7 @@ var SwdView = {
             top: Math.max(offset + 60, 0)
         }, 100);
         
-        $('#main-toolbar').animate({
+        $('#main-toolbar, .floating-panel').animate({
             top: Math.max(offset, 0)
         }, 100);
     },
@@ -943,16 +941,6 @@ var SwdView = {
      */
     setFloatingPanelHeight: function(height) {
         $('.floating-panel').height(height);
-    },
-    /***
-     * Dynamically set the top and bottom of 
-     * @param {type} top
-     * @param {type} bottom
-     */
-    setFloatingPanelPosition: function(top) {
-        $('.floating-panel').animate({
-            top: Math.max(top, 0)
-        }, 100);
     },
     /***
      * Changes the text shown in the "Select a Group" button.
