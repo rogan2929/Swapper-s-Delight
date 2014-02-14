@@ -138,11 +138,11 @@ textarea {
     position: absolute;
 }
 
-#post-message-user {
+#post-message-header {
     position: relative;
 }
 
-#post-message-user .wrapper {
+#post-message-header .wrapper {
     top: 0;
     bottom: 0;
     margin: auto;
