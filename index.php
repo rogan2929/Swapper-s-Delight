@@ -105,7 +105,7 @@
                 <div id='new-post-panel' class='floating-panel hidden'>
                     <div class='floating-panel-content ui-widget-content scroll-y'></div>
                 </div>
-                <div id='select-group-panel' class='floating-panel hidden'>
+                <div id='select-group-panel' class='floating-panel narrow-floating-panel hidden'>
                     <div class='floating-panel-content ui-widget-content scroll-y'>
                         <ul id='select-group-list' class='selection-list'>
                             <li id='select-group-no-groups' class='selection-item select-group'>
