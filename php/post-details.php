@@ -18,7 +18,11 @@ $response = $fbSession->api(array(
     'queries' => $queries
         ));
 
-echo json_encode($response);
+echo json_encode($response[0]) . '<br/><br/>';
+echo json_encode($response[1]) . '<br/><br/>';
+echo json_encode($response[2]) . '<br/><br/>';
+echo json_encode($response[3]) . '<br/><br/>';
+echo json_encode($response[4]) . '<br/><br/>';
 
 // Construct a return object.
 $post = $response[0]['fql_result_set'][0];
