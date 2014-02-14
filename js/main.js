@@ -835,7 +835,7 @@ var SwdView = {
         var i, isEmpty, imageUrl, message, post, postTile, primaryContent, secondaryContent;
 
         // If there is a feed to display, then display it.
-        if (posts) {
+        if (posts && posts.length > 0) {
             $('#post-feed-noposts').hide();
 
             for (i = 0; i < posts.length; i++) {
