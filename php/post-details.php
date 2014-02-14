@@ -18,12 +18,6 @@ $response = $fbSession->api(array(
     'queries' => $queries
         ));
 
-echo json_encode($response[0]) . '<br/><br/>';
-echo json_encode($response[1]) . '<br/><br/>';
-echo json_encode($response[2]) . '<br/><br/>';
-echo json_encode($response[3]) . '<br/><br/>';
-echo json_encode($response[4]) . '<br/><br/>';
-
 // Construct a return object.
 $post = $response[0]['fql_result_set'][0];
 $post['comments'] = $response[1]['fql_result_set'];
@@ -35,7 +29,9 @@ if ($post['message']) {
     $post['message'] = nl2br($post['message']);
 }
 
-//$post['image_url'] = getImageUrlArray($post, $images);
+$post['image_url'] = getImageUrlArray($post, $images);
+
+echo json_encode($post);
 
 $commentUserData = array();
 
