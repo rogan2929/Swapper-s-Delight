@@ -398,7 +398,7 @@ textarea {
 
 #post-button-comment {
     position: relative;
-    height: 30px;
+    height: 32px;
 }
 
 #post-button-comment > div {
@@ -451,14 +451,12 @@ textarea {
 }
 
 .post-comment {
-    margin-bottom: 7px;
-    padding: 5px;
+    margin-bottom: 8px;
     font-size: 0.9em !important;
 }
 
 .post-comment .ui-state-default {
     padding: 5px;
-    /*    margin-bottom: 5px;*/
     position: relative;
 }
 
