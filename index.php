@@ -93,8 +93,8 @@
                                 Comment
                             </div>
                         </div>
+                        <div class='ajax-loading-div hidden'></div>
                     </div>
-                    <div class='ajax-loading-div hidden'></div>
                 </div>
                 <div id='new-post-panel' class='floating-panel hidden'>
                     <div class='floating-panel-content ui-widget-content scroll-y'></div>
