@@ -328,9 +328,9 @@ var SwdPresenter = {
                     height = clientHeight - offsetTop - 10;
                 }
 
-                // Set floating panel heights; 15% "padding"
-                SwdView.setFloatingPanelHeight(height * 0.85);
-                SwdView.setFloatingPanelPosition(height * 0.15)
+                // Set floating panel heights
+                SwdView.setFloatingPanelHeight(height);
+                SwdView.setFloatingPanelPosition(height)
 
                 scrollPos = $('#app-content').height() - clientHeight;
 
