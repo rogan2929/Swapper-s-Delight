@@ -152,7 +152,7 @@ textarea {
     position: absolute;
 }
 
-.post-comment-header,#post-message-header .timestamp {
+.post-comment-header .timestamp,#post-message-header .timestamp {
     display: block;
     font-weight: normal;
     color: black;
