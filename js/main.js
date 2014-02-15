@@ -280,7 +280,6 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickPostButtonComment', SwdPresenter.onClickPostButtonComment, '#post-button-comment > div', 'click');
                         SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
                         SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
-                        //SwdView.installHandler('onClickPanelMessageUser', SwdPresenter.onClickPanelMessageUser, '#post-message-user', 'click');
                         SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
                         SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
                         SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#post-comment-text > textarea', 'keyup')
@@ -541,10 +540,6 @@ var SwdPresenter = {
         SwdPresenter.loadPosts(false);
         SwdView.setSelectedPostType(id);
     },
-    onClickPanelMessageUser: function(e, args) {
-        var profileUrl = $(e.currentTarget).data('src');
-        window.open(profileUrl);
-    },
     onClickPostButtonComment: function(e, args) {
         var id, comment;
 
@@ -778,24 +773,13 @@ var SwdView = {
             }
         });
 
-//        $('#post-message-user').hover(function() {
-//            $(this).removeClass('ui-state-default').addClass('ui-state-hover');
-//        }, function() {
-//            $(this).removeClass('ui-state-hover').addClass('ui-state-default');
-//        });
-
         $('.floating-panel').click(function(e) {
             // Prevent floating panels from closing whenever they are clicked on.
             e.stopPropagation();
         });
 
-        //$('#post-message-user').button();
-
         // Init menus.
         $('#popup-menu-main').menu();
-
-        // Fade out the div we are using to hide non-initted elements.
-        //$('#overlay-app-loading').fadeOut('fast');
     },
     /**
      * Installs an event handler and connects it to the presenter.
@@ -1005,7 +989,7 @@ var SwdView = {
 
         $('#post-message-pic').css('background-image', userImage);
         $('#post-message-name').text(post.user.first_name + ' ' + post.user.last_name);
-        $('#post-message-user').data('src', post.user.profile_url);
+        $('#post-message-name').attr('href', post.user.profile_url);
         $('#post-message-text').html(post.message);
         $('#post-comment-list').empty();
         $('#post-nocomments').show();
