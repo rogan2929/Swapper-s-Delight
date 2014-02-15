@@ -773,7 +773,7 @@ var SwdView = {
             }
         });
 
-        $('.floating-panel').click(function(e) {
+        $('.floating-panel-content').click(function(e) {
             // Prevent floating panels from closing whenever they are clicked on.
             e.stopPropagation();
         });
