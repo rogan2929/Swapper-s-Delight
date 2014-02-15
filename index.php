@@ -53,6 +53,7 @@
                     <div id='post-feed-noposts'>No posts were found.</div>
                 </div>
                 <div id='post-details-panel' class='floating-panel hidden'>
+                    <div class='close-button'></div>
                     <div id='panel-post' class='floating-panel-content ui-widget-content'>
                         <div id='panel-post-left' class='panel-post-column scroll-y'>
                             <div id='post-message-user' class='ui-state-default'>

@@ -181,15 +181,24 @@ textarea {
 .floating-panel {
     width: 1000px;
     background-color: transparent;
-    background-image: url('/img/panel-close.png');
-    background-repeat: no-repeat;
-    background-position: 100% 0%;
     position: fixed;
     left: 0;
     right: 0;
     margin-left: auto;
     margin-right: auto;
     z-index: 1000;
+}
+
+.floating-panel .close-button {
+    background-image: url('/img/panel-close.png');
+    background-repeat: no-repeat;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    z-index: 1001;
+    position: absolute;
+    right: -15px;
+    top: -15px;
 }
 
 .floating-panel > .floating-panel-content {
