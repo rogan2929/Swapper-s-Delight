@@ -179,7 +179,7 @@ textarea {
 }
 
 .floating-panel {
-    width: 1000px;
+    width: 950px;
     background-color: transparent;
     position: fixed;
     left: 0;
