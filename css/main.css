@@ -194,13 +194,12 @@ textarea {
     top: 25px;
 }
 
-.close-button :hover {
+.close-button:hover {
     background-image: url('/img/panel-close-hover.png');
     cursor: pointer;
-    top: 0px;
 }
 
-.close-button :active {
+.close-button:active {
     background-image: url('/img/panel-close-active.png');
 }
 
