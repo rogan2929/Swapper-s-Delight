@@ -183,23 +183,23 @@ textarea {
     z-index: 1000;
 }
 
-.floating-panel .close-button {
+.close-button {
     background-image: url('/img/panel-close.png');
     background-repeat: no-repeat;
     height: 30px;
     width: 30px;
-    cursor: pointer;
     z-index: 1001;
     position: absolute;
     right: -30px;
     top: 25px;
 }
 
-.floating-panel .close-button :hover {
+.close-button :hover {
     background-image: url('/img/panel-close-hover.png');
+    cursor: pointer;
 }
 
-.floating-panel .close-button :active {
+.close-button :active {
     background-image: url('/img/panel-close-active.png');
 }
 
