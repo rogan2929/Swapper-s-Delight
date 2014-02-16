@@ -192,6 +192,7 @@ textarea {
     position: absolute;
     right: 0;
     top: -5px;
+    display: none;
 }
 
 .close-button:hover {
