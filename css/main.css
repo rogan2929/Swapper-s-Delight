@@ -195,6 +195,14 @@ textarea {
     top: 25px;
 }
 
+.floating-panel .close-button :hover {
+    background-image: url('/img/panel-close-hover.png');
+}
+
+.floating-panel .close-button :active {
+    background-image: url('/img/panel-close-active.png');
+}
+
 .floating-panel > .floating-panel-content {
     border: 5px solid #ccc;
     border-radius: 5px;
