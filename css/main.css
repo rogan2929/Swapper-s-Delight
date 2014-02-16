@@ -197,8 +197,8 @@ textarea {
     cursor: pointer;
     z-index: 1001;
     position: absolute;
-    right: -20px;
-    top: 5;
+    right: -15px;
+    top: 10px;
 }
 
 .floating-panel > .floating-panel-content {
