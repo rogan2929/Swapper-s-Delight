@@ -49,7 +49,7 @@ function processStreamQuery($stream, $images) {
     for ($i = 0; $i < count($stream); $i++) {
         $post = $stream[$i];
 
-        $post['image_url'] = getImageUrlArray($post, $images);
+        $post['image_url'] = getImageUrlArray($post, $images, $true);
 
         // Replace any line breaks with <br/>
         if ($post['message']) {
@@ -85,11 +85,18 @@ function getImageUrlArray($post, $images) {
     return $imageUrls;
 }
 
-function getImageUrlFromFbId($fbid, $images) {
+function getImageUrlFromFbId($fbid, $images, $small = false) {
     $imageUrl = null;
     
     for ($i = 0; $i < count($images); $i++) {
         if ($fbid == $images[$i]['object_id']) {
+            $index = 0;
+            
+            // See if we are trying to retrieve a small image. (Usually last in the array.)
+            if ($small) {
+                $index = count($images[$i]['images']) - 1;
+            }
+            
             $imageUrl = $images[$i]['images'][0]['source'];
             break;
         }

@@ -19,7 +19,7 @@ $response = $fbSession->api(array(
     'queries' => $queries
         ));
 
-// Construct a return object.
+// Begin parsing the returned data.
 $post = $response[0]['fql_result_set'][0];
 $post['comments'] = $response[1]['fql_result_set'];
 $images = $response[2]['fql_result_set'];
@@ -30,17 +30,19 @@ if ($post['message']) {
     $post['message'] = nl2br($post['message']);
 }
 
+// Extract image data for the post.
 $post['image_url'] = getImageUrlArray($post, $images);
 
 $commentUserData = array();
 
-// For each comment, attach user data to it.
+// Begin parsing comment data.
 for ($i = 0; $i < count($post['comments']); $i++) {
     // Replace any line breaks with <br/>
     if ($post['comments'][$i]['text']) {
         $post['comments'][$i]['text'] = nl2br($post['comments'][$i]['text']);
     }
     
+    // For each comment, attach user data to it.
     for ($j = 0; $j < count($response[4]['fql_result_set']); $j++) {
         $userDataObject = $response[4]['fql_result_set'][$j];
 
