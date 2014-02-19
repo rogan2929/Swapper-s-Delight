@@ -989,6 +989,7 @@ var SwdView = {
         
         timeStamp = new moment(new Date(post.created_time * 1000));
         
+        alert(post.created_time);
         alert(timeStamp.calendar());
 
         $('#post-message-pic').css('background-image', userImage);
