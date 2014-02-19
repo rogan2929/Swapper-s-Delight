@@ -961,7 +961,7 @@ var SwdView = {
      * @param {type} post Post to load into floating post details panel.
      */
     showPostDetails: function(post) {
-        var userImage, postImage, i;
+        var userImage, postImage, i, timeStamp;
 
         // Display the post's image, or the no-image placeholder.
         if (post.image_url && post.image_url.length > 0) {
@@ -986,10 +986,13 @@ var SwdView = {
         else {
             userImage = '';
         }
+        
+        timeStamp = new moment(new Date(post.created_time * 1000));
 
         $('#post-message-pic').css('background-image', userImage);
         $('#post-message-name').text(post.user.first_name + ' ' + post.user.last_name);
         $('#post-message-name').attr('href', post.user.profile_url);
+        $('#post-message-header .timestmap').text(timeStamp);
         $('#post-message-text').html(post.message);
         $('#post-comment-list').empty();
         $('#post-nocomments').show();

@@ -61,7 +61,7 @@
                                 <div id='post-message-header'>
                                     <p class='wrapper'>
                                         <a id='post-message-name' target='_blank'></a>
-                                        <span class='timestamp'>Today</span>
+                                        <span class='timestamp'></span>
                                     </p>
                                 </div>
                             </div>
