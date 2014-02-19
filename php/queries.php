@@ -97,7 +97,7 @@ function getImageUrlFromFbId($fbid, $images, $small = false) {
                 $index = count($images[$i]['images']) - 1;
             }
             
-            $imageUrl = $images[$i]['images'][0]['source'];
+            $imageUrl = $images[$i]['images'][$index]['source'];
             break;
         }
     }
