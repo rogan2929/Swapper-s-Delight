@@ -49,7 +49,7 @@ function processStreamQuery($stream, $images) {
     for ($i = 0; $i < count($stream); $i++) {
         $post = $stream[$i];
 
-        $post['image_url'] = getImageUrlArray($post, $images, $true);
+        $post['image_url'] = getImageUrlArray($post, $images);
 
         // Replace any line breaks with <br/>
         if ($post['message']) {
@@ -66,7 +66,7 @@ function processStreamQuery($stream, $images) {
 /***
  * For posts with an image, look for associated image data.
  */
-function getImageUrlArray($post, $images) {
+function getImageUrlArray($post, $images, $thumbnails = true) {
     $imageUrls = array();
 
     if ($post['attachment'] && $post['attachment']['media']) {
@@ -77,7 +77,7 @@ function getImageUrlArray($post, $images) {
                 $fbid = $post['attachment']['media'][$i]['photo']['fbid'];
                 
                 // Find the image url from the given Facebook ID
-                $imageUrls[] = getImageUrlFromFbId($fbid, $images);
+                $imageUrls[] = getImageUrlFromFbId($fbid, $images, $thumbnails);
             }
         }
     }
@@ -85,7 +85,7 @@ function getImageUrlArray($post, $images) {
     return $imageUrls;
 }
 
-function getImageUrlFromFbId($fbid, $images, $small = false) {
+function getImageUrlFromFbId($fbid, $images, $thumbnails = true) {
     $imageUrl = null;
     
     for ($i = 0; $i < count($images); $i++) {
@@ -93,8 +93,8 @@ function getImageUrlFromFbId($fbid, $images, $small = false) {
             $index = 0;
             
             // See if we are trying to retrieve a small image. (Usually last in the array.)
-            if ($small) {
-                $index = count($images[$i]['images']) - 2;
+            if ($thumbnails) {
+                $index = count($images[$i]['images']) - 1;
             }
             
             $imageUrl = $images[$i]['images'][$index]['source'];

@@ -31,7 +31,7 @@ if ($post['message']) {
 }
 
 // Extract image data for the post.
-$post['image_url'] = getImageUrlArray($post, $images);
+$post['image_url'] = getImageUrlArray($post, $images, false);
 
 $commentUserData = array();
 
