@@ -544,7 +544,7 @@ div.right-toolbar-button {
     top: 0;
     position: fixed;
     width: 100%;
-    border-bottom: 5px solid #ccc;
+    border-bottom: 1px solid #ccc;
 }
 
 .button-nav {
