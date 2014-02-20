@@ -284,6 +284,10 @@ textarea {
     font-weight: bold;
 }
 
+#post-feed {
+    border-bottom: 1px solid #ccc;
+}
+
 #post-feed-noposts {
     position: absolute;
     left: 0;
