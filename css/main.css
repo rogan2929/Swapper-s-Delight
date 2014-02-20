@@ -342,6 +342,8 @@ textarea {
     overflow: hidden;
     margin: 3px;
     margin-bottom: -3px;
+    cursor: pointer;
+    font-weight: normal !important;
 }
 
 .post-tile {
