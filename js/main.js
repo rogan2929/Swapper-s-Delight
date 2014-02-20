@@ -473,9 +473,9 @@ var SwdPresenter = {
             console.log($('#post-feed').height());
             
             // Ensure a minimum height.
-            if ($('html').height() < SwdPresenter.clientHeight  * 1.5) {
-                $('html').height(SwdPresenter.clientHeight * 1.5);
-            }
+//            if ($('html').height() < SwdPresenter.clientHeight  * 1.5) {
+//                $('html').height(SwdPresenter.clientHeight * 1.5);
+//            }
 
             FB.Canvas.setSize({
                 //height: Math.max($('html').height(), SwdPresenter.clientHeight)
