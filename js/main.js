@@ -294,7 +294,7 @@ var SwdPresenter = {
                         SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#post-comment-text > textarea', 'keyup')
                         SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
                         SwdView.positionMenus();
-                        
+
                         // Set the main ajax overlay to be semi-transparent.
                         SwdView.setMainOverlayTransparency();
                     }
@@ -472,9 +472,9 @@ var SwdPresenter = {
     refreshFbCanvasSize: function() {
         FB.Canvas.getPageInfo(function(pageInfo) {
             SwdPresenter.clientHeight = parseInt(pageInfo.clientHeight);
-            
+
             console.log($('#post-feed').height());
-            
+
             // Ensure a minimum height.
 //            if ($('html').height() < SwdPresenter.clientHeight  * 1.5) {
 //                $('html').height(SwdPresenter.clientHeight * 1.5);
@@ -983,25 +983,31 @@ var SwdView = {
         $('#' + id).addClass('selected-nav');
     },
     populatePostBlocks: function(posts, clientWidth) {
+        var i, post;
+
         SwdView.toggleAjaxLoadingDiv('body', false);
 
         // If there is a feed to display, then display it.
         if (posts && posts.length > 0) {
             $('#post-feed-noposts').hide();
-            
+
             // Two types of post blocks: image blocks, and text blocks
             // Come in either 1x1, 2x1, 1x2, and 2x2 (base is 280 width, 160 height.)
             // Text will be 1x1.
             // Images will vary, depending on aspect ratio.
-            
-            $('div.post-block').html(post.message).appendTo('#post-feed');
-            
+
+            for (i = 0; i < posts.length; i++) {
+                post = posts[i];
+                
+                $('div.post-block').html(post.message).appendTo('#post-feed');
+            }
+
             SwdPresenter.refreshFbCanvasSize();
         }
         else {
             $('#post-feed-noposts').show();
         }
-        
+
         SwdPresenter.currentlyLoading = false;
     },
     /***
