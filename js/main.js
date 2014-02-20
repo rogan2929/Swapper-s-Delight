@@ -1002,7 +1002,7 @@ var SwdView = {
                 
                 //$('<div class="post-block"></div>').html('<p>' + post.message + '</p>').appendTo('#post-feed');
                 postBlock = $('<div id="' + post.post_id + '" class="post-block ui-corner-all ui-widget ui-widget-content ui-state-default"></div>');
-                $('#post-tile').append(postBlock);
+                $(postBlock).html(post.message).appendTo('#post-feed');
             }
 
             SwdPresenter.refreshFbCanvasSize();
