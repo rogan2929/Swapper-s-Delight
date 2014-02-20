@@ -130,15 +130,17 @@ var SwdModel = {
     /***
      * Like a post.
      * @param {type} postId
+     * @param {type} userLikes
      * @param {type} callbacks
      */
-    likePost: function(postId, callbacks) {
+    likePost: function(postId, userLikes, callbacks) {
         $.ajax({
             type: 'POST',
             url: '/php/like-post.php',
             dataType: 'json',
             data: {
-                'postId': postId
+                'postId': postId,
+                'userLikes': userLikes
             },
             success: function(response) {
                 callbacks.success.call(SwdModel, response);
@@ -577,12 +579,13 @@ var SwdPresenter = {
         }
     },
     onClickPostButtonLike: function(e, args) {
-        var id;
+        var id, userLikes;
 
         id = SwdPresenter.selectedPost.post_id;
+        userLikes = 1;
 
         // Post the comment.
-        SwdModel.likePost(id, {
+        SwdModel.likePost(id, userLikes, {
             success: function(response) {
                 // TODO: Update View
             },
