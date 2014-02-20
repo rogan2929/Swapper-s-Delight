@@ -457,6 +457,7 @@ var SwdPresenter = {
         if (response) {
             // If a response came through, then display the posts.
             SwdPresenter.oldestPost = response[response.length - 1];
+            SwdViewpopulatePostBlocks(response, SwdPresenter.clientWidth);
             //SwdView.populatePosts(response);
         }
         else
