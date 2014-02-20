@@ -206,6 +206,7 @@ textarea {
 
 .floating-panel > .floating-panel-content {
     border: 5px solid #ccc;
+    box-shadow: 8px 8px 5px #888888;
     border-radius: 5px;
     border-top-right-radius: 0px;
     position: absolute;
