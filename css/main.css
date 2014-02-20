@@ -343,6 +343,7 @@ textarea {
     margin: 3px;
     margin-bottom: -3px;
     cursor: pointer;
+    color: #666666;
     font-weight: normal !important;
 }
 
