@@ -293,6 +293,9 @@ var SwdPresenter = {
                         SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#post-comment-text > textarea', 'keyup')
                         SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
                         SwdView.positionMenus();
+                        
+                        // Set the main ajax overlay to be semi-transparent.
+                        SwdView.setMainOverlayTransparency();
                     }
                     else {
                         // Have the view prompt the user to edit BST groups.
@@ -794,9 +797,6 @@ var SwdView = {
 
         // Init menus.
         $('#popup-menu-main').menu();
-        
-        // Set the main ajax overlay to be semi-transparent.
-        $('#overlay-app-loading').addClass('semi-transparent');
     },
     /**
      * Installs an event handler and connects it to the presenter.
@@ -984,6 +984,13 @@ var SwdView = {
         }
     },
     /***
+     * Sets the main overlay to a semi-transparent state.
+     */
+    setMainOverlayTransparency: function() {
+        // Set the main ajax overlay to be semi-transparent.
+        $('#overlay-app-loading').addClass('semi-transparent');
+    },
+    /***
      * Displays a lovely error message. Something which the user loves.
      * @param {type} message
      */
@@ -1020,7 +1027,7 @@ var SwdView = {
         else {
             userImage = '';
         }
-        
+
         timeStamp = new moment(new Date(post.created_time * 1000));
 
         $('#post-message-pic').css('background-image', userImage);
@@ -1036,7 +1043,7 @@ var SwdView = {
                 SwdView.addPostComment(post.comments[i]);
             }
         }
-        
+
         SwdView.setLikePost(post.like_info.user_likes);
 
         SwdView.clearPostCommentText();
