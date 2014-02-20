@@ -339,6 +339,8 @@ textarea {
     height: 160px;
     width: 280px;
     border: 1px solid #ddd;
+    overflow: hidden;
+    margin: 4px;
 }
 
 .post-tile {
