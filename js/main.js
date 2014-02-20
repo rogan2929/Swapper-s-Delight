@@ -826,7 +826,8 @@ var SwdView = {
      * Clear all posts from the view.
      */
     clearPosts: function() {
-        $('#post-feed .post-tile').remove();
+        //$('#post-feed .post-tile').remove();
+        $('#post-feed .post-block').remove();
     },
     /***
      * Clear comment box.
