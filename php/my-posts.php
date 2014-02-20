@@ -7,7 +7,6 @@ $gid = $_GET['gid'];
 $uid = $_GET['uid'];    // For some reason, calling $fbSession->getUser() kills the access token. So, we cheated.
 
 // Allow everything younger than one month.
-//$oldestAllowed = strtotime('-1 month');
 // Define the initial window to search within.
 $windowSize = 3600 * 24;    // 1 Day
 $windowStart = time();
