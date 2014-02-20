@@ -549,7 +549,6 @@ div.right-toolbar-button {
     position: fixed;
     width: 100%;
     border-bottom: 1px solid #ccc;
-    z-index: 1002;
 }
 
 .button-nav {
