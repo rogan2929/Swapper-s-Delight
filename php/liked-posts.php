@@ -12,8 +12,8 @@ $windowSize = 3600 * 24;    // 1 Day
 $windowStart = time();
 $windowEnd = $windowStart - $windowSize;
 
-$batchSize = 1000;
-$batchRunCount = 30;
+$batchSize = 750;
+$batchRunCount = 45;
 
 // Create the constraints array.
 $likeConstraint = array(
