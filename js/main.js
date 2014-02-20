@@ -195,6 +195,7 @@ var SwdPresenter = {
     clientHeight: null,
     uid: null,
     currentlyLoading: false,
+    selectedPost: null,
     /**
      * Entry point of program.
      */
@@ -543,7 +544,7 @@ var SwdPresenter = {
     onClickPostButtonComment: function(e, args) {
         var id, comment;
 
-        id = $('#panel-post').data('id');
+        id = SwdPresenter.selectedPost.post_id;
         comment = $('#post-comment-text > textarea').val();
 
         // Show the ajax loading div.
@@ -565,7 +566,7 @@ var SwdPresenter = {
     onClickPostButtonLike: function(e, args) {
         var id;
 
-        id = $('#panel-post').data('id');
+        id = SwdPresenter.selectedPost.post_id;
 
         // Post the comment.
         SwdModel.likePost(id, {
@@ -580,7 +581,7 @@ var SwdPresenter = {
     onClickPostButtonPm: function(e, args) {
         var id;
 
-        id = $('#panel-post').data('actor_id');
+        id = SwdPresenter.selectedPost.actor_id;
 
         // Yes, shamelessly plug the app.
         SwdPresenter.sendFacebookMessage(id, AppUrl);
@@ -610,10 +611,12 @@ var SwdPresenter = {
                 //post['image_url'] = $('#' + id).data('image_url');
 
                 if (post) {
+                    SwdPresenter.selectedPost = post;
                     SwdView.showPostDetails(post);
                 }
                 else {
                     // TODO: Do a real error message.
+                    SwdPresenter.selectedPost = null;
                     alert('Unable to display post. It was most likely deleted.');
                 }
             },
@@ -650,7 +653,7 @@ var SwdPresenter = {
         if (e.which === 13 && !e.shiftKey) {
             e.preventDefault();
 
-            id = $('#panel-post').data('id');
+            id = SwdPresenter.selectedPost.post_id;
             comment = $('#post-comment-text > textarea').val();
 
             // Show the ajax loading div.
@@ -1004,9 +1007,6 @@ var SwdView = {
         }
 
         SwdView.clearPostCommentText();
-
-        // Save some data for later consumption.
-        $('#panel-post').data('actor_id', post.actor_id).data('permalink', post.permalink).data('id', post.post_id);
         SwdView.toggleAjaxLoadingDiv('#post-details-panel', false);
     },
     /***
