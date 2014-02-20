@@ -999,11 +999,17 @@ var SwdView = {
 
             for (i = 0; i < posts.length; i++) {
                 post = posts[i];
-                
+
                 //$('<div class="post-block"></div>').html('<p>' + post.message + '</p>').appendTo('#post-feed');
                 postBlock = $('<div id="' + post.post_id + '" class="post-block ui-corner-all ui-widget ui-widget-content ui-state-default"></div>');
                 $(postBlock).html(post.message).appendTo('#post-feed');
             }
+
+            $('.post-block').hover(function() {
+                $(this).removeClass('ui-state-default').addClass('ui-state-hover');
+            }, function() {
+                $(this).removeClass('ui-state-hover').addClass('ui-state-default');
+            });
 
             SwdPresenter.refreshFbCanvasSize();
         }
