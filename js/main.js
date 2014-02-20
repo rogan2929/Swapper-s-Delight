@@ -988,14 +988,11 @@ var SwdView = {
         }
         
         timeStamp = new moment(new Date(post.created_time * 1000));
-        
-        alert(post.created_time);
-        alert(timeStamp.calendar());
 
         $('#post-message-pic').css('background-image', userImage);
         $('#post-message-name').text(post.user.first_name + ' ' + post.user.last_name);
         $('#post-message-name').attr('href', post.user.profile_url);
-        $('#post-message-header .timestmap').text(timeStamp.calendar());
+        $('#post-message-header .wrapper .timestmap').text(timeStamp.calendar());
         $('#post-message-text').html(post.message);
         $('#post-comment-list').empty();
         $('#post-nocomments').show();
