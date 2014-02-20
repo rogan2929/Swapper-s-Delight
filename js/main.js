@@ -189,14 +189,6 @@ var SwdModel = {
 //            }
 //        });
 //    },
-    /***
-     * Unlike a post. 
-     * @param {type} postId
-     * @param {type} callbacks
-     */
-    unlikePost: function(postId, callbacks) {
-
-    }
 };
 /**
  * Presenter for the Swapper's Delight program.
@@ -1020,6 +1012,10 @@ var SwdView = {
             for (i = 0; i < post.comments.length; i++) {
                 SwdView.addPostComment(post.comments[i]);
             }
+        }
+        
+        if (post.like_info.user_likes) {
+            alert('test');
         }
 
         SwdView.clearPostCommentText();
