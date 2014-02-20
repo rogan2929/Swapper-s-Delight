@@ -469,9 +469,15 @@ var SwdPresenter = {
     refreshFbCanvasSize: function() {
         FB.Canvas.getPageInfo(function(pageInfo) {
             SwdPresenter.clientHeight = parseInt(pageInfo.clientHeight);
+            
+            // Ensure a minimum height.
+            if ($('#app-content').height() < SwdPresenter.clientHeight  * 1.5) {
+                $('#app-content').height(SwdPresenter.clientHeight * 1.5);
+            }
 
             FB.Canvas.setSize({
-                height: Math.max($('html').height(), SwdPresenter.clientHeight)
+                //height: Math.max($('html').height(), SwdPresenter.clientHeight)
+                height: $('html').height()
             });
         });
     },

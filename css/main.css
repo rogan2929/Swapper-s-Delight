@@ -22,7 +22,7 @@ html {
     font-size: 0.85em;
     line-height: 1.4;
     overflow: hidden;
-    min-height: 800px;
+/*    min-height: 800px;*/
 }
 
 body {
@@ -284,9 +284,9 @@ textarea {
     font-weight: bold;
 }
 
-#app-content {
+/*#app-content {
     border-bottom: 1px solid #ccc;
-}
+}*/
 
 #post-feed-noposts {
     position: absolute;
@@ -530,7 +530,7 @@ div.right-toolbar-button {
     margin-left: 200px;
     margin-top: 60px;
     position: relative;
-    min-height: 800px;
+/*    min-height: 800px;*/
 }
 
 #left-rail {
