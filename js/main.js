@@ -498,8 +498,10 @@ var SwdPresenter = {
      */
     setSelectedGroup: function(group) {
         SwdPresenter.selectedGroup = group;
+        SwdPresenter.postType = PostType.group;
         SwdPresenter.loadPosts(false);
         SwdView.setGroupButtonText(group.name);
+        SwdView.setSelectedPostType('button-nav-group');
     },
     onClickButtonGroups: function(e, args) {
         // Prevent the event from bubbling up the DOM and closing the floating panel.
