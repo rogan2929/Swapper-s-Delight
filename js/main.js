@@ -413,7 +413,8 @@ var SwdPresenter = {
                 updatedTime = null;
                 SwdView.clearPosts();
                 SwdPresenter.resetFbCanvasSize();
-                SwdView.toggleAjaxLoadingDiv('#post-feed', true);
+                //SwdView.toggleAjaxLoadingDiv('#post-feed', true);
+                SwdView.toggleAjaxLoadingDiv('body', true);
             }
 
             switch (SwdPresenter.postType) {
@@ -833,7 +834,8 @@ var SwdView = {
     populatePosts: function(posts) {
         var i, isEmpty, imageUrl, message, post, postTile, primaryContent, secondaryContent;
 
-        SwdView.toggleAjaxLoadingDiv('#post-feed', false);
+        ///SwdView.toggleAjaxLoadingDiv('#post-feed', false);
+        SwdView.toggleAjaxLoadingDiv('body', false);
 
         // If there is a feed to display, then display it.
         if (posts && posts.length > 0) {
