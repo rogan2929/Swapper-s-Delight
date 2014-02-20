@@ -552,7 +552,7 @@ div.right-toolbar-button {
 }
 
 .semi-transparent {
-    opacity: 70%;
+    opacity: 0.7;
 }
 
 .button-nav {
