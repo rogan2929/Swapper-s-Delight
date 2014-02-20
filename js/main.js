@@ -574,12 +574,12 @@ var SwdPresenter = {
         var id, userLikes;
 
         id = SwdPresenter.selectedPost.post_id;
-        userLikes = 1;
+        userLikes = !SwdPresenter.selectedPost.like_info.user_likes;
 
         // Post the comment.
         SwdModel.likePost(id, userLikes, {
             success: function(response) {
-                // TODO: Update View
+                SwdView.setLikePost(response);
             },
             fail: function(response) {
                 SwdView.showError(response);
@@ -956,9 +956,25 @@ var SwdView = {
     setGroupButtonText: function(text) {
         $('#button-groups span').text(text);
     },
+    /***
+     * Set selected post type.
+     * @param {type} id
+     */
     setSelectedPostType: function(id) {
         $('.button-nav').removeClass('selected-nav');
         $('#' + id).addClass('selected-nav');
+    },
+    /***
+     * Sets the 'Like' or 'Unlike' button text.
+     * @param {type} userLikes
+     */
+    setLikePost: function(userLikes) {
+        if (userLikes) {
+            $('#post-button-like .ui-button-text').text('Unlike');
+        }
+        else {
+            $('#post-button-like .ui-button-text').text('Like');
+        }
     },
     /***
      * Displays a lovely error message. Something which the user loves.
@@ -1014,12 +1030,7 @@ var SwdView = {
             }
         }
         
-        if (post.like_info.user_likes) {
-            $('#post-button-like .ui-button-text').text('Unlike');
-        }
-        else {
-            $('#post-button-like .ui-button-text').text('Like');
-        }
+        SwdView.setLikePost(post.like_info.user_likes);
 
         SwdView.clearPostCommentText();
         SwdView.toggleAjaxLoadingDiv('#post-details-panel', false);
