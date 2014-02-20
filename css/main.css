@@ -334,11 +334,11 @@ textarea {
 
 .post-block {
     display: inline-block;
-    background: #eee;
+/*    background: #eee;*/
     padding: 10px;
     height: 160px;
     width: 280px;
-    border: 1px solid #ddd;
+/*    border: 1px solid #ddd;*/
     overflow: hidden;
     margin: 3px;
     margin-bottom: -3px;
