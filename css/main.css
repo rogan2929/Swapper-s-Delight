@@ -332,6 +332,15 @@ textarea {
 
 /*http://jsfiddle.net/E78q3/*/
 
+.post-block {
+    position: absolute;
+    background: #eee;
+    padding: 10px;
+    min-height: 200px;
+    min-width: 200px;
+    border: 1px solid #ddd;
+}
+
 .post-tile {
     width: 200px;
     height: 200px;

@@ -200,6 +200,7 @@ var SwdPresenter = {
     groups: null,
     prevOffset: null,
     clientHeight: null,
+    clientWidth: null,
     uid: null,
     currentlyLoading: false,
     selectedPost: null,
@@ -320,6 +321,7 @@ var SwdPresenter = {
             clientHeight = parseInt(pageInfo.clientHeight);
 
             SwdPresenter.clientHeight = clientHeight;
+            SwdPresenter.clientWidth = parseInt(pageInfo.clientWidth);
 
             // Calculate how far to offset things.
             offset = Math.max(scrollTop - offsetTop, 0);
@@ -455,7 +457,7 @@ var SwdPresenter = {
         if (response) {
             // If a response came through, then display the posts.
             SwdPresenter.oldestPost = response[response.length - 1];
-            SwdView.populatePosts(response);
+            //SwdView.populatePosts(response);
         }
         else
         if (!loadNextPage) {
@@ -978,6 +980,19 @@ var SwdView = {
     setSelectedPostType: function(id) {
         $('.button-nav').removeClass('selected-nav');
         $('#' + id).addClass('selected-nav');
+    },
+    populatePostBlocks: function(posts, clientWidth) {
+        SwdView.toggleAjaxLoadingDiv('body', false);
+
+        // If there is a feed to display, then display it.
+        if (posts && posts.length > 0) {
+            $('#post-feed-noposts').hide();
+        }
+        else {
+            $('#post-feed-noposts').show();
+        }
+        
+        SwdPresenter.currentlyLoading = false;
     },
     /***
      * Sets the 'Like' or 'Unlike' button text.
