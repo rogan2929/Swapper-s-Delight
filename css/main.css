@@ -347,6 +347,10 @@ textarea {
     font-weight: normal !important;
 }
 
+.post-block.ui-state-hover {
+    color: #fcfcfc;
+}
+
 .post-tile {
     width: 300px;
     height: 200px;
