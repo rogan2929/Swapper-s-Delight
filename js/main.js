@@ -1015,7 +1015,10 @@ var SwdView = {
         }
         
         if (post.like_info.user_likes) {
-            alert('test');
+            $('#post-button-like').text('Unlike');
+        }
+        else {
+            $('#post-button-like').text('Like');
         }
 
         SwdView.clearPostCommentText();
