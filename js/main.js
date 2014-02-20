@@ -470,6 +470,8 @@ var SwdPresenter = {
         FB.Canvas.getPageInfo(function(pageInfo) {
             SwdPresenter.clientHeight = parseInt(pageInfo.clientHeight);
             
+            console.log($('#app-content').height());
+            
             // Ensure a minimum height.
             if ($('#app-content').height() < SwdPresenter.clientHeight  * 1.5) {
                 $('#app-content').height(SwdPresenter.clientHeight * 1.5);
