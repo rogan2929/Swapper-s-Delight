@@ -129,11 +129,24 @@ var SwdModel = {
     },
     /***
      * Like a post.
-     * @param {type} id
+     * @param {type} postId
      * @param {type} callbacks
      */
-    likePost: function(id, callbacks) {
-        alert(id);
+    likePost: function(postId, callbacks) {
+        $.ajax({
+            type: 'POST',
+            url: '/php/like-post.php',
+            dataType: 'json',
+            data: {
+                'postId': postId
+            },
+            success: function(response) {
+                callbacks.success.call(SwdModel, response);
+            },
+            fail: function(response) {
+                callbacks.fail.call(SwdModel, response);
+            }
+        });
     },
     /***
      * Post a comment on a post.
