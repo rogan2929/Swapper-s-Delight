@@ -988,6 +988,15 @@ var SwdView = {
         // If there is a feed to display, then display it.
         if (posts && posts.length > 0) {
             $('#post-feed-noposts').hide();
+            
+            // Two types of post blocks: image blocks, and text blocks
+            // Come in either 1x1, 2x1, 1x2, and 2x2 (base is 280 width, 160 height.)
+            // Text will be 1x1.
+            // Images will vary, depending on aspect ratio.
+            
+            $('div.post-block').html(post.message).appendTo('#post-feed');
+            
+            SwdPresenter.refreshFbCanvasSize();
         }
         else {
             $('#post-feed-noposts').show();
