@@ -794,6 +794,9 @@ var SwdView = {
 
         // Init menus.
         $('#popup-menu-main').menu();
+        
+        // Set the main ajax overlay to be semi-transparent.
+        $('#overlay-app-loading').addClass('semi-transparent');
     },
     /**
      * Installs an event handler and connects it to the presenter.

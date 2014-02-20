@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div id='post-feed' class='scroll-y'>
-                    <div class='ajax-loading-div hidden'></div>
+<!--                    <div class='ajax-loading-div hidden'></div>-->
                     <div id='post-feed-noposts'>No posts were found.</div>
                 </div>
                 <div id='post-details-panel' class='floating-panel hidden'>
@@ -156,7 +156,7 @@
             </ul>
         </div>
 
-        <div id='overlay-app-loading' class='ajax-loading-div semi-transparent'></div>
+        <div id='overlay-app-loading' class='ajax-loading-div'></div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
