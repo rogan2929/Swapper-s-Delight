@@ -999,7 +999,7 @@ var SwdView = {
             for (i = 0; i < posts.length; i++) {
                 post = posts[i];
                 
-                $('div.post-block').html(post.message).appendTo('#post-feed');
+                $('<div class="post-block"></div>').html(post.message).appendTo('#post-feed');
             }
 
             SwdPresenter.refreshFbCanvasSize();
