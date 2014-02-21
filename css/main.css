@@ -521,6 +521,7 @@ textarea {
 #overlay {
     background: #ddd;
     position: absolute;
+    opacity: 0.65;
     left: 0;
     right: 0;
     top: 0;
