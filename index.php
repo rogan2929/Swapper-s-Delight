@@ -29,7 +29,7 @@
             <div id='fb-root'></div>
 
             <div id='main-panel'>
-                <div id='left-rail' class='ui-widget ui-widget-content ui-corner-all scroll-y'>
+                <div id='left-rail' class='ui-widget scroll-y'>
                     <div id='left-rail-nav'>
                         <div id='button-nav-group' class='button-nav selected-nav'>
                             Newest
@@ -54,7 +54,7 @@
                 </div>
                 <div id='post-details-panel' class='floating-panel hidden'>
                     <div class='close-button'></div>
-                    <div id='panel-post' class='floating-panel-content ui-widget-content'>
+                    <div id='panel-post' class='floating-panel-content'>
                         <div id='panel-post-left' class='panel-post-column scroll-y'>
                             <div id='post-message-user' class='ui-state-default'>
                                 <div id='post-message-pic'></div>
@@ -65,17 +65,17 @@
                                     </p>
                                 </div>
                             </div>
-                            <div id='post-image-container' class='ui-widget ui-widget-content ui-corner-all'>
+                            <div id='post-image-container' class='ui-widget'>
                                 <div id='post-no-image' class='hidden'>
                                     <!--                                <div></div>
                                                                     <span>This post does not have a photo, or the owner of this post has chosen not to give permission for applications like Swapper's Delight to view it. Click the link below to see the original Facebook posting.</span>-->
                                 </div>
                                 <div id='post-image'></div>
                             </div>
-                            <div id='post-permalink' class='ui-widget ui-widget-content ui-corner-all'>
+                            <div id='post-permalink' class='ui-widget'>
                                 <a class='wrappable-link' target='_blank'></a>
                             </div>
-                            <div id='post-message' class='ui-widget ui-widget-content ui-corner-all'>
+                            <div id='post-message' class='ui-widget'>
                                 <div id='post-message-text'></div>
                             </div>
                             <div id='post-button-bar'>
@@ -90,7 +90,7 @@
                             </div>
                         </div>
                         <div id='panel-post-right' class='panel-post-column scroll-y'>
-                            <div id='post-comment-text' class='ui-corner-all ui-widget ui-widget-content'>
+                            <div id='post-comment-text' class='ui-corner-all ui-widget'>
                                 <textarea placeholder='Add a comment...'></textarea>
                                 <div class='ajax-loading-div hidden'></div>
                             </div>
@@ -113,14 +113,14 @@
                 </div>
                 <div id='new-post-panel' class='floating-panel hidden'>
                     <div class='close-button'></div>
-                    <div class='floating-panel-content ui-widget-content scroll-y'></div>
+                    <div class='floating-panel-content scroll-y'></div>
                 </div>
                 <div id='select-group-panel' class='floating-panel narrow-floating-panel hidden'>
                     <div class='close-button'></div>
-                    <div class='floating-panel-content ui-widget-content scroll-y'>
+                    <div class='floating-panel-content scroll-y'>
                         <ul id='select-group-list' class='selection-list'>
                             <li id='select-group-no-groups' class='selection-item select-group'>
-                                <span class='ui-icon ui-icon-check'></span>You're not a member of any Facebook groups.
+                                You're not a member of any Facebook groups.
                             </li>
                         </ul>
                     </div>
