@@ -328,9 +328,8 @@ textarea {
 
 .button {
     cursor: pointer;
-    min-width: 112px;
-    height: 30px;
-    line-height: 30px;
+    height: 25px;
+    line-height: 25px;
     border-radius: 2px;
     border: 1px solid #ccc;
     background-color: #ddd;
@@ -362,6 +361,7 @@ textarea {
 
 .button.post-button {
     display: inline-block;
+    min-width: 112px;
 }
 
 /*http://jsfiddle.net/E78q3/*/
