@@ -1005,17 +1005,17 @@ var SwdView = {
                     html = '';
                     
                     // Randomly select a layout size.
-                    width = $(postBlock).width();
-                    height = $(postBlock).height();
+                    width = 200;//$(postBlock).width();
+                    height = 125;//$(postBlock).height();
                     
                     // 25% chance to double width.
                     if (Math.random() > 0.25) {
-                        width = parseInt(width) * 2;
+                        width = width * 2;
                     }
                     
                     // 25% chance to double height.
                     if (Math.random() > 0.25) {
-                        height = parseInt(height) * 2;
+                        height = height * 2;
                     }
                     
                     console.log(width);
