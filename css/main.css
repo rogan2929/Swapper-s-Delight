@@ -678,6 +678,7 @@ div.right-toolbar-button {
     position: absolute;
 /*    padding: 5px;*/
     top: 42px;
+    border-radius: 0;
 }
 
 #left-rail-nav {
