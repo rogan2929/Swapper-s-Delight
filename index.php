@@ -32,21 +32,17 @@
                 <div id='left-rail' class='ui-widget scroll-y'>
                     <div id='left-rail-nav'>
                         <div id='button-nav-group' class='button nav-button selected-nav'>
-                            <span class='button-icon icon-refresh'></span>
                             <span>Newest</span>
                         </div>
                         <div id='button-nav-myposts' class='button nav-button'>
-                            <span class='button-icon icon-refresh'></span>
                             <span>My Posts</span>
                         </div>
                         <div id='button-nav-liked' class='button nav-button'>
-                            <span class='button-icon icon-refresh'></span>
                             <span>Liked</span>
                         </div>
-                        <div id='button-nav-search' class='button nav-button'>
-                            <span class='button-icon icon-search'></span>
+<!--                        <div id='button-nav-search' class='button nav-button'>
                             <span>Search</span>
-                        </div>
+                        </div>-->
                     </div>
                     <div id='ad-space'>
                         Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by by turning what you're using off for this site. Ads are what makes this program viable. Thank you!

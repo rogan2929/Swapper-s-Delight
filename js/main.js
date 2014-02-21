@@ -554,9 +554,9 @@ var SwdPresenter = {
             case 'button-nav-liked':
                 SwdPresenter.postType = PostType.liked;
                 break;
-            case 'button-nav-search':
-                SwdPresenter.postType = PostType.search;
-                break;
+//            case 'button-nav-search':
+//                SwdPresenter.postType = PostType.search;
+//                break;
         }
 
         SwdPresenter.loadPosts(false);
