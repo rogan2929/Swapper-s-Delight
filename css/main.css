@@ -259,7 +259,7 @@ textarea {
 .selection-item {
     padding-top: 8px;
     padding-bottom: 8px;
-    display: block;
+    display: inline-block;
 }
 
 .selection-item .ui-icon {
@@ -440,10 +440,6 @@ textarea {
     cursor: pointer;
     color: #444;
     font-size: 1.0em;
-}
-
-.post-block:hover {
-    
 }
 
 .post-block.post-block-text > div {

@@ -114,13 +114,13 @@
                     <div class='close-button'></div>
                     <div class='floating-panel-content scroll-y'></div>
                 </div>
-                <div id='select-group-panel' class='floating-panel narrow-floating-panel hidden'>
+                <div id='select-group-panel' class='floating-panel hidden'>
                     <div class='close-button'></div>
-                    <div class='floating-panel-content scroll-y'>
-                        <ul id='select-group-list' class='selection-list'>
-                            <li id='select-group-no-groups' class='selection-item select-group'>
+                    <div class='floating-panel-content ui-widget scroll-y'>
+                        <div id='select-group-list' class='selection-list'>
+                            <div id='select-group-no-groups' class='selection-item select-group'>
                                 You're not a member of any Facebook groups.
-                            </li>
+                            </div>
                         </ul>
                     </div>
                 </div>
