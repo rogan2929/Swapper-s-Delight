@@ -890,7 +890,7 @@ var SwdView = {
                 else {
                     $(postBlock).addClass('post-block-text'); 
                     
-                    color = colorArray[Math.floor(Math.random() * (colorArray.length - 1))];
+                    color = colorArray[Math.floor(Math.random() * (colorArray.length))];
                     
                     message = '<div><p style="background-color: ' + color + '">' + post.message + '</p></div>';
                     
