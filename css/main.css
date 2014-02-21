@@ -375,18 +375,21 @@ textarea {
     height: 20px;
     width: 20px;
     margin-right: 3px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
 }
 
 .button-icon.icon-new {
-    
+    background-image: url('/icons/paperplus32.png');
 }
 
 .button-icon.icon-refresh {
-    
+    background-image: url('/icons/exchange32.png');
 }
 
 .button-icon.icon-search {
-    
+    background-image: url('/icons/search32.png');
 }
 
 /*http://jsfiddle.net/E78q3/*/
