@@ -348,18 +348,24 @@ textarea {
 
 .button:hover {
     background-color: #b3d4fc;
-    border: 1px solid #f8f8f8;
+/*    border: 1px solid #f8f8f8;*/
 }
 
 .nav-button {
-    
+    border-radius: 0;
 }
 
 .button.toolbar-button {
     display: inline-block;
-    height: 100%;
+    border: 1px solid transparent;
     background: white;
     border-radius: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.button.toolbar-button:hover {
+    border: 1px solid #ccc;
 }
 
 .button.post-button {
