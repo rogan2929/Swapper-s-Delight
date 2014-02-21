@@ -544,14 +544,13 @@ div.right-toolbar-button {
 }
 
 #post-feed {
-/*    margin-left: 200px;*/
+    margin-left: 200px;
     margin-top: 60px;
     position: relative;
     min-height: 800px;
 }
 
 #left-rail {
-    display: none;
     width: 180px;
     position: fixed;
     padding: 5px;
