@@ -1002,7 +1002,7 @@ var SwdView = {
 
                 postBlock = $('<div class="post-block"></div>');
                 
-                if (post.image_url) {
+                if (post.image_url.length > 0) {
                     $(postBlock).css('background-image', 'url("' + post.image_url[0] + '")');
                     html = '';
                 }
