@@ -1003,7 +1003,7 @@ var SwdView = {
                 postBlock = $('<div class="post-block"></div>');
                 
                 if (post.image_url) {
-                    imageUrl = post.image_ulr[post.image_url.length - 1];
+                    imageUrl = post.image_url[post.image_url.length - 1];
                     $(postBlock).css('background-image', 'url("' + imageUrl + '")');
                     html = '';
                 }
@@ -1012,8 +1012,6 @@ var SwdView = {
                 }
 
                 $(postBlock).html(html).appendTo('#post-feed');
-                //postBlock = $('<div id="' + post.post_id + '" class="post-block ui-corner-all ui-widget ui-widget-content ui-state-default"></div>');
-                //$(postBlock).html(post.message).appendTo('#post-feed');
             }
 
 //            $('.post-block').hover(function() {
