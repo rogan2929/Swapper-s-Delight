@@ -155,11 +155,11 @@
 
             <!--Menus-->
 
-            <ul id='popup-menu-main' class='menu'>
-                <li id='menu-item-logout' class='menu-item'>
+            <div id='popup-menu-main' class='menu'>
+                <div id='menu-item-logout' class='menu-item'>
                     <span>Logout</span>
-                </li>
-            </ul>
+                </div>
+            </div>
         </div>
 
         <div id='overlay-app-loading' class='ajax-loading-div'></div>
