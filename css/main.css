@@ -575,6 +575,10 @@ textarea {
     background-size: 100%;
 }
 
+#button-groups {
+    min-width: 300px;
+}
+
 #post-message-user {
     padding: 5px;
 }
