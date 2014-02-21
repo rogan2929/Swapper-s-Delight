@@ -328,13 +328,14 @@ textarea {
 
 .button {
     cursor: pointer;
+    min-width: 100px;
     height: 25px;
     line-height: 25px;
     border-radius: 2px;
     border: 1px solid #ccc;
     background-color: #ddd;
     color: #444;
-    padding: 3px;
+    padding: 4px;
     text-align: center;
     font-weight: bold;
 }
