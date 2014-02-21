@@ -676,7 +676,7 @@ div.right-toolbar-button {
 #left-rail {
     width: 180px;
     position: absolute;
-    padding: 5px;
+/*    padding: 5px;*/
     top: 42px;
 }
 
