@@ -1005,12 +1005,12 @@ var SwdView = {
                     html = '';
                     
                     // Randomly select a layout size.
-                    width = 250;//$(postBlock).width();
-                    
-                    // 40% chance to double width.
-                    if (Math.random() > 0.25) {
-                        width = width * 2;
-                    }
+//                    width = 250;//$(postBlock).width();
+//                    
+//                    // 40% chance to double width.
+//                    if (Math.random() > 0.25) {
+//                        width = width * 2;
+//                    }
                     
                     // 25% chance to double height.
 //                    if (Math.random() > 0.25) {
@@ -1022,7 +1022,7 @@ var SwdView = {
                     
                     // Apply size.
                     //$(postBlock).width(width).height(height);
-                    $(postBlock).width(width);
+//                    $(postBlock).width(width);
                 }
                 else {
                     $(postBlock).addClass('post-block-text');
