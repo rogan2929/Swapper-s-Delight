@@ -970,7 +970,7 @@ var SwdView = {
      * @param {type} text Text to display inside the button.
      */
     setGroupButtonText: function(text) {
-        $('#button-groups span').text(text);
+        $('#button-groups').text(text);
     },
     /***
      * Set selected post type.
@@ -1055,10 +1055,10 @@ var SwdView = {
      */
     setLikePost: function(userLikes) {
         if (userLikes) {
-            $('#post-button-like .ui-button-text').text('Unlike');
+            $('#post-button-like').text('Unlike');
         }
         else {
-            $('#post-button-like .ui-button-text').text('Like');
+            $('#post-button-like').text('Like');
         }
     },
     /***
