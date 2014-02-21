@@ -290,7 +290,7 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
                         SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
                         //SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
-                        SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block > *', 'click');
+                        SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block', 'click');
                         SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
                         SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#post-comment-text > textarea', 'keyup')
                         SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
@@ -1023,7 +1023,7 @@ var SwdView = {
 //            });
 
             // Associate the click event handler for newly created posts.
-            $('.post-block > *').click(SwdView.handlers['onClickPostBlock']);
+            $('.post-block').click(SwdView.handlers['onClickPostBlock']);
 
             SwdPresenter.refreshFbCanvasSize();
         }
