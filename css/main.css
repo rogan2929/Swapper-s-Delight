@@ -679,13 +679,13 @@ div.right-toolbar-button {
     top: 0;
     position: fixed;
     width: 100%;
-/*    border-bottom: 1px solid #ccc;*/
 }
 
 .toolbar {
     height: 42px;
     line-height: 42px;
     display: block;
+    border-radius: 0;
 }
 
 .semi-transparent {
