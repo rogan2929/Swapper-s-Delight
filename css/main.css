@@ -518,6 +518,16 @@ textarea {
     font-size: 0.9em !important;
 }
 
+#overlay {
+    background: #ddd;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 999;
+}
+
 /*.post-comment .ui-state-default {
     padding: 5px;
     position: relative;

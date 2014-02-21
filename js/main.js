@@ -1028,12 +1028,12 @@ var SwdView = {
     toggleFloatingPanel: function(id, show) {
         if (show) {
             // Make the panel modal by summoning an overlay.
-            //$('<div class="ui-widget-overlay ui-widget-front"></div>').hide().appendTo('body').show();
+            $('#overlay').show();
             $(id).show();
         }
         else {
+            $('#overlay').hide();
             $(id).hide();
-            //$('div.ui-widget-overlay').remove();
         }
     }
 };
