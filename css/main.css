@@ -349,20 +349,20 @@ textarea {
     color: #444;
 }
 
-.button > span {
+.button > span, .menu-item > span {
     display: inline-block;
     vertical-align: middle;
     line-height: normal;
 }
 
-.button:hover {
+.button:hover, .menu-item:hover {
     background-color: #b3d4fc;
 }
 
 .nav-button {
     display: block;
-    height: 30px;
-    line-height: 30px;
+    height: 40px;
+    line-height: 40px;
     border: 1px solid transparent;
 }
 
@@ -652,6 +652,11 @@ div.right-toolbar-button {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     margin: 0;
+}
+
+.menu-item {
+    height: 30px;
+    line-height: 30px;
 }
 
 #post-feed {
