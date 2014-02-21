@@ -350,11 +350,13 @@ textarea {
 .nav-button {
     display: block;
     height: 30px;
+    line-height: 30px;
     border: 1px solid transparent;
 }
 
 .button.toolbar-button {
     height: 40px;
+    line-height: 40px;
     border: 1px solid transparent;
 }
 
