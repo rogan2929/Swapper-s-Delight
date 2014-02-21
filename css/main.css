@@ -416,9 +416,15 @@ textarea {
 }
 
 #button-groups {
-    text-align: left;
-    margin-left: 200px;
-    color: #e31025;
+    margin-left: 204px;
+    background-color: #e31025;
+    color: white;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 5px;
+    height: 30px;
+    line-height: 30px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
 }
 
 /*http://jsfiddle.net/E78q3/*/
