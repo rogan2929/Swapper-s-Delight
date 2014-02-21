@@ -512,7 +512,7 @@ var SwdPresenter = {
         SwdPresenter.selectedGroup = group;
         SwdPresenter.postType = PostType.group;
         SwdPresenter.loadPosts(false);
-        SwdView.setGroupButtonText('Showing posts from ' + group.name);
+        SwdView.setGroupButtonText(group.name);
         SwdView.setSelectedPostType('button-nav-group');
     },
     onClickButtonGroups: function(e, args) {
