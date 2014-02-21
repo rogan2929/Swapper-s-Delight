@@ -840,7 +840,7 @@ var SwdView = {
         console.log(id);
     },
     populatePostBlocks: function(posts, clientWidth) {
-        var i, post, postBlock, html, width, height;
+        var i, post, postBlock, message, width, height;
 
         SwdView.toggleAjaxLoadingDiv('body', false);
 
@@ -861,7 +861,7 @@ var SwdView = {
                 if (post.image_url.length > 0) {
                     $(postBlock).addClass('post-block-image');
                     $(postBlock).css('background-image', 'url("' + post.image_url[0] + '")');
-                    html = '';
+                    message = '';
                     
                     // Randomly select a layout size.
 //                    width = 250;//$(postBlock).width();
@@ -882,13 +882,18 @@ var SwdView = {
                     // Apply size.
                     //$(postBlock).width(width).height(height);
 //                    $(postBlock).width(width);
+
+                    $(postBlock).appendTo('#post-feed');
                 }
                 else {
                     $(postBlock).addClass('post-block-text');
-                    html = '<div><p>' + post.message + '</p></div>';
+                    
+                    message = $('<div><p>' + post.message + '</p></div>');
+                    
+                    $(message).css('background-color', 'red');
+                    
+                    $(postBlock).append(message).appendTo('#post-feed');
                 }
-
-                $(postBlock).html(html).appendTo('#post-feed');
             }
 
             // Associate the click event handler for newly created posts.
