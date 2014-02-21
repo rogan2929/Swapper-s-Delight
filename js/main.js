@@ -984,7 +984,7 @@ var SwdView = {
         $('#' + id).addClass('selected-nav');
     },
     populatePostBlocks: function(posts, clientWidth) {
-        var i, post, postBlock;
+        var i, post, postBlock, html, imageUrl;
 
         SwdView.toggleAjaxLoadingDiv('body', false);
 
@@ -1000,7 +1000,18 @@ var SwdView = {
             for (i = 0; i < posts.length; i++) {
                 post = posts[i];
 
-                $('<div class="post-block"></div>').html('<p>' + post.message + '</p>').appendTo('#post-feed');
+                postBlock = $('<div class="post-block"></div>');
+                
+                if (post.image_url) {
+                    imageUrl = ''
+                    $(postBlock).css('background-image', 'url("' + imageUrl + '")');
+                    html = '';
+                }
+                else {
+                    html = '<p>' + post.message + '</p>';
+                }
+
+                $(postBlock).html(html).appendTo('#post-feed');
                 //postBlock = $('<div id="' + post.post_id + '" class="post-block ui-corner-all ui-widget ui-widget-content ui-state-default"></div>');
                 //$(postBlock).html(post.message).appendTo('#post-feed');
             }

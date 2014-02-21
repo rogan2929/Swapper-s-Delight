@@ -336,7 +336,6 @@ textarea {
 .post-block {
     display: inline-block;
     background: white;
-    padding: 5px;
     height: 160px;
     width: 280px;
 /*    border: 1px solid #ddd;*/
@@ -347,6 +346,16 @@ textarea {
     margin-bottom: 2px;
     cursor: pointer;
     color: #444;
+}
+
+.post-block.post-block-text {
+    padding: 20px;
+}
+
+.post-block.post-block-image {
+    padding: 1px;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .post-tile {
