@@ -130,7 +130,7 @@
                 </div>
             </div>
 
-            <div id='main-toolbar' class='ui-widget'>
+            <div id='main-toolbar' class='ui-widget toolbar'>
                 <div class='float-left'>
                     <div id='button-groups' class='button toolbar-button'>
                         <span>Select a Group</span>

@@ -329,15 +329,13 @@ textarea {
 .button {
     cursor: pointer;
     min-width: 100px;
-    height: 25px;
-    line-height: 25px;
-    border-radius: 2px;
-    border: 1px solid #ccc;
-    background-color: #ddd;
     color: #444;
-    padding: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
     text-align: center;
     font-weight: bold;
+    display: inline-block;
+    height: 40px;
 }
 
 .button > span {
@@ -348,30 +346,23 @@ textarea {
 
 .button:hover {
     background-color: #b3d4fc;
-/*    border: 1px solid #f8f8f8;*/
+    border: 1px solid #ccc;
 }
 
 .nav-button {
-    border-radius: 0;
+    
 }
 
 .button.toolbar-button {
-    display: inline-block;
-    border: 1px solid transparent;
-    background: white;
-    border-radius: 0;
-    height: 40px;
-    line-height: 40px;
-}
-
-.button.toolbar-button:hover {
-    background-color: #b3d4fc;
-    border: 1px solid #ccc;
+    
 }
 
 .button.post-button {
     display: inline-block;
     min-width: 112px;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    background-color: #ddd;
 }
 
 .button-icon {
@@ -632,7 +623,7 @@ div.right-toolbar-button {
 
 #post-feed {
     margin-left: 200px;
-    margin-top: 60px;
+    margin-top: 52px;
     position: relative;
     min-height: 800px;
 }
@@ -647,12 +638,16 @@ div.right-toolbar-button {
 }
 
 #main-toolbar {
-    height: 50px;
-    line-height: 50px;
     top: 0;
     position: fixed;
     width: 100%;
-    border-bottom: 1px solid #ccc;
+/*    border-bottom: 1px solid #ccc;*/
+}
+
+.toolbar {
+    height: 42px;
+    line-height: 42px;
+    display: block;
 }
 
 .semi-transparent {
