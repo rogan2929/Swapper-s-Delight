@@ -285,7 +285,7 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
                         SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
                         SwdView.installHandler('onClickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item-main', 'click');
-                        SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.button-nav', 'click');
+                        SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
                         SwdView.installHandler('onClickPostButtonComment', SwdPresenter.onClickPostButtonComment, '#post-button-comment > div', 'click');
                         SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
                         SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
@@ -513,7 +513,7 @@ var SwdPresenter = {
         SwdPresenter.postType = PostType.group;
         SwdPresenter.loadPosts(false);
         SwdView.setGroupButtonText(group.name);
-        SwdView.setSelectedPostType('button-nav-group');
+        SwdView.setSelectedPostType('nav-button-group');
     },
     onClickButtonGroups: function(e, args) {
         // Prevent the event from bubbling up the DOM and closing the floating panel.
@@ -835,7 +835,7 @@ var SwdView = {
      * @param {type} id
      */
     setSelectedPostType: function(id) {
-        $('.button-nav').removeClass('selected-nav');
+        $('.nav-button').removeClass('selected-nav');
         $('#' + id).addClass('selected-nav');
     },
     populatePostBlocks: function(posts, clientWidth) {
