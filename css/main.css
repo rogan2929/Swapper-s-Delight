@@ -434,22 +434,25 @@ textarea {
     background: white;
     height: 200px;
     width: 250px;
-/*    border: 1px solid #ddd;*/
     overflow: hidden;
     margin: 5px;
     margin-bottom: 2px;
     cursor: pointer;
     color: #444;
+    font-size: 1.0em;
 }
 
 .post-block.post-block-text > div {
-    padding: 20px;
+    padding: 5px;
     overflow: hidden;
 }
 
 .post-block.post-block-text > div > p {
     overflow: hidden;
-    height: 11em;
+    height: 175px;
+    background: #f6f6f6;
+    padding: 8px;
+    border-radius: 5px;
 }
 
 .post-block.post-block-image {
