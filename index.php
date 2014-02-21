@@ -14,7 +14,7 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-<!--        <link rel="stylesheet" href="css/flick-red/jquery-ui-1.10.4.custom.min.css">-->
+        <!--        <link rel="stylesheet" href="css/flick-red/jquery-ui-1.10.4.custom.min.css">-->
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
@@ -40,9 +40,9 @@
                         <div id='button-nav-liked' class='button nav-button'>
                             <span>Liked</span>
                         </div>
-<!--                        <div id='button-nav-search' class='button nav-button'>
-                            <span>Search</span>
-                        </div>-->
+                        <!--                        <div id='button-nav-search' class='button nav-button'>
+                                                    <span>Search</span>
+                                                </div>-->
                     </div>
                     <div id='ad-space'>
                         Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
@@ -128,9 +128,6 @@
 
             <div id='main-toolbar' class='ui-widget toolbar'>
                 <div class='float-left'>
-                    <div id='button-groups' class='button toolbar-button'>
-                        <span>Select a Group</span>
-                    </div>
                     <div id='button-new' class='button toolbar-button'>
                         <span class='button-icon icon-new'></span>
                         <span>New</span>
@@ -138,6 +135,9 @@
                     <div id='button-refresh' class='button toolbar-button'>
                         <span class='button-icon icon-refresh'></span>
                         <span>Refresh</span>
+                    </div>
+                    <div id='button-groups' class='button toolbar-button'>
+                        <span>Select a Group</span>
                     </div>
                 </div>
                 <div class='float-right'>
