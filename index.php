@@ -31,16 +31,16 @@
             <div id='main-panel'>
                 <div id='left-rail' class='ui-widget scroll-y'>
                     <div id='left-rail-nav'>
-                        <div id='button-nav-group' class='button-nav selected-nav'>
+                        <div id='button-nav-group' class='nav-button selected-nav'>
                             Newest
                         </div>
-                        <div id='button-nav-myposts' class='button-nav'>
+                        <div id='button-nav-myposts' class='nav-button'>
                             My Posts
                         </div>
-                        <div id='button-nav-liked' class='button-nav'>
+                        <div id='button-nav-liked' class='nav-button'>
                             Liked
                         </div>
-                        <div id='button-nav-search' class='button-nav'>
+                        <div id='button-nav-search' class='nav-button'>
                             Search
                         </div>
                     </div>

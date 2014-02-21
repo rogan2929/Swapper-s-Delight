@@ -330,9 +330,33 @@ textarea {
     margin-right: 5px;
 }
 
+.toolbar-button, .post-button, .nav-button {
+    cursor: pointer;
+    min-width: 112px;
+    height: 30px;
+    border-radius: 2px;
+    border: 1px #ccc;
+    background-color: firebrick;
+    padding: 3px;
+}
+
+.toolbar-button:hover, .post-button:hover, .nav-button:hover {
+    background-color: #b3d4fc;
+    border: 1px #f8f8f8;
+}
+
+.nav-button {
+    width: 100%;
+    margin-top: 4px;
+}
+
 .toolbar-button {
     display: inline-block;
     margin-left: 5px;
+}
+
+.post-button {
+    display: inline-block;
 }
 
 /*http://jsfiddle.net/E78q3/*/
@@ -602,11 +626,6 @@ div.right-toolbar-button {
     opacity: 0.7;
 }
 
-.button-nav {
-    width: 100%;
-    margin-top: 4px;
-}
-
 div.login-div {
     position: absolute;
     left: 0;
@@ -629,12 +648,6 @@ div.login-div {
     height: 100%;
     margin-left: -2px;
     margin-top: -2px;
-}
-
-/* JQuery UI Overrides */
-
-.post-button {
-    min-width: 112px;
 }
 
 /* Ellipses */
