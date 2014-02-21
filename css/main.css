@@ -365,6 +365,7 @@ textarea {
 }
 
 .button.toolbar-button:hover {
+    background-color: #b3d4fc;
     border: 1px solid #ccc;
 }
 
