@@ -443,14 +443,13 @@ textarea {
 }
 
 .post-block.post-block-text > div {
-    padding: 5px;
     overflow: hidden;
 }
 
 .post-block.post-block-text > div > p {
     overflow: hidden;
-    height: 175px;
-    padding: 8px;
+    height: 185px;
+    padding: 12px;
     border-radius: 5px;
 }
 
