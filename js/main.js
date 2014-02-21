@@ -289,7 +289,8 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickPostButtonComment', SwdPresenter.onClickPostButtonComment, '#post-button-comment > div', 'click');
                         SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
                         SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
-                        SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
+                        //SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
+                        SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block > *', 'click');
                         SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
                         SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#post-comment-text > textarea', 'keyup')
                         SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
@@ -611,12 +612,12 @@ var SwdPresenter = {
         // Yes, shamelessly plug the app.
         SwdPresenter.sendFacebookMessage(id, AppUrl);
     },
-    onClickPostTile: function(e, args) {
+    onClickPostBlock: function(e, args) {
         var id;
         var post;
 
-        // Assuming one of the child elements of post-tile was clicked.
-        id = $(e.currentTarget).parents('div.post-tile').attr('id');
+        // Assuming one of the child elements of post-block was clicked.
+        id = $(e.currentTarget).parents('div.post-block').attr('id');
 
         if (!id) {
             id = $(e.currentTarget).attr('id');
@@ -1020,6 +1021,9 @@ var SwdView = {
 //            }, function() {
 //                $(this).removeClass('ui-state-hover').addClass('ui-state-default');
 //            });
+
+            // Associate the click event handler for newly created posts.
+            $('.post-block > *').click(SwdView.handlers['onClickPostBlock']);
 
             SwdPresenter.refreshFbCanvasSize();
         }
