@@ -984,7 +984,7 @@ var SwdView = {
         $('#' + id).addClass('selected-nav');
     },
     populatePostBlocks: function(posts, clientWidth) {
-        var i, post, postBlock, html, imageUrl;
+        var i, post, postBlock, html;
 
         SwdView.toggleAjaxLoadingDiv('body', false);
 
@@ -1003,8 +1003,7 @@ var SwdView = {
                 postBlock = $('<div class="post-block"></div>');
                 
                 if (post.image_url) {
-                    imageUrl = post.image_url[post.image_url.length - 1];
-                    $(postBlock).css('background-image', 'url("' + imageUrl + '")');
+                    $(postBlock).css('background-image', 'url("' + post.image_url[0] + '")');
                     html = '';
                 }
                 else {

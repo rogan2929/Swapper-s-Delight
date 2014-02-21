@@ -49,7 +49,7 @@ function processStreamQuery($stream, $images) {
     for ($i = 0; $i < count($stream); $i++) {
         $post = $stream[$i];
 
-        $post['image_url'] = getImageUrlArray($post, $images);
+        $post['image_url'] = getImageUrlArray($post, $images, false);
 
         // Replace any line breaks with <br/>
         if ($post['message']) {
