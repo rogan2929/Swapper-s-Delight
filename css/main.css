@@ -335,7 +335,6 @@ textarea {
     text-align: center;
     font-weight: bold;
     display: inline-block;
-    height: 40px;
 }
 
 .button > span {
@@ -346,15 +345,20 @@ textarea {
 
 .button:hover {
     background-color: #b3d4fc;
-    border: 1px solid #ccc;
 }
 
 .nav-button {
-    
+    display: block;
+    height: 30px;
 }
 
 .button.toolbar-button {
-    
+    height: 40px;
+    border: 1px solid transparent;
+}
+
+.button.toolbar-button:hover, .button.nav-button:hover {
+    border: 1px solid #ccc;
 }
 
 .button.post-button {
