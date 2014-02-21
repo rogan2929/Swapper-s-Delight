@@ -435,8 +435,7 @@ textarea {
     height: 200px;
     width: 250px;
     overflow: hidden;
-/*    margin: 5px;*/
-    border: 5px solid transparent;
+    margin: 5px;
     margin-bottom: 2px;
     cursor: pointer;
     color: #444;
@@ -444,7 +443,7 @@ textarea {
 }
 
 .post-block:hover {
-    border-color: #f7c80a;
+    
 }
 
 .post-block.post-block-text > div {
@@ -459,7 +458,6 @@ textarea {
 }
 
 .post-block.post-block-image {
-    padding: 1px;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
