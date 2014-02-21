@@ -717,7 +717,7 @@ var SwdView = {
             $('#select-group-list').append('<li id="' + groups[i].gid + '" class="selection-item select-group"><span class="ui-icon" style="background-image: url(' + groups[i].icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + groups[i].name + '</div></li>');
         }
 
-        $('.selection-item.select-group').button();
+        //$('.selection-item.select-group').button();
     },
     addPostComment: function(comment) {
         var commentDiv, timeStamp, userImage;
@@ -748,55 +748,55 @@ var SwdView = {
      */
     initView: function() {
         // Set up buttons
-        $('.button-nav').button();
+        //$('.button-nav').button();
 
-        $('#button-menu-main').button({
-            icons: {
-                primary: 'ui-icon-gear'
-            }
-        });
-
-        $('#button-groups').button({
-            icons: {
-                primary: 'ui-icon-contact'
-            }
-        });
-
-        $('#button-new').button({
-            icons: {
-                primary: 'ui-icon-comment'
-            }
-        });
-
-        $('#button-refresh').button({
-            icons: {
-                primary: 'ui-icon-refresh'
-            }
-        });
-
-        $('#button-menu-daysback').button({
-            icons: {
-                primary: 'ui-icon-calendar'
-            }
-        });
-
-        $('#post-button-comment > div').button({
-            icons: {
-                primary: 'ui-icon-comment'
-            }
-        });
-
-        $('#post-button-pm').button({
-            icons: {
-                primary: 'ui-icon-mail-closed'
-            }
-        });
-
-        $('#post-button-like').button({
-            icons: {
-                primary: 'ui-icon-pin-s'
-            }
-        });
+//        $('#button-menu-main').button({
+//            icons: {
+//                primary: 'ui-icon-gear'
+//            }
+//        });
+//
+//        $('#button-groups').button({
+//            icons: {
+//                primary: 'ui-icon-contact'
+//            }
+//        });
+//
+//        $('#button-new').button({
+//            icons: {
+//                primary: 'ui-icon-comment'
+//            }
+//        });
+//
+//        $('#button-refresh').button({
+//            icons: {
+//                primary: 'ui-icon-refresh'
+//            }
+//        });
+//
+//        $('#button-menu-daysback').button({
+//            icons: {
+//                primary: 'ui-icon-calendar'
+//            }
+//        });
+//
+//        $('#post-button-comment > div').button({
+//            icons: {
+//                primary: 'ui-icon-comment'
+//            }
+//        });
+//
+//        $('#post-button-pm').button({
+//            icons: {
+//                primary: 'ui-icon-mail-closed'
+//            }
+//        });
+//
+//        $('#post-button-like').button({
+//            icons: {
+//                primary: 'ui-icon-pin-s'
+//            }
+//        });
 
         $('.floating-panel-content').click(function(e) {
             // Prevent floating panels from closing whenever they are clicked on.
