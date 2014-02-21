@@ -334,21 +334,17 @@ textarea {
 
 .post-block {
     display: inline-block;
-/*    background: #eee;*/
-    padding: 10px;
+    background: #eee;
+    padding: 5px;
     height: 160px;
     width: 280px;
-/*    border: 1px solid #ddd;*/
+    border: 1px solid #ddd;
+    border-radius: 5px;
     overflow: hidden;
     margin: 3px;
     margin-bottom: -3px;
     cursor: pointer;
     color: #444;
-    font-weight: normal !important;
-}
-
-.post-block.ui-state-hover {
-    color: #fcfcfc;
 }
 
 .post-tile {
