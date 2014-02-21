@@ -151,7 +151,7 @@
 
             <!--Menus-->
 
-            <ul id='popup-menu-main' class='menu'>
+            <ul id='popup-menu-main' class='menu ui-widget'>
                 <li id='menu-item-logout' class='menu-item'>
                     <span>Logout</span>
                 </li>
