@@ -365,6 +365,7 @@ textarea {
     line-height: 40px;
     border: 1px solid transparent;
     text-align: left;
+    padding-left: 8px;
 }
 
 .button.toolbar-button {
@@ -412,6 +413,11 @@ textarea {
 
 #button-menu-main {
     min-width: 0 !important;
+}
+
+#button-groups {
+    text-align: left;
+    padding-left: 8px;
 }
 
 /*http://jsfiddle.net/E78q3/*/
