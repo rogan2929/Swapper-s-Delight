@@ -137,10 +137,10 @@
                         <span>Refresh</span>
                     </div>
                 </div>
-                <div id='button-groups' class='button toolbar-button'>
-                    <span>Select a Group</span>
-                </div>
                 <div class='float-right'>
+                    <div id='button-groups' class='button toolbar-button'>
+                        <span>Select a Group</span>
+                    </div>
                     <div id='button-menu-main' class='button menu-button'>
                         <span><a href='#popup-menu-main'>Menu</a></span>
                     </div>
