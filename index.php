@@ -143,7 +143,7 @@
                     </div>
                     <div id='button-menu-main' class='button menu-button'>
                         <span class='button-icon icon-menu'></span>
-                        <span><a href='#popup-menu-main'></a></span>
+                        <a href='#popup-menu-main'></a>
                     </div>
                 </div>
                 <div style='clear: both;'></div>
