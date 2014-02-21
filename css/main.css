@@ -336,6 +336,19 @@ textarea {
     display: inline-block;
 }
 
+.button a {
+    text-decoration: none;
+}
+
+.button a:hover {
+    text-decoration: none;
+}
+
+.button a:visited {
+    text-decoration: none;
+    color: #444;
+}
+
 .button > span {
     display: inline-block;
     vertical-align: middle;
