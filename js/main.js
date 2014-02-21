@@ -1010,12 +1010,12 @@ var SwdView = {
                     
                     // 25% chance to double width.
                     if (Math.random() > 0.25) {
-                        width = width * 2;
+                        width = parseInt(width) * 2;
                     }
                     
                     // 25% chance to double height.
                     if (Math.random() > 0.25) {
-                        height = height * 2;
+                        height = parseInt(height) * 2;
                     }
                     
                     console.log(width);
