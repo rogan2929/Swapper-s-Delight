@@ -1008,21 +1008,22 @@ var SwdView = {
                     width = 200;//$(postBlock).width();
                     height = 125;//$(postBlock).height();
                     
-                    // 25% chance to double width.
+                    // 40% chance to double width.
                     if (Math.random() > 0.25) {
                         width = width * 2;
                     }
                     
                     // 25% chance to double height.
-                    if (Math.random() > 0.25) {
-                        height = height * 2;
-                    }
-                    
-                    console.log(width);
-                    console.log(height);
+//                    if (Math.random() > 0.25) {
+//                        height = height * 2;
+//                    }
+//                    
+//                    console.log(width);
+//                    console.log(height);
                     
                     // Apply size.
-                    $(postBlock).width(width).height(height);
+                    //$(postBlock).width(width).height(height);
+                    $(postBlock).width(width);
                 }
                 else {
                     $(postBlock).addClass('post-block-text');
