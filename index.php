@@ -136,9 +136,9 @@
                         <span class='button-icon icon-refresh'></span>
                         <span>Refresh</span>
                     </div>
-                    <div id='button-groups' class='button toolbar-button'>
-                        <span>Select a Group</span>
-                    </div>
+                </div>
+                <div id='button-groups' class='button toolbar-button'>
+                    <span>Select a Group</span>
                 </div>
                 <div class='float-right'>
                     <div id='button-menu-main' class='button menu-button'>

@@ -392,6 +392,10 @@ textarea {
     background-image: url('/icons/search32.png');
 }
 
+#button-groups {
+    text-align: center;
+}
+
 /*http://jsfiddle.net/E78q3/*/
 
 .post-block {
