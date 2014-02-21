@@ -840,7 +840,7 @@ var SwdView = {
         console.log(id);
     },
     populatePostBlocks: function(posts, clientWidth) {
-        var i, post, postBlock, message, width, height;
+        var i, post, postBlock, message, colorClass, width, height;
 
         SwdView.toggleAjaxLoadingDiv('body', false);
 
@@ -888,10 +888,11 @@ var SwdView = {
                 else {
                     $(postBlock).addClass('post-block-text');                    
                     
-                    message = $('<p>' + post.message + '</p>');
-                    $(message).css('background-color', 'red');
+                    colorClass = 'post-block-message-cornsilk';
                     
-                    $(postBlock).append('<div>' + message + '</div>').appendTo('#post-feed');
+                    message = '<div><p class="' + colorClass + '">' + post.message + '</p></div>';
+                    
+                    $(postBlock).html(message).appendTo('#post-feed');
                 }
             }
 

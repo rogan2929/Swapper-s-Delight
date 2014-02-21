@@ -450,9 +450,12 @@ textarea {
 .post-block.post-block-text > div > p {
     overflow: hidden;
     height: 175px;
-    background: cornsilk;
     padding: 8px;
     border-radius: 5px;
+}
+
+.post-block-message-cornsilk {
+    color: cornsilk;
 }
 
 .post-block.post-block-image {
