@@ -336,10 +336,6 @@ textarea {
     display: inline-block;
 }
 
-.menu {
-    margin: 0;
-}
-
 .button a {
     text-decoration: none;
 }
@@ -653,6 +649,8 @@ div.right-toolbar-button {
 .menu {
     position: absolute;
     display: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 #post-feed {
