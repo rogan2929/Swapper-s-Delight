@@ -144,7 +144,7 @@
                         <span>Refresh</span>
                     </div>
                 </div>
-                <div class='float-right right-margin'>
+                <div class='float-right'>
                     <div id='button-menu-main' class='button menu-button'>
                         <span><a href='#popup-menu-main'>Menu</a></span>
                     </div>
