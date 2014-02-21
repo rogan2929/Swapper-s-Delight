@@ -668,8 +668,9 @@ div.right-toolbar-button {
 
 #left-rail {
     width: 180px;
-    position: fixed;
+    position: absolute;
     padding: 5px;
+    top: 42px;
 }
 
 #left-rail-nav {
