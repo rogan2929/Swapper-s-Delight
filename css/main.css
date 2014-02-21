@@ -454,9 +454,21 @@ textarea {
     border-radius: 5px;
 }
 
-.post-block-message-cornsilk {
-    color: cornsilk;
+/*.post-block-message-cornsilk {
+    background-color: cornsilk;
 }
+
+.post-block-message-antwh {
+    background-color: antiquewhite;
+}
+
+.post-block-message-azure {
+    background-color: azure;
+}
+
+.post-block-message-cornb {
+    background-color: cornflowerblue;
+}*/
 
 .post-block.post-block-image {
     padding: 1px;
