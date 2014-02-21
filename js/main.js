@@ -284,7 +284,7 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
                         SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
                         SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
-                        SwdView.installHandler('onClickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item-main', 'click');
+                        //SwdView.installHandler('onClickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item', 'click');
                         SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
                         SwdView.installHandler('onClickPostButtonComment', SwdPresenter.onClickPostButtonComment, '#post-button-comment > div', 'click');
                         SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
@@ -784,7 +784,7 @@ var SwdView = {
      * Closes all Jquery UI menus.
      */
     closeAllUiMenus: function() {
-        $('.ui-menu').hide();
+        $('.menu').hide();
     },
     /***
      * Sets menu positions.

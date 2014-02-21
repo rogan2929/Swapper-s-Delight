@@ -325,7 +325,7 @@ textarea {
     margin-right: 5px;
 }
 
-.button {
+.button,.menu-item {
     cursor: pointer;
     min-width: 100px;
     color: #444;
@@ -403,6 +403,10 @@ textarea {
 
 .button-icon.icon-search {
     background-image: url('/icons/search32.png');
+}
+
+.button-icon.icon-menu {
+    background-image: url('/icons/gear32.png');
 }
 
 #button-groups {
