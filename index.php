@@ -132,6 +132,7 @@
                         <span>Select a Group</span>
                     </div>
                     <div id='button-new' class='button toolbar-button'>
+                        <span class='button-icon icon-new'></span>
                         <span>New</span>
                     </div>
                     <div id='button-refresh' class='button toolbar-button'>

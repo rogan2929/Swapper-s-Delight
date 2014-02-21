@@ -365,6 +365,13 @@ textarea {
     min-width: 112px;
 }
 
+.button-icon {
+    height: 20px;
+    width: 20px;
+    background: green;
+    margin-right: 3px;
+}
+
 /*http://jsfiddle.net/E78q3/*/
 
 .post-block {
