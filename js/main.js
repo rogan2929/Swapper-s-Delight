@@ -411,11 +411,9 @@ var SwdPresenter = {
             SwdPresenter.currentlyLoading = true;
 
             if (loadNextPage && SwdPresenter.oldestPost) {
-                console.log('Loading next page.');
                 updatedTime = SwdPresenter.oldestPost.updated_time;
             }
             else {
-                console.log('Loading new content.');
                 updatedTime = null;
                 SwdView.clearPosts();
                 SwdPresenter.resetFbCanvasSize();
@@ -473,8 +471,6 @@ var SwdPresenter = {
     refreshFbCanvasSize: function() {
         FB.Canvas.getPageInfo(function(pageInfo) {
             SwdPresenter.clientHeight = parseInt(pageInfo.clientHeight);
-
-            console.log($('#post-feed').height());
 
             // Ensure a minimum height.
 //            if ($('html').height() < SwdPresenter.clientHeight  * 1.5) {
@@ -1021,6 +1017,9 @@ var SwdView = {
                     if (Math.random() > 0.25) {
                         height = height * 2;
                     }
+                    
+                    console.log(width);
+                    console.log(height);
                     
                     // Apply size.
                     $(postBlock).width(width).height(height);
