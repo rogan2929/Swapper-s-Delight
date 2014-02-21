@@ -409,8 +409,8 @@ textarea {
     background-image: url('/icons/gear32.png');
 }
 
-#button-groups {
-    text-align: center;
+#button-menu-main {
+    min-width: 0 !important;
 }
 
 /*http://jsfiddle.net/E78q3/*/
