@@ -442,8 +442,12 @@ textarea {
     color: #444;
 }
 
-.post-block.post-block-text > p {
+.post-block.post-block-text > div {
     padding: 20px;
+}
+
+.post-block.post-block-text > div > p {
+    overflow: hidden;
 }
 
 .post-block.post-block-image {

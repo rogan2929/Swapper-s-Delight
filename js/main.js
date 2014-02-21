@@ -885,7 +885,7 @@ var SwdView = {
                 }
                 else {
                     $(postBlock).addClass('post-block-text');
-                    html = '<p>' + post.message + '</p>';
+                    html = '<div><p>' + post.message + '</p></div>';
                 }
 
                 $(postBlock).html(html).appendTo('#post-feed');
