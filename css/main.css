@@ -337,7 +337,7 @@ textarea {
 }
 
 .menu {
-    
+    margin: 0;
 }
 
 .button a {
@@ -638,7 +638,7 @@ textarea {
     padding: 3px;
 }*/
 
-.ui-widget {
+.ui-widget,.menu {
     background: white;
     border-radius: 5px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
