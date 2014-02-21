@@ -985,7 +985,7 @@ var SwdView = {
         $('#' + id).addClass('selected-nav');
     },
     populatePostBlocks: function(posts, clientWidth) {
-        var i, post, postBlock, html;
+        var i, post, postBlock, html, width, height;
 
         SwdView.toggleAjaxLoadingDiv('body', false);
 
@@ -1007,6 +1007,23 @@ var SwdView = {
                     $(postBlock).addClass('post-block-image');
                     $(postBlock).css('background-image', 'url("' + post.image_url[0] + '")');
                     html = '';
+                    
+                    // Randomly select a layout size.
+                    width = $(postBlock).width();
+                    height = $(postBlock).height();
+                    
+                    // 25% chance to double width.
+                    if (Math.random() > 0.25) {
+                        width = width * 2;
+                    }
+                    
+                    // 25% chance to double height.
+                    if (Math.random() > 0.25) {
+                        height = height * 2;
+                    }
+                    
+                    // Apply size.
+                    $(postBlock).width(width).height(height);
                 }
                 else {
                     $(postBlock).addClass('post-block-text');
