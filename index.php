@@ -148,6 +148,10 @@
                 </div>
                 <div style='clear: both;'></div>
             </div>
+            
+            <div id='post-details-toolbar' class='ui-widget toolbar hidden'>
+                
+            </div>
 
             <!--Menus-->
 

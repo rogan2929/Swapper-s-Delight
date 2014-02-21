@@ -812,7 +812,7 @@ var SwdView = {
             top: Math.max(offset + 60, 0)
         }, 100);
 
-        $('#main-toolbar, .floating-panel').animate({
+        $('.toolbar, .floating-panel').animate({
             top: Math.max(offset, 0)
         }, 100);
     },
