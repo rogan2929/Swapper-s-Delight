@@ -129,13 +129,13 @@
 
             <div id='main-toolbar' class='ui-widget ui-widget-header'>
                 <div class='float-left left-margin'>
-                    <div id='button-groups' class='left-margin'>
+                    <div id='button-groups' class='toolbar-button'>
                         Select a Group
                     </div>
-                    <div id='button-new' class='left-margin'>
+                    <div id='button-new' class='toolbar-button'>
                         New
                     </div>
-                    <div id='button-refresh' class='left-margin'>
+                    <div id='button-refresh' class='toolbar-button'>
                         Refresh
                     </div>
                 </div>

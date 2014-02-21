@@ -331,6 +331,11 @@ textarea {
     margin-right: 5px;
 }
 
+.toolbar-button {
+    display: inline-block;
+    margin-left: 5px;
+}
+
 /*http://jsfiddle.net/E78q3/*/
 
 .post-block {
