@@ -714,10 +714,10 @@ var SwdView = {
         $('#select-group-no-groups').hide();
 
         for (i = 0; i < groups.length; i++) {
-            $('#select-group-list').append('<li id="' + groups[i].gid + '" class="selection-item select-group"><span class="ui-icon" style="background-image: url(' + groups[i].icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + groups[i].name + '</div></li>');
+            $('#select-group-list').append('<li id="' + groups[i].gid + '" class="selection-item select-group"><span style="background-image: url(' + groups[i].icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + groups[i].name + '</div></li>');
         }
 
-        $('.selection-item.select-group').button();
+        //$('.selection-item.select-group').button();
     },
     addPostComment: function(comment) {
         var commentDiv, timeStamp, userImage;
@@ -738,7 +738,7 @@ var SwdView = {
         //timeStamp = $.datepicker.formatDate('DD, mm/dd/yy at HH:MM', new Date(post.comments[i].time * 1000));
         timeStamp = new moment(new Date(comment.time * 1000));
 
-        commentDiv = $('<div class="post-comment ui-corner-all ui-widget ui-widget-content"><div class="ui-state-default"><div class="post-comment-user-image"></div><div class="post-comment-header"><p class="wrapper"><a class="post-comment-user-name" href="' + comment.user.profile_url + '" target="_blank">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><span class="timestamp">' + timeStamp.calendar() + '</span></p></div></div><div class="ui-widget ui-widget-content">' + comment.text + '</div></div>');
+        commentDiv = $('<div class="post-comment ui-widget "><div class="ui-state-default"><div class="post-comment-user-image"></div><div class="post-comment-header"><p class="wrapper"><a class="post-comment-user-name" href="' + comment.user.profile_url + '" target="_blank">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><span class="timestamp">' + timeStamp.calendar() + '</span></p></div></div><div class="ui-widget">' + comment.text + '</div></div>');
         $(commentDiv).find('.post-comment-user-image').css('background-image', userImage);
         $(commentDiv).hide().prependTo('#post-comment-list').fadeIn();
         //$('#post-comment-list').append(commentDiv);
@@ -747,64 +747,11 @@ var SwdView = {
      * Init function for SwdView.
      */
     initView: function() {
-        // Set up buttons
-        $('.button-nav').button();
-
-        $('#button-menu-main').button({
-            icons: {
-                primary: 'ui-icon-gear'
-            }
-        });
-
-        $('#button-groups').button({
-            icons: {
-                primary: 'ui-icon-contact'
-            }
-        });
-
-        $('#button-new').button({
-            icons: {
-                primary: 'ui-icon-comment'
-            }
-        });
-
-        $('#button-refresh').button({
-            icons: {
-                primary: 'ui-icon-refresh'
-            }
-        });
-
-        $('#button-menu-daysback').button({
-            icons: {
-                primary: 'ui-icon-calendar'
-            }
-        });
-
-        $('#post-button-comment > div').button({
-            icons: {
-                primary: 'ui-icon-comment'
-            }
-        });
-
-        $('#post-button-pm').button({
-            icons: {
-                primary: 'ui-icon-mail-closed'
-            }
-        });
-
-        $('#post-button-like').button({
-            icons: {
-                primary: 'ui-icon-pin-s'
-            }
-        });
-
+        // TODO: Install an event handler to decouple this from the view.
         $('.floating-panel-content').click(function(e) {
             // Prevent floating panels from closing whenever they are clicked on.
             e.stopPropagation();
         });
-
-        // Init menus.
-        $('#popup-menu-main').menu();
     },
     /**
      * Installs an event handler and connects it to the presenter.
@@ -838,95 +785,6 @@ var SwdView = {
      */
     closeAllUiMenus: function() {
         $('.ui-menu').hide();
-    },
-    /***
-     * Write posts to the page.
-     * @param {type} posts
-     */
-    populatePosts: function(posts) {
-        var i, isEmpty, imageUrl, message, post, postTile, primaryContent, secondaryContent;
-
-        ///SwdView.toggleAjaxLoadingDiv('#post-feed', false);
-        SwdView.toggleAjaxLoadingDiv('body', false);
-
-        // If there is a feed to display, then display it.
-        if (posts && posts.length > 0) {
-            $('#post-feed-noposts').hide();
-
-            for (i = 0; i < posts.length; i++) {
-                isEmpty = false;
-                post = posts[i];
-                if (post.message) {
-                    message = post.message;
-                }
-                else {
-                    message = null;
-                }
-
-                if (post.image_url) {
-                    imageUrl = post.image_url[0];
-                }
-                else {
-                    imageUrl = null;
-                }
-
-                postTile = $('<div id="' + post.post_id + '" class="post-tile ui-corner-all ui-widget ui-widget-content ui-state-default"><div class="post-tile-primary-content"></div><div class="post-tile-secondary-content"></div></div>');//.data('image_url', imageUrl);
-                primaryContent = $(postTile).children('.post-tile-primary-content');
-                secondaryContent = $(postTile).children('.post-tile-secondary-content');
-                if (message && imageUrl) {
-                    $(postTile).addClass('post-tile-multi');
-                    $(primaryContent).css('background-image', 'url("' + imageUrl + '")');
-                    $(secondaryContent).text(message);
-                }
-                else
-                if (message && !imageUrl) {
-                    $(postTile).addClass('post-tile-multi');
-                    $(primaryContent).css('background-image', 'url("/img/no-image.png")');
-                    $(secondaryContent).text(message);
-                }
-                else
-                if (!message && imageUrl) {
-                    $(postTile).addClass('post-tile-image');
-                    $(primaryContent).css('background-image', 'url("' + imageUrl + '")');
-                }
-                else {
-                    isEmpty = true;
-                }
-
-                if (!isEmpty) {
-                    $(postTile).hide().appendTo('#post-feed');
-                }
-            }
-
-            // Sleekly fade in the post tile elements.
-            // From: http://www.paulirish.com/2008/sequentially-chain-your-callbacks-in-jquery-two-ways/
-//            (function shownext(jq) {
-//                jq.eq(0).fadeIn(60, function() {
-//                    FB.Canvas.setSize({
-//                        height: Math.max($('html').height(), SwdPresenter.clientHeight)
-//                                //height: Math.max(clientHeight, 810)
-//                    });
-//                    (jq = jq.slice(1)).length && shownext(jq);
-//                });
-//            })($('div.post-tile'));
-            $('div.post-tile').fadeIn(200, function() {
-                // Refresh FB canvas when fade in completes.
-                SwdPresenter.refreshFbCanvasSize();
-            });
-
-            // Associate the click event handler for newly created posts.
-            $('.post-tile > *').click(SwdView.handlers['onClickPostTile']);
-            $('.post-tile').hover(function() {
-                $(this).removeClass('ui-state-default').addClass('ui-state-hover');
-            }, function() {
-                $(this).removeClass('ui-state-hover').addClass('ui-state-default');
-            });
-        }
-        else {
-            $('#post-feed-noposts').show();
-        }
-
-        SwdPresenter.currentlyLoading = false;
     },
     /***
      * Sets menu positions.
@@ -970,7 +828,7 @@ var SwdView = {
      * @param {type} text Text to display inside the button.
      */
     setGroupButtonText: function(text) {
-        $('#button-groups span').text(text);
+        $('#button-groups').text(text);
     },
     /***
      * Set selected post type.
@@ -1032,12 +890,6 @@ var SwdView = {
                 $(postBlock).html(html).appendTo('#post-feed');
             }
 
-//            $('.post-block').hover(function() {
-//                $(this).removeClass('ui-state-default').addClass('ui-state-hover');
-//            }, function() {
-//                $(this).removeClass('ui-state-hover').addClass('ui-state-default');
-//            });
-
             // Associate the click event handler for newly created posts.
             $('.post-block').click(SwdView.handlers['onClickPostBlock']);
 
@@ -1055,10 +907,10 @@ var SwdView = {
      */
     setLikePost: function(userLikes) {
         if (userLikes) {
-            $('#post-button-like .ui-button-text').text('Unlike');
+            $('#post-button-like').text('Unlike');
         }
         else {
-            $('#post-button-like .ui-button-text').text('Like');
+            $('#post-button-like').text('Like');
         }
     },
     /***
@@ -1175,25 +1027,13 @@ var SwdView = {
      */
     toggleFloatingPanel: function(id, show) {
         if (show) {
-            // Make the panel modal by summoning a ui-widget-overlay.
-            //$('<div class="ui-widget-overlay ui-widget-front"></div>').hide().appendTo('body').fadeIn();
-            //$(id).fadeIn(150);
-            $('<div class="ui-widget-overlay ui-widget-front"></div>').hide().appendTo('body').show();
+            // Make the panel modal by summoning an overlay.
+            //$('<div class="ui-widget-overlay ui-widget-front"></div>').hide().appendTo('body').show();
             $(id).show();
-//            $(id).show('slide', {
-//                easing: 'easeInOutQuint',
-//                direction: 'down'
-//            }, 300);
         }
         else {
             $(id).hide();
-            $('div.ui-widget-overlay').remove();
-//            $(id).hide('slide', {
-//                easing: 'easeInOutQuint',
-//                direction: 'down'
-//            }, 300, function() {
-//                $('div.ui-widget-overlay').remove();
-//            });
+            //$('div.ui-widget-overlay').remove();
         }
     }
 };
