@@ -1005,8 +1005,7 @@ var SwdView = {
                     html = '';
                     
                     // Randomly select a layout size.
-                    width = 200;//$(postBlock).width();
-                    height = 125;//$(postBlock).height();
+                    width = 250;//$(postBlock).width();
                     
                     // 40% chance to double width.
                     if (Math.random() > 0.25) {
