@@ -886,13 +886,12 @@ var SwdView = {
                     $(postBlock).appendTo('#post-feed');
                 }
                 else {
-                    $(postBlock).addClass('post-block-text');
+                    $(postBlock).addClass('post-block-text');                    
                     
-                    message = $('<div><p>' + post.message + '</p></div>');
-                    
+                    message = $('<p>' + post.message + '</p>');
                     $(message).css('background-color', 'red');
                     
-                    $(postBlock).append(message).appendTo('#post-feed');
+                    $(postBlock).append('<div>' + message + '</div>').appendTo('#post-feed');
                 }
             }
 
