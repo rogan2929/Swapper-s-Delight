@@ -262,10 +262,6 @@ textarea {
     display: block;
 }
 
-.selection-item.ui-button-text {
-
-}
-
 .selection-item .ui-icon {
     display: inline-block;
 }
@@ -334,6 +330,7 @@ textarea {
     cursor: pointer;
     min-width: 112px;
     height: 30px;
+    line-height: 30px;
     border-radius: 2px;
     border: 1px solid #ccc;
     background-color: #ddd;
@@ -346,6 +343,7 @@ textarea {
 .button > span {
     display: inline-block;
     vertical-align: middle;
+    line-height: normal;
 }
 
 .button:hover {
