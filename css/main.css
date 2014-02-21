@@ -444,10 +444,12 @@ textarea {
 
 .post-block.post-block-text > div {
     padding: 20px;
+    overflow: hidden;
 }
 
 .post-block.post-block-text > div > p {
     overflow: hidden;
+    height: 11em;
 }
 
 .post-block.post-block-image {

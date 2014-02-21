@@ -53,7 +53,7 @@ function processStreamQuery($stream, $images) {
 
         // Replace any line breaks with <br/>
         if ($post['message']) {
-            $post['message'] = str_replace('\n', '<br/>', $post['message']);
+            $post['message'] = nl2br($post['message']);
         }
 
         // Add to the posts array.
