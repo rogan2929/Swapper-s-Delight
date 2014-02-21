@@ -1000,7 +1000,7 @@ var SwdView = {
             for (i = 0; i < posts.length; i++) {
                 post = posts[i];
 
-                postBlock = $('<div class="post-block"></div>');
+                postBlock = $('<div id="' + post.post_id + '" class="post-block"></div>');
                 
                 if (post.image_url.length > 0) {
                     $(postBlock).addClass('post-block-image');
