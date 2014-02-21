@@ -544,8 +544,12 @@ textarea {
     text-decoration: underline;
 }
 
-.post-comment .ui-widget-content {
+/*.post-comment .ui-widget-content {
     padding: 3px;
+}*/
+
+.ui-widget {
+    background: white;
 }
 
 div.right-toolbar-button {
