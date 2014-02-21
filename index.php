@@ -31,17 +31,17 @@
             <div id='main-panel'>
                 <div id='left-rail' class='ui-widget scroll-y'>
                     <div id='left-rail-nav'>
-                        <div id='button-nav-group' class='nav-button selected-nav'>
-                            Newest
+                        <div id='button-nav-group' class='button nav-button selected-nav'>
+                            <span>Newest</span>
                         </div>
-                        <div id='button-nav-myposts' class='nav-button'>
-                            My Posts
+                        <div id='button-nav-myposts' class='button nav-button'>
+                            <span>My Posts</span>
                         </div>
-                        <div id='button-nav-liked' class='nav-button'>
-                            Liked
+                        <div id='button-nav-liked' class='button nav-button'>
+                            <span>Liked</span>
                         </div>
-                        <div id='button-nav-search' class='nav-button'>
-                            Search
+                        <div id='button-nav-search' class='button nav-button'>
+                            <span>Search</span>
                         </div>
                     </div>
                     <div id='ad-space'>
@@ -79,11 +79,11 @@
                             </div>
                             <div id='post-button-bar'>
                                 <div>
-                                    <div id='post-button-pm' class='post-button'>
-                                        Message
+                                    <div id='post-button-pm' class='button post-button'>
+                                        <span>Message</span>
                                     </div>
-                                    <div id='post-button-like' class='post-button'>
-                                        Like
+                                    <div id='post-button-like' class='button post-button'>
+                                        <span>Like</span>
                                     </div>
                                 </div>
                             </div>
@@ -94,8 +94,8 @@
                                 <div class='ajax-loading-div hidden'></div>
                             </div>
                             <div id='post-button-comment'>
-                                <div class='post-button'>
-                                    Comment
+                                <div class='button post-button'>
+                                    <span>Comment</span>
                                 </div>
                             </div>
                             <span id='post-comment-heading'>Viewing all comments, newest first.</span>
@@ -127,20 +127,20 @@
             </div>
 
             <div id='main-toolbar' class='ui-widget'>
-                <div class='float-left left-margin'>
-                    <div id='button-groups' class='toolbar-button'>
-                        Select a Group
+                <div class='float-left'>
+                    <div id='button-groups' class='button toolbar-button'>
+                        <span>Select a Group</span>
                     </div>
-                    <div id='button-new' class='toolbar-button'>
-                        New
+                    <div id='button-new' class='button toolbar-button'>
+                        <span>New</span>
                     </div>
-                    <div id='button-refresh' class='toolbar-button'>
-                        Refresh
+                    <div id='button-refresh' class='button toolbar-button'>
+                        <span>Refresh</span>
                     </div>
                 </div>
                 <div class='float-right right-margin'>
-                    <div id='button-menu-main' class='menu-button'>
-                        <a href='#popup-menu-main'>Menu</a>
+                    <div id='button-menu-main' class='button menu-button'>
+                        <span><a href='#popup-menu-main'>Menu</a></span>
                     </div>
                 </div>
                 <div style='clear: both;'></div>
