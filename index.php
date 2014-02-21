@@ -32,15 +32,19 @@
                 <div id='left-rail' class='ui-widget scroll-y'>
                     <div id='left-rail-nav'>
                         <div id='button-nav-group' class='button nav-button selected-nav'>
+                            <span class='button-icon icon-refresh'></span>
                             <span>Newest</span>
                         </div>
                         <div id='button-nav-myposts' class='button nav-button'>
+                            <span class='button-icon icon-refresh'></span>
                             <span>My Posts</span>
                         </div>
                         <div id='button-nav-liked' class='button nav-button'>
+                            <span class='button-icon icon-refresh'></span>
                             <span>Liked</span>
                         </div>
                         <div id='button-nav-search' class='button nav-button'>
+                            <span class='button-icon icon-search'></span>
                             <span>Search</span>
                         </div>
                     </div>
@@ -136,6 +140,7 @@
                         <span>New</span>
                     </div>
                     <div id='button-refresh' class='button toolbar-button'>
+                        <span class='button-icon icon-refresh'></span>
                         <span>Refresh</span>
                     </div>
                 </div>

@@ -357,7 +357,9 @@ textarea {
 
 .button.toolbar-button {
     display: inline-block;
-    margin-left: 5px;
+    height: 100%;
+    background: white;
+    border-radius: 0;
 }
 
 .button.post-button {
@@ -368,8 +370,19 @@ textarea {
 .button-icon {
     height: 20px;
     width: 20px;
-    background: green;
     margin-right: 3px;
+}
+
+.button-icon.icon-new {
+    
+}
+
+.button-icon.icon-refresh {
+    
+}
+
+.button-icon.icon-search {
+    
 }
 
 /*http://jsfiddle.net/E78q3/*/
