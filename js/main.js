@@ -1003,10 +1003,12 @@ var SwdView = {
                 postBlock = $('<div class="post-block"></div>');
                 
                 if (post.image_url.length > 0) {
+                    $(postBlock).addClass('post-block-image');
                     $(postBlock).css('background-image', 'url("' + post.image_url[0] + '")');
                     html = '';
                 }
                 else {
+                    $(postBlock).addClass('post-block-text');
                     html = '<p>' + post.message + '</p>';
                 }
 
