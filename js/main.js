@@ -842,7 +842,15 @@ var SwdView = {
     populatePostBlocks: function(posts, clientWidth) {
         var i, post, postBlock, message, color, width, height, colorArray;
         
-        colorArray = ['cornsilk', 'azure', 'antiquewhite', 'cornflowerblue'];
+        // Array of random colors to choose from.
+        colorArray = [
+            'cornsilk', 
+            'azure', 
+            'antiquewhite', 
+            'cornflowerblue',
+            'sandybrown',
+            'mintcream'
+        ];
 
         SwdView.toggleAjaxLoadingDiv('body', false);
 
