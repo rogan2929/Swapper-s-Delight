@@ -450,7 +450,7 @@ textarea {
 .post-block.post-block-text > div > p {
     overflow: hidden;
     height: 175px;
-    background: #f6f6f6;
+    background: cornsilk;
     padding: 8px;
     border-radius: 5px;
 }
