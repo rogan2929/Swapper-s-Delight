@@ -18,7 +18,8 @@ if ($updatedTime) {
     );
 }
 
-for ($i = 1; $i <= 5; $i++) {
+// Begin querying the group's feed, trying for a larger limit if an insufficient number of results is returned.
+for ($i = 1; $i <= 10; $i++) {
     $posts = streamQuery($fbSession, $gid, $constraints, $i * 50);
     
     if (count($posts) >= 20) {
