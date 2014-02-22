@@ -406,7 +406,6 @@ var SwdPresenter = {
                 updatedTime = null;
                 SwdView.clearPosts();
                 SwdPresenter.resetFbCanvasSize();
-                //SwdView.toggleAjaxLoadingDiv('#post-feed', true);
                 SwdView.toggleAjaxLoadingDiv('body', true);
             }
 

@@ -444,6 +444,7 @@ textarea {
 
 .post-block.load-more {
     padding: 0px;
+    position: relative;
 }
 
 .load-more > .load-more-text {
