@@ -23,6 +23,7 @@ for ($i = 1; $i <= 10; $i++) {
     $posts = streamQuery($fbSession, $gid, $constraints, $i * 50);
     
     if (count($posts) >= 20) {
+        $posts = array_slice($posts, 0, 20);
         break;
     }
 }
