@@ -49,7 +49,7 @@ function processStreamQuery($stream, $images) {
     for ($i = 0; $i < count($stream); $i++) {
         $post = $stream[$i];
 
-        $post['image_url'] = getImageUrlArray($post, $images, false);
+        $post['image_url'] = getImageUrlArray($post, $images, true);
 
         // Replace any line breaks with <br/>
         if ($post['message']) {
@@ -63,9 +63,10 @@ function processStreamQuery($stream, $images) {
     return $posts;
 }
 
-/***
+/* * *
  * For posts with an image, look for associated image data.
  */
+
 function getImageUrlArray($post, $images, $thumbnails = true) {
     $imageUrls = array();
 
@@ -75,32 +76,36 @@ function getImageUrlArray($post, $images, $thumbnails = true) {
             if ($post['attachment']['media'][$i] && $post['attachment']['media'][$i]['photo']) {
                 // Get image's unique Facebook Id
                 $fbid = $post['attachment']['media'][$i]['photo']['fbid'];
-                
+
                 // Find the image url from the given Facebook ID
                 $imageUrls[] = getImageUrlFromFbId($fbid, $images, $thumbnails);
             }
         }
     }
-    
+
     return $imageUrls;
 }
 
 function getImageUrlFromFbId($fbid, $images, $thumbnails = true) {
     $imageUrl = null;
-    
+
     for ($i = 0; $i < count($images); $i++) {
         if ($fbid == $images[$i]['object_id']) {
             $index = 0;
-            
+
             // See if we are trying to retrieve a small image. (Usually last in the array.)
             if ($thumbnails) {
-                $index = count($images[$i]['images']) - 1;
+                $index = count($images[$i]['images']) - 2;
+
+                if ($index < 0) {
+                    $index = 0;
+                }
             }
-            
+
             $imageUrl = $images[$i]['images'][$index]['source'];
             break;
         }
     }
-    
+
     return $imageUrl;
 }
