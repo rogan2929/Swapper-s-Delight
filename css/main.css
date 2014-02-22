@@ -443,7 +443,7 @@ textarea {
 }
 
 .post-block.load-more {
-    position: relative;
+    padding: 0px;
 }
 
 .load-more > .load-more-text {
