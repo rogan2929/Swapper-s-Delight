@@ -95,11 +95,11 @@ function getImageUrlFromFbId($fbid, $images, $thumbnails = true) {
 
             // See if we are trying to retrieve a small image. (Usually last in the array.)
             if ($thumbnails) {
-                $index = count($images[$i]['images']) - 2;
-
-                if ($index < 0) {
-                    $index = 0;
-                }
+//                $index = count($images[$i]['images']) - 1;
+//
+//                if ($index < 0) {
+//                    $index = 0;
+//                }
             }
 
             $imageUrl = $images[$i]['images'][$index]['source'];
