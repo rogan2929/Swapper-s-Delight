@@ -287,7 +287,6 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickPostButtonComment', SwdPresenter.onClickPostButtonComment, '#post-button-comment > div', 'click');
                         SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
                         SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
-                        //SwdView.installHandler('onClickPostTile', SwdPresenter.onClickPostTile, '.post-tile > *', 'click');
                         SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block', 'click');
                         SwdView.installHandler('onClickPostBlockLoadMore', SwdPresenter.onClickPostBlockLoadMore, '.post-block.load-more', 'click');
                         SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
@@ -854,7 +853,7 @@ var SwdView = {
             $('#post-feed-noposts').hide();
             
             // Remove any existing 'Load more...' tiles.
-            $('.post-tile.load-more').remove();
+            $('.post-block.load-more').remove();
 
             for (i = 0; i < posts.length; i++) {
                 post = posts[i];
