@@ -8,6 +8,7 @@ $gid = $_GET['gid'];
 $updatedTime = $_GET['updatedTime'];
 
 $constraints = array();
+$limit = 25;
 
 if ($updatedTime) {
     // Add to the constraints array.
@@ -22,9 +23,9 @@ if ($updatedTime) {
 for ($i = 1; $i <= 10; $i++) {
     $posts = streamQuery($fbSession, $gid, $constraints, $i * 50);
     
-    if (count($posts) >= 20) {
+    if (count($posts) >= $limit) {
         // Cap at 20 posts.
-        $posts = array_slice($posts, 0, 20);
+        $posts = array_slice($posts, 0, $limit);
         break;
     }
 }
