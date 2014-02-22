@@ -88,19 +88,18 @@ function getImageUrlArray($post, $images, $thumbnails = true) {
 
 function getImageUrlFromFbId($fbid, $images, $thumbnails = true) {
     $imageUrl = null;
-    
+
     for ($i = 0; $i < count($images); $i++) {
         if ($fbid == $images[$i]['object_id']) {
             // See if we are trying to retrieve a small image. (Usually last in the array.)
             if ($thumbnails) {
-                $imageUrl = getSmallestImageUrl($images[$i]['images']);
-            }
-            else {
+                $imageUrl = getSmallImageUrl($images[$i]['images']);
+            } else {
                 //$imageUrl = $images[$i]['images'][$index]['source'];
-                $imageUrl = getLargestImageUrl($images[$i]['images']);
+                $imageUrl = getLargeImageUrl($images[$i]['images']);
             }
 
-            
+
             break;
         }
     }
@@ -108,16 +107,24 @@ function getImageUrlFromFbId($fbid, $images, $thumbnails = true) {
     return $imageUrl;
 }
 
-/***
+/* * *
  * In an array, find the largest Facebook image.
  */
-function getLargestImageUrl($image) {
+
+function getLargeImageUrl($image) {
     return $image[0]['source'];
 }
 
-/***
+/* * *
  * In an array, find the smallest Facebook image.
  */
-function getSmallestImageUrl($image) {
-    return $image[0]['source'];
+
+function getSmallImageUrl($image) {
+    $index = 0;
+    
+    for ($i = 0; $i < count($image); $i++) {
+        
+    }
+
+    return $image[$index]['source'];
 }
