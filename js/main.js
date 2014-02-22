@@ -340,14 +340,6 @@ var SwdPresenter = {
 
                 SwdView.setFloatingPanelHeight(height);
 
-//                scrollPos = $('#app-content').height() - clientHeight;
-//
-//                // Detect scroll at bottom 10% of page.
-//                if (scrollTop >= scrollPos * 0.9 && scrollPos >= 0) {
-//                    //alert(scrollTop + ' ' + $('#app-content').height() + ' ' + clientHeight);
-//                    SwdPresenter.loadPosts(true);
-//                }
-
                 FB.Canvas.setSize({
                     height: Math.max($('html').height(), clientHeight)
                 });
@@ -848,6 +840,7 @@ var SwdView = {
         ];
 
         SwdView.toggleAjaxLoadingDiv('body', false);
+        SwdView.toggleAjaxLoadingDiv('.post-block.load-more', false);
 
         // If there is a feed to display, then display it.
         if (posts && posts.length > 0) {
