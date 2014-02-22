@@ -343,13 +343,13 @@ var SwdPresenter = {
 
                 SwdView.setFloatingPanelHeight(height);
 
-                scrollPos = $('#app-content').height() - clientHeight;
-
-                // Detect scroll at bottom 10% of page.
-                if (scrollTop >= scrollPos * 0.9 && scrollPos >= 0) {
-                    //alert(scrollTop + ' ' + $('#app-content').height() + ' ' + clientHeight);
-                    SwdPresenter.loadPosts(true);
-                }
+//                scrollPos = $('#app-content').height() - clientHeight;
+//
+//                // Detect scroll at bottom 10% of page.
+//                if (scrollTop >= scrollPos * 0.9 && scrollPos >= 0) {
+//                    //alert(scrollTop + ' ' + $('#app-content').height() + ' ' + clientHeight);
+//                    SwdPresenter.loadPosts(true);
+//                }
 
                 FB.Canvas.setSize({
                     height: Math.max($('html').height(), clientHeight)
@@ -457,7 +457,6 @@ var SwdPresenter = {
             // If a response came through, then display the posts.
             SwdPresenter.oldestPost = response[response.length - 1];
             SwdView.populatePostBlocks(response, SwdPresenter.clientWidth);
-            //SwdView.populatePosts(response);
         }
         else
         if (!loadNextPage) {
@@ -867,31 +866,11 @@ var SwdView = {
 
                 postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
                 
+                message = '';
+                
                 if (post.image_url.length > 0) {
                     $(postBlock).addClass('post-block-image');
                     $(postBlock).css('background-image', 'url("' + post.image_url[0] + '")');
-                    message = '';
-                    
-                    // Randomly select a layout size.
-//                    width = 250;//$(postBlock).width();
-//                    
-//                    // 40% chance to double width.
-//                    if (Math.random() > 0.25) {
-//                        width = width * 2;
-//                    }
-                    
-                    // 25% chance to double height.
-//                    if (Math.random() > 0.25) {
-//                        height = height * 2;
-//                    }
-//                    
-//                    console.log(width);
-//                    console.log(height);
-                    
-                    // Apply size.
-                    //$(postBlock).width(width).height(height);
-//                    $(postBlock).width(width);
-
                     $(postBlock).appendTo('#post-feed');
                 }
                 else {
@@ -907,6 +886,8 @@ var SwdView = {
 
             // Associate the click event handler for newly created posts.
             $('.post-block').click(SwdView.handlers['onClickPostBlock']);
+            
+            // Add the 'Load More...' post block.
 
             SwdPresenter.refreshFbCanvasSize();
         }
