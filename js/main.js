@@ -879,9 +879,11 @@ var SwdView = {
             $('.post-block').click(SwdView.handlers['onClickPostBlock']);
             
             // Add the 'Load More...' post block.
-            postBlock = $('<div class="post-block load-more ui-widget"><div class="load-more-text">Load more...</div></div>');
-            
+            postBlock = $('<div class="button post-block load-more ui-widget"><div class="load-more-text">Load more...</div></div>');
             $('#post-feed').append(postBlock);
+            
+            // Add an event handler for when it is clicked on.
+            $('.post-block').click(SwdView.handlers['onClickPostBlock']);
 
             SwdPresenter.refreshFbCanvasSize();
         }
