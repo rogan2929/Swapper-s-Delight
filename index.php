@@ -32,13 +32,13 @@
                 <div id='left-rail' class='ui-widget scroll-y'>
                     <div id='left-rail-nav'>
                         <div id='button-nav-group' class='button nav-button selected-nav'>
-                            <span>Newest</span>
+                            <span>Newest Posts</span>
                         </div>
                         <div id='button-nav-myposts' class='button nav-button'>
                             <span>My Posts</span>
                         </div>
                         <div id='button-nav-liked' class='button nav-button'>
-                            <span>Liked</span>
+                            <span>Liked Posts</span>
                         </div>
                         <!--                        <div id='button-nav-search' class='button nav-button'>
                                                     <span>Search</span>
