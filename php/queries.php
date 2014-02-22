@@ -120,11 +120,7 @@ function getLargeImageUrl($image) {
  */
 
 function getSmallImageUrl($image) {
-    $index = 0;
-    
-    for ($i = 0; $i < count($image); $i++) {
-        
-    }
-
+    // Grab the 'middle' image for a scaled version of the full size image.
+    $index = intval(floor((count($image) / 2)));
     return $image[$index]['source'];
 }
