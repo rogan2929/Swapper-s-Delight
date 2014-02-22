@@ -21,8 +21,13 @@ if ($updatedTime) {
 $posts = streamQuery($fbSession, $gid, $constraints, 20);
 
 // If no results were retrieved, try again with a large sample.
-if (count($posts) <= 5) {
-    $posts = streamQuery($fbSession, $gid, $constraints, 50);    
+if (count($posts) <= 20) {
+    $posts = streamQuery($fbSession, $gid, $constraints, 50);
+}
+
+// If no results were retrieved, try again with a large sample.
+if (count($posts) <= 20) {
+    $posts = streamQuery($fbSession, $gid, $constraints, 100);
 }
 
 // Return the result.
