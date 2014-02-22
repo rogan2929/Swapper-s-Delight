@@ -443,12 +443,9 @@ textarea {
     font-size: 1.0em;
 }
 
-/*.post-block.load-more {
-    background-color: #0073ea;
-    text-align: center;
-    font-weight: bold;
-    color: white;
-}*/
+.post-block.load-more {
+    position: relative;
+}
 
 .load-more > .load-more-text {
     line-height: 200px;
