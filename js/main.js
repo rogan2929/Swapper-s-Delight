@@ -837,7 +837,6 @@ var SwdView = {
     setSelectedPostType: function(id) {
         $('.nav-button').removeClass('selected-nav');
         $('#' + id).addClass('selected-nav');
-        console.log(id);
     },
     populatePostBlocks: function(posts, clientWidth) {
         var i, post, postBlock, message, color, width, height, colorArray;
