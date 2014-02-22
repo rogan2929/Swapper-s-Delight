@@ -828,12 +828,12 @@ var SwdView = {
      */
     populatePostBlocks: function(posts) {
         var i, post, postBlock, message, color, colorArray;
-        
+
         // Array of random colors to choose from.
         colorArray = [
-            'cornsilk', 
-            'azure', 
-            'antiquewhite', 
+            'cornsilk',
+            'azure',
+            'antiquewhite',
             'cornflowerblue',
             'sandybrown',
             'mintcream'
@@ -845,7 +845,7 @@ var SwdView = {
         // If there is a feed to display, then display it.
         if (posts && posts.length > 0) {
             $('#post-feed-noposts').hide();
-            
+
             // Remove any existing 'Load more...' tiles.
             $('.post-block.load-more').remove();
 
@@ -853,39 +853,39 @@ var SwdView = {
                 post = posts[i];
 
                 postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
-                
+
                 message = '';
-                
+
                 if (post.image_url.length > 0) {
                     $(postBlock).addClass('post-block-image');
                     $(postBlock).css('background-image', 'url("' + post.image_url[0] + '")');
                     $(postBlock).appendTo('#post-feed');
                 }
                 else {
-                    $(postBlock).addClass('post-block-text'); 
-                    
+                    $(postBlock).addClass('post-block-text');
+
                     color = colorArray[Math.floor(Math.random() * (colorArray.length))];
-                    
+
                     message = '<div><p>' + post.message + '</p></div>';
-                    
+
                     $(postBlock).css('background-color', color).html(message).appendTo('#post-feed');
                 }
             }
 
             // Associate the click event handler for newly created posts.
             $('.post-block').click(SwdView.handlers['onClickPostBlock']);
-            
+
             // Add the 'Load More...' post block.
             postBlock = $('<div class="button post-block load-more ui-widget"><div class="ajax-loading-div hidden"></div><div class="load-more-text">Load more...</div></div>');
             $('#post-feed').append(postBlock);
-            
+
             // Add an event handler for when it is clicked on.
             $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
 
             SwdPresenter.refreshFbCanvasSize();
         }
         else {
-            $('#post-feed-noposts').show();
+//            $('#post-feed-noposts').show();
         }
 
         SwdPresenter.currentlyLoading = false;
