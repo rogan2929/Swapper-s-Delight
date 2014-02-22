@@ -23,22 +23,11 @@ for ($i = 1; $i <= 10; $i++) {
     $posts = streamQuery($fbSession, $gid, $constraints, $i * 50);
     
     if (count($posts) >= 20) {
+        // Cap at 20 posts.
         $posts = array_slice($posts, 0, 20);
         break;
     }
 }
-
-//$posts = streamQuery($fbSession, $gid, $constraints, 20);
-//
-//// If no results were retrieved, try again with a large sample.
-//if (count($posts) <= 20) {
-//    $posts = streamQuery($fbSession, $gid, $constraints, 50);
-//}
-//
-//// If no results were retrieved, try again with a large sample.
-//if (count($posts) <= 20) {
-//    $posts = streamQuery($fbSession, $gid, $constraints, 100);
-//}
 
 // Return the result.
 echo json_encode($posts);
