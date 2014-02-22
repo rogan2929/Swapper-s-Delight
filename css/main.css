@@ -449,9 +449,10 @@ textarea {
 
 .post-block.post-block-text > div > p {
     overflow: hidden;
-    height: 185px;
+    height: 166px;
     padding: 12px;
     border-radius: 5px;
+    line-height: 1.3;
 }
 
 .post-block.post-block-image {
