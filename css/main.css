@@ -443,6 +443,16 @@ textarea {
     font-size: 1.0em;
 }
 
+.post-block.load-more {
+    background-color: #0073ea;
+    text-align: center;
+}
+
+.load-more > .load-more-text {
+    line-height: 200px;
+    vertical-align: middle;
+}
+
 .post-block.post-block-text > div {
     overflow: hidden;
 }

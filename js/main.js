@@ -200,7 +200,6 @@ var SwdPresenter = {
     groups: null,
     prevOffset: null,
     clientHeight: null,
-    clientWidth: null,
     uid: null,
     currentlyLoading: false,
     selectedPost: null,
@@ -284,7 +283,6 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
                         SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
                         SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
-                        //SwdView.installHandler('onClickMenuItemMain', SwdPresenter.onClickMenuItemMain, '.menu-item', 'click');
                         SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
                         SwdView.installHandler('onClickPostButtonComment', SwdPresenter.onClickPostButtonComment, '#post-button-comment > div', 'click');
                         SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
@@ -322,7 +320,6 @@ var SwdPresenter = {
             clientHeight = parseInt(pageInfo.clientHeight);
 
             SwdPresenter.clientHeight = clientHeight;
-            SwdPresenter.clientWidth = parseInt(pageInfo.clientWidth);
 
             // Calculate how far to offset things.
             offset = Math.max(scrollTop - offsetTop, 0);
@@ -456,7 +453,7 @@ var SwdPresenter = {
         if (response) {
             // If a response came through, then display the posts.
             SwdPresenter.oldestPost = response[response.length - 1];
-            SwdView.populatePostBlocks(response, SwdPresenter.clientWidth);
+            SwdView.populatePostBlocks(response);
         }
         else
         if (!loadNextPage) {
@@ -537,9 +534,6 @@ var SwdPresenter = {
     onClickMenuButton: function(e, args) {
         SwdView.showUiMenu(e);
     },
-    onClickMenuItemMain: function(e, args) {
-        var id = $(e.currentTarget).attr('id');
-    },
     onClickNavButton: function(e, args) {
         var id = $(e.currentTarget).attr('id');
 
@@ -553,9 +547,6 @@ var SwdPresenter = {
             case 'button-nav-liked':
                 SwdPresenter.postType = PostType.liked;
                 break;
-//            case 'button-nav-search':
-//                SwdPresenter.postType = PostType.search;
-//                break;
         }
 
         SwdPresenter.loadPosts(false);
@@ -715,8 +706,6 @@ var SwdView = {
         for (i = 0; i < groups.length; i++) {
             $('#select-group-list').append('<div id="' + groups[i].gid + '" class="button selection-item select-group"><span class="button-icon" style="background-image: url(' + groups[i].icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + groups[i].name + '</div></div>');
         }
-
-        //$('.selection-item.select-group').button();
     },
     addPostComment: function(comment) {
         var commentDiv, timeStamp, userImage;
@@ -837,8 +826,12 @@ var SwdView = {
         $('.nav-button').removeClass('selected-nav');
         $('#' + id).addClass('selected-nav');
     },
-    populatePostBlocks: function(posts, clientWidth) {
-        var i, post, postBlock, message, color, width, height, colorArray;
+    /***
+     * Populate the main view with post blocks.
+     * @param {type} posts
+     */
+    populatePostBlocks: function(posts) {
+        var i, post, postBlock, message, color, colorArray;
         
         // Array of random colors to choose from.
         colorArray = [
@@ -888,6 +881,7 @@ var SwdView = {
             $('.post-block').click(SwdView.handlers['onClickPostBlock']);
             
             // Add the 'Load More...' post block.
+            postBlock = $('<div class="post-block load-more ui-widget"><div class="load-more-text">Load more...</div></div>').appendTo('#post-feed');
 
             SwdPresenter.refreshFbCanvasSize();
         }
