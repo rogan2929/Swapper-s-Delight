@@ -356,7 +356,7 @@ textarea {
     line-height: normal;
 }
 
-.button:hover, .menu-item:hover, .post-block.load-more:hover {
+.button:hover, .menu-item:hover, .post-block:hover {
     background-color: #b3d4fc;
 }
 
@@ -446,6 +446,10 @@ textarea {
 .post-block.load-more {
     padding: 0px;
     position: relative;
+}
+
+.post-block:hover {
+    color: #444;
 }
 
 .load-more > .load-more-text {
