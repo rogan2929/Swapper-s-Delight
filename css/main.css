@@ -164,7 +164,7 @@ textarea {
     text-decoration: none !important;
 /*    border: 1px solid #0073ea !important;*/
     /*background: #0073ea url(flick-red/images/ui-bg_highlight-soft_25_0073ea_1x100.png) 50% 50% repeat-x !important;  Custom Flick */
-    background: #193f41;
+    background: #13486b;
     font-weight: bold !important;
 }
 
@@ -358,7 +358,7 @@ textarea {
 
 .button:hover, .menu-item:hover{
 /*    background-color: #b3d4fc;*/
-    background-color: #307a7e;
+    background-color: #1d6fa5;
     color: white;
 }
 
