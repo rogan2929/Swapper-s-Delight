@@ -886,11 +886,11 @@ var SwdView = {
 
             // Additionally, set up some styling for when the post block is moused over.
             $('.post-block').hover(function() {
-                $('#post-block-mask').show().position({
+                $('#post-block-mask').position({
                     my: 'left top',
                     at: 'left top',
                     of: $(this)
-                });
+                }).fadeIn(100);
             }, function() {
                 $('#post-block-mask').hide();
             });

@@ -471,7 +471,8 @@ textarea {
 }*/
 
 #post-block-mask {
-    background: #307a7e;
+/*    background: #307a7e;*/
+    background-color: #f6f6f6;
     opacity: 0.3;
     position: absolute;
 }
