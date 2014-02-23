@@ -413,6 +413,10 @@ textarea {
     background-image: url('/icons/gear32.png');
 }
 
+.button-icon.icon-new:hover {
+    background-image: url('/icons/paperplus32w.png');
+}
+
 #button-menu-main {
     min-width: 0 !important;
 }
