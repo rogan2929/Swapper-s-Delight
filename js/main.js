@@ -873,11 +873,15 @@ var SwdView = {
             }
 
             // Associate the click event handler for newly created posts.
+            // Additionally, set up some styling for when the post block is moused over.
             $('.post-block').click(SwdView.handlers['onClickPostBlock']).hover(function() {
-                console.log($(this).attr('id'));
-                //$(this).append($("<span> ***</span>"));
+                $('#post-block-mask').show().position({
+                    my: 'left top',
+                    at: 'left top',
+                    of: $(this)
+                });
             }, function() {
-                //$(this).find("span:last").remove();
+                $('#post-block-mask').hide();
             });
 
             // Show the "Load More..." block if the group's main feed is being displayed.
