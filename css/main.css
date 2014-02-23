@@ -357,7 +357,8 @@ textarea {
 }
 
 .button:hover, .menu-item:hover{
-    background-color: #b3d4fc;
+/*    background-color: #b3d4fc;*/
+    background-color: #307a7e;
 }
 
 .nav-button {
@@ -454,7 +455,7 @@ textarea {
 
 .post-block:hover {
     color: #444;
-    background-color: #b3d4fc;
+    background-color: #307a7e;
 }
 
 .load-more > .load-more-text {
