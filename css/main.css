@@ -413,7 +413,7 @@ textarea {
     background-image: url('/icons/gear32.png');
 }
 
-.button-icon.icon-new:hover {
+#button-groups:hover .button-icon.icon-new {
     background-image: url('/icons/paperplus32w.png');
 }
 
