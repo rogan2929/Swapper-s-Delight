@@ -476,6 +476,7 @@ textarea {
     background-color: #f6f6f6;
     opacity: 0.3;
     position: absolute;
+    pointer-events: none;
 }
 
 .load-more > .load-more-text {
