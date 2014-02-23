@@ -873,7 +873,12 @@ var SwdView = {
             }
 
             // Associate the click event handler for newly created posts.
-            $('.post-block').click(SwdView.handlers['onClickPostBlock']);
+            $('.post-block').click(SwdView.handlers['onClickPostBlock']).hover(function() {
+                console.log($(this).attr('id'));
+                //$(this).append($("<span> ***</span>"));
+            }, function() {
+                //$(this).find("span:last").remove();
+            });
 
             // Show the "Load More..." block if the group's main feed is being displayed.
             if (postType === PostType.group) {
@@ -883,6 +888,8 @@ var SwdView = {
                 // Add an event handler for when it is clicked on.
                 $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
             }
+
+
 
             SwdPresenter.refreshFbCanvasSize();
         }

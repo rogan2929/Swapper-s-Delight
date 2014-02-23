@@ -466,9 +466,9 @@ textarea {
     position: relative;
 }
 
-.post-block:hover {
+/*.post-block:hover {
     background-color: #307a7e;
-}
+}*/
 
 .load-more > .load-more-text {
     line-height: 200px;
