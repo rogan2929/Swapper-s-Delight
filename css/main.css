@@ -427,6 +427,10 @@ textarea {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);*/
 }
 
+#button-groups:hover {
+    background-color: #e35765;
+}
+
 /*http://jsfiddle.net/E78q3/*/
 
 .post-block.ui-widget {
