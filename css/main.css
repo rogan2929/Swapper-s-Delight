@@ -436,10 +436,10 @@ textarea {
     color: white;
     padding-left: 8px;
     padding-right: 8px;
-/*    border-radius: 5px;
+    border-radius: 5px;
     height: 30px;
     line-height: 30px;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);*/
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
 }
 
 #button-groups:hover {
