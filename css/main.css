@@ -431,11 +431,11 @@ textarea {
 
 .post-block {
     display: inline-block;
-    background: #43726c;
+    background: #43726c !important;
     height: 200px;
     width: 250px;
     overflow: hidden;
-    margin: 5px;
+    margin: 4px;
     margin-bottom: 2px;
     cursor: pointer;
 /*    color: #444;*/
