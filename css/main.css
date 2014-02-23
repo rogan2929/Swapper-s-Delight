@@ -356,7 +356,7 @@ textarea {
     line-height: normal;
 }
 
-.button:hover, .menu-item:hover {
+.button:hover, .menu-item:hover, .post-block.load-more:hover {
     background-color: #b3d4fc;
 }
 
