@@ -736,6 +736,7 @@ div.right-toolbar-button {
 /*    padding: 5px;*/
 /*    top: 44px;*/
     border-radius: 0;
+    z-index: 100;
 }
 
 #left-rail-nav {
