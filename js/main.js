@@ -867,7 +867,8 @@ var SwdView = {
 
                     message = '<div><p>' + post.message + '</p></div>';
 
-                    $(postBlock).css('background-color', color).html(message).appendTo('#post-feed');
+                    //$(postBlock).css('background-color', color).html(message).appendTo('#post-feed');
+                    $(postBlock).html(message).appendTo('#post-feed');
                 }
             }
 
