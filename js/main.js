@@ -851,7 +851,7 @@ var SwdView = {
             for (i = 0; i < posts.length; i++) {
                 post = posts[i];
 
-                postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
+                postBlock = $('<div id="' + post.post_id + '" class="ui-widget post-block"></div>');
 
                 message = '';
 
