@@ -873,16 +873,7 @@ var SwdView = {
             }
 
             // Associate the click event handler for newly created posts.
-            // Additionally, set up some styling for when the post block is moused over.
-            $('.post-block').click(SwdView.handlers['onClickPostBlock']).hover(function() {
-                $('#post-block-mask').show().position({
-                    my: 'left top',
-                    at: 'left top',
-                    of: $(this)
-                });
-            }, function() {
-                $('#post-block-mask').hide();
-            });
+            $('.post-block').click(SwdView.handlers['onClickPostBlock']);
 
             // Show the "Load More..." block if the group's main feed is being displayed.
             if (postType === PostType.group) {
@@ -893,7 +884,16 @@ var SwdView = {
                 $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
             }
 
-
+            // Additionally, set up some styling for when the post block is moused over.
+            $('.post-block').hover(function() {
+                $('#post-block-mask').show().position({
+                    my: 'left top',
+                    at: 'left top',
+                    of: $(this)
+                });
+            }, function() {
+                $('#post-block-mask').hide();
+            });
 
             SwdPresenter.refreshFbCanvasSize();
         }
