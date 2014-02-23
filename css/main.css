@@ -413,8 +413,16 @@ textarea {
     background-image: url('/icons/gear32.png');
 }
 
-#button-groups:hover .button-icon.icon-new {
+#button-new:hover .button-icon.icon-new {
     background-image: url('/icons/paperplus32w.png');
+}
+
+#button-refresh:hover .button-icon.icon-refresh {
+    background-image: url('/icons/exchange32w.png');
+}
+
+#button-menu-main:hover .button-icon.icon-menu {
+    background-image: url('/icons/gear32w.png');
 }
 
 #button-menu-main {
