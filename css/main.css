@@ -441,8 +441,8 @@ textarea {
     height: 200px;
     width: 250px;
     overflow: hidden;
-    margin: 4px;
-    margin-bottom: 2px;
+    margin: 3px;
+    margin-bottom: 0px;
     cursor: pointer;
 /*    color: #444;*/
     color: white;
