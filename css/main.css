@@ -429,9 +429,9 @@ textarea {
 
 /*http://jsfiddle.net/E78q3/*/
 
-.post-block {
+.post-block.ui-widget {
     display: inline-block;
-    background: #43726c !important;
+    background: #43726c;
     height: 200px;
     width: 250px;
     overflow: hidden;
