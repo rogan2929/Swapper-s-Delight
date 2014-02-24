@@ -607,6 +607,7 @@ var SwdPresenter = {
 
         SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
         SwdView.toggleFloatingPanel('#post-details-panel', true);
+        SwdView.toggleToolbar('#post-details-toolbar', true);
 
         SwdModel.getPostDetails(id, {
             success: function(response) {
@@ -617,7 +618,6 @@ var SwdPresenter = {
 
                 if (post) {
                     SwdPresenter.selectedPost = post;
-                    SwdView.toggleToolbar('post-details-toolbar', true);
                     SwdView.showPostDetails(post);
                 }
                 else {
@@ -995,7 +995,7 @@ var SwdView = {
     toggleToolbar: function(id, show) {
         if (show) {
             $('#main-toolbar').hide();
-            $('#' + id).show();
+            $(id).show();
         }
         else {
             $('.toolbar').hide();
