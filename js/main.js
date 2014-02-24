@@ -521,7 +521,7 @@ var SwdPresenter = {
     onClickHtml: function(e, args) {
         SwdView.closeAllUiMenus();
         SwdView.toggleFloatingPanel('.floating-panel', false);
-        SwdView.toggleToolbar('', true);
+        SwdView.toggleToolbar('', false);
     },
     onClickMenuButton: function(e, args) {
         SwdView.showUiMenu(e);
