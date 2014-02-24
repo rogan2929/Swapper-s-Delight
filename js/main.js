@@ -986,6 +986,7 @@ var SwdView = {
     /***
      * Toggles the display of a context sensitive one specified by 'id'.
      * @param {type} id
+     * @param {type} show
      */
     toggleToolbar: function(id, show) {
         if (show) {
