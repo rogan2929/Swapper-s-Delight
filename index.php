@@ -133,14 +133,16 @@
             </div>
 
             <div id='post-details-toolbar' class='ui-widget toolbar floating-panel-toolbar hidden'>
-                <div id='post-button-pm' class='button toolbar-button'>
-                    <span>Message Seller</span>
-                </div>
-                <div id='post-button-like' class='button toolbar-button'>
-                    <span>Like</span>
-                </div>
-                <div id='post-button-comment' class='button toolbar-button'>
-                    <span>Comment</span>
+                <div class='float-right'>
+                    <div id='post-button-pm' class='button toolbar-button'>
+                        <span>Message Seller</span>
+                    </div>
+                    <div id='post-button-like' class='button toolbar-button'>
+                        <span>Like</span>
+                    </div>
+                    <div id='post-button-comment' class='button toolbar-button'>
+                        <span>Comment</span>
+                    </div>
                 </div>
             </div>
 
