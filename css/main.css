@@ -758,6 +758,10 @@ div.right-toolbar-button {
     border-radius: 0;
 }
 
+.toolbar.floating-panel-toolbar {
+    z-index: 1000;
+}
+
 .semi-transparent {
     opacity: 0.7;
 }

@@ -995,7 +995,7 @@ var SwdView = {
     toggleToolbar: function(id, show) {
         if (show) {
             $('#main-toolbar').hide();
-            $('#' + id).hide();
+            $('#' + id).show();
         }
         else {
             $('.toolbar').hide();

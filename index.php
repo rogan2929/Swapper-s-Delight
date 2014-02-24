@@ -132,7 +132,7 @@
                 <div style='clear: both;'></div>
             </div>
 
-            <div id='post-details-toolbar' class='ui-widget toolbar hidden'>
+            <div id='post-details-toolbar' class='ui-widget toolbar floating-panel-toolbar hidden'>
                 <div id='post-button-pm' class='button toolbar-button'>
                     <span>Message Seller</span>
                 </div>
