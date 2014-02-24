@@ -290,6 +290,7 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block', 'click');
                         SwdView.installHandler('onClickPostBlockLoadMore', SwdPresenter.onClickPostBlockLoadMore, '.post-block.load-more', 'click');
                         SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
+                        SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
                         SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#post-comment-text > textarea', 'keyup')
                         SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
                         SwdView.positionMenus();
@@ -655,6 +656,9 @@ var SwdPresenter = {
 
             SwdView.toggleFloatingPanel('#select-group-panel', false);
         }
+    },
+    onClickToolbar:function (e, args) {
+        e.stopPropagation();
     },
     onKeyUpCommentTextarea: function(e, args) {
         var id, comment;
