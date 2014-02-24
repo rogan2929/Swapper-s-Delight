@@ -521,6 +521,7 @@ var SwdPresenter = {
     onClickHtml: function(e, args) {
         SwdView.closeAllUiMenus();
         SwdView.toggleFloatingPanel('.floating-panel', false);
+        SwdView.toggleToolbar('', true);
     },
     onClickMenuButton: function(e, args) {
         SwdView.showUiMenu(e);
@@ -615,6 +616,7 @@ var SwdPresenter = {
 
                 if (post) {
                     SwdPresenter.selectedPost = post;
+                    SwdView.toggleToolbar('post-details-toolbar', true);
                     SwdView.showPostDetails(post);
                 }
                 else {
@@ -980,6 +982,21 @@ var SwdView = {
 
         SwdView.clearPostCommentText();
         SwdView.toggleAjaxLoadingDiv('#post-details-panel', false);
+    },
+    /***
+     * Toggles the display of a context sensitive one specified by 'id'.
+     * @param {type} id
+     */
+    toggleToolbar: function(id, show) {
+        if (show) {
+            $('#main-toolbar').hide();
+            $('#' + id).hide();
+        }
+        else {
+            $('.toolbar').hide();
+            $('#main-toolbar').show();
+        }
+
     },
     /***
      * Shows a Jquery UI menu.

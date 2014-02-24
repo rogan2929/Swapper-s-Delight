@@ -75,26 +75,11 @@
                             <div id='post-message'>
                                 <div id='post-message-text'></div>
                             </div>
-                            <div id='post-button-bar'>
-                                <div>
-                                    <div id='post-button-pm' class='button post-button'>
-                                        <span>Message</span>
-                                    </div>
-                                    <div id='post-button-like' class='button post-button'>
-                                        <span>Like</span>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <div id='panel-post-right' class='panel-post-column scroll-y'>
                             <div id='post-comment-text'>
                                 <textarea placeholder='Add a comment...'></textarea>
                                 <div class='ajax-loading-div hidden'></div>
-                            </div>
-                            <div id='post-button-comment'>
-                                <div class='button post-button'>
-                                    <span>Comment</span>
-                                </div>
                             </div>
                             <span id='post-comment-heading'>Viewing all comments, newest first.</span>
                             <div id='post-comments'>
@@ -148,7 +133,15 @@
             </div>
 
             <div id='post-details-toolbar' class='ui-widget toolbar hidden'>
-
+                <div id='post-button-pm' class='button toolbar-button'>
+                    <span>Message Seller</span>
+                </div>
+                <div id='post-button-like' class='button toolbar-button'>
+                    <span>Like</span>
+                </div>
+                <div id='post-button-comment' class='button toolbar-button'>
+                    <span>Comment</span>
+                </div>
             </div>
 
             <!--Menus-->
