@@ -331,12 +331,12 @@ var SwdPresenter = {
                 // Update fixed divs
                 SwdView.setFixedDivs(offset);
 
-                // Update floating panel height
+                // Update floating panel height, allowing for height of toolbar.
                 if (scrollTop > offsetTop) {
-                    height = clientHeight - 10;
+                    height = clientHeight - 10 - 42;
                 }
                 else {
-                    height = clientHeight - offsetTop - 10;
+                    height = clientHeight - offsetTop - 10 - 42;
                 }
 
                 SwdView.setFloatingPanelHeight(height);
