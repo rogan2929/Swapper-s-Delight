@@ -760,7 +760,7 @@ div.right-toolbar-button {
 }
 
 .toolbar.floating-panel-toolbar {
-    z-index: 1000;
+    z-index: 1001;
 }
 
 .semi-transparent {
