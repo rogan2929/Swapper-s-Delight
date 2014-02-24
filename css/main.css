@@ -453,7 +453,7 @@ textarea {
     display: inline-block;
 /*    background: #193f41;*/
     background-color: #13486b;
-    height: 200px;
+    height: 205px;
     width: 250px;
     overflow: hidden;
     margin: 3px;
@@ -493,7 +493,7 @@ textarea {
 
 .post-block.post-block-text > div > p {
     overflow: hidden;
-    height: 166px;
+    height: 170px;
     padding: 12px;
     border-radius: 5px;
     line-height: 1.3;
