@@ -22,12 +22,12 @@ html {
     font-size: 0.85em;
     line-height: 1.4;
     overflow: hidden;
-/*    min-height: 800px;*/
+    /*    min-height: 800px;*/
 }
 
 body {
     overflow: hidden;
-/*    background: #f6f6f6;*/
+    /*    background: #f6f6f6;*/
     background: #dddddd;
 }
 
@@ -163,7 +163,7 @@ textarea {
 .selected-nav {
     color: #ffffff !important;
     text-decoration: none !important;
-/*    border: 1px solid #0073ea !important;*/
+    /*    border: 1px solid #0073ea !important;*/
     /*background: #0073ea url(flick-red/images/ui-bg_highlight-soft_25_0073ea_1x100.png) 50% 50% repeat-x !important;  Custom Flick */
     background: #13486b;
     font-weight: bold !important;
@@ -208,8 +208,8 @@ textarea {
 
 .floating-panel > .floating-panel-content {
     border: 1px solid #ccc;
-/*    box-shadow: 8px 8px 5px #888888;*/
-/*    border-radius: 5px;*/
+    /*    box-shadow: 8px 8px 5px #888888;*/
+    /*    border-radius: 5px;*/
     position: absolute;
     bottom: 25px;
     top: 25px;
@@ -358,7 +358,7 @@ textarea {
 }
 
 .button:hover, .menu-item:hover{
-/*    background-color: #b3d4fc;*/
+    /*    background-color: #b3d4fc;*/
     background-color: #1d6fa5;
     color: white;
 }
@@ -431,7 +431,7 @@ textarea {
 }
 
 #button-groups {
-/*    margin-left: 203px;*/
+    /*    margin-left: 203px;*/
     margin-left: 8px;
     background-color: #e31025;
     color: white;
@@ -451,7 +451,7 @@ textarea {
 
 .post-block.ui-widget {
     display: inline-block;
-/*    background: #193f41;*/
+    /*    background: #193f41;*/
     background-color: #13486b;
     height: 205px;
     width: 250px;
@@ -459,7 +459,7 @@ textarea {
     margin: 3px;
     margin-bottom: -1px;
     cursor: pointer;
-/*    color: #444;*/
+    /*    color: #444;*/
     color: white;
     font-size: 1.0em;
 }
@@ -475,7 +475,7 @@ textarea {
 }*/
 
 #post-block-mask {
-/*    background: #307a7e;*/
+    /*    background: #307a7e;*/
     background-color: #f6f6f6;
     opacity: 0.3;
     position: absolute;
@@ -702,9 +702,9 @@ textarea {
 
 .ui-widget,.menu {
     background: white;
-/*    border-radius: 5px;*/
-/*    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
-    border-radius: 5px;*/
+    /*    border-radius: 5px;*/
+    /*    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
+        border-radius: 5px;*/
 }
 
 div.right-toolbar-button {
@@ -735,7 +735,7 @@ div.right-toolbar-button {
 #left-rail {
     width: 180px;
     position: absolute;
-/*    padding: 5px;*/
+    /*    padding: 5px;*/
     padding-top: 11px;
     top: 43px;
     border-radius: 0;
@@ -745,10 +745,7 @@ div.right-toolbar-button {
 }
 
 #main-toolbar {
-    top: 0;
-    position: fixed;
-    width: 100%;
-    z-index: 100;
+
 }
 
 .toolbar {
@@ -756,6 +753,10 @@ div.right-toolbar-button {
     line-height: 42px;
     display: block;
     border-radius: 0;
+    top: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
 }
 
 .toolbar.floating-panel-toolbar {
