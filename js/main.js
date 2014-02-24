@@ -657,7 +657,7 @@ var SwdPresenter = {
             SwdView.toggleFloatingPanel('#select-group-panel', false);
         }
     },
-    onClickToolbar:function (e, args) {
+    onClickToolbar: function(e, args) {
         e.stopPropagation();
     },
     onKeyUpCommentTextarea: function(e, args) {
@@ -801,8 +801,16 @@ var SwdView = {
             top: Math.max(offset + 43, 0)
         }, 100);
 
-        $('.toolbar, .floating-panel').animate({
+//        $('.toolbar, .floating-panel').animate({
+//            top: Math.max(offset, 0)
+//        }, 100);
+
+        $('.toolbar').animate({
             top: Math.max(offset, 0)
+        }, 100);
+
+        $('.floating-panel').animate({
+            top: Math.max(offset, 42)
         }, 100);
     },
     /***
