@@ -607,6 +607,9 @@ textarea {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
+}
+
+.facebook-user-header .facebook-poststamp {
     line-height: 40px;
     vertical-align: middle;
 }

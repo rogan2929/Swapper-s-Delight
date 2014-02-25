@@ -60,8 +60,10 @@
                         <div id='details-left-column' class='panel-post-column scroll-y'>
                             <div id='post-details-user-data' class='facebook-user-header'>
                                 <div class='facebook-user-photo'></div>
-                                <a class='facebook-user-name' target='_blank'></a>
-                                <span class='timestamp'></span>
+                                <div class='facebook-poststamp'>
+                                    <a class='facebook-user-name' target='_blank'></a>
+                                    <span class='timestamp'></span>
+                                </div>
                             </div>
                             <!--                            <div id='post-image-container'>
                                                             <div id='post-no-image' class='hidden'>
