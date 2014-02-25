@@ -281,6 +281,7 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickButtonGroups', SwdPresenter.onClickButtonGroups, '#button-groups', 'click');
                         SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
                         SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
+                        SwdView.installHandler('onClickFloatingPanelContent', SwdPresenter.onClickFloatingPanelContent, '.floating-panel-content', 'click');
                         SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
                         SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
                         SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
@@ -519,6 +520,9 @@ var SwdPresenter = {
     },
     onClickButtonRefresh: function(e, args) {
         SwdPresenter.loadPosts(false);
+    },
+    onClickFloatingPanelContent: function(e, args) {
+        SwdView.closeAllUiMenus();
     },
     onClickHtml: function(e, args) {
         SwdView.closeAllUiMenus();
