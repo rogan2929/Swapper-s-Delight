@@ -419,7 +419,7 @@ textarea {
 }
 
 #post-button-comment:hover .button-icon.icon-comment {
-    background-image: url('/icons/comment32.png');
+    background-image: url('/icons/comment32w.png');
 }
 
 #post-button-like:hover .button-icon.icon-like {
