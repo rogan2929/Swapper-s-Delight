@@ -77,10 +77,6 @@
                             </div>
                         </div>
                         <div id='panel-post-right' class='panel-post-column scroll-y'>
-                            <div id='post-comment-text'>
-                                <textarea placeholder='Add a comment...'></textarea>
-                                <div class='ajax-loading-div hidden'></div>
-                            </div>
                             <span id='post-comment-heading'>Viewing all comments, newest first.</span>
                             <div id='post-comments'>
                                 <div id='post-nocomments'>
@@ -146,11 +142,17 @@
                 </div>
             </div>
 
-            <!--Menus-->
+            <!--Menus and Popups-->
 
             <div id='popup-menu-main' class='menu'>
                 <div id='menu-item-logout' class='menu-item'>
                     <span>Logout</span>
+                </div>
+            </div>
+            <div id='popup-comment' class='menu'>
+                <div id='post-comment'>
+                    <textarea id='post-comment-text' placeholder='Add a comment...'></textarea>
+                    <div class='ajax-loading-div hidden'></div>
                 </div>
             </div>
         </div>

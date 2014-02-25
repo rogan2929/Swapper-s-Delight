@@ -5,5 +5,8 @@
         <data xmlns="http://www.netbeans.org/ns/php-project/1">
             <name>Swapper-s-Delight</name>
         </data>
+        <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>Popups</word>
+        </spellchecker-wordlist>
     </configuration>
 </project>

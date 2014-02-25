@@ -291,7 +291,7 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickPostBlockLoadMore', SwdPresenter.onClickPostBlockLoadMore, '.post-block.load-more', 'click');
                         SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
                         SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
-                        SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#post-comment-text > textarea', 'keyup')
+                        SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#post-comment-text', 'keyup')
                         SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
                         SwdView.positionMenus();
 
@@ -549,10 +549,10 @@ var SwdPresenter = {
         var id, comment;
 
         id = SwdPresenter.selectedPost.post_id;
-        comment = $('#post-comment-text > textarea').val();
+        comment = $('#post-comment-text').val();
 
         // Show the ajax loading div.
-        SwdView.toggleAjaxLoadingDiv('#post-comment-text', true);
+        SwdView.toggleAjaxLoadingDiv('#post-comment', true);
 
         // Post the comment, if it's not empty.
         if (comment) {
@@ -667,10 +667,10 @@ var SwdPresenter = {
             e.preventDefault();
 
             id = SwdPresenter.selectedPost.post_id;
-            comment = $('#post-comment-text > textarea').val();
+            comment = $('#post-comment-text').val();
 
             // Show the ajax loading div.
-            SwdView.toggleAjaxLoadingDiv('#post-comment-text', true);
+            SwdView.toggleAjaxLoadingDiv('#post-comment', true);
 
             // Post the comment.
             SwdModel.postComment(id, comment, {
@@ -766,8 +766,8 @@ var SwdView = {
      * Clear comment box.
      */
     clearPostCommentText: function() {
-        $('#post-comment-text > textarea').val('');
-        SwdView.toggleAjaxLoadingDiv('#post-comment-text', false);
+        $('#post-comment-text').val('');
+        SwdView.toggleAjaxLoadingDiv('#post-comment', false);
     },
     /***
      * Closes all Jquery UI menus.
