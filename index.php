@@ -65,17 +65,17 @@
                                     <span class='timestamp'></span>
                                 </div>
                             </div>
-                            <!--                            <div id='post-image-container'>
-                                                            <div id='post-no-image' class='hidden'>
-                                                            </div>
-                                                            <div id='post-image'></div>
-                                                        </div>
-                                                        <div id='post-permalink'>
-                                                            <a class='wrappable-link' target='_blank'></a>
-                                                        </div>
-                                                        <div id='post-message'>
-                                                            <div id='post-message-text'></div>
-                                                        </div>-->
+                            <div id='post-image-container'>
+                                <div id='post-no-image' class='hidden'>
+                                </div>
+                                <div id='post-image'></div>
+                            </div>
+                            <div id='post-permalink'>
+                                <a class='wrappable-link' target='_blank'></a>
+                            </div>
+                            <div id='post-message'>
+                                <div id='post-message-text'></div>
+                            </div>
                         </div>
                         <div id='details-right-column' class='panel-post-column scroll-y'>
                             <span class='heading'>Viewing all comments, newest first.</span>
