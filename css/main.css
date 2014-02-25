@@ -154,10 +154,14 @@ textarea {
     position: absolute;
 }
 
-.post-comment-header .timestamp,#post-message-header .timestamp {
+/*.post-comment-header .timestamp,#post-message-header .timestamp {
     display: block;
     font-weight: normal;
     color: black;
+}*/
+
+.facebook-user-header .timestamp {
+    vertical-align: middle;
 }
 
 .selected-nav {
@@ -588,6 +592,8 @@ textarea {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
+    line-height: 40px;
+    vertical-align: middle;
 }
 
 #post-message-user {
