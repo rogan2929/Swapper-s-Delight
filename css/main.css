@@ -267,15 +267,21 @@ textarea {
     padding-bottom: 8px;
     display: inline-block;
     margin: 5px;
-    height: 100px;
-    width: 100px;
+    height: 150px;
+    width: 150px;
+    position: relative;
 }
 
-.selection-item .ui-icon {
+.selection-item > div {
+    position: absolute;
+    
+}
+
+.selection-item > div > .ui-icon {
     display: inline-block;
 }
 
-.selection-item div {
+.selection-item > div > div {
     margin-left: 10px !important;
 }
 
