@@ -164,6 +164,10 @@ textarea {
     vertical-align: middle;
 }
 
+.facebook-user-header > *:not(:first-child) {
+    margin-left: 3px;
+}
+
 .selected-nav {
     color: #ffffff !important;
     text-decoration: none !important;
