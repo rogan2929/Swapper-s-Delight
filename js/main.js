@@ -683,7 +683,7 @@ var SwdPresenter = {
             comment = $('#popup-comment-text').val();
 
             // Show the ajax loading div.
-            SwdView.toggleAjaxLoadingDiv('#post-comment', true);
+            SwdView.toggleAjaxLoadingDiv('#popup-comment', true);
 
             // Post the comment.
             SwdModel.postComment(id, comment, {
@@ -779,8 +779,9 @@ var SwdView = {
      * Clear comment box.
      */
     clearPostCommentText: function() {
-        $('#popup-comment-text').val('').hide();
-        SwdView.toggleAjaxLoadingDiv('#post-comment', false);
+        $('#popup-comment-text').val('');
+        $('#popup-comment').hide();
+        SwdView.toggleAjaxLoadingDiv('#popup-comment', false);
     },
     /***
      * Closes all Jquery UI menus.
