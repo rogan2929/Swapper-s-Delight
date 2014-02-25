@@ -58,7 +58,7 @@
                     <div class='close-button'></div>
                     <div class='floating-panel-content ui-widget'>
                         <div id='details-left-column' class='panel-post-column scroll-y'>
-                            <div id='post-details-user-data' class='facebook-user-header'>
+                            <div id='post-details-user-data' class='facebook-user-header floating-panel-section'>
                                 <div class='facebook-user-photo'></div>
                                 <div class='facebook-poststamp'>
                                     <a class='facebook-user-name' target='_blank'></a>
