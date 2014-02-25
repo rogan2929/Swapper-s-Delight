@@ -151,7 +151,7 @@
                 </div>
             </div>
             <div id='popup-comment' class='menu floating-panel-menu ui-widget'>
-                <textarea id='popup-comment-text' placeholder='Type a comment and press [Enter] to send it.'></textarea>
+                <textarea id='popup-comment-text' placeholder='Type a comment and press [Enter] to post it.'></textarea>
                 <div class='ajax-loading-div hidden'></div>
             </div>
         </div>
