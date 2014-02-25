@@ -216,7 +216,7 @@ textarea {
     padding-top: 20px;
 }
 
-.floating-panel-content > #panel-post-left {
+.floating-panel-content > #details-left-column {
     left: 0;
     right: 320px;
     position: absolute;
@@ -225,7 +225,7 @@ textarea {
     padding: 10px;
 }
 
-.floating-panel-content > #panel-post-right {
+.floating-panel-content > #details-right-column {
     width: 300px;
     right: 0;
     position: absolute;
@@ -273,8 +273,8 @@ textarea {
     width: 500px !important;
 }
 
-#post-comment-heading {
-    color: #737373;
+.floating-panel-content .heading {
+    color: #444;
     display: block;
     font-weight: bold;
 }
@@ -577,17 +577,13 @@ textarea {
     padding: 7px;
 }
 
-#panel-post {
-    padding: 10px;
-}
-
-#post-message-pic {
-    height: 50px;
-    width: 50px;
+.facebook-user-photo {
+    height: 40px;
+    width: 40px;
     display: inline-block;
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: contain;
 }
 
 #post-message-user {
@@ -602,7 +598,7 @@ textarea {
     padding: 10px;
 }
 
-#post-nocomments {
+.italic {
     font-style: italic;
 }
 

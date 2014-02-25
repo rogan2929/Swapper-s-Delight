@@ -963,24 +963,8 @@ var SwdView = {
      */
     showPostDetails: function(post) {
         var userImage, postImage, i, timeStamp;
-
-        // Display the post's image, or the no-image placeholder.
-        if (post.image_url && post.image_url.length > 0) {
-            postImage = 'url("' + post.image_url[0] + '")';
-
-            // Hide the no-image container and display the post's attached image.
-            $('#post-no-image').hide();
-            $('#post-image').show();
-            $('#post-image').css('background-image', postImage);
-        }
-        else {
-            // Show the no-image notification.
-            $('#post-image').hide();
-            $('#post-no-image').show();
-        }
-
-        $('#post-permalink > a').attr('href', post.permalink).text(post.permalink);
-
+        
+        // Display user's data.
         if (post.user.pic_square) {
             userImage = 'url("' + post.user.pic_square + '")';
         }
@@ -988,21 +972,41 @@ var SwdView = {
             userImage = '';
         }
 
+        // Get a nice, human readable version of the post's created_time timestamp.
         timeStamp = new moment(new Date(post.created_time * 1000));
+        
+        $('#post-details-user-data .facebook-user-photo').css('background-image', userImage);
+        $('#post-details-user-data .facebook-user-name').text(post.user.first_name + ' ' + post.user.last_name).attr('href', post.user.profile_url);
+        $('#post-details-user-data .timestamp').text(timeStamp.calendar());
 
-        $('#post-message-pic').css('background-image', userImage);
-        $('#post-message-name').text(post.user.first_name + ' ' + post.user.last_name);
-        $('#post-message-name').attr('href', post.user.profile_url);
-        $('#post-message-header .timestamp').text(timeStamp.calendar());
-        $('#post-message-text').html(post.message);
-        $('#post-comment-list').empty();
-        $('#post-nocomments').show();
+//        // Display the post's image, or the no-image placeholder.
+//        if (post.image_url && post.image_url.length > 0) {
+//            postImage = 'url("' + post.image_url[0] + '")';
+//
+//            // Hide the no-image container and display the post's attached image.
+//            $('#post-no-image').hide();
+//            $('#post-image').show();
+//            $('#post-image').css('background-image', postImage);
+//        }
+//        else {
+//            // Show the no-image notification.
+//            $('#post-image').hide();
+//            $('#post-no-image').show();
+//        }
+//
+//        $('#post-permalink > a').attr('href', post.permalink).text(post.permalink);
 
-        if (post.comments.length > 0) {
-            for (i = 0; i < post.comments.length; i++) {
-                SwdView.addPostComment(post.comments[i]);
-            }
-        }
+//        $('#post-message-pic').css('background-image', userImage);
+
+//        $('#post-message-text').html(post.message);
+//        $('#post-comment-list').empty();
+//        $('#post-nocomments').show();
+//
+//        if (post.comments.length > 0) {
+//            for (i = 0; i < post.comments.length; i++) {
+//                SwdView.addPostComment(post.comments[i]);
+//            }
+//        }
 
         SwdView.setLikePost(post.like_info.user_likes);
 
