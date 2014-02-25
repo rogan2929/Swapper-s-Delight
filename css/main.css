@@ -579,7 +579,7 @@ textarea {
     background-position: center center;
     border: 1px solid #ccc;
     background-repeat: no-repeat;
-    background-size: auto 100%;
+    background-size: contain;
     height: 350px;
 }
 
@@ -596,6 +596,7 @@ textarea {
     background-position: center center;
     background-repeat: no-repeat;
     background-image: url("/img/no-image.png");
+    background-size: contain;
     height: 350px;
 
 }
