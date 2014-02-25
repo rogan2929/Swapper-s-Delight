@@ -810,7 +810,7 @@ var SwdView = {
         }, 100);
 
         $('.floating-panel').animate({
-            top: Math.max(offset, 42)
+            top: Math.max(offset + 42, 42)
         }, 100);
     },
     /***
