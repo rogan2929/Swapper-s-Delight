@@ -276,10 +276,6 @@ textarea {
     text-align: center;
 }
 
-.selection-item-content > .ui-icon {
-    display: inline-block;
-}
-
 .selection-item-content > div {
     margin-left: 10px !important;
 }
