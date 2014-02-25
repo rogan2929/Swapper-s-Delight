@@ -51,24 +51,29 @@
                 <div id='post-feed' class='scroll-y'>
                     <div id='post-feed-noposts' class='hidden'>No posts were found.</div>
                 </div>
-                
+
                 <!--Post Details Panel-->
-                
+
                 <div id='post-details-panel' class='floating-panel hidden'>
                     <div class='close-button'></div>
                     <div class='floating-panel-content ui-widget'>
+                        <div id='post-details-user-data' class='facebook-user-header'>
+                            <div class='facebook-user-photo'></div>
+                            <a class='facebook-user-name' target='_blank'></a>
+                            <span class='timestamp'></span>
+                        </div>
                         <div id='details-left-column' class='panel-post-column scroll-y'>
-<!--                            <div id='post-image-container'>
-                                <div id='post-no-image' class='hidden'>
-                                </div>
-                                <div id='post-image'></div>
-                            </div>
-                            <div id='post-permalink'>
-                                <a class='wrappable-link' target='_blank'></a>
-                            </div>
-                            <div id='post-message'>
-                                <div id='post-message-text'></div>
-                            </div>-->
+                            <!--                            <div id='post-image-container'>
+                                                            <div id='post-no-image' class='hidden'>
+                                                            </div>
+                                                            <div id='post-image'></div>
+                                                        </div>
+                                                        <div id='post-permalink'>
+                                                            <a class='wrappable-link' target='_blank'></a>
+                                                        </div>
+                                                        <div id='post-message'>
+                                                            <div id='post-message-text'></div>
+                                                        </div>-->
                         </div>
                         <div id='details-right-column' class='panel-post-column scroll-y'>
                             <span class='heading'>Viewing all comments, newest first.</span>
@@ -83,16 +88,16 @@
                         <div class='ajax-loading-div hidden'></div>
                     </div>
                 </div>
-                
+
                 <!--New Post Panel-->
-                
+
                 <div id='new-post-panel' class='floating-panel hidden'>
                     <div class='close-button'></div>
                     <div class='floating-panel-content ui-widget scroll-y'></div>
                 </div>
-                
+
                 <!--Select Group panel-->
-                
+
                 <div id='select-group-panel' class='floating-panel hidden'>
                     <div class='close-button'></div>
                     <div class='floating-panel-content ui-widget scroll-y'>
@@ -129,23 +134,16 @@
             </div>
 
             <div id='post-details-toolbar' class='ui-widget toolbar floating-panel-toolbar hidden'>
-                <div class='float-left'>
-                    <div id='post-details-user-data' class='facebook-user-header'>
-                        <div class='facebook-user-photo'></div>
-                        <a class='facebook-user-name' target='_blank'></a>
-                        <span class='timestamp'></span>
-                    </div>
-                </div>
                 <div class='float-right'>
                     <div id='post-button-pm' class='button toolbar-button'>
                         <span>Private Message</span>
                     </div>
-                    <div id='post-button-like' class='button toolbar-button'>
-                        <span>Like</span>
-                    </div>
                     <div id='post-button-comment' class='button menu-button'>
                         <span>Comment</span>
                         <a href='#popup-comment'></a>
+                    </div>
+                    <div id='post-button-like' class='button toolbar-button'>
+                        <span>Like</span>
                     </div>
                 </div>
             </div>
