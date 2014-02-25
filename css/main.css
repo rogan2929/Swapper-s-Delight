@@ -209,6 +209,7 @@ textarea {
 .floating-panel > .floating-panel-content {
     border: 1px solid #ccc;
     /*    box-shadow: 8px 8px 5px #888888;*/
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
     /*    border-radius: 5px;*/
     position: absolute;
     bottom: 25px;
@@ -666,11 +667,16 @@ textarea {
     padding: 3px;
 }*/
 
-.ui-widget, .menu {
+.ui-widget {
     background: white;
     /*    border-radius: 5px;*/
     /*    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
         border-radius: 5px;*/
+}
+
+.menu {
+    background: white;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
 }
 
 div.right-toolbar-button {
@@ -752,11 +758,11 @@ div.login-div {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     margin: 0;
-    padding: 10px;
+    padding: 5px;
 }
 
 #popup-comment-text {
-/*    border: transparent;*/
+    border: transparent;
     width: 200px;
     height: 100px;
 /*    margin-left: -2px;
