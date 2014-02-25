@@ -65,15 +65,15 @@
                                     <span class='timestamp'></span>
                                 </div>
                             </div>
-                            <div id='post-image-container'>
+                            <div id='post-image-container' class='floating-panel-section'>
                                 <div id='post-no-image' class='hidden'>
                                 </div>
                                 <div id='post-image'></div>
                             </div>
-                            <div id='post-permalink'>
+                            <div id='post-permalink' class='floating-panel-section'>
                                 <a class='wrappable-link' target='_blank'></a>
                             </div>
-                            <div id='post-message'>
+                            <div id='post-message' class='floating-panel-section'>
                                 <div id='post-message-text'></div>
                             </div>
                         </div>
