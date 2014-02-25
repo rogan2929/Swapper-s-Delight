@@ -737,12 +737,14 @@ var SwdView = {
             $('#post-nocomments').hide();
         }
 
-        //timeStamp = $.datepicker.formatDate('DD, mm/dd/yy at HH:MM', new Date(post.comments[i].time * 1000));
+        // Get a human-readable version of the comment's timestamp value.
         timeStamp = new moment(new Date(comment.time * 1000));
+        
+        commentDiv = $('<div class="post-comment">' + comment.text + '</div>');
 
 //        commentDiv = $('<div class="post-comment"><div><div class="post-comment-user-image"></div><div class="post-comment-header"><p class="wrapper"><a class="post-comment-user-name" href="' + comment.user.profile_url + '" target="_blank">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><span class="timestamp">' + timeStamp.calendar() + '</span></p></div></div><div>' + comment.text + '</div></div>');
 //        $(commentDiv).find('.post-comment-user-image').css('background-image', userImage);
-//        $(commentDiv).hide().prependTo('#post-comment-list').fadeIn();
+        $(commentDiv).hide().prependTo('#post-comment-list').fadeIn();
         //$('#post-comment-list').append(commentDiv);
     },
     /**
@@ -979,7 +981,7 @@ var SwdView = {
         $('#post-details-user-data .facebook-user-name').text(post.user.first_name + ' ' + post.user.last_name).attr('href', post.user.profile_url);
         $('#post-details-user-data .timestamp').text(timeStamp.calendar());
 
-//        // Display the post's image, or the no-image placeholder.
+        // Display the post's image, or the no-image placeholder.
         if (post.image_url && post.image_url.length > 0) {
             postImage = 'url("' + post.image_url[0] + '")';
 
@@ -994,22 +996,24 @@ var SwdView = {
             $('#post-no-image').show();
         }
 
-//        $('#post-permalink > a').attr('href', post.permalink).text(post.permalink);
+        // Display permalink
+        $('#post-permalink > a').attr('href', post.permalink).text(post.permalink);
+        
+        // Display message content.
+        $('#post-message-text').html(post.message);
+        
+        // Populate the comments section.
+        $('#post-comment-list').empty();
+        $('#post-nocomments').show();
 
-//        $('#post-message-pic').css('background-image', userImage);
+        if (post.comments.length > 0) {
+            for (i = 0; i < post.comments.length; i++) {
+                SwdView.addPostComment(post.comments[i]);
+            }
+        }
 
-//        $('#post-message-text').html(post.message);
-//        $('#post-comment-list').empty();
-//        $('#post-nocomments').show();
-//
-//        if (post.comments.length > 0) {
-//            for (i = 0; i < post.comments.length; i++) {
-//                SwdView.addPostComment(post.comments[i]);
-//            }
-//        }
-
+        // Wrap stuff up.
         SwdView.setLikePost(post.like_info.user_likes);
-
         SwdView.clearPostCommentText();
         SwdView.toggleAjaxLoadingDiv('#post-details-panel', false);
     },

@@ -85,8 +85,7 @@
                                 <div id='post-nocomments' class='italic'>
                                     No comments yet.
                                 </div>
-                                <div id='post-comment-list'>
-                                </div>
+                                <div id='post-comment-list'></div>
                             </div>
                         </div>
                         <div class='ajax-loading-div hidden'></div>
