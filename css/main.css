@@ -462,8 +462,8 @@ textarea {
 }
 
 .facebook-user-header {
-    height: 40px;
-    line-height: 40px;
+    height: 50px;
+    line-height: 50px;
     color: white;
     background: #13486b;
 }
@@ -610,7 +610,7 @@ textarea {
 }
 
 .facebook-user-header .facebook-poststamp {
-    line-height: 40px;
+    line-height: 50px;
     vertical-align: middle;
 }
 
