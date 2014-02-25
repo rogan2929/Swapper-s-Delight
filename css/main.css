@@ -263,6 +263,10 @@ textarea {
 }
 
 .selection-item {
+    display: inline-block;
+}
+
+.selection-item-content {
     padding-top: 8px;
     padding-bottom: 8px;
     margin: 5px;
@@ -274,11 +278,11 @@ textarea {
     background-color: #dddddd;
 }
 
-.selection-item > .ui-icon {
+.selection-item-content > .ui-icon {
     display: inline-block;
 }
 
-.selection-item > div {
+.selection-item-content > div {
     margin-left: 10px !important;
 }
 
