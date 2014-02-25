@@ -939,10 +939,10 @@ var SwdView = {
      */
     setLikePost: function(userLikes) {
         if (userLikes) {
-            $('#post-button-like').text('Unlike');
+            $('#post-button-like span:nth-child(2)').text('Unlike');
         }
         else {
-            $('#post-button-like').text('Like');
+            $('#post-button-like span:nth-child(2)').text('Like');
         }
     },
     /***
