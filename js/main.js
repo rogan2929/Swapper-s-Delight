@@ -291,7 +291,7 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickPostBlockLoadMore', SwdPresenter.onClickPostBlockLoadMore, '.post-block.load-more', 'click');
                         SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
                         SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
-                        SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#post-comment-text', 'keyup')
+                        SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#popup-comment-text', 'keyup')
                         SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
                         SwdView.positionMenus();
 
@@ -549,7 +549,7 @@ var SwdPresenter = {
 //        var id, comment;
 //
 //        id = SwdPresenter.selectedPost.post_id;
-//        comment = $('#post-comment-text').val();
+//        comment = $('#popup-comment-text').val();
 //
 //        // Show the ajax loading div.
 //        SwdView.toggleAjaxLoadingDiv('#post-comment', true);
@@ -667,7 +667,7 @@ var SwdPresenter = {
             e.preventDefault();
 
             id = SwdPresenter.selectedPost.post_id;
-            comment = $('#post-comment-text').val();
+            comment = $('#popup-comment-text').val();
 
             // Show the ajax loading div.
             SwdView.toggleAjaxLoadingDiv('#post-comment', true);
@@ -766,7 +766,7 @@ var SwdView = {
      * Clear comment box.
      */
     clearPostCommentText: function() {
-        $('#post-comment-text').val('');
+        $('#popup-comment-text').val('');
         SwdView.toggleAjaxLoadingDiv('#post-comment', false);
     },
     /***

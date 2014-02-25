@@ -151,10 +151,8 @@
                 </div>
             </div>
             <div id='popup-comment' class='menu'>
-                <div id='post-comment'>
-                    <textarea id='post-comment-text' placeholder='Add a comment. Press [Enter] to send.'></textarea>
-                    <div class='ajax-loading-div hidden'></div>
-                </div>
+                <textarea id='popup-comment-text' placeholder='Add a comment. Press [Enter] to send.'></textarea>
+                <div class='ajax-loading-div hidden'></div>
             </div>
         </div>
 
