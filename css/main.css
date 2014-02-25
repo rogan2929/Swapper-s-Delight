@@ -561,14 +561,17 @@ textarea {
 .floating-panel-section {
     margin-bottom: 10px;
     border: 2px solid #f6f6f6;
+    padding: 7px;
 }
 
 .facebook-user-header.floating-panel-section {
     border: none !important;
+    padding: 0;
 }
 
 .heading.floating-panel-section {
     border: none !important;
+    padding: 0;
 }
 
 .floating-panel-content > * {
