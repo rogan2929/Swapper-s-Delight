@@ -268,7 +268,7 @@ textarea {
     margin: 5px;
     height: 150px;
     width: 150px;
-    display: table-cell;
+    display: table-cell !important;
     vertical-align: middle;
     text-align: center;
     background-color: #dddddd;
