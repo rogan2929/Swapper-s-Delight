@@ -267,6 +267,8 @@ textarea {
     padding-bottom: 8px;
     display: inline-block;
     margin: 5px;
+    height: 100px;
+    width: 100px;
 }
 
 .selection-item .ui-icon {
