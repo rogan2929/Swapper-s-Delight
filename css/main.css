@@ -560,14 +560,14 @@ textarea {
 
 .floating-panel-section {
     margin-bottom: 10px;
-    border: 1px solid #f6f6f6;
+    border: 1px solid #eee;
 }
 
 .facebook-user-header.floating-panel-section {
     border: none !important;
 }
 
-.header.floating-panel-section {
+.heading.floating-panel-section {
     border: none !important;
 }
 
