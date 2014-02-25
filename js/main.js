@@ -603,6 +603,9 @@ var SwdPresenter = {
         var id;
         var post;
 
+        // Close any open menus.
+        SwdView.closeAllUiMenus();
+
         // Assuming one of the child elements of post-block was clicked.
         id = $(e.currentTarget).parents('div.post-block').attr('id');
 
