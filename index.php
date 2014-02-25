@@ -136,8 +136,9 @@
                     <div id='post-button-like' class='button toolbar-button'>
                         <span>Like</span>
                     </div>
-                    <div id='post-button-comment' class='button toolbar-button'>
+                    <div id='post-button-comment' class='button menu-button'>
                         <span>Comment</span>
+                        <a href='#popup-comment'></a>
                     </div>
                 </div>
             </div>
