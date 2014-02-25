@@ -468,6 +468,17 @@ textarea {
 .facebook-user-header {
     height: 40px;
     line-height: 40px;
+    color: white;
+    background: #13486b;
+}
+
+.facebook-user-header > a {
+    color: white;
+    text-decoration: none;
+}
+
+.facebook-user-header > a:hover {
+    text-decoration: underline;
 }
 
 .load-more > .load-more-text {
