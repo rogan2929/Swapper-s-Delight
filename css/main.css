@@ -457,6 +457,15 @@ textarea {
     pointer-events: none;
 }
 
+.facebook-user-header {
+    height: 40px;
+}
+
+.facebook-user-header > div {
+    line-height: 40px;
+    vertical-align: middle;
+}
+
 .load-more > .load-more-text {
     line-height: 205px;
     vertical-align: middle;
