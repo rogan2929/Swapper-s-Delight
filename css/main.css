@@ -467,7 +467,7 @@ textarea {
 .post-block.ui-widget {
     display: inline-block;
     background-color: #13486b;
-    height: 205px;
+    height: 250px;
     width: 250px;
     overflow: hidden;
     margin: 3px;
@@ -510,7 +510,7 @@ textarea {
     color: white;
 }
 .load-more > .load-more-text {
-    line-height: 205px;
+    line-height: 250px;
     vertical-align: middle;
 }
 
