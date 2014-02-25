@@ -160,11 +160,7 @@ textarea {
     color: black;
 }*/
 
-.facebook-user-header .timestamp {
-    vertical-align: middle;
-}
-
-.facebook-user-header > *:not(:first-child) {
+.facebook-user-header .facebook-poststamp > *:not(:first-child) {
     margin-left: 3px;
 }
 
@@ -607,6 +603,7 @@ textarea {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
+    float: left;
 }
 
 .facebook-user-header .facebook-poststamp {
