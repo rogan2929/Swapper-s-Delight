@@ -284,7 +284,7 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
                         SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
                         SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
-                        SwdView.installHandler('onClickPostButtonComment', SwdPresenter.onClickPostButtonComment, '#post-button-comment > div', 'click');
+//                        SwdView.installHandler('onClickPostButtonComment', SwdPresenter.onClickPostButtonComment, '#post-button-comment > div', 'click');
                         SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
                         SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
                         SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block', 'click');
@@ -545,28 +545,28 @@ var SwdPresenter = {
         SwdPresenter.loadPosts(false);
         SwdView.setSelectedPostType(id);
     },
-    onClickPostButtonComment: function(e, args) {
-        var id, comment;
-
-        id = SwdPresenter.selectedPost.post_id;
-        comment = $('#post-comment-text').val();
-
-        // Show the ajax loading div.
-        SwdView.toggleAjaxLoadingDiv('#post-comment', true);
-
-        // Post the comment, if it's not empty.
-        if (comment) {
-            SwdModel.postComment(id, comment, {
-                success: function(response) {
-                    SwdView.addPostComment(response);
-                    SwdView.clearPostCommentText();
-                },
-                fail: function(response) {
-                    SwdView.showError(response);
-                }
-            });
-        }
-    },
+//    onClickPostButtonComment: function(e, args) {
+//        var id, comment;
+//
+//        id = SwdPresenter.selectedPost.post_id;
+//        comment = $('#post-comment-text').val();
+//
+//        // Show the ajax loading div.
+//        SwdView.toggleAjaxLoadingDiv('#post-comment', true);
+//
+//        // Post the comment, if it's not empty.
+//        if (comment) {
+//            SwdModel.postComment(id, comment, {
+//                success: function(response) {
+//                    SwdView.addPostComment(response);
+//                    SwdView.clearPostCommentText();
+//                },
+//                fail: function(response) {
+//                    SwdView.showError(response);
+//                }
+//            });
+//        }
+//    },
     onClickPostButtonLike: function(e, args) {
         var id, userLikes;
 
