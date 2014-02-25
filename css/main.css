@@ -558,7 +558,7 @@ textarea {
     word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
 
-.panel-post-column > * {
+.floating-panel-section {
     margin-bottom: 10px;
 }
 
@@ -567,7 +567,6 @@ textarea {
 }
 
 #post-image-container {
-    padding: 10px;
     height: 350px;
 }
 
