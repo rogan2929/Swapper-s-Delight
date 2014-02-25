@@ -271,6 +271,7 @@ textarea {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
+    background-color: #dddddd;
 }
 
 .selection-item > .ui-icon {
