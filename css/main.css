@@ -611,10 +611,6 @@ textarea {
 
 }
 
-#post-permalink {
-    padding: 7px;
-}
-
 .facebook-user-photo {
     height: 50px;
     width: 50px;
@@ -628,18 +624,6 @@ textarea {
 .facebook-user-header .facebook-poststamp {
     line-height: 50px;
     vertical-align: middle;
-}
-
-#post-message-user {
-    padding: 5px;
-}
-
-#post-message-name {
-    margin-top: 5px;
-}
-
-#post-message-text {
-    padding: 10px;
 }
 
 #post-comments {
