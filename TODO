@@ -1,0 +1,7 @@
+Fix timeout issue resulting from expired access tokens.
+Rework post details floating panel.
+Implement 'New' post functionality.
+Implement 'Logout' feature.
+Find ad provider and place their ads.
+Possibly rework select group floating panel.
+Implement Search functionality.
