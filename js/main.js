@@ -718,7 +718,7 @@ var SwdView = {
         $('#select-group-no-groups').hide();
 
         for (i = 0; i < groups.length; i++) {
-            $('#select-group-list').append('<div id="' + groups[i].gid + '" class="button selection-item select-group"><div><span class="button-icon" style="background-image: url(' + groups[i].icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + groups[i].name + '</div></div></div>');
+            $('#select-group-list').append('<div id="' + groups[i].gid + '" class="button selection-item select-group"><span class="button-icon" style="background-image: url(' + groups[i].icon + ')"></span><div style="display: inline-block; margin-left: 5px">' + groups[i].name + '</div></div>');
         }
     },
     addPostComment: function(comment) {

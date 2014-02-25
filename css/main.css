@@ -265,23 +265,19 @@ textarea {
 .selection-item {
     padding-top: 8px;
     padding-bottom: 8px;
-    display: inline-block;
     margin: 5px;
     height: 150px;
     width: 150px;
-    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
 }
 
-.selection-item > div {
-    position: absolute;
-    
-}
-
-.selection-item > div > .ui-icon {
+.selection-item > .ui-icon {
     display: inline-block;
 }
 
-.selection-item > div > div {
+.selection-item > div {
     margin-left: 10px !important;
 }
 
