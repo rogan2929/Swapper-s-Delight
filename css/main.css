@@ -264,18 +264,16 @@ textarea {
 
 .selection-item {
     display: inline-block;
-}
-
-.selection-item-content {
-    padding-top: 8px;
-    padding-bottom: 8px;
+    background-color: #dddddd;
     margin: 5px;
     height: 150px;
     width: 150px;
+}
+
+.selection-item-content {
     display: table-cell !important;
     vertical-align: middle;
     text-align: center;
-    background-color: #dddddd;
 }
 
 .selection-item-content > .ui-icon {
@@ -529,7 +527,7 @@ textarea {
 
 .post-block.post-block-text > div > p {
     overflow: hidden;
-/*    height: 170px;*/
+    /*    height: 170px;*/
     height: 215px;
     padding: 12px;
     border-radius: 5px;
@@ -799,8 +797,8 @@ div.login-div {
     border-radius: 2px;
     width: 300px;
     height: 100px;
-/*    margin-left: -2px;
-    margin-top: -2px;*/
+    /*    margin-left: -2px;
+        margin-top: -2px;*/
 }
 
 #post-comment-text {
