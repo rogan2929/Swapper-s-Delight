@@ -666,7 +666,7 @@ textarea {
     padding: 3px;
 }*/
 
-.ui-widget,.menu {
+.ui-widget, .menu {
     background: white;
     /*    border-radius: 5px;*/
     /*    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
@@ -684,6 +684,9 @@ div.right-toolbar-button {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     margin: 0;
+}
+
+.floating-panel-menu {
     z-index: 1002;
 }
 
