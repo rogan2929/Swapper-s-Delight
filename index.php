@@ -139,13 +139,16 @@
             <div id='post-details-toolbar' class='ui-widget toolbar floating-panel-toolbar hidden'>
                 <div class='float-right'>
                     <div id='post-button-comment' class='button menu-button'>
+                        <span class='button-icon icon-comment'></span>
                         <span>Comment</span>
                         <a href='#popup-comment'></a>
                     </div>
                     <div id='post-button-like' class='button toolbar-button'>
+                        <span class='button-icon icon-like'></span>
                         <span>Like</span>
                     </div>
                     <div id='post-button-pm' class='button toolbar-button'>
+                        <span class='button-icon icon-pm'></span>
                         <span>Private Message</span>
                     </div>
                 </div>

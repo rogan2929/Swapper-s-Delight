@@ -406,6 +406,30 @@ textarea {
     background-image: url('/icons/gear32.png');
 }
 
+.button-icon.icon-comment {
+    background-image: url('/icons/comment32.png');
+}
+
+.button-icon.icon-like {
+    background-image: url('/icons/heart32.png');
+}
+
+.button-icon.icon-pm {
+    background-image: url('/icons/mail32.png');
+}
+
+#post-button-comment:hover .button-icon.icon-comment {
+    background-image: url('/icons/comment32.png');
+}
+
+#post-button-like:hover .button-icon.icon-like {
+    background-image: url('/icons/heart32w.png');
+}
+
+#post-button-pm:hover .button-icon.icon-pm {
+    background-image: url('/icons/mail32w.png');
+}
+
 #button-new:hover .button-icon.icon-new {
     background-image: url('/icons/paperplus32w.png');
 }
