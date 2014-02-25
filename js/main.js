@@ -285,6 +285,7 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
                         SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
 //                        SwdView.installHandler('onClickPostButtonComment', SwdPresenter.onClickPostButtonComment, '#post-button-comment > div', 'click');
+                        SwdView.installHandler('onClickPopupComment', SwdPresenter.onClickPopupComment, '#popup-comment', 'click');
                         SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
                         SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
                         SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block', 'click');
@@ -544,6 +545,9 @@ var SwdPresenter = {
 
         SwdPresenter.loadPosts(false);
         SwdView.setSelectedPostType(id);
+    },
+    onClickPopupComment: function(e, args) {
+        e.stopPropagation();
     },
 //    onClickPostButtonComment: function(e, args) {
 //        var id, comment;
