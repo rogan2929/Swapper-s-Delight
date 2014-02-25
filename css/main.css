@@ -161,7 +161,11 @@ textarea {
 }*/
 
 .facebook-user-header .facebook-poststamp > * {
-    margin-left: 3px;
+    margin-left: 4px;
+}
+
+.facebook-user-header .facebook-poststamp > *:first-child {
+    margin-left: 10px;
 }
 
 .selected-nav {
@@ -468,16 +472,16 @@ textarea {
     background: #13486b;
 }
 
-.facebook-user-header > a {
+.facebook-user-header a {
     color: white;
     text-decoration: none;
 }
 
-.facebook-user-header > a:hover {
+.facebook-user-header a:hover {
     text-decoration: underline;
 }
 
-.facebook-user-header > a:visited {
+.facebook-user-header a:visited {
     color: white;
 }
 .load-more > .load-more-text {
@@ -600,8 +604,8 @@ textarea {
 }
 
 .facebook-user-photo {
-    height: 40px;
-    width: 40px;
+    height: 50px;
+    width: 50px;
     display: inline-block;
     background-position: center center;
     background-repeat: no-repeat;
