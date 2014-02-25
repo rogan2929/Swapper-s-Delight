@@ -57,12 +57,12 @@
                 <div id='post-details-panel' class='floating-panel hidden'>
                     <div class='close-button'></div>
                     <div class='floating-panel-content ui-widget'>
-                        <div id='post-details-user-data' class='facebook-user-header'>
-                            <div class='facebook-user-photo'></div>
-                            <a class='facebook-user-name' target='_blank'></a>
-                            <span class='timestamp'></span>
-                        </div>
                         <div id='details-left-column' class='panel-post-column scroll-y'>
+                            <div id='post-details-user-data' class='facebook-user-header'>
+                                <div class='facebook-user-photo'></div>
+                                <a class='facebook-user-name' target='_blank'></a>
+                                <span class='timestamp'></span>
+                            </div>
                             <!--                            <div id='post-image-container'>
                                                             <div id='post-no-image' class='hidden'>
                                                             </div>
