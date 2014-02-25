@@ -95,7 +95,7 @@
                 </div>
                 <div id='new-post-panel' class='floating-panel hidden'>
                     <div class='close-button'></div>
-                    <div class='floating-panel-content scroll-y'></div>
+                    <div class='floating-panel-content ui-widget scroll-y'></div>
                 </div>
                 <div id='select-group-panel' class='floating-panel hidden'>
                     <div class='close-button'></div>
