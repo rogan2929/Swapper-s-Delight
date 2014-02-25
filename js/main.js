@@ -779,7 +779,7 @@ var SwdView = {
      * Clear comment box.
      */
     clearPostCommentText: function() {
-        $('#popup-comment-text').val('');
+        $('#popup-comment-text').val('').hide();
         SwdView.toggleAjaxLoadingDiv('#post-comment', false);
     },
     /***
