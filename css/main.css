@@ -160,7 +160,7 @@ textarea {
     color: black;
 }*/
 
-.facebook-user-header .facebook-poststamp > *:not(:first-child) {
+.facebook-user-header .facebook-poststamp > * {
     margin-left: 3px;
 }
 
@@ -477,6 +477,9 @@ textarea {
     text-decoration: underline;
 }
 
+.facebook-user-header > a:visited {
+    color: white;
+}
 .load-more > .load-more-text {
     line-height: 205px;
     vertical-align: middle;
