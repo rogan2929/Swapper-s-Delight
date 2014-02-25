@@ -150,7 +150,7 @@
                     <span>Logout</span>
                 </div>
             </div>
-            <div id='popup-comment' class='menu floating-panel-menu'>
+            <div id='popup-comment' class='menu floating-panel-menu ui-widget'>
                 <textarea id='popup-comment-text' placeholder='Add a comment. Press [Enter] to send.'></textarea>
                 <div class='ajax-loading-div hidden'></div>
             </div>
