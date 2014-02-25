@@ -560,6 +560,15 @@ textarea {
 
 .floating-panel-section {
     margin-bottom: 10px;
+    border: 1px solid #f6f6f6;
+}
+
+.facebook-user-header.floating-panel-section {
+    border: none !important;
+}
+
+.header.floating-panel-section {
+    border: none !important;
 }
 
 .floating-panel-content > * {
@@ -576,7 +585,6 @@ textarea {
 
 #post-image {
     background-position: center center;
-    border: 1px solid #ccc;
     background-repeat: no-repeat;
     background-size: contain;
     height: 350px;
@@ -629,6 +637,10 @@ textarea {
 
 #post-message-text {
     padding: 10px;
+}
+
+#post-comments {
+    border: none;
 }
 
 .italic {
