@@ -670,6 +670,8 @@ var SwdPresenter = {
     },
     onClickToolbar: function(e, args) {
         e.stopPropagation();
+        
+        SwdView.closeAllUiMenus();
     },
     onKeyUpCommentTextarea: function(e, args) {
         var id, comment;
