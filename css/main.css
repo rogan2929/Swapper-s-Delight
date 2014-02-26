@@ -520,6 +520,7 @@ textarea {
 .load-more > .load-more-text {
     line-height: 200px;
     vertical-align: middle;
+    font-size: 1.15em;
 }
 
 #post-permalink {
