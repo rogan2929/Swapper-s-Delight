@@ -524,6 +524,12 @@ textarea {
 
 #post-permalink {
     display: inline-block;
+    margin-right: 10px;
+    text-decoration: underline;
+}
+
+#post-permalink:hover {
+    color: #e31025;
 }
 
 .post-block.post-block-text > div,
