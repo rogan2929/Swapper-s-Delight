@@ -100,7 +100,7 @@ function getLinkDataArray($post) {
     if ($post['attachment'] && $post['attachment']['media']) {
         for ($i = 0; $i < count($post['attachment']['media']); $i++) {
             if ($post['attachment']['media'][$i]['type'] == 'link') {
-                $linkData = $post['attachment']['media'][$i];
+                $linkData = $post['attachment'];
             }
         }
     }
