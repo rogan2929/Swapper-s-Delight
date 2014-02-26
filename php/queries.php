@@ -50,6 +50,7 @@ function processStreamQuery($stream, $images) {
         $post = $stream[$i];
 
         $post['image_url'] = getImageUrlArray($post, $images, true);
+        $post['link_data'] = getLinkDataArray($post);
 
         // Replace any line breaks with <br/>
         if ($post['message']) {
@@ -82,14 +83,29 @@ function getImageUrlArray($post, $images, $thumbnails = true) {
                     // Find the image url from the given Facebook ID
                     $imageUrls[] = getImageUrlFromFbId($fbid, $images, $thumbnails);
                 }
-                else if ($post['attachment']['media'][$i]['type'] == 'link') {
-                    $imageUrls[] = $post['attachment']['media'][$i]['src'];
-                }
             }
         }
     }
 
     return $imageUrls;
+}
+
+/***
+ * Function to parse FQL attachment data for links.
+ */
+function getLinkDataArray($post) {
+    $linkData = array();
+    
+    // Loop through media attachments, looking for type 'link'.
+    if ($post['attachment'] && $post['attachment']['media']) {
+        for ($i = 0; $i < count($post['attachment']['media']); $i++) {
+            if ($post['attachment']['media'][$i]['type'] == 'link') {
+                $linkData = $post['attachment']['media'][$i];
+            }
+        }
+    }
+    
+    return $linkData;
 }
 
 function getImageUrlFromFbId($fbid, $images, $thumbnails = true) {
