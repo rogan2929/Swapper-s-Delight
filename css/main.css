@@ -529,7 +529,6 @@ textarea {
 .post-block.post-block-text > div > p {
     overflow: hidden;
     /*    height: 170px;*/
-/*    height: 215px;*/
     height: 165px;
     padding: 12px;
     border-radius: 5px;
