@@ -522,11 +522,15 @@ textarea {
     vertical-align: middle;
 }
 
-.post-block.post-block-text > div {
+.post-block.post-block-text > div,
+.post-block.post-block-link > div,
+.post-block.post-block-textlink > div {
     overflow: hidden;
 }
 
-.post-block.post-block-text > div > p {
+.post-block.post-block-text > div > p,
+.post-block.post-block-link > div > p,
+.post-block.post-block-textlink > div > p {
     overflow: hidden;
     /*    height: 170px;*/
     height: 165px;

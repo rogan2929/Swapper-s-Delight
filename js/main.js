@@ -886,8 +886,9 @@ var SwdView = {
         var postBlock, description;
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
+        $(postBlock).addClass('post-block-link');
         
-        description = '<div><p><p>' + post.link_data.name + '</p><p>' + post.link_data.description + '</p></p></div>';
+        description = '<div><p>' + post.link_data.name + '<br/>' + post.link_data.description + '</p></div>';
         
         $(postBlock).html(description).appendTo('#post-feed');
     },
@@ -899,6 +900,7 @@ var SwdView = {
         var postBlock, message;
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
+        $(postBlock).addClass('post-block-textlink');
         
         message = '<div><p>' + post.message + '</p></div>';
         
