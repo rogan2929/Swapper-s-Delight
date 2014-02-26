@@ -274,7 +274,6 @@ textarea {
     text-align: center;
     height: 134px;
     width: 134px;
-    position: relative;
 }
 
 .selection-item-content > div {
@@ -283,11 +282,6 @@ textarea {
 
 .selection-item-content > .button-icon {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    position: absolute;
-    left: 0;
-    right: 0;
 }
 
 .floating-panel.narrow-floating-panel {
