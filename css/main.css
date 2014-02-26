@@ -475,8 +475,8 @@ textarea {
 .post-block.ui-widget {
     display: inline-block;
     background-color: #13486b;
-    height: 250px;
-    width: 250px;
+    height: 200px;
+    width: 200px;
     overflow: hidden;
     margin: 3px;
     margin-bottom: -1px;
@@ -529,7 +529,8 @@ textarea {
 .post-block.post-block-text > div > p {
     overflow: hidden;
     /*    height: 170px;*/
-    height: 215px;
+/*    height: 215px;*/
+    height: 165px;
     padding: 12px;
     border-radius: 5px;
     line-height: 1.3;
