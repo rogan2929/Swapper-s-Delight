@@ -522,6 +522,10 @@ textarea {
     vertical-align: middle;
 }
 
+#post-permalink {
+    display: inline-block;
+}
+
 .post-block.post-block-text > div,
 .post-block.post-block-link > div,
 .post-block.post-block-textlink > div {
