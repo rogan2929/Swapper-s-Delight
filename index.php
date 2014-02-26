@@ -62,6 +62,7 @@
                                 <div class='facebook-user-photo'></div>
                                 <div class='facebook-poststamp'>
                                     <a class='facebook-user-name' target='_blank'></a>
+                                    <span> - </span>
                                     <span class='timestamp'></span>
                                 </div>
                             </div>
