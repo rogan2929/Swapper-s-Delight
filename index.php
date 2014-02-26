@@ -63,7 +63,7 @@
                                 <div class='facebook-poststamp'>
                                     <a class='facebook-user-name' target='_blank'></a>
                                     <span> - </span>
-                                    <span class='timestamp'></span>
+                                    <a id='post-permalink' class='wrappable-link'><span class='timestamp'></span></a>
                                 </div>
                             </div>
                             <div id='post-image-container' class='floating-panel-section'>
@@ -71,9 +71,9 @@
                                 </div>
                                 <div id='post-image'></div>
                             </div>
-                            <div id='post-permalink' class='floating-panel-section'>
+<!--                            <div id='post-permalink' class='floating-panel-section'>
                                 <a class='wrappable-link' target='_blank'></a>
-                            </div>
+                            </div>-->
                             <div id='post-message' class='floating-panel-section'>
                                 <div id='post-message-text'></div>
                             </div>

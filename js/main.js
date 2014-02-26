@@ -1038,7 +1038,7 @@ var SwdView = {
         }
 
         // Display permalink
-        $('#post-permalink > a').attr('href', post.permalink).text(post.permalink);
+        $('#post-permalink').attr('href', post.permalink).text(post.permalink);
 
         // Display message content.
         $('#post-message-text').html(post.message);
