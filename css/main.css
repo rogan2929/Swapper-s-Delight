@@ -280,6 +280,10 @@ textarea {
     margin-left: 10px !important;
 }
 
+.selection-item-content > .button-icon {
+    display: inline-block;
+}
+
 .floating-panel.narrow-floating-panel {
     width: 500px !important;
 }
