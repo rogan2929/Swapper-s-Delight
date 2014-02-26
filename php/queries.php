@@ -51,11 +51,41 @@ function processStreamQuery($stream, $images) {
 
         $post['image_url'] = getImageUrlArray($post, $images, true);
         $post['link_data'] = getLinkData($post);
-        
+
         // Erase any attachment data to save on object size.
         // This has already been parsed out.
         unset($post['attachment']);
 
+        // Four types of posts:
+        // 1. Image Posts (text and non-text, doesn't matter.) ('image')
+        // 2. Text Only Posts ('text')
+        // 3. Link Only Posts ('link')
+        // 4. Link + Text Posts ('textlink')
+        //
+        // These all have to be accounted for.
+        
+        // Just to start with, but this will catch any bizarre instances, like
+        // a post with no message, no pictures, or no urls.
+        $post['post_type'] = 'unknown';
+        
+        // The logic below should catch everything.
+        if (count($post['image_url']) > 0) {
+            $post['post_type'] = 'image';       // Image Post
+        }
+        else {
+            $post['post_type'] = 'text';        // Assume text post, but this might change to link.
+        }
+        
+        if ($post['message'] == '' && count($post['link_data'] > 0)) {
+            $post['post_type'] = 'link';        // Link post.
+        }
+        
+        if ($post['message'] && count($post['link_data']) > 0) {
+            $post['post_type'] = 'textlink';        // Link + Text post.
+        }
+        
+        // Determine which kind of post this is.
+        
         // Replace any line breaks with <br/>
         if ($post['message']) {
             $post['message'] = nl2br($post['message']);

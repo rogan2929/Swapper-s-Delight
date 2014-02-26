@@ -856,17 +856,7 @@ var SwdView = {
      * @param {type} posts
      */
     populatePostBlocks: function(posts, postType) {
-        var i, post, postBlock, message, color, colorArray;
-
-        // Array of random colors to choose from.
-        colorArray = [
-            'cornsilk',
-            'azure',
-            'antiquewhite',
-            'cornflowerblue',
-            'sandybrown',
-            'mintcream'
-        ];
+        var i, post, postBlock, message, color;
 
         SwdView.toggleAjaxLoadingDiv('body', false);
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', false);
@@ -892,8 +882,6 @@ var SwdView = {
                 }
                 else {
                     $(postBlock).addClass('post-block-text');
-
-                    color = colorArray[Math.floor(Math.random() * (colorArray.length))];
 
                     message = '<div><p>' + post.message + '</p></div>';
 
