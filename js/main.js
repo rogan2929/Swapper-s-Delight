@@ -876,7 +876,6 @@ var SwdView = {
         
         message = '<div><p>' + post.message + '</p></div>';
 
-        //$(postBlock).css('background-color', color).html(message).appendTo('#post-feed');
         $(postBlock).html(message).appendTo('#post-feed');
     },
     /***
@@ -884,14 +883,26 @@ var SwdView = {
      * @param {type} post
      */
     createLinkPostBlock: function(post) {
+        var postBlock, description;
 
+        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
+        
+        description = '<div><p><p>' + post.link_data.name + '</p><p>' + post.link_data.description + '</p></p></div>';
+        
+        $(postBlock).html(description).appendTo('#post-feed');
     },
     /***
      * Create and display a textlink type post block.
      * @param {type} post
      */
     createTextLinkPostBlock: function(post) {
+        var postBlock, message;
 
+        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
+        
+        message = '<div><p>' + post.message + '</p></div>';
+        
+        $(postBlock).html(message).appendTo('#post-feed');
     },
     /***
      * Populate the main view with post blocks.
@@ -922,8 +933,10 @@ var SwdView = {
                         SwdView.createTextPostBlock(post);
                         break;
                     case 'link':
+                        SwdView.createLinkPostBlock(post);
                         break;
                     case 'textlink':
+                        SwdView.createTextLinkPostBlock(post);
                         break;
                 }
             }
