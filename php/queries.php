@@ -72,7 +72,7 @@ function processStreamQuery($stream, $images) {
         if (count($post['image_url']) > 0) {
             $post['post_type'] = 'image';       // Image Post
         }
-        else {
+        else if (strlen($post['message']) > 0) {
             $post['post_type'] = 'text';        // Assume text post, but this might change to link.
         }
         
