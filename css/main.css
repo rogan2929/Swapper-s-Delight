@@ -272,8 +272,8 @@ textarea {
     display: table-cell !important;
     vertical-align: middle;
     text-align: center;
-    height: 140px;
-    width: 140px;
+    height: 130px;
+    width: 130px;
 }
 
 .selection-item-content > div {
