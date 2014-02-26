@@ -51,6 +51,10 @@ function processStreamQuery($stream, $images) {
 
         $post['image_url'] = getImageUrlArray($post, $images, true);
         $post['link_data'] = getLinkData($post);
+        
+        // Erase any attachment data to save on object size.
+        // This has already been parsed out.
+        unset($post['attachment']);
 
         // Replace any line breaks with <br/>
         if ($post['message']) {
