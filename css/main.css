@@ -278,11 +278,11 @@ textarea {
 
 .selection-item-content > div {
 /*    margin-left: 10px !important;*/
-    text-align: center;
+/*    text-align: center;*/
 }
 
 .selection-item-content .button-icon {
-    display: block;
+    display: inline-block;
 }
 
 .floating-panel.narrow-floating-panel {
