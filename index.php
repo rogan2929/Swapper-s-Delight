@@ -62,8 +62,9 @@
                                 <div class='facebook-user-photo'></div>
                                 <div class='facebook-poststamp'>
                                     <a class='facebook-user-name' target='_blank'></a>
-                                    <span> - </span>
-                                    <a id='post-permalink' class='wrappable-link'><span class='timestamp'></span></a>
+                                    <span>-</span>
+                                    <span class='timestamp'></span>
+                                    <a id='post-permalink' class='wrappable-link'>(Permalink)</a>
                                 </div>
                             </div>
                             <div id='post-image-container' class='floating-panel-section'>

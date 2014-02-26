@@ -665,7 +665,11 @@ textarea {
 
 .facebook-user-header .facebook-poststamp {
     line-height: 50px;
-    vertical-align: middle;
+    vertical-align: middle;    
+}
+
+.facebook-user-header .facebook-poststamp:not(:first-child) {
+    margin-left: 5px;
 }
 
 #post-comments {
