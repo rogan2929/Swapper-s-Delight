@@ -50,7 +50,7 @@ function processStreamQuery($stream, $images) {
         $post = $stream[$i];
 
         $post['image_url'] = getImageUrlArray($post, $images, true);
-        $post['link_data'] = getLinkDataArray($post);
+        $post['link_data'] = getLinkData($post);
 
         // Replace any line breaks with <br/>
         if ($post['message']) {
@@ -90,21 +90,19 @@ function getImageUrlArray($post, $images, $thumbnails = true) {
     return $imageUrls;
 }
 
-/***
+/* * *
  * Function to parse FQL attachment data for links.
  */
-function getLinkDataArray($post) {
-    $linkData = array();
-    
+
+function getLinkData($post) {
+    $linkData = null;
+
     // Loop through media attachments, looking for type 'link'.
-    if ($post['attachment'] && $post['attachment']['media']) {
-        for ($i = 0; $i < count($post['attachment']['media']); $i++) {
-            if ($post['attachment']['media'][$i]['type'] == 'link') {
-                $linkData = $post['attachment'];
-            }
-        }
+    if ($post['attachment'] && $post['attachment']['media'] && $post['attachment']['media'][0] &&
+            $post['attachment']['media'][0]['type'] == 'link') {
+        $linkData = $post['attachment'];
     }
-    
+
     return $linkData;
 }
 
