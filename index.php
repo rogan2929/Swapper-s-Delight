@@ -64,7 +64,7 @@
                                     <a class='facebook-user-name' target='_blank'></a>
                                     <span>-</span>
                                     <span class='timestamp'></span>
-                                    <a id='post-permalink' class='float-right wrappable-link'>Permalink</a>
+                                    <a id='post-permalink' target='_blank' class='float-right wrappable-link'>Permalink</a>
                                 </div>
                             </div>
                             <div id='post-image-container' class='floating-panel-section'>
