@@ -888,7 +888,7 @@ var SwdView = {
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
         $(postBlock).addClass('post-block-link');
         
-        description = '<div><p>' + post.link_data.name + '<br/>' + post.link_data.description + '</p></div>';
+        description = '<div><p><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
         
         $(postBlock).html(description).appendTo('#post-feed');
     },

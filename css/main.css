@@ -539,6 +539,10 @@ textarea {
     line-height: 1.3;
 }
 
+.post-block .link-title {
+    font-weight: bold;
+}
+
 .post-block.post-block-image {
     background-repeat: no-repeat;
     background-position: center center;
