@@ -670,7 +670,7 @@ var SwdPresenter = {
     },
     onClickToolbar: function(e, args) {
         e.stopPropagation();
-        
+
         SwdView.closeAllUiMenus();
     },
     onKeyUpCommentTextarea: function(e, args) {
@@ -739,7 +739,7 @@ var SwdView = {
 
         // Get a human-readable version of the comment's timestamp value.
         timeStamp = new moment(new Date(comment.time * 1000));
-        
+
         commentDiv = $('<div class="post-comment">' + comment.text + '</div>');
 
 //        commentDiv = $('<div class="post-comment"><div><div class="post-comment-user-image"></div><div class="post-comment-header"><p class="wrapper"><a class="post-comment-user-name" href="' + comment.user.profile_url + '" target="_blank">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><span class="timestamp">' + timeStamp.calendar() + '</span></p></div></div><div>' + comment.text + '</div></div>');
@@ -852,11 +852,53 @@ var SwdView = {
         $('#' + id).addClass('selected-nav');
     },
     /***
+     * Create and display an image type post block.
+     * @param {type} post
+     */
+    createImagePostBlock: function(post) {
+        var postBlock;
+
+        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
+        $(postBlock).addClass('post-block-image');
+        $(postBlock).css('background-image', 'url("' + post.image_url[0] + '")');
+        $(postBlock).appendTo('#post-feed');
+    },
+    /***
+     * Create and display a text type post block.
+     * @param {type} post
+     */
+    createTextPostBlock: function(post) {
+        var postBlock, message;
+
+        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
+        
+        $(postBlock).addClass('post-block-text');
+        
+        message = '<div><p>' + post.message + '</p></div>';
+
+        //$(postBlock).css('background-color', color).html(message).appendTo('#post-feed');
+        $(postBlock).html(message).appendTo('#post-feed');
+    },
+    /***
+     * Create and display a link type post block.
+     * @param {type} post
+     */
+    createLinkPostBlock: function(post) {
+
+    },
+    /***
+     * Create and display a textlink type post block.
+     * @param {type} post
+     */
+    createTextLinkPostBlock: function(post) {
+
+    },
+    /***
      * Populate the main view with post blocks.
      * @param {type} posts
      */
     populatePostBlocks: function(posts, postType) {
-        var i, post, postBlock, message, color;
+        var i, post;
 
         SwdView.toggleAjaxLoadingDiv('body', false);
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', false);
@@ -871,22 +913,18 @@ var SwdView = {
             for (i = 0; i < posts.length; i++) {
                 post = posts[i];
 
-                postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
-
-                message = '';
-
-                if (post.image_url.length > 0) {
-                    $(postBlock).addClass('post-block-image');
-                    $(postBlock).css('background-image', 'url("' + post.image_url[0] + '")');
-                    $(postBlock).appendTo('#post-feed');
-                }
-                else {
-                    $(postBlock).addClass('post-block-text');
-
-                    message = '<div><p>' + post.message + '</p></div>';
-
-                    //$(postBlock).css('background-color', color).html(message).appendTo('#post-feed');
-                    $(postBlock).html(message).appendTo('#post-feed');
+                // Switch based on post_type
+                switch (post.post_type) {
+                    case 'image':
+                        SwdView.createImagePostBlock(post);
+                        break;
+                    case 'text':
+                        SwdView.createTextPostBlock(post);
+                        break;
+                    case 'link':
+                        break;
+                    case 'textlink':
+                        break;
                 }
             }
 
@@ -953,7 +991,7 @@ var SwdView = {
      */
     showPostDetails: function(post) {
         var userImage, postImage, i, timeStamp;
-        
+
         // Display user's data.
         if (post.user.pic_square) {
             userImage = 'url("' + post.user.pic_square + '")';
@@ -964,7 +1002,7 @@ var SwdView = {
 
         // Get a nice, human readable version of the post's created_time timestamp.
         timeStamp = new moment(new Date(post.created_time * 1000));
-        
+
         $('#post-details-user-data .facebook-user-photo').css('background-image', userImage);
         $('#post-details-user-data .facebook-user-name').text(post.user.first_name + ' ' + post.user.last_name).attr('href', post.user.profile_url);
         $('#post-details-user-data .timestamp').text(timeStamp.calendar());
@@ -986,10 +1024,10 @@ var SwdView = {
 
         // Display permalink
         $('#post-permalink > a').attr('href', post.permalink).text(post.permalink);
-        
+
         // Display message content.
         $('#post-message-text').html(post.message);
-        
+
         // Populate the comments section.
         $('#post-comment-list').empty();
         $('#post-nocomments').show();
