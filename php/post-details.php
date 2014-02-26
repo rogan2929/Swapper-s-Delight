@@ -25,7 +25,7 @@ $post['comments'] = $response[1]['fql_result_set'];
 $images = $response[2]['fql_result_set'];
 $post['user'] = $response[3]['fql_result_set'][0];
 
-if ($post['message']) {
+if (strlen($post['message']) > 0) {
     // Replace new line characters with <br/>
     $post['message'] = nl2br($post['message']);
 }

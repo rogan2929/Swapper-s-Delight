@@ -76,18 +76,18 @@ function processStreamQuery($stream, $images) {
             $post['post_type'] = 'text';        // Assume text post, but this might change to link.
         }
         
-        if ($post['message'] == '' && count($post['link_data'] > 0)) {
+        if (strlen($post['message']) == 0 && count($post['link_data'] > 0)) {
             $post['post_type'] = 'link';        // Link post.
         }
         
-        if ($post['message'] && count($post['link_data']) > 0) {
+        if (strlen($post['message']) > 0 && count($post['link_data']) > 0) {
             $post['post_type'] = 'textlink';        // Link + Text post.
         }
         
         // Determine which kind of post this is.
         
         // Replace any line breaks with <br/>
-        if ($post['message']) {
+        if (strlen($post['message']) > 0) {
             $post['message'] = nl2br($post['message']);
         }
 
