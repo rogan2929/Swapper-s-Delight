@@ -99,7 +99,7 @@ function getImageUrlArray($post, $images, $thumbnails = true) {
  */
 
 function getLinkData($post) {
-    $linkData = null;
+    $linkData = array();
 
     // Loop through media attachments, looking for type 'link'.
     if ($post['attachment'] && $post['attachment']['media'] && $post['attachment']['media'][0] &&
