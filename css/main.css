@@ -549,6 +549,7 @@ textarea {
 
 .post-block .link-title {
     font-weight: bold;
+    margin-bottom: 4px;
 }
 
 .post-block.post-block-image {
