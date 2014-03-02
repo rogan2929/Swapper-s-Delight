@@ -1132,6 +1132,7 @@ var SwdView = {
         }
     }
 };
+
 $(document).ready(function() {
     $.ajaxSetup({
         cache: true
