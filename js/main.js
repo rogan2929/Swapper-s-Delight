@@ -740,7 +740,7 @@ var SwdView = {
         // Get a human-readable version of the comment's timestamp value.
         timeStamp = new moment(new Date(comment.time * 1000));
 
-        commentDiv = $('<div class="post-comment"><div><a href="' + comment.user.profile_url + '">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><span>-</span><span class="timestamp">' + timeStamp.calendar() + '</span></div><div>' + comment.text + '</div>');
+        commentDiv = $('<div class="post-comment"><div><a href="' + comment.user.profile_url + '">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><span>-</span><span class="timestamp">' + timeStamp.calendar() + '</span></div><div class="post-comment-text">' + comment.text + '</div>');
         $(commentDiv).hide().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
         //$('#post-comment-list').append(commentDiv);
     },
