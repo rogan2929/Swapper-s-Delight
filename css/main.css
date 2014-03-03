@@ -181,7 +181,7 @@ textarea {
 }
 
 .floating-panel {
-    width: 970px;
+    width: 950px;
     background-color: transparent;
     position: fixed;
     left: 0;
@@ -691,18 +691,14 @@ textarea {
 .post-comment {
     margin-bottom: 12px;
     font-size: 0.95em !important;
-/*    padding-bottom: 3px;*/
-/*    border-bottom: 1px solid #eee;*/
-/*    border-bottom: 1px solid #13486b;*/
+    background-color: #eee;
+    padding: 5px;
+    min-height: 3em;
 }
 
-.post-comment > div:first-child {
+.post-comment > a:first-child {
     font-weight: bold;
     font-size: 0.98em;
-}
-
-.post-comment *:not(:first-child) {
-    margin-left: 5px;
 }
 
 .post-comment > .post-comment-text {
