@@ -80,9 +80,9 @@
                             </div>
                         </div>
                         <div id='details-right-column' class='panel-post-column scroll-y'>
-                            <span class='heading floating-panel-section'>
+<!--                            <span class='heading floating-panel-section'>
                                 Viewing all comments, newest first.
-                            </span>
+                            </span>-->
                             <div id='post-comments' class='floating-panel-section'>
                                 <div id='post-nocomments' class='italic'>
                                     No comments yet.
