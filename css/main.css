@@ -691,12 +691,14 @@ textarea {
 .post-comment {
     margin-bottom: 12px;
     font-size: 0.95em !important;
-    background-color: #eee;
-    padding: 5px;
-    min-height: 3em;
 }
 
-.post-comment > a:first-child {
+.post-comment > div:first-child {
+    background-color: #eee;
+    padding: 5px;
+}
+
+.post-comment a:first-child {
     font-weight: bold;
     font-size: 0.98em;
 }
