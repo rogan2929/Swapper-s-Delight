@@ -25,7 +25,6 @@ try {
     // just ask the user to login again here.
     
     $loginUrl = $fbSession->getLoginUrl();
-    //echo '<div id="popup-logged-out" class="ui-widget">Sorry, your session has expired. Please ' . '<a href="' . $loginUrl . '">log back in.</a>' . '</div>';
+    //echo '<div id="popup-logged-out" class="ui-widget">Sorry, your session has expired. Please ' . '<a href="' . $loginUrl . '">log back in.</a>' . '</div>';    
+    throw new Exception('Sorry, your session has expired. Please refresh the page to log back in.', 1111);
 }
-
-throw new Exception('Sorry, your session has expired. Please refresh the page to log back in.', 1111);

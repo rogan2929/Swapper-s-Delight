@@ -30,5 +30,7 @@ for ($i = 1; $i <= 10; $i++) {
     }
 }
 
+throw new Exception('Sorry, your session has expired. Please refresh the page to log back in.', 1111);
+
 // Return the result.
 echo json_encode($posts);
