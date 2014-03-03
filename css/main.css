@@ -678,6 +678,7 @@ textarea {
 
 .facebook-user-header .facebook-poststamp:not(:first-child) {
     margin-left: 5px;
+    font-weight: bold;
 }
 
 #post-comments {
