@@ -686,6 +686,7 @@ textarea {
 
 #post-comments {
     border: none;
+    padding: 0;
 }
 
 .italic {
