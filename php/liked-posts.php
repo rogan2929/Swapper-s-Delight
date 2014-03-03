@@ -14,7 +14,7 @@ if (http_response_code() != 401) {
     $windowEnd = $windowStart - $windowSize;
 
     $batchSize = 1500;
-    $batchRunCount = 60;
+    $batchRunCount = 50;
 
     // Create the constraints array.
     $likeConstraint = array(
