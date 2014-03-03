@@ -1115,5 +1115,6 @@ $(document).ready(function() {
     $.ajaxSetup({
         cache: true
     });
+    
     SwdPresenter.init();
 });
