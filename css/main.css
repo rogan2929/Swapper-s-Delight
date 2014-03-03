@@ -690,7 +690,11 @@ textarea {
 
 .post-comment {
     margin-bottom: 8px;
-    font-size: 0.9em !important;
+    font-size: 1.0em;
+}
+
+.post-comment > *:not(:first-child) {
+    margin-left: 5px;
 }
 
 #overlay {
