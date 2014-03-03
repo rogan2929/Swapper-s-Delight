@@ -3,18 +3,6 @@
 require_once 'session.php';
 require_once 'queries.php';
 
-//try {
-//    throw new Exception('Sorry, your session has expired. Please refresh the page to log back in.', 1111);
-//}
-//catch(Exception $e) {
-//    echo json_encode(array(
-//        'error' => array(
-//            'code' => $e->getCode(),
-//            'message' => $e->getMessage()
-//        )
-//    ));
-//}
-
 if (http_response_code() != 401) {
 // Retrieve group id that is being queried.
     $gid = $_GET['gid'];
