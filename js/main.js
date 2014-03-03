@@ -553,28 +553,6 @@ var SwdPresenter = {
     onClickPopupComment: function(e, args) {
         e.stopPropagation();
     },
-//    onClickPostButtonComment: function(e, args) {
-//        var id, comment;
-//
-//        id = SwdPresenter.selectedPost.post_id;
-//        comment = $('#popup-comment-text').val();
-//
-//        // Show the ajax loading div.
-//        SwdView.toggleAjaxLoadingDiv('#post-comment', true);
-//
-//        // Post the comment, if it's not empty.
-//        if (comment) {
-//            SwdModel.postComment(id, comment, {
-//                success: function(response) {
-//                    SwdView.addPostComment(response);
-//                    SwdView.clearPostCommentText();
-//                },
-//                fail: function(response) {
-//                    SwdView.showError(response);
-//                }
-//            });
-//        }
-//    },
     onClickPostButtonLike: function(e, args) {
         var id, userLikes;
 
