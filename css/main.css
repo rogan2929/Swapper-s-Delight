@@ -654,6 +654,7 @@ textarea {
     background-repeat: no-repeat;
     background-size: contain;
     height: 350px;
+    cursor: pointer;
 }
 
 #overlay-app-loading {
