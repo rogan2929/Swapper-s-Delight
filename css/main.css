@@ -704,7 +704,7 @@ textarea {
 }
 
 .post-comment > .post-comment-text {
-    margin-left: 0px;
+    margin-left: 5px;
 }
 
 .post-comment a {
