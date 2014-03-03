@@ -168,6 +168,10 @@ textarea {
     margin-left: 10px;
 }
 
+.facebook-user-header .facebook-user-name {
+    font-weight: bold;
+}
+
 .selected-nav {
     color: #ffffff !important;
     text-decoration: none !important;
@@ -678,7 +682,6 @@ textarea {
 
 .facebook-user-header .facebook-poststamp:not(:first-child) {
     margin-left: 5px;
-    font-weight: bold;
 }
 
 #post-comments {
