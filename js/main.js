@@ -580,11 +580,13 @@ var SwdPresenter = {
 
         id = SwdPresenter.selectedPost.post_id;
         userLikes = !SwdPresenter.selectedPost.like_info.user_likes;
+        
+        SwdView.setLikePost(userLikes);
 
         // Post the comment.
         SwdModel.likePost(id, userLikes, {
             success: function(response) {
-                SwdView.setLikePost(response);
+                //SwdView.setLikePost(response);
             },
             fail: function(response) {
                 SwdView.showError(response);
