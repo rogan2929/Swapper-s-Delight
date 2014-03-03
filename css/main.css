@@ -690,7 +690,14 @@ textarea {
 
 .post-comment {
     margin-bottom: 8px;
-    font-size: 0.9em !important;
+    font-size: 0.95em !important;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #eee;
+}
+
+.post-comment > div:first-child {
+    font-weight: bold;
+    font-size: 0.98em;
 }
 
 .post-comment *:not(:first-child) {
