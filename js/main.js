@@ -458,27 +458,28 @@ var SwdPresenter = {
     /***
      * Refresh FB canvas size.
      */
-    refreshFbCanvasSize: function() {
-        FB.Canvas.getPageInfo(function(pageInfo) {
-            SwdPresenter.clientHeight = parseInt(pageInfo.clientHeight);
-
-            // Ensure a minimum height.
-//            if ($('html').height() < SwdPresenter.clientHeight  * 1.5) {
-//                $('html').height(SwdPresenter.clientHeight * 1.5);
-//            }
-
-            FB.Canvas.setSize({
-                height: Math.max($('html').height(), SwdPresenter.clientHeight)
-                //height: $('html').height()
-            });
-        });
-    },
+//    refreshFbCanvasSize: function() {
+//        FB.Canvas.getPageInfo(function(pageInfo) {
+//            SwdPresenter.clientHeight = parseInt(pageInfo.clientHeight);
+//
+//            FB.Canvas.setSize({
+//                height: Math.max($('html').height(), SwdPresenter.clientHeight)
+//            });
+//        });
+//    },
     /***
      * Reset Facebook Canvas Size to default value of 800
      */
     resetFbCanvasSize: function() {
-        FB.Canvas.setSize({
-            height: 810
+//        FB.Canvas.setSize({
+//            height: 810
+//        });
+        FB.Canvas.getPageInfo(function(pageInfo) {
+            SwdPresenter.clientHeight = parseInt(pageInfo.clientHeight);
+
+            FB.Canvas.setSize({
+                height: Math.max($('html').height(), SwdPresenter.clientHeight)
+            });
         });
     },
     /***
@@ -558,7 +559,7 @@ var SwdPresenter = {
 
         id = SwdPresenter.selectedPost.post_id;
         userLikes = !SwdPresenter.selectedPost.like_info.user_likes;
-        
+
         SwdView.setLikePost(userLikes);
 
         // Post the comment.
@@ -849,9 +850,9 @@ var SwdView = {
         var postBlock, message;
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
-        
+
         $(postBlock).addClass('post-block-text');
-        
+
         message = '<div><p>' + post.message + '</p></div>';
 
         $(postBlock).html(message).appendTo('#post-feed');
@@ -865,9 +866,9 @@ var SwdView = {
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
         $(postBlock).addClass('post-block-link');
-        
+
         description = '<div><p><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
-        
+
         $(postBlock).html(description).appendTo('#post-feed');
     },
     /***
@@ -879,9 +880,9 @@ var SwdView = {
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
         $(postBlock).addClass('post-block-textlink');
-        
+
         message = '<div><p>' + post.message + '</p></div>';
-        
+
         $(postBlock).html(message).appendTo('#post-feed');
     },
     /***
@@ -944,7 +945,7 @@ var SwdView = {
                 $('#post-block-mask').hide();
             });
 
-            SwdPresenter.refreshFbCanvasSize();
+            SwdPresenter.resetFbCanvasSize();
         }
         else {
 //            $('#post-feed-noposts').show();
@@ -1115,6 +1116,6 @@ $(document).ready(function() {
     $.ajaxSetup({
         cache: true
     });
-    
+
     SwdPresenter.init();
 });
