@@ -693,8 +693,12 @@ textarea {
     font-size: 0.9em !important;
 }
 
-.post-comment *:not(.post-comment-text) {
+.post-comment *:not(:first-child) {
     margin-left: 5px;
+}
+
+.post-comment > .post-comment-text {
+    margin-left: 0px;
 }
 
 .post-comment a {
