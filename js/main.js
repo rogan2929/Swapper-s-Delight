@@ -46,7 +46,7 @@ var SwdModel = {
                 callbacks.success.call(SwdModel, JSON.parse(response));
             },
             error: function(response) {
-                callbacks.error.call(SwdModel, response.responseText);
+                callbacks.error.call(SwdModel, response);
             }
         });
     },
@@ -62,7 +62,7 @@ var SwdModel = {
                 callbacks.success.call(SwdModel, JSON.parse(response));
             },
             error: function(response) {
-                callbacks.error.call(SwdModel, response.responseText);
+                callbacks.error.call(SwdModel, response);
             }
         });
     },
@@ -82,7 +82,7 @@ var SwdModel = {
                 callbacks.success.call(SwdModel, JSON.parse(response));
             },
             error: function(response) {
-                callbacks.error.call(SwdModel, response.responseText);
+                callbacks.error.call(SwdModel, response);
             }
         });
     },
@@ -106,7 +106,7 @@ var SwdModel = {
                 callbacks.success.call(SwdModel, JSON.parse(response));
             },
             error: function(response) {
-                callbacks.error.call(SwdModel, response.responseText);
+                callbacks.error.call(SwdModel, response);
             }
         });
     },
@@ -123,7 +123,7 @@ var SwdModel = {
                 callbacks.success.call(SwdModel, JSON.parse(response));
             },
             error: function(response) {
-                callbacks.error.call(SwdModel, response.responseText);
+                callbacks.error.call(SwdModel, response);
             }
         });
     },
@@ -146,7 +146,7 @@ var SwdModel = {
                 callbacks.success.call(SwdModel, response);
             },
             error: function(response) {
-                callbacks.error.call(SwdModel, response.responseText);
+                callbacks.error.call(SwdModel, response);
             }
         });
     },
@@ -169,7 +169,7 @@ var SwdModel = {
                 callbacks.success.call(SwdModel, response);
             },
             error: function(response) {
-                callbacks.fail.call(SwdModel, response.responseText);
+                callbacks.fail.call(SwdModel, response);
             }
         });
     },
@@ -187,6 +187,15 @@ var SwdPresenter = {
     uid: null,
     currentlyLoading: false,
     selectedPost: null,
+    
+    /***
+     * Top-level error handler function.
+     */
+    handleError: function(error) {
+        
+        
+        SwdView.showError(error.responseText);
+    },
     /**
      * Entry point of program.
      */
@@ -288,9 +297,7 @@ var SwdPresenter = {
                         // Have the view prompt the user to edit BST groups.
                     }
                 },
-                error: function(response) {
-                    SwdView.showError(response);
-                }
+                error: SwdPresenter.handleError
             });
         }
     },
@@ -343,9 +350,7 @@ var SwdPresenter = {
             success: function(response) {
                 SwdPresenter.loadPostsComplete(null, response);
             },
-            error: function(response) {
-                SwdView.showError(response);
-            }
+            error: SwdPresenter.handleError
         });
     },
     /***
@@ -356,9 +361,7 @@ var SwdPresenter = {
             success: function(response) {
                 SwdPresenter.loadPostsComplete(null, response);
             },
-            error: function(response) {
-                SwdView.showError(response);
-            }
+            error: SwdPresenter.handleError
         });
     },
     /***
@@ -371,9 +374,7 @@ var SwdPresenter = {
             success: function(response) {
                 SwdPresenter.loadPostsComplete(loadNextPage, response);
             },
-            error: function(response) {
-                SwdView.showError(response);
-            }
+            error: SwdPresenter.handleError
         });
     },
     /***
@@ -539,9 +540,7 @@ var SwdPresenter = {
             success: function(response) {
                 //SwdView.setLikePost(response);
             },
-            error: function(response) {
-                SwdView.showError(response);
-            }
+            error: SwdPresenter.handleError
         });
     },
     onClickPostButtonPm: function(e, args) {
@@ -591,9 +590,7 @@ var SwdPresenter = {
                     alert('Unable to display post. It was most likely deleted.');
                 }
             },
-            error: function(response) {
-                SwdView.showError(response);
-            }
+            error: SwdPresenter.handleError
         });
     },
     onClickPostBlockLoadMore: function(e, args) {
@@ -648,9 +645,7 @@ var SwdPresenter = {
                     SwdView.addPostComment(response);
                     SwdView.clearPostCommentText();
                 },
-                error: function(response) {
-                    SwdView.showError(response);
-                }
+                error: SwdPresenter.handleError
             });
         }
 
