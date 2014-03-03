@@ -15,41 +15,17 @@ $fbSession = new Facebook(array(
     'cookie' => true
         ));
 
-//// Save or retrieve the accessToken.
-//if (!isset($_SESSION['accessToken'])) {
-//    $_SESSION['accessToken'] = $fbSession->getAccessToken();
-//}
-//else {
-//    $fbSession->setAccessToken($_SESSION['accessToken']);
-//}
-//
-//// Test the access token.
-//try {
-//    // Test the connectivity waters...
-//    $me = $fbSession->api('/me');
-//} catch (FacebookApiException $e) {
-//    //echo $e->getType();
-//    //echo $e->getMessage();
-//    
-//    // An error occurred, so refresh the access token.
-//    $_SESSION['accessToken'] = $fbSession->getAccessToken();
-//}
+// Test the access token.
+try {
+    $userProfile = $facebook->api('/me','GET');
+} catch(FacebookApiException $e) {
+    // If the user is logged out, you can have a 
+    // user ID even though the access token is invalid.
+    // In this case, we'll get an exception, so we'll
+    // just ask the user to login again here.
+    
+    $loginUrl = $fbSession->getLoginUrl();
+    //echo '<div id="popup-logged-out" class="ui-widget">Sorry, your session has expired. Please ' . '<a href="' . $loginUrl . '">log back in.</a>' . '</div>';
+}
 
-//// Test the access token.
-//try {
-//    // Test the connectivity waters...
-//    $me = $fbSession->api('/me');
-//} catch (FacebookApiException $e) {
-//    //echo $e->getType();
-//    //echo $e->getMessage();
-//    
-//    // An error occurred, so refresh the access token.    
-//}
-//
-//// Save or retrieve the accessToken.
-//if (!isset($_SESSION['accessToken'])) {
-//    $_SESSION['accessToken'] = $fbSession->getAccessToken();
-//}
-//else {
-//    $fbSession->setAccessToken($_SESSION['accessToken']);
-//}
+throw new Exception('Sorry, your session has expired. Please refresh the page to log back in.', 1111);

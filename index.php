@@ -163,6 +163,7 @@
                     <span>Logout</span>
                 </div>
             </div>
+            
             <div id='popup-comment' class='menu floating-panel-menu ui-widget'>
                 <textarea id='popup-comment-text' placeholder='Type a comment and press [Enter] to post it.'></textarea>
                 <div class='ajax-loading-div hidden'></div>
@@ -172,6 +173,7 @@
         <div id='overlay-app-loading' class='ajax-loading-div'></div>
         <div id='overlay' class='hidden'></div>
         <div id='post-block-mask' class='post-block ui-widget hidden'></div>
+        <div id='popup-logged-out'>Sorry, your session has expired.</div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>

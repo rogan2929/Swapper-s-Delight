@@ -173,22 +173,6 @@ var SwdModel = {
             }
         });
     },
-    /***
-     * Sync the server with the current session.
-     * @param {type} callbacks
-     */
-//    startSession: function(callbacks) {
-//        $.ajax({
-//            type: 'GET',
-//            url: '/php/session.php',
-//            success: function(response) {
-//                callbacks.success.call(SwdModel);
-//            },
-//            fail: function(response) {
-//                callbacks.fail.call(SwdModel, JSON.parse(response));
-//            }
-//        });
-//    },
 };
 /**
  * Presenter for the Swapper's Delight program.
@@ -977,7 +961,7 @@ var SwdView = {
      * @param {type} message
      */
     showError: function(message) {
-
+        alert(message);
     },
     /***
      * Shows the post details for the selected post.
