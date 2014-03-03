@@ -17,7 +17,7 @@ $fbSession = new Facebook(array(
 
 // Test the access token.
 try {
-    $userProfile = $facebook->api('/me','GET');
+    $userProfile = $fbSession->api('/me','GET');
 } catch(FacebookApiException $e) {
     // If the user is logged out, you can have a 
     // user ID even though the access token is invalid.
