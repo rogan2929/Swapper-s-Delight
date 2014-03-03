@@ -3,17 +3,17 @@
 require_once 'session.php';
 require_once 'queries.php';
 
-try {
-    throw new Exception('Sorry, your session has expired. Please refresh the page to log back in.', 1111);
-}
-catch(Exception $e) {
-    echo json_encode(array(
-        'error' => array(
-            'code' => $e->getCode(),
-            'message' => $e->getMessage()
-        )
-    ));
-}
+//try {
+//    throw new Exception('Sorry, your session has expired. Please refresh the page to log back in.', 1111);
+//}
+//catch(Exception $e) {
+//    echo json_encode(array(
+//        'error' => array(
+//            'code' => $e->getCode(),
+//            'message' => $e->getMessage()
+//        )
+//    ));
+//}
 
 // Retrieve group id that is being queried.
 $gid = $_GET['gid'];
@@ -43,4 +43,4 @@ for ($i = 1; $i <= 10; $i++) {
 }
 
 // Return the result.
-//echo json_encode($posts);
+echo json_encode($posts);
