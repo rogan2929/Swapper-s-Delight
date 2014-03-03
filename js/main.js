@@ -741,7 +741,7 @@ var SwdView = {
         timeStamp = new moment(new Date(comment.time * 1000));
 
         //commentDiv = $('<div class="post-comment"><a href="' + comment.text + '</div>');
-        commentDiv = $('<div class="post-comment"><a href="comment.' + comment.user.profile_url + '">' + comment.user.first_name + ' ' + comment.user.last_name + '</a>' + comment.text + '</div>');
+        commentDiv = $('<div class="post-comment"><div><a href="' + comment.user.profile_url + '">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><span>-</span><span class="timestamp">' + timeStamp.calendar() + '</span><div>' + comment.text + '</div>');
 
 //        commentDiv = $('<div class="post-comment"><div><div class="post-comment-user-image"></div><div class="post-comment-header"><p class="wrapper"><a class="post-comment-user-name" href="' + comment.user.profile_url + '" target="_blank">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><span class="timestamp">' + timeStamp.calendar() + '</span></p></div></div><div>' + comment.text + '</div></div>');
 //        $(commentDiv).find('.post-comment-user-image').css('background-image', userImage);
