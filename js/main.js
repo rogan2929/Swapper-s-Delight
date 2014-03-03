@@ -631,6 +631,7 @@ var SwdPresenter = {
 
                 if (post) {
                     SwdPresenter.selectedPost = post;
+                    SwdView.setLikePost(false);
                     SwdView.showPostDetails(post);
                 }
                 else {
@@ -1005,8 +1006,6 @@ var SwdView = {
      */
     showPostDetails: function(post) {
         var userImage, postImage, i, timeStamp;
-        
-        SwdView.setLikePost(false);
 
         // Display user's data.
         if (post.user.pic_square) {
