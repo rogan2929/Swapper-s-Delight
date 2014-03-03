@@ -1005,6 +1005,8 @@ var SwdView = {
      */
     showPostDetails: function(post) {
         var userImage, postImage, i, timeStamp;
+        
+        SwdView.setLikePost(false);
 
         // Display user's data.
         if (post.user.pic_square) {
