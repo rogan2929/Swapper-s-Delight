@@ -18,13 +18,13 @@ $fbSession = new Facebook(array(
 // Test the access token.
 try {
     $userProfile = $fbSession->api('/me','GET');
-} catch(FacebookApiException $e) {
+} 
+catch(FacebookApiException $e) {
     // If the user is logged out, you can have a 
     // user ID even though the access token is invalid.
     // In this case, we'll get an exception, so we'll
     // just ask the user to login again here.
     
     $loginUrl = $fbSession->getLoginUrl();
-    //echo '<div id="popup-logged-out" class="ui-widget">Sorry, your session has expired. Please ' . '<a href="' . $loginUrl . '">log back in.</a>' . '</div>';    
     throw new Exception('Sorry, your session has expired. Please refresh the page to log back in.', 1111);
 }
