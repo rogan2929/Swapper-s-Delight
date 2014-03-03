@@ -601,7 +601,7 @@ var SwdPresenter = {
         SwdPresenter.loadPosts(true);
     },
     onClickPostImage: function(e, args) {
-        //SwdView.toggleFloatingPanel('#post-image', true);
+        SwdView.showImageViewer(SwdPresenter.selectedPost);
     },
     onClickSelectGroup: function(e, args) {
         var i, id, group;
