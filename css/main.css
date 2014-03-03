@@ -697,6 +697,19 @@ textarea {
     margin-left: 5px;
 }
 
+.post-comment a {
+    text-decoration: none;
+    color: #444;
+}
+
+.post-comment a:hover {
+    text-decoration: underline;
+}
+
+.post-comment a:visited {
+    color: #444;
+}
+
 #overlay {
     background: #ddd;
     position: absolute;
