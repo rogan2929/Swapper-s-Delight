@@ -269,12 +269,12 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
                         SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
                         SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
-//                        SwdView.installHandler('onClickPostButtonComment', SwdPresenter.onClickPostButtonComment, '#post-button-comment > div', 'click');
                         SwdView.installHandler('onClickPopupComment', SwdPresenter.onClickPopupComment, '#popup-comment', 'click');
                         SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
                         SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
                         SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block', 'click');
                         SwdView.installHandler('onClickPostBlockLoadMore', SwdPresenter.onClickPostBlockLoadMore, '.post-block.load-more', 'click');
+                        SwdView.installHandler('onClickPostImage', SwdPresenter.onClickPostImage, '#post-image', 'click');
                         SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
                         SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
                         SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#popup-comment-text', 'keyup')
@@ -440,18 +440,6 @@ var SwdPresenter = {
         }
     },
     /***
-     * Refresh FB canvas size.
-     */
-//    refreshFbCanvasSize: function() {
-//        FB.Canvas.getPageInfo(function(pageInfo) {
-//            SwdPresenter.clientHeight = parseInt(pageInfo.clientHeight);
-//
-//            FB.Canvas.setSize({
-//                height: Math.max($('html').height(), SwdPresenter.clientHeight)
-//            });
-//        });
-//    },
-    /***
      * Reset Facebook Canvas Size to default value of 800
      */
     resetFbCanvasSize: function() {
@@ -611,6 +599,9 @@ var SwdPresenter = {
     onClickPostBlockLoadMore: function(e, args) {
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', true);
         SwdPresenter.loadPosts(true);
+    },
+    onClickPostImage: function(e, args) {
+        //SwdView.toggleFloatingPanel('#post-image', true);
     },
     onClickSelectGroup: function(e, args) {
         var i, id, group;
@@ -955,6 +946,13 @@ var SwdView = {
     setMainOverlayTransparency: function() {
         // Set the main ajax overlay to be semi-transparent.
         $('#overlay-app-loading').addClass('semi-transparent');
+    },
+    /***
+     * Shows an image viewer for the given post, allowing the user to see photos in greater detail.
+     * @param {type} post
+     */
+    showImageViewer: function(post) {
+        alert(post.post_id);
     },
     /***
      * Displays a lovely error message. Something which the user loves.

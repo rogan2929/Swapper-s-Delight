@@ -168,6 +168,12 @@
                 <textarea id='popup-comment-text' placeholder='Type a comment and press [Enter] to post it.'></textarea>
                 <div class='ajax-loading-div hidden'></div>
             </div>
+            
+            <!--Image Viewer Panel-->
+            <div id='image-viewer' class='hidden'>
+
+            </div>
+            
         </div>
 
         <div id='overlay-app-loading' class='ajax-loading-div'></div>
