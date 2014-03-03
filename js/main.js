@@ -46,7 +46,7 @@ var SwdModel = {
                 callbacks.success.call(SwdModel, JSON.parse(response));
             },
             error: function(response) {
-                callbacks.error.call(SwdModel, JSON.parse(response));
+                callbacks.error.call(SwdModel, response);
             }
         });
     },
@@ -62,7 +62,7 @@ var SwdModel = {
                 callbacks.success.call(SwdModel, JSON.parse(response));
             },
             error: function(response) {
-                callbacks.error.call(SwdModel, JSON.parse(response));
+                callbacks.error.call(SwdModel, response);
             }
         });
     },
@@ -82,7 +82,7 @@ var SwdModel = {
                 callbacks.success.call(SwdModel, JSON.parse(response));
             },
             error: function(response) {
-                callbacks.error.call(SwdModel, JSON.parse(response));
+                callbacks.error.call(SwdModel, response);
             }
         });
     },
@@ -106,7 +106,7 @@ var SwdModel = {
                 callbacks.success.call(SwdModel, JSON.parse(response));
             },
             error: function(response) {
-                callbacks.error.call(SwdModel, JSON.parse(response));
+                callbacks.error.call(SwdModel, response);
             }
         });
     },
@@ -123,7 +123,7 @@ var SwdModel = {
                 callbacks.success.call(SwdModel, JSON.parse(response));
             },
             error: function(response) {
-                callbacks.error.call(SwdModel, JSON.parse(response));
+                callbacks.error.call(SwdModel, response);
             }
         });
     },
@@ -169,7 +169,7 @@ var SwdModel = {
                 callbacks.success.call(SwdModel, response);
             },
             error: function(response) {
-                callbacks.error.call(SwdModel, response);
+                callbacks.fail.call(SwdModel, response);
             }
         });
     },

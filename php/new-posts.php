@@ -3,7 +3,7 @@
 require_once 'session.php';
 require_once 'queries.php';
 
-throw new Exception('Sorry, your session has expired. Please refresh the page to log back in.', 1111);
+http_response_code(401);
 
 //try {
 //    throw new Exception('Sorry, your session has expired. Please refresh the page to log back in.', 1111);
