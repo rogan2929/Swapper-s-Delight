@@ -6,16 +6,17 @@ require_once 'queries.php';
 if (http_response_code() != 401) {
     $gid = $_GET['gid'];
     $uid = $_GET['uid'];    // For some reason, calling $fbSession->getUser() kills the access token. So, we cheated.
-// Allow everything younger than one month.
-// Define the initial window to search within.
-    $windowSize = 3600 * 24;    // 1 Day
+
+    // Allow everything younger than one month.
+    // Define the initial window to search within.
+    $windowSize = 3600 * 12;    // 1 Day
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
 
     $batchSize = 1500;
-    $batchRunCount = 30;
+    $batchRunCount = 60;
 
-// Create the constraints array.
+    // Create the constraints array.
     $likeConstraint = array(
         'field' => 'like_info.user_likes',
         'operator' => '=',
@@ -24,7 +25,7 @@ if (http_response_code() != 401) {
 
     $queries = array();
 
-// Construct the FB batch request
+    // Construct the FB batch request
     for ($i = 0; $i < $batchRunCount; $i++) {
         $constraints = array();
 
@@ -49,7 +50,7 @@ if (http_response_code() != 401) {
         $windowEnd -= $windowSize;
     }
 
-// Call the batch query.
+    // Call the batch query.
     $response = $fbSession->api('/', 'POST', array(
         'batch' => json_encode($queries),
         'include_headers' => false
