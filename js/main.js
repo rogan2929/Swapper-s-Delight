@@ -740,11 +740,7 @@ var SwdView = {
         // Get a human-readable version of the comment's timestamp value.
         timeStamp = new moment(new Date(comment.time * 1000));
 
-        //commentDiv = $('<div class="post-comment"><a href="' + comment.text + '</div>');
-        commentDiv = $('<div class="post-comment"><div><a href="' + comment.user.profile_url + '">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><span>-</span><span class="timestamp">' + timeStamp.calendar() + '</span><div>' + comment.text + '</div>');
-
-//        commentDiv = $('<div class="post-comment"><div><div class="post-comment-user-image"></div><div class="post-comment-header"><p class="wrapper"><a class="post-comment-user-name" href="' + comment.user.profile_url + '" target="_blank">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><span class="timestamp">' + timeStamp.calendar() + '</span></p></div></div><div>' + comment.text + '</div></div>');
-//        $(commentDiv).find('.post-comment-user-image').css('background-image', userImage);
+        commentDiv = $('<div class="post-comment"><div><a href="' + comment.user.profile_url + '">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><span>-</span><span class="timestamp">' + timeStamp.calendar() + '</span></div><div>' + comment.text + '</div>');
         $(commentDiv).hide().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
         //$('#post-comment-list').append(commentDiv);
     },
