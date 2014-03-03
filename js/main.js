@@ -468,8 +468,8 @@ var SwdPresenter = {
 //            }
 
             FB.Canvas.setSize({
-                //height: Math.max($('html').height(), SwdPresenter.clientHeight)
-                height: $('html').height()
+                height: Math.max($('html').height(), SwdPresenter.clientHeight)
+                //height: $('html').height()
             });
         });
     },
