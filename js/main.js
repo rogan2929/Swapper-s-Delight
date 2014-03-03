@@ -45,8 +45,8 @@ var SwdModel = {
             success: function(response) {
                 callbacks.success.call(SwdModel, JSON.parse(response));
             },
-            fail: function(response) {
-                callbacks.fail.call(SwdModel, JSON.parse(response));
+            error: function(response) {
+                callbacks.error.call(SwdModel, JSON.parse(response));
             }
         });
     },
@@ -61,8 +61,8 @@ var SwdModel = {
             success: function(response) {
                 callbacks.success.call(SwdModel, JSON.parse(response));
             },
-            fail: function(response) {
-                callbacks.fail.call(SwdModel, JSON.parse(response));
+            error: function(response) {
+                callbacks.error.call(SwdModel, JSON.parse(response));
             }
         });
     },
@@ -81,8 +81,8 @@ var SwdModel = {
             success: function(response) {
                 callbacks.success.call(SwdModel, JSON.parse(response));
             },
-            fail: function(response) {
-                callbacks.fail.call(SwdModel, JSON.parse(response));
+            error: function(response) {
+                callbacks.error.call(SwdModel, JSON.parse(response));
             }
         });
     },
@@ -105,8 +105,8 @@ var SwdModel = {
             success: function(response) {
                 callbacks.success.call(SwdModel, JSON.parse(response));
             },
-            fail: function(response) {
-                callbacks.fail.call(SwdModel, JSON.parse(response));
+            error: function(response) {
+                callbacks.error.call(SwdModel, JSON.parse(response));
             }
         });
     },
@@ -122,8 +122,8 @@ var SwdModel = {
             success: function(response) {
                 callbacks.success.call(SwdModel, JSON.parse(response));
             },
-            fail: function(response) {
-                callbacks.fail.call(SwdModel, JSON.parse(response));
+            error: function(response) {
+                callbacks.error.call(SwdModel, JSON.parse(response));
             }
         });
     },
@@ -145,8 +145,8 @@ var SwdModel = {
             success: function(response) {
                 callbacks.success.call(SwdModel, response);
             },
-            fail: function(response) {
-                callbacks.fail.call(SwdModel, response);
+            error: function(response) {
+                callbacks.error.call(SwdModel, response);
             }
         });
     },
@@ -168,8 +168,8 @@ var SwdModel = {
             success: function(response) {
                 callbacks.success.call(SwdModel, response);
             },
-            fail: function(response) {
-                callbacks.fail.call(SwdModel, response);
+            error: function(response) {
+                callbacks.error.call(SwdModel, response);
             }
         });
     },
@@ -288,7 +288,7 @@ var SwdPresenter = {
                         // Have the view prompt the user to edit BST groups.
                     }
                 },
-                fail: function(response) {
+                error: function(response) {
                     SwdView.showError(response);
                 }
             });
@@ -343,7 +343,7 @@ var SwdPresenter = {
             success: function(response) {
                 SwdPresenter.loadPostsComplete(null, response);
             },
-            fail: function(response) {
+            error: function(response) {
                 SwdView.showError(response);
             }
         });
@@ -356,7 +356,7 @@ var SwdPresenter = {
             success: function(response) {
                 SwdPresenter.loadPostsComplete(null, response);
             },
-            fail: function(response) {
+            error: function(response) {
                 SwdView.showError(response);
             }
         });
@@ -371,7 +371,7 @@ var SwdPresenter = {
             success: function(response) {
                 SwdPresenter.loadPostsComplete(loadNextPage, response);
             },
-            fail: function(response) {
+            error: function(response) {
                 SwdView.showError(response);
             }
         });
@@ -551,7 +551,7 @@ var SwdPresenter = {
             success: function(response) {
                 //SwdView.setLikePost(response);
             },
-            fail: function(response) {
+            error: function(response) {
                 SwdView.showError(response);
             }
         });
@@ -603,7 +603,7 @@ var SwdPresenter = {
                     alert('Unable to display post. It was most likely deleted.');
                 }
             },
-            fail: function(response) {
+            error: function(response) {
                 SwdView.showError(response);
             }
         });
@@ -657,7 +657,7 @@ var SwdPresenter = {
                     SwdView.addPostComment(response);
                     SwdView.clearPostCommentText();
                 },
-                fail: function(response) {
+                error: function(response) {
                     SwdView.showError(response);
                 }
             });
