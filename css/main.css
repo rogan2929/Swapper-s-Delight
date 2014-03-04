@@ -258,6 +258,7 @@ textarea {
     top: 0;
     bottom: 0;
     z-index: 1000;
+    border-radius: 5px;
 }
 
 .selection-list {
