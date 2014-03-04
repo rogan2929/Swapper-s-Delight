@@ -373,7 +373,7 @@ textarea {
     line-height: normal;
 }
 
-.button:hover, .menu-item:hover{
+.button:hover, .menu-item:hover, .post-block:hover{
 /*    background-color: #1d6fa5;*/
     background-color: #999;
     color: white;
@@ -484,7 +484,8 @@ textarea {
 .post-block.ui-widget {
     display: inline-block;
 /*    background-color: #13486b;*/
-    background-color: #4395D1;
+/*    background-color: #4395D1;*/
+    background-color: #eee;
     height: 210px;
     width: 325px;
     overflow: hidden;

@@ -903,8 +903,8 @@ var SwdView = {
                 $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
             }
 
-            // Additionally, set up some styling for when the post block is moused over.
-            $('.post-block').hover(function() {
+            // Additionally, set up some styling for when an image type post block is moused over.
+            $('.post-block.post-block-image').hover(function() {
                 $('#post-block-mask').show().position({
                     my: 'left top',
                     at: 'left top',
