@@ -117,10 +117,6 @@
 
             <div id='main-toolbar' class='ui-widget toolbar'>
                 <div class='toolbar-group float-left'>
-                    <div id='button-menu-main' class='button menu-button'>
-                        <span class='button-icon icon-menu'></span>
-                        <a href='#popup-menu-main'></a>
-                    </div>
                     <div id='button-new' class='button toolbar-button'>
                         <span class='button-icon icon-new'></span>
                         <span>New</span>
@@ -133,6 +129,10 @@
                 <div class='toolbar-group float-right'>
                     <div id='button-groups' class='button toolbar-button'>
                         <span>Select a Group</span>
+                    </div>
+                    <div id='button-menu-main' class='button menu-button'>
+                        <span class='button-icon icon-menu'></span>
+                        <a href='#popup-menu-main'></a>
                     </div>
                 </div>
                 <div style='clear: both;'></div>
