@@ -272,6 +272,7 @@ textarea {
     display: inline-block;
     background-color: #eee;
     margin: 5px;
+    padding: 4px;
 }
 
 .selection-item-content {
@@ -344,12 +345,10 @@ textarea {
 
 .button, .menu-item {
     cursor: pointer;
-    min-width: 100px;
     color: #444;
-    padding-left: 4px;
-    padding-right: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
     text-align: center;
-/*    font-weight: bold;*/
     display: inline-block;
 }
 
