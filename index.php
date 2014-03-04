@@ -125,14 +125,14 @@
                         <span class='button-icon icon-refresh'></span>
                         <span>Refresh</span>
                     </div>
+                    <div id='button-menu-main' class='button menu-button'>
+                        <span class='button-icon icon-menu'></span>
+                        <a href='#popup-menu-main'></a>
+                    </div>
                 </div>
                 <div class='toolbar-group float-right'>
                     <div id='button-groups' class='button toolbar-button'>
                         <span>Select a Group</span>
-                    </div>
-                    <div id='button-menu-main' class='button menu-button'>
-                        <span class='button-icon icon-menu'></span>
-                        <a href='#popup-menu-main'></a>
                     </div>
                 </div>
                 <div style='clear: both;'></div>
