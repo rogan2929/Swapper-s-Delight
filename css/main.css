@@ -466,6 +466,7 @@ textarea {
 
 #button-menu-main {
     min-width: 0 !important;
+    width: 30px;
 }
 
 #button-groups {
