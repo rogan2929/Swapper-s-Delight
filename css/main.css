@@ -513,13 +513,13 @@ textarea {
 .facebook-user-header {
     height: 50px;
     line-height: 50px;
-    color: white;
+    color: #444;
 /*    background: #13486b;*/
-    background: #4395D1;
+    background: #eee;
 }
 
 .facebook-user-header a {
-    color: white;
+    color: #444;
     text-decoration: none;
 }
 
@@ -528,7 +528,7 @@ textarea {
 }
 
 .facebook-user-header a:visited {
-    color: white;
+    color: #444;
 }
 .load-more > .load-more-text {
     line-height: 200px;
