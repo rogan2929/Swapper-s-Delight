@@ -341,15 +341,16 @@ textarea {
     margin-right: 5px;
 }
 
-.button,.menu-item {
+.button, .menu-item {
     cursor: pointer;
     min-width: 100px;
     color: #444;
     padding-left: 4px;
     padding-right: 4px;
     text-align: center;
-    font-weight: bold;
+/*    font-weight: bold;*/
     display: inline-block;
+    border-radius: 5px;
 }
 
 .button a {
@@ -470,6 +471,7 @@ textarea {
     height: 30px;
     line-height: 30px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
+    font-weight: bold;
 }
 
 #button-groups:hover {
@@ -482,7 +484,7 @@ textarea {
     display: inline-block;
 /*    background-color: #13486b;*/
     background-color: #4395D1;
-    height: 200px;
+    height: 210px;
     width: 325px;
     overflow: hidden;
     margin: 3px;
@@ -551,7 +553,7 @@ textarea {
 .post-block.post-block-link > div > p,
 .post-block.post-block-textlink > div > p {
     overflow: hidden;
-    height: 165px;
+    height: 175px;
     padding: 12px;
 }
 
