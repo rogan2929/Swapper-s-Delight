@@ -196,6 +196,10 @@ textarea {
     z-index: 1000;
 }
 
+#select-group-panel {
+    width: 972px;
+}
+
 .close-button {
     background-image: url('/img/panel-close.png');
     background-repeat: no-repeat;
@@ -795,6 +799,7 @@ div.right-toolbar-button {
 .menu-item {
     height: 30px;
     line-height: 30px;
+    min-width: 100px;
 }
 
 #post-feed {
