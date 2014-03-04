@@ -397,6 +397,7 @@ textarea {
     height: 30px;
     line-height: 30px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
+    background: #eee;
 }
 
 .button.toolbar-button:hover, .button.nav-button:hover {
