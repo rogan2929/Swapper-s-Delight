@@ -176,7 +176,7 @@ textarea {
     color: #ffffff !important;
     text-decoration: none !important;
 /*    background: #13486b;*/
-    background: #e31025;
+    background: #aaa;
     font-weight: bold !important;
 }
 
@@ -373,7 +373,7 @@ textarea {
 
 .button:hover, .menu-item:hover{
 /*    background-color: #1d6fa5;*/
-    background-color: #444;
+    background-color: #999;
     color: white;
 }
 
