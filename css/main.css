@@ -460,6 +460,7 @@ textarea {
 
 #button-menu-main {
     min-width: 0 !important;
+    width: 35px;
 }
 
 #button-groups {
@@ -771,11 +772,10 @@ div.right-toolbar-button {
 }
 
 .toolbar-group.float-left {
-    margin-left: 175px;
+    margin-left: 203px;
 }
 
 .toolbar-group.float-right {
-    margin-right: 10px;
 }
 
 .menu {
