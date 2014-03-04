@@ -400,7 +400,7 @@ textarea {
 }
 
 .button.toolbar-button:hover, .button.nav-button:hover {
-    border: 1px solid #ccc;
+/*    border: 1px solid #ccc;*/
 }
 
 .button-icon {
