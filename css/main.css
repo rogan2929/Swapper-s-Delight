@@ -481,7 +481,7 @@ textarea {
 .post-block.ui-widget {
     display: inline-block;
 /*    background-color: #13486b;*/
-    background-color: #439501;
+    background-color: #4395D1;
     height: 200px;
     width: 325px;
     overflow: hidden;
@@ -510,7 +510,7 @@ textarea {
     line-height: 50px;
     color: white;
 /*    background: #13486b;*/
-    background: #439501;
+    background: #4395D1;
 }
 
 .facebook-user-header a {
