@@ -389,9 +389,8 @@ textarea {
 }
 
 .button.toolbar-button {
-    height: 40px;
-    line-height: 40px;
-    border: 1px solid transparent;
+    height: 41px;
+    line-height: 41px;
     border-radius: 0px;
 }
 
