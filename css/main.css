@@ -482,7 +482,7 @@ textarea {
     font-weight: bold;
 }
 
-#button-groups:hover {
+#button-groups:hover, .post-block.load-more:hover {
     background-color: #e35765;
 }
 
