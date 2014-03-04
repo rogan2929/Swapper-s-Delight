@@ -778,10 +778,11 @@ div.right-toolbar-button {
 }
 
 .toolbar-group.float-left {
-    margin-left: 203px;
+    margin-left: 10px;
 }
 
 .toolbar-group.float-right {
+    margin-right: 10px;
 }
 
 .menu {
