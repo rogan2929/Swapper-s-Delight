@@ -175,7 +175,8 @@ textarea {
 .selected-nav {
     color: #ffffff !important;
     text-decoration: none !important;
-    background: #13486b;
+/*    background: #13486b;*/
+    background: #e31025;
     font-weight: bold !important;
 }
 
@@ -371,7 +372,8 @@ textarea {
 }
 
 .button:hover, .menu-item:hover{
-    background-color: #1d6fa5;
+/*    background-color: #1d6fa5;*/
+    background-color: #444;
     color: white;
 }
 
@@ -478,9 +480,10 @@ textarea {
 
 .post-block.ui-widget {
     display: inline-block;
-    background-color: #13486b;
+/*    background-color: #13486b;*/
+    background-color: #444;
     height: 200px;
-    width: 200px;
+    width: 325px;
     overflow: hidden;
     margin: 3px;
     margin-bottom: -1px;
@@ -506,7 +509,8 @@ textarea {
     height: 50px;
     line-height: 50px;
     color: white;
-    background: #13486b;
+/*    background: #13486b;*/
+    background: #444;
 }
 
 .facebook-user-header a {
