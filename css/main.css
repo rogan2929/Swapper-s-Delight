@@ -463,7 +463,7 @@ textarea {
 }
 
 #button-groups {
-    margin-left: 203px;
+/*    margin-left: 203px;*/
     background-color: #e31025;
     color: white;
     padding-left: 8px;
@@ -768,6 +768,14 @@ textarea {
 div.right-toolbar-button {
     display: inline-block;
     margin-left: 5px;
+}
+
+.toolbar-group.float-left {
+    margin-left: 175px;
+}
+
+.toolbar-group.float-right {
+    margin-right: 10px;
 }
 
 .menu {

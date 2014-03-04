@@ -72,9 +72,9 @@
                                 </div>
                                 <div id='post-image'></div>
                             </div>
-<!--                            <div id='post-permalink' class='floating-panel-section'>
-                                <a class='wrappable-link' target='_blank'></a>
-                            </div>-->
+                            <!--                            <div id='post-permalink' class='floating-panel-section'>
+                                                            <a class='wrappable-link' target='_blank'></a>
+                                                        </div>-->
                             <div id='post-message' class='floating-panel-section'>
                                 <div id='post-message-text'></div>
                             </div>
@@ -116,12 +116,7 @@
             </div>
 
             <div id='main-toolbar' class='ui-widget toolbar'>
-                <div class='float-left'>
-                    <div id='button-groups' class='button toolbar-button'>
-                        <span>Select a Group</span>
-                    </div>
-                </div>
-                <div class='float-right'>
+                <div class='toolbar-group float-left'>
                     <div id='button-new' class='button toolbar-button'>
                         <span class='button-icon icon-new'></span>
                         <span>New</span>
@@ -129,6 +124,11 @@
                     <div id='button-refresh' class='button toolbar-button'>
                         <span class='button-icon icon-refresh'></span>
                         <span>Refresh</span>
+                    </div>
+                </div>
+                <div class='toolbar-group float-right'>
+                    <div id='button-groups' class='button toolbar-button'>
+                        <span>Select a Group</span>
                     </div>
                     <div id='button-menu-main' class='button menu-button'>
                         <span class='button-icon icon-menu'></span>
@@ -139,7 +139,7 @@
             </div>
 
             <div id='post-details-toolbar' class='ui-widget toolbar floating-panel-toolbar hidden'>
-                <div class='float-right'>
+                <div class='toolbar-group float-left'>
                     <div id='post-button-comment' class='button menu-button'>
                         <span class='button-icon icon-comment'></span>
                         <span>Comment</span>
@@ -163,17 +163,17 @@
                     <span>Logout</span>
                 </div>
             </div>
-            
+
             <div id='popup-comment' class='menu floating-panel-menu ui-widget'>
                 <textarea id='popup-comment-text' placeholder='Type a comment and press [Enter] to post it.'></textarea>
                 <div class='ajax-loading-div hidden'></div>
             </div>
-            
+
             <!--Image Viewer Panel-->
             <div id='image-viewer' class='hidden'>
 
             </div>
-            
+
         </div>
 
         <div id='overlay-app-loading' class='ajax-loading-div'></div>
