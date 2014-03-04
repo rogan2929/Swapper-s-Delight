@@ -388,16 +388,10 @@ textarea {
 }
 
 .button.toolbar-button {
-/*    height: 40px;
+    height: 40px;
     line-height: 40px;
-    border: 1px solid transparent;*/
-    padding-left: 8px;
-    padding-right: 8px;
-    border-radius: 5px;
-    height: 30px;
-    line-height: 30px;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
-    background: #eee;
+    border: 1px solid transparent;
+    border-radius: 0px;
 }
 
 .button.toolbar-button:hover, .button.nav-button:hover {
@@ -468,6 +462,7 @@ textarea {
 #button-menu-main {
     min-width: 0 !important;
     width: 35px;
+    border-radius: 0px;
 }
 
 #button-groups {
