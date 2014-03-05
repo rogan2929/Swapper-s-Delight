@@ -327,7 +327,7 @@ textarea {
 
 #ad-space {
     margin-top: 10px;
-    border: red dashed;
+    border: 3px red dashed;
     width: 160px;
     height: 600px;
 }
@@ -805,14 +805,14 @@ div.right-toolbar-button {
 }
 
 #post-feed {
-    margin-left: 180px;
+    margin-left: 176px;
     margin-top: 52px;
     position: relative;
     min-height: 800px;
 }
 
 #left-rail {
-    width: 170px;
+    width: 166px;
     position: absolute;
     padding-top: 11px;
     top: 43px;
