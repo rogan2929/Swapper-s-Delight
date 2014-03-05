@@ -3,12 +3,12 @@
 require_once ("facebook.php");
 
 // Prod AppId and Secret
-//$appId = '1401018793479333';
-//$appSecret = '603325411a953e21ccbc29d2c7d50e7e';
+$appId = '1401018793479333';
+$appSecret = '603325411a953e21ccbc29d2c7d50e7e';
 
 // Test AppId and Secret
-$appId = '652991661414427';
-$appSecret = 'b8447ce73d2dcfccde6e30931cfb0a90';
+//$appId = '652991661414427';
+//$appSecret = 'b8447ce73d2dcfccde6e30931cfb0a90';
 
 // Start up the Facebook object
 $fbSession = new Facebook(array(
