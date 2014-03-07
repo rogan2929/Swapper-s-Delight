@@ -407,7 +407,7 @@ a:visited {
 .button:hover, .menu-item:hover, .post-block.ui-widget:hover{
 /*    background-color: #1d6fa5;*/
     background-color: #999;
-    color: white;
+    color: #f6f6f6;
 }
 
 .nav-button {
