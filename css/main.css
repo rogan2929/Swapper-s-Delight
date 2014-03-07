@@ -105,6 +105,14 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 .row,.col {
     overflow: hidden;
     position: absolute;
@@ -374,10 +382,6 @@ textarea {
     display: inline-block;
 }
 
-.button a {
-    text-decoration: none;
-}
-
 .button a:hover {
     text-decoration: none;
 }
@@ -546,11 +550,6 @@ textarea {
 
 .facebook-user-header a {
     color: #444;
-    text-decoration: none;
-}
-
-.facebook-user-header a:hover {
-    text-decoration: underline;
 }
 
 .facebook-user-header a:visited {
@@ -569,7 +568,6 @@ textarea {
 
 #post-permalink:hover {
 /*    color: #e31025;*/
-    text-decoration: underline;
 }
 
 .post-block.post-block-text > div,
@@ -595,11 +593,6 @@ a.link-title {
     font-weight: bold;
     color: #105cb6;
     display: block;
-    text-decoration: none;
-}
-
-a.link-title:hover {
-    text-decoration: underline;
 }
 
 .post-block.post-block-image {
@@ -769,12 +762,7 @@ a.link-title:hover {
 }
 
 .post-comment a {
-    text-decoration: none;
     color: #444;
-}
-
-.post-comment a:hover {
-    text-decoration: underline;
 }
 
 .post-comment a:visited {
