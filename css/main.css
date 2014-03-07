@@ -514,7 +514,7 @@ a:visited {
     color: white;
 }
 
-#post-message-linkdata > * {
+#post-message-linkdata > *:not(:last-child) {
     margin-bottom: 1em;
     display: block;
 }
