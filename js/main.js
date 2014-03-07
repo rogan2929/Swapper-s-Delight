@@ -503,6 +503,7 @@ var SwdPresenter = {
     },
     onClickCloseButton: function(e, args) {
         SwdView.toggleFloatingPanel('.floating-panel', false);
+        SwdView.toggleToolbar('', false);
     },
     onClickFloatingPanelContent: function(e, args) {
         SwdView.closeAllUiMenus();
