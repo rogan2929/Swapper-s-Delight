@@ -1008,9 +1008,10 @@ var SwdView = {
 
         // Display message content, or hide it if empty.
         if (post.message !== '') {
+            $('#post-message').show();
             $('#post-message-text').html(post.message);
         } else {
-            $('#post-message-text').hide();
+            $('#post-message').hide();
         }
 
         if (post.post_type === 'link' || post.post_type === 'textlink') {
