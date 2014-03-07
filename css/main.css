@@ -588,12 +588,12 @@ textarea {
 
 .post-block .link-title {
     font-weight: bold;
-    margin-bottom: 4px;
+    display: block;
 }
 
 .floating-panel-content .link-title {
     font-weight: bold;
-    margin-bottom: 4px;
+    display: block;
 }
 
 .post-block.post-block-image {
