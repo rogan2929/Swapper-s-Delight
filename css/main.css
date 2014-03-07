@@ -253,7 +253,7 @@ textarea {
     left: 0;
     right: 320px;
     position: absolute;
-    top: 0;
+    top: 25px;
     bottom: 0;
     padding: 10px;
     border-right: 2px solid #f6f6f6;
@@ -263,7 +263,7 @@ textarea {
     width: 300px;
     right: 0;
     position: absolute;
-    top: 0;
+    top: 25px;
     bottom: 0;
     padding: 10px;
 }
