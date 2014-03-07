@@ -71,7 +71,14 @@
                             <div id='post-message' class='floating-panel-section'>
                                 <div id='post-message-text'></div>
                             </div>
-                            <div id='post-message-linkdata' class='floating-panel-section'></div>
+                            <div id='post-message-linkdata' class='floating-panel-section'>
+                                <div>
+                                    <a id='linkdata-href' target='_blank' class='link-title'></a>
+                                    <span id='linkdata-caption'></span>
+                                </div>
+                                <img id='linkdata-img'>
+                                <span id='linkdata-desc'></span>
+                            </div>
                             <div id='post-no-image-desc' class='floating-panel-section hidden'>
                                 <b>Hint:</b> Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. 
                                 Click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook.

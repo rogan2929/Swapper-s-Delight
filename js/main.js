@@ -191,13 +191,15 @@ var SwdPresenter = {
      * Top-level error handler function.
      */
     handleError: function(error) {
-        if (error.status === 401) {
-            // Access denied, most likely from an expired access token.
-            // Automatically refresh the page.
-            location.reload();
-        }
-        else {
-            SwdView.showError(error.responseText);
+        switch (error.status) {
+            case 401:
+                // Access denied, most likely from an expired access token.
+                // Get a new access token.
+                // For now, simply refresh the page.
+                location.reload();
+                break;
+            default:
+                SwdView.showError(error.responseText);
         }
     },
     /**
@@ -969,7 +971,7 @@ var SwdView = {
      * @param {type} post Post to load into floating post details panel.
      */
     showPostDetails: function(post) {
-        var userImage, postImage, i, timeStamp;
+        var userImage, postImage, i, timeStamp, linkData;
 
         // Display user's data.
         if (post.user.pic_square) {
@@ -1012,8 +1014,20 @@ var SwdView = {
             $('#post-message').hide();
         }
 
+        // Set link data and display it.
         if (post.post_type === 'link' || post.post_type === 'textlink') {
-            $('#post-message-linkdata').html('<div><p><a href="' + post.link_data.href + '" target="_blank" class="link-title">' + post.link_data.name + '</a></br>' + post.link_data.description + '</p></div>').show();
+            //linkData = '<div><p><a href="' + post.link_data.href + '" target="_blank" class="link-title">' + post.link_data.name + '</a></br>' + post.link_data.description + '</p></div>';
+            //$('#post-message-linkdata').html(linkData).show();
+
+            $('#linkdata-href').attr('href', post.link_data.href).text(post.link_data.name);
+            $('#linkdata-caption').text(post.link_data.caption);
+
+            if (post.link_data.media && post.link_data.media[0].src) {
+                $('#linkdata-img').attr('src', post.link_data.media[0].src);
+            }
+
+            $('#linkdata-desc').html(post.link_data.description);
+            $('#post-message-linkdata').show();
         }
         else {
             $('#post-message-linkdata').hide();

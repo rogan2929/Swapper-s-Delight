@@ -514,6 +514,11 @@ a:visited {
     color: white;
 }
 
+#post-message-linkdata > * {
+    margin-bottom: 1em;
+    display: block;
+}
+
 #post-block-mask {
     background-color: #f6f6f6;
     opacity: 0.3;
