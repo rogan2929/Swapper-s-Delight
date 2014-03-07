@@ -115,7 +115,7 @@
                 <div class='toolbar-group float-left'>
                     <div id='button-new' class='button toolbar-button'>
                         <span class='button-icon icon-new'></span>
-                        <span>New</span>
+                        <span>New Post</span>
                     </div>
                     <div id='button-refresh' class='button toolbar-button'>
                         <span class='button-icon icon-refresh'></span>
