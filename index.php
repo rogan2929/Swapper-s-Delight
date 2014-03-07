@@ -76,6 +76,7 @@
                                     <a id='linkdata-href' target='_blank' class='link-title'></a>
                                     <a id='linkdata-caption' target='blank'></span>
                                 </div>
+                                <img id='linkdata-img'>
                                 <span id='linkdata-desc'></span>
                             </div>
                             <div id='post-no-image-desc' class='floating-panel-section hidden'>

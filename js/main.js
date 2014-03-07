@@ -1018,9 +1018,14 @@ var SwdView = {
         if (post.post_type === 'link' || post.post_type === 'textlink') {
             //linkData = '<div><p><a href="' + post.link_data.href + '" target="_blank" class="link-title">' + post.link_data.name + '</a></br>' + post.link_data.description + '</p></div>';
             //$('#post-message-linkdata').html(linkData).show();
-            
+
             $('#linkdata-href').attr('href', post.link_data.href).text(post.link_data.name);
             $('#linkdata-caption').attr('href', post.link_data.caption).text(post.link_data.caption);
+
+            if (post.link_data.media && post.link_data.media[0].src) {
+                $('#linkdata-img').attr('src', post.link_data.media[0].src);
+            }
+
             $('#linkdata-desc').html(post.link_data.description);
             $('#post-message-linkdata').show();
         }
