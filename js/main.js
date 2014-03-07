@@ -10,12 +10,12 @@ var PostType = {
 };
 
 // Prod AppId
-var AppId = '1401018793479333';
-var AppUrl = 'http://bit.ly/1kq93Xb';
+//var AppId = '1401018793479333';
+//var AppUrl = 'http://bit.ly/1kq93Xb';
 
 // Test AppId
-//var AppId = '652991661414427';
-//var AppUrl = 'http://bit.ly/1aXsWl3';
+var AppId = '652991661414427';
+var AppUrl = 'http://bit.ly/1aXsWl3';
 
 // http://stackoverflow.com/questions/1102215/mvp-pattern-with-javascript-framework
 
