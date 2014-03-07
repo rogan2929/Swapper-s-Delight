@@ -187,7 +187,6 @@ var SwdPresenter = {
     uid: null,
     currentlyLoading: false,
     selectedPost: null,
-    
     /***
      * Top-level error handler function.
      */
@@ -196,7 +195,7 @@ var SwdPresenter = {
             // Access denied, most likely from an expired access token.
             // Automatically refresh the page.
             location.reload();
-        } 
+        }
         else {
             SwdView.showError(error.responseText);
         }
@@ -992,21 +991,33 @@ var SwdView = {
             postImage = 'url("' + post.image_url[0] + '")';
 
             // Hide the no-image container and display the post's attached image.
-            $('#post-no-image').hide();
             $('#post-image').show();
+            $('#post-no-image-desc').hide();
             $('#post-image').css('background-image', postImage);
         }
         else {
-            // Show the no-image notification.
+            // Hide the image container.
             $('#post-image').hide();
-            $('#post-no-image').show();
+            $('#post-no-image-desc').show();
         }
 
         // Display permalink
-        $('#post-permalink').attr('href', post.permalink);
+        $('.post-permalink').attr('href', post.permalink);
 
-        // Display message content.
-        $('#post-message-text').html(post.message);
+        // Display message content, or hide it if empty.
+        if (post.message !== '') {
+            $('#post-message').show();
+            $('#post-message-text').html(post.message);
+        } else {
+            $('#post-message').hide();
+        }
+
+        if (post.post_type === 'link' || post.post_type === 'textlink') {
+            $('#post-message-linkdata').html('<div><p><a href="' + post.link_data.href + '" target="_blank" class="link-title">' + post.link_data.name + '</a></br>' + post.link_data.description + '</p></div>').show();
+        }
+        else {
+            $('#post-message-linkdata').hide();
+        }
 
         // Populate the comments section.
         $('#post-comment-list').empty();

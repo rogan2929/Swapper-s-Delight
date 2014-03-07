@@ -64,19 +64,17 @@
                                     <a class='facebook-user-name' target='_blank'></a>
                                     <span>-</span>
                                     <span class='timestamp'></span>
-                                    <a id='post-permalink' target='_blank' class='float-right wrappable-link'>Permalink</a>
+                                    <a target='_blank' class='post-permalink float-right wrappable-link'>Permalink</a>
                                 </div>
                             </div>
-                            <div id='post-image-container' class='floating-panel-section'>
-                                <div id='post-no-image' class='hidden'>
-                                </div>
-                                <div id='post-image'></div>
-                            </div>
-                            <!--                            <div id='post-permalink' class='floating-panel-section'>
-                                                            <a class='wrappable-link' target='_blank'></a>
-                                                        </div>-->
+                            <div id='post-image' class='floating-panel-section'></div>
                             <div id='post-message' class='floating-panel-section'>
                                 <div id='post-message-text'></div>
+                            </div>
+                            <div id='post-message-linkdata' class='floating-panel-section'></div>
+                            <div id='post-no-image-desc' class='floating-panel-section hidden'>
+                                <b>Hint:</b> Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. 
+                                Click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook.
                             </div>
                         </div>
                         <div id='details-right-column' class='panel-post-column scroll-y'>
@@ -117,7 +115,7 @@
                 <div class='toolbar-group float-left'>
                     <div id='button-new' class='button toolbar-button'>
                         <span class='button-icon icon-new'></span>
-                        <span>New</span>
+                        <span>New Post</span>
                     </div>
                     <div id='button-refresh' class='button toolbar-button'>
                         <span class='button-icon icon-refresh'></span>
