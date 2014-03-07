@@ -993,12 +993,15 @@ var SwdView = {
             // Hide the no-image container and display the post's attached image.
             //$('#post-no-image, #post-no-image-desc').hide();
             //$('#post-no-image').hide();
-            $('#post-image').show();
+            //$('#post-image').show();
+            $('#post-image-container').show();
             $('#post-image').css('background-image', postImage);
         }
         else {
+            $('#post-image-container').hide();
+            
             // Show the no-image notification.
-            $('#post-image').hide();
+            //$('#post-image').hide();
             //$('#post-no-image, #post-no-image-desc').show();
             //$('#post-no-image').show();
         }
