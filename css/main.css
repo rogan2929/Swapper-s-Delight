@@ -27,9 +27,6 @@ html {
 
 body {
     overflow: hidden;
-    /*    background: #f6f6f6;*/
-    background-color: #eee;
-/*    background: #dddddd;*/
 }
 
 /*
@@ -424,6 +421,7 @@ a:visited {
     height: 41px;
     line-height: 41px;
     border-radius: 0px;
+    color: #f6f6f6;
 }
 
 .button.menu-button {
@@ -523,9 +521,9 @@ a:visited {
 .post-block.ui-widget {
     display: inline-block;
 /*    background-color: #13486b;*/
-/*    background-color: #4395D1;*/
+    background-color: #4395D1;
 /*    background-color: #f6f6f6;*/
-    background-color: #105cb6;
+/*    background-color: #105cb6;*/
     height: 210px;
     width: 325px;
     overflow: hidden;
@@ -847,6 +845,7 @@ div.right-toolbar-button {
     position: fixed;
     width: 100%;
     z-index: 100;
+    background-color: #105cb6;
 }
 
 .toolbar.floating-panel-toolbar {
