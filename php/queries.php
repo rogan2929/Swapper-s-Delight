@@ -55,12 +55,7 @@ function processStreamQuery($stream, $images) {
         // Erase any attachment data to save on object size.
         // This has already been parsed out.
         unset($post['attachment']);
-
-        // Four types of posts:
-        //
-        // These all have to be accounted for.
-        // Just to start with, but this will catch any bizarre instances, like
-        // a post with no message, no pictures, or no urls.
+        
         $post['post_type'] = getPostType($post);
 
         // Determine which kind of post this is.

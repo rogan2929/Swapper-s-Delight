@@ -40,6 +40,9 @@ if (http_response_code() != 401) {
     // Extract link data.
     $post['link_data'] = getLinkData($post);
 
+    // Erase attachment data (to make the object smaller), since this has already been parse.
+    unset ($post['attachment']);
+    
     $commentUserData = array();
 
     // Begin parsing comment data.
