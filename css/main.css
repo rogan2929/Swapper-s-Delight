@@ -591,6 +591,11 @@ textarea {
     margin-bottom: 4px;
 }
 
+.floating-panel-content .link-title {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
 .post-block.post-block-image {
     background-repeat: no-repeat;
     background-position: center center;
