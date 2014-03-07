@@ -187,7 +187,6 @@ var SwdPresenter = {
     uid: null,
     currentlyLoading: false,
     selectedPost: null,
-    
     /***
      * Top-level error handler function.
      */
@@ -196,7 +195,7 @@ var SwdPresenter = {
             // Access denied, most likely from an expired access token.
             // Automatically refresh the page.
             location.reload();
-        } 
+        }
         else {
             SwdView.showError(error.responseText);
         }
@@ -1005,12 +1004,19 @@ var SwdView = {
         // Display permalink
         $('#post-permalink').attr('href', post.permalink);
 
-        // Display message content.
-        $('#post-message-text').html(post.message);
-        
-        var description = '<div><p><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
-        
-        $('#post-message-linkdata').html(description);
+        // Display message content, or hide it if empty.
+        if (post.message) {
+            $('#post-message-text').html(post.message);
+        } else {
+            $('#post-message-text').hide();
+        }
+
+        if (post.post_type === 'link' || post.post_type === 'textlink') {
+            $('#post-message-linkdata').html('<div><p><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>').show();
+        }
+        else {
+            $('#post-message-linkdata').hide();
+        }
 
         // Populate the comments section.
         $('#post-comment-list').empty();
