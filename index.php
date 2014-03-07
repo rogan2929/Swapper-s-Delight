@@ -72,8 +72,10 @@
                                 <div id='post-message-text'></div>
                             </div>
                             <div id='post-message-linkdata' class='floating-panel-section'>
-                                <a id='linkdata-href' target="_blank" class="link-title"></a>
-                                <span id='linkdata-caption'></span>
+                                <div>
+                                    <a id='linkdata-href' target="_blank" class="link-title"></a>
+                                    <span id='linkdata-caption'></span>
+                                </div>
                                 <span id='linkdata-desc'></span>
                             </div>
                             <div id='post-no-image-desc' class='floating-panel-section hidden'>
