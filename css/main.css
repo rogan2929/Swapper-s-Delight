@@ -592,6 +592,7 @@ a:visited {
 }
 
 .post-block .link-title {
+    font-weight: bold;
     display: block;
 }
 
