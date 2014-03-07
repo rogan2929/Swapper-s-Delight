@@ -201,6 +201,17 @@ textarea {
 }
 
 .close-button {
+    height: 20px;
+    width: 20px;
+    z-index: 1001;
+    float: right;
+    margin-top: 5px;
+    margin-right: 5px;
+    background-image: url('/img/panel-close.png');
+    background-repeat: no-repeat;
+}
+
+/*.close-button {
     background-image: url('/img/panel-close.png');
     background-repeat: no-repeat;
     height: 30px;
@@ -219,7 +230,7 @@ textarea {
 
 .close-button:active {
     background-image: url('/img/panel-close-active.png');
-}
+}*/
 
 .floating-panel > .floating-panel-content {
     border: 1px solid #ccc;
