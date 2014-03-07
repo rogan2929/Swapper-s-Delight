@@ -107,10 +107,15 @@ textarea {
 
 a {
     text-decoration: none;
+    color: #105cb6;
 }
 
 a:hover {
     text-decoration: underline;
+}
+
+a:visited {
+    color: #105cb6;
 }
 
 .row,.col {
@@ -548,13 +553,14 @@ a:hover {
     background: #eee;
 }
 
-.facebook-user-header a {
+/*.facebook-user-header a {
     color: #444;
 }
 
 .facebook-user-header a:visited {
     color: #444;
-}
+}*/
+
 .load-more > .load-more-text {
     line-height: 200px;
     vertical-align: middle;
@@ -753,13 +759,13 @@ a.link-title {
     margin-left: 5px;
 }
 
-.post-comment a {
+/*.post-comment a {
     color: #444;
 }
 
 .post-comment a:visited {
     color: #444;
-}
+}*/
 
 #overlay {
     background: #ddd;
