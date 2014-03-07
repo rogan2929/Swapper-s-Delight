@@ -680,14 +680,6 @@ a.link-title {
     margin-bottom: 10px;
 }
 
-#post-image-container {
-    height: 350px;
-}
-
-#post-image-container > * {
-    font-size: 0.9em;
-}
-
 #post-image {
     background-position: center center;
     background-repeat: no-repeat;
