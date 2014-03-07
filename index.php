@@ -68,13 +68,15 @@
                                 </div>
                             </div>
                             <div id='post-image-container' class='floating-panel-section'>
-                                <div id='post-no-image' class='hidden'>
-                                </div>
+                                <div id='post-no-image' class='hidden'></div>
                                 <div id='post-image'></div>
                             </div>
                             <!--                            <div id='post-permalink' class='floating-panel-section'>
                                                             <a class='wrappable-link' target='_blank'></a>
                                                         </div>-->
+                            <div id='post-no-image-desc' class='floating-panel-section hidden'>
+                                This post either doesn't have any photos or the poster has not granted applications like Swapper's Delight to view them.
+                            </div>
                             <div id='post-message' class='floating-panel-section'>
                                 <div id='post-message-text'></div>
                             </div>

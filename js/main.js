@@ -992,14 +992,14 @@ var SwdView = {
             postImage = 'url("' + post.image_url[0] + '")';
 
             // Hide the no-image container and display the post's attached image.
-            $('#post-no-image').hide();
+            $('#post-no-image, #post-no-image-desc').hide();
             $('#post-image').show();
             $('#post-image').css('background-image', postImage);
         }
         else {
             // Show the no-image notification.
             $('#post-image').hide();
-            $('#post-no-image').show();
+            $('#post-no-image, #post-no-image-desc').show();
         }
 
         // Display permalink
