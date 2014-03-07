@@ -216,10 +216,6 @@ textarea {
     cursor: pointer;
 }
 
-#select-group-list {
-    padding-top: 20px;
-}
-
 /*.close-button {
     background-image: url('/img/panel-close.png');
     background-repeat: no-repeat;
@@ -250,6 +246,7 @@ textarea {
     left: 0;
     right: 0;
     padding: 10px;
+    padding-top: 25px;
 }
 
 .floating-panel-content > #details-left-column {
@@ -735,7 +732,6 @@ textarea {
 #post-comments {
     border: none;
     padding: 0;
-    padding-top: 25px;
 }
 
 .italic {
