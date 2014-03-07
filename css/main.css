@@ -442,55 +442,55 @@ a:visited {
 }
 
 .button-icon.icon-new {
-    background-image: url('/icons/paperplus32.png');
-}
-
-.button-icon.icon-refresh {
-    background-image: url('/icons/exchange32.png');
-}
-
-.button-icon.icon-search {
-    background-image: url('/icons/search32.png');
-}
-
-.button-icon.icon-menu {
-    background-image: url('/icons/gear32.png');
-}
-
-.button-icon.icon-comment {
-    background-image: url('/icons/comment32.png');
-}
-
-.button-icon.icon-like {
-    background-image: url('/icons/heart32.png');
-}
-
-.button-icon.icon-pm {
-    background-image: url('/icons/mail32.png');
-}
-
-#post-button-comment:hover .button-icon.icon-comment {
-    background-image: url('/icons/comment32w.png');
-}
-
-#post-button-like:hover .button-icon.icon-like {
-    background-image: url('/icons/heart32w.png');
-}
-
-#post-button-pm:hover .button-icon.icon-pm {
-    background-image: url('/icons/mail32w.png');
-}
-
-#button-new:hover .button-icon.icon-new {
     background-image: url('/icons/paperplus32w.png');
 }
 
-#button-refresh:hover .button-icon.icon-refresh {
+.button-icon.icon-refresh {
     background-image: url('/icons/exchange32w.png');
 }
 
-#button-menu-main:hover .button-icon.icon-menu {
+.button-icon.icon-search {
+    background-image: url('/icons/search32w.png');
+}
+
+.button-icon.icon-menu {
     background-image: url('/icons/gear32w.png');
+}
+
+.button-icon.icon-comment {
+    background-image: url('/icons/comment32w.png');
+}
+
+.button-icon.icon-like {
+    background-image: url('/icons/heart32w.png');
+}
+
+.button-icon.icon-pm {
+    background-image: url('/icons/mail32w.png');
+}
+
+#post-button-comment:hover .button-icon.icon-comment {
+    background-image: url('/icons/comment32.png');
+}
+
+#post-button-like:hover .button-icon.icon-like {
+    background-image: url('/icons/heart32.png');
+}
+
+#post-button-pm:hover .button-icon.icon-pm {
+    background-image: url('/icons/mail32.png');
+}
+
+#button-new:hover .button-icon.icon-new {
+    background-image: url('/icons/paperplus32.png');
+}
+
+#button-refresh:hover .button-icon.icon-refresh {
+    background-image: url('/icons/exchange32.png');
+}
+
+#button-menu-main:hover .button-icon.icon-menu {
+    background-image: url('/icons/gear32.png');
 }
 
 #button-menu-main {
