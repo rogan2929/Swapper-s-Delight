@@ -108,6 +108,7 @@ textarea {
 a {
     text-decoration: none;
     color: #105cb6;
+    font-weight: bold;
 }
 
 a:hover {
@@ -591,12 +592,10 @@ a:visited {
 }
 
 .post-block .link-title {
-    font-weight: bold;
     display: block;
 }
 
 a.link-title {
-    font-weight: bold;
     color: #105cb6;
     display: block;
 }
@@ -751,7 +750,6 @@ a.link-title {
 }
 
 .post-comment a:first-child {
-    font-weight: bold;
     font-size: 0.98em;
 }
 
