@@ -1020,7 +1020,7 @@ var SwdView = {
             //$('#post-message-linkdata').html(linkData).show();
             
             $('#linkdata-href').attr('href', post.link_data.href).text(post.link_data.name);
-            $('#linkdata-caption').text(post.link_data.caption);
+            $('#linkdata-caption').attr('href', post.link_data.caption).text(post.link_data.caption);
             $('#linkdata-desc').html(post.link_data.description);
             $('#post-message-linkdata').show();
         }

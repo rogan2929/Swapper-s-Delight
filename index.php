@@ -73,8 +73,8 @@
                             </div>
                             <div id='post-message-linkdata' class='floating-panel-section'>
                                 <div>
-                                    <a id='linkdata-href' target="_blank" class="link-title"></a>
-                                    <span id='linkdata-caption'></span>
+                                    <a id='linkdata-href' target='_blank' class='link-title'></a>
+                                    <a id='linkdata-caption' target='blank'></span>
                                 </div>
                                 <span id='linkdata-desc'></span>
                             </div>
