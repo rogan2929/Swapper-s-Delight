@@ -577,13 +577,13 @@ a:visited {
     font-size: 1.15em;
 }
 
-#post-permalink {
+.facebook-poststamp .post-permalink {
     display: inline-block;
     margin-right: 10px;
 }
 
-#post-permalink:hover {
-/*    color: #e31025;*/
+#post-no-image-desc {
+    color: #e35765;
 }
 
 .post-block.post-block-text > div,

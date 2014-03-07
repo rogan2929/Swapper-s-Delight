@@ -992,15 +992,17 @@ var SwdView = {
 
             // Hide the no-image container and display the post's attached image.
             $('#post-image').show();
+            $('#post-no-image-desc').hide();
             $('#post-image').css('background-image', postImage);
         }
         else {
             // Hide the image container.
             $('#post-image').hide();
+            $('#post-no-image-desc').show();
         }
 
         // Display permalink
-        $('#post-permalink').attr('href', post.permalink);
+        $('.post-permalink').attr('href', post.permalink);
 
         // Display message content, or hide it if empty.
         if (post.message !== '') {

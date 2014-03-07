@@ -64,13 +64,14 @@
                                     <a class='facebook-user-name' target='_blank'></a>
                                     <span>-</span>
                                     <span class='timestamp'></span>
-                                    <a id='post-permalink' target='_blank' class='float-right wrappable-link'>Permalink</a>
+                                    <a target='_blank' class='post-permalink float-right wrappable-link'>Permalink</a>
                                 </div>
                             </div>
                             <div id='post-image' class='floating-panel-section'></div>
-<!--                            <div id='post-no-image-desc' class='floating-panel-section hidden'>
-                                This post either doesn't have any photos or the poster has not granted applications like Swapper's Delight to view them.
-                            </div>-->
+                            <div id='post-no-image-desc' class='floating-panel-section hidden'>
+                                Hint: Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. 
+                                Click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook.
+                            </div>
                             <div id='post-message' class='floating-panel-section'>
                                 <div id='post-message-text'></div>
                             </div>
