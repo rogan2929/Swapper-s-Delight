@@ -31,18 +31,18 @@ if (http_response_code() != 401) {
         $post['message'] = nl2br($post['message']);
     }
 
-    // Determine type of post.
-    $post['post_type'] = getPostType($post);
-    
     // Extract image data for the post.
     $post['image_url'] = getImageUrlArray($post, $images, false);
-    
+
     // Extract link data.
     $post['link_data'] = getLinkData($post);
 
+    // Determine type of post.
+    $post['post_type'] = getPostType($post);
+
     // Erase attachment data (to make the object smaller), since this has already been parse.
-    unset ($post['attachment']);
-    
+    unset($post['attachment']);
+
     $commentUserData = array();
 
     // Begin parsing comment data.
