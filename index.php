@@ -80,6 +80,8 @@
                             <div id='post-message' class='floating-panel-section'>
                                 <div id='post-message-text'></div>
                             </div>
+
+                            <div id='post-message-linkdata' class='floating-panel-section'></div>
                         </div>
                         <div id='details-right-column' class='panel-post-column scroll-y'>
                             <div id='post-comments' class='floating-panel-section'>

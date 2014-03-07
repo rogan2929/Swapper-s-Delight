@@ -1007,6 +1007,10 @@ var SwdView = {
 
         // Display message content.
         $('#post-message-text').html(post.message);
+        
+        var description = '<div><p><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
+        
+        $('#post-message-linkdata').html(description);
 
         // Populate the comments section.
         $('#post-comment-list').empty();
