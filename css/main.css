@@ -514,8 +514,9 @@ a:visited {
     color: white;
 }
 
-#post-message-linkdata > div {
+#post-message-linkdata > * {
     margin-bottom: 1em;
+    display: block;
 }
 
 #post-block-mask {
