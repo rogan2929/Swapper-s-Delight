@@ -74,7 +74,7 @@
                             <div id='post-message-linkdata' class='floating-panel-section'>
                                 <div>
                                     <a id='linkdata-href' target='_blank' class='link-title'></a>
-                                    <a id='linkdata-caption' target='blank'></a>
+                                    <span id='linkdata-caption'></span>
                                 </div>
                                 <img id='linkdata-img'>
                                 <span id='linkdata-desc'></span>
