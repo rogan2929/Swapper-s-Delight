@@ -68,15 +68,14 @@
                                 </div>
                             </div>
                             <div id='post-image' class='floating-panel-section'></div>
-                            <div id='post-no-image-desc' class='floating-panel-section hidden'>
-                                Hint: Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. 
-                                Click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook.
-                            </div>
                             <div id='post-message' class='floating-panel-section'>
                                 <div id='post-message-text'></div>
                             </div>
-
                             <div id='post-message-linkdata' class='floating-panel-section'></div>
+                            <div id='post-no-image-desc' class='floating-panel-section hidden'>
+                                <b>Hint:</b> Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. 
+                                Click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook.
+                            </div>
                         </div>
                         <div id='details-right-column' class='panel-post-column scroll-y'>
                             <div id='post-comments' class='floating-panel-section'>
