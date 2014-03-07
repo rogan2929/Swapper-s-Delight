@@ -67,10 +67,10 @@
                                     <a id='post-permalink' target='_blank' class='float-right wrappable-link'>Permalink</a>
                                 </div>
                             </div>
-                            <div id='post-image-container' class='floating-panel-section'>
-                                <div id='post-no-image' class='hidden'></div>
+                            <div id='post-image' class='floating-panel-section'></div>
+<!--                            <div id='post-image-container' class='floating-panel-section'>
                                 <div id='post-image'></div>
-                            </div>
+                            </div>-->
                             <!--                            <div id='post-permalink' class='floating-panel-section'>
                                                             <a class='wrappable-link' target='_blank'></a>
                                                         </div>-->
