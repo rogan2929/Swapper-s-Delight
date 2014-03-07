@@ -31,12 +31,18 @@ if (http_response_code() != 401) {
         $post['message'] = nl2br($post['message']);
     }
 
-// Extract image data for the post.
+    // Determine type of post.
+    $post['post_type'] = getPostType($post);
+    
+    // Extract image data for the post.
     $post['image_url'] = getImageUrlArray($post, $images, false);
+    
+    // Extract link data.
+    $post['link_data'] = getLinkData($post);
 
     $commentUserData = array();
 
-// Begin parsing comment data.
+    // Begin parsing comment data.
     for ($i = 0; $i < count($post['comments']); $i++) {
         // Replace any line breaks with <br/>
         if ($post['comments'][$i]['text']) {
@@ -55,11 +61,11 @@ if (http_response_code() != 401) {
         }
     }
 
-// Query action links for the given post. (FQL's action_links column always returns null. Suspect a bug.)
+    // Query action links for the given post. (FQL's action_links column always returns null. Suspect a bug.)
     $actions = $fbSession->api('/' . $postId . '?fields=actions');
 
     $post['action_links'] = $actions['actions'];
 
-// Return the result.
+    // Return the result.
     echo json_encode($post);
 }

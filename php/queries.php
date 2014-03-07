@@ -57,35 +57,13 @@ function processStreamQuery($stream, $images) {
         unset($post['attachment']);
 
         // Four types of posts:
-        // 1. Image Posts (text and non-text, doesn't matter.) ('image')
-        // 2. Text Only Posts ('text')
-        // 3. Link Only Posts ('link')
-        // 4. Link + Text Posts ('textlink')
         //
         // These all have to be accounted for.
-        
         // Just to start with, but this will catch any bizarre instances, like
         // a post with no message, no pictures, or no urls.
-        $post['post_type'] = 'unknown';
-        
-        // The logic below should catch everything.
-        if (count($post['image_url']) > 0) {
-            $post['post_type'] = 'image';       // Image Post
-        }
-        else if (strlen($post['message']) > 0) {
-            $post['post_type'] = 'text';        // Assume text post, but this might change to link.
-        }
-        
-        if (strlen($post['message']) == 0 && count($post['link_data']) > 0) {
-            $post['post_type'] = 'link';        // Link post.
-        }
-        
-        if (strlen($post['message']) > 0 && count($post['link_data']) > 0) {
-            $post['post_type'] = 'textlink';    // Link + Text post.
-        }
-        
+        $post['post_type'] = getPostType($post);
+
         // Determine which kind of post this is.
-        
         // Replace any line breaks with <br/>
         if (strlen($post['message']) > 0) {
             $post['message'] = nl2br($post['message']);
@@ -159,6 +137,35 @@ function getImageUrlFromFbId($fbid, $images, $thumbnails = true) {
     }
 
     return $imageUrl;
+}
+
+/* * *
+ * Determines the post type:
+ *  1. Image Posts (text and non-text, doesn't matter.) ('image')
+ *  2. Text Only Posts ('text')
+ *  3. Link Only Posts ('link')
+ *  4. Link + Text Posts ('textlink')
+ */
+
+function getPostType($post) {
+    $postType = 'unknown';
+
+    // The logic below should catch everything.
+    if (count($post['image_url']) > 0) {
+        $postType = 'image';       // Image Post
+    } else if (strlen($post['message']) > 0) {
+        $postType = 'text';        // Assume text post, but this might change to link.
+    }
+
+    if (strlen($post['message']) == 0 && count($post['link_data']) > 0) {
+        $postType = 'link';        // Link post.
+    }
+
+    if (strlen($post['message']) > 0 && count($post['link_data']) > 0) {
+        $postType = 'textlink';    // Link + Text post.
+    }
+
+    return $postType;
 }
 
 /* * *
