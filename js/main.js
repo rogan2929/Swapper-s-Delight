@@ -1005,14 +1005,14 @@ var SwdView = {
         $('#post-permalink').attr('href', post.permalink);
 
         // Display message content, or hide it if empty.
-        if (post.message) {
+        if (post.message !== '') {
             $('#post-message-text').html(post.message);
         } else {
             $('#post-message-text').hide();
         }
 
         if (post.post_type === 'link' || post.post_type === 'textlink') {
-            $('#post-message-linkdata').html('<div><p><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>').show();
+            $('#post-message-linkdata').html('<div><p><a href="' + post.link_data.href + '" class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>').show();
         }
         else {
             $('#post-message-linkdata').hide();
