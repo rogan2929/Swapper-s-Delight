@@ -415,14 +415,14 @@ a:visited {
     display: block;
     height: 40px;
     line-height: 40px;
-    border: 1px solid transparent;
-    padding-left: 8px;
+    font-size: 0.95em;
 }
 
 .button.toolbar-button {
     height: 42px;
     line-height: 42px;
     border-radius: 0px;
+    font-size: 1.2em;
     color: #f6f6f6;
 }
 
