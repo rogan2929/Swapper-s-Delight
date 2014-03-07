@@ -97,15 +97,16 @@
                 <!--New Post Panel-->
 
                 <div id='new-post-panel' class='floating-panel hidden'>
-                    <div class='close-button'></div>
-                    <div class='floating-panel-content ui-widget scroll-y'></div>
+                    <div class='floating-panel-content ui-widget scroll-y'>
+                        <div class='close-button'></div>
+                    </div>
                 </div>
 
                 <!--Select Group panel-->
 
                 <div id='select-group-panel' class='floating-panel hidden'>
-                    <div class='close-button'></div>
                     <div class='floating-panel-content ui-widget scroll-y'>
+                        <div class='close-button'></div>
                         <div id='select-group-list' class='selection-list'>
                             <div id='select-group-no-groups' class='selection-item select-group'>
                                 You're not a member of any Facebook groups.
