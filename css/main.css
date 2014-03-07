@@ -381,7 +381,8 @@ a:visited {
 
 .button, .menu-item {
     cursor: pointer;
-    color: #444;
+/*    color: #444;*/
+    color: #f6f6f6;
     padding-left: 8px;
     padding-right: 8px;
     text-align: center;
