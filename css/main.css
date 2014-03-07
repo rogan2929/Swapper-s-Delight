@@ -232,27 +232,6 @@ a:visited {
     cursor: pointer;
 }
 
-/*.close-button {
-    background-image: url('/img/panel-close.png');
-    background-repeat: no-repeat;
-    height: 30px;
-    width: 30px;
-    z-index: 1001;
-    position: absolute;
-    right: 0;
-    top: -5px;
-    display: none;
-}
-
-.close-button:hover {
-    background-image: url('/img/panel-close-hover.png');
-    cursor: pointer;
-}
-
-.close-button:active {
-    background-image: url('/img/panel-close-active.png');
-}*/
-
 .floating-panel > .floating-panel-content {
     border: 1px solid #ccc;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
@@ -385,8 +364,8 @@ a:visited {
     cursor: pointer;
     color: #444;
 /*    color: #f6f6f6;*/
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
     text-align: center;
     display: inline-block;
 }
