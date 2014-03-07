@@ -55,7 +55,6 @@
                 <!--Post Details Panel-->
 
                 <div id='post-details-panel' class='floating-panel hidden'>
-                    <div class='close-button'></div>
                     <div class='floating-panel-content ui-widget'>
                         <div id='details-left-column' class='panel-post-column scroll-y'>
                             <div id='post-details-user-data' class='facebook-user-header floating-panel-section'>
@@ -83,6 +82,7 @@
 <!--                            <span class='heading floating-panel-section'>
                                 Viewing all comments, newest first.
                             </span>-->
+                            <div class='close-button'></div>
                             <div id='post-comments' class='floating-panel-section'>
                                 <div id='post-nocomments' class='italic'>
                                     No comments yet.

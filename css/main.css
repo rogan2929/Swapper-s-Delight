@@ -726,6 +726,7 @@ textarea {
 #post-comments {
     border: none;
     padding: 0;
+    padding-top: 25px;
 }
 
 .italic {
