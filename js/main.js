@@ -192,9 +192,14 @@ var SwdPresenter = {
      * Top-level error handler function.
      */
     handleError: function(error) {
-        
-        
-        SwdView.showError(error.responseText);
+        if (error.status === 401) {
+            // Access denied, most likely from an expired access token.
+            // Automatically refresh the page.
+            location.reload();
+        } 
+        else {
+            SwdView.showError(error.responseText);
+        }
     },
     /**
      * Entry point of program.
