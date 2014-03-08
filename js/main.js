@@ -799,8 +799,14 @@ var SwdView = {
      * Changes the text shown in the "Select a Group" button.
      * @param {type} text Text to display inside the button.
      */
-    setGroupButtonText: function(text) {
-        $('#button-groups').text(text);
+    setGroupButtonText: function(text, postCount) {
+        if (postCount) {
+            $('#button-groups').text(text + ' (' + postCount + ')');
+        }
+        else {
+            $('#button-groups').text(text);
+        }
+    
     },
     /***
      * Set selected post type.
@@ -878,9 +884,7 @@ var SwdView = {
         // If there is a feed to display, then display it.
         if (posts && posts.length > 0) {
             $('#post-feed-noposts').hide();
-            groupText = $('#button-groups').text();
-            groupText += ' (' + posts.length + ')';
-            $('#button-groups').text(groupText);
+            SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, posts.length);
 
             // Remove any existing 'Load more...' tiles.
             $('.post-block.load-more').remove();
