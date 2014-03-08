@@ -20,7 +20,7 @@ if (http_response_code() != 401) {
     $actorConstraint = array(
         'field' => 'actor_id',
         'operator' => '=',
-        'value' => $uid
+        'value' => 'me()'
     );
 
     $queries = array();
