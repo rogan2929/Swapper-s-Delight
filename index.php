@@ -137,7 +137,7 @@
                     <div id='button-groups' class='button toolbar-button'>
                         <span>Select a Group</span>
                     </div>
-                    <span id='post-count'></span>
+<!--                    <span id='post-count'></span>-->
                 </div>
                 <div style='clear: both;'></div>
             </div>
