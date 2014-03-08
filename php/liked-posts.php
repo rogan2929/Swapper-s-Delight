@@ -9,12 +9,12 @@ if (http_response_code() != 401) {
 
     // Allow everything younger than one month.
     // Define the initial window to search within.
-    $windowSize = 3600 * 10;    // 10 Hour Periods
+    $windowSize = 3600 * 6;    // 10 Hour Periods
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
 
-    $batchSize = 10000;
-    $batchRunCount = 48;
+    $batchSize = 5000;
+    $batchRunCount = 50;
 
     // Create the constraints array.
     $likeConstraint = array(

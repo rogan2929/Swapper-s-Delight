@@ -14,4 +14,5 @@ Show or hide groups that the user chooses. Can either be saved locally (per comp
 Helper Popups:
     Start here with group choosing.
     Point out controls for post details toolbar.
+Fix bug where posts are improperly counted when more posts are loaded.
     
