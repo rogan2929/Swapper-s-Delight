@@ -8,11 +8,11 @@ if (http_response_code() != 401) {
     $uid = $_GET['uid'];    // For some reason, calling $fbSession->getUser() kills the access token. So, we cheated.
     // Allow everything younger than one month.
     // Define the initial window to search within.
-    $windowSize = 3600 * 10;    // 10 Hour Periods
+    $windowSize = 3600 * 0.5;    // 10 Hour Periods
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
 
-    $batchSize = 2000;
+    $batchSize = 5000;
     $batchRunCount = 48;
 
     // Create the constraints array.
@@ -44,14 +44,14 @@ if (http_response_code() != 401) {
 
         $queries[] = array(
             'method' => 'POST',
-            'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildNewsFeedQuery($gid, $constraints, $batchSize))
+            'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints, $batchSize))
         );
 
         $windowStart -= $windowSize;
         $windowEnd -= $windowSize;
     }
     
-    echo json_encode($queries);
+//    echo json_encode($queries);
 
     // Call the batch query.
     $response = $fbSession->api('/', 'POST', array(
@@ -69,7 +69,7 @@ if (http_response_code() != 401) {
         $posts = array_merge($posts, processStreamQuery($result[0]['fql_result_set'], $result[1]['fql_result_set']));
     }
 
-//    echo json_encode($posts);
+    echo json_encode($posts);
 }
 
 function buildNewsFeedQuery($targetId, $constraints, $limit = 20) {
