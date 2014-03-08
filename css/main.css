@@ -370,13 +370,6 @@ a:visited {
     display: inline-block;
 }
 
-#post-count {
-    color: #f6f6f6;
-    font-weight: bold;
-    line-height: 42px;
-    height: 42px;
-}
-
 .button a:hover {
     text-decoration: none;
 }
