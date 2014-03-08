@@ -8,12 +8,12 @@ if (http_response_code() != 401) {
     $uid = $_GET['uid'];    // For some reason, calling $fbSession->getUser() kills the access token. So, we cheated.
     // Allow everything younger than one month.
     // Define the initial window to search within.
-    $windowSize = 3600 * 10;    // 10 Hour Periods
+    $windowSize = 3600 * 48;    // 10 Hour Periods
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
 
     $batchSize = 500;
-    $batchRunCount = 48;
+    $batchRunCount = 1;
 
     // Create the constraints array.
     $actorConstraint = array(
