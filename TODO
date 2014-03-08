@@ -8,3 +8,5 @@ Implement Search Post functionality, by FB user and by keyword.
 Implement Delete Post functionality for owned posts.
 Rework timeout issue so that instead of simply refreshing the page, a new access token is requested.
 Implement check to see that app has the correct permissions.
+*Possibly* add functionality to filter 'My Posts' by comment data.
+Artwork.
