@@ -46,6 +46,8 @@ if (http_response_code() != 401) {
             'method' => 'POST',
             'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildNewsFeedQuery($gid, $constraints, $batchSize))
         );
+        
+        echo json_encode($queries);
 
         $windowStart -= $windowSize;
         $windowEnd -= $windowSize;
@@ -69,7 +71,7 @@ if (http_response_code() != 401) {
 }
 
 function buildNewsFeedQuery($targetId, $constraints, $limit = 20) {
-    $streamQuery = 'SELECT post_id,updated_time,message,attachment,comment_info FROM stream WHERE filter_key in (SELECT filter_key FROM stream_filter WHERE uid=me() AND type="newsfeed") AND is_hidden = 0 AND target_id=' . $targetId;
+    $streamQuery = 'SELECT post_id,updated_time,message,attachment,comment_info FROM stream WHERE filter_key in (SELECT filter_key FROM stream_filter WHERE uid=me() AND type="newsfeed") AND is_hidden=0 AND target_id=' . $targetId;
 
     // Check for constraints.
     for ($i = 0; $i < count($constraints); $i++) {
