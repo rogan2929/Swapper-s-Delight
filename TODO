@@ -6,3 +6,5 @@ Find ad provider and place their ads.
 #Possibly rework select group floating panel.
 Implement Search Post functionality, by FB user and by keyword.
 Implement Delete Post functionality for owned posts.
+Rework timeout issue so that instead of simply refreshing the page, a new access token is requested.
+Implement check to see that app has the correct permissions.
