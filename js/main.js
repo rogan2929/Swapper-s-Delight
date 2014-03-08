@@ -870,16 +870,17 @@ var SwdView = {
      * @param {type} posts
      */
     populatePostBlocks: function(posts, postType) {
-        var i, post;
+        var i, post, groupText;
 
         SwdView.toggleAjaxLoadingDiv('body', false);
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', false);
-        $('#post-count').hide();
 
         // If there is a feed to display, then display it.
         if (posts && posts.length > 0) {
             $('#post-feed-noposts').hide();
-            $('#post-count').text('(' + posts.length + ')').show();
+            groupText = $('#button-groups').text();
+            groupText += ' (' + posts.length + ')';
+            $('#button-groups').text(groupText);
 
             // Remove any existing 'Load more...' tiles.
             $('.post-block.load-more').remove();
