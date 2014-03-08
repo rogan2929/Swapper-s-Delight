@@ -9,7 +9,7 @@ if (http_response_code() != 401) {
 
     // Allow everything younger than one month.
     // Define the initial window to search within.
-    $windowSize = 3600 * 15;    // 1 Day
+    $windowSize = 3600 * 10;    // 1 Day
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
 
