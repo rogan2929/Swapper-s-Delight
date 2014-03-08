@@ -9,12 +9,12 @@ if (http_response_code() != 401) {
 
     // Allow everything younger than one month.
     // Define the initial window to search within.
-    $windowSize = 3600 * 18;    // 1 Day
+    $windowSize = 3600 * 15;    // 1 Day
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
 
     $batchSize = 1700;
-    $batchRunCount = 40;
+    $batchRunCount = 48;
 
     // Create the constraints array.
     $actorConstraint = array(
