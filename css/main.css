@@ -16,7 +16,7 @@ input,
 select,
 textarea {
     color: #222;
-}
+}b
 
 html {
     font-size: 0.85em;
@@ -360,7 +360,7 @@ a:visited {
     margin-right: 5px;
 }
 
-.button, .menu-item {
+.button, .menu-item, #post-count {
     cursor: pointer;
     color: #444;
 /*    color: #f6f6f6;*/

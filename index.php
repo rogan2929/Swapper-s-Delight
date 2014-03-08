@@ -132,6 +132,7 @@
                         <span class='button-icon icon-menu'></span>
                         <a href='#popup-menu-main'></a>
                     </div>
+                    <div id='post-count'></div>
                 </div>
                 <div class='toolbar-group float-right'>
                     <div id='button-groups' class='button toolbar-button'>
