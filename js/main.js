@@ -240,7 +240,7 @@ var SwdPresenter = {
                             SwdPresenter.startApp();
                         }
                     }, {
-                        scope: 'user_groups,user_likes,publish_stream'
+                        scope: 'user_groups,user_likes,publish_stream,read_stream'
                     });
                 }
             });
