@@ -6,7 +6,6 @@ require_once 'queries.php';
 if (http_response_code() != 401) {
     $gid = $_GET['gid'];
     $uid = $_GET['uid'];    // For some reason, calling $fbSession->getUser() kills the access token. So, we cheated.
-
     // Allow everything younger than one month.
     // Define the initial window to search within.
     $windowSize = 3600 * 10;    // 10 Hour Periods
@@ -30,11 +29,13 @@ if (http_response_code() != 401) {
         $constraints = array();
 
         $constraints[] = $actorConstraint;
+
         $constraints[] = array(// Window start constraint
             'field' => 'updated_time',
             'operator' => '<=',
             'value' => $windowStart
         );
+
         $constraints[] = array(// Window end constraint
             'field' => 'updated_time',
             'operator' => '>=',
@@ -43,7 +44,7 @@ if (http_response_code() != 401) {
 
         $queries[] = array(
             'method' => 'POST',
-            'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints, $batchSize))
+            'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildNewsFeedQuery($gid, $constraints, $batchSize))
         );
 
         $windowStart -= $windowSize;
@@ -65,4 +66,24 @@ if (http_response_code() != 401) {
     }
 
     echo json_encode($posts);
+}
+
+function buildNewsFeedQuery($targetId, $constraints, $limit = 20) {
+    $streamQuery = 'SELECT post_id,updated_time,message,attachment,comment_info FROM stream WHERE filter_key in (SELECT filter_key FROM stream_filter WHERE uid=me() AND type="newsfeed") AND is_hidden = 0 AND target_id=' . $targetId;
+
+    // Check for constraints.
+    for ($i = 0; $i < count($constraints); $i++) {
+        $constraint = $constraints[$i];
+        $streamQuery .= ' AND ' . $constraint['field'] . ' ' . $constraint['operator'] . ' ' . $constraint['value'];
+    }
+
+    // Fetch 20 results, and sorted by creation time.
+    $streamQuery .= ' ORDER BY updated_time DESC LIMIT ' . $limit;
+
+    $queries = array(
+        'streamQuery' => $streamQuery,
+        'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'
+    );
+
+    return $queries;
 }
