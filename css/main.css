@@ -119,6 +119,12 @@ a:visited {
     color: #105cb6;
 }
 
+#post-count {
+    line-height: 42px;
+    height: 42px;
+    font-weight: bold;
+}
+
 .row,.col {
     overflow: hidden;
     position: absolute;
