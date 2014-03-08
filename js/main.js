@@ -879,7 +879,7 @@ var SwdView = {
         // If there is a feed to display, then display it.
         if (posts && posts.length > 0) {
             $('#post-feed-noposts').hide();
-            $('#post-count').text('Showing ' + posts.length + ' Posts').show();
+            $('#post-count').text('(' + posts.length + ')').show();
 
             // Remove any existing 'Load more...' tiles.
             $('.post-block.load-more').remove();
