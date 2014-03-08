@@ -46,8 +46,6 @@ if (http_response_code() != 401) {
             'method' => 'POST',
             'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildNewsFeedQuery($gid, $constraints, $batchSize))
         );
-        
-        echo json_encode($queries);
 
         $windowStart -= $windowSize;
         $windowEnd -= $windowSize;
@@ -58,6 +56,8 @@ if (http_response_code() != 401) {
         'batch' => json_encode($queries),
         'include_headers' => false
     ));
+    
+    echo json_encode($response);
 
     $posts = array();
 
