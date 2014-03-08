@@ -51,7 +51,7 @@ if (http_response_code() != 401) {
         $windowEnd -= $windowSize;
     }
     
-    echo var_dump($queries);
+    echo json_encode($queries);
 
     // Call the batch query.
     $response = $fbSession->api('/', 'POST', array(
