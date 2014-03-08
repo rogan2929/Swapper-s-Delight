@@ -59,7 +59,7 @@ if (http_response_code() != 401) {
         'include_headers' => false
     ));
     
-    echo json_encode($response);
+//    echo json_encode($response);
 
     $posts = array();
 
@@ -69,7 +69,7 @@ if (http_response_code() != 401) {
         $posts = array_merge($posts, processStreamQuery($result[0]['fql_result_set'], $result[1]['fql_result_set']));
     }
 
-    echo json_encode($posts);
+//    echo json_encode($posts);
 }
 
 function buildNewsFeedQuery($targetId, $constraints, $limit = 20) {
