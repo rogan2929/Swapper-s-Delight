@@ -13,8 +13,8 @@ if (http_response_code() != 401) {
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
 
-    $batchSize = 1500;
-    $batchRunCount = 45;
+    $batchSize = 1700;
+    $batchRunCount = 30;
 
     // Create the constraints array.
     $actorConstraint = array(
