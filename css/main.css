@@ -370,8 +370,11 @@ a:visited {
     display: inline-block;
 }
 
-#post-comment {
-    display: inline-block;
+#post-count {
+    color: #f6f6f6;
+    font-weight: bold;
+    line-height: 42px;
+    height: 42px;
 }
 
 .button a:hover {
@@ -488,7 +491,7 @@ a:visited {
 
 #button-groups {
     padding-left: 20px;
-    padding-right: 20px;
+/*    padding-right: 20px;*/
 /*    margin-right: -10px;*/
     font-weight: bold;
 }
