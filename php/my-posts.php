@@ -13,7 +13,7 @@ if (http_response_code() != 401) {
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
 
-    $batchSize = 1700;
+    $batchSize = 1800;
     $batchRunCount = 48;
 
     // Create the constraints array.
