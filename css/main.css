@@ -398,7 +398,7 @@ a:visited {
     font-size: 0.95em;
 }
 
-.button.toolbar-button {
+.button.toolbar-button, #post-count {
     height: 42px;
     line-height: 42px;
     border-radius: 0px;
