@@ -297,7 +297,7 @@ var SwdPresenter = {
                     }
 
                     if (SwdPresenter.groups) {
-                        SwdPresenter.setSelectedGroup(selectedGroups[0]);
+                        //SwdPresenter.setSelectedGroup(selectedGroups[0]);
                         SwdView.addGroupsToSelectPanel(selectedGroups);
 
                         // Install Event Handlers
@@ -324,6 +324,9 @@ var SwdPresenter = {
 
                         // Set the main ajax overlay to be semi-transparent.
                         SwdView.setMainOverlayTransparency();
+                        
+                        // Start with displaying the group selection panel.
+                        SwdView.toggleFloatingPanel('#select-group-panel', true);
                     }
                     else {
                         // Have the view prompt the user to edit BST groups.

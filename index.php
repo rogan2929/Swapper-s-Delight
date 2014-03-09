@@ -108,6 +108,7 @@
                 <div id='select-group-panel' class='floating-panel hidden'>
                     <div class='floating-panel-content ui-widget scroll-y'>
                         <div class='close-button'></div>
+                        <span class='heading'>Choose a Group to View</span>
                         <span class='hint'>Hint: Hide any groups that you don't want to see here. Don't worry; you can always bring them back later.</span>
                         <div id='select-group-list' class='selection-list'>
                             <div id='select-group-no-groups' class='selection-item select-group'>
