@@ -197,8 +197,9 @@ var SwdPresenter = {
             if (response.status !== 'connected') {
                 SwdView.showMessage('Sorry, but your session has expired. Please log back in.');
                 FB.login();
-                callback.call(SwdPresenter);
             }
+
+            callback.call(SwdPresenter);
         });
     },
     /***
