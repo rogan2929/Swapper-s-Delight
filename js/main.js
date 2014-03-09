@@ -821,7 +821,9 @@ var SwdView = {
      * @param {type} id
      */
     removeGroupFromSelectPanel: function(id) {
-        $(id).fadeOut().remove();
+        $(id).fadeOut(function() {
+            $(this).remove();
+        });
     },
     /***
      * Simulate the placing of fixed divs within the FB app canvas.
