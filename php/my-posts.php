@@ -5,10 +5,10 @@ require_once 'queries.php';
 
 if (http_response_code() != 401) {
     $gid = $_GET['gid'];
-    $uid = $_GET['uid'];    // For some reason, calling $fbSession->getUser() kills the access token. So, we cheated.
-    // Allow everything younger than one month.
+    $uid = $_GET['uid'];    
+    
     // Define the initial window to search within.
-    $windowSize = 3600 * 6;    // 10 Hour Periods
+    $windowSize = 3600 * 6;    // 6 Hour Periods
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
 
@@ -22,6 +22,8 @@ if (http_response_code() != 401) {
         'operator' => '=',
         'value' => 'me()'
     );
+    
+    $posts = array();
 
     for ($i = 0; $i < $batchCount; $i++) {
         $queries = array();
@@ -59,16 +61,14 @@ if (http_response_code() != 401) {
             'include_headers' => false
         ));
 
-        $posts = array();
-
         // Sift through the results.
         for ($i = 0; $i < count($response); $i++) {
             $result = json_decode($response[$i]['body'], true);
             $posts = array_merge($posts, processStreamQuery($result[0]['fql_result_set'], $result[1]['fql_result_set']));
         }
-
-        echo json_encode($posts);
         
         sleep(3);
     }
 }
+
+echo json_encode($posts);
