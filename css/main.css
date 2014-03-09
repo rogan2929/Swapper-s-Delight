@@ -570,6 +570,7 @@ a:visited {
 .post-block.post-block-link > div,
 .post-block.post-block-textlink > div {
     overflow: hidden;
+    height: 200px;
 }
 
 .post-block.post-block-text > div > p,
