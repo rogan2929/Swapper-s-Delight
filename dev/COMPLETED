@@ -2,3 +2,4 @@ Fix timeout issue resulting from expired access tokens.
 Rework post details floating panel.
 Possibly rework select group floating panel.
 Implement 'Logout' feature.
+Rework timeout issue so that instead of simply refreshing the page, a new access token is requested.
