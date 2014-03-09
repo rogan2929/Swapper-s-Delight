@@ -194,16 +194,20 @@ var SwdPresenter = {
     checkFBLoginStatus: function(callback) {
         FB.getLoginStatus(function(response) {
             // Check connection status, posting a login prompt if the user has disconnected.
+            // TODO: Replace with something better.
             if (response.status !== 'connected') {
                 SwdView.showMessage('Sorry, but your session has expired. Please log back in.');
+                
+                // Send the user to the app's main url.
+                window.location = AppUrl;
 
-                FB.login(function(response) {
-                    if (response.status === 'connected') {
-                        callback.call(SwdPresenter);
-                    }
-                }, {
-                    scope: 'user_groups,user_likes,publish_stream,read_stream'
-                });
+//                FB.login(function(response) {
+//                    if (response.status === 'connected') {
+//                        callback.call(SwdPresenter);
+//                    }
+//                }, {
+//                    scope: 'user_groups,user_likes,publish_stream,read_stream'
+//                });
             }
             else {
                 callback.call(SwdPresenter);
