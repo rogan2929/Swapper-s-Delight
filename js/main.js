@@ -606,12 +606,12 @@ var SwdPresenter = {
         // Prevent the event from bubbling up the DOM and immediately causing the displayed panel to close.
         e.stopPropagation();
 
-        SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
-        SwdView.toggleFloatingPanel('#post-details-panel', true);
-        SwdView.toggleToolbar('#post-details-toolbar', true);
-
         // Before calling anything, confirm login status.
         SwdPresenter.checkFBLoginStatus(function() {
+            SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
+            SwdView.toggleFloatingPanel('#post-details-panel', true);
+            SwdView.toggleToolbar('#post-details-toolbar', true);
+
             SwdModel.getPostDetails(id, {
                 success: function(response) {
                     post = response;
@@ -677,11 +677,11 @@ var SwdPresenter = {
             id = SwdPresenter.selectedPost.post_id;
             comment = $('#popup-comment-text').val();
 
-            // Show the ajax loading div.
-            SwdView.toggleAjaxLoadingDiv('#popup-comment', true);
-
             // Before calling anything, confirm login status.
             SwdPresenter.checkFBLoginStatus(function() {
+                // Show the ajax loading div.
+                SwdView.toggleAjaxLoadingDiv('#popup-comment', true);
+
                 // Post the comment.
                 SwdModel.postComment(id, comment, {
                     success: function(response) {
