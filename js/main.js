@@ -676,8 +676,6 @@ var SwdPresenter = {
 
         groupTile = $(target).parent('.group-selection-item');
 
-        alert(groupTile.attr('id'));
-
         // Remove the item from view.
         SwdView.removeGroupFromSelectPanel(groupTile);
     },
