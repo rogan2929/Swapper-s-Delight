@@ -23,6 +23,7 @@ if (http_response_code() != 401) {
     );
 
     $queries = array();
+    $posts = array();
 
     // Construct the FB batch request
     for ($i = 0; $i < $batchRunCount; $i++) {
@@ -42,28 +43,30 @@ if (http_response_code() != 401) {
             'value' => $windowEnd
         );
 
-        $queries[] = array(
-            'method' => 'POST',
-            'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints, $batchSize))
-        );
+//        $queries[] = array(
+//            'method' => 'POST',
+//            'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints, $batchSize))
+//        );
+        
+        $posts = array_merge($posts, streamQuery($fbSession, $gid, $constraints, $batchSize));
 
         $windowStart -= $windowSize;
         $windowEnd -= $windowSize;
     }
 
     // Call the batch query.
-    $response = $fbSession->api('/', 'POST', array(
-        'batch' => json_encode($queries),
-        'include_headers' => false
-    ));
+//    $response = $fbSession->api('/', 'POST', array(
+//        'batch' => json_encode($queries),
+//        'include_headers' => false
+//    ));
 
-    $posts = array();
-
-    // Sift through the results.
-    for ($i = 0; $i < count($response); $i++) {
-        $result = json_decode($response[$i]['body'], true);
-        $posts = array_merge($posts, processStreamQuery($result[0]['fql_result_set'], $result[1]['fql_result_set']));
-    }
+//    $posts = array();
+//
+//    // Sift through the results.
+//    for ($i = 0; $i < count($response); $i++) {
+//        $result = json_decode($response[$i]['body'], true);
+//        $posts = array_merge($posts, processStreamQuery($result[0]['fql_result_set'], $result[1]['fql_result_set']));
+//    }
 
     echo json_encode($posts);
 }
