@@ -280,8 +280,6 @@ var SwdPresenter = {
             // Retrieve group info for logged in user.
             SwdModel.getGroupInfo({
                 success: function(response) {
-                    SwdView.toggleAjaxLoadingDiv('body', false);
-
                     SwdPresenter.groups = response;
 
                     selectedGroups = [];
@@ -322,14 +320,16 @@ var SwdPresenter = {
                         SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
                         SwdView.positionMenus();
 
-                        // Sleep for 2 seconds, allowing facebookPageInfoPoll() to complete for the first time.
+                        // Sleep for 1 second, allowing facebookPageInfoPoll() to complete for the first time.
                         setTimeout(function() {
+                            SwdView.toggleAjaxLoadingDiv('body', false);
+                            
                             // Set the main ajax overlay to be semi-transparent.
                             SwdView.setMainOverlayTransparency();
 
                             // Start with displaying the group selection panel.
                             SwdView.toggleFloatingPanel('#select-group-panel', true);
-                        }, 2000);
+                        }, 1000);
                     }
                     else {
                         // Have the view prompt the user to edit BST groups.
