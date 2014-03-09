@@ -290,6 +290,7 @@ a:visited {
     padding: 0;
     margin-top: 0;
     margin-bottom: 0;
+    margin-right: -5px;
 }
 
 .selection-item {
@@ -297,6 +298,7 @@ a:visited {
     background-color: #eee;
     margin: 5px;
     padding: 4px !important;
+    position: relative;
 }
 
 .selection-item-content {
@@ -324,6 +326,8 @@ a:visited {
     color: #444;
     display: block;
     font-weight: bold;
+    font-size: 1.05em;
+    margin-bottom: 4px;
 }
 
 #post-feed-noposts {
@@ -562,14 +566,17 @@ a:visited {
     margin-right: 10px;
 }
 
-#post-no-image-desc {
+.hint {
     color: #e35765;
+    display: block;
+    font-style: italic;
 }
 
 .post-block.post-block-text > div,
 .post-block.post-block-link > div,
 .post-block.post-block-textlink > div {
     overflow: hidden;
+    height: 200px;
 }
 
 .post-block.post-block-text > div > p,

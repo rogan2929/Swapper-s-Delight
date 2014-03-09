@@ -188,19 +188,43 @@ var SwdPresenter = {
     currentlyLoading: false,
     selectedPost: null,
     /***
+     * Confirm Facebook Login Status.
+     * @param {type} callback
+     */
+    checkFBLoginStatus: function(callback) {
+        FB.getLoginStatus(function(response) {
+            // Check connection status, posting a login prompt if the user has disconnected.
+            if (response.status !== 'connected') {
+                SwdView.showMessage('Sorry, but your session has expired. Please log back in.');
+
+                FB.login(function(response) {
+                    if (response.status === 'connected') {
+                        callback.call(SwdPresenter);
+                    }
+                }, {
+                    scope: 'user_groups,user_likes,publish_stream,read_stream'
+                });
+            }
+            else {
+                callback.call(SwdPresenter);
+            }
+        });
+    },
+    /***
      * Top-level error handler function.
      */
     handleError: function(error) {
-        switch (error.status) {
-            case 401:
-                // Access denied, most likely from an expired access token.
-                // Get a new access token.
-                // For now, simply refresh the page.
-                location.reload();
-                break;
-            default:
-                SwdView.showError(error.responseText);
-        }
+//        switch (error.status) {
+//            case 401:
+//                // Access denied, most likely from an expired access token.
+//                // Get a new access token.
+//                // For now, simply refresh the page.
+//                location.reload();
+//                break;
+//            default:
+//                SwdView.showError(error.responseText);
+//        }
+        SwdView.showError(error.responseText);
     },
     /**
      * Entry point of program.
@@ -256,8 +280,6 @@ var SwdPresenter = {
             // Retrieve group info for logged in user.
             SwdModel.getGroupInfo({
                 success: function(response) {
-                    SwdView.toggleAjaxLoadingDiv('body', false);
-
                     SwdPresenter.groups = response;
 
                     selectedGroups = [];
@@ -273,14 +295,14 @@ var SwdPresenter = {
                     }
 
                     if (SwdPresenter.groups) {
-                        SwdPresenter.setSelectedGroup(selectedGroups[0]);
+                        //SwdPresenter.setSelectedGroup(selectedGroups[0]);
                         SwdView.addGroupsToSelectPanel(selectedGroups);
 
                         // Install Event Handlers
                         SwdView.installHandler('onClickButtonGroups', SwdPresenter.onClickButtonGroups, '#button-groups', 'click');
                         SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
                         SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
-                        SwdView.installHandler('onClickCloseButton', SwdPresenter.onClickCloseButton, '.close-button', 'click');
+                        SwdView.installHandler('onClickFloatingPanelCloseButton', SwdPresenter.onClickFloatingPanelCloseButton, '.floating-panel-content > .close-button', 'click');
                         SwdView.installHandler('onClickFloatingPanelContent', SwdPresenter.onClickFloatingPanelContent, '.floating-panel-content', 'click');
                         SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
                         SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
@@ -292,13 +314,22 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickPostBlockLoadMore', SwdPresenter.onClickPostBlockLoadMore, '.post-block.load-more', 'click');
                         SwdView.installHandler('onClickPostImage', SwdPresenter.onClickPostImage, '#post-image', 'click');
                         SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
+                        SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .close-button', 'click');
                         SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
                         SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#popup-comment-text', 'keyup')
                         SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
                         SwdView.positionMenus();
 
-                        // Set the main ajax overlay to be semi-transparent.
-                        SwdView.setMainOverlayTransparency();
+                        // Sleep for 1 second, allowing facebookPageInfoPoll() to complete for the first time.
+                        setTimeout(function() {
+                            SwdView.toggleAjaxLoadingDiv('body', false);
+                            
+                            // Set the main ajax overlay to be semi-transparent.
+                            SwdView.setMainOverlayTransparency();
+
+                            // Start with displaying the group selection panel.
+                            SwdView.toggleFloatingPanel('#select-group-panel', true);
+                        }, 1000);
                     }
                     else {
                         // Have the view prompt the user to edit BST groups.
@@ -391,39 +422,42 @@ var SwdPresenter = {
     loadPosts: function(loadNextPage) {
         var updatedTime;
 
-        if (!SwdPresenter.currentlyLoading) {
-            SwdPresenter.currentlyLoading = true;
+        // Before calling anything, confirm login status.
+        SwdPresenter.checkFBLoginStatus(function() {
+            if (!SwdPresenter.currentlyLoading) {
+                SwdPresenter.currentlyLoading = true;
 
-            if (loadNextPage && SwdPresenter.oldestPost) {
-                updatedTime = SwdPresenter.oldestPost.updated_time;
-            }
-            else {
-                updatedTime = null;
-                SwdView.clearPosts();
-                SwdPresenter.resetFbCanvasSize();
-                SwdView.toggleAjaxLoadingDiv('body', true);
-            }
+                if (loadNextPage && SwdPresenter.oldestPost) {
+                    updatedTime = SwdPresenter.oldestPost.updated_time;
+                }
+                else {
+                    updatedTime = null;
+                    SwdView.clearPosts();
+                    SwdPresenter.resetFbCanvasSize();
+                    SwdView.toggleAjaxLoadingDiv('body', true);
+                }
 
-            switch (SwdPresenter.postType) {
-                case PostType.group:
-                    SwdPresenter.loadNewestPosts(loadNextPage, updatedTime);
-                    break;
-                case PostType.myposts:
-                    if (!loadNextPage) {
-                        // This request is so intensive, that it's best to return everything at once, rather than implement paging.
-                        SwdPresenter.loadMyPosts();
-                    }
-                    break;
-                case PostType.liked:
-                    if (!loadNextPage) {
-                        // This request is so intensive, that it's best to return everything at once, rather than implement paging.
-                        SwdPresenter.loadLikedPosts();
-                    }
-                    break;
-                case PostType.search:
-                    break;
+                switch (SwdPresenter.postType) {
+                    case PostType.group:
+                        SwdPresenter.loadNewestPosts(loadNextPage, updatedTime);
+                        break;
+                    case PostType.myposts:
+                        if (!loadNextPage) {
+                            // This request is so intensive, that it's best to return everything at once, rather than implement paging.
+                            SwdPresenter.loadMyPosts();
+                        }
+                        break;
+                    case PostType.liked:
+                        if (!loadNextPage) {
+                            // This request is so intensive, that it's best to return everything at once, rather than implement paging.
+                            SwdPresenter.loadLikedPosts();
+                        }
+                        break;
+                    case PostType.search:
+                        break;
+                }
             }
-        }
+        });
     },
     /***
      * Function to wrap up any kind of post loading.
@@ -502,7 +536,7 @@ var SwdPresenter = {
     onClickButtonRefresh: function(e, args) {
         SwdPresenter.loadPosts(false);
     },
-    onClickCloseButton: function(e, args) {
+    onClickFloatingPanelCloseButton: function(e, args) {
         SwdView.toggleFloatingPanel('.floating-panel', false);
         SwdView.toggleToolbar('', false);
     },
@@ -513,6 +547,11 @@ var SwdPresenter = {
         SwdView.closeAllUiMenus();
         SwdView.toggleFloatingPanel('.floating-panel', false);
         SwdView.toggleToolbar('', false);
+    },
+    onClickLogout: function(e, args) {
+        // User selected 'logout' from the settings menu.
+        // Take them back to their main Facebook page.
+        window.location = "www.facebook.com";
     },
     onClickMenuButton: function(e, args) {
         SwdView.showUiMenu(e);
@@ -546,12 +585,15 @@ var SwdPresenter = {
 
         SwdView.setLikePost(userLikes);
 
-        // Post the comment.
-        SwdModel.likePost(id, userLikes, {
-            success: function(response) {
-                //SwdView.setLikePost(response);
-            },
-            error: SwdPresenter.handleError
+        // Before calling anything, confirm login status.
+        SwdPresenter.checkFBLoginStatus(function() {
+            // Post the comment.
+            SwdModel.likePost(id, userLikes, {
+                success: function(response) {
+                    //SwdView.setLikePost(response);
+                },
+                error: SwdPresenter.handleError
+            });
         });
     },
     onClickPostButtonPm: function(e, args) {
@@ -579,29 +621,32 @@ var SwdPresenter = {
         // Prevent the event from bubbling up the DOM and immediately causing the displayed panel to close.
         e.stopPropagation();
 
-        SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
-        SwdView.toggleFloatingPanel('#post-details-panel', true);
-        SwdView.toggleToolbar('#post-details-toolbar', true);
+        // Before calling anything, confirm login status.
+        SwdPresenter.checkFBLoginStatus(function() {
+            SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
+            SwdView.toggleFloatingPanel('#post-details-panel', true);
+            SwdView.toggleToolbar('#post-details-toolbar', true);
 
-        SwdModel.getPostDetails(id, {
-            success: function(response) {
-                post = response;
+            SwdModel.getPostDetails(id, {
+                success: function(response) {
+                    post = response;
 
-                // Try to retrieve image URL from object.
-                //post['image_url'] = $('#' + id).data('image_url');
+                    // Try to retrieve image URL from object.
+                    //post['image_url'] = $('#' + id).data('image_url');
 
-                if (post) {
-                    SwdPresenter.selectedPost = post;
-                    SwdView.setLikePost(false);
-                    SwdView.showPostDetails(post);
-                }
-                else {
-                    // TODO: Do a real error message.
-                    SwdPresenter.selectedPost = null;
-                    alert('Unable to display post. It was most likely deleted.');
-                }
-            },
-            error: SwdPresenter.handleError
+                    if (post) {
+                        SwdPresenter.selectedPost = post;
+                        SwdView.setLikePost(false);
+                        SwdView.showPostDetails(post);
+                    }
+                    else {
+                        // TODO: Do a real error message.
+                        SwdPresenter.selectedPost = null;
+                        alert('Unable to display post. It was most likely deleted.');
+                    }
+                },
+                error: SwdPresenter.handleError
+            });
         });
     },
     onClickPostBlockLoadMore: function(e, args) {
@@ -616,22 +661,29 @@ var SwdPresenter = {
 
         id = $(e.currentTarget).attr('id');
 
-        if (id === 'select-group-choose') {
-            // TODO: Display group chooser dialog.
-        }
-        else {
-            for (i = 0; i < SwdPresenter.groups.length; i++) {
-                if (id === SwdPresenter.groups[i].gid) {
-                    group = SwdPresenter.groups[i];
-                    break;
-                }
+        for (i = 0; i < SwdPresenter.groups.length; i++) {
+            if (id === SwdPresenter.groups[i].gid) {
+                group = SwdPresenter.groups[i];
+                break;
             }
-
-            // Set selected group and load its feed.
-            SwdPresenter.setSelectedGroup(group);
-
-            SwdView.toggleFloatingPanel('#select-group-panel', false);
         }
+
+        // Set selected group and load its feed.
+        SwdPresenter.setSelectedGroup(group);
+
+        SwdView.toggleFloatingPanel('#select-group-panel', false);
+    },
+    onClickGroupClose: function(e, args) {
+        var groupTile, target;
+
+        e.stopPropagation();
+
+        target = $(e.currentTarget);
+
+        groupTile = $(target).parent('.group-selection-item');
+
+        // Remove the item from view.
+        SwdView.removeGroupFromSelectPanel(groupTile);
     },
     onClickToolbar: function(e, args) {
         e.stopPropagation();
@@ -647,16 +699,19 @@ var SwdPresenter = {
             id = SwdPresenter.selectedPost.post_id;
             comment = $('#popup-comment-text').val();
 
-            // Show the ajax loading div.
-            SwdView.toggleAjaxLoadingDiv('#popup-comment', true);
+            // Before calling anything, confirm login status.
+            SwdPresenter.checkFBLoginStatus(function() {
+                // Show the ajax loading div.
+                SwdView.toggleAjaxLoadingDiv('#popup-comment', true);
 
-            // Post the comment.
-            SwdModel.postComment(id, comment, {
-                success: function(response) {
-                    SwdView.addPostComment(response);
-                    SwdView.clearPostCommentText();
-                },
-                error: SwdPresenter.handleError
+                // Post the comment.
+                SwdModel.postComment(id, comment, {
+                    success: function(response) {
+                        SwdView.addPostComment(response);
+                        SwdView.clearPostCommentText();
+                    },
+                    error: SwdPresenter.handleError
+                });
             });
         }
 
@@ -681,7 +736,7 @@ var SwdView = {
         $('#select-group-no-groups').hide();
 
         for (i = 0; i < groups.length; i++) {
-            $('#select-group-list').append('<div id="' + groups[i].gid + '" class="button selection-item select-group"><div class="selection-item-content"><span class="button-icon" style="background-image: url(' + groups[i].icon + ')"></span><div>' + groups[i].name + '</div></div></div>');
+            $('#select-group-list').append('<div id="' + groups[i].gid + '" class="button group-selection-item selection-item select-group"><div class="close-button"></div><div class="selection-item-content"><span class="button-icon" style="background-image: url(' + groups[i].icon + ')"></span><div>' + groups[i].name + '</div></div></div>');
         }
     },
     addPostComment: function(comment) {
@@ -768,6 +823,15 @@ var SwdView = {
         });
     },
     /***
+     * Remove a group from the group selection panel.
+     * @param {type} id
+     */
+    removeGroupFromSelectPanel: function(id) {
+        $(id).fadeOut(function() {
+            $(this).remove();
+        });
+    },
+    /***
      * Simulate the placing of fixed divs within the FB app canvas.
      * @param {type} offset
      */
@@ -806,7 +870,7 @@ var SwdView = {
         else {
             $('#button-groups').text(text);
         }
-    
+
     },
     /***
      * Set selected post type.
@@ -967,10 +1031,19 @@ var SwdView = {
         alert(post.post_id);
     },
     /***
-     * Displays a lovely error message. Something which the user loves.
+     * Displays an error message to the user.
      * @param {type} message
      */
     showError: function(message) {
+        // TODO: Replace with a nice dialog box.
+        alert(message);
+    },
+    /***
+     * Displays an information message to the user.
+     * @param {type} message
+     */
+    showMessage: function(message) {
+        // TODO: Replace with a nice dialog box.
         alert(message);
     },
     /***

@@ -1,9 +1,5 @@
-#Fix timeout issue resulting from expired access tokens.
-#Rework post details floating panel.
 Implement 'New' post functionality.
-Implement 'Logout' feature.
 Find ad provider and place their ads.
-#Possibly rework select group floating panel.
 Implement Search Post functionality, by FB user and by keyword.
 Implement Delete Post functionality for owned posts.
 Rework timeout issue so that instead of simply refreshing the page, a new access token is requested.
@@ -18,4 +14,5 @@ Fix bug where posts are improperly counted when more posts are loaded.
 Include prompt to change app settings so that others using Swapper's Delight can see the current user's photos.
     https://www.facebook.com/settings?tab=applications&section=friends_share&view (Apps Others Use)
 Delete comments?
-    
+Acknowledge tags in posts and comments.
+Allow creation of tags in posts and comments.
