@@ -646,22 +646,17 @@ var SwdPresenter = {
 
         id = $(e.currentTarget).attr('id');
 
-        if (id === 'select-group-choose') {
-            // TODO: Display group chooser dialog.
-        }
-        else {
-            for (i = 0; i < SwdPresenter.groups.length; i++) {
-                if (id === SwdPresenter.groups[i].gid) {
-                    group = SwdPresenter.groups[i];
-                    break;
-                }
+        for (i = 0; i < SwdPresenter.groups.length; i++) {
+            if (id === SwdPresenter.groups[i].gid) {
+                group = SwdPresenter.groups[i];
+                break;
             }
-
-            // Set selected group and load its feed.
-            SwdPresenter.setSelectedGroup(group);
-
-            SwdView.toggleFloatingPanel('#select-group-panel', false);
         }
+
+        // Set selected group and load its feed.
+        SwdPresenter.setSelectedGroup(group);
+
+        SwdView.toggleFloatingPanel('#select-group-panel', false);
     },
     onClickToolbar: function(e, args) {
         e.stopPropagation();
@@ -714,7 +709,7 @@ var SwdView = {
         $('#select-group-no-groups').hide();
 
         for (i = 0; i < groups.length; i++) {
-            $('#select-group-list').append('<div id="' + groups[i].gid + '" class="button selection-item select-group"><div class="selection-item-content"><span class="button-icon" style="background-image: url(' + groups[i].icon + ')"></span><div>' + groups[i].name + '</div></div></div>');
+            $('#select-group-list').append('<div id="' + groups[i].gid + '" class="button selection-item select-group"><div class="close-button"></div><div class="selection-item-content"><span class="button-icon" style="background-image: url(' + groups[i].icon + ')"></span><div>' + groups[i].name + '</div></div></div>');
         }
     },
     addPostComment: function(comment) {
