@@ -8,7 +8,7 @@ if (http_response_code() != 401) {
     $uid = $_GET['uid'];    // For some reason, calling $fbSession->getUser() kills the access token. So, we cheated.
     // Allow everything younger than one month.
     // Define the initial window to search within.
-    $windowSize = 3600 * 8;    // 10 Hour Periods
+    $windowSize = 3600 * 7;    // 10 Hour Periods
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
 
