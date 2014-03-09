@@ -188,19 +188,33 @@ var SwdPresenter = {
     currentlyLoading: false,
     selectedPost: null,
     /***
+     * Confirm Facebook Login Status.
+     * @param {type} callback
+     */
+    checkFBLoginStatus: function(callback) {
+        FB.getLoginStatus(function(response) {
+            // Check connection status.
+            if (response.status !== 'connected') {
+                FB.login();
+                callback.call(SwdPresenter);
+            }
+        });
+    },
+    /***
      * Top-level error handler function.
      */
     handleError: function(error) {
-        switch (error.status) {
-            case 401:
-                // Access denied, most likely from an expired access token.
-                // Get a new access token.
-                // For now, simply refresh the page.
-                location.reload();
-                break;
-            default:
-                SwdView.showError(error.responseText);
-        }
+//        switch (error.status) {
+//            case 401:
+//                // Access denied, most likely from an expired access token.
+//                // Get a new access token.
+//                // For now, simply refresh the page.
+//                location.reload();
+//                break;
+//            default:
+//                SwdView.showError(error.responseText);
+//        }
+        SwdView.showError(error.responseText);
     },
     /**
      * Entry point of program.
@@ -391,39 +405,42 @@ var SwdPresenter = {
     loadPosts: function(loadNextPage) {
         var updatedTime;
 
-        if (!SwdPresenter.currentlyLoading) {
-            SwdPresenter.currentlyLoading = true;
+        // Before calling anything, confirm login status.
+        SwdPresenter.checkFBLoginStatus(function() {
+            if (!SwdPresenter.currentlyLoading) {
+                SwdPresenter.currentlyLoading = true;
 
-            if (loadNextPage && SwdPresenter.oldestPost) {
-                updatedTime = SwdPresenter.oldestPost.updated_time;
-            }
-            else {
-                updatedTime = null;
-                SwdView.clearPosts();
-                SwdPresenter.resetFbCanvasSize();
-                SwdView.toggleAjaxLoadingDiv('body', true);
-            }
+                if (loadNextPage && SwdPresenter.oldestPost) {
+                    updatedTime = SwdPresenter.oldestPost.updated_time;
+                }
+                else {
+                    updatedTime = null;
+                    SwdView.clearPosts();
+                    SwdPresenter.resetFbCanvasSize();
+                    SwdView.toggleAjaxLoadingDiv('body', true);
+                }
 
-            switch (SwdPresenter.postType) {
-                case PostType.group:
-                    SwdPresenter.loadNewestPosts(loadNextPage, updatedTime);
-                    break;
-                case PostType.myposts:
-                    if (!loadNextPage) {
-                        // This request is so intensive, that it's best to return everything at once, rather than implement paging.
-                        SwdPresenter.loadMyPosts();
-                    }
-                    break;
-                case PostType.liked:
-                    if (!loadNextPage) {
-                        // This request is so intensive, that it's best to return everything at once, rather than implement paging.
-                        SwdPresenter.loadLikedPosts();
-                    }
-                    break;
-                case PostType.search:
-                    break;
+                switch (SwdPresenter.postType) {
+                    case PostType.group:
+                        SwdPresenter.loadNewestPosts(loadNextPage, updatedTime);
+                        break;
+                    case PostType.myposts:
+                        if (!loadNextPage) {
+                            // This request is so intensive, that it's best to return everything at once, rather than implement paging.
+                            SwdPresenter.loadMyPosts();
+                        }
+                        break;
+                    case PostType.liked:
+                        if (!loadNextPage) {
+                            // This request is so intensive, that it's best to return everything at once, rather than implement paging.
+                            SwdPresenter.loadLikedPosts();
+                        }
+                        break;
+                    case PostType.search:
+                        break;
+                }
             }
-        }
+        });
     },
     /***
      * Function to wrap up any kind of post loading.
@@ -546,12 +563,15 @@ var SwdPresenter = {
 
         SwdView.setLikePost(userLikes);
 
-        // Post the comment.
-        SwdModel.likePost(id, userLikes, {
-            success: function(response) {
-                //SwdView.setLikePost(response);
-            },
-            error: SwdPresenter.handleError
+        // Before calling anything, confirm login status.
+        SwdPresenter.checkFBLoginStatus(function() {
+            // Post the comment.
+            SwdModel.likePost(id, userLikes, {
+                success: function(response) {
+                    //SwdView.setLikePost(response);
+                },
+                error: SwdPresenter.handleError
+            });
         });
     },
     onClickPostButtonPm: function(e, args) {
@@ -583,25 +603,28 @@ var SwdPresenter = {
         SwdView.toggleFloatingPanel('#post-details-panel', true);
         SwdView.toggleToolbar('#post-details-toolbar', true);
 
-        SwdModel.getPostDetails(id, {
-            success: function(response) {
-                post = response;
+        // Before calling anything, confirm login status.
+        SwdPresenter.checkFBLoginStatus(function() {
+            SwdModel.getPostDetails(id, {
+                success: function(response) {
+                    post = response;
 
-                // Try to retrieve image URL from object.
-                //post['image_url'] = $('#' + id).data('image_url');
+                    // Try to retrieve image URL from object.
+                    //post['image_url'] = $('#' + id).data('image_url');
 
-                if (post) {
-                    SwdPresenter.selectedPost = post;
-                    SwdView.setLikePost(false);
-                    SwdView.showPostDetails(post);
-                }
-                else {
-                    // TODO: Do a real error message.
-                    SwdPresenter.selectedPost = null;
-                    alert('Unable to display post. It was most likely deleted.');
-                }
-            },
-            error: SwdPresenter.handleError
+                    if (post) {
+                        SwdPresenter.selectedPost = post;
+                        SwdView.setLikePost(false);
+                        SwdView.showPostDetails(post);
+                    }
+                    else {
+                        // TODO: Do a real error message.
+                        SwdPresenter.selectedPost = null;
+                        alert('Unable to display post. It was most likely deleted.');
+                    }
+                },
+                error: SwdPresenter.handleError
+            });
         });
     },
     onClickPostBlockLoadMore: function(e, args) {
@@ -650,13 +673,16 @@ var SwdPresenter = {
             // Show the ajax loading div.
             SwdView.toggleAjaxLoadingDiv('#popup-comment', true);
 
-            // Post the comment.
-            SwdModel.postComment(id, comment, {
-                success: function(response) {
-                    SwdView.addPostComment(response);
-                    SwdView.clearPostCommentText();
-                },
-                error: SwdPresenter.handleError
+            // Before calling anything, confirm login status.
+            SwdPresenter.checkFBLoginStatus(function() {
+                // Post the comment.
+                SwdModel.postComment(id, comment, {
+                    success: function(response) {
+                        SwdView.addPostComment(response);
+                        SwdView.clearPostCommentText();
+                    },
+                    error: SwdPresenter.handleError
+                });
             });
         }
 
@@ -806,7 +832,7 @@ var SwdView = {
         else {
             $('#button-groups').text(text);
         }
-    
+
     },
     /***
      * Set selected post type.
