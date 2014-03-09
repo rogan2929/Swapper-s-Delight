@@ -660,18 +660,18 @@ var SwdPresenter = {
         SwdView.toggleFloatingPanel('#select-group-panel', false);
     },
     onClickGroupClose: function(e, args) {
-        var id, groupTile;
+        var groupTile, target;
         
         e.stopPropagation();
         
-        id = $(e.currentTarget).attr('id');
+        target = $(e.currentTarget);
         
-        groupTile = $(id).parent('.group-selection-item');
+        groupTile = $(target).parent('.group-selection-item');
         
-        alert(groupTile.attr('id'));
+        alert(id.attr('id'));
         
         // Remove the item from view.
-        SwdView.removeGroupFromSelectPanel(id);
+        SwdView.removeGroupFromSelectPanel(groupTile);
     },
     onClickToolbar: function(e, args) {
         e.stopPropagation();
