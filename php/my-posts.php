@@ -14,7 +14,7 @@ if (http_response_code() != 401) {
 
     $batchSize = 5000;
     $batchRunCount = 50;
-    $batchCount = 3;
+    $batchCount = 2;
 
     // Create the constraints array.
     $actorConstraint = array(
