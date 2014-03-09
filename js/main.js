@@ -532,6 +532,11 @@ var SwdPresenter = {
         SwdView.toggleFloatingPanel('.floating-panel', false);
         SwdView.toggleToolbar('', false);
     },
+    onClickLogout: function(e, args) {
+        // User selected 'logout' from the settings menu.
+        // Take them back to their main Facebook page.
+        window.location = "www.facebook.com";
+    },
     onClickMenuButton: function(e, args) {
         SwdView.showUiMenu(e);
     },
