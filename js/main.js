@@ -195,6 +195,7 @@ var SwdPresenter = {
         FB.getLoginStatus(function(response) {
             // Check connection status, posting a login prompt if the user has disconnected.
             if (response.status !== 'connected') {
+                SwdView.showMessage('Sorry, but your session has expired. Please log back in.');
                 FB.login();
                 callback.call(SwdPresenter);
             }
@@ -993,10 +994,19 @@ var SwdView = {
         alert(post.post_id);
     },
     /***
-     * Displays a lovely error message. Something which the user loves.
+     * Displays an error message to the user.
      * @param {type} message
      */
     showError: function(message) {
+        // TODO: Replace with a nice dialog box.
+        alert(message);
+    },
+    /***
+     * Displays an information message to the user.
+     * @param {type} message
+     */
+    showMessage: function(message) {
+        // TODO: Replace with a nice dialog box.
         alert(message);
     },
     /***
