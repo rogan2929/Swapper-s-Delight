@@ -304,7 +304,7 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickButtonGroups', SwdPresenter.onClickButtonGroups, '#button-groups', 'click');
                         SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
                         SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
-                        SwdView.installHandler('onClickFloatingPanelCloseButton', SwdPresenter.onClickFloatingPanelCloseButton, '.floating-panel .close-button', 'click');
+                        SwdView.installHandler('onClickFloatingPanelCloseButton', SwdPresenter.onClickFloatingPanelCloseButton, '.floating-panel > .close-button', 'click');
                         SwdView.installHandler('onClickFloatingPanelContent', SwdPresenter.onClickFloatingPanelContent, '.floating-panel-content', 'click');
                         SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
                         SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
@@ -316,7 +316,7 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickPostBlockLoadMore', SwdPresenter.onClickPostBlockLoadMore, '.post-block.load-more', 'click');
                         SwdView.installHandler('onClickPostImage', SwdPresenter.onClickPostImage, '#post-image', 'click');
                         SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
-                        SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item .close-button', 'click');
+                        SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .close-button', 'click');
                         SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
                         SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#popup-comment-text', 'keyup')
                         SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
