@@ -691,8 +691,7 @@ var SwdPresenter = {
         SwdView.hideGroupFromSelectPanel(groupTile);
     },
     onClickRestoreGroupSelectionItems: function(e, args) {
-        // restore-group-selection-items
-        alert('TEST');
+        SwdView.showAllGroupSelectionItems();
     },
     onClickToolbar: function(e, args) {
         e.stopPropagation();
@@ -837,6 +836,12 @@ var SwdView = {
      */
     hideGroupFromSelectPanel: function(id) {
         $(id).fadeOut();
+    },
+    /***
+     * Show all group selection items.
+     */
+    showAllGroupSelectionItems: function() {
+        $('.group-selection-item').fadeIn();
     },
     /***
      * Simulate the placing of fixed divs within the FB app canvas.
