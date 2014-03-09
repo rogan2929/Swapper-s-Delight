@@ -193,7 +193,7 @@ var SwdPresenter = {
      */
     checkFBLoginStatus: function(callback) {
         FB.getLoginStatus(function(response) {
-            // Check connection status.
+            // Check connection status, posting a login prompt if the user has disconnected.
             if (response.status !== 'connected') {
                 FB.login();
                 callback.call(SwdPresenter);
