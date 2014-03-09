@@ -17,4 +17,5 @@ Helper Popups:
 Fix bug where posts are improperly counted when more posts are loaded.
 Include prompt to change app settings so that others using Swapper's Delight can see the current user's photos.
     https://www.facebook.com/settings?tab=applications&section=friends_share&view (Apps Others Use)
+Delete comments?
     
