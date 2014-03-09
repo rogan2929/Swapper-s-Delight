@@ -323,7 +323,7 @@ var SwdPresenter = {
                         SwdView.positionMenus();
 
                         // Sleep for 2 seconds, allowing facebookPageInfoPoll() to complete for the first time.
-                        setTimeOut(function() {
+                        setTimeout(function() {
                             // Set the main ajax overlay to be semi-transparent.
                             SwdView.setMainOverlayTransparency();
 
