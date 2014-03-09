@@ -196,10 +196,18 @@ var SwdPresenter = {
             // Check connection status, posting a login prompt if the user has disconnected.
             if (response.status !== 'connected') {
                 SwdView.showMessage('Sorry, but your session has expired. Please log back in.');
-                FB.login();
-            }
 
-            callback.call(SwdPresenter);
+                FB.login(function(response) {
+                    if (response.status === 'connected') {
+                        callback.call(SwdPresenter);
+                    }
+                }, {
+                    scope: 'user_groups,user_likes,publish_stream,read_stream'
+                });
+            }
+            else {
+                callback.call(SwdPresenter);
+            }
         });
     },
     /***
@@ -661,15 +669,15 @@ var SwdPresenter = {
     },
     onClickGroupClose: function(e, args) {
         var groupTile, target;
-        
+
         e.stopPropagation();
-        
+
         target = $(e.currentTarget);
-        
+
         groupTile = $(target).parent('.group-selection-item');
-        
+
         alert(groupTile.attr('id'));
-        
+
         // Remove the item from view.
         SwdView.removeGroupFromSelectPanel(groupTile);
     },
