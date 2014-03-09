@@ -22,7 +22,7 @@ if (http_response_code() != 401) {
         'value' => 'me()'
     );
 
-    $queries = array();
+//    $queries = array();
     $posts = array();
 
     // Construct the FB batch request
