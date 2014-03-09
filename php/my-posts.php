@@ -5,10 +5,10 @@ require_once 'queries.php';
 
 if (http_response_code() != 401) {
     $gid = $_GET['gid'];
-    $uid = $_GET['uid'];    // For some reason, calling $fbSession->getUser() kills the access token. So, we cheated.
-    // Allow everything younger than one month.
+    $uid = $_GET['uid'];
+
     // Define the initial window to search within.
-    $windowSize = 3600 * 6;    // 10 Hour Periods
+    $windowSize = 3600 * 6;    // 6 Hour Periods
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
 
@@ -50,16 +50,12 @@ if (http_response_code() != 401) {
         $windowStart -= $windowSize;
         $windowEnd -= $windowSize;
     }
-    
-//    echo json_encode($queries);
 
     // Call the batch query.
     $response = $fbSession->api('/', 'POST', array(
         'batch' => json_encode($queries),
         'include_headers' => false
     ));
-    
-//    echo json_encode($response);
 
     $posts = array();
 
@@ -70,24 +66,4 @@ if (http_response_code() != 401) {
     }
 
     echo json_encode($posts);
-}
-
-function buildNewsFeedQuery($targetId, $constraints, $limit = 20) {
-    $streamQuery = 'SELECT post_id,updated_time,message,attachment,comment_info FROM stream WHERE filter_key in (SELECT filter_key FROM stream_filter WHERE uid=me() AND type="newsfeed") AND is_hidden=0 AND target_id=' . $targetId;
-
-    // Check for constraints.
-    for ($i = 0; $i < count($constraints); $i++) {
-        $constraint = $constraints[$i];
-        $streamQuery .= ' AND ' . $constraint['field'] . ' ' . $constraint['operator'] . ' ' . $constraint['value'];
-    }
-
-    // Fetch 20 results, and sorted by creation time.
-    $streamQuery .= ' ORDER BY updated_time DESC LIMIT ' . $limit;
-
-    $queries = array(
-        'streamQuery' => $streamQuery,
-        'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'
-    );
-
-    return $queries;
 }
