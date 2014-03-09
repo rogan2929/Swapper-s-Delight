@@ -319,6 +319,7 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickPostImage', SwdPresenter.onClickPostImage, '#post-image', 'click');
                         SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
                         SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .close-button', 'click');
+                        SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
                         SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
                         SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#popup-comment-text', 'keyup')
                         SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
@@ -687,7 +688,10 @@ var SwdPresenter = {
         groupTile = $(target).parent('.group-selection-item');
 
         // Remove the item from view.
-        SwdView.removeGroupFromSelectPanel(groupTile);
+        SwdView.hideGroupFromSelectPanel(groupTile);
+    },
+    onClickRestoreGroupSelectionItems: function(e, args) {
+        SwdView.showAllGroupSelectionItems();
     },
     onClickToolbar: function(e, args) {
         e.stopPropagation();
@@ -830,10 +834,14 @@ var SwdView = {
      * Remove a group from the group selection panel.
      * @param {type} id
      */
-    removeGroupFromSelectPanel: function(id) {
-        $(id).fadeOut(function() {
-            $(this).remove();
-        });
+    hideGroupFromSelectPanel: function(id) {
+        $(id).fadeOut();
+    },
+    /***
+     * Show all group selection items.
+     */
+    showAllGroupSelectionItems: function() {
+        $('.group-selection-item').fadeIn();
     },
     /***
      * Simulate the placing of fixed divs within the FB app canvas.
