@@ -322,11 +322,14 @@ var SwdPresenter = {
                         SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
                         SwdView.positionMenus();
 
-                        // Set the main ajax overlay to be semi-transparent.
-                        SwdView.setMainOverlayTransparency();
-                        
-                        // Start with displaying the group selection panel.
-                        SwdView.toggleFloatingPanel('#select-group-panel', true);
+                        // Sleep for 2 seconds, allowing facebookPageInfoPoll() to complete for the first time.
+                        setTimeOut(function() {
+                            // Set the main ajax overlay to be semi-transparent.
+                            SwdView.setMainOverlayTransparency();
+
+                            // Start with displaying the group selection panel.
+                            SwdView.toggleFloatingPanel('#select-group-panel', true);
+                        }, 2000);
                     }
                     else {
                         // Have the view prompt the user to edit BST groups.
