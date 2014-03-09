@@ -566,6 +566,7 @@ a:visited {
 .hint {
     color: #e35765;
     display: block;
+    font-weight: bold;
 }
 
 .post-block.post-block-text > div,
