@@ -79,9 +79,8 @@
                                 <img id='linkdata-img'>
                                 <span id='linkdata-desc'></span>
                             </div>
-                            <div id='post-no-image-desc' class='floating-panel-section hidden'>
-                                <b>Hint:</b> Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. 
-                                Click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook.
+                            <div id='post-no-image-desc' class='floating-panel-section hint hidden'>
+                                <b>Hint:</b> Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. Click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook.
                             </div>
                         </div>
                         <div id='details-right-column' class='panel-post-column scroll-y'>
@@ -109,6 +108,7 @@
                 <div id='select-group-panel' class='floating-panel hidden'>
                     <div class='floating-panel-content ui-widget scroll-y'>
                         <div class='close-button'></div>
+                        <span class='hint'><b>Hint:</b> Hide any groups that you don't want to see here.</span>
                         <div id='select-group-list' class='selection-list'>
                             <div id='select-group-no-groups' class='selection-item select-group'>
                                 You're not a member of any Facebook groups.

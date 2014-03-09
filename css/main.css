@@ -563,8 +563,9 @@ a:visited {
     margin-right: 10px;
 }
 
-#post-no-image-desc {
+.hint {
     color: #e35765;
+    display: block;
 }
 
 .post-block.post-block-text > div,
