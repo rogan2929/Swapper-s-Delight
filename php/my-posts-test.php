@@ -13,20 +13,26 @@ $uid = $_GET['uid'];
 
 function getMyPosts($fbSession, $gid, $uid, $until) {
     $posts = array();
+    $oldest = time();
 
-    $response = $fbSession->api('/' . $gid . '/feed?fields=id,from&limit=5000');
+//    while ($oldest > $until) {
+        $response = $fbSession->api('/' . $gid . '/feed?fields=id,from&limit=5000');
 
-    for ($i = 0; $i < count($response['data']); $i++) {
-        if ($response['data'][$i]['from']['id'] == $uid) {
-            $posts[] = $response['data'][$i]['id'];
+        for ($i = 0; $i < count($response['data']); $i++) {
+            if ($response['data'][$i]['from']['id'] == $uid) {
+                $posts[] = $response['data'][$i]['id'];
+            }
         }
-    }
-    
-    echo json_encode($response['paging']);
-    
+        
+        echo json_encode($response['paging']);
+//    }
+
     return $posts;
 }
 
-$posts = getMyPosts($fbSession, $gid, $uid, null);
+// Look up to 15 days back.
+$until = time() - 3600 * 24 * 15;
+
+$posts = getMyPosts($fbSession, $gid, $uid, $until);
 
 //echo json_encode($posts);
