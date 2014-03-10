@@ -55,7 +55,7 @@ function processStreamQuery($stream, $images) {
         // Erase any attachment data to save on object size.
         // This has already been parsed out.
         unset($post['attachment']);
-        
+
         $post['post_type'] = getPostType($post);
 
         // Determine which kind of post this is.
@@ -179,4 +179,38 @@ function getSmallImageUrl($image) {
     // Grab the 'middle' image for a scaled version of the full size image.
     $index = intval(floor((count($image) / 2)));
     return $image[$index]['source'];
+}
+
+/**
+ * Determine the optimal window size to use in batch queries.
+ */
+function getOptimalWindowSize($fbSession, $sourceId) {
+    // Various window sizes to try.
+    $multiples = array(
+        0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24
+    );
+    $index = 0;
+    $max = 0;
+
+    // Try each window size, and determine which one yields the highest number of results.
+    for ($i = 0; $i < count($multiples); $i++) {
+        $startTime = time();
+        $endTime = $startTime - 3600 * $multiples[$i];
+
+        $query = 'SELECT post_id FROM stream WHERE source_id = ' . $sourceId . ' AND updated_time <= ' . $startTime . ' AND updated_time >= ' . $endTime;
+
+        $response = $fbSession->api(array(
+            'method' => 'fql.query',
+            'query' => $query
+        ));
+        
+        $count = count($response['data']);
+        
+        if ($count > $max) {
+            $max = $count;
+            $index = $i;
+        }
+    }
+
+    return $multiples[$index] * 3600;
 }
