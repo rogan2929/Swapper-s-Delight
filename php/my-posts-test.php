@@ -16,7 +16,7 @@ $uid = $_GET['uid'];
  */
 function getGroupPostIdsByUid($fbSession, $gid, $uid, $windowSize, $until) {
     $posts = array();
-    $feedQuery = '/' . $gid . '/feed?fields=id,from,updated_time&date_format=U&limit=100';
+    $feedQuery = '/' . $gid . '/feed?fields=id,from,updated_time&date_format=U&limit=5000';
     $next = $feedQuery;
     $oldest = time();
 
