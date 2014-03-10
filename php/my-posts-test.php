@@ -16,8 +16,8 @@ $posts = array();
 $response = $fbSession->api('/' . $gid . '/feed?fields=id,from&limit=5000');
 
 for ($i = 0; $i < count(response); $i++) {
-    if ($response[$i]['from']['id'] == $uid) {
-        $posts[] = $response[$i]['id'];
+    if ($response[$i]->from->id == $uid) {
+        $posts[] = $response[$i]->id;
     }
 }
 
