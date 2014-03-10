@@ -30,6 +30,7 @@ function getGroupPostIdsByUid($fbSession, $gid, $uid, $windowSize, $until) {
                 $postId = $response['data'][$i]['id'];
                 
                 if (!in_array($postId, $posts)) {
+                    echo $postId . "<br/>";
                     $posts[] = $postId;
                 }
             }
