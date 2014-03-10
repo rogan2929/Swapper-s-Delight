@@ -36,7 +36,7 @@ function getGroupPostIdsByUid($fbSession, $gid, $uid, $windowSize, $until) {
         // Get the next page and trim off the "https://graph.facebook.com"
         //$next = substr($response['paging']['next'], strlen("https://graph.facebook.com"), strlen($response['paging']['next']) - strlen("https://graph.facebook.com"));
         
-        $next = $feedQuery . 'until=' . $window . '&__paging_token=' . $oldestPost['id'];
+        $next = $feedQuery . '&until=' . $window . '&__paging_token=' . $oldestPost['id'];
         
         $window -= $windowSize;
         
