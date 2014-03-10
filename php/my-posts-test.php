@@ -17,7 +17,7 @@ $uid = $_GET['uid'];
 function getGroupPostIdsByUid($fbSession, $gid, $uid, $until) {
     $posts = array();
     $oldest = time();
-    $next = '/' . $gid . '/feed?fields=id,from,updated_time&limit=5000&date_format=U';
+    $next = '/' . $gid . '/feed?fields=id,from,updated_time&date_format=U';
 
     while ($oldest > $until) {
         echo $next . "<br/>";
