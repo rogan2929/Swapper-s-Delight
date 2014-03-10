@@ -32,8 +32,8 @@ function getGroupPostIdsByUid($fbSession, $gid, $uid, $until) {
         
         $oldest = $response['data'][count($response['data']) - 1]['updated_time'];
         
-        $next = $response['paging']['next'];
-        echo $oldest . " " . $until . " " . $next . "<br/>";
+        $next = substr($response['paging']['next'], 0, strlen("https://graph.facebook.com"));
+        //echo $oldest . " " . $until . " " . $next . "<br/>";
     }
 
     return $posts;
