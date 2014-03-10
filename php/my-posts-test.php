@@ -9,7 +9,7 @@
 require_once 'session.php';
 
 $gid = $_GET['gid'];
-$uid = $fbSession->getUser();
+$uid = $_GET['uid'];
 
 $posts = array();
 
