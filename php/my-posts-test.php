@@ -45,8 +45,9 @@ function getGroupPostIdsByUid($fbSession, $gid, $uid, $windowSize, $until) {
 }
 
 // Look up to 15 days back.
-$windowSize = 3600 * 24;
-$until = time() - $windowSize * 15;
+$windowSize = 3600 * 6;
+$windowCount = 60;
+$until = time() - $windowSize * $windowCount;
 
 $posts = getGroupPostIdsByUid($fbSession, $gid, $uid, $windowSize, $until);
 
