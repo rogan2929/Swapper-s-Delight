@@ -31,6 +31,7 @@ function getGroupPostsByUid($fbSession, $gid, $uid, $until) {
         $oldest = $response['data'][count($response['data']) - 1]['updated_time'];
         
         $next = $response['paging']['next'];
+        echo $next . "<br/>";
     }
 
     return $posts;
@@ -42,3 +43,4 @@ $until = time() - 3600 * 24 * 15;
 $posts = getGroupPostsByUid($fbSession, $gid, $uid, $until);
 
 echo json_encode($posts);
+echo count($posts);
