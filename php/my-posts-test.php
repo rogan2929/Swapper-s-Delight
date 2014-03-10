@@ -18,9 +18,9 @@ function getGroupPostIdsByUid($fbSession, $gid, $uid, $windowSize, $until) {
     $posts = array();
     $feedQuery = '/' . $gid . '/feed?fields=id,from,updated_time&date_format=U&limit=5000';
     $next = $feedQuery;
-    $window = time() - $windowSize;
+    $oldest = time();
 
-    while ($window > $until) {
+    while ($oldest > $until) {
         echo $next . "<br/>";
         
         $response = $fbSession->api($next);
@@ -31,16 +31,14 @@ function getGroupPostIdsByUid($fbSession, $gid, $uid, $windowSize, $until) {
             }
         }
         
-        $oldestPost = $response['data'][count($response['data']) - 1]['updated_time'];
+        $oldestPost = $response['data'][count($response['data']) - 1];
         
         // Get the next page and trim off the "https://graph.facebook.com"
         //$next = substr($response['paging']['next'], strlen("https://graph.facebook.com"), strlen($response['paging']['next']) - strlen("https://graph.facebook.com"));
         
-        $next = $feedQuery . '&until=' . $window . '&__paging_token=' . $oldestPost['id'];
+        $oldest -= $windowSize;
         
-        $window -= $windowSize;
-        
-        //echo $oldest . " " . $until . " " . $next . "<br/>";
+        $next = $feedQuery . '&until=' . $oldest . '&__paging_token=' . $oldestPost['id'];
     }
 
     return $posts;
