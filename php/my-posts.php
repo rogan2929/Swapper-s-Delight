@@ -8,7 +8,7 @@ if (http_response_code() != 401) {
     $uid = $_GET['uid'];
 
     // Define the initial window to search within.
-    $windowSize = 3600 * 6;    // 6 Hour Periods
+    $windowSize = 3600 * 8;    // 6 Hour Periods
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
 
