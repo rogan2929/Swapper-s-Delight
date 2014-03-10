@@ -8,12 +8,12 @@ if (http_response_code() != 401) {
     $uid = $_GET['uid'];
 
     // Define the initial window to search within.
-    $windowSize = 3600 * 3.5;    // 6 Hour Periods
+    $windowSize = 3600 * 3;    // 6 Hour Periods
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
 
     $batchSize = 5000;
-    $batchRunCount = 50;
+    $batchRunCount = 100;
 
     // Create the constraints array.
     $likeConstraint = array(
