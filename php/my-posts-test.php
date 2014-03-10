@@ -14,12 +14,13 @@ $uid = $_GET['uid'];
 /***
  * Using the Graph API, query a group's feed for post ids belonging to the given user.
  */
-function getGroupPostIdsByUid($fbSession, $gid, $uid, $until) {
+function getGroupPostIdsByUid($fbSession, $gid, $uid, $windowSize, $until) {
     $posts = array();
-    $oldest = time();
-    $next = '/' . $gid . '/feed?fields=id,from,updated_time&date_format=U&limit=100000';
+    $feedQuery = '/' . $gid . '/feed?fields=id,from,updated_time&date_format=U&limit=5000';
+    $next = $feedQuery;
+    $window = time() - $windowSize;
 
-    while ($oldest > $until) {
+    while ($window > $until) {
         echo $next . "<br/>";
         
         $response = $fbSession->api($next);
@@ -30,10 +31,14 @@ function getGroupPostIdsByUid($fbSession, $gid, $uid, $until) {
             }
         }
         
-        $oldest = $response['data'][count($response['data']) - 1]['updated_time'];
+        $oldestPost = $response['data'][count($response['data']) - 1]['updated_time'];
         
         // Get the next page and trim off the "https://graph.facebook.com"
-        $next = substr($response['paging']['next'], strlen("https://graph.facebook.com"), strlen($response['paging']['next']) - strlen("https://graph.facebook.com"));
+        //$next = substr($response['paging']['next'], strlen("https://graph.facebook.com"), strlen($response['paging']['next']) - strlen("https://graph.facebook.com"));
+        
+        $next = $feedQuery . 'until=' . $window . '&__paging_token=' . $oldestPost['id'];
+        
+        $window -= $windowSize;
         
         //echo $oldest . " " . $until . " " . $next . "<br/>";
     }
@@ -42,9 +47,10 @@ function getGroupPostIdsByUid($fbSession, $gid, $uid, $until) {
 }
 
 // Look up to 15 days back.
-$until = time() - 3600 * 24 * 15;
+$windowSize = 3600 * 24;
+$until = time() - $windowSize * 15;
 
-$posts = getGroupPostIdsByUid($fbSession, $gid, $uid, $until);
+$posts = getGroupPostIdsByUid($fbSession, $gid, $uid, $windowSize, $until);
 
 echo json_encode($posts) . "<br/>";
 echo count($posts);
