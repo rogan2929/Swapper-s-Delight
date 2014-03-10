@@ -10,6 +10,6 @@ require_once 'session.php';
 
 $gid = $_GET['gid'];
 
-$response = $fbSession->api('/' . $gid . '/feed');
+$response = $fbSession->api('/' . $gid . '/feed?fields=id,from&limit=5000');
 
 echo json_encode($response);
