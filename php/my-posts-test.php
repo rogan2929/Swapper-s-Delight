@@ -16,7 +16,7 @@ function getMyPosts($fbSession, $gid, $uid, $until) {
     $oldest = time();
 
 //    while ($oldest > $until) {
-        $response = $fbSession->api('/' . $gid . '/feed?fields=id,from&limit=5000');
+        $response = $fbSession->api('/' . $gid . '/feed?fields=id,from,updated_time&limit=5000');
 
         for ($i = 0; $i < count($response['data']); $i++) {
             if ($response['data'][$i]['from']['id'] == $uid) {
@@ -24,7 +24,10 @@ function getMyPosts($fbSession, $gid, $uid, $until) {
             }
         }
         
+        $oldest = $response['data'][count($response['data']) - 1]['updated_time'];
+        
         echo json_encode($response['paging']);
+        echo $oldest;
 //    }
 
     return $posts;
