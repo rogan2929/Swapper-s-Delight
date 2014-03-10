@@ -32,7 +32,9 @@ function getGroupPostIdsByUid($fbSession, $gid, $uid, $until) {
         
         $oldest = $response['data'][count($response['data']) - 1]['updated_time'];
         
-        $next = substr($response['paging']['next'], 0, strlen("https://graph.facebook.com"));
+        // Get the next page and trim off the "https://graph.facebook.com"
+        $next = substr($response['paging']['next'], 0, strlen($response['paging']['next']) - strlen("https://graph.facebook.com"));
+        
         //echo $oldest . " " . $until . " " . $next . "<br/>";
     }
 
