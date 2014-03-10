@@ -10,7 +10,7 @@ require_once 'session.php';
 
 $gid = $_GET['gid'];
 
-echo 'TEST';
+echo $gid;
 
 $response = $fbSession->api('/' + $gid + '/feed');
 
