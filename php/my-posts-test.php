@@ -21,4 +21,6 @@ for ($i = 0; $i < count(response); $i++) {
     }
 }
 
+echo json_encode($response);
+
 echo json_encode($posts);
