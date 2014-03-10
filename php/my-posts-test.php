@@ -14,10 +14,10 @@ $uid = $_GET['uid'];
 /***
  * Using the Graph API, query a group's feed for post ids belonging to the given user.
  */
-function getGroupPostsByUid($fbSession, $gid, $uid, $until) {
+function getGroupPostIdsByUid($fbSession, $gid, $uid, $until) {
     $posts = array();
     $oldest = time();
-    $next = '/' . $gid . '/feed?fields=id,from,updated_time&limit=5000';
+    $next = '/' . $gid . '/feed?fields=id,from,updated_time&limit=5000&date_format=U';
 
     while ($oldest > $until) {
         $response = $fbSession->api($next);
@@ -40,7 +40,7 @@ function getGroupPostsByUid($fbSession, $gid, $uid, $until) {
 // Look up to 15 days back.
 $until = time() - 3600 * 24 * 15;
 
-$posts = getGroupPostsByUid($fbSession, $gid, $uid, $until);
+$posts = getGroupPostIdsByUid($fbSession, $gid, $uid, $until);
 
 echo json_encode($posts) . "<br/>";
 echo count($posts);
