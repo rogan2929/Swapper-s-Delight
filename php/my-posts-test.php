@@ -11,10 +11,14 @@ require_once 'session.php';
 $gid = $_GET['gid'];
 $uid = $fbSession->getUser();
 
-echo $uid;
+$posts = array();
 
 $response = $fbSession->api('/' . $gid . '/feed?fields=id,from&limit=5000');
 
+for ($i = 0; $i < count(response); $i++) {
+    if ($response[$i]['from']['id'] == $uid) {
+        $posts[] = $response[$i]['id'];
+    }
+}
 
-
-echo json_encode($response);
+echo json_encode($posts);
