@@ -16,7 +16,7 @@ $uid = $_GET['uid'];
  */
 function getGroupPostIdsByUid($fbSession, $gid, $uid, $windowSize, $until) {
     $posts = array();
-    $feedQuery = '/' . $gid . '/feed?fields=id,from,updated_time&date_format=U&limit=5000';
+    $feedQuery = '/' . $gid . '/feed?fields=id,from,updated_time&date_format=U&limit=500';
     $next = $feedQuery;
     $oldest = time();
 
@@ -45,11 +45,10 @@ function getGroupPostIdsByUid($fbSession, $gid, $uid, $windowSize, $until) {
 }
 
 // Look up to 15 days back.
-$windowSize = 3600 * 6;
+$windowSize = 3600 * 2;
 $windowCount = 3;
 $until = time() - $windowSize * $windowCount;
 
 $posts = getGroupPostIdsByUid($fbSession, $gid, $uid, $windowSize, $until);
 
-echo json_encode($posts) . "<br/>";
 echo count($posts);
