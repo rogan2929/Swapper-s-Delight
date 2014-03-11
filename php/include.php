@@ -229,7 +229,7 @@ function getGroupPostsbyUid($fbSession, $sourceId, $uid) {
     $actorConstraint = array(
         'field' => 'actor_id',
         'operator' => '=',
-        'value' => 'me()'
+        'value' => $uid
     );
 
     $queries = array();
@@ -263,16 +263,12 @@ function getGroupPostsbyUid($fbSession, $sourceId, $uid) {
         $windowStart -= $windowSize;
         $windowEnd -= $windowSize;
     }
-    
-    echo json_encode($queries);
 
     // Call the batch query.
     $response = $fbSession->api('/', 'POST', array(
         'batch' => json_encode($queries),
         'include_headers' => false
     ));
-    
-    echo json_encode($response);
 
     $posts = array();
 
