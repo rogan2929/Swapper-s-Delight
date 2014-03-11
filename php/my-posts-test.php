@@ -51,11 +51,4 @@ $uid = $_GET['uid'];
 
 
 
-// Look up to 15 days back.
-$windowSize = getOptimalWindowSize($fbSession);
-$windowCount = 30;
-$until = time() - $windowSize * $windowCount;
-
-$posts = getGroupPostIdsByUid($fbSession, $gid, $uid, $windowSize, $until);
-
-echo count($posts);
+echo count(getGroupPostsbyUid($fbSession, $gid, $uid));
