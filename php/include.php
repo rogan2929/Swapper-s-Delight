@@ -217,8 +217,8 @@ function getOptimalWindowSize($fbSession, $sourceId) {
 
 function getGroupPostsbyUid($fbSession, $sourceId, $uid) {
     // Define the initial window to search within.
-    //$windowSize = getOptimalWindowSize($fbSession, $sourceId);
-    $windowSize = 3600 * 6;
+    $windowSize = getOptimalWindowSize($fbSession, $sourceId);
+    //$windowSize = 3600 * 6;
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
 
@@ -257,7 +257,7 @@ function getGroupPostsbyUid($fbSession, $sourceId, $uid) {
 
         $queries[] = array(
             'method' => 'POST',
-            'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints, $batchSize))
+            'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($sourceId, $constraints, $batchSize))
         );
         
         //$posts = array_merge($posts, streamQuery($fbSession, $gid, $constraints, $batchSize));
@@ -271,8 +271,6 @@ function getGroupPostsbyUid($fbSession, $sourceId, $uid) {
         'batch' => json_encode($queries),
         'include_headers' => false
     ));
-    
-    echo json_encode($queries);
 
     $posts = array();
 
