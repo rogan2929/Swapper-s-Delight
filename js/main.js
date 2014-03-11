@@ -199,15 +199,15 @@ var SwdPresenter = {
                 SwdView.showMessage('Sorry, but your session has expired - automatically taking you back to the main page.');
 
                 // Send the user to the app's main url.
-                window.location = AppUrl;
+                //window.location = AppUrl;
 
-//                FB.login(function(response) {
-//                    if (response.status === 'connected') {
-//                        callback.call(SwdPresenter);
-//                    }
-//                }, {
-//                    scope: 'user_groups,user_likes,publish_stream,read_stream'
-//                });
+                FB.login(function(response) {
+                    if (response.status === 'connected') {
+                        callback.call(SwdPresenter);
+                    }
+                }, {
+                    scope: 'user_groups,user_likes,publish_stream,read_stream'
+                });
             }
             else {
                 callback.call(SwdPresenter);
