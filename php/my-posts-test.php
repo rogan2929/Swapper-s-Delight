@@ -63,6 +63,8 @@ $response = $fbSession->api(array(
 
 echo count($response) . "<br/>";
 
+echo getOptimalWindowSize($fbSession, $gid) / 3600 . "<br/>";
+
 $constraints = array();
 
 $constraints[] = array(
