@@ -29,5 +29,4 @@ catch(FacebookApiException $e) {
     
     $loginUrl = $fbSession->getLoginUrl();
     http_response_code(401);
-    echo 'Sorry, your session has expired. Please refresh the page to log back in.';
 }

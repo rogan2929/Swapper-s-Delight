@@ -4,8 +4,8 @@
  * Build a 'streamQuery' FQL multi-query.
  */
 
-function buildStreamQuery($sourceId, $constraints, $limit = 20) {
-    $streamQuery = 'SELECT post_id,updated_time,message,attachment,comment_info FROM stream WHERE source_id=' . $sourceId;
+function buildStreamQuery($gid, $constraints, $limit = 20) {
+    $streamQuery = 'SELECT post_id,updated_time,message,attachment,comment_info FROM stream WHERE source_id=' . $gid;
 
     // Check for constraints.
     for ($i = 0; $i < count($constraints); $i++) {
@@ -28,8 +28,8 @@ function buildStreamQuery($sourceId, $constraints, $limit = 20) {
  * Reusable, generic function that executes an FQL query against the given stream.
  */
 
-function streamQuery($fbSession, $sourceId, $constraints, $limit = 20) {
-    $queries = buildStreamQuery($sourceId, $constraints, $limit);
+function streamQuery($fbSession, $gid, $constraints, $limit = 20) {
+    $queries = buildStreamQuery($gid, $constraints, $limit);
 
     $response = $fbSession->api(array(
         'method' => 'fql.multiquery',
@@ -55,7 +55,7 @@ function processStreamQuery($stream, $images) {
         // Erase any attachment data to save on object size.
         // This has already been parsed out.
         unset($post['attachment']);
-        
+
         $post['post_type'] = getPostType($post);
 
         // Determine which kind of post this is.
@@ -179,4 +179,94 @@ function getSmallImageUrl($image) {
     // Grab the 'middle' image for a scaled version of the full size image.
     $index = intval(floor((count($image) / 2)));
     return $image[$index]['source'];
+}
+
+/**
+ * Determine the optimal window size to use in batch queries.
+ */
+function getOptimalWindowSize($fbSession, $gid) {
+    $startTime = time();
+    $endTime = time() - 3600;
+
+    $query = 'SELECT post_id FROM stream WHERE source_id = ' . $gid . ' AND updated_time <= ' . $startTime . ' AND updated_time >= ' . $endTime . ' LIMIT 100';
+
+    $response = $fbSession->api(array(
+        'method' => 'fql.query',
+        'query' => $query
+    ));
+    
+    $count = count($response);
+    
+    // These values were reached through trial and error.
+    switch ($count) {
+        case $count < 100:
+            $windowSize = 3.5;
+            break;
+        case $count >= 100 && $count < 150:
+            $windowSize = 3;
+            break;
+        case $count >= 150 && $count < 225:
+            $windowSize = 2;
+            break;
+        default:
+            $windowSize = 1;
+            break;
+    }
+
+    return 3600 * $windowSize;
+}
+
+function executeBatchQuery($fbSession, $gid, $constraints) {
+    $windowSize = getOptimalWindowSize($fbSession, $gid);
+    $windowStart = time();
+    $windowEnd = $windowStart - $windowSize;
+
+    $batchSize = 5000;
+    $batchRunCount = 50;
+    
+    $queries = array();
+    
+    // Construct the FB batch request
+    for ($i = 0; $i < $batchRunCount; $i++) {
+        $queryContraints = $constraints;
+        
+        // Add start and end constraints.
+        // Start Window Constraint
+        $queryContraints[] = array(
+            'field' => 'updated_time',
+            'operator' => '<=',
+            'value' => $windowStart
+        );
+
+        // End Window constraint
+        $queryContraints[] = array(
+            'field' => 'updated_time',
+            'operator' => '>=',
+            'value' => $windowEnd
+        );
+
+        $queries[] = array(
+            'method' => 'POST',
+            'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $queryContraints, $batchSize))
+        );
+
+        $windowStart -= $windowSize;
+        $windowEnd -= $windowSize;
+    }
+
+    // Call the batch query.
+    $response = $fbSession->api('/', 'POST', array(
+        'batch' => json_encode($queries),
+        'include_headers' => false
+    ));
+
+    $posts = array();
+
+    // Sift through the results.
+    for ($i = 0; $i < count($response); $i++) {
+        $result = json_decode($response[$i]['body'], true);
+        $posts = array_merge($posts, processStreamQuery($result[0]['fql_result_set'], $result[1]['fql_result_set']));
+    }
+
+    return $posts;
 }
