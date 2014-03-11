@@ -6,6 +6,15 @@ require_once 'include.php';
 if (http_response_code() != 401) {
     $gid = $_GET['gid'];
     $uid = $_GET['uid'];
+    
+    // Create the constraints array.
+    $constraints = array();
 
-    echo json_encode(getGroupPostsbyUid($fbSession, $gid, $uid));
+    $constraints[] = array(
+        'field' => 'actor_id',
+        'operator' => '=',
+        'value' => $uid
+    );
+
+    echo json_encode(executeBatchQuery($fbSession, $gid, $constraints));
 }

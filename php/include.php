@@ -198,31 +198,18 @@ function getOptimalWindowSize($fbSession, $sourceId) {
     return 3600 * 3.5;
 }
 
-function getGroupPostsbyUid($fbSession, $sourceId, $uid) {
-    // Define the initial window to search within.
+function executeBatchQuery($fbSession, $gid, $constraints) {
     $windowSize = getOptimalWindowSize($fbSession, $sourceId);
-    //$windowSize = 3600 * 3;
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
 
     $batchSize = 5000;
     $batchRunCount = 50;
-
-    // Create the constraints array.
-    $actorConstraint = array(
-        'field' => 'actor_id',
-        'operator' => '=',
-        'value' => $uid
-    );
-
+    
     $queries = array();
-    //$posts = array();
+    
     // Construct the FB batch request
     for ($i = 0; $i < $batchRunCount; $i++) {
-        $constraints = array();
-
-        $constraints[] = $actorConstraint;
-
         $constraints[] = array(// Window start constraint
             'field' => 'updated_time',
             'operator' => '<=',
@@ -237,7 +224,7 @@ function getGroupPostsbyUid($fbSession, $sourceId, $uid) {
 
         $queries[] = array(
             'method' => 'POST',
-            'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($sourceId, $constraints, $batchSize))
+            'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints, $batchSize))
         );
 
         //$posts = array_merge($posts, streamQuery($fbSession, $gid, $constraints, $batchSize));
