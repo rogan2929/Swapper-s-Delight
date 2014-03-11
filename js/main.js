@@ -837,7 +837,7 @@ var SwdView = {
      * @param {type} id
      */
     hideGroupFromSelectPanel: function(id) {
-        $(id).hide('explode');
+        $(id).fadeOut();
     },
     /***
      * Show all group selection items.
