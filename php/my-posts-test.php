@@ -50,6 +50,6 @@ $uid = $_GET['uid'];
 //    return $posts;
 //}
 
+echo getOptimalWindowSize($fbSession, $gid);
 
-
-echo count(getGroupPostsbyUid($fbSession, $gid, $uid));
+//echo count(getGroupPostsbyUid($fbSession, $gid, $uid));

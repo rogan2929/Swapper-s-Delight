@@ -213,7 +213,20 @@ function getOptimalWindowSize($fbSession, $sourceId) {
 //    }
 //
 //    return $multiples[$index] * 3600;
-    return 3600 * 6;
+    
+    $startTime = time();
+    $endTime = time() - 3600;
+    
+    $query = 'SELECT post_id FROM stream WHERE source_id = ' . $sourceId . ' AND updated_time <= ' . $startTime . ' AND updated_time >= ' . $endTime . ' LIMIT 100';
+    
+    $response = $fbSession->api(array(
+            'method' => 'fql.query',
+            'query' => $query
+        ));
+    
+    echo count($response);
+    
+    return 3600 * 3.5;
 }
 
 function getGroupPostsbyUid($fbSession, $sourceId, $uid) {
@@ -222,8 +235,6 @@ function getGroupPostsbyUid($fbSession, $sourceId, $uid) {
     //$windowSize = 3600 * 3;
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
-    
-    echo $windowSize / 3600 . "<br/>";
 
     $batchSize = 5000;
     $batchRunCount = 50;
