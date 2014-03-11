@@ -263,6 +263,8 @@ function getGroupPostsbyUid($fbSession, $sourceId, $uid) {
         $windowStart -= $windowSize;
         $windowEnd -= $windowSize;
     }
+    
+    echo json_encode($queries);
 
     // Call the batch query.
     $response = $fbSession->api('/', 'POST', array(
