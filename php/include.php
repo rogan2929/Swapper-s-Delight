@@ -272,7 +272,7 @@ function getGroupPostsbyUid($fbSession, $sourceId, $uid) {
         'include_headers' => false
     ));
     
-    echo json_encode($response);
+    echo json_encode($queries);
 
     $posts = array();
 
