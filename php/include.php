@@ -185,45 +185,16 @@ function getSmallImageUrl($image) {
  * Determine the optimal window size to use in batch queries.
  */
 function getOptimalWindowSize($fbSession, $sourceId) {
-    // Various window sizes to try.
-//    $multiples = array(
-//        0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24
-//    );
-//    $index = 0;
-//    $max = 0;
-//
-//    // Try each window size, and determine which one yields the highest number of results.
-//    for ($i = 0; $i < count($multiples); $i++) {
-//        $startTime = time();
-//        $endTime = $startTime - 3600 * $multiples[$i];
-//
-//        $query = 'SELECT post_id FROM stream WHERE source_id = ' . $sourceId . ' AND updated_time <= ' . $startTime . ' AND updated_time >= ' . $endTime . ' LIMIT 100';
-//
-//        $response = $fbSession->api(array(
-//            'method' => 'fql.query',
-//            'query' => $query
-//        ));
-//        
-//        $count = count($response);
-//        
-//        if ($count > $max) {
-//            $max = $count;
-//            $index = $i;
-//        }
-//    }
-//
-//    return $multiples[$index] * 3600;
-    
     $startTime = time();
     $endTime = time() - 3600;
-    
+
     $query = 'SELECT post_id FROM stream WHERE source_id = ' . $sourceId . ' AND updated_time <= ' . $startTime . ' AND updated_time >= ' . $endTime . ' LIMIT 100';
-    
+
     $response = $fbSession->api(array(
-            'method' => 'fql.query',
-            'query' => $query
-        ));
-    
+        'method' => 'fql.query',
+        'query' => $query
+    ));
+
     return 3600 * 3.5;
 }
 
@@ -246,7 +217,6 @@ function getGroupPostsbyUid($fbSession, $sourceId, $uid) {
 
     $queries = array();
     //$posts = array();
-
     // Construct the FB batch request
     for ($i = 0; $i < $batchRunCount; $i++) {
         $constraints = array();
@@ -269,7 +239,7 @@ function getGroupPostsbyUid($fbSession, $sourceId, $uid) {
             'method' => 'POST',
             'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($sourceId, $constraints, $batchSize))
         );
-        
+
         //$posts = array_merge($posts, streamQuery($fbSession, $gid, $constraints, $batchSize));
 
         $windowStart -= $windowSize;

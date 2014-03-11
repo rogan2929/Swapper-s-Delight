@@ -12,7 +12,7 @@ require_once 'include.php';
 $gid = $_GET['gid'];
 $uid = $_GET['uid'];
 
-/***
+/* * *
  * Using the Graph API, query a group's feed for post ids belonging to the given user.
  */
 //function getGroupPostIdsByUid($fbSession, $gid, $uid, $windowSize, $until) {
@@ -50,6 +50,17 @@ $uid = $_GET['uid'];
 //    return $posts;
 //}
 
-getOptimalWindowSize($fbSession, $gid);
+$startTime = time();
+$endTime = time() - 3600;
+
+$query = 'SELECT post_id FROM stream WHERE source_id = ' . $sourceId . ' AND updated_time <= ' . $startTime . ' AND updated_time >= ' . $endTime . ' LIMIT 100';
+
+$response = $fbSession->api(array(
+    'method' => 'fql.query',
+    'query' => $query
+        ));
+
+
+echo count($response);
 
 //echo count(getGroupPostsbyUid($fbSession, $gid, $uid));
