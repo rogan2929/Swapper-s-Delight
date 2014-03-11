@@ -219,7 +219,7 @@ function getOptimalWindowSize($fbSession, $sourceId) {
 
 function getGroupPostsbyUid($fbSession, $sourceId, $uid) {
     // Define the initial window to search within.
-    $windowSize = getOptimalWindowSize($fbSession);
+    $windowSize = getOptimalWindowSize($fbSession, $sourceId);
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
     
