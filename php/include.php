@@ -224,8 +224,6 @@ function getGroupPostsbyUid($fbSession, $sourceId, $uid) {
 
     $batchSize = 5000;
     $batchRunCount = 50;
-    
-    echo $windowSize;
 
     // Create the constraints array.
     $actorConstraint = array(
