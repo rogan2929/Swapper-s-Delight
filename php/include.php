@@ -224,8 +224,6 @@ function getOptimalWindowSize($fbSession, $sourceId) {
             'query' => $query
         ));
     
-    echo count($response);
-    
     return 3600 * 3.5;
 }
 
