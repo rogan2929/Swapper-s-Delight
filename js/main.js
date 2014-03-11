@@ -197,7 +197,7 @@ var SwdPresenter = {
             // TODO: Replace with something better.
             if (response.status !== 'connected') {
                 SwdView.showMessage('Sorry, but your session has expired - automatically taking you back to the main page.');
-                
+
                 // Send the user to the app's main url.
                 window.location = AppUrl;
 
@@ -218,17 +218,19 @@ var SwdPresenter = {
      * Top-level error handler function.
      */
     handleError: function(error) {
-//        switch (error.status) {
-//            case 401:
-//                // Access denied, most likely from an expired access token.
-//                // Get a new access token.
-//                // For now, simply refresh the page.
-//                location.reload();
-//                break;
-//            default:
-//                SwdView.showError(error.responseText);
-//        }
-        SwdView.showError(error.responseText);
+        switch (error.status) {
+            case 401:
+                // Access denied, most likely from an expired access token.
+                // Get a new access token.
+                // For now, simply refresh the page.
+                SwdView.showMessage('Sorry, but your session has expired - automatically taking you back to the main page.');
+
+                // Send the user to the app's main url.
+                window.location = AppUrl;
+                break;
+            default:
+                SwdView.showError(error.responseText);
+        }
     },
     /**
      * Entry point of program.
@@ -328,7 +330,7 @@ var SwdPresenter = {
                         // Sleep for 1 second, allowing facebookPageInfoPoll() to complete for the first time.
                         setTimeout(function() {
                             SwdView.toggleAjaxLoadingDiv('body', false);
-                            
+
                             // Set the main ajax overlay to be semi-transparent.
                             SwdView.setMainOverlayTransparency();
 
