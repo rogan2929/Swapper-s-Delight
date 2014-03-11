@@ -206,7 +206,7 @@ function getOptimalWindowSize($fbSession, $sourceId) {
         
         $count = count($response['data']);
         
-        echo $count;
+        echo json_encode($response);
         
         if ($count > $max) {
             $max = $count;
