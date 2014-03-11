@@ -4,8 +4,8 @@
  * Build a 'streamQuery' FQL multi-query.
  */
 
-function buildStreamQuery($sourceId, $constraints, $limit = 20) {
-    $streamQuery = 'SELECT post_id,updated_time,message,attachment,comment_info FROM stream WHERE source_id=' . $sourceId;
+function buildStreamQuery($gid, $constraints, $limit = 20) {
+    $streamQuery = 'SELECT post_id,updated_time,message,attachment,comment_info FROM stream WHERE source_id=' . $gid;
 
     // Check for constraints.
     for ($i = 0; $i < count($constraints); $i++) {
@@ -28,8 +28,8 @@ function buildStreamQuery($sourceId, $constraints, $limit = 20) {
  * Reusable, generic function that executes an FQL query against the given stream.
  */
 
-function streamQuery($fbSession, $sourceId, $constraints, $limit = 20) {
-    $queries = buildStreamQuery($sourceId, $constraints, $limit);
+function streamQuery($fbSession, $gid, $constraints, $limit = 20) {
+    $queries = buildStreamQuery($gid, $constraints, $limit);
 
     $response = $fbSession->api(array(
         'method' => 'fql.multiquery',
@@ -184,11 +184,11 @@ function getSmallImageUrl($image) {
 /**
  * Determine the optimal window size to use in batch queries.
  */
-function getOptimalWindowSize($fbSession, $sourceId) {
+function getOptimalWindowSize($fbSession, $gid) {
     $startTime = time();
     $endTime = time() - 3600;
 
-    $query = 'SELECT post_id FROM stream WHERE source_id = ' . $sourceId . ' AND updated_time <= ' . $startTime . ' AND updated_time >= ' . $endTime . ' LIMIT 100';
+    $query = 'SELECT post_id FROM stream WHERE source_id = ' . $gid . ' AND updated_time <= ' . $startTime . ' AND updated_time >= ' . $endTime . ' LIMIT 100';
 
     $response = $fbSession->api(array(
         'method' => 'fql.query',
@@ -199,7 +199,7 @@ function getOptimalWindowSize($fbSession, $sourceId) {
 }
 
 function executeBatchQuery($fbSession, $gid, $constraints) {
-    $windowSize = getOptimalWindowSize($fbSession, $sourceId);
+    $windowSize = getOptimalWindowSize($fbSession, $gid);
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
 
