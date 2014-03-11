@@ -246,6 +246,8 @@ function executeBatchQuery($fbSession, $gid, $constraints) {
         $result = json_decode($response[$i]['body'], true);
         $posts = array_merge($posts, processStreamQuery($result[0]['fql_result_set'], $result[1]['fql_result_set']));
     }
+    
+    echo json_encode($queries);
 
-    return $posts;
+    //return $posts;
 }
