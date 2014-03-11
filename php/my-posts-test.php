@@ -7,6 +7,7 @@
  */
 
 require_once 'session.php';
+require_once 'include.php';
 
 $gid = $_GET['gid'];
 $uid = $_GET['uid'];
