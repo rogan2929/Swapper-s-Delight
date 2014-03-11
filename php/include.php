@@ -217,8 +217,8 @@ function getOptimalWindowSize($fbSession, $sourceId) {
 
 function getGroupPostsbyUid($fbSession, $sourceId, $uid) {
     // Define the initial window to search within.
-    $windowSize = getOptimalWindowSize($fbSession, $sourceId);
-    //$windowSize = 3600 * 6;
+    //$windowSize = getOptimalWindowSize($fbSession, $sourceId);
+    $windowSize = 3600 * 6;
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
 
@@ -271,6 +271,8 @@ function getGroupPostsbyUid($fbSession, $sourceId, $uid) {
         'batch' => json_encode($queries),
         'include_headers' => false
     ));
+    
+    echo json_encode($response);
 
     $posts = array();
 
