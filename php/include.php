@@ -195,7 +195,7 @@ function getOptimalWindowSize($fbSession, $gid) {
         'query' => $query
     ));
 
-    return 3600 * 12;
+    return 3600 * 8;
 }
 
 function executeBatchQuery($fbSession, $gid, $constraints) {
