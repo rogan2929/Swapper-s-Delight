@@ -194,8 +194,26 @@ function getOptimalWindowSize($fbSession, $gid) {
         'method' => 'fql.query',
         'query' => $query
     ));
+    
+    $count = count($response);
+    
+    // These values were reached through trial and error.
+    switch ($count) {
+        case $count < 100:
+            $windowSize = 3.5;
+            break;
+        case $count >= 100 && $count < 150:
+            $windowSize = 3;
+            break;
+        case $count >= 150 && $count < 225:
+            $windowSize = 2;
+            break;
+        default:
+            $windowSize = 1;
+            break;
+    }
 
-    return 3600 * 3.5;
+    return 3600 * $windowSize;
 }
 
 function executeBatchQuery($fbSession, $gid, $constraints) {
