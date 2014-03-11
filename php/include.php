@@ -195,7 +195,7 @@ function getOptimalWindowSize($fbSession, $gid) {
         'query' => $query
     ));
 
-    return 3600 * 8;
+    return 3600 * 3.5;
 }
 
 function executeBatchQuery($fbSession, $gid, $constraints) {
@@ -210,13 +210,17 @@ function executeBatchQuery($fbSession, $gid, $constraints) {
     
     // Construct the FB batch request
     for ($i = 0; $i < $batchRunCount; $i++) {
-        $constraints[] = array(// Window start constraint
+        
+        // Add start and end constraints.
+        // Start Window Constraint
+        $constraints[] = array(
             'field' => 'updated_time',
             'operator' => '<=',
             'value' => $windowStart
         );
 
-        $constraints[] = array(// Window end constraint
+        // End Window constraint
+        $constraints[] = array(
             'field' => 'updated_time',
             'operator' => '>=',
             'value' => $windowEnd
@@ -227,7 +231,9 @@ function executeBatchQuery($fbSession, $gid, $constraints) {
             'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints, $batchSize))
         );
 
-        //$posts = array_merge($posts, streamQuery($fbSession, $gid, $constraints, $batchSize));
+        // Remove the time constraints.
+        $constraints = array_pop($constraints);
+        $constraints = array_pop($constraints);
 
         $windowStart -= $windowSize;
         $windowEnd -= $windowSize;
