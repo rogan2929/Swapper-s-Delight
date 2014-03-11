@@ -241,6 +241,8 @@ function executeBatchQuery($fbSession, $gid, $constraints) {
         'batch' => json_encode($queries),
         'include_headers' => false
     ));
+    
+    echo var_dump($queries);
 
     $posts = array();
 
