@@ -221,6 +221,8 @@ function getGroupPostsbyUid($fbSession, $sourceId, $uid) {
     //$windowSize = 3600 * 6;
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
+    
+    echo $windowSize . "<br/>";
 
     $batchSize = 5000;
     $batchRunCount = 50;
