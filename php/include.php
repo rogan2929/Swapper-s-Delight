@@ -197,7 +197,7 @@ function getOptimalWindowSize($fbSession, $sourceId) {
         $startTime = time();
         $endTime = $startTime - 3600 * $multiples[$i];
 
-        $query = 'SELECT post_id FROM stream WHERE source_id = ' . $sourceId . ' AND updated_time <= ' . $startTime . ' AND updated_time >= ' . $endTime . ' LIMIT 500';
+        $query = 'SELECT post_id FROM stream WHERE source_id = ' . $sourceId . ' AND updated_time <= ' . $startTime . ' AND updated_time >= ' . $endTime . ' LIMIT 50';
 
         $response = $fbSession->api(array(
             'method' => 'fql.query',
@@ -217,8 +217,8 @@ function getOptimalWindowSize($fbSession, $sourceId) {
 
 function getGroupPostsbyUid($fbSession, $sourceId, $uid) {
     // Define the initial window to search within.
-    //$windowSize = getOptimalWindowSize($fbSession, $sourceId);
-    $windowSize = 3600 * 3;
+    $windowSize = getOptimalWindowSize($fbSession, $sourceId);
+    //$windowSize = 3600 * 3;
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
     
