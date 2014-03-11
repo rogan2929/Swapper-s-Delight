@@ -61,7 +61,7 @@ $response = $fbSession->api(array(
         ));
 
 
-echo count($response);
+echo count($response) . "<br/>";
 
 $constraints = array();
 
