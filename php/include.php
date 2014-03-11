@@ -210,17 +210,18 @@ function executeBatchQuery($fbSession, $gid, $constraints) {
     
     // Construct the FB batch request
     for ($i = 0; $i < $batchRunCount; $i++) {
+        $queryContraints = $constraints;
         
         // Add start and end constraints.
         // Start Window Constraint
-        $constraints[] = array(
+        $queryContraints[] = array(
             'field' => 'updated_time',
             'operator' => '<=',
             'value' => $windowStart
         );
 
         // End Window constraint
-        $constraints[] = array(
+        $queryContraints[] = array(
             'field' => 'updated_time',
             'operator' => '>=',
             'value' => $windowEnd
@@ -228,12 +229,8 @@ function executeBatchQuery($fbSession, $gid, $constraints) {
 
         $queries[] = array(
             'method' => 'POST',
-            'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $constraints, $batchSize))
+            'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $queryContraints, $batchSize))
         );
-
-        // Remove the time constraints.
-        $constraints = array_pop($constraints);
-        $constraints = array_pop($constraints);
 
         $windowStart -= $windowSize;
         $windowEnd -= $windowSize;

@@ -63,4 +63,14 @@ $response = $fbSession->api(array(
 
 echo count($response);
 
+$constraints = array();
+
+$constraints[] = array(
+    'field' => 'actor_id',
+    'operator' => '=',
+    'value' => $uid
+);
+
+echo count(executeBatchQuery($fbSession, $gid, $constraints));
+
 //echo count(getGroupPostsbyUid($fbSession, $gid, $uid));
