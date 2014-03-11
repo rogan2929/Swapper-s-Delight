@@ -193,12 +193,14 @@ function getOptimalWindowSize($fbSession, $sourceId) {
     $max = 0;
 
     // Try each window size, and determine which one yields the highest number of results.
-//    for ($i = 0; $i < count($multiples); $i++) {
-//        $startTime = time();
-//        $endTime = $startTime - 3600 * $multiples[$i];
-//
-//        $query = 'SELECT post_id FROM stream WHERE source_id = ' . $sourceId . ' AND updated_time <= ' . $startTime . ' AND updated_time >= ' . $endTime . ' LIMIT 100';
-//
+    for ($i = 0; $i < count($multiples); $i++) {
+        $startTime = time();
+        $endTime = $startTime - 3600 * $multiples[$i];
+
+        $query = 'SELECT post_id FROM stream WHERE source_id = ' . $sourceId . ' AND updated_time <= ' . $startTime . ' AND updated_time >= ' . $endTime . ' LIMIT 100';
+        
+        echo $query . "<br/>";
+
 //        $response = $fbSession->api(array(
 //            'method' => 'fql.query',
 //            'query' => $query
@@ -210,7 +212,7 @@ function getOptimalWindowSize($fbSession, $sourceId) {
 //            $max = $count;
 //            $index = $i;
 //        }
-//    }
+    }
 
     return $multiples[$index] * 3600;
 }
