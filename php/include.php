@@ -19,7 +19,7 @@ function buildStreamQuery($gid, $constraints, $limit = 20) {
     $queries = array(
         'streamQuery' => $streamQuery,
         'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)',
-        'userQuery' => 'SELECT last_name,first_name,pic_square,profile_url FROM user WHERE uid IN (SELECT actor_id FROM #streamQuery)'
+        'userQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url FROM user WHERE uid IN (SELECT actor_id FROM #streamQuery)'
     );
 
     return $queries;
@@ -50,9 +50,10 @@ function processStreamQuery($stream, $images, $users) {
     for ($i = 0; $i < count($stream); $i++) {
         $post = $stream[$i];
 
+        // Parse associated data from the query.
         $post['image_url'] = getImageUrlArray($post, $images, true);
         $post['link_data'] = getLinkData($post);
-        $post['user'] = $users[$i];
+        $post['user'] = getUserData($post, $users);
 
         // Erase any attachment data to save on object size.
         // This has already been parsed out.
@@ -113,6 +114,21 @@ function getLinkData($post) {
     }
 
     return $linkData;
+}
+
+/***
+ * Function to parse FQL user data.
+ */
+function getUserData($post, $users) {
+    $user = array();
+    
+    for ($i = 0; $i < count($users); $i++) {
+        if ($post['actor_id'] == $users[$i]['uid']) {
+            $user = $users[$i];
+        }
+    }
+    
+    return $user;
 }
 
 function getImageUrlFromFbId($fbid, $images, $thumbnails = true) {
