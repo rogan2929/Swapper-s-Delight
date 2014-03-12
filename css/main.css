@@ -529,6 +529,7 @@ a:visited {
     position: relative;
     background-color: #e31025;
     color: white;
+    background-image: none;
 }
 
 #post-message-linkdata > *:not(:last-child) {
@@ -537,8 +538,9 @@ a:visited {
 }
 
 #post-block-mask {
-    background-color: #f6f6f6;
-    opacity: 0.3;
+    background-color: #4d81bf;
+    background-image: none;
+    opacity: 0.4;
     position: absolute;
     pointer-events: none;
 }
