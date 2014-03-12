@@ -18,7 +18,8 @@ function buildStreamQuery($gid, $constraints, $limit = 20) {
 
     $queries = array(
         'streamQuery' => $streamQuery,
-        'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'
+        'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)',
+        'userQuery' => 'SELECT last_name,first_name,pic_square,profile_url FROM user WHERE uid IN (SELECT actor_id FROM #streamQuery)'
     );
 
     return $queries;
@@ -36,14 +37,14 @@ function streamQuery($fbSession, $gid, $constraints, $limit = 20) {
         'queries' => $queries
     ));
 
-    return processStreamQuery($response[0]['fql_result_set'], $response[1]['fql_result_set']);
+    return processStreamQuery($response[0]['fql_result_set'], $response[1]['fql_result_set'], $response[2]['fql_result_set']);
 }
 
 /* * *
  * Take a response and construct post objects out of it.
  */
 
-function processStreamQuery($stream, $images) {
+function processStreamQuery($stream, $images, $users) {
     $posts = array();
 
     for ($i = 0; $i < count($stream); $i++) {
@@ -51,6 +52,7 @@ function processStreamQuery($stream, $images) {
 
         $post['image_url'] = getImageUrlArray($post, $images, true);
         $post['link_data'] = getLinkData($post);
+        $post['user'] = $users[$i];
 
         // Erase any attachment data to save on object size.
         // This has already been parsed out.
