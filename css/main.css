@@ -419,10 +419,6 @@ a:visited {
     color: #f6f6f6;
 }
 
-.button.toolbar-button.personal-button {
-    display: none;
-}
-
 .button.menu-button {
     border-radius: 0px;
     color: #f6f6f6;

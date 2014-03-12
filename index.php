@@ -153,7 +153,7 @@
                         <span class='button-icon icon-like'></span>
                         <span>Like</span>
                     </div>
-                    <div id='post-button-delete' class='button toolbar-button personal-button'>
+                    <div id='post-button-delete' class='button toolbar-button personal-button hidden'>
                         <span class='button-icon icon-delete'></span>
                         <span>Delete</span>
                     </div>
