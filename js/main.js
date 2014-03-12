@@ -1025,7 +1025,6 @@ var SwdView = {
         // If there is a feed to display, then display it.
         if (posts && posts.length > 0) {
             $('#post-feed-noposts').hide();
-            SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, posts.length);
 
             // Remove any existing 'Load more...' tiles.
             $('.post-block.load-more').remove();
@@ -1078,6 +1077,8 @@ var SwdView = {
         else {
 //            $('#post-feed-noposts').show();
         }
+        
+        SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block').length - 1);
 
         SwdPresenter.currentlyLoading = false;
     },
