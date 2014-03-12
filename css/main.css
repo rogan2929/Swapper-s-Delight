@@ -594,6 +594,16 @@ a:visited {
     padding: 12px;
 }
 
+.post-block.post-block-text > div > p > span {
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background-size: cover;
+    margin-bottom: 10px;
+}
+
 .post-block .link-title {
     font-weight: bold;
     display: block;

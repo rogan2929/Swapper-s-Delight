@@ -981,9 +981,9 @@ var SwdView = {
 
         $(postBlock).addClass('post-block-text');
         
-        tileImage = 'url('+ post.user.pic_square + ')';
+        tileImage = 'url('+ post.user.pic_small + ')';
 
-        message = '<div><span style="background-image: ' + tileImage + '"></span><p>' + post.message + '</p></div>';
+        message = '<div><p><span style="background-image: ' + tileImage + '"></span>' + post.message + '</p></div>';
 
         $(postBlock).html(message).appendTo('#post-feed');
     },
