@@ -32,12 +32,12 @@ function buildStreamQuery($gid, $constraints, $limit = 20) {
 function streamQuery($fbSession, $gid, $constraints, $limit = 20) {
     $queries = buildStreamQuery($gid, $constraints, $limit);
 
+    echo json_encode($queries);
+    
     $response = $fbSession->api(array(
         'method' => 'fql.multiquery',
         'queries' => $queries
     ));
-    
-    echo json_encode($response);
 
     //return processStreamQuery($response[0]['fql_result_set'], $response[1]['fql_result_set'], $response[2]['fql_result_set']);
 }
