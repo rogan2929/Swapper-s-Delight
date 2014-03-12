@@ -896,6 +896,7 @@ var SwdView = {
     removePost: function(id) {
         $(id).fadeOut(function() {
             $(this).remove();
+            SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block').length - 1);
         });
     },
     /***
