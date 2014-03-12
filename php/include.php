@@ -5,7 +5,7 @@
  */
 
 function buildStreamQuery($gid, $constraints, $limit = 20) {
-    $streamQuery = 'SELECT post_id,updated_time,message,attachment,comment_info FROM stream WHERE source_id=' . $gid;
+    $streamQuery = 'SELECT post_id,actor_id,updated_time,message,attachment,comment_info FROM stream WHERE source_id=' . $gid;
 
     // Check for constraints.
     for ($i = 0; $i < count($constraints); $i++) {
@@ -31,15 +31,13 @@ function buildStreamQuery($gid, $constraints, $limit = 20) {
 
 function streamQuery($fbSession, $gid, $constraints, $limit = 20) {
     $queries = buildStreamQuery($gid, $constraints, $limit);
-
-    echo json_encode($queries);
     
     $response = $fbSession->api(array(
         'method' => 'fql.multiquery',
         'queries' => $queries
     ));
 
-    //return processStreamQuery($response[0]['fql_result_set'], $response[1]['fql_result_set'], $response[2]['fql_result_set']);
+    return processStreamQuery($response[0]['fql_result_set'], $response[1]['fql_result_set'], $response[2]['fql_result_set']);
 }
 
 /* * *
@@ -54,7 +52,7 @@ function processStreamQuery($stream, $images, $users) {
 
         $post['image_url'] = getImageUrlArray($post, $images, true);
         $post['link_data'] = getLinkData($post);
-        //$post['user'] = $users[$i];
+        $post['user'] = $users[$i];
 
         // Erase any attachment data to save on object size.
         // This has already been parsed out.
