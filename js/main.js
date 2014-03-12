@@ -1139,10 +1139,10 @@ var SwdView = {
 
         // Display the 'Delete' button for owned posts. Otherwise, hide it.
         if (post.actor_id === SwdPresenter.uid) {
-            $('#post-button-delete').fadeIn();
+            $('.personal-button').fadeIn();
         }
         else {
-            $('#post-button-delete').hide();
+            $('.personal-button').hide();
         }
 
         // Display user's data.
