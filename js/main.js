@@ -1240,6 +1240,7 @@ var SwdView = {
             $('#main-toolbar').show();
         }
 
+        $('.personal-button').hide();
     },
     /***
      * Shows a Jquery UI menu.
