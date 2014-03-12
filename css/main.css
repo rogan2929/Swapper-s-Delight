@@ -398,7 +398,7 @@ a:visited {
     line-height: normal;
 }
 
-.button:hover, .menu-item:hover, .post-block.ui-widget:hover{
+.button:hover, .menu-item:hover {
 /*    background-color: #1d6fa5;*/
     background-color: #999;
     color: #f6f6f6;
@@ -521,6 +521,7 @@ a:visited {
     margin-bottom: -1px;
     cursor: pointer;
     color: #f6f6f6;
+    background-image: url('/img/tile-background.png');
 }
 
 .post-block.load-more {
