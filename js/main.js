@@ -975,13 +975,15 @@ var SwdView = {
      * @param {type} post
      */
     createTextPostBlock: function(post) {
-        var postBlock, message;
+        var postBlock, message, tileImage;
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
 
         $(postBlock).addClass('post-block-text');
+        
+        tileImage = 'url('+ post.user.pic_square + ')';
 
-        message = '<div><span style="background-image: url("' + post.user.pic_square + ')"></span><p>' + post.message + '</p></div>';
+        message = '<div><span style="background-image: ' + tileImage + '"></span><p>' + post.message + '</p></div>';
 
         $(postBlock).html(message).appendTo('#post-feed');
     },
