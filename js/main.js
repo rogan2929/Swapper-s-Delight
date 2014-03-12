@@ -347,7 +347,7 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
                         SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
                         SwdView.installHandler('onClickPopupComment', SwdPresenter.onClickPopupComment, '#popup-comment', 'click');
-                        SwdView.installHandler('onClickPostButtonDelete', SwdPresenter.onClickPostButtonDelete, '#post-button-comment', 'click');
+                        SwdView.installHandler('onClickPostButtonDelete', SwdPresenter.onClickPostButtonDelete, '#post-button-delete', 'click');
                         SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
                         SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
                         SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block', 'click');
