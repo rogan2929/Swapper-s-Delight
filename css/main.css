@@ -27,7 +27,7 @@ html {
 
 body {
     overflow: hidden;
-    background-color: #f1f1f1;
+/*    background-color: #f1f1f1;*/
     font-size: 0.98em;
 }
 
@@ -513,14 +513,14 @@ a:visited {
 
 .post-block.ui-widget {
     display: inline-block;
-    background-color: #666;
+    background-color: #eee;
     height: 200px;
     width: 325px;
     overflow: hidden;
     margin: 3px;
     margin-bottom: -1px;
     cursor: pointer;
-    color: #f6f6f6;
+/*    color: #f6f6f6;*/
 /*    background-image: url('/img/tile-background.png');*/
 }
 
