@@ -1,7 +1,6 @@
 Implement 'New' post functionality.
 Find ad provider and place their ads.
 Implement Search Post functionality, by FB user and by keyword.
-Implement Delete Post functionality for owned posts.
 Implement check to see that app has the correct permissions.
 *Possibly* add functionality to filter 'My Posts' by comment data.
 Artwork.
@@ -9,10 +8,11 @@ Show or hide groups that the user chooses. Can either be saved locally (per comp
 Helper Popups:
     Start here with group choosing.
     Point out controls for post details toolbar.
-Fix bug where posts are improperly counted when more posts are loaded.
 Include prompt to change app settings so that others using Swapper's Delight can see the current user's photos.
     https://www.facebook.com/settings?tab=applications&section=friends_share&view (Apps Others Use)
 Delete comments?
 Acknowledge tags in posts and comments.
 Allow creation of tags in posts and comments.
 Fix issue of trying to bring up a post that is no longer there.
+Replace dialogs with nicer ones.
+Fix unlike post. (Issue "DELETE" to /OBJECT_ID/likes.)

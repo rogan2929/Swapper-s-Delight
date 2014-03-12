@@ -9,13 +9,14 @@ var PostType = {
     search: 3
 };
 
-// Prod AppId
 var AppId = '1401018793479333';
 var AppUrl = 'http://bit.ly/1kq93Xb';
+var AppUrlFull = 'https://apps.facebook.com/1401018793479333'
 
 // Test AppId
 //var AppId = '652991661414427';
 //var AppUrl = 'http://bit.ly/1aXsWl3';
+//var AppUrlFull = 'https://apps.facebook.com/652991661414427';
 
 // http://stackoverflow.com/questions/1102215/mvp-pattern-with-javascript-framework
 
@@ -29,6 +30,23 @@ var SwdModel = {
      */
     createNewPost: function(callbacks) {
 
+    },
+    /***
+     * Delete a post from a group's feed.
+     * @param {type} postId
+     * @param {type} callbacks
+     */
+    deletePost: function(postId, callbacks) {
+        $.ajax({
+            type: 'GET',
+            url: '/php/delete-post.php?postId=' + postId,
+            success: function(response) {
+                callbacks.success.call(SwdModel, response);
+            },
+            error: function(response) {
+                callbacks.error.call(SwdModel, response);
+            }
+        });
     },
     /***
      * Get posts in the group that are liked.
@@ -173,6 +191,19 @@ var SwdModel = {
             }
         });
     },
+    /***
+     * Remove a group from the selected groups list.
+     * @param {type} gid
+     */
+    removeGroup: function(gid) {
+        
+    },
+    /***
+     * Restores all groups to the selected groups list.
+     */
+    restoreAllGroups: function() {
+        
+    },
 };
 /**
  * Presenter for the Swapper's Delight program.
@@ -199,7 +230,8 @@ var SwdPresenter = {
                 SwdView.showMessage('Sorry, but your session has expired - automatically taking you back to the main page.');
 
                 // Send the user to the app's main url.
-                window.location = AppUrl;
+                window.location = window.location.href;
+                window.location.reload();
 
 //                FB.login(function(response) {
 //                    if (response.status === 'connected') {
@@ -314,6 +346,7 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
                         SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
                         SwdView.installHandler('onClickPopupComment', SwdPresenter.onClickPopupComment, '#popup-comment', 'click');
+                        SwdView.installHandler('onClickPostButtonDelete', SwdPresenter.onClickPostButtonDelete, '#post-button-delete', 'click');
                         SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
                         SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
                         SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block', 'click');
@@ -584,6 +617,22 @@ var SwdPresenter = {
     onClickPopupComment: function(e, args) {
         e.stopPropagation();
     },
+    onClickPostButtonDelete: function(e, args) {
+        if (SwdView.showConfirmation('Are you sure you want to delete this post? You won\'t be able to get it back.')) {
+            SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
+
+            // Delete the post and then remove it from the feed.
+            SwdModel.deletePost(SwdPresenter.selectedPost.post_id, {
+                success: function(response) {
+                    SwdView.toggleAjaxLoadingDiv('#post-details-panel', false);
+                    SwdView.toggleFloatingPanel('#post-details-panel', false);
+                    SwdView.toggleToolbar('', false);
+                    SwdView.removePost('#' + SwdPresenter.selectedPost.post_id);
+                },
+                fail: SwdPresenter.handleError
+            });
+        }
+    },
     onClickPostButtonLike: function(e, args) {
         var id, userLikes;
 
@@ -681,18 +730,25 @@ var SwdPresenter = {
         SwdView.toggleFloatingPanel('#select-group-panel', false);
     },
     onClickGroupClose: function(e, args) {
-        var groupTile, target;
+        var groupTile, target, gid;
 
         e.stopPropagation();
 
         target = $(e.currentTarget);
 
         groupTile = $(target).parent('.group-selection-item');
+        
+        gid = $(groupTile).attr('id');
+        
+        // Remove the item from the back end.
+        SwdModel.removeGroup(gid);
 
         // Remove the item from view.
         SwdView.hideGroupFromSelectPanel(groupTile);
     },
     onClickRestoreGroupSelectionItems: function(e, args) {
+        // Restore all group selection items.
+        SwdModel.restoreAllGroups();
         SwdView.showAllGroupSelectionItems();
     },
     onClickToolbar: function(e, args) {
@@ -833,6 +889,16 @@ var SwdView = {
         });
     },
     /***
+     * Remove a post block from the view.
+     * @param {type} id
+     */
+    removePost: function(id) {
+        $(id).fadeOut(function() {
+            $(this).remove();
+            SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block').length - 2);
+        });
+    },
+    /***
      * Remove a group from the group selection panel.
      * @param {type} id
      */
@@ -854,10 +920,6 @@ var SwdView = {
             top: Math.max(offset + 43, 0)
         }, 100);
 
-//        $('.toolbar, .floating-panel').animate({
-//            top: Math.max(offset, 0)
-//        }, 100);
-
         $('.toolbar').animate({
             top: Math.max(offset, 0)
         }, 100);
@@ -867,7 +929,7 @@ var SwdView = {
         }, 100);
     },
     /***
-     * Dynamically calculate the height of all floating panels, based on how large the FB canvas is.
+     * Calculate the height of all floating panels, based on how large the FB canvas is.
      * @param {type} height
      */
     setFloatingPanelHeight: function(height) {
@@ -962,7 +1024,6 @@ var SwdView = {
         // If there is a feed to display, then display it.
         if (posts && posts.length > 0) {
             $('#post-feed-noposts').hide();
-            SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, posts.length);
 
             // Remove any existing 'Load more...' tiles.
             $('.post-block.load-more').remove();
@@ -1015,6 +1076,10 @@ var SwdView = {
         else {
 //            $('#post-feed-noposts').show();
         }
+        
+        // Display the official count.
+        // Subtract two since one is the hidden mask overlay and the other is the 'Load More' post block.
+        SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block').length - 2);
 
         SwdPresenter.currentlyLoading = false;
     },
@@ -1036,6 +1101,15 @@ var SwdView = {
     setMainOverlayTransparency: function() {
         // Set the main ajax overlay to be semi-transparent.
         $('#overlay-app-loading').addClass('semi-transparent');
+    },
+    /***
+     * Displays a confirmation dialog (Yes/No) to the user.
+     * Returns true for Yes, false for No.
+     * @param {type} message
+     * @returns {bool}
+     */
+    showConfirmation: function(message) {
+        return confirm(message);
     },
     /***
      * Shows an image viewer for the given post, allowing the user to see photos in greater detail.
@@ -1066,6 +1140,14 @@ var SwdView = {
      */
     showPostDetails: function(post) {
         var userImage, postImage, i, timeStamp, linkData;
+
+        // Display the 'Delete' button for owned posts. Otherwise, hide it.
+        if (post.actor_id === SwdPresenter.uid) {
+            $('.personal-button').fadeIn();
+        }
+        else {
+            $('.personal-button').hide();
+        }
 
         // Display user's data.
         if (post.user.pic_square) {
@@ -1157,6 +1239,7 @@ var SwdView = {
             $('#main-toolbar').show();
         }
 
+        $('.personal-button').hide();
     },
     /***
      * Shows a Jquery UI menu.

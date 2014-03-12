@@ -3,3 +3,5 @@ Rework post details floating panel.
 Possibly rework select group floating panel.
 Implement 'Logout' feature.
 Rework timeout issue so that instead of simply refreshing the page, a new access token is requested.
+Implement Delete Post functionality for owned posts.
+Fix bug where posts are improperly counted when more posts are loaded.
