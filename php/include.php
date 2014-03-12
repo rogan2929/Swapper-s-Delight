@@ -286,7 +286,7 @@ function executeBatchQuery($fbSession, $gid, $constraints) {
     // Sift through the results.
     for ($i = 0; $i < count($response); $i++) {
         $result = json_decode($response[$i]['body'], true);
-        $posts = array_merge($posts, processStreamQuery($result[0]['fql_result_set'], $result[1]['fql_result_set']));
+        $posts = array_merge($posts, processStreamQuery($result[0]['fql_result_set'], $result[1]['fql_result_set'], $result[2]['fql_result_set']));
     }
 
     return $posts;
