@@ -17,3 +17,4 @@ Acknowledge tags in posts and comments.
 Allow creation of tags in posts and comments.
 Fix issue of trying to bring up a post that is no longer there.
 Replace dialogs with nicer ones.
+Fix unlike post. (Issue "DELETE" to /OBJECT_ID/likes.)

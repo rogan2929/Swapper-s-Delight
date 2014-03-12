@@ -42,7 +42,7 @@ var SwdModel = {
             type: 'GET',
             url: '/php/delete-post.php?postId=' + postId,
             success: function(response) {
-                callbacks.success.call(SwdModel, JSON.parse(response));
+                callbacks.success.call(SwdModel, response);
             },
             error: function(response) {
                 callbacks.error.call(SwdModel, response);
