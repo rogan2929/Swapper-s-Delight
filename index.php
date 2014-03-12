@@ -153,13 +153,13 @@
                         <span class='button-icon icon-like'></span>
                         <span>Like</span>
                     </div>
-                    <div id='post-button-pm' class='button toolbar-button'>
-                        <span class='button-icon icon-pm'></span>
-                        <span>Private Message</span>
-                    </div>
                     <div id='post-button-delete' class='button toolbar-button personal-button'>
                         <span class='button-icon icon-delete'></span>
                         <span>Delete</span>
+                    </div>
+                    <div id='post-button-pm' class='button toolbar-button'>
+                        <span class='button-icon icon-pm'></span>
+                        <span>Private Message</span>
                     </div>
                 </div>
             </div>
