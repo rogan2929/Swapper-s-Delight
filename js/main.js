@@ -12,10 +12,12 @@ var PostType = {
 // Prod AppId
 //var AppId = '1401018793479333';
 //var AppUrl = 'http://bit.ly/1kq93Xb';
+//var AppUrlFull = 'https://apps.facebook.com/1401018793479333'
 
 // Test AppId
 var AppId = '652991661414427';
 var AppUrl = 'http://bit.ly/1aXsWl3';
+var AppUrlFull = 'https://apps.facebook.com/652991661414427';
 
 // http://stackoverflow.com/questions/1102215/mvp-pattern-with-javascript-framework
 
@@ -29,6 +31,23 @@ var SwdModel = {
      */
     createNewPost: function(callbacks) {
 
+    },
+    /***
+     * Delete a post from a group's feed.
+     * @param {type} postId
+     * @param {type} callbacks
+     */
+    deletePost: function(postId, callbacks) {
+        $.ajax({
+            type: 'GET',
+            url: '/php/delete-post.php?postId=' + postId,
+            success: function(response) {
+                callbacks.success.call(SwdModel, JSON.parse(response));
+            },
+            error: function(response) {
+                callbacks.error.call(SwdModel, response);
+            }
+        });
     },
     /***
      * Get posts in the group that are liked.
@@ -199,15 +218,16 @@ var SwdPresenter = {
                 SwdView.showMessage('Sorry, but your session has expired - automatically taking you back to the main page.');
 
                 // Send the user to the app's main url.
-                //window.location = AppUrl;
+                window.location = window.location.href;
+                window.location.reload();
 
-                FB.login(function(response) {
-                    if (response.status === 'connected') {
-                        callback.call(SwdPresenter);
-                    }
-                }, {
-                    scope: 'user_groups,user_likes,publish_stream,read_stream'
-                });
+//                FB.login(function(response) {
+//                    if (response.status === 'connected') {
+//                        callback.call(SwdPresenter);
+//                    }
+//                }, {
+//                    scope: 'user_groups,user_likes,publish_stream,read_stream'
+//                });
             }
             else {
                 callback.call(SwdPresenter);
@@ -314,6 +334,7 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
                         SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
                         SwdView.installHandler('onClickPopupComment', SwdPresenter.onClickPopupComment, '#popup-comment', 'click');
+                        SwdView.installHandler('onClickPostButtonDelete', SwdPresenter.onClickPostButtonDelete, '#post-button-comment', 'click');
                         SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
                         SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
                         SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block', 'click');
@@ -584,6 +605,21 @@ var SwdPresenter = {
     onClickPopupComment: function(e, args) {
         e.stopPropagation();
     },
+    onClickPostButtonDelete: function(e, args) {
+        if (SwdView.showConfirmation('Are you sure you want to delete this post? You won\'t be able to get it back.')) {
+            SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
+
+            // Delete the post and then remove it from the feed.
+            SwdModel.deletePost(SwdPresenter.selectedPost.post_id, {
+                success: function(response) {
+                    SwdView.toggleAjaxLoadingDiv('#post-details-panel', false);
+                    SwdView.toggleFloatingPanel('#post-details-panel', false);
+
+                },
+                fail: SwdPresenter.handleError
+            });
+        }
+    },
     onClickPostButtonLike: function(e, args) {
         var id, userLikes;
 
@@ -833,6 +869,15 @@ var SwdView = {
         });
     },
     /***
+     * Remove a post block from the view.
+     * @param {type} id
+     */
+    removePost: function(id) {
+        $(id).fadeOut(function() {
+            $(this).remove();
+        });
+    },
+    /***
      * Remove a group from the group selection panel.
      * @param {type} id
      */
@@ -854,10 +899,6 @@ var SwdView = {
             top: Math.max(offset + 43, 0)
         }, 100);
 
-//        $('.toolbar, .floating-panel').animate({
-//            top: Math.max(offset, 0)
-//        }, 100);
-
         $('.toolbar').animate({
             top: Math.max(offset, 0)
         }, 100);
@@ -867,7 +908,7 @@ var SwdView = {
         }, 100);
     },
     /***
-     * Dynamically calculate the height of all floating panels, based on how large the FB canvas is.
+     * Calculate the height of all floating panels, based on how large the FB canvas is.
      * @param {type} height
      */
     setFloatingPanelHeight: function(height) {
@@ -1038,6 +1079,19 @@ var SwdView = {
         $('#overlay-app-loading').addClass('semi-transparent');
     },
     /***
+     * Displays a confirmation dialog (Yes/No) to the user.
+     * Returns true for Yes, false for No.
+     * @param {type} message
+     * @returns {bool}
+     */
+    showConfirmation: function(message) {
+        var confirmed;
+        
+        confirmed = true;
+        
+        return confirmed;
+    },
+    /***
      * Shows an image viewer for the given post, allowing the user to see photos in greater detail.
      * @param {type} post
      */
@@ -1066,6 +1120,14 @@ var SwdView = {
      */
     showPostDetails: function(post) {
         var userImage, postImage, i, timeStamp, linkData;
+
+        // Display the 'Delete' button for owned posts. Otherwise, hide it.
+        if (post.actor === SwdPresenter.uid) {
+            $('#post-button-delete').show();
+        }
+        else {
+            $('#post-button-delete').hide();
+        }
 
         // Display user's data.
         if (post.user.pic_square) {

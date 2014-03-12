@@ -419,6 +419,10 @@ a:visited {
     color: #f6f6f6;
 }
 
+.personal-button {
+    display: none;
+}
+
 .button.menu-button {
     border-radius: 0px;
     color: #f6f6f6;
@@ -464,6 +468,10 @@ a:visited {
 
 .button-icon.icon-pm {
     background-image: url('/icons/mail32w.png');
+}
+
+.button-icon.icon-delete {
+    background-image: url('/icons/recycle32w.png');
 }
 
 /*#post-button-comment:hover .button-icon.icon-comment {
