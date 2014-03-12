@@ -627,7 +627,8 @@ var SwdPresenter = {
                 success: function(response) {
                     SwdView.toggleAjaxLoadingDiv('#post-details-panel', false);
                     SwdView.toggleFloatingPanel('#post-details-panel', false);
-
+                    SwdView.toggleToolbar('', false);
+                    SwdView.removePost('#' + SwdPresenter.selectedPost.post_id);
                 },
                 fail: SwdPresenter.handleError
             });
