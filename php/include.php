@@ -19,7 +19,7 @@ function buildStreamQuery($gid, $constraints, $limit = 20) {
     $queries = array(
         'streamQuery' => $streamQuery,
         'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)',
-        'userQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url,pic_small FROM user WHERE uid IN (SELECT actor_id FROM #streamQuery)'
+        'userQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url,pic FROM user WHERE uid IN (SELECT actor_id FROM #streamQuery)'
     );
 
     return $queries;

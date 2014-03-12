@@ -981,7 +981,7 @@ var SwdView = {
 
         $(postBlock).addClass('post-block-text');
         
-        tileImage = 'url('+ post.user.pic_small + ')';
+        tileImage = 'url('+ post.user.pic + ')';
 
         message = '<div><p><span style="background-image: ' + tileImage + '"></span>' + post.message + '</p></div>';
 
