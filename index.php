@@ -109,7 +109,7 @@
                     <div class='floating-panel-content ui-widget scroll-y'>
                         <div class='close-button'></div>
                         <span class='heading'>Choose a Group to View</span>
-                        <span class='hint'>Hint: Hide any groups that you don't want to see here. Don't worry; you can just click <a id='restore-group-selection-items' href='#'>here</a> to bring them back.</span>
+                        <span class='hint'>Hint: You can also hide any groups that you don't want to see here. Don't worry; you can just click <a id='restore-group-selection-items' href='#'>here</a> to bring them back.</span>
                         <div id='select-group-list' class='selection-list'>
                             <div id='select-group-no-groups' class='selection-item select-group'>
                                 You're not a member of any Facebook groups.
