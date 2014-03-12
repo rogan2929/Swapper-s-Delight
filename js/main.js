@@ -896,7 +896,7 @@ var SwdView = {
     removePost: function(id) {
         $(id).fadeOut(function() {
             $(this).remove();
-            SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block').length - 1);
+            SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block').length - 2);
         });
     },
     /***
@@ -1078,7 +1078,9 @@ var SwdView = {
 //            $('#post-feed-noposts').show();
         }
         
-        SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block').length - 1);
+        // Display the official count.
+        // Subtract two since one is the hidden mask overlay and the other is the 'Load More' post block.
+        SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block').length - 2);
 
         SwdPresenter.currentlyLoading = false;
     },
