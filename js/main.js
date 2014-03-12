@@ -228,11 +228,11 @@ var SwdPresenter = {
             // Check connection status, posting a login prompt if the user has disconnected.
             // TODO: Replace with something better.
             if (response.status !== 'connected') {
-                SwdView.showMessage('Sorry, but your session has expired - automatically taking you back to the main page.');
-
-                // Send the user to the app's main url.
-                window.location = window.location.href;
-                window.location.reload();
+//                SwdView.showMessage('Sorry, but your session has expired - automatically taking you back to the main page.');
+//
+//                // Send the user to the app's main url.
+//                window.location = window.location.href;
+//                window.location.reload();
 
 //                FB.login(function(response) {
 //                    if (response.status === 'connected') {
@@ -259,7 +259,8 @@ var SwdPresenter = {
                 SwdView.showMessage('Sorry, but your session has expired - automatically taking you back to the main page.');
 
                 // Send the user to the app's main url.
-                window.location = AppUrl;
+                window.location = SwdPresenter.AppUrlFull;
+                window.reload();
                 break;
             default:
                 SwdView.showError(error.responseText);
