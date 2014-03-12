@@ -513,7 +513,7 @@ a:visited {
 
 .post-block.ui-widget {
     display: inline-block;
-    background-color: #4D81BF;
+    background-color: #666;
     height: 200px;
     width: 325px;
     overflow: hidden;
@@ -521,7 +521,7 @@ a:visited {
     margin-bottom: -1px;
     cursor: pointer;
     color: #f6f6f6;
-    background-image: url('/img/tile-background.png');
+/*    background-image: url('/img/tile-background.png');*/
 }
 
 .post-block.load-more {
