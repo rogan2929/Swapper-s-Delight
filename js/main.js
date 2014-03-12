@@ -1085,11 +1085,7 @@ var SwdView = {
      * @returns {bool}
      */
     showConfirmation: function(message) {
-        var confirmed;
-        
-        confirmed = true;
-        
-        return confirmed;
+        return confirm(message);
     },
     /***
      * Shows an image viewer for the given post, allowing the user to see photos in greater detail.
