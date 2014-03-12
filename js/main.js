@@ -981,7 +981,7 @@ var SwdView = {
 
         $(postBlock).addClass('post-block-text');
 
-        message = '<div><p>' + post.message + '</p></div>';
+        message = '<div><span style="background-image: url("' + post.user.pic_square + ')"></span><p>' + post.message + '</p></div>';
 
         $(postBlock).html(message).appendTo('#post-feed');
     },
