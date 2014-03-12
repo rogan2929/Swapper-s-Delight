@@ -192,6 +192,19 @@ var SwdModel = {
             }
         });
     },
+    /***
+     * Remove a group from the selected groups list.
+     * @param {type} gid
+     */
+    removeGroup: function(gid) {
+        
+    },
+    /***
+     * Restores all groups to the selected groups list.
+     */
+    restoreAllGroups: function() {
+        
+    },
 };
 /**
  * Presenter for the Swapper's Delight program.
@@ -717,18 +730,25 @@ var SwdPresenter = {
         SwdView.toggleFloatingPanel('#select-group-panel', false);
     },
     onClickGroupClose: function(e, args) {
-        var groupTile, target;
+        var groupTile, target, gid;
 
         e.stopPropagation();
 
         target = $(e.currentTarget);
 
         groupTile = $(target).parent('.group-selection-item');
+        
+        gid = $(groupTile).attr('id');
+        
+        // Remove the item from the back end.
+        SwdModel.removeGroup(gid);
 
         // Remove the item from view.
         SwdView.hideGroupFromSelectPanel(groupTile);
     },
     onClickRestoreGroupSelectionItems: function(e, args) {
+        // Restore all group selection items.
+        SwdModel.restoreAllGroups();
         SwdView.showAllGroupSelectionItems();
     },
     onClickToolbar: function(e, args) {
