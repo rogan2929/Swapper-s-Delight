@@ -80,7 +80,7 @@
                                 <span id='linkdata-desc'></span>
                             </div>
                             <div id='post-no-image-desc' class='floating-panel-section hidden'>
-                                <span class='hint'>Hint: Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. Click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook.</span>
+                                <span class='hint'>Hint: Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. If you want to see them, click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook.</span>
                             </div>
                         </div>
                         <div id='details-right-column' class='panel-post-column scroll-y'>
