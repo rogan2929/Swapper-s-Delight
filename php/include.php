@@ -52,7 +52,7 @@ function processStreamQuery($stream, $images, $users) {
 
         $post['image_url'] = getImageUrlArray($post, $images, true);
         $post['link_data'] = getLinkData($post);
-        $post['user'] = $users[$i];
+        //$post['user'] = $users[$i];
 
         // Erase any attachment data to save on object size.
         // This has already been parsed out.
