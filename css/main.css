@@ -663,7 +663,7 @@ a:visited {
 .post-block.post-block-link .content,
 .post-block.post-block-textlink .content {
     overflow: hidden;
-    height: 11.5em;
+    height: 12em;
     padding: 12px;
 }
 
