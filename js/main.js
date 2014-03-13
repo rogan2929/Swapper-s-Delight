@@ -1012,7 +1012,7 @@ var SwdView = {
         linkImage = 'url(' + post.link_data.media[0].src + ')';
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
-        description = '<div class="visible-content wrapper"><p class="content"><span class="link-image" style="background-image: "' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
+        description = '<div class="visible-content wrapper"><p class="content"><span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
 
         $(postBlock).addClass('post-block-link').html(description);
         
