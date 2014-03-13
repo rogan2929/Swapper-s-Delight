@@ -969,7 +969,7 @@ var SwdView = {
         tileImage = 'url(' + post.image_url[0] + ')';
 
         // Create the visible block.
-        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"><div class="post-image" style="background-image: ' + tileImage + '"></div></div>');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"><div class="visible-content" style="background-image: ' + tileImage + '"></div></div>');
         //$(postBlock).addClass('post-block-image').css('background-image', 'url("' + post.image_url[0] + '")');
 
         $(postBlock).addClass('post-block-image');
@@ -998,7 +998,7 @@ var SwdView = {
 
         timeStamp = new moment(new Date(post.created_time * 1000));
 
-        message = '<div class="wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+        message = '<div class="visible-content wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
         $(postBlock).addClass('post-block-text').html(message).appendTo('#post-feed');
     },
@@ -1010,7 +1010,7 @@ var SwdView = {
         var postBlock, description, userImage, timeStamp, message;
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
-        description = '<div class="wrapper"><p class="content"><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
+        description = '<div class="visible-content wrapper"><p class="content"><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
 
         $(postBlock).addClass('post-block-link').html(description); //.appendTo('#post-feed');
         
@@ -1033,7 +1033,7 @@ var SwdView = {
         var postBlock, message, userImage, timeStamp, message;
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
-        message = '<div class="wrapper"><p class="content">' + post.message + '</p></div>';
+        message = '<div class="wrapper visible-content"><p class="content">' + post.message + '</p></div>';
 
         $(postBlock).addClass('post-block-textlink').html(message);//.appendTo('#post-feed');
         
@@ -1042,7 +1042,7 @@ var SwdView = {
 
         timeStamp = new moment(new Date(post.created_time * 1000));
 
-        message = '<div class="wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+        message = '<div class="visible-content wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
         $(postBlock).append('<div class="post-block post-block-text hidden-content">' + message + '</div>');
 
@@ -1110,10 +1110,10 @@ var SwdView = {
 
             // After a delay, show the hidden content for any moused over image post blocks.
             // Use the hoverIntent plugin.
-            $('.post-block.post-block-image').hoverIntent(function() {
-                $(this).children('.post-image').slideUp(300);
+            $('.visible-content').not('.post-block-text .visible-content').hoverIntent(function() {
+                $(this).slideUp(300);
             }, function() {
-                $(this).children('.post-image').slideDown(300);
+                $(this).slideDown(300);
             }, 500);
 
             SwdPresenter.resetFbCanvasSize();
