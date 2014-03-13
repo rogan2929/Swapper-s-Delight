@@ -489,7 +489,7 @@ a:visited {
     background-image: url('/icons/exchange32.png');
 }
 
-.toolbar-button .button-icon.icon-search:hover {
+/*.toolbar-button .button-icon.icon-search:hover {
     background-image: url('/icons/search32.png');
 }
 
@@ -511,9 +511,9 @@ a:visited {
 
 .toolbar-button .button-icon.icon-delete:hover {
     background-image: url('/icons/recycle32.png');
-}
+}*/
 
-/*#post-button-comment:hover .button-icon.icon-comment {
+#post-button-comment:hover .button-icon.icon-comment {
     background-image: url('/icons/comment32.png');
 }
 
@@ -535,7 +535,11 @@ a:visited {
 
 #button-menu-main:hover .button-icon.icon-menu {
     background-image: url('/icons/gear32.png');
-}*/
+}
+
+#post-button-delete:hover .button-icon.icon-delete {
+    background-image: url('/icons/recycle32.png');
+}
 
 #button-menu-main {
     min-width: 0 !important;
