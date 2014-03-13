@@ -1059,7 +1059,7 @@ var SwdView = {
 
         $(postBlock).addClass('post-block-textlink').html(message);
         
-        description = '<div class="visible-content wrapper"><p class="content"><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
+        description = '<div class="wrapper"><p class="content"><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
         
         // Create the link text block that resides behind the visible block.
         //message = '<div class="wrapper"><p class="content">' + description + '</p></div>';
