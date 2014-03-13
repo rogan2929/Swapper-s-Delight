@@ -5,7 +5,7 @@
  */
 
 function buildStreamQuery($gid, $constraints, $limit = 20) {
-    $streamQuery = 'SELECT post_id,actor_id,updated_time,message,attachment,comment_info FROM stream WHERE source_id=' . $gid;
+    $streamQuery = 'SELECT post_id,actor_id,updated_time,message,attachment,comment_info,created_time FROM stream WHERE source_id=' . $gid;
 
     // Check for constraints.
     for ($i = 0; $i < count($constraints); $i++) {
