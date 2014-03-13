@@ -109,7 +109,7 @@
                     <div class='floating-panel-content ui-widget scroll-y'>
                         <div class='close-button'></div>
                         <span class='heading'>Choose a Group to View</span>
-                        <span class='hint'>Hint: Hide any groups that you don't want to see here. Don't worry; you can just click <a id='restore-group-selection-items' href='#'>here</a> to bring them back.</span>
+                        <span class='hint'>Hint: You can also hide any groups that you don't want to see here. Don't worry; click <a id='restore-group-selection-items' href='#'>here</a> to bring them back.</span>
                         <div id='select-group-list' class='selection-list'>
                             <div id='select-group-no-groups' class='selection-item select-group'>
                                 You're not a member of any Facebook groups.
@@ -129,7 +129,7 @@
                         <span class='button-icon icon-refresh'></span>
                         <span>Refresh</span>
                     </div>
-                    <div id='button-menu-main' class='button menu-button'>
+                    <div id='button-menu-main' class='button toolbar-button menu-button icon-only'>
                         <span class='button-icon icon-menu'></span>
                         <a href='#popup-menu-main'></a>
                     </div>
@@ -144,7 +144,7 @@
 
             <div id='post-details-toolbar' class='ui-widget toolbar floating-panel-toolbar hidden'>
                 <div class='toolbar-group float-left'>
-                    <div id='post-button-comment' class='button menu-button'>
+                    <div id='post-button-comment' class='button toolbar-button menu-button'>
                         <span class='button-icon icon-comment'></span>
                         <span>Comment</span>
                         <a href='#popup-comment'></a>
@@ -189,6 +189,7 @@
         <div id='overlay-app-loading' class='ajax-loading-div'></div>
         <div id='overlay' class='hidden'></div>
         <div id='post-block-mask' class='post-block ui-widget hidden'></div>
+        <div id='selection-item-mask' class='button selection-item ui-widget hidden'></div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>

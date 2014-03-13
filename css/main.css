@@ -27,7 +27,7 @@ html {
 
 body {
     overflow: hidden;
-    background-color: #f1f1f1;
+/*    background-color: #f1f1f1;*/
     font-size: 0.98em;
 }
 
@@ -177,6 +177,16 @@ a:visited {
     position: absolute;
 }
 
+.post-block .timestamp {
+    display: block;
+    color: #4d81bf;
+    margin-bottom: 6px;
+}
+
+.post-block.hidden-block .timestamp, .hover-highlight .timestamp {
+    color: #f6f6f6;
+}
+
 /*.post-comment-header .timestamp,#post-message-header .timestamp {
     display: block;
     font-weight: normal;
@@ -197,12 +207,11 @@ a:visited {
     font-weight: bold;
 }
 
-.selected-nav {
-    color: #ffffff !important;
-    text-decoration: none !important;
-/*    background: #13486b;*/
-    background: #aaa;
-    font-weight: bold !important;
+.nav-button.selected-nav {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #e35765;
+    font-weight: bold;
 }
 
 #main-panel {
@@ -299,6 +308,7 @@ a:visited {
     margin: 5px;
     padding: 4px !important;
     position: relative;
+    border-radius: 5px;
 }
 
 .selection-item-content {
@@ -398,17 +408,26 @@ a:visited {
     line-height: normal;
 }
 
-.button:hover, .menu-item:hover, .post-block.ui-widget:hover{
-/*    background-color: #1d6fa5;*/
-    background-color: #999;
+.button:hover, 
+.menu-item:hover {
+    background-color: #aaa;
     color: #f6f6f6;
 }
+
+/*.button:hover, 
+.menu-item:hover, 
+.post-block.post-block-text:hover,
+.post-block.post-block-link:hover,
+.post-block.post-block-textlink:hover {
+    background-color: #ccc;
+}*/
 
 .nav-button {
     display: block;
     height: 40px;
     line-height: 40px;
     font-size: 0.95em;
+    background-color: #eee;
 }
 
 .button.toolbar-button {
@@ -427,6 +446,7 @@ a:visited {
 
 .button.toolbar-button:hover, .button.nav-button:hover {
 /*    border: 1px solid #ccc;*/
+    color: #f6f6f6;
 }
 
 .button-icon {
@@ -438,37 +458,70 @@ a:visited {
     background-position: center center;
 }
 
-.button-icon.icon-new {
+.toolbar-button .button-icon.icon-new {
     background-image: url('/icons/paperplus32w.png');
 }
 
-.button-icon.icon-refresh {
+.toolbar-button .button-icon.icon-refresh {
     background-image: url('/icons/exchange32w.png');
 }
 
-.button-icon.icon-search {
+.toolbar-button .button-icon.icon-search {
     background-image: url('/icons/search32w.png');
 }
 
-.button-icon.icon-menu {
+.toolbar-button .button-icon.icon-menu {
     background-image: url('/icons/gear32w.png');
 }
 
-.button-icon.icon-comment {
+.toolbar-button .button-icon.icon-comment {
     background-image: url('/icons/comment32w.png');
 }
 
-.button-icon.icon-like {
+.toolbar-button .button-icon.icon-like {
     background-image: url('/icons/heart32w.png');
 }
 
-.button-icon.icon-pm {
+.toolbar-button .button-icon.icon-pm {
     background-image: url('/icons/mail32w.png');
 }
 
-.button-icon.icon-delete {
+.toolbar-button .button-icon.icon-delete {
     background-image: url('/icons/recycle32w.png');
 }
+
+/*
+.toolbar-button .button-icon.icon-new:hover {
+    background-image: url('/icons/paperplus32.png');
+}
+
+.toolbar-button .button-icon.icon-refresh:hover {
+    background-image: url('/icons/exchange32.png');
+}
+
+.toolbar-button .button-icon.icon-search:hover {
+    background-image: url('/icons/search32.png');
+}
+
+.toolbar-button .button-icon.icon-menu:hover {
+    background-image: url('/icons/gear32.png');
+}
+
+.toolbar-button .button-icon.icon-comment:hover {
+    background-image: url('/icons/comment32.png');
+}
+
+.toolbar-button .button-icon.icon-like:hover {
+    background-image: url('/icons/heart32.png');
+}
+
+.toolbar-button .button-icon.icon-pm:hover {
+    background-image: url('/icons/mail32.png');
+}
+
+.toolbar-button .button-icon.icon-delete:hover {
+    background-image: url('/icons/recycle32.png');
+}*/
 
 /*#post-button-comment:hover .button-icon.icon-comment {
     background-image: url('/icons/comment32.png');
@@ -492,17 +545,25 @@ a:visited {
 
 #button-menu-main:hover .button-icon.icon-menu {
     background-image: url('/icons/gear32.png');
+}
+
+#post-button-delete:hover .button-icon.icon-delete {
+    background-image: url('/icons/recycle32.png');
 }*/
 
 #button-menu-main {
     min-width: 0 !important;
-    width: 30px;
+}
+
+.button.icon-only > .button-icon {
+    margin-right: 0;
 }
 
 #button-groups {
     padding-left: 20px;
     padding-right: 20px;
     font-weight: bold;
+    color: #f6f6f6;
 }
 
 #button-groups:hover, .post-block.load-more:hover {
@@ -511,16 +572,29 @@ a:visited {
 
 /*http://jsfiddle.net/E78q3/*/
 
-.post-block.ui-widget {
+.post-block,
+.post-block.post-block-text,
+.post-block.post-block-link,
+.post-block.post-block-textlink {
     display: inline-block;
-    background-color: #4D81BF;
-    height: 200px;
+    background-color: #eee;
+    height: 205px;
     width: 325px;
     overflow: hidden;
     margin: 3px;
     margin-bottom: -1px;
     cursor: pointer;
-    color: #f6f6f6;
+    border-radius: 5px;
+/*    color: #f6f6f6;*/
+/*    background-image: url('/img/tile-background.png');*/
+}
+
+
+
+.post-block .visible-content {
+    background-size: 100%;
+    height: 205px;
+    width: 325px;
 }
 
 .post-block.load-more {
@@ -528,6 +602,7 @@ a:visited {
     position: relative;
     background-color: #e31025;
     color: white;
+    background-image: none;
 }
 
 #post-message-linkdata > *:not(:last-child) {
@@ -535,8 +610,9 @@ a:visited {
     display: block;
 }
 
-#post-block-mask {
+#post-block-mask, #selection-item-mask {
     background-color: #f6f6f6;
+    background-image: none;
     opacity: 0.3;
     position: absolute;
     pointer-events: none;
@@ -560,7 +636,7 @@ a:visited {
 }*/
 
 .load-more > .load-more-text {
-    line-height: 200px;
+    line-height: 205px;
     vertical-align: middle;
     font-size: 1.15em;
 }
@@ -576,22 +652,46 @@ a:visited {
     font-style: italic;
 }
 
-.post-block.post-block-text > div,
-.post-block.post-block-link > div,
-.post-block.post-block-textlink > div {
+.post-block.post-block-text .wrapper,
+.post-block.post-block-link .wrapper,
+.post-block.post-block-textlink .wrapper {
     overflow: hidden;
-    height: 200px;
+    height: 205px;
 }
 
-.post-block.post-block-text > div > p,
-.post-block.post-block-link > div > p,
-.post-block.post-block-textlink > div > p {
+.post-block.post-block-text .content,
+.post-block.post-block-link .content,
+.post-block.post-block-textlink .content {
     overflow: hidden;
-    height: 165px;
+    height: 170px;
     padding: 12px;
 }
 
-.post-block .link-title {
+.post-block.hidden-block {
+    margin: 0 !important;
+    background-color: #4d81bf;
+    color: #f6f6f6;
+}
+
+.hover-highlight {
+    background-color: #4d81bf !important;
+    color: #f6f6f6;
+}
+
+/*.post-block .text {
+    margin-top: 5px;
+}*/
+
+.post-block .user-image, .post-block .link-image {
+    height: 60px;
+    width: 60px;
+    background-size: cover;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    float: left;
+}
+
+.post-block .link-title, .post-block .user-name {
     font-weight: bold;
     display: block;
 }

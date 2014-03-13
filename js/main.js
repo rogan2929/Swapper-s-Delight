@@ -196,13 +196,13 @@ var SwdModel = {
      * @param {type} gid
      */
     removeGroup: function(gid) {
-        
+
     },
     /***
      * Restores all groups to the selected groups list.
      */
     restoreAllGroups: function() {
-        
+
     },
 };
 /**
@@ -738,9 +738,9 @@ var SwdPresenter = {
         target = $(e.currentTarget);
 
         groupTile = $(target).parent('.group-selection-item');
-        
+
         gid = $(groupTile).attr('id');
-        
+
         // Remove the item from the back end.
         SwdModel.removeGroup(gid);
 
@@ -896,7 +896,7 @@ var SwdView = {
     removePost: function(id) {
         $(id).fadeOut(function() {
             $(this).remove();
-            SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block').not('#post-block-mask, .post-block.load-more').length);
+            SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block.unique').length);
         });
     },
     /***
@@ -962,11 +962,26 @@ var SwdView = {
      * @param {type} post
      */
     createImagePostBlock: function(post) {
-        var postBlock;
+        var postBlock, userImage, tileImage, timeStamp, message;
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
+        userImage = 'url(' + post.user.pic + ')';
+        tileImage = 'url(' + post.image_url[0] + ')';
+
+        // Create the visible block.
+        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"><div class="visible-content" style="background-image: ' + tileImage + '"></div></div>');
+        //$(postBlock).addClass('post-block-image').css('background-image', 'url("' + post.image_url[0] + '")');
+
         $(postBlock).addClass('post-block-image');
-        $(postBlock).css('background-image', 'url("' + post.image_url[0] + '")');
+
+        // Create the text block that resides below the visible post block.
+        userImage = 'url(' + post.user.pic + ')';
+
+        timeStamp = new moment(new Date(post.created_time * 1000));
+
+        message = '<div class="wrapper hidden-content"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+
+        $(postBlock).append('<div class="post-block post-block-text hidden-block">' + message + '</div>');
+
         $(postBlock).appendTo('#post-feed');
     },
     /***
@@ -974,50 +989,75 @@ var SwdView = {
      * @param {type} post
      */
     createTextPostBlock: function(post) {
-        var postBlock, message;
+        var postBlock, message, userImage, timeStamp;
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
 
-        $(postBlock).addClass('post-block-text');
+        userImage = 'url(' + post.user.pic + ')';
 
-        message = '<div><p>' + post.message + '</p></div>';
+        timeStamp = new moment(new Date(post.created_time * 1000));
 
-        $(postBlock).html(message).appendTo('#post-feed');
+        message = '<div class="visible-content wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+
+        $(postBlock).addClass('post-block-text').html(message).appendTo('#post-feed');
     },
     /***
      * Create and display a link type post block.
      * @param {type} post
      */
     createLinkPostBlock: function(post) {
-        var postBlock, description;
+        var postBlock, description, userImage, timeStamp, message, linkImage;
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
-        $(postBlock).addClass('post-block-link');
+        linkImage = 'url(' + post.link_data.media[0].src + ')';
 
-        description = '<div><p><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
+        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
+        description = '<div class="visible-content wrapper"><p class="content"><span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
 
-        $(postBlock).html(description).appendTo('#post-feed');
+        $(postBlock).addClass('post-block-link').html(description);
+
+        // Create the text block that resides below the visible post block.
+        userImage = 'url(' + post.user.pic + ')';
+
+        timeStamp = new moment(new Date(post.created_time * 1000));
+
+        message = '<div class="hidden-content wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+
+        $(postBlock).append('<div class="post-block post-block-text hidden-block">' + message + '</div>');
+
+        $(postBlock).appendTo('#post-feed');
     },
     /***
      * Create and display a textlink type post block.
      * @param {type} post
      */
     createTextLinkPostBlock: function(post) {
-        var postBlock, message;
+        var postBlock, message, userImage, timeStamp, description, linkImage;
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
-        $(postBlock).addClass('post-block-textlink');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
 
-        message = '<div><p>' + post.message + '</p></div>';
+        userImage = 'url(' + post.user.pic + ')';
 
-        $(postBlock).html(message).appendTo('#post-feed');
+        timeStamp = new moment(new Date(post.created_time * 1000));
+
+        message = '<div class="visible-content wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+
+        $(postBlock).addClass('post-block-textlink').html(message);
+
+        linkImage = 'url(' + post.link_data.media[0].src + ')';
+
+        description = '<span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description;
+
+        // Create the link text block that resides below the visible block.
+        $(postBlock).append('<div class="post-block post-block-link hidden-block"><div class="hidden-content wrapper"><p class="content">' + description + '</p></div></div>');
+
+        $(postBlock).appendTo('#post-feed');
     },
     /***
      * Populate the main view with post blocks.
      * @param {type} posts
      */
     populatePostBlocks: function(posts, postType) {
-        var i, post, groupText;
+        var i, post;
 
         SwdView.toggleAjaxLoadingDiv('body', false);
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', false);
@@ -1061,15 +1101,23 @@ var SwdView = {
                 $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
             }
 
-            // Additionally, set up some styling for when an image type post block is moused over.
-            $('.post-block.post-block-image').hover(function() {
-                $('#post-block-mask').show().position({
-                    my: 'left top',
-                    at: 'left top',
-                    of: $(this)
-                });
+            // After a delay, show the hidden content for any moused over image post blocks.
+            // Use the hoverIntent plugin.
+            //$('.visible-content').not('.post-block-text .visible-content').not('.hidden-content').hoverIntent(function() {
+            $('.post-block').not('.post-block.post-block-text').hoverIntent({
+                over: function() {
+                    $(this).children('.visible-content').slideUp(300);
+                },
+                out: function() {
+                    $(this).children('.visible-content').slideDown(300);
+                },
+                timeout: 500
+            });
+
+            $('.post-block.unique.post-block-text').hoverIntent(function() {
+                $(this).addClass('hover-highlight', 100);
             }, function() {
-                $('#post-block-mask').hide();
+                $(this).removeClass('hover-highlight', 100);
             });
 
             SwdPresenter.resetFbCanvasSize();
@@ -1077,9 +1125,9 @@ var SwdView = {
         else {
 //            $('#post-feed-noposts').show();
         }
-        
+
         // Display the official count.
-        SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block').not('#post-block-mask, .post-block.load-more').length);
+        SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block.unique').length);
 
         SwdPresenter.currentlyLoading = false;
     },

@@ -5,7 +5,7 @@
  */
 
 function buildStreamQuery($gid, $constraints, $limit = 20) {
-    $streamQuery = 'SELECT post_id,updated_time,message,attachment,comment_info FROM stream WHERE source_id=' . $gid;
+    $streamQuery = 'SELECT post_id,actor_id,updated_time,message,attachment,comment_info,created_time FROM stream WHERE source_id=' . $gid;
 
     // Check for constraints.
     for ($i = 0; $i < count($constraints); $i++) {
@@ -18,7 +18,8 @@ function buildStreamQuery($gid, $constraints, $limit = 20) {
 
     $queries = array(
         'streamQuery' => $streamQuery,
-        'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)'
+        'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)',
+        'userQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url,pic FROM user WHERE uid IN (SELECT actor_id FROM #streamQuery)'
     );
 
     return $queries;
@@ -30,27 +31,29 @@ function buildStreamQuery($gid, $constraints, $limit = 20) {
 
 function streamQuery($fbSession, $gid, $constraints, $limit = 20) {
     $queries = buildStreamQuery($gid, $constraints, $limit);
-
+    
     $response = $fbSession->api(array(
         'method' => 'fql.multiquery',
         'queries' => $queries
     ));
 
-    return processStreamQuery($response[0]['fql_result_set'], $response[1]['fql_result_set']);
+    return processStreamQuery($response[0]['fql_result_set'], $response[1]['fql_result_set'], $response[2]['fql_result_set']);
 }
 
 /* * *
  * Take a response and construct post objects out of it.
  */
 
-function processStreamQuery($stream, $images) {
+function processStreamQuery($stream, $images, $users) {
     $posts = array();
 
     for ($i = 0; $i < count($stream); $i++) {
         $post = $stream[$i];
 
+        // Parse associated data from the query.
         $post['image_url'] = getImageUrlArray($post, $images, true);
         $post['link_data'] = getLinkData($post);
+        $post['user'] = getUserData($post, $users);
 
         // Erase any attachment data to save on object size.
         // This has already been parsed out.
@@ -111,6 +114,21 @@ function getLinkData($post) {
     }
 
     return $linkData;
+}
+
+/***
+ * Function to parse FQL user data.
+ */
+function getUserData($post, $users) {
+    $user = array();
+    
+    for ($i = 0; $i < count($users); $i++) {
+        if ($post['actor_id'] == $users[$i]['uid']) {
+            $user = $users[$i];
+        }
+    }
+    
+    return $user;
 }
 
 function getImageUrlFromFbId($fbid, $images, $thumbnails = true) {
@@ -268,7 +286,7 @@ function executeBatchQuery($fbSession, $gid, $constraints) {
     // Sift through the results.
     for ($i = 0; $i < count($response); $i++) {
         $result = json_decode($response[$i]['body'], true);
-        $posts = array_merge($posts, processStreamQuery($result[0]['fql_result_set'], $result[1]['fql_result_set']));
+        $posts = array_merge($posts, processStreamQuery($result[0]['fql_result_set'], $result[1]['fql_result_set'], $result[2]['fql_result_set']));
     }
 
     return $posts;
