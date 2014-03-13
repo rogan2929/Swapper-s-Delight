@@ -981,9 +981,9 @@ var SwdView = {
         $(postBlock).appendTo('#post-feed');
 
         $(postBlock).hover(function() {
-            $(this).child('.post-image').hide();
+            $(this).children('.post-image').hide();
         }, function() {
-            $(this).child('.post-image').show();
+            $(this).children('.post-image').show();
         });
     },
     /***
