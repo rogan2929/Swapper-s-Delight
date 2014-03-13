@@ -1112,7 +1112,7 @@ var SwdView = {
 //                out: function() {
 //                    $(this).children('.visible-content').slideDown(300);
 //                },
-                timeout: 500
+                timeout: 1000
             });
 
             $('.post-block').not('.post-block.post-block-text').mouseleave(function () {
