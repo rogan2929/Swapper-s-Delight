@@ -1015,7 +1015,7 @@ var SwdView = {
         description = '<div class="visible-content wrapper"><p class="content"><span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
 
         $(postBlock).addClass('post-block-link').html(description);
-        
+
         // Create the text block that resides below the visible post block.
         userImage = 'url(' + post.user.pic + ')';
 
@@ -1043,11 +1043,11 @@ var SwdView = {
         message = '<div class="visible-content wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
         $(postBlock).addClass('post-block-textlink').html(message);
-        
+
         linkImage = 'url(' + post.link_data.media[0].src + ')';
-        
+
         description = '<span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description;
-        
+
         // Create the link text block that resides below the visible block.
         $(postBlock).append('<div class="post-block post-block-link hidden-block"><div class="hidden-content wrapper"><p class="content">' + description + '</p></div></div>');
 
@@ -1105,13 +1105,17 @@ var SwdView = {
             // After a delay, show the hidden content for any moused over image post blocks.
             // Use the hoverIntent plugin.
             //$('.visible-content').not('.post-block-text .visible-content').not('.hidden-content').hoverIntent(function() {
-            $('.post-block').not('.post-block.post-block-text').hoverIntent(function () {
-                $(this).children('.visible-content').slideUp(300);
-            }, function() {
-                $(this).children('.visible-content').slideDown(300);
-            }, 1500);
-            
-            $('.post-block.unique.post-block-text').hoverIntent(function () {
+            $('.post-block').not('.post-block.post-block-text').hoverIntent({
+                over: function() {
+                    $(this).children('.visible-content').slideUp(300);
+                },
+                out: function() {
+                    $(this).children('.visible-content').slideDown(300);
+                },
+                timeout: 1000
+            });
+
+            $('.post-block.unique.post-block-text').hoverIntent(function() {
                 $(this).addClass('hover-highlight', 100);
             }, function() {
                 $(this).removeClass('hover-highlight', 100);
