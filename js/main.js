@@ -988,7 +988,7 @@ var SwdView = {
         $(postBlock).hover(function() {
             // After a delay, show the hidden content.
             setTimeout(function () {
-                $(this).children('.post-image').slideUp();
+                $(postBlock).children('.post-image').slideUp();
             }, 500);
         }, function() {
             $(this).children('.post-image').slideDown();
