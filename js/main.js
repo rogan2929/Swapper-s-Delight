@@ -970,6 +970,8 @@ var SwdView = {
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
         $(postBlock).addClass('post-block-image').css('background-image', 'url("' + post.image_url[0] + '")').appendTo('#post-feed');
+        
+        SwdView.createTextPostBlock(post);
     },
     /***
      * Create and display a text type post block.
