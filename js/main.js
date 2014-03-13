@@ -1046,10 +1046,10 @@ var SwdView = {
         
         linkImage = 'url(' + post.link_data.media[0].src + ')';
         
-        description = '<div class="hidden-content wrapper"><p class="content"><span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
+        description = '<span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description;
         
         // Create the link text block that resides below the visible block.
-        $(postBlock).append('<div class="post-block post-block-link hidden-block"><div class="wrapper"><p class="content">' + description + '</p></div></div>');
+        $(postBlock).append('<div class="post-block post-block-link hidden-block"><div class="hidden-content wrapper"><p class="content">' + description + '</p></div></div>');
 
         $(postBlock).appendTo('#post-feed');
     },
