@@ -649,7 +649,7 @@ a:visited {
 .post-block.post-block-link .wrapper,
 .post-block.post-block-textlink .wrapper {
     overflow: hidden;
-    height: 200px;
+    height: 205px;
 }
 
 .post-block.post-block-text .content,
@@ -662,6 +662,11 @@ a:visited {
 
 .post-block.hidden-block {
     margin: 0 !important;
+    background-color: #f5f520;
+}
+
+.post-block.unique.post-block-text:hover {
+    background-color: #f5f520;
 }
 
 /*.post-block .text {
