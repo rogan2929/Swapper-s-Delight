@@ -259,7 +259,7 @@ var SwdPresenter = {
 
                 // Send the user to the app's main url.
                 window.location = SwdPresenter.AppUrlFull;
-                window.reload();
+                window.location.reload();
                 break;
             default:
                 SwdView.showError(error.responseText);
