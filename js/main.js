@@ -1032,7 +1032,7 @@ var SwdView = {
      * @param {type} post
      */
     createTextLinkPostBlock: function(post) {
-        var postBlock, message, userImage, timeStamp, description;
+        var postBlock, message, userImage, timeStamp, description, linkImage;
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
 
@@ -1044,10 +1044,12 @@ var SwdView = {
 
         $(postBlock).addClass('post-block-textlink').html(message);
         
-        description = '<div class="hiddent-content wrapper"><p class="content"><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
+        linkImage = 'url(' + post.link_data.media[0].src + ')';
+        
+        description = '<div class="hidden-content wrapper"><p class="content"><span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
         
         // Create the link text block that resides below the visible block.
-        $(postBlock).append('<div class="post-block post-block-textlink hidden-block"><div class="wrapper"><p class="content">' + description + '</p></div></div>');
+        $(postBlock).append('<div class="post-block post-block-link hidden-block"><div class="wrapper"><p class="content">' + description + '</p></div></div>');
 
         $(postBlock).appendTo('#post-feed');
     },
