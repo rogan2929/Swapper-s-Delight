@@ -1089,9 +1089,8 @@ var SwdView = {
             // After a delay, show the hidden content for any moused over image post blocks.
             // Use the hoverIntent plugin.
             $('.post-block.post-block-image').hoverIntent(function() {
-                $(this).children('.post-image').slideUp(function () {
-                    $(this).parent('.post-block').children('.post-block.hidden-content').focus();
-                });
+                $(this).children('.post-image').slideUp();
+                $(this).parent('.post-block').children('.post-block.hidden-content').focus();
             }, function() {
                 $(this).children('.post-image').slideDown(100);
             }, 500);
