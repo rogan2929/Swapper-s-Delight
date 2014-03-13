@@ -304,6 +304,7 @@ a:visited {
     margin: 5px;
     padding: 4px !important;
     position: relative;
+    border-radius: 5px;
 }
 
 .selection-item-content {
