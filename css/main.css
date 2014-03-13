@@ -308,7 +308,6 @@ a:visited {
     margin: 5px;
     padding: 4px !important;
     position: relative;
-    border-radius: 5px;
 }
 
 .selection-item-content {
@@ -584,7 +583,6 @@ a:visited {
     margin: 3px;
     margin-bottom: -1px;
     cursor: pointer;
-    border-radius: 5px;
 /*    color: #f6f6f6;*/
 /*    background-image: url('/img/tile-background.png');*/
 }
