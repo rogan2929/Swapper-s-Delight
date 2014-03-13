@@ -129,7 +129,7 @@
                         <span class='button-icon icon-refresh'></span>
                         <span>Refresh</span>
                     </div>
-                    <div id='button-menu-main' class='button menu-button'>
+                    <div id='button-menu-main' class='button toolbar-button menu-button'>
                         <span class='button-icon icon-menu'></span>
                         <a href='#popup-menu-main'></a>
                     </div>
@@ -144,7 +144,7 @@
 
             <div id='post-details-toolbar' class='ui-widget toolbar floating-panel-toolbar hidden'>
                 <div class='toolbar-group float-left'>
-                    <div id='post-button-comment' class='button menu-button'>
+                    <div id='post-button-comment' class='button toolbar-button menu-button'>
                         <span class='button-icon icon-comment'></span>
                         <span>Comment</span>
                         <a href='#popup-comment'></a>
