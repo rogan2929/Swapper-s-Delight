@@ -1007,7 +1007,7 @@ var SwdView = {
      * @param {type} post
      */
     createLinkPostBlock: function(post) {
-        var postBlock, description, userImage, timeStamp;
+        var postBlock, description, userImage, timeStamp, message;
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
         description = '<div class="wrapper"><p class="content"><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
@@ -1030,7 +1030,7 @@ var SwdView = {
      * @param {type} post
      */
     createTextLinkPostBlock: function(post) {
-        var postBlock, message, userImage, timeStamp;
+        var postBlock, message, userImage, timeStamp, message;
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
         message = '<div class="wrapper"><p class="content">' + post.message + '</p></div>';
