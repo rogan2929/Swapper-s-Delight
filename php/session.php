@@ -29,6 +29,8 @@ try {
     // In this case, we'll get an exception, so we'll
     // just ask the user to login again here.
     
+    echo json_encode($e);
+    
     $loginUrl = $fbSession->getLoginUrl();
     http_response_code(401);
 }
