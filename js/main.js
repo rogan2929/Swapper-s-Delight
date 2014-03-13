@@ -1071,15 +1071,15 @@ var SwdView = {
             }
 
             // Additionally, set up some styling for when an image type post block is moused over.
-//            $('.post-block').hover(function() {
-//                $('#post-block-mask').show().position({
-//                    my: 'left top',
-//                    at: 'left top',
-//                    of: $(this)
-//                });
-//            }, function() {
-//                $('#post-block-mask').hide();
-//            });
+            $('.post-block').hover(function() {
+                $('#post-block-mask').show().position({
+                    my: 'left top',
+                    at: 'left top',
+                    of: $(this)
+                });
+            }, function() {
+                $('#post-block-mask').hide();
+            });
 
             SwdPresenter.resetFbCanvasSize();
         }
