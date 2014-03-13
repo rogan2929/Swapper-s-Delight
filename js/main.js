@@ -963,11 +963,14 @@ var SwdView = {
      * @param {type} post
      */
     createImagePostBlock: function(post) {
-        var postBlock;
+        var postBlock, userImage, tileImage;
+        
+        userImage = 'url('+ post.user.pic + ')';
+        tileImage = 'url(' + post.image_url[0] + ')';
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"><span style="background-image: ' + userImage + '"></span><div class="post-image" style="background-image: ' + tileImage + '"></div></div>');
         $(postBlock).addClass('post-block-image');
-        $(postBlock).css('background-image', 'url("' + post.image_url[0] + '")');
+        //$(postBlock).css('background-image', 'url("' + post.image_url[0] + '")');
         $(postBlock).appendTo('#post-feed');
     },
     /***
@@ -975,15 +978,15 @@ var SwdView = {
      * @param {type} post
      */
     createTextPostBlock: function(post) {
-        var postBlock, message, tileImage;
+        var postBlock, message, userImage;
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
 
         $(postBlock).addClass('post-block-text');
         
-        tileImage = 'url('+ post.user.pic + ')';
+        userImage = 'url('+ post.user.pic + ')';
 
-        message = '<div><p><span style="background-image: ' + tileImage + '"></span>' + post.message + '</p></div>';
+        message = '<div><p><span style="background-image: ' + userImage + '"></span>' + post.message + '</p></div>';
 
         $(postBlock).html(message).appendTo('#post-feed');
     },

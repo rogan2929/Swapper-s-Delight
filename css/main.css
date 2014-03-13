@@ -524,6 +524,10 @@ a:visited {
 /*    background-image: url('/img/tile-background.png');*/
 }
 
+.post-block.ui-widget .post-image {
+    background-size: contain;
+}
+
 .post-block.load-more {
     padding: 0px;
     position: relative;
@@ -594,7 +598,7 @@ a:visited {
     padding: 12px;
 }
 
-.post-block.post-block-text > div > p > span {
+.post-block > div > p > span {
     height: 60px;
     width: 60px;
     background-size: cover;
