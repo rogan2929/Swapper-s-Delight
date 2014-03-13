@@ -17,11 +17,6 @@ $fbSession = new Facebook(array(
     'cookie' => true
         ));
 
-echo $appId . "<br/>";
-echo $appSecret . "<br/>";
-
-echo $fbSession->getLoginStatusUrl();
-
 // Test the access token.
 try {
     $userProfile = $fbSession->api('/me','GET');
@@ -31,6 +26,8 @@ catch(FacebookApiException $e) {
     // user ID even though the access token is invalid.
     // In this case, we'll get an exception, so we'll
     // just ask the user to login again here.
+    
+    echo var_dump($e);
     
     $loginUrl = $fbSession->getLoginUrl();
     http_response_code(401);
