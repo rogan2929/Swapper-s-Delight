@@ -1089,9 +1089,9 @@ var SwdView = {
             // After a delay, show the hidden content for any moused over image post blocks.
             // Use the hoverIntent plugin.
             $('.post-block.post-block-image').hoverIntent(function() {
-                $(this).children('.post-image').slideUp();
+                $(this).children('.post-image').hide();
             }, function() {
-                $(this).children('.post-image').slideDown();
+                $(this).children('.post-image').show();
             }, 500);
 
             SwdPresenter.resetFbCanvasSize();
