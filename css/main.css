@@ -404,10 +404,14 @@ a:visited {
     line-height: normal;
 }
 
-.button:hover, .menu-item:hover, .post-block.ui-widget:hover {
+.button:hover, 
+.menu-item:hover, 
+.post-block.post-block-text:hover,
+.post-block.post-block-link:hover,
+.post-block.post-block-textlink:hover {
 /*    background-color: #1d6fa5;*/
-    background-color: #999 !important;
-    color: #f6f6f6 !important;
+    background-color: #999;
+    color: #f6f6f6;
 }
 
 .nav-button {
