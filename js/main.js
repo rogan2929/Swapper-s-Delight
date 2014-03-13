@@ -968,10 +968,17 @@ var SwdView = {
         userImage = 'url('+ post.user.pic + ')';
         tileImage = 'url(' + post.image_url[0] + ')';
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
-        $(postBlock).addClass('post-block-image').css('background-image', 'url("' + post.image_url[0] + '")').appendTo('#post-feed');
+        // Create the visible block.
+        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"><div class="post-image" style="background-image: ' + tileImage + '"></div></div>');
+        //$(postBlock).addClass('post-block-image').css('background-image', 'url("' + post.image_url[0] + '")');
         
-        SwdView.createTextPostBlock(post);
+        $(postBlock).addClass('post-block-image');
+        
+        // Create the text block that resides "behind" the image post block.
+        
+        //$(postBlock).append('<div class="post-block hidden-content"></div>');
+        
+        $(postBlock).appendTo('#post-feed');
     },
     /***
      * Create and display a text type post block.
@@ -1064,15 +1071,15 @@ var SwdView = {
             }
 
             // Additionally, set up some styling for when an image type post block is moused over.
-            $('.post-block').hover(function() {
-                $('#post-block-mask').show().position({
-                    my: 'left top',
-                    at: 'left top',
-                    of: $(this)
-                });
-            }, function() {
-                $('#post-block-mask').hide();
-            });
+//            $('.post-block').hover(function() {
+//                $('#post-block-mask').show().position({
+//                    my: 'left top',
+//                    at: 'left top',
+//                    of: $(this)
+//                });
+//            }, function() {
+//                $('#post-block-mask').hide();
+//            });
 
             SwdPresenter.resetFbCanvasSize();
         }
