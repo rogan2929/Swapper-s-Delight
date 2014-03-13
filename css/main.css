@@ -183,6 +183,10 @@ a:visited {
     margin-bottom: 6px;
 }
 
+.post-block.hidden-block .timestamp {
+    color: #f6f6f6;
+}
+
 /*.post-comment-header .timestamp,#post-message-header .timestamp {
     display: block;
     font-weight: normal;
@@ -665,11 +669,12 @@ a:visited {
 
 .post-block.hidden-block {
     margin: 0 !important;
-    background-color: #f5f520;
+    background-color: #4d81bf;
+    color: #f6f6f6;
 }
 
 .hover-highlight {
-    background-color: #f5f520 !important;
+    background-color: #4d81bf !important;
 }
 
 /*.post-block .text {
