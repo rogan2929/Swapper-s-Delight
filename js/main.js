@@ -1101,7 +1101,7 @@ var SwdView = {
                 $(this).children('.post-image').slideUp();
             }, function() {
                 $(this).children('.post-image').slideDown();
-            }, 1500);
+            }, 500);
 
             SwdPresenter.resetFbCanvasSize();
         }
