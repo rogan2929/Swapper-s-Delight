@@ -607,6 +607,11 @@ a:visited {
     float: left;
 }
 
+.post-block .user-name {
+    display: block;
+    font-weight: bold;
+}
+
 .post-block .link-title {
     font-weight: bold;
     display: block;

@@ -986,7 +986,7 @@ var SwdView = {
         
         userImage = 'url('+ post.user.pic + ')';
 
-        message = '<div><p><span class="user-image" style="background-image: ' + userImage + '"></span>' + post.message + '</p></div>';
+        message = '<div><p><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span>' + post.message + '</p></div>';
 
         $(postBlock).html(message).appendTo('#post-feed');
     },
