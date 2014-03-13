@@ -984,7 +984,7 @@ var SwdView = {
     
         timeStamp = new moment(new Date(post.created_time * 1000));
         
-        message = '<div><p><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp + '</span><p class="text">' + post.message + '</p></p></div>';
+        message = '<div><p><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp + '</span><p class="text">' + post.message + '</p></div>';
 
         $(postBlock).addClass('post-block-text').html(message).appendTo('#post-feed');
     },
