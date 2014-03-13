@@ -840,7 +840,7 @@ a.link-title {
 
 .post-comment {
     margin-bottom: 12px;
-    font-size: 0.95em !important;
+/*    font-size: 0.95em !important;*/
 }
 
 .post-comment > div:first-child {
