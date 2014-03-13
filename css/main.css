@@ -404,7 +404,7 @@ a:visited {
     line-height: normal;
 }
 
-.button:hover, .menu-item:hover, .post-block:hover {
+.button:hover, .menu-item:hover, .post-block.ui-widget:hover {
 /*    background-color: #1d6fa5;*/
     background-color: #999;
     color: #f6f6f6;
