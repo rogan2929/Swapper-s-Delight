@@ -669,7 +669,7 @@ a:visited {
 }
 
 .hover-highlight {
-    background-color: #f5f520;
+    background-color: #f5f520 !important;
 }
 
 /*.post-block .text {

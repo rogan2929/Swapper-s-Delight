@@ -1112,9 +1112,9 @@ var SwdView = {
             }, 1500);
             
             $('.post-block.unique.post-block-text').hoverIntent(function () {
-                $(this).addClass('.hover-highlight');
+                $(this).addClass('.hover-highlight', 300);
             }, function() {
-                $(this).removeClass('.hover-highlight');
+                $(this).removeClass('.hover-highlight', 300);
             });
 
             SwdPresenter.resetFbCanvasSize();
