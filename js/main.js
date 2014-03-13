@@ -1115,6 +1115,13 @@ var SwdView = {
                 timeout: 500
             });
 
+            $('.post-block').not('.post-block.post-block-text').hoverIntent({
+                over: null,
+                out: function() {
+                    $(this).children('.visible-content').slideDown(300);
+                }
+            });
+
             $('.post-block.unique.post-block-text').hoverIntent(function() {
                 $(this).addClass('hover-highlight', 100);
             }, function() {
