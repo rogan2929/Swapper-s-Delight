@@ -1111,7 +1111,7 @@ var SwdView = {
                 $(this).children('.visible-content').slideDown(300);
             }, 1500);
             
-            $('.post-block.post-block-text').hoverIntent(function () {
+            $('.post-block.unique.post-block-text').hoverIntent(function () {
                 $(this).addClass('.hover-highlight', 300);
             }, function() {
                 $(this).removeClass('.hover-highlight', 300);
