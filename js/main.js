@@ -897,7 +897,7 @@ var SwdView = {
     removePost: function(id) {
         $(id).fadeOut(function() {
             $(this).remove();
-            SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block').not('#post-block-mask, .post-block.load-more').length);
+            SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block.unique').length);
         });
     },
     /***
@@ -969,7 +969,7 @@ var SwdView = {
         tileImage = 'url(' + post.image_url[0] + ')';
 
         // Create the visible block.
-        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"><div class="post-image" style="background-image: ' + tileImage + '"></div></div>');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"><div class="post-image" style="background-image: ' + tileImage + '"></div></div>');
         //$(postBlock).addClass('post-block-image').css('background-image', 'url("' + post.image_url[0] + '")');
 
         $(postBlock).addClass('post-block-image');
@@ -984,15 +984,6 @@ var SwdView = {
         $(postBlock).append('<div class="post-block hidden-content">' + message + '</div>');
 
         $(postBlock).appendTo('#post-feed');
-
-//        $(postBlock).hover(function() {
-//            // After a delay, show the hidden content.
-//            setTimeout(function () {
-//                $(postBlock).children('.post-image').slideUp();
-//            }, 500);
-//        }, function() {
-//            $(this).children('.post-image').slideDown();
-//        });
     },
     /***
      * Create and display a text type post block.
@@ -1001,7 +992,7 @@ var SwdView = {
     createTextPostBlock: function(post) {
         var postBlock, message, userImage, timeStamp;
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
 
         userImage = 'url(' + post.user.pic + ')';
 
@@ -1018,7 +1009,7 @@ var SwdView = {
     createLinkPostBlock: function(post) {
         var postBlock, description;
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
         description = '<div class="wrapper"><p class="content"><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
 
         $(postBlock).addClass('post-block-link').html(description).appendTo('#post-feed');
@@ -1030,7 +1021,7 @@ var SwdView = {
     createTextLinkPostBlock: function(post) {
         var postBlock, message;
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
         message = '<div class="wrapper"><p class="content">' + post.message + '</p></div>';
 
         $(postBlock).addClass('post-block-textlink').html(message).appendTo('#post-feed');
@@ -1110,7 +1101,7 @@ var SwdView = {
         }
 
         // Display the official count.
-        SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block').not('#post-block-mask, .post-block.load-more').length);
+        SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block.unique').length);
 
         SwdPresenter.currentlyLoading = false;
     },
