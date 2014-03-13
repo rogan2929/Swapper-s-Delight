@@ -981,7 +981,7 @@ var SwdView = {
 
         message = '<div class="wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
-        $(postBlock).append('<div class="post-block hidden-content">' + message + '</div>');
+        $(postBlock).append('<div class="post-block post-block-text hidden-content">' + message + '</div>');
 
         $(postBlock).appendTo('#post-feed');
     },
