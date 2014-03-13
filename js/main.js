@@ -974,7 +974,7 @@ var SwdView = {
 
         $(postBlock).addClass('post-block-image');
 
-        // Create the text block that resides "behind" the image post block.
+        // Create the text block that resides below the visible post block.
         userImage = 'url(' + post.user.pic + ')';
 
         timeStamp = new moment(new Date(post.created_time * 1000));
@@ -1007,14 +1007,16 @@ var SwdView = {
      * @param {type} post
      */
     createLinkPostBlock: function(post) {
-        var postBlock, description, userImage, timeStamp, message;
+        var postBlock, description, userImage, timeStamp, message, linkImage;
+
+        linkImage = 'url(' + post.link_data.media[0].src + ')';
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
-        description = '<div class="visible-content wrapper"><p class="content"><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
+        description = '<div class="visible-content wrapper"><p class="content"><img style="float: left" src="' + post.link_data.media[0].src + '"><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
 
         $(postBlock).addClass('post-block-link').html(description); //.appendTo('#post-feed');
         
-        // Create the text block that resides "behind" the image post block.
+        // Create the text block that resides below the visible post block.
         userImage = 'url(' + post.user.pic + ')';
 
         timeStamp = new moment(new Date(post.created_time * 1000));
@@ -1030,23 +1032,6 @@ var SwdView = {
      * @param {type} post
      */
     createTextLinkPostBlock: function(post) {
-//        var postBlock, message, userImage, timeStamp, message;
-//
-//        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
-//        message = '<div class="wrapper visible-content"><p class="content">' + post.message + '</p></div>';
-//
-//        $(postBlock).addClass('post-block-textlink').html(message);//.appendTo('#post-feed');
-//        
-//        // Create the text block that resides "behind" the image post block.
-//        userImage = 'url(' + post.user.pic + ')';
-//
-//        timeStamp = new moment(new Date(post.created_time * 1000));
-//
-//        message = '<div class="visible-content wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
-//
-//        $(postBlock).append('<div class="post-block post-block-text hidden-content">' + message + '</div>');
-//
-//        $(postBlock).appendTo('#post-feed');
         var postBlock, message, userImage, timeStamp, description;
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
@@ -1061,9 +1046,7 @@ var SwdView = {
         
         description = '<div class="hiddent-content wrapper"><p class="content"><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
         
-        // Create the link text block that resides behind the visible block.
-        //message = '<div class="wrapper"><p class="content">' + description + '</p></div>';
-
+        // Create the link text block that resides below the visible block.
         $(postBlock).append('<div class="post-block post-block-textlink hidden-block"><div class="wrapper"><p class="content">' + description + '</p></div></div>');
 
         $(postBlock).appendTo('#post-feed');
