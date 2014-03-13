@@ -1007,31 +1007,53 @@ var SwdView = {
      * @param {type} post
      */
     createLinkPostBlock: function(post) {
-        var postBlock, description;
+        var postBlock, description, userImage, timeStamp;
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
         description = '<div class="wrapper"><p class="content"><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
 
-        $(postBlock).addClass('post-block-link').html(description).appendTo('#post-feed');
+        $(postBlock).addClass('post-block-link').html(description); //.appendTo('#post-feed');
+        
+        // Create the text block that resides "behind" the image post block.
+        userImage = 'url(' + post.user.pic + ')';
+
+        timeStamp = new moment(new Date(post.created_time * 1000));
+
+        message = '<div class="wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+
+        $(postBlock).append('<div class="post-block post-block-text hidden-content">' + message + '</div>');
+
+        $(postBlock).appendTo('#post-feed');
     },
     /***
      * Create and display a textlink type post block.
      * @param {type} post
      */
     createTextLinkPostBlock: function(post) {
-        var postBlock, message;
+        var postBlock, message, userImage, timeStamp;
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
         message = '<div class="wrapper"><p class="content">' + post.message + '</p></div>';
 
-        $(postBlock).addClass('post-block-textlink').html(message).appendTo('#post-feed');
+        $(postBlock).addClass('post-block-textlink').html(message);//.appendTo('#post-feed');
+        
+        // Create the text block that resides "behind" the image post block.
+        userImage = 'url(' + post.user.pic + ')';
+
+        timeStamp = new moment(new Date(post.created_time * 1000));
+
+        message = '<div class="wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+
+        $(postBlock).append('<div class="post-block post-block-text hidden-content">' + message + '</div>');
+
+        $(postBlock).appendTo('#post-feed');
     },
     /***
      * Populate the main view with post blocks.
      * @param {type} posts
      */
     populatePostBlocks: function(posts, postType) {
-        var i, post, groupText;
+        var i, post;
 
         SwdView.toggleAjaxLoadingDiv('body', false);
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', false);
