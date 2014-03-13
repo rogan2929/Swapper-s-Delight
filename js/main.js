@@ -963,7 +963,7 @@ var SwdView = {
      * @param {type} post
      */
     createImagePostBlock: function(post) {
-        var postBlock, userImage, tileImage;
+        var postBlock, userImage, tileImage, timeStamp, message;
 
         userImage = 'url(' + post.user.pic + ')';
         tileImage = 'url(' + post.image_url[0] + ')';
@@ -975,8 +975,13 @@ var SwdView = {
         $(postBlock).addClass('post-block-image');
 
         // Create the text block that resides "behind" the image post block.
+        userImage = 'url(' + post.user.pic + ')';
 
-        $(postBlock).append('<div class="post-block hidden-content"></div>');
+        timeStamp = new moment(new Date(post.created_time * 1000));
+
+        message = '<div class="wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+        
+        $(postBlock).append('<div class="post-block hidden-content">' + message + '</div>');
 
         $(postBlock).appendTo('#post-feed');
 
@@ -1077,15 +1082,15 @@ var SwdView = {
             }
 
             // Additionally, set up some styling for when an image type post block is moused over.
-            $('.post-block').hover(function() {
-                $('#post-block-mask').show().position({
-                    my: 'left top',
-                    at: 'left top',
-                    of: $(this)
-                });
-            }, function() {
-                $('#post-block-mask').hide();
-            });
+//            $('.post-block').hover(function() {
+//                $('#post-block-mask').show().position({
+//                    my: 'left top',
+//                    at: 'left top',
+//                    of: $(this)
+//                });
+//            }, function() {
+//                $('#post-block-mask').hide();
+//            });
 
             SwdPresenter.resetFbCanvasSize();
         }
