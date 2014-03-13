@@ -985,7 +985,7 @@ var SwdView = {
         timeStamp = new moment(new Date(post.created_time * 1000));
         
         //message = '<div><p><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp + '</span><p class="text">' + post.message + '</p></p></div>';
-        message = '<div><p>' + post.message + '</p></div>';
+        message = '<div class="wrapper"><p class="content">' + post.message + '</p></div>';
 
         $(postBlock).addClass('post-block-text').html(message).appendTo('#post-feed');
     },
@@ -997,7 +997,7 @@ var SwdView = {
         var postBlock, description;
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
-        description = '<div><p><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
+        description = '<div class="wrapper"><p class="content"><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
 
         $(postBlock).addClass('post-block-link').html(description).appendTo('#post-feed');
     },
@@ -1009,7 +1009,7 @@ var SwdView = {
         var postBlock, message;
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
-        message = '<div><p>' + post.message + '</p></div>';
+        message = '<div class="wrapper"><p class="content">' + post.message + '</p></div>';
 
         $(postBlock).addClass('post-block-textlink').html(message).appendTo('#post-feed');
     },

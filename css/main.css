@@ -588,16 +588,16 @@ a:visited {
     font-style: italic;
 }
 
-.post-block.post-block-text > div,
-.post-block.post-block-link > div,
-.post-block.post-block-textlink > div {
+.post-block.post-block-text .wrapper,
+.post-block.post-block-link .wrapper,
+.post-block.post-block-textlink .wrapper {
     overflow: hidden;
     height: 200px;
 }
 
-.post-block.post-block-text > div > p,
-.post-block.post-block-link > div > p,
-.post-block.post-block-textlink > div > p {
+.post-block.post-block-text .content,
+.post-block.post-block-link .content,
+.post-block.post-block-textlink .content {
     overflow: hidden;
     height: 165px;
     padding: 12px;
