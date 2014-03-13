@@ -969,26 +969,24 @@ var SwdView = {
         tileImage = 'url(' + post.image_url[0] + ')';
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
-        $(postBlock).addClass('post-block-image');
-        $(postBlock).css('background-image', 'url("' + post.image_url[0] + '")');
-        $(postBlock).appendTo('#post-feed');
+        $(postBlock).addClass('post-block-image').css('background-image', 'url("' + post.image_url[0] + '")').appendTo('#post-feed');
     },
     /***
      * Create and display a text type post block.
      * @param {type} post
      */
     createTextPostBlock: function(post) {
-        var postBlock, message, userImage;
+        var postBlock, message, userImage, timeStamp;
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
-
-        $(postBlock).addClass('post-block-text');
         
         userImage = 'url('+ post.user.pic + ')';
+    
+        timeStamp = new moment(new Date(post.created_time * 1000));
+        
+        message = '<div><p><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp + '</span>' + post.message + '</p></div>';
 
-        message = '<div><p><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span>' + post.message + '</p></div>';
-
-        $(postBlock).html(message).appendTo('#post-feed');
+        $(postBlock).addClass('post-block-text').html(message).appendTo('#post-feed');
     },
     /***
      * Create and display a link type post block.
@@ -998,11 +996,9 @@ var SwdView = {
         var postBlock, description;
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
-        $(postBlock).addClass('post-block-link');
-
         description = '<div><p><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
 
-        $(postBlock).html(description).appendTo('#post-feed');
+        $(postBlock).addClass('post-block-link').html(description).appendTo('#post-feed');
     },
     /***
      * Create and display a textlink type post block.
@@ -1012,11 +1008,9 @@ var SwdView = {
         var postBlock, message;
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
-        $(postBlock).addClass('post-block-textlink');
-
         message = '<div><p>' + post.message + '</p></div>';
 
-        $(postBlock).html(message).appendTo('#post-feed');
+        $(postBlock).addClass('post-block-textlink').html(message).appendTo('#post-feed');
     },
     /***
      * Populate the main view with post blocks.

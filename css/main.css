@@ -177,6 +177,11 @@ a:visited {
     position: absolute;
 }
 
+.post-block .timestamp {
+    display: block;
+    color: #4d81bf;
+}
+
 /*.post-comment-header .timestamp,#post-message-header .timestamp {
     display: block;
     font-weight: normal;
