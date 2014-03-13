@@ -182,6 +182,10 @@ a:visited {
     color: #4d81bf;
 }
 
+.post-block .timestamp:after {
+    margin-top: 6px;
+}
+
 /*.post-comment-header .timestamp,#post-message-header .timestamp {
     display: block;
     font-weight: normal;
