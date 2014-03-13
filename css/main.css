@@ -607,7 +607,7 @@ a:visited {
     margin-top: 5px;
 }*/
 
-.post-block .user-image {
+.post-block .user-image, .post-block .sub-image {
     height: 60px;
     width: 60px;
     background-size: cover;
