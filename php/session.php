@@ -17,7 +17,10 @@ $fbSession = new Facebook(array(
     'cookie' => true
         ));
 
-echo var_dump($fbSession);
+echo $appId . "<br/>";
+echo $appSecret . "<br/>";
+
+echo $fbSession->getLoginStatusUrl();
 
 // Test the access token.
 try {
