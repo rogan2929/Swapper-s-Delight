@@ -183,7 +183,7 @@ a:visited {
 }
 
 .post-block .timestamp:after {
-    margin-top: 6px;
+    content: ' ';
 }
 
 /*.post-comment-header .timestamp,#post-message-header .timestamp {
