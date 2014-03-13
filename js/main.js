@@ -979,9 +979,9 @@ var SwdView = {
 
         timeStamp = new moment(new Date(post.created_time * 1000));
 
-        message = '<div class="wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+        message = '<div class="wrapper hidden-content"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
-        $(postBlock).append('<div class="post-block post-block-text hidden-content">' + message + '</div>');
+        $(postBlock).append('<div class="post-block post-block-text hidden-block">' + message + '</div>');
 
         $(postBlock).appendTo('#post-feed');
     },
@@ -1019,9 +1019,9 @@ var SwdView = {
 
         timeStamp = new moment(new Date(post.created_time * 1000));
 
-        message = '<div class="wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+        message = '<div class="hidden-content wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
-        $(postBlock).append('<div class="post-block post-block-text hidden-content">' + message + '</div>');
+        $(postBlock).append('<div class="post-block post-block-text hidden-block">' + message + '</div>');
 
         $(postBlock).appendTo('#post-feed');
     },
@@ -1059,12 +1059,12 @@ var SwdView = {
 
         $(postBlock).addClass('post-block-textlink').html(message);
         
-        description = '<div class="wrapper"><p class="content"><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
+        description = '<div class="hiddent-content wrapper"><p class="content"><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
         
         // Create the link text block that resides behind the visible block.
         //message = '<div class="wrapper"><p class="content">' + description + '</p></div>';
 
-        $(postBlock).append('<div class="post-block post-block-textlink hidden-content"><div class="wrapper"><p class="content">' + description + '</p></div></div>');
+        $(postBlock).append('<div class="post-block post-block-textlink hidden-block"><div class="wrapper"><p class="content">' + description + '</p></div></div>');
 
         $(postBlock).appendTo('#post-feed');
     },
