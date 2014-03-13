@@ -1082,7 +1082,7 @@ var SwdView = {
             }
 
             // Additionally, set up some styling for when an image type post block is moused over.
-            $('.post-block').hover(function() {
+            $('.post-block').not('.post-block.hidden-content').hover(function() {
                 $('#post-block-mask').show().position({
                     my: 'left top',
                     at: 'left top',
