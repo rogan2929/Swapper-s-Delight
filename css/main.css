@@ -180,10 +180,7 @@ a:visited {
 .post-block .timestamp {
     display: block;
     color: #4d81bf;
-}
-
-.post-block .timestamp:after {
-    content: ' ';
+    margin-bottom: 6px;
 }
 
 /*.post-comment-header .timestamp,#post-message-header .timestamp {
