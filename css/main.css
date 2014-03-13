@@ -530,7 +530,7 @@ a:visited {
 }
 
 .post-block.ui-widget .post-image {
-    background-size: contain;
+    background-size: cover;
 }
 
 .post-block.load-more {
@@ -601,6 +601,10 @@ a:visited {
     overflow: hidden;
     height: 165px;
     padding: 12px;
+}
+
+.post-block .text {
+    margin-top: 10px;
 }
 
 .post-block .user-image {
