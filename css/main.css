@@ -406,9 +406,9 @@ a:visited {
 
 .button:hover, 
 .menu-item:hover, 
-.post-block-text:hover,
-.post-block-link:hover,
-.post-block-textlink:hover {
+.post-block.post-block-text:hover,
+.post-block.post-block-link:hover,
+.post-block.post-block-textlink:hover {
 /*    background-color: #1d6fa5;*/
     background-color: #999;
     color: #f6f6f6;
@@ -521,7 +521,10 @@ a:visited {
 
 /*http://jsfiddle.net/E78q3/*/
 
-.post-block.ui-widget, .post-block.hidden-content {
+.post-block,
+.post-block.post-block-text,
+.post-block.post-block-link,
+.post-block.post-block-textlink {
     display: inline-block;
     background-color: #eee;
     height: 205px;
