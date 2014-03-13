@@ -129,7 +129,7 @@
                         <span class='button-icon icon-refresh'></span>
                         <span>Refresh</span>
                     </div>
-                    <div id='button-menu-main' class='button toolbar-button menu-button'>
+                    <div id='button-menu-main' class='button toolbar-button menu-button icon-only'>
                         <span class='button-icon icon-menu'></span>
                         <a href='#popup-menu-main'></a>
                     </div>

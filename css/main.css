@@ -549,7 +549,10 @@ a:visited {
 
 #button-menu-main {
     min-width: 0 !important;
-    width: 30px;
+}
+
+.button.icon-only > .button-icon {
+    margin-right: 0;
 }
 
 #button-groups {
