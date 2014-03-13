@@ -9,15 +9,14 @@ require_once ("facebook.php");
 $appId = '652991661414427';
 $appSecret = 'b8447ce73d2dcfccde6e30931cfb0a90';
 
+// Start up the Facebook object
+$fbSession = new Facebook(array(
+    'appId' => $appId,
+    'secret' => $appSecret
+        ));
+
 // Test the access token.
 try {
-    // Start up the Facebook object
-    $fbSession = new Facebook(array(
-        'appId' => $appId,
-        'secret' => $appSecret,
-        'cookie' => true
-    ));
-
     $userProfile = $fbSession->api('/me', 'GET');
 } catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
