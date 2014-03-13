@@ -968,7 +968,7 @@ var SwdView = {
         userImage = 'url('+ post.user.pic + ')';
         tileImage = 'url(' + post.image_url[0] + ')';
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"><span style="background-image: ' + userImage + '"></span><div class="post-image" style="background-image: ' + tileImage + '"></div></div>');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"><span class="user-image" style="background-image: ' + userImage + '"></span><div class="post-image" style="background-image: ' + tileImage + '"></div></div>');
         $(postBlock).addClass('post-block-image');
         //$(postBlock).css('background-image', 'url("' + post.image_url[0] + '")');
         $(postBlock).appendTo('#post-feed');
@@ -986,7 +986,7 @@ var SwdView = {
         
         userImage = 'url('+ post.user.pic + ')';
 
-        message = '<div><p><span style="background-image: ' + userImage + '"></span>' + post.message + '</p></div>';
+        message = '<div><p><span class="user-image" style="background-image: ' + userImage + '"></span>' + post.message + '</p></div>';
 
         $(postBlock).html(message).appendTo('#post-feed');
     },
