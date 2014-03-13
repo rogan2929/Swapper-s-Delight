@@ -980,19 +980,19 @@ var SwdView = {
         timeStamp = new moment(new Date(post.created_time * 1000));
 
         message = '<div class="wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
-        
+
         $(postBlock).append('<div class="post-block hidden-content">' + message + '</div>');
 
         $(postBlock).appendTo('#post-feed');
 
-        $(postBlock).hover(function() {
-            // After a delay, show the hidden content.
-            setTimeout(function () {
-                $(postBlock).children('.post-image').slideUp();
-            }, 500);
-        }, function() {
-            $(this).children('.post-image').slideDown();
-        });
+//        $(postBlock).hover(function() {
+//            // After a delay, show the hidden content.
+//            setTimeout(function () {
+//                $(postBlock).children('.post-image').slideUp();
+//            }, 500);
+//        }, function() {
+//            $(this).children('.post-image').slideDown();
+//        });
     },
     /***
      * Create and display a text type post block.
@@ -1094,6 +1094,14 @@ var SwdView = {
             }, function() {
                 $('#post-block-mask').hide();
             });
+
+            // After a delay, show the hidden content for any moused over image post blocks.
+            // Use the hoverIntent plugin.
+            $('.post-block.post-block-image').hoverIntent(function() {
+                $(this).children('.post-image').slideUp();
+            }, function() {
+                $(this).children('.post-image').slideDown();
+            }, 500);
 
             SwdPresenter.resetFbCanvasSize();
         }
