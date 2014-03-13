@@ -1109,9 +1109,9 @@ var SwdView = {
                 over: function() {
                     $(this).children('.visible-content').slideUp(300);
                 },
-//                out: function() {
-//                    $(this).children('.visible-content').slideDown(300);
-//                },
+                out: function() {
+                    
+                },
                 timeout: 1000
             });
 
