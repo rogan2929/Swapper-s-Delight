@@ -1014,7 +1014,7 @@ var SwdView = {
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
         description = '<div class="visible-content wrapper"><p class="content"><img style="float: left" src="' + post.link_data.media[0].src + '"><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
 
-        $(postBlock).addClass('post-block-link').html(description); //.appendTo('#post-feed');
+        $(postBlock).addClass('post-block-link').html(description);
         
         // Create the text block that resides below the visible post block.
         userImage = 'url(' + post.user.pic + ')';
@@ -1107,7 +1107,7 @@ var SwdView = {
                 $(this).children('.visible-content').slideUp(300);
             }, function() {
                 $(this).children('.visible-content').slideDown(300);
-            }, 500);
+            }, 1000);
 
             SwdPresenter.resetFbCanvasSize();
         }
