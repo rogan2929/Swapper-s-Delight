@@ -17,6 +17,8 @@ $fbSession = new Facebook(array(
     'cookie' => true
         ));
 
+echo var_dump($fbSession);
+
 // Test the access token.
 try {
     $userProfile = $fbSession->api('/me','GET');
