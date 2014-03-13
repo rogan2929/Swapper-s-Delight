@@ -552,9 +552,9 @@ a:visited {
 }
 
 #post-block-mask, #selection-item-mask {
-    background-color: #4d81bf;
+    background-color: #f6f6f6;
     background-image: none;
-    opacity: 0.4;
+    opacity: 0.3;
     position: absolute;
     pointer-events: none;
 }
