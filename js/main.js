@@ -1110,13 +1110,9 @@ var SwdView = {
                     $(this).children('.visible-content').slideUp(300);
                 },
                 out: function() {
-                    
+                    $(this).children('.visible-content').slideDown(300);
                 },
-                timeout: 1000
-            });
-
-            $('.post-block').not('.post-block.post-block-text').mouseleave(function () {
-                $(this).children('.visible-content').slideDown(300);                
+                timeout: 400
             });
 
             $('.post-block.unique.post-block-text').hoverIntent(function() {
