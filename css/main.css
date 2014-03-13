@@ -203,11 +203,11 @@ a:visited {
     font-weight: bold;
 }
 
-.selected-nav {
-    color: #ffffff !important;
-    text-decoration: none !important;
+.nav-button.selected-nav {
+    color: #ffffff;
+    text-decoration: none;
     background-color: #e35765;
-    font-weight: bold !important;
+    font-weight: bold;
 }
 
 #main-panel {
