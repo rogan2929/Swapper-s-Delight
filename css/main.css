@@ -406,9 +406,9 @@ a:visited {
 
 .button:hover, 
 .menu-item:hover, 
-.post-block.post-block-text:hover,
-.post-block.post-block-link:hover,
-.post-block.post-block-textlink:hover {
+.post-block-text:hover,
+.post-block-link:hover,
+.post-block-textlink:hover {
 /*    background-color: #1d6fa5;*/
     background-color: #999;
     color: #f6f6f6;
