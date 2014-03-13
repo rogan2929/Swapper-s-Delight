@@ -1030,21 +1030,41 @@ var SwdView = {
      * @param {type} post
      */
     createTextLinkPostBlock: function(post) {
-        var postBlock, message, userImage, timeStamp, message;
+//        var postBlock, message, userImage, timeStamp, message;
+//
+//        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
+//        message = '<div class="wrapper visible-content"><p class="content">' + post.message + '</p></div>';
+//
+//        $(postBlock).addClass('post-block-textlink').html(message);//.appendTo('#post-feed');
+//        
+//        // Create the text block that resides "behind" the image post block.
+//        userImage = 'url(' + post.user.pic + ')';
+//
+//        timeStamp = new moment(new Date(post.created_time * 1000));
+//
+//        message = '<div class="visible-content wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+//
+//        $(postBlock).append('<div class="post-block post-block-text hidden-content">' + message + '</div>');
+//
+//        $(postBlock).appendTo('#post-feed');
+        var postBlock, message, userImage, timeStamp, description;
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
-        message = '<div class="wrapper visible-content"><p class="content">' + post.message + '</p></div>';
 
-        $(postBlock).addClass('post-block-textlink').html(message);//.appendTo('#post-feed');
-        
-        // Create the text block that resides "behind" the image post block.
         userImage = 'url(' + post.user.pic + ')';
 
         timeStamp = new moment(new Date(post.created_time * 1000));
 
         message = '<div class="visible-content wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
-        $(postBlock).append('<div class="post-block post-block-text hidden-content">' + message + '</div>');
+        $(postBlock).addClass('post-block-textlink').html(message);
+        
+        description = '<div class="visible-content wrapper"><p class="content"><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
+        
+        // Create the link text block that resides behind the visible block.
+        //message = '<div class="wrapper"><p class="content">' + description + '</p></div>';
+
+        $(postBlock).append('<div class="post-block post-block-textlink hidden-content"><div class="wrapper"><p class="content">' + description + '</p></div></div>');
 
         $(postBlock).appendTo('#post-feed');
     },
@@ -1096,17 +1116,6 @@ var SwdView = {
                 // Add an event handler for when it is clicked on.
                 $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
             }
-
-            // Additionally, set up some styling for when an image type post block is moused over.
-//            $('.post-block').not('.post-block.hidden-content').hover(function() {
-//                $('#post-block-mask').show().position({
-//                    my: 'left top',
-//                    at: 'left top',
-//                    of: $(this)
-//                });
-//            }, function() {
-//                $('#post-block-mask').hide();
-//            });
 
             // After a delay, show the hidden content for any moused over image post blocks.
             // Use the hoverIntent plugin.
