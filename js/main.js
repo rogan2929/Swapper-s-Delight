@@ -197,13 +197,13 @@ var SwdModel = {
      * @param {type} gid
      */
     removeGroup: function(gid) {
-        
+
     },
     /***
      * Restores all groups to the selected groups list.
      */
     restoreAllGroups: function() {
-        
+
     },
 };
 /**
@@ -739,9 +739,9 @@ var SwdPresenter = {
         target = $(e.currentTarget);
 
         groupTile = $(target).parent('.group-selection-item');
-        
+
         gid = $(groupTile).attr('id');
-        
+
         // Remove the item from the back end.
         SwdModel.removeGroup(gid);
 
@@ -964,21 +964,27 @@ var SwdView = {
      */
     createImagePostBlock: function(post) {
         var postBlock, userImage, tileImage;
-        
-        userImage = 'url('+ post.user.pic + ')';
+
+        userImage = 'url(' + post.user.pic + ')';
         tileImage = 'url(' + post.image_url[0] + ')';
 
         // Create the visible block.
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"><div class="post-image" style="background-image: ' + tileImage + '"></div></div>');
         //$(postBlock).addClass('post-block-image').css('background-image', 'url("' + post.image_url[0] + '")');
-        
+
         $(postBlock).addClass('post-block-image');
-        
+
         // Create the text block that resides "behind" the image post block.
-        
-        //$(postBlock).append('<div class="post-block hidden-content"></div>');
-        
+
+        $(postBlock).append('<div class="post-block hidden-content"></div>');
+
         $(postBlock).appendTo('#post-feed');
+
+        $(postBlock).hover(function() {
+            $(this).child('.post-image').hide();
+        }, function() {
+            $(this).child('.post-image').show();
+        });
     },
     /***
      * Create and display a text type post block.
@@ -988,11 +994,11 @@ var SwdView = {
         var postBlock, message, userImage, timeStamp;
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget"></div>');
-        
-        userImage = 'url('+ post.user.pic + ')';
-    
+
+        userImage = 'url(' + post.user.pic + ')';
+
         timeStamp = new moment(new Date(post.created_time * 1000));
-        
+
         message = '<div class="wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
         $(postBlock).addClass('post-block-text').html(message).appendTo('#post-feed');
@@ -1086,7 +1092,7 @@ var SwdView = {
         else {
 //            $('#post-feed-noposts').show();
         }
-        
+
         // Display the official count.
         SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block').not('#post-block-mask, .post-block.load-more').length);
 

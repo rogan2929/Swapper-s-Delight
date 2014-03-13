@@ -530,6 +530,8 @@ a:visited {
 /*    background-image: url('/img/tile-background.png');*/
 }
 
+
+
 .post-block.ui-widget .post-image {
     background-size: cover;
     height: 205px;
@@ -607,7 +609,7 @@ a:visited {
 }
 
 .post-block.hidden-content {
-    
+    background: green;
 }
 
 /*.post-block .text {
