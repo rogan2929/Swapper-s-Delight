@@ -183,7 +183,7 @@ a:visited {
     margin-bottom: 6px;
 }
 
-.post-block.hidden-block .timestamp {
+.post-block.hidden-block .timestamp, .hover-highlight .timestamp {
     color: #f6f6f6;
 }
 
