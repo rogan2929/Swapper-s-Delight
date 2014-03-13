@@ -30,6 +30,5 @@ try {
     // just ask the user to login again here.
     
     $loginUrl = $fbSession->getLoginUrl();
-    
     http_response_code(401);
 }
