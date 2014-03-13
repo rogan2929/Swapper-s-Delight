@@ -1111,7 +1111,7 @@ var SwdView = {
                 out: function() {
                     $(this).children('.visible-content').slideDown(300);
                 },
-                timeout: 500
+                timeout: 400
             });
 
             $('.post-block.unique.post-block-text').hoverIntent(function() {

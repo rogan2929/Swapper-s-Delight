@@ -1,5 +1,8 @@
 <?php
 
+// Header required by IE.
+header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
+
 require_once ("facebook.php");
 
 // Prod AppId and Secret
@@ -19,9 +22,8 @@ $fbSession = new Facebook(array(
 
 // Test the access token.
 try {
-    $userProfile = $fbSession->api('/me','GET');
-} 
-catch(FacebookApiException $e) {
+    $userProfile = $fbSession->api('/me', 'GET');
+} catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
     // user ID even though the access token is invalid.
     // In this case, we'll get an exception, so we'll
