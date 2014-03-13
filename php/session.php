@@ -16,8 +16,7 @@ $appSecret = 'b8447ce73d2dcfccde6e30931cfb0a90';
 // Start up the Facebook object
 $fbSession = new Facebook(array(
     'appId' => $appId,
-    'secret' => $appSecret,
-    'cookie' => true
+    'secret' => $appSecret
         ));
 
 // Test the access token.
@@ -29,8 +28,9 @@ try {
     // In this case, we'll get an exception, so we'll
     // just ask the user to login again here.
     
-    echo var_dump($e);
-    
     $loginUrl = $fbSession->getLoginUrl();
+    
+    echo $loginUrl;
+    
     http_response_code(401);
 }
