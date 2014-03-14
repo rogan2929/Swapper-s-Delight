@@ -12,12 +12,14 @@ if ($conn === false) {
     die(print('Could not connect to database.'));
 }
 
-$sql = 'SELECT * FROM HiddenGroups';
+$sql = 'SELECT Group FROM HiddenGroups WHERE UID="' + $uid + '"';
 
 $result = sqlsrv_query($conn, $sql);
 
 $hiddenGroups = '';
 
 while ($row = sqlsrv_fetch_array($result)) {
-    echo json_encode($row);
+    $hiddenGroups .= $row['Group'] . ' ';
 }
+
+echo $hiddenGroups;
