@@ -578,8 +578,7 @@ var SwdPresenter = {
 
         //SwdView.toggleFloatingPanel('#new-post-panel', true);
         FB.ui({
-           method: 'feed',
-           to: SwdPresenter.selectedGroup.gid
+           method: 'feed'
         }, function(response) {
             alert(response);
         });
