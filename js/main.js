@@ -1136,7 +1136,7 @@ var SwdView = {
      * @param {type} userLikes
      */
     setLikePost: function(userLikes) {
-        if (userLikes) {
+        if (userLikes == true) {
             $('#post-button-like span:nth-child(2)').text('Unlike');
         }
         else {
