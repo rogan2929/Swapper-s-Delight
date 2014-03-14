@@ -1,8 +1,6 @@
 <?php
-
 // IE header to allow third party cookies.
 header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
-
 ?>
 
 <!DOCTYPE html>
@@ -25,6 +23,9 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+
+        <!--LifesiteMedia Script-->
+        <script src="//ads.lfstmedia.com/getad?site=231280" type="text/javascript"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -51,6 +52,9 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
                                                     <span>Search</span>
                                                 </div>-->
                     </div>
+                    
+                    <!--Ad Slot-->
+                    
                     <div id='ad-space'>
                         Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
                     </div>
@@ -202,6 +206,17 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
+
+<!--        <script type="text/javascript">
+            //<![CDATA[
+            LSM_Slot({
+                adkey: '814',
+                ad_size: '160x600',
+                slot: 'slot92146',
+                _render_div_id: 'ad-space'
+            });
+            //]]>
+        </script>-->
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
