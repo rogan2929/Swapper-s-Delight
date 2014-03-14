@@ -206,6 +206,8 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
+        
+        <!--LifeSiteMedia Ad Script-->
 
         <script type="text/javascript">
             //<![CDATA[
