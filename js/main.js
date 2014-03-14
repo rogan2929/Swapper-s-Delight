@@ -228,9 +228,19 @@ var SwdModel = {
     /***
      * Restores all groups to the selected groups list.
      */
-    restoreAllGroups: function(callbacks) {
-        window.localStorage.removeItem('hiddenGroups');
-        callbacks.success.call(SwdModel);
+    restoreAllGroups: function(callbacks, uid) {
+        var url = '/php/restore-groups.php?uid=' + uid;
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(response) {
+                callbacks.success.call(SwdModel, response);
+            },
+            error: function(response) {
+                callbacks.error.call(SwdModel, response);
+            }
+        });
     },
 };
 /**
@@ -772,8 +782,9 @@ var SwdPresenter = {
         SwdModel.restoreAllGroups({
             success: function() {
                 SwdView.showAllGroupSelectionItems();
-            }
-        });
+            },
+            error: SwdPresenter.handleError
+        }, SwdPresenter.uid);
     },
     onClickToolbar: function(e, args) {
         e.stopPropagation();
