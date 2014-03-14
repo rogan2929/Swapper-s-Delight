@@ -12,7 +12,7 @@ if ($conn === false) {
     die(print('Could not connect to database.'));
 }
 
-$sql = 'SELECT Group FROM HiddenGroups WHERE UID="' . $uid . '"';
+$sql = 'SELECT Group FROM HiddenGroups';
 
 $result = sqlsrv_query($conn, $query);
 
