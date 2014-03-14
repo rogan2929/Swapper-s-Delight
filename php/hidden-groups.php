@@ -14,6 +14,8 @@ if ($conn === false) {
 
 $sql = 'SELECT HiddenGroup FROM HiddenGroups WHERE UID=\'' + $uid + '\'';
 
+echo $sql . "<br/>";
+
 $result = sqlsrv_query($conn, $sql);
 
 $hiddenGroups = '';
