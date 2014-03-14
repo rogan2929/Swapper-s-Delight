@@ -28,7 +28,7 @@ if (http_response_code() != 401) {
     for ($i = 0; $i < count($groups); $i++) {
         $members = $fbSession->api(array(
             'method' => 'fql.query',
-            'queries' => 'SELECT uid FROM group_member WHERE gid=' . $groups[$i]['gid']
+            'query' => 'SELECT uid FROM group_member WHERE gid=' . $groups[$i]['gid']
         ));
         
         $groups[$i]['size'] = count($members['data']);
