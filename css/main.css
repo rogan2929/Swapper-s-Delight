@@ -361,8 +361,8 @@ a:visited {
 
 #ad-space {
     margin-top: 10px;
-    width: 170px;
-    height: 610px;
+    width: 160px;
+    height: 605px;
 }
 
 .float-left {
@@ -915,14 +915,14 @@ div.right-toolbar-button {
 }
 
 #post-feed {
-    margin-left: 176px;
+    margin-left: 175px;
     margin-top: 52px;
     position: relative;
     min-height: 800px;
 }
 
 #left-rail {
-    width: 166px;
+    width: 165px;
     position: absolute;
     padding-top: 11px;
     top: 43px;
