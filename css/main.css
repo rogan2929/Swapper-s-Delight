@@ -598,8 +598,8 @@ a:visited {
 .post-block.load-more {
     padding: 0px;
     position: relative;
-    background-color: #e31025;
-    color: white;
+    background-color: #e35765;
+    color: #f6f6f6;
     background-image: none;
 }
 
@@ -677,7 +677,8 @@ a:visited {
 }
 
 .post-block.load-more.hover {
-    background-color: #e35765;
+    background-color: #aaa;
+    font-weight: bold;
 }
 
 /*.post-block .text {
