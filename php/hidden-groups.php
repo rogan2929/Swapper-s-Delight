@@ -8,6 +8,10 @@ $serverName = "tcp:lreuagtc6u.database.windows.net,1433";
 
 $conn = sqlsrv_connect($serverName, $connectionInfo);
 
+if ($conn === false) {
+    die(print('Could not connect to database.'));
+}
+
 $sql = 'SELECT Group FROM HiddenGroups WHERE UID="' . $uid . '"';
 
 $groups = sqlsrv_query($conn, $query);
