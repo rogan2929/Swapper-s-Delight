@@ -639,7 +639,7 @@ var SwdPresenter = {
         var id, userLikes;
 
         id = SwdPresenter.selectedPost.post_id;
-        userLikes = !SwdPresenter.selectedPost.like_info.user_likes;
+        userLikes = Number(!SwdPresenter.selectedPost.like_info.user_likes);
 
         SwdView.setLikePost(userLikes);
 
