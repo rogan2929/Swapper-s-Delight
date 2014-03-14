@@ -861,7 +861,7 @@ var SwdView = {
             e.stopPropagation();
         });
         
-        $('.button, .button.menu-item, .button.toolbar-button').hoverIntent(function() {
+        $('.button, .button.menu-item, .button.toolbar-button, .button.selection-item, ').hoverIntent(function() {
                 $(this).addClass('hover', 100);
             }, function() {
                 $(this).removeClass('hover', 100);

@@ -569,7 +569,7 @@ a:visited {
     color: #f6f6f6;
 }
 
-#button-groups:hover {
+#button-groups.hover {
     background-color: #e35765;
 }
 
