@@ -1121,7 +1121,9 @@ var SwdView = {
                 $('<div class="button post-block load-more ui-widget"><div class="ajax-loading-div hidden"></div><div class="load-more-text">Load more...</div></div>').appendTo('#post-feed');
 
                 // Add an event handler for when it is clicked on.
-                $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']).hoverIntent(function() {
+                $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore'])
+                        
+                $('.post-block.load-more').hoverIntent(function() {
                     $(this).addClass('hover', 100);
                 }, function() {
                     $(this).removeClass('hover', 100);
