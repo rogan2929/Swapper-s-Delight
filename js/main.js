@@ -862,9 +862,9 @@ var SwdView = {
         });
         
         $('.button, .button.menu-item, .button.toolbar-button, .selection-item').hover(function() {
-                $(this).addClass('hover', 50);
+                $(this).addClass('hover', 100);
             }, function() {
-                $(this).removeClass('hover', 50);
+                $(this).removeClass('hover', 100);
         });
     },
     /**
