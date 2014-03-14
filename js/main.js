@@ -1122,11 +1122,14 @@ var SwdView = {
 
                 // Add an event handler for when it is clicked on.
                 $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
-                        
-                $('.post-block.load-more').hover(function() {
-                    $(this).addClass('hover', 100);
-                }, function() {
-                    $(this).removeClass('hover', 100);
+
+                $('.post-block.load-more').hoverIntent({
+                    over: function() {
+                        $(this).addClass('hover', 100);
+                    },
+                    out: function() {
+                        $(this).removeClass('hover', 100);
+                    }
                 });
             }
 
