@@ -86,7 +86,7 @@ var SwdModel = {
         });
     },
     getHiddenGroups: function(callback) {
-        callback.call(window.localStorage.getItem('hiddenGroups'));
+        callback.call(SwdModel, window.localStorage.getItem('hiddenGroups'));
     },
     /***
      * Get posts that are owned by the current user in the provided group. Go back 42 days.
