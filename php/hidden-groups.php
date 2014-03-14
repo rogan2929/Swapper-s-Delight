@@ -14,15 +14,12 @@ if ($conn === false) {
 
 $sql = 'SELECT HiddenGroup FROM HiddenGroups WHERE UID=\'' . $uid . '\'';
 
-echo $sql . "<br/>";
-
 $result = sqlsrv_query($conn, $sql);
 
 $hiddenGroups = '';
 
 while ($row = sqlsrv_fetch_array($result)) {
-    //$hiddenGroups .= $row['Group'] . ' ';
-    echo $row['HiddenGroup'] . "<br/>";
+    $hiddenGroups .= $row['Group'] . ' ';
 }
 
 echo $hiddenGroups;
