@@ -5,6 +5,8 @@ require_once 'session.php';
 if (http_response_code() != 401) {
     $postId = $_POST['postId'];
     $userLikes = $_POST['userLikes'];
+    
+    echo $userLikes;
 
     if ($userLikes) {
         // Like the post and get the response.
