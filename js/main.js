@@ -638,7 +638,7 @@ var SwdPresenter = {
         var id, userLikes;
 
         id = SwdPresenter.selectedPost.post_id;
-        userLikes = !SwdPresenter.selectedPost.like_info.user_likes;
+        userLikes = Number(!SwdPresenter.selectedPost.like_info.user_likes);
 
         SwdView.setLikePost(userLikes);
 
@@ -647,7 +647,7 @@ var SwdPresenter = {
             // Post the comment.
             SwdModel.likePost(id, userLikes, {
                 success: function(response) {
-                    //SwdView.setLikePost(response);
+                    SwdPresenter.selectedPost.like_info.user_likes = userLikes;
                 },
                 error: SwdPresenter.handleError
             });
@@ -1136,7 +1136,7 @@ var SwdView = {
      * @param {type} userLikes
      */
     setLikePost: function(userLikes) {
-        if (userLikes) {
+        if (userLikes == true) {
             $('#post-button-like span:nth-child(2)').text('Unlike');
         }
         else {

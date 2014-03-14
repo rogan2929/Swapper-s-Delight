@@ -1,5 +1,4 @@
 Implement 'New' post functionality.
-Find ad provider and place their ads.
 Implement Search Post functionality, by FB user and by keyword.
 Implement check to see that app has the correct permissions.
 *Possibly* add functionality to filter 'My Posts' by comment data.
@@ -15,4 +14,3 @@ Acknowledge tags in posts and comments.
 Allow creation of tags in posts and comments.
 Fix issue of trying to bring up a post that is no longer there.
 Replace dialogs with nicer ones.
-Fix unlike post. (Issue "DELETE" to /OBJECT_ID/likes.)
