@@ -1121,7 +1121,11 @@ var SwdView = {
                 $('<div class="button post-block load-more ui-widget"><div class="ajax-loading-div hidden"></div><div class="load-more-text">Load more...</div></div>').appendTo('#post-feed');
 
                 // Add an event handler for when it is clicked on.
-                $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
+                $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']).hoverIntent(function() {
+                    $(this).addClass('hover', 100);
+                }, function() {
+                    $(this).removeClass('hover', 100);
+                });
             }
 
             // After a delay, show the hidden content for any moused over image post blocks.
@@ -1138,9 +1142,9 @@ var SwdView = {
             });
 
             $('.post-block.unique.post-block-text').hoverIntent(function() {
-                $(this).addClass('hover-highlight', 100);
+                $(this).addClass('hover', 100);
             }, function() {
-                $(this).removeClass('hover-highlight', 100);
+                $(this).removeClass('hover', 100);
             });
 
             SwdPresenter.resetFbCanvasSize();
