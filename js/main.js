@@ -85,8 +85,8 @@ var SwdModel = {
             }
         });
     },
-    getHiddenGroups: function(callbacks) {
-        callbacks.success.call(window.localStorage.getItem('hiddenGroups'));
+    getHiddenGroups: function(callback) {
+        callback.call(window.localStorage.getItem('hiddenGroups'));
     },
     /***
      * Get posts that are owned by the current user in the provided group. Go back 42 days.
