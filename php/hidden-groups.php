@@ -1,11 +1,13 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 $uid = $_GET['uid'];
 
-phpinfo();
+$connectionInfo = array("UID" => "rogan2929@lreuagtc6u", "pwd" => "Revelation19:11", "Database" => "swapperAGiJRLgvy", "LoginTimeout" => 30, "Encrypt" => 1);
+
+$serverName = "tcp:lreuagtc6u.database.windows.net,1433";
+
+$conn = sqlsrv_connect($serverName, $connectionInfo);
+
+$sql = 'SELECT Group FROM HiddenGroups WHERE UID="' . $uid . '"';
+
+echo sqlsrv_query($conn, $query);
