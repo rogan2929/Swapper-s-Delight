@@ -12,6 +12,6 @@ if ($conn === false) {
     die(print('Could not connect to database.'));
 }
 
-$sql = 'DELETE * FROM HiddenGroups WHERE UID=\'' . $uid . '\'';
+$sql = 'DELETE FROM HiddenGroups WHERE UID=\'' . $uid . '\'';
 
 $result = sqlsrv_query($conn, $sql);
