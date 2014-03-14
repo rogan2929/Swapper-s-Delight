@@ -203,7 +203,12 @@ var SwdModel = {
         // Save hidden group's ID to localStorage.
         var hiddenGroups = window.localStorage.getItem('hiddenGroups');
 
-        hiddenGroups += ' ' + gid;
+        if (hiddenGroups) {
+            hiddenGroups += ' ' + gid;
+        }
+        else {
+            hiddenGroups = gid;
+        }
 
         window.localStorage.setItem('hiddenGroups', hiddenGroups)
 
