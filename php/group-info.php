@@ -31,8 +31,10 @@ if (http_response_code() != 401) {
             'query' => 'SELECT uid FROM group_member WHERE gid=' . $groups[$i]['gid']
         ));
         
-        $groups[$i]['size'] = count($members['data']);
+        echo json_encode($members) . "<br/>";
+        
+        //$groups[$i]['size'] = count($members['data']);
     }
 
-    echo json_encode($groups);
+    //echo json_encode($groups);
 }
