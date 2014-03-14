@@ -617,8 +617,8 @@ a:visited {
 }
 
 .facebook-user-header {
-    height: 70px;
-    line-height: 70px;
+    height: 65px;
+    line-height: 65px;
     color: #f6f6f6;
 /*    background: #13486b;*/
 /*    background: #eee;*/
@@ -811,8 +811,8 @@ a.link-title {
 }
 
 .facebook-user-photo {
-    height: 70px;
-    width: 70px;
+    height: 65px;
+    width: 65px;
     display: inline-block;
     background-position: center center;
     background-repeat: no-repeat;
@@ -821,7 +821,7 @@ a.link-title {
 }
 
 .facebook-user-header .facebook-poststamp {
-    line-height: 70px;
+    line-height: 65px;
     vertical-align: middle;    
 }
 
