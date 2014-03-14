@@ -1198,8 +1198,8 @@ var SwdView = {
         }
 
         // Display user's data.
-        if (post.user.pic_square) {
-            userImage = 'url("' + post.user.pic_square + '")';
+        if (post.user.pic) {
+            userImage = 'url("' + post.user.pic + '")';
         }
         else {
             userImage = '';
