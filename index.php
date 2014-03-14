@@ -207,7 +207,7 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
 
-<!--        <script type="text/javascript">
+        <script type="text/javascript">
             //<![CDATA[
             LSM_Slot({
                 adkey: '814',
@@ -216,7 +216,7 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
                 _render_div_id: 'ad-space'
             });
             //]]>
-        </script>-->
+        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
