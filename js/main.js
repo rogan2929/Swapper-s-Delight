@@ -554,19 +554,6 @@ var SwdPresenter = {
         });
     },
     /***
-     * Brings up a send message window.
-     * @param {type} id
-     * @param {type} link
-     */
-    sendFacebookMessage: function(id, link) {
-        FB.ui({
-            app_id: AppId,
-            to: id,
-            method: 'send',
-            link: link
-        });
-    },
-    /***
      * Set currently selected group.
      * @param {type} group
      */
@@ -670,12 +657,8 @@ var SwdPresenter = {
         });
     },
     onClickPostButtonPm: function(e, args) {
-        var id;
-
-        id = SwdPresenter.selectedPost.actor_id;
-
-        // Yes, shamelessly plug the app.
-        SwdPresenter.sendFacebookMessage(id, AppUrl);
+        window.open('https://www.facebook.com/messages/' + SwdPresenter.selectedPost.actor_id);
+        
     },
     onClickPostBlock: function(e, args) {
         var id;
