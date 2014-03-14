@@ -14,7 +14,7 @@ if ($conn === false) {
 
 $sql = 'SELECT * FROM HiddenGroups';
 
-$result = sqlsrv_query($conn, $query);
+$result = sqlsrv_query($conn, $sql);
 
 $hiddenGroups = '';
 
