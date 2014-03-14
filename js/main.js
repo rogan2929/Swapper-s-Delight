@@ -816,7 +816,7 @@ var SwdView = {
             
             // Look through the string containing hiddenGroup IDs. If there is a match, hide the group.
             if (hiddenGroups && hiddenGroups.indexOf(groups[i].gid) !== -1) {
-                $(groupItem).addClass('hidden');
+                $(groupItem).hide();
             }
             
             $('#select-group-list').append(groupItem);
