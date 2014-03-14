@@ -13,4 +13,7 @@ if ($conn === false) {
     die(print('Could not connect to database.'));
 }
 
-$sql = 'DELETE FROM HiddenGroups WHERE UID=\'' . $uid . '\'';
+$sql = 'INSERT INTO HiddenGroups (UID, HiddenGroup) VALUES (\'' . $uid . '\', \'' . $gid . '\')';
+
+// Execute the query.
+$result = sqlsrv_query($conn, $sql);

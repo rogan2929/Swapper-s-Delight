@@ -14,4 +14,5 @@ if ($conn === false) {
 
 $sql = 'DELETE FROM HiddenGroups WHERE UID=\'' . $uid . '\'';
 
+// Execute the query.
 $result = sqlsrv_query($conn, $sql);
