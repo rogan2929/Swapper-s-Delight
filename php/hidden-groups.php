@@ -12,7 +12,7 @@ if ($conn === false) {
     die(print('Could not connect to database.'));
 }
 
-$sql = 'SELECT HiddenGroup FROM HiddenGroups WHERE UID=\'' + $uid + '\'';
+$sql = 'SELECT HiddenGroup FROM HiddenGroups WHERE UID=\'' . $uid . '\'';
 
 echo $sql . "<br/>";
 
