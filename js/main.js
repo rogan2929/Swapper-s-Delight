@@ -85,6 +85,9 @@ var SwdModel = {
             }
         });
     },
+    getHiddenGroups: function(callbacks) {
+        callbacks.success.call(window.localStorage.getItem('hiddenGroups'));
+    },
     /***
      * Get posts that are owned by the current user in the provided group. Go back 42 days.
      * @param {type} uid
@@ -196,14 +199,22 @@ var SwdModel = {
      * Remove a group from the selected groups list.
      * @param {type} gid
      */
-    removeGroup: function(gid) {
+    removeGroup: function(gid, callbacks) {
+        // Save hidden group's ID to localStorage.
+        var hiddenGroups = window.localStorage.getItem('hiddenGroups');
 
+        hiddenGroups += ' ' + gid;
+
+        window.localStorage.setItem('hiddenGroups', hiddenGroups)
+
+        callbacks.success.call(SwdModel);
     },
     /***
      * Restores all groups to the selected groups list.
      */
-    restoreAllGroups: function() {
-
+    restoreAllGroups: function(callbacks) {
+        window.localStorage.removeItem('hiddenGroups');
+        callbacks.success.call(SwdModel);
     },
 };
 /**
@@ -743,15 +754,21 @@ var SwdPresenter = {
         gid = $(groupTile).attr('id');
 
         // Remove the item from the back end.
-        SwdModel.removeGroup(gid);
-
-        // Remove the item from view.
-        SwdView.hideGroupFromSelectPanel(groupTile);
+        SwdModel.removeGroup(gid, {
+            success: function() {
+                // Remove the item from view.
+                SwdView.hideGroupFromSelectPanel(groupTile);
+            },
+            fail: SwdPresenter.handleError
+        });
     },
     onClickRestoreGroupSelectionItems: function(e, args) {
         // Restore all group selection items.
-        SwdModel.restoreAllGroups();
-        SwdView.showAllGroupSelectionItems();
+        SwdModel.restoreAllGroups({
+            success: function() {
+                SwdView.showAllGroupSelectionItems();
+            }
+        });
     },
     onClickToolbar: function(e, args) {
         e.stopPropagation();
