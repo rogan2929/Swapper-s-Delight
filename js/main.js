@@ -84,8 +84,19 @@ var SwdModel = {
             }
         });
     },
-    getHiddenGroups: function(callback) {
-        callback.call(SwdModel, window.localStorage.getItem('hiddenGroups'));
+    getHiddenGroups: function(uid, callbacks) {
+        var url = '/php/hidden-groups.php?uid=' + uid;
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(response) {
+                callbacks.success.call(SwdModel, response);
+            },
+            error: function(response) {
+                callbacks.error.call(SwdModel, response);
+            }
+        });
     },
     /***
      * Get posts that are owned by the current user in the provided group. Go back 42 days.
@@ -195,30 +206,39 @@ var SwdModel = {
         });
     },
     /***
-     * Remove a group from the selected groups list.
+     * Remove a group from the selected groups list by saving it to the HiddenGroups DB table.
      * @param {type} gid
      */
-    removeGroup: function(gid, callbacks) {
-        // Save hidden group's ID to localStorage.
-        var hiddenGroups = window.localStorage.getItem('hiddenGroups');
+    hideGroup: function(uid, gid, callbacks) {
+        var url = '/php/hide-group.php?uid=' + uid + '&gid=' + gid;
 
-        if (hiddenGroups) {
-            hiddenGroups += ' ' + gid;
-        }
-        else {
-            hiddenGroups = gid;
-        }
-
-        window.localStorage.setItem('hiddenGroups', hiddenGroups)
-
-        callbacks.success.call(SwdModel);
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(response) {
+                callbacks.success.call(SwdModel, response);
+            },
+            error: function(response) {
+                callbacks.error.call(SwdModel, response);
+            }
+        });
     },
     /***
      * Restores all groups to the selected groups list.
      */
-    restoreAllGroups: function(callbacks) {
-        window.localStorage.removeItem('hiddenGroups');
-        callbacks.success.call(SwdModel);
+    restoreAllGroups: function(uid, callbacks) {
+        var url = '/php/restore-groups.php?uid=' + uid;
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(response) {
+                callbacks.success.call(SwdModel, response);
+            },
+            error: function(response) {
+                callbacks.error.call(SwdModel, response);
+            }
+        });
     },
 };
 /**
@@ -352,43 +372,46 @@ var SwdPresenter = {
                     if (SwdPresenter.groups) {
                         //SwdPresenter.setSelectedGroup(selectedGroups[0]);
 
-                        SwdModel.getHiddenGroups(function(response) {
-                            SwdView.addGroupsToSelectPanel(SwdPresenter.groups, response);
+                        SwdModel.getHiddenGroups(SwdPresenter.uid, {
+                            success: function(response) {
+                                SwdView.addGroupsToSelectPanel(SwdPresenter.groups, response);
 
-                            // Install Event Handlers
-                            SwdView.installHandler('onClickButtonGroups', SwdPresenter.onClickButtonGroups, '#button-groups', 'click');
-                            SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
-                            SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
-                            SwdView.installHandler('onClickFloatingPanelCloseButton', SwdPresenter.onClickFloatingPanelCloseButton, '.floating-panel-content > .close-button', 'click');
-                            SwdView.installHandler('onClickFloatingPanelContent', SwdPresenter.onClickFloatingPanelContent, '.floating-panel-content', 'click');
-                            SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
-                            SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
-                            SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
-                            SwdView.installHandler('onClickPopupComment', SwdPresenter.onClickPopupComment, '#popup-comment', 'click');
-                            SwdView.installHandler('onClickPostButtonDelete', SwdPresenter.onClickPostButtonDelete, '#post-button-delete', 'click');
-                            SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
-                            SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
-                            SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block', 'click');
-                            SwdView.installHandler('onClickPostBlockLoadMore', SwdPresenter.onClickPostBlockLoadMore, '.post-block.load-more', 'click');
-                            SwdView.installHandler('onClickPostImage', SwdPresenter.onClickPostImage, '#post-image', 'click');
-                            SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
-                            SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .close-button', 'click');
-                            SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
-                            SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
-                            SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#popup-comment-text', 'keyup')
-                            SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
-                            SwdView.positionMenus();
+                                // Install Event Handlers
+                                SwdView.installHandler('onClickButtonGroups', SwdPresenter.onClickButtonGroups, '#button-groups', 'click');
+                                SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
+                                SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
+                                SwdView.installHandler('onClickFloatingPanelCloseButton', SwdPresenter.onClickFloatingPanelCloseButton, '.floating-panel-content > .close-button', 'click');
+                                SwdView.installHandler('onClickFloatingPanelContent', SwdPresenter.onClickFloatingPanelContent, '.floating-panel-content', 'click');
+                                SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
+                                SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
+                                SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
+                                SwdView.installHandler('onClickPopupComment', SwdPresenter.onClickPopupComment, '#popup-comment', 'click');
+                                SwdView.installHandler('onClickPostButtonDelete', SwdPresenter.onClickPostButtonDelete, '#post-button-delete', 'click');
+                                SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
+                                SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
+                                SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block', 'click');
+                                SwdView.installHandler('onClickPostBlockLoadMore', SwdPresenter.onClickPostBlockLoadMore, '.post-block.load-more', 'click');
+                                SwdView.installHandler('onClickPostImage', SwdPresenter.onClickPostImage, '#post-image', 'click');
+                                SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
+                                SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .close-button', 'click');
+                                SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
+                                SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
+                                SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#popup-comment-text', 'keyup')
+                                SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
+                                SwdView.positionMenus();
 
-                            // Sleep for 1 second, allowing facebookPageInfoPoll() to complete for the first time.
-                            setTimeout(function() {
-                                SwdView.toggleAjaxLoadingDiv('body', false);
+                                // Sleep for 1 second, allowing facebookPageInfoPoll() to complete for the first time.
+                                setTimeout(function() {
+                                    SwdView.toggleAjaxLoadingDiv('body', false);
 
-                                // Set the main ajax overlay to be semi-transparent.
-                                SwdView.setMainOverlayTransparency();
+                                    // Set the main ajax overlay to be semi-transparent.
+                                    SwdView.setMainOverlayTransparency();
 
-                                // Start with displaying the group selection panel.
-                                SwdView.toggleFloatingPanel('#select-group-panel', true);
-                            }, 1000);
+                                    // Start with displaying the group selection panel.
+                                    SwdView.toggleFloatingPanel('#select-group-panel', true);
+                                }, 1000);
+                            },
+                            error: SwdPresenter.handleError
                         });
                     }
                     else {
@@ -744,7 +767,7 @@ var SwdPresenter = {
         gid = $(groupTile).attr('id');
 
         // Remove the item from the back end.
-        SwdModel.removeGroup(gid, {
+        SwdModel.hideGroup(SwdPresenter.uid, gid, {
             success: function() {
                 // Remove the item from view.
                 SwdView.hideGroupFromSelectPanel(groupTile);
@@ -754,10 +777,11 @@ var SwdPresenter = {
     },
     onClickRestoreGroupSelectionItems: function(e, args) {
         // Restore all group selection items.
-        SwdModel.restoreAllGroups({
+        SwdModel.restoreAllGroups(SwdPresenter.uid, {
             success: function() {
                 SwdView.showAllGroupSelectionItems();
-            }
+            },
+            error: SwdPresenter.handleError
         });
     },
     onClickToolbar: function(e, args) {
@@ -812,12 +836,12 @@ var SwdView = {
 
         for (i = 0; i < groups.length; i++) {
             groupItem = $('<div id="' + groups[i].gid + '" class="button group-selection-item selection-item select-group"><div class="close-button"></div><div class="selection-item-content"><span class="button-icon" style="background-image: url(' + groups[i].icon + ')"></span><div>' + groups[i].name + '</div></div></div>');
-            
+
             // Look through the string containing hiddenGroup IDs. If there is a match, hide the group.
             if (hiddenGroups && hiddenGroups.indexOf(groups[i].gid) !== -1) {
                 $(groupItem).hide();
             }
-            
+
             $('#select-group-list').append(groupItem);
         }
 
