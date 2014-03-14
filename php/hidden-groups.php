@@ -19,7 +19,7 @@ $result = sqlsrv_query($conn, $sql);
 $hiddenGroups = '';
 
 while ($row = sqlsrv_fetch_array($result)) {
-    $hiddenGroups .= $row['Group'] . ' ';
+    $hiddenGroups .= $row['HiddenGroup'] . ' ';
 }
 
 echo $hiddenGroups;
