@@ -7,12 +7,12 @@ if (http_response_code() != 401) {
     $userLikes = $_POST['userLikes'];
 
     if ($userLikes == $true) {
-        // Like the post and get the response.
+        // Like the post.
         $fbSession->api('/' . $postId . '/likes', 'POST', array('user_likes' => true));
     } 
     else {
+        // Delete the post's like.
         $fbSession->api('/' . $postId . '/likes', 'DELETE');
-        echo 'Deleting...';
     }
     
     echo $userLikes;

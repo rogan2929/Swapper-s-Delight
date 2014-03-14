@@ -6,3 +6,4 @@ Rework timeout issue so that instead of simply refreshing the page, a new access
 Implement Delete Post functionality for owned posts.
 Fix bug where posts are improperly counted when more posts are loaded.
 Find ad provider and place their ads.
+Fix unlike post. (Issue "DELETE" to /OBJECT_ID/likes.)
