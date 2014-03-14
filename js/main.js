@@ -860,6 +860,12 @@ var SwdView = {
             // Prevent floating panels from closing whenever they are clicked on.
             e.stopPropagation();
         });
+        
+        $('.button, .button.menu-item, .button.toolbar-button').hoverIntent(function() {
+                $(this).addClass('hover', 100);
+            }, function() {
+                $(this).removeClass('hover', 100);
+        });
     },
     /**
      * Installs an event handler and connects it to the presenter.
