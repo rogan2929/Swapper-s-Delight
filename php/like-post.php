@@ -13,6 +13,7 @@ if (http_response_code() != 401) {
     else {
         // Delete the post's like.
         $fbSession->api('/' . $postId . '/likes', 'DELETE');
+        echo 'Delete';
     }
     
     echo $userLikes;
