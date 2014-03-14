@@ -363,11 +363,14 @@ a:visited {
     margin-top: 10px;
     width: 160px;
     height: 600px;
+}
+
+.ad-div {
     overflow: hidden;
+    border: 1px solid #aaa;
 }
 
 #bottom-ad-banner {
-    overflow: hidden;
     width: 728px;
     height: 90px;
     display: block;
@@ -375,7 +378,8 @@ a:visited {
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 75px;
+    margin-top: 70px;
+    margin-bottom: 10px;
 }
 
 .float-left {
