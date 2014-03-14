@@ -10,4 +10,6 @@ $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 $sql = 'SELECT Group FROM HiddenGroups WHERE UID="' . $uid . '"';
 
-echo sqlsrv_query($conn, $query);
+$groups = sqlsrv_query($conn, $query);
+
+echo var_dump($groups);
