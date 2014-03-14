@@ -52,9 +52,9 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
                                                     <span>Search</span>
                                                 </div>-->
                     </div>
-                    
+
                     <!--Ad Slot-->
-                    
+
                     <div id='ad-space'>
                         Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
                     </div>
@@ -62,7 +62,7 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
                 <div id='post-feed' class='scroll-y'>
                     <div id='post-feed-noposts' class='hidden'>No posts were found.</div>
                 </div>
-                
+
                 <div id='bottom-ad-banner'>
                     Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
                 </div>
@@ -210,7 +210,7 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
-        
+
         <!--LifeSiteMedia Ad Script-->
 
         <script type="text/javascript">
@@ -220,6 +220,17 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
                 ad_size: '160x600',
                 slot: 'slot92146',
                 _render_div_id: 'ad-space'
+            });
+            //]]>
+        </script>
+
+        <script type="text/javascript">
+            //<![CDATA[
+            LSM_Slot({
+                adkey: '27f',
+                ad_size: '728x90',
+                slot: 'slot93186',
+                _render_div_id: 'bottom-ad-banner'
             });
             //]]>
         </script>
