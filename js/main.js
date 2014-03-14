@@ -815,7 +815,7 @@ var SwdView = {
             groupItem = $('<div id="' + groups[i].gid + '" class="button group-selection-item selection-item select-group"><div class="close-button"></div><div class="selection-item-content"><span class="button-icon" style="background-image: url(' + groups[i].icon + ')"></span><div>' + groups[i].name + '</div></div></div>');
             
             // Look through the string containing hiddenGroup IDs. If there is a match, hide the group.
-            if (hiddenGroups.indexOf(groups[i].gid) !== -1) {
+            if (hiddenGroups && hiddenGroups.indexOf(groups[i].gid) !== -1) {
                 $(groupItem).addClass('hidden');
             }
             
