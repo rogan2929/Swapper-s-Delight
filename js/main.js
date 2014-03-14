@@ -827,6 +827,12 @@ var SwdView = {
         for (i = 0; i < groups.length; i++) {
             $('#select-group-list').append('<div id="' + groups[i].gid + '" class="button group-selection-item selection-item select-group"><div class="close-button"></div><div class="selection-item-content"><span class="button-icon" style="background-image: url(' + groups[i].icon + ')"></span><div>' + groups[i].name + '</div></div></div>');
         }
+
+        $('.selection-item').hover(function() {
+            $(this).addClass('hover', 100);
+        }, function() {
+            $(this).removeClass('hover', 100);
+        });
     },
     addPostComment: function(comment) {
         var commentDiv, timeStamp, userImage;
@@ -858,6 +864,12 @@ var SwdView = {
         $('.floating-panel-content').click(function(e) {
             // Prevent floating panels from closing whenever they are clicked on.
             e.stopPropagation();
+        });
+
+        $('.button, .button.menu-item, .button.toolbar-button, .selection-item').hover(function() {
+            $(this).addClass('hover', 100);
+        }, function() {
+            $(this).removeClass('hover', 100);
         });
     },
     /**
@@ -1136,10 +1148,10 @@ var SwdView = {
                 timeout: 400
             });
 
-            $('.post-block.unique.post-block-text').hoverIntent(function() {
-                $(this).addClass('hover-highlight', 100);
+            $('.post-block.unique.post-block-text, .post-block.load-more').hoverIntent(function() {
+                $(this).addClass('hover', 100);
             }, function() {
-                $(this).removeClass('hover-highlight', 100);
+                $(this).removeClass('hover', 100);
             });
 
             SwdPresenter.resetFbCanvasSize();
