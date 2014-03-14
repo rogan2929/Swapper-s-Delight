@@ -85,7 +85,7 @@ var SwdModel = {
             }
         });
     },
-    getHiddenGroups: function(callbacks, uid) {
+    getHiddenGroups: function(uid, callbacks) {
         var url = '/php/hidden-groups.php?uid=' + uid;
 
         $.ajax({
@@ -207,28 +207,27 @@ var SwdModel = {
         });
     },
     /***
-     * Remove a group from the selected groups list.
+     * Remove a group from the selected groups list by saving it to the HiddenGroups DB table.
      * @param {type} gid
      */
-    removeGroup: function(gid, callbacks) {
-        // Save hidden group's ID to localStorage.
-        var hiddenGroups = window.localStorage.getItem('hiddenGroups');
+    hideGroup: function(uid, gid, callbacks) {
+        var url = '/php/hide-group.php?uid=' + uid + '&gid=' + gid;
 
-        if (hiddenGroups) {
-            hiddenGroups += ' ' + gid;
-        }
-        else {
-            hiddenGroups = gid;
-        }
-
-        window.localStorage.setItem('hiddenGroups', hiddenGroups)
-
-        callbacks.success.call(SwdModel);
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(response) {
+                callbacks.success.call(SwdModel, response);
+            },
+            error: function(response) {
+                callbacks.error.call(SwdModel, response);
+            }
+        });
     },
     /***
      * Restores all groups to the selected groups list.
      */
-    restoreAllGroups: function(callbacks, uid) {
+    restoreAllGroups: function(uid, callbacks) {
         var url = '/php/restore-groups.php?uid=' + uid;
 
         $.ajax({
@@ -374,7 +373,7 @@ var SwdPresenter = {
                     if (SwdPresenter.groups) {
                         //SwdPresenter.setSelectedGroup(selectedGroups[0]);
 
-                        SwdModel.getHiddenGroups({
+                        SwdModel.getHiddenGroups(SwdPresenter.uid, {
                             success: function(response) {
                                 SwdView.addGroupsToSelectPanel(SwdPresenter.groups, response);
 
@@ -414,7 +413,7 @@ var SwdPresenter = {
                                 }, 1000);
                             },
                             error: SwdPresenter.handleError
-                        }, SwdPresenter.uid);
+                        });
                     }
                     else {
                         // Have the view prompt the user to edit BST groups.
@@ -769,7 +768,7 @@ var SwdPresenter = {
         gid = $(groupTile).attr('id');
 
         // Remove the item from the back end.
-        SwdModel.removeGroup(gid, {
+        SwdModel.hideGroup(SwdPresenter.uid, gid, {
             success: function() {
                 // Remove the item from view.
                 SwdView.hideGroupFromSelectPanel(groupTile);
@@ -779,12 +778,12 @@ var SwdPresenter = {
     },
     onClickRestoreGroupSelectionItems: function(e, args) {
         // Restore all group selection items.
-        SwdModel.restoreAllGroups({
+        SwdModel.restoreAllGroups(SwdPresenter.uid, {
             success: function() {
                 SwdView.showAllGroupSelectionItems();
             },
             error: SwdPresenter.handleError
-        }, SwdPresenter.uid);
+        });
     },
     onClickToolbar: function(e, args) {
         e.stopPropagation();
