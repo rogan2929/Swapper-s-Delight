@@ -11,6 +11,8 @@ if (http_response_code() != 401) {
         $fbSession->api('/' . $postId . '/likes', 'POST', array('user_likes' => true));
     } else {
         $fbSession->api('/' . $postId . '/likes', 'DELETE');
+        echo 'Deleting...';
     }
+    
     echo $userLikes;
 }

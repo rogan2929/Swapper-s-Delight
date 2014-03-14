@@ -648,7 +648,6 @@ var SwdPresenter = {
             // Post the comment.
             SwdModel.likePost(id, userLikes, {
                 success: function(response) {
-                    alert(response);
                 },
                 error: SwdPresenter.handleError
             });
