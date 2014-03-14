@@ -576,7 +576,13 @@ var SwdPresenter = {
         // Prevent the event from bubbling up the DOM and closing the floating panel.
         e.stopPropagation();
 
-        SwdView.toggleFloatingPanel('#new-post-panel', true);
+        //SwdView.toggleFloatingPanel('#new-post-panel', true);
+        FB.ui({
+           method: 'feed',
+           to: SwdPresenter.selectedGroup.gid
+        }, function(response) {
+            alert(response);
+        });
     },
     onClickButtonRefresh: function(e, args) {
         SwdPresenter.loadPosts(false);
