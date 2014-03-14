@@ -58,6 +58,10 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
                 <div id='post-feed' class='scroll-y'>
                     <div id='post-feed-noposts' class='hidden'>No posts were found.</div>
                 </div>
+                
+                <div id='bottom-ad-banner'>
+                    Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+                </div>
 
                 <!--Post Details Panel-->
 

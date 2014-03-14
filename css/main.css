@@ -366,6 +366,17 @@ a:visited {
     overflow: hidden;
 }
 
+#bottom-ad-banner {
+    overflow: hidden;
+    width: 728px;
+    height: 90px;
+    display: block;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .float-left {
     float: left;
 }
