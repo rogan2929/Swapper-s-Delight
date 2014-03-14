@@ -809,7 +809,7 @@ var SwdView = {
         $('#select-group-no-groups').hide();
 
         for (i = 0; i < groups.length; i++) {
-            $('#select-group-list').append('<div id="' + groups[i].gid + '" class="button group-selection-item selection-item select-group"><div class="close-button"></div><div class="selection-item-content"><span class="button-icon" style="background-image: url(' + groups[i].icon + ')"></span><div>' + groups[i].name + '</div><span>' + groups[i].size + ' Members</span></div></div>');
+            $('#select-group-list').append('<div id="' + groups[i].gid + '" class="button group-selection-item selection-item select-group"><div class="close-button"></div><div class="selection-item-content"><span class="button-icon" style="background-image: url(' + groups[i].icon + ')"></span><div>' + groups[i].name + '</div></div></div>');
         }
 
         $('.selection-item').hover(function() {
