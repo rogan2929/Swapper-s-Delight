@@ -9,14 +9,11 @@ var PostType = {
     search: 3
 };
 
+// Prod AppId
 var AppId = '1401018793479333';
-var AppUrl = 'http://bit.ly/1kq93Xb';
-var AppUrlFull = 'https://apps.facebook.com/1401018793479333'
 
 // Test AppId
 //var AppId = '652991661414427';
-//var AppUrl = 'http://bit.ly/1aXsWl3';
-//var AppUrlFull = 'https://apps.facebook.com/652991661414427';
 
 // http://stackoverflow.com/questions/1102215/mvp-pattern-with-javascript-framework
 
