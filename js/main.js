@@ -1161,7 +1161,10 @@ var SwdView = {
             // merely the last batch.
             adSpread = Math.floor(posts.length / 3);
             
-            $('#post-feed .post-block.unique:nth-child(3)').css('height', '300px');
+            // Insert add tiles evenly
+            $('#ad-tile-1').insertAfter('#post-feed .post-block.unique:nth-child(' + adSpread + ')');
+            $('#ad-tile-2').insertAfter('#post-feed .post-block.unique:nth-child(' + 2 * adSpread + ')');
+            $('#ad-tile-3').insertAfter('#post-feed .post-block.unique:nth-child(' + 3 * adSpread + ')');
 
             // After a delay, show the hidden content for any moused over image post blocks.
             // Use the hoverIntent plugin.
