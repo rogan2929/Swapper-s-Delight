@@ -1161,12 +1161,13 @@ var SwdView = {
                 $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
             }
             
-            adSpread = Math.floor(SwdView.getPostBlockCount() / 3);
+            // Determine how far apart each ad-tile will be.
+            adSpread = Math.max(Math.floor(SwdView.getPostBlockCount() / 4), 5);
             
-            // Insert add tiles evenly
-            $('#ad-tile-1').insertAfter('#post-feed .post-block.unique:nth-child(' + adSpread + ')').show();
-            $('#ad-tile-2').insertAfter('#post-feed .post-block.unique:nth-child(' + 2 * adSpread + ')').show();
-            $('#ad-tile-3').insertAfter('#post-feed .post-block.unique:nth-child(' + 3 * adSpread + ')').show();
+            // Insert add tiles evenly throughout all the posts.
+            for (i = 1; i <= 4; i++) {
+                $('#ad-tile-' + i).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
+            }
 
             // After a delay, show the hidden content for any moused over image post blocks.
             // Use the hoverIntent plugin.
