@@ -1110,17 +1110,19 @@ var SwdView = {
      * @param {type} posts
      */
     populatePostBlocks: function(posts, postType) {
-        var i, post;
+        var i, post, adTileCount;
 
         SwdView.toggleAjaxLoadingDiv('body', false);
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', false);
+
+        adTileCount = 0;
 
         // If there is a feed to display, then display it.
         if (posts && posts.length > 0) {
             // Remove any existing 'Load more...' tiles.
             $('.post-block.load-more').remove();
             
-            $('.post-block.ad-div').show().appendTo('#post-feed');
+            //$('.post-block.ad-div').show().appendTo('#post-feed');
 
             for (i = 0; i < posts.length; i++) {
                 post = posts[i];
@@ -1140,10 +1142,16 @@ var SwdView = {
                         SwdView.createTextLinkPostBlock(post);
                         break;
                 }
+                
+                // Every tiles, place an ad-tile.
+                if (i % 8 === 0) {
+                    adTileCount++;
+                    $('#ad-tile-' + adTileCount).show().appendTo('#post-feed');
+                }
             }
 
             // Associate the click event handler for newly created posts.
-            $('.post-block').click(SwdView.handlers['onClickPostBlock']);
+            $('.post-block').not('.post-block.ad-div').click(SwdView.handlers['onClickPostBlock']);
 
             // Show the "Load More..." block if the group's main feed is being displayed.
             if (postType === PostType.group) {
