@@ -1161,7 +1161,7 @@ var SwdView = {
             // merely the last batch.
             adSpread = Math.floor(posts.length / 3);
             
-            $('.post-block.unique:nth-child(3)').css('background-image', 'none');
+            $('#post-feed .post-block.unique:nth-child(3)').css('height', '300px');
 
             // After a delay, show the hidden content for any moused over image post blocks.
             // Use the hoverIntent plugin.
