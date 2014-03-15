@@ -1144,7 +1144,7 @@ var SwdView = {
                 }
                 
                 // Every tiles, place an ad-tile.
-                if (i % 8 === 0) {
+                if (i % 10 === 0) {
                     adTileCount++;
                     $('#ad-tile-' + adTileCount).show().appendTo('#post-feed');
                 }
