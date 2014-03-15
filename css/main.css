@@ -615,7 +615,7 @@ a:visited {
 
 
 .post-block .visible-content {
-    background-size: 100%;
+    background-size: cover;
     height: 250px;
     width: 300px;
 }
