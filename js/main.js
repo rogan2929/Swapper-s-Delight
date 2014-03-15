@@ -906,7 +906,7 @@ var SwdView = {
     clearPosts: function() {
         $('#post-feed .post-block').not('.post-block.ad-div').remove();
         
-        $('.post-block.ad-div').hide();
+        $('.post-block.ad-div').fadeOut();
     },
     /***
      * Clear comment box.
@@ -1122,8 +1122,6 @@ var SwdView = {
         if (posts && posts.length > 0) {
             // Remove any existing 'Load more...' tiles.
             $('.post-block.load-more').remove();
-            
-            //$('.post-block.ad-div').show().appendTo('#post-feed');
 
             for (i = 0; i < posts.length; i++) {
                 post = posts[i];
