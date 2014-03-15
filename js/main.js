@@ -294,8 +294,7 @@ var SwdPresenter = {
                 SwdView.showMessage('Sorry, but your session has expired - automatically taking you back to the main page.');
 
                 // Send the user to the app's main url.
-                window.location = SwdPresenter.AppUrlFull;
-                window.location.reload();
+                window.location = window.location.href;
                 break;
             default:
                 SwdView.showError(error.responseText);
@@ -1163,6 +1162,9 @@ var SwdView = {
                 // Add an event handler for when it is clicked on.
                 $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
             }
+            
+            // TODO: Use .insertAfter() to evenly distribute ad-tiles throughout all posts, not
+            // merely the last batch.
 
             // After a delay, show the hidden content for any moused over image post blocks.
             // Use the hoverIntent plugin.
