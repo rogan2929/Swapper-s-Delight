@@ -1118,7 +1118,7 @@ var SwdView = {
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', false);
 
         adTileCount = 0;
-        adSpread = posts.length / 3;
+        adSpread = Math.floor(posts.length / 3);
 
         // If there is a feed to display, then display it.
         if (posts && posts.length > 0) {
