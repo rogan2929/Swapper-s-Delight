@@ -904,9 +904,8 @@ var SwdView = {
      * Clear all posts from the view.
      */
     clearPosts: function() {
+        $('.post-block.ad-div').hide();
         $('#post-feed .post-block').not('.post-block.ad-div').remove();
-        
-        $('.post-block.ad-div').fadeOut();
     },
     /***
      * Clear comment box.
