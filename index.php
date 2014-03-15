@@ -1,6 +1,12 @@
 <?php
 // IE header to allow third party cookies.
 header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
+
+// Force browser to keep page updated.
+header('Expires: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
+header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+header('Cache-Control: no-cache, must-revalidate');
+header('Pragma: no-cache');
 ?>
 
 <!DOCTYPE html>
