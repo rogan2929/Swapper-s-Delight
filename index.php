@@ -1,8 +1,6 @@
 <?php
-
 // IE header to allow third party cookies.
 header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
-
 ?>
 
 <!DOCTYPE html>
@@ -51,15 +49,15 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
                                                     <span>Search</span>
                                                 </div>-->
                     </div>
-<!--                    <div id='ad-space' class='ad-div'>
-                        Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
-                    </div>-->
+                    <!--                    <div id='ad-space' class='ad-div'>
+                                            Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+                                        </div>-->
                 </div>
                 <div id='post-feed' class='scroll-y'></div>
-                
-<!--                <div id='bottom-ad-banner' class='ad-div'>
-                    Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
-                </div>-->
+
+                <!--                <div id='bottom-ad-banner' class='ad-div'>
+                                    Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+                                </div>-->
 
                 <!--Post Details Panel-->
 
@@ -196,17 +194,29 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
         </div>
 
         <!--Ad Tiles that will be dynamically placed.-->
-        
+
         <div id='ad-tile-1' class='post-block ui-widget ad-div post-block-text'>
-            Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+            <div class='wrapper'>
+                <p class='content'>
+                    Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+                </p>
+            </div>
         </div>
         <div id='ad-tile-2' class='post-block ui-widget ad-div post-block-text'>
-            Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+            <div class='wrapper'>
+                <p class='content'>
+                    Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+                </p>
+            </div>
         </div>
         <div id='ad-tile-3' class='post-block ui-widget ad-div post-block-text'>
-            Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+            <div class='wrapper'>
+                <p class='content'>
+                    Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+                </p>
+            </div>
         </div>
-        
+
         <div id='overlay-app-loading' class='ajax-loading-div'></div>
         <div id='overlay' class='hidden'></div>
         <div id='post-block-mask' class='post-block ui-widget hidden'></div>
