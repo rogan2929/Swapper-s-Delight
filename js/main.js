@@ -910,6 +910,8 @@ var SwdView = {
      */
     clearPosts: function() {
         $('#post-feed .post-block').not('.post-block.ad-div').remove();
+        
+        $('.post-block.ad-div').hide();
     },
     /***
      * Clear comment box.
