@@ -53,7 +53,7 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
                 <div id='post-feed' class='scroll-y'>
                     <div id='post-feed-noposts' class='hidden'>No posts were found.</div>
                 </div>
-                
+
                 <div id='post-feed' class='scroll-y'></div>
 
                 <!--Post Details Panel-->
@@ -226,6 +226,38 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
 
         <!--LifeSiteMedia Ad Script-->
 
+        <script type="text/javascript">
+            //<![CDATA[
+            LSM_Slot({
+                adkey: '345',
+                ad_size: '300x250',
+                slot: 'slot93218',
+                _render_div_id: 'ad-tile-1'
+            });
+            //]]>
+        </script>
+
+        <script type="text/javascript">
+            //<![CDATA[
+            LSM_Slot({
+                adkey: '553',
+                ad_size: '300x250',
+                slot: 'slot93219',
+                _render_div_id: 'ad-tile-2'
+            });
+            //]]>
+        </script>
+
+        <script type="text/javascript">
+            //<![CDATA[
+            LSM_Slot({
+                adkey: 'd33',
+                ad_size: '300x250',
+                slot: 'slot93220',
+                _render_div_id: 'ad-tile-3'
+            });
+            //]]>
+        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
