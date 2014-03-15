@@ -906,7 +906,7 @@ var SwdView = {
     clearPosts: function() {
         $('#post-feed .post-block').not('.post-block.ad-div').remove();
         
-        $('.post-block.ad-div').hide();
+        $('.post-block.ad-div').fadeOut();
     },
     /***
      * Clear comment box.
@@ -946,8 +946,14 @@ var SwdView = {
     removePost: function(id) {
         $(id).fadeOut(function() {
             $(this).remove();
-            SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block.unique').length);
+            SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, SwdView.getPostBlockCount());
         });
+    },
+    /***
+     * Determine the number of visible tiles.
+     */
+    getPostBlockCount: function() {
+        return $('.post-block.unique').length;
     },
     /***
      * Remove a group from the group selection panel.
@@ -1107,20 +1113,15 @@ var SwdView = {
      * @param {type} posts
      */
     populatePostBlocks: function(posts, postType) {
-        var i, post, adTileCount, adSpread;
+        var i, post, adSpread;
 
         SwdView.toggleAjaxLoadingDiv('body', false);
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', false);
-
-        adTileCount = 0;
-        adSpread = Math.floor(posts.length / 3);
 
         // If there is a feed to display, then display it.
         if (posts && posts.length > 0) {
             // Remove any existing 'Load more...' tiles.
             $('.post-block.load-more').remove();
-            
-            //$('.post-block.ad-div').show().appendTo('#post-feed');
 
             for (i = 0; i < posts.length; i++) {
                 post = posts[i];
@@ -1142,10 +1143,10 @@ var SwdView = {
                 }
                 
                 // Every tiles, place an ad-tile.
-                if (i % adSpread === 0 && i > 0 && adTileCount < 3) {
-                    adTileCount++;
-                    $('#ad-tile-' + adTileCount).show().appendTo('#post-feed');
-                }
+//                if (i % adSpread === 0 && i > 0 && adTileCount < 3) {
+//                    adTileCount++;
+//                    $('#ad-tile-' + adTileCount).show().appendTo('#post-feed');
+//                }
             }
 
             // Associate the click event handler for newly created posts.
@@ -1160,8 +1161,12 @@ var SwdView = {
                 $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
             }
             
-            // TODO: Use .insertAfter() to evenly distribute ad-tiles throughout all posts, not
-            // merely the last batch.
+            adSpread = Math.floor(SwdView.getPostBlockCount() / 3);
+            
+            // Insert add tiles evenly
+            $('#ad-tile-1').insertAfter('#post-feed .post-block.unique:nth-child(' + adSpread + ')').show();
+            $('#ad-tile-2').insertAfter('#post-feed .post-block.unique:nth-child(' + 2 * adSpread + ')').show();
+            $('#ad-tile-3').insertAfter('#post-feed .post-block.unique:nth-child(' + 3 * adSpread + ')').show();
 
             // After a delay, show the hidden content for any moused over image post blocks.
             // Use the hoverIntent plugin.
@@ -1188,7 +1193,7 @@ var SwdView = {
         }
 
         // Display the official count.
-        SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block.unique').length);
+        SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, SwdView.getPostBlockCount());
 
         SwdPresenter.currentlyLoading = false;
     },
