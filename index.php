@@ -195,14 +195,16 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
 
         </div>
 
-        <div id='overlay-app-loading' class='ajax-loading-div'></div>
-        <div id='overlay' class='hidden'></div>
-        <div id='post-block-mask' class='post-block ui-widget hidden'></div>
-        <div id='selection-item-mask' class='button selection-item ui-widget hidden'></div>
+        <!--Ad Tiles that will be dynamically placed.-->
         
         <div id='ad-tile-1' class='post-block ui-widget ad-div'></div>
         <div id='ad-tile-2' class='post-block ui-widget ad-div'></div>
         <div id='ad-tile-3' class='post-block ui-widget ad-div'></div>
+        
+        <div id='overlay-app-loading' class='ajax-loading-div'></div>
+        <div id='overlay' class='hidden'></div>
+        <div id='post-block-mask' class='post-block ui-widget hidden'></div>
+        <div id='selection-item-mask' class='button selection-item ui-widget hidden'></div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
