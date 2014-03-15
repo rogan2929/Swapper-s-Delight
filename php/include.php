@@ -221,7 +221,7 @@ function getOptimalWindowSize($fbSession, $gid) {
             $windowSize = 3.5;
             break;
         case $count >= 80 && $count < 115:
-            $windowSize = 3;
+            $windowSize = 2.5;
             break;
         case $count >= 115 && $count < 150:
             $windowSize = 2.5;
