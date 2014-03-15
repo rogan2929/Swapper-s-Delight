@@ -56,9 +56,9 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
                     </div>-->
                 </div>
                 <div id='post-feed' class='scroll-y'>
-                    <div id='ad-tile-1' class='post-block ui-widget ad-div'></div>
-                    <div id='ad-tile-2' class='post-block ui-widget ad-div'></div>
-                    <div id='ad-tile-3' class='post-block ui-widget ad-div'></div>
+                    <div id='ad-tile-1' class='post-block ui-widget post-block-text ad-div'></div>
+                    <div id='ad-tile-2' class='post-block ui-widget post-block-text ad-div'></div>
+                    <div id='ad-tile-3' class='post-block ui-widget post-block-text ad-div'></div>
                 </div>
                 
 <!--                <div id='bottom-ad-banner' class='ad-div'>
