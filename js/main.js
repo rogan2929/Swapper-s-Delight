@@ -389,7 +389,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickPostButtonDelete', SwdPresenter.onClickPostButtonDelete, '#post-button-delete', 'click');
                                 SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
                                 SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
-                                SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block', 'click');
+                                SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block.ui-widget.unique', 'click');
                                 SwdView.installHandler('onClickPostBlockLoadMore', SwdPresenter.onClickPostBlockLoadMore, '.post-block.load-more', 'click');
                                 SwdView.installHandler('onClickPostImage', SwdPresenter.onClickPostImage, '#post-image', 'click');
                                 SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
@@ -888,6 +888,8 @@ var SwdView = {
         }, function() {
             $(this).removeClass('hover', 100);
         });
+        
+        $('.post-block.ad-div').hide();
     },
     /**
      * Installs an event handler and connects it to the presenter.
@@ -906,8 +908,9 @@ var SwdView = {
      * Clear all posts from the view.
      */
     clearPosts: function() {
-        //$('#post-feed .post-tile').remove();
-        $('#post-feed .post-block').remove();
+        $('#post-feed .post-block').not('.post-block.ad-div').remove();
+        
+        $('.post-block.ad-div').hide();
     },
     /***
      * Clear comment box.
@@ -1108,17 +1111,19 @@ var SwdView = {
      * @param {type} posts
      */
     populatePostBlocks: function(posts, postType) {
-        var i, post;
+        var i, post, adTileCount;
 
         SwdView.toggleAjaxLoadingDiv('body', false);
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', false);
 
+        adTileCount = 0;
+
         // If there is a feed to display, then display it.
         if (posts && posts.length > 0) {
-            $('#post-feed-noposts').hide();
-
             // Remove any existing 'Load more...' tiles.
             $('.post-block.load-more').remove();
+            
+            //$('.post-block.ad-div').show().appendTo('#post-feed');
 
             for (i = 0; i < posts.length; i++) {
                 post = posts[i];
@@ -1138,10 +1143,16 @@ var SwdView = {
                         SwdView.createTextLinkPostBlock(post);
                         break;
                 }
+                
+                // Every tiles, place an ad-tile.
+                if (i % 10 === 0 && i > 1 && i <= 6) {
+                    adTileCount++;
+                    $('#ad-tile-' + adTileCount).show().appendTo('#post-feed');
+                }
             }
 
             // Associate the click event handler for newly created posts.
-            $('.post-block').click(SwdView.handlers['onClickPostBlock']);
+            $('.post-block').not('.post-block.ad-div').click(SwdView.handlers['onClickPostBlock']);
 
             // Show the "Load More..." block if the group's main feed is being displayed.
             if (postType === PostType.group) {

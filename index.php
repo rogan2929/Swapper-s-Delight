@@ -48,24 +48,13 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
                         <div id='button-nav-liked' class='button nav-button'>
                             <span>Liked Posts</span>
                         </div>
-                        <!--                        <div id='button-nav-search' class='button nav-button'>
-                                                    <span>Search</span>
-                                                </div>-->
                     </div>
-
-                    <!--Ad Slot-->
-                    <div id='ad-space' class='ad-div'>
-                        Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
-                    </div>
-                    
                 </div>
                 <div id='post-feed' class='scroll-y'>
                     <div id='post-feed-noposts' class='hidden'>No posts were found.</div>
                 </div>
                 
-                <div id='bottom-ad-banner' class='ad-div'>
-                    Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
-                </div>
+                <div id='post-feed' class='scroll-y'></div>
 
                 <!--Post Details Panel-->
 
@@ -201,6 +190,30 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
 
         </div>
 
+        <!--Ad Tiles that will be dynamically placed.-->
+
+        <div id='ad-tile-1' class='post-block ui-widget ad-div post-block-text'>
+            <div class='wrapper'>
+                <p class='content'>
+                    Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+                </p>
+            </div>
+        </div>
+        <div id='ad-tile-2' class='post-block ui-widget ad-div post-block-text'>
+            <div class='wrapper'>
+                <p class='content'>
+                    Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+                </p>
+            </div>
+        </div>
+        <div id='ad-tile-3' class='post-block ui-widget ad-div post-block-text'>
+            <div class='wrapper'>
+                <p class='content'>
+                    Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+                </p>
+            </div>
+        </div>
+
         <div id='overlay-app-loading' class='ajax-loading-div'></div>
         <div id='overlay' class='hidden'></div>
         <div id='post-block-mask' class='post-block ui-widget hidden'></div>
@@ -213,27 +226,6 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
 
         <!--LifeSiteMedia Ad Script-->
 
-        <script type="text/javascript">
-            //<![CDATA[
-            LSM_Slot({
-                adkey: '814',
-                ad_size: '160x600',
-                slot: 'slot92146',
-                _render_div_id: 'ad-space'
-            });
-            //]]>
-        </script>
-
-        <script type="text/javascript">
-            //<![CDATA[
-            LSM_Slot({
-                adkey: '27f',
-                ad_size: '728x90',
-                slot: 'slot93186',
-                _render_div_id: 'bottom-ad-banner'
-            });
-            //]]>
-        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
