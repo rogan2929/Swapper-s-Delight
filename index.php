@@ -50,10 +50,6 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
                         </div>
                     </div>
                 </div>
-                <div id='post-feed' class='scroll-y'>
-                    <div id='post-feed-noposts' class='hidden'>No posts were found.</div>
-                </div>
-
                 <div id='post-feed' class='scroll-y'></div>
 
                 <!--Post Details Panel-->
