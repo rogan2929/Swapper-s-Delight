@@ -1112,12 +1112,13 @@ var SwdView = {
      * @param {type} posts
      */
     populatePostBlocks: function(posts, postType) {
-        var i, post, adTileCount;
+        var i, post, adTileCount, adSpread;
 
         SwdView.toggleAjaxLoadingDiv('body', false);
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', false);
 
         adTileCount = 0;
+        adSpread = posts.length / 3;
 
         // If there is a feed to display, then display it.
         if (posts && posts.length > 0) {
@@ -1146,7 +1147,7 @@ var SwdView = {
                 }
                 
                 // Every tiles, place an ad-tile.
-                if (i % 10 === 0 && adTileCount < 3) {
+                if (i % adSpread === 0 && i > 0 && adTileCount < 3) {
                     adTileCount++;
                     $('#ad-tile-' + adTileCount).show().appendTo('#post-feed');
                 }
