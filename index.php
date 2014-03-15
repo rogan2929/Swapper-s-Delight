@@ -268,6 +268,17 @@ header('Pragma: no-cache');
             //]]>
         </script>
 
+        <script type="text/javascript">
+            //<![CDATA[
+            LSM_Slot({
+                adkey: '2e5',
+                ad_size: '300x250',
+                slot: 'slot93255',
+                _render_div_id: 'ad-tile-4'
+            });
+            //]]>
+        </script>
+
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
             (function(b, o, i, l, e, r) {
