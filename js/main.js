@@ -946,8 +946,14 @@ var SwdView = {
     removePost: function(id) {
         $(id).fadeOut(function() {
             $(this).remove();
-            SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block.unique').length);
+            SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, SwdView.getPostBlockCount());
         });
+    },
+    /***
+     * Determine the number of visible tiles.
+     */
+    getPostBlockCount: function() {
+        return $('.post-block.unique').length;
     },
     /***
      * Remove a group from the group selection panel.
@@ -1157,9 +1163,7 @@ var SwdView = {
                 $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
             }
             
-            // TODO: Use .insertAfter() to evenly distribute ad-tiles throughout all posts, not
-            // merely the last batch.
-            adSpread = Math.floor(posts.length / 3);
+            adSpread = Math.floor(SwdView.getPostBlockCount() / 3);
             
             // Insert add tiles evenly
             $('#ad-tile-1').insertAfter('#post-feed .post-block.unique:nth-child(' + adSpread + ')').show();
@@ -1191,7 +1195,7 @@ var SwdView = {
         }
 
         // Display the official count.
-        SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block.unique').length);
+        SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, SwdView.getPostBlockCount());
 
         SwdPresenter.currentlyLoading = false;
     },
