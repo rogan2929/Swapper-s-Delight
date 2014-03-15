@@ -390,7 +390,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickPostButtonDelete', SwdPresenter.onClickPostButtonDelete, '#post-button-delete', 'click');
                                 SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
                                 SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
-                                SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block.unique', 'click');
+                                SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block.ui-widget.unique', 'click');
                                 SwdView.installHandler('onClickPostBlockLoadMore', SwdPresenter.onClickPostBlockLoadMore, '.post-block.load-more', 'click');
                                 SwdView.installHandler('onClickPostImage', SwdPresenter.onClickPostImage, '#post-image', 'click');
                                 SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
