@@ -889,6 +889,8 @@ var SwdView = {
         }, function() {
             $(this).removeClass('hover', 100);
         });
+        
+        $('.post-block.ad-div').appendTo('#post-feed');
     },
     /**
      * Installs an event handler and connects it to the presenter.

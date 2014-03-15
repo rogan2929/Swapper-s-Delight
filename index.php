@@ -55,11 +55,7 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
                         Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
                     </div>-->
                 </div>
-                <div id='post-feed' class='scroll-y'>
-                    <div id='ad-tile-1' class='post-block ui-widget ad-div'></div>
-                    <div id='ad-tile-2' class='post-block ui-widget ad-div'></div>
-                    <div id='ad-tile-3' class='post-block ui-widget ad-div'></div>
-                </div>
+                <div id='post-feed' class='scroll-y'></div>
                 
 <!--                <div id='bottom-ad-banner' class='ad-div'>
                     Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
@@ -203,6 +199,10 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
         <div id='overlay' class='hidden'></div>
         <div id='post-block-mask' class='post-block ui-widget hidden'></div>
         <div id='selection-item-mask' class='button selection-item ui-widget hidden'></div>
+        
+        <div id='ad-tile-1' class='post-block ui-widget ad-div'></div>
+        <div id='ad-tile-2' class='post-block ui-widget ad-div'></div>
+        <div id='ad-tile-3' class='post-block ui-widget ad-div'></div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
