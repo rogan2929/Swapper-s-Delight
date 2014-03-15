@@ -197,9 +197,15 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
 
         <!--Ad Tiles that will be dynamically placed.-->
         
-        <div id='ad-tile-1' class='post-block ui-widget ad-div'></div>
-        <div id='ad-tile-2' class='post-block ui-widget ad-div'></div>
-        <div id='ad-tile-3' class='post-block ui-widget ad-div'></div>
+        <div id='ad-tile-1' class='post-block ui-widget ad-div'>
+            Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+        </div>
+        <div id='ad-tile-2' class='post-block ui-widget ad-div'>
+            Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+        </div>
+        <div id='ad-tile-3' class='post-block ui-widget ad-div'>
+            Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+        </div>
         
         <div id='overlay-app-loading' class='ajax-loading-div'></div>
         <div id='overlay' class='hidden'></div>
