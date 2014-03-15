@@ -907,8 +907,10 @@ var SwdView = {
      * Clear all posts from the view.
      */
     clearPosts: function() {
-        //$('#post-feed .post-tile').remove();
-        $('#post-feed .post-block').remove();
+        $('#post-feed .post-block').not('.post-block.ad-div').remove();
+        
+        // Hide the ad tiles.
+        $('.post-block.ad-div').hide();
     },
     /***
      * Clear comment box.
@@ -1116,10 +1118,10 @@ var SwdView = {
 
         // If there is a feed to display, then display it.
         if (posts && posts.length > 0) {
-            $('#post-feed-noposts').hide();
-
             // Remove any existing 'Load more...' tiles.
             $('.post-block.load-more').remove();
+            
+            $('.post-block.ad-div').show();
 
             for (i = 0; i < posts.length; i++) {
                 post = posts[i];
