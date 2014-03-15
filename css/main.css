@@ -955,8 +955,7 @@ div.right-toolbar-button {
 #left-rail {
     width: 160px;
     position: absolute;
-    padding-top: 11px;
-    top: 43px;
+    top: 55px;
     border-radius: 0;
     overflow: hidden;
 }
