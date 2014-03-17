@@ -821,7 +821,7 @@ a.link-title {
 #post-image-container > .post-image-tile {
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     cursor: pointer;
     display: inline-block;
     margin: 3px;
