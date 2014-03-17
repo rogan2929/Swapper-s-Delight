@@ -830,7 +830,7 @@ a.link-title {
     margin-right: 6px;
 }
 
-.post-image-tile.right {
+#post-image-container > .post-image-tile.right {
     margin-right: 0px;
 }
 

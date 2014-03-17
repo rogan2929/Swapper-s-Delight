@@ -1093,7 +1093,7 @@ var SwdView = {
             
             $(imageTile).height(tileHeight).width(tileWidth).css('background-image', imageUrl).appendTo('#post-image-container');
             
-            if (i % colCount === 0) {
+            if (i % colCount === 0 && i > 0) {
                 $(imageTile).addClass('right');
             }
         }
