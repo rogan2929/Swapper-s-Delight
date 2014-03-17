@@ -1071,7 +1071,7 @@ var SwdView = {
     fillPostImageContainer: function(post) {
         var i, imageTile, imageUrl, tileSize;
         
-        tileSize = math.min(($('#post-image-container').width() - 16) / post.image_url.length, 350); // 16 = 4 * 4px margin width
+        tileSize = Math.min(($('#post-image-container').width() - 16) / post.image_url.length, 350); // 16 = 4 * 4px margin width
         
         // Create at tile for each image.
         for (i = 0; i < post.image_url.length; i++) {
