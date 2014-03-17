@@ -292,13 +292,13 @@ function executeBatchQuery($fbSession, $gid, $constraints) {
             'include_headers' => false
         ));
      
-        if ($i == 0) {
+        if ($i == 1) {
             echo json_encode($response) . "<br/>";
         }
 
         // Sift through the results.
         for ($k = 0; $k < count($response); $k++) {
-            $result = json_decode($response[$j]['body'], true);
+            $result = json_decode($response[$k]['body'], true);
             $posts = array_merge($posts, processStreamQuery($result[0]['fql_result_set'], $result[1]['fql_result_set'], $result[2]['fql_result_set']));
         }
     }
