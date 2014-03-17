@@ -239,14 +239,15 @@ function getOptimalWindowData($fbSession, $gid) {
             $batchCount = 4;
             break;
     }
+    
+    echo $windowSize . "<br/>";
+    echo $batchCount . "<br/>";
 
     return array('windowSize' => 3600 * $windowSize, 'batchCount' => $batchCount);
 }
 
 function executeBatchQuery($fbSession, $gid, $constraints) {
     $windowData = getOptimalWindowData($fbSession, $gid);
-    
-    echo json_encode($windowData);
 
     $windowSize = $windowData['windowSize'];
     $windowStart = time();
