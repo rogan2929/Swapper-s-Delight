@@ -819,20 +819,18 @@ a.link-title {
     max-height: 375px;
 }
 
-#post-image-container > .post-image-tile {
+#post-image-container .post-image-tile {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
     cursor: pointer;
     display: inline-block;
-    margin: 3px;
     min-width: 183px;
     min-height: 183px;
-    background-color: #ccc;
 }
 
-#post-image-container > .post-image-tile.hover {
-    background-color: #aaa;
+#post-image-container .post-image-tile.hover {
+    background-color: #f6f6f6;
 }
 
 .floating-panel-content .column {
