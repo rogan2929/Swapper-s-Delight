@@ -31,7 +31,7 @@ function buildStreamQuery($gid, $constraints, $limit = 20) {
 
 function streamQuery($fbSession, $gid, $constraints, $limit = 20) {
     $queries = buildStreamQuery($gid, $constraints, $limit);
-    
+
     $response = $fbSession->api(array(
         'method' => 'fql.multiquery',
         'queries' => $queries
@@ -116,18 +116,19 @@ function getLinkData($post) {
     return $linkData;
 }
 
-/***
+/* * *
  * Function to parse FQL user data.
  */
+
 function getUserData($post, $users) {
     $user = array();
-    
+
     for ($i = 0; $i < count($users); $i++) {
         if ($post['actor_id'] == $users[$i]['uid']) {
             $user = $users[$i];
         }
     }
-    
+
     return $user;
 }
 
@@ -202,7 +203,7 @@ function getSmallImageUrl($image) {
 /**
  * Determine the optimal window size to use in batch queries.
  */
-function getOptimalWindowSize($fbSession, $gid) {
+function getOptimalWindowData($fbSession, $gid) {
     $startTime = time();
     $endTime = time() - 3600;
 
@@ -212,81 +213,92 @@ function getOptimalWindowSize($fbSession, $gid) {
         'method' => 'fql.query',
         'query' => $query
     ));
-    
+
     $count = count($response);
-    
+
     // These values were reached through trial and error.
     switch ($count) {
         case $count < 85:
             $windowSize = 3.5;
+            $batchCount = 2;
             break;
         case $count >= 85 && $count < 115:
             $windowSize = 3.0;
+            $batchCount = 2;
             break;
         case $count >= 115 && $count < 150:
             $windowSize = 2.5;
+            $batchCount = 3;
             break;
         case $count >= 150 && $count < 225:
             $windowSize = 2;
+            $batchCount = 3;
             break;
         default:
             $windowSize = 1;
+            $batchCount = 4;
             break;
     }
 
-    return 3600 * $windowSize;
+    return array('windowSize' => 3600 * $windowSize, 'batchCount' => $batchCount);
 }
 
 function executeBatchQuery($fbSession, $gid, $constraints) {
-    $windowSize = getOptimalWindowSize($fbSession, $gid);
+    $windowData = getOptimalWindowData($fbSession, $gid);
+
+    $windowSize = $windowData['windowSize'];
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
 
     $batchSize = 5000;
     $batchRunCount = 50;
-    
-    $queries = array();
-    
-    // Construct the FB batch request
-    for ($i = 0; $i < $batchRunCount; $i++) {
-        $queryContraints = $constraints;
-        
-        // Add start and end constraints.
-        // Start Window Constraint
-        $queryContraints[] = array(
-            'field' => 'updated_time',
-            'operator' => '<=',
-            'value' => $windowStart
-        );
-
-        // End Window constraint
-        $queryContraints[] = array(
-            'field' => 'updated_time',
-            'operator' => '>=',
-            'value' => $windowEnd
-        );
-
-        $queries[] = array(
-            'method' => 'POST',
-            'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $queryContraints, $batchSize))
-        );
-
-        $windowStart -= $windowSize;
-        $windowEnd -= $windowSize;
-    }
-
-    // Call the batch query.
-    $response = $fbSession->api('/', 'POST', array(
-        'batch' => json_encode($queries),
-        'include_headers' => false
-    ));
 
     $posts = array();
 
-    // Sift through the results.
-    for ($i = 0; $i < count($response); $i++) {
-        $result = json_decode($response[$i]['body'], true);
-        $posts = array_merge($posts, processStreamQuery($result[0]['fql_result_set'], $result[1]['fql_result_set'], $result[2]['fql_result_set']));
+    for ($i = 0; $i < $windowData['batchCount']; $i++) {
+        $queries = array();
+
+        // Construct the FB batch request
+        for ($i = 0; $i < $batchRunCount; $i++) {
+            $queryContraints = $constraints;
+
+            // Add start and end constraints.
+            // Start Window Constraint
+            $queryContraints[] = array(
+                'field' => 'updated_time',
+                'operator' => '<=',
+                'value' => $windowStart
+            );
+
+            // End Window constraint
+            $queryContraints[] = array(
+                'field' => 'updated_time',
+                'operator' => '>=',
+                'value' => $windowEnd
+            );
+
+            $queries[] = array(
+                'method' => 'POST',
+                'relative_url' => 'method/fql.multiquery?queries=' . json_encode(buildStreamQuery($gid, $queryContraints, $batchSize))
+            );
+
+            $windowStart -= $windowSize;
+            $windowEnd -= $windowSize;
+        }
+
+        // Call the batch query.
+        $response = $fbSession->api('/', 'POST', array(
+            'batch' => json_encode($queries),
+            'include_headers' => false
+        ));
+        
+        echo json_encode($response) . "<br/>";
+
+        // Sift through the results.
+        for ($i = 0; $i < count($response); $i++) {
+            $result = json_decode($response[$i]['body'], true);
+            $posts = array_merge($posts, processStreamQuery($result[0]['fql_result_set'], $result[1]['fql_result_set'], $result[2]['fql_result_set']));
+        }
     }
 
     return $posts;
