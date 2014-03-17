@@ -1049,22 +1049,13 @@ var SwdView = {
      * @param {type} image
      */
     toggleSelectedImage: function(image) {
-        var height, width;
-        
         if (!$(image).hasClass('expanded')) {
-            height = $(image).height();
-            width = $(image).width();
-            
             $('#post-image-container').addClass('max-height');
-            //$(image).addClass('expanded').css('height', 'auto').css('width', 'auto').data('height', height).data('width', width);
-            $(image).addClass('expanded', 400).data('height', height).data('width', width);
+            $(image).addClass('expanded');
         }
         else {
-            height = $(image).data('height');
-            width = $(image).data('width');
-            
             $('#post-image-container').removeClass('max-height');
-            $(image).removeClass('expanded').css('height', height + 'px').css('width', width + 'px');
+            $(image).removeClass('expanded');
         }
     },
     /***
