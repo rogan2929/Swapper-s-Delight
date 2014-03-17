@@ -1069,11 +1069,17 @@ var SwdView = {
      * @param {type} post
      */
     fillPostImageContainer: function(post) {
-        var containerWidth;
+        var containerWidth, i, imageTile, imageUrl;
         
         containerWidth = $('#post-image-container').width() - 16; // 16 = 4 * 4px margin width
         
-        alert(post.image_url.length);
+        // Create at tile for each image.
+        for (i = 0; i < post.image_url.length; i++) {
+            imageUrl = post.image_url[i];
+            imageTile = $('<div class="post-image-tile"></div>');
+            
+            $(imageTile).css('background-image', imageUrl).appendTo('#post-image-container');
+        }
     },
     /***
      * Create and display a link type post block.
