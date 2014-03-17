@@ -11,13 +11,9 @@ var PostType = {
 
 // Prod AppId
 //var AppId = '1401018793479333';
-//var AppUrl = 'http://bit.ly/1kq93Xb';
-//var AppUrlFull = 'https://apps.facebook.com/1401018793479333'
 
 // Test AppId
 var AppId = '652991661414427';
-var AppUrl = 'http://bit.ly/1aXsWl3';
-var AppUrlFull = 'https://apps.facebook.com/652991661414427';
 
 // http://stackoverflow.com/questions/1102215/mvp-pattern-with-javascript-framework
 
@@ -295,8 +291,7 @@ var SwdPresenter = {
                 SwdView.showMessage('Sorry, but your session has expired - automatically taking you back to the main page.');
 
                 // Send the user to the app's main url.
-                window.location = SwdPresenter.AppUrlFull;
-                window.location.reload();
+                window.location = window.location.href;
                 break;
             default:
                 SwdView.showError(error.responseText);
@@ -909,9 +904,8 @@ var SwdView = {
      * Clear all posts from the view.
      */
     clearPosts: function() {
-        $('#post-feed .post-block').not('.post-block.ad-div').remove();
-        
         $('.post-block.ad-div').hide();
+        $('#post-feed .post-block').not('.post-block.ad-div').remove();
     },
     /***
      * Clear comment box.
@@ -951,8 +945,14 @@ var SwdView = {
     removePost: function(id) {
         $(id).fadeOut(function() {
             $(this).remove();
-            SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block.unique').length);
+            SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, SwdView.getPostBlockCount());
         });
+    },
+    /***
+     * Determine the number of visible tiles.
+     */
+    getPostBlockCount: function() {
+        return $('.post-block.unique').length;
     },
     /***
      * Remove a group from the group selection panel.
@@ -973,7 +973,7 @@ var SwdView = {
      */
     setFixedDivs: function(offset) {
         $('#left-rail').animate({
-            top: Math.max(offset + 43, 0)
+            top: Math.max(offset + 55, 0)
         }, 100);
 
         $('.toolbar').animate({
@@ -1112,19 +1112,15 @@ var SwdView = {
      * @param {type} posts
      */
     populatePostBlocks: function(posts, postType) {
-        var i, post, adTileCount;
+        var i, post, adSpread;
 
         SwdView.toggleAjaxLoadingDiv('body', false);
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', false);
-
-        adTileCount = 0;
 
         // If there is a feed to display, then display it.
         if (posts && posts.length > 0) {
             // Remove any existing 'Load more...' tiles.
             $('.post-block.load-more').remove();
-            
-            //$('.post-block.ad-div').show().appendTo('#post-feed');
 
             for (i = 0; i < posts.length; i++) {
                 post = posts[i];
@@ -1146,10 +1142,10 @@ var SwdView = {
                 }
                 
                 // Every tiles, place an ad-tile.
-                if (i % 10 === 0 && i > 1 && i <= 6) {
-                    adTileCount++;
-                    $('#ad-tile-' + adTileCount).show().appendTo('#post-feed');
-                }
+//                if (i % adSpread === 0 && i > 0 && adTileCount < 3) {
+//                    adTileCount++;
+//                    $('#ad-tile-' + adTileCount).show().appendTo('#post-feed');
+//                }
             }
 
             // Associate the click event handler for newly created posts.
@@ -1163,16 +1159,23 @@ var SwdView = {
                 // Add an event handler for when it is clicked on.
                 $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
             }
+            
+            // Determine how far apart each ad-tile will be.
+            adSpread = Math.max(Math.floor(SwdView.getPostBlockCount() / 4), 5);
+            
+            // Insert add tiles evenly throughout all the posts.
+            for (i = 1; i <= 4; i++) {
+                $('#ad-tile-' + i).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
+            }
 
             // After a delay, show the hidden content for any moused over image post blocks.
             // Use the hoverIntent plugin.
-            //$('.visible-content').not('.post-block-text .visible-content').not('.hidden-content').hoverIntent(function() {
             $('.post-block').not('.post-block.post-block-text').hoverIntent({
                 over: function() {
-                    $(this).children('.visible-content').slideUp(300);
+                    $(this).children('.visible-content').hide('blind', 300);
                 },
                 out: function() {
-                    $(this).children('.visible-content').slideDown(300);
+                    $(this).children('.visible-content').show('blind', 300);
                 },
                 timeout: 400
             });
@@ -1190,7 +1193,7 @@ var SwdView = {
         }
 
         // Display the official count.
-        SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, $('.post-block.unique').length);
+        SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, SwdView.getPostBlockCount());
 
         SwdPresenter.currentlyLoading = false;
     },
