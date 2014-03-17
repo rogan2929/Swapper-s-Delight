@@ -270,6 +270,7 @@ a:visited {
     bottom: 0;
     padding: 10px;*/
     border-right: 2px solid #f6f6f6;
+    width: 550px;
 }
 
 #details-right-column {
@@ -815,8 +816,7 @@ a.link-title {
 }
 
 #post-image-container {
-    width: 618px;
-    max-height: 618px;
+    max-height: 538px;
 }
 
 #post-image-container > .post-image-tile {
