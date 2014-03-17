@@ -1071,7 +1071,7 @@ var SwdView = {
     fillPostImageContainer: function(post) {
         var containerWidth;
         
-        containerWidth = $('#post-container-width').innerWidth();
+        containerWidth = $('#post-image-container').width();
         
         alert(containerWidth);
     },
