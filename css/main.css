@@ -814,11 +814,14 @@ a.link-title {
     margin-bottom: 10px;
 }
 
-#post-image {
+#post-image-container {
+    height: 350px;
+}
+
+#post-image-container > .post-image-tile {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
-    height: 350px;
     cursor: pointer;
 }
 

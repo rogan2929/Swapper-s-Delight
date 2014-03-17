@@ -392,7 +392,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
                                 SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block.ui-widget.unique', 'click');
                                 SwdView.installHandler('onClickPostBlockLoadMore', SwdPresenter.onClickPostBlockLoadMore, '.post-block.load-more', 'click');
-                                SwdView.installHandler('onClickPostImage', SwdPresenter.onClickPostImage, '#post-image', 'click');
+                                SwdView.installHandler('onClickPostImageTile', SwdPresenter.onClickPostImageTile, '.post-image-tile', 'click');
                                 SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
                                 SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .close-button', 'click');
                                 SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
@@ -737,7 +737,7 @@ var SwdPresenter = {
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', true);
         SwdPresenter.loadPosts(true);
     },
-    onClickPostImage: function(e, args) {
+    onClickPostImageTile: function(e, args) {
         SwdView.showImageViewer(SwdPresenter.selectedPost);
     },
     onClickSelectGroup: function(e, args) {
@@ -1292,13 +1292,15 @@ var SwdView = {
             postImage = 'url("' + post.image_url[0] + '")';
 
             // Hide the no-image container and display the post's attached image.
-            $('#post-image').show();
+            $('#post-image-container').empty().show();
             $('#post-no-image-desc').hide();
-            $('#post-image').css('background-image', postImage);
+            
+            // File the image container with post-image-tiles.
+            //$('#post-image').css('background-image', postImage);
         }
         else {
             // Hide the image container.
-            $('#post-image').hide();
+            $('#post-image-container').hide();
             $('#post-no-image-desc').show();
         }
 

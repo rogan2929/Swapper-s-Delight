@@ -7,3 +7,4 @@ Implement Delete Post functionality for owned posts.
 Fix bug where posts are improperly counted when more posts are loaded.
 Find ad provider and place their ads.
 Fix unlike post. (Issue "DELETE" to /OBJECT_ID/likes.)
+Show or hide groups that the user chooses. Can either be saved locally (per computer) or in the DB.

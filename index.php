@@ -73,7 +73,8 @@ header('Pragma: no-cache');
                                     <a target='_blank' class='post-permalink float-right wrappable-link'>Permalink</a>
                                 </div>
                             </div>
-                            <div id='post-image' class='floating-panel-section'></div>
+                            <div id='post-image-container' class='floating-panel-section'></div>
+<!--                            <div id='post-image' class='floating-panel-section'></div>-->
                             <div id='post-message' class='floating-panel-section'>
                                 <div id='post-message-text'></div>
                             </div>
