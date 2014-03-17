@@ -1069,16 +1069,16 @@ var SwdView = {
      * @param {type} post
      */
     fillPostImageContainer: function(post) {
-        var containerWidth, i, imageTile, imageUrl;
+        var i, imageTile, imageUrl, tileSize;
         
-        containerWidth = $('#post-image-container').width() - 16; // 16 = 4 * 4px margin width
+        tileSize = ($('#post-image-container').width() - 16) / post.image_url.length; // 16 = 4 * 4px margin width
         
         // Create at tile for each image.
         for (i = 0; i < post.image_url.length; i++) {
             imageUrl = post.image_url[i];
             imageTile = $('<div class="post-image-tile"></div>');
             
-            $(imageTile).css('background-image', imageUrl).appendTo('#post-image-container');
+            $(imageTile).height(tileSize).width(tileSize).css('background-image', imageUrl).appendTo('#post-image-container');
         }
     },
     /***
