@@ -1079,6 +1079,8 @@ var SwdView = {
             imageTile = $('<div class="post-image-tile"></div>');
             
             $(imageTile).height(tileHeight).width(tileWidth).css('background-image', imageUrl).appendTo('#post-image-container');
+            
+            alert($(imageTile).right());
         }
         
         // Set up mouse over effects.

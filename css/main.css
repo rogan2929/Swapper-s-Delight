@@ -822,12 +822,16 @@ a.link-title {
 #post-image-container > .post-image-tile {
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     cursor: pointer;
     display: inline-block;
-    min-width: 177px;
-    min-height: 177px;
-    margin: 3px;
+    min-width: 185px;
+    min-height: 185px;
+    margin-right: 6px;
+}
+
+.post-image-tile.right {
+    margin-right: 0px;
 }
 
 #post-image-container  > .post-image-tile.hover {
