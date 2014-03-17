@@ -1075,7 +1075,7 @@ var SwdView = {
         
         // Create at tile for each image.
         for (i = 0; i < post.image_url.length; i++) {
-            imageUrl = post.image_url[i];
+            imageUrl = 'url(' + post.image_url[i] + ')';
             imageTile = $('<div class="post-image-tile"></div>');
             
             $(imageTile).height(tileSize).width(tileSize).css('background-image', imageUrl).appendTo('#post-image-container');
