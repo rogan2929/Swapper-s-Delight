@@ -259,7 +259,7 @@ function executeBatchQuery($fbSession, $gid, $constraints) {
         $queries = array();
 
         // Construct the FB batch request
-        for ($i = 0; $i < $batchRunCount; $i++) {
+        for ($j = 0; $j < $batchRunCount; $j++) {
             $queryContraints = $constraints;
 
             // Add start and end constraints.
@@ -297,7 +297,7 @@ function executeBatchQuery($fbSession, $gid, $constraints) {
         }
 
         // Sift through the results.
-        for ($j = 0; $j < count($response); $j++) {
+        for ($k = 0; $k < count($response); $k++) {
             $result = json_decode($response[$j]['body'], true);
             $posts = array_merge($posts, processStreamQuery($result[0]['fql_result_set'], $result[1]['fql_result_set'], $result[2]['fql_result_set']));
         }
