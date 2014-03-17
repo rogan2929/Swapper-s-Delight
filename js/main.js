@@ -1049,7 +1049,8 @@ var SwdView = {
      * @param {type} image
      */
     expandSelectedImage: function(image) {
-        $(image).addClass('expanded');
+        $('#post-image-container').height(375);
+        $(image).addClass('expanded').css('height', 'auto').css('width', 'auto');
     },
     /***
      * Create and display a text type post block.
