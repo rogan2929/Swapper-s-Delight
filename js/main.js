@@ -735,7 +735,7 @@ var SwdPresenter = {
         SwdPresenter.loadPosts(true);
     },
     onClickPostImageTile: function(e, args) {
-        SwdView.showImageViewer(SwdPresenter.selectedPost);
+        SwdView.expandSelectedImage($(e.currentTarget))
     },
     onClickSelectGroup: function(e, args) {
         var i, id, group;
@@ -1045,6 +1045,13 @@ var SwdView = {
         $(postBlock).appendTo('#post-feed');
     },
     /***
+     * Expands a selected post details image to fill its entire parent container.
+     * @param {type} image
+     */
+    expandSelectedImage: function(image) {
+        $(image).addClass('expanded');
+    },
+    /***
      * Create and display a text type post block.
      * @param {type} post
      */
@@ -1274,13 +1281,6 @@ var SwdView = {
      */
     showConfirmation: function(message) {
         return confirm(message);
-    },
-    /***
-     * Shows an image viewer for the given post, allowing the user to see photos in greater detail.
-     * @param {type} post
-     */
-    showImageViewer: function(post) {
-        alert(post.post_id);
     },
     /***
      * Displays an error message to the user.

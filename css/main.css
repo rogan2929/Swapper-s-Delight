@@ -817,6 +817,17 @@ a.link-title {
 
 #post-image-container {
     max-height: 375px;
+    position: relative;
+}
+
+#post-image-container > .post-image-tile.expanded {
+    background-size: 100%;
+    margin-right: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
 }
 
 #post-image-container > .post-image-tile {
