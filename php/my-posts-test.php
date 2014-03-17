@@ -25,7 +25,7 @@ $response = $fbSession->api(array(
 
 echo count($response) . "<br/>";
 
-echo json_encode(getOptimalWindowSize($fbSession, $gid));
+echo json_encode(getOptimalWindowData($fbSession, $gid));
 
 $constraints = array();
 
