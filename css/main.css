@@ -263,22 +263,22 @@ a:visited {
 }
 
 .floating-panel-content > #details-left-column {
-    left: 0;
+/*    left: 0;
     right: 320px;
     position: absolute;
     top: 25px;
     bottom: 0;
-    padding: 10px;
+    padding: 10px;*/
     border-right: 2px solid #f6f6f6;
 }
 
 .floating-panel-content > #details-right-column {
     width: 300px;
-    right: 0;
+/*    right: 0;
     position: absolute;
     top: 25px;
     bottom: 0;
-    padding: 10px;
+    padding: 10px;*/
 }
 
 .ajax-loading-div {
@@ -828,6 +828,17 @@ a.link-title {
     margin: 3px;
     min-width: 300px;
     min-height: 300px;
+}
+
+.floating-panel-content .column {
+    position: absolute;
+    top: 25px;
+    bottom: 0;
+    padding: 10px;
+}
+
+.floating-panel-content .column > * {
+    margin-bottom: 10px;
 }
 
 #overlay-app-loading {
