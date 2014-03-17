@@ -291,8 +291,10 @@ function executeBatchQuery($fbSession, $gid, $constraints) {
             'batch' => json_encode($queries),
             'include_headers' => false
         ));
-        
-        echo json_encode($response) . "<br/>";
+     
+        if ($i == 1) {
+            echo json_encode($response) . "<br/>";
+        }
 
         // Sift through the results.
         for ($i = 0; $i < count($response); $i++) {
