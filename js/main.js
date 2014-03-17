@@ -1071,9 +1071,9 @@ var SwdView = {
     fillPostImageContainer: function(post) {
         var containerWidth;
         
-        containerWidth = $('#post-image-container').width();
+        containerWidth = $('#post-image-container').width() - 16; // 16 = 4 * 4px margin width
         
-        alert(containerWidth);
+        alert(post.image_url.length);
     },
     /***
      * Create and display a link type post block.

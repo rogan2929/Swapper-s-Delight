@@ -824,6 +824,7 @@ a.link-title {
     background-size: cover;
     cursor: pointer;
     display: inline-block;
+    margin: 3px;
 }
 
 #overlay-app-loading {
