@@ -1069,6 +1069,7 @@ var SwdView = {
         var i, imageTile, imageUrl, tileWidth, tileHeight;
         
         // Get image tile width & height, assuming a max of 370 for height.
+        // Try for a square first.
         tileWidth = ($('#post-image-container').width() - 12) / post.image_url.length;
         tileHeight = Math.min(tileWidth, 370);
         
