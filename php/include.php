@@ -215,6 +215,8 @@ function getOptimalWindowData($fbSession, $gid) {
     ));
 
     $count = count($response);
+    
+    echo 'TEST';
 
     // These values were reached through trial and error.
     switch ($count) {
