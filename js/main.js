@@ -1056,7 +1056,8 @@ var SwdView = {
             width = $(image).width();
             
             $('#post-image-container').addClass('max-height');
-            $(image).addClass('expanded').css('height', 'auto').css('width', 'auto').data('height', height).data('width', width);;
+            //$(image).addClass('expanded').css('height', 'auto').css('width', 'auto').data('height', height).data('width', width);
+            $(image).addClass('expanded', 400).data('height', height).data('width', width);
         }
         else {
             height = $(image).data('height');
