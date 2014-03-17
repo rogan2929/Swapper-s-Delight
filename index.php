@@ -191,7 +191,7 @@ header('Pragma: no-cache');
 
             <!--Image Viewer Panel-->
             <div id='image-viewer' class='hidden'>
-
+                
             </div>
 
         </div>
