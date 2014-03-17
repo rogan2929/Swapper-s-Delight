@@ -215,8 +215,6 @@ function getOptimalWindowData($fbSession, $gid) {
     ));
 
     $count = count($response);
-    
-    echo 'TEST';
 
     // These values were reached through trial and error.
     switch ($count) {
@@ -241,9 +239,6 @@ function getOptimalWindowData($fbSession, $gid) {
             $batchCount = 4;
             break;
     }
-    
-    echo $windowSize . "<br/>";
-    echo $batchCount . "<br/>";
 
     return array('windowSize' => 3600 * $windowSize, 'batchCount' => $batchCount);
 }
