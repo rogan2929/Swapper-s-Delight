@@ -1308,6 +1308,7 @@ var SwdView = {
             
             // File the image container with post-image-tiles.
             //$('#post-image').css('background-image', postImage);
+            SwdView.fillPostImageContainer(post);
         }
         else {
             // Hide the image container.
