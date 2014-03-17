@@ -1049,7 +1049,7 @@ var SwdView = {
      * @param {type} image
      */
     expandSelectedImage: function(image) {
-        $('#post-image-container').height(375);
+        $('#post-image-container').addClass('max-height');
         $(image).addClass('expanded').css('height', 'auto').css('width', 'auto');
     },
     /***
@@ -1092,7 +1092,7 @@ var SwdView = {
         // Try for a square first.
         // Subtract 6 * colCount - 1 from total width.
         tileWidth = ($('#post-image-container').width() - (6 * (colCount -1))) / post.image_url.length;
-        tileHeight = Math.min(tileWidth, 375);
+        tileHeight = Math.min(tileWidth, 500);
         
         // Create at tile for each image.
         for (i = 1; i <= post.image_url.length; i++) {
