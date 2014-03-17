@@ -64,7 +64,7 @@ header('Pragma: no-cache');
                     <div class='floating-panel-content ui-widget'>
                         <div class='close-button'></div>
                         <div class='column left'>
-                            <div id='details-left-column' class='panel-post-column scroll-y'>
+                            <div id='details-left-column'>
                                 <div id='post-details-user-data' class='facebook-user-header floating-panel-section'>
                                     <div class='facebook-user-photo'></div>
                                     <div class='facebook-poststamp'>
@@ -93,7 +93,7 @@ header('Pragma: no-cache');
                             </div>
                         </div>
                         <div class='column right'>
-                            <div id='details-right-column' class='panel-post-column scroll-y'>
+                            <div id='details-right-column'>
                                 <div id='post-comments' class='floating-panel-section'>
                                     <div id='post-nocomments' class='italic'>
                                         No comments yet.

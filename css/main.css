@@ -835,6 +835,8 @@ a.link-title {
     top: 25px;
     bottom: 0;
     padding: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .floating-panel-content .column > * {
