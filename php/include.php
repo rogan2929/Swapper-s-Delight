@@ -245,6 +245,8 @@ function getOptimalWindowData($fbSession, $gid) {
 
 function executeBatchQuery($fbSession, $gid, $constraints) {
     $windowData = getOptimalWindowData($fbSession, $gid);
+    
+    echo json_encode($windowData);
 
     $windowSize = $windowData['windowSize'];
     $windowStart = time();
