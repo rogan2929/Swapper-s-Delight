@@ -735,7 +735,7 @@ var SwdPresenter = {
         SwdPresenter.loadPosts(true);
     },
     onClickPostImageTile: function(e, args) {
-        SwdView.expandSelectedImage($(e.currentTarget))
+        SwdView.toggleSelectedImage($(e.currentTarget))
     },
     onClickSelectGroup: function(e, args) {
         var i, id, group;
@@ -888,7 +888,7 @@ var SwdView = {
         }, function() {
             $(this).removeClass('hover', 100);
         });
-        
+
         $('.post-block.ad-div').hide();
     },
     /**
@@ -1048,9 +1048,23 @@ var SwdView = {
      * Expands a selected post details image to fill its entire parent container.
      * @param {type} image
      */
-    expandSelectedImage: function(image) {
-        $('#post-image-container').addClass('max-height');
-        $(image).addClass('expanded').css('height', 'auto').css('width', 'auto');
+    toggleSelectedImage: function(image) {
+        var height, width;
+        
+        if (!$(image).hasClass('expanded')) {
+            height = $(image).height();
+            width = $(image).width();
+            
+            $('#post-image-container').addClass('max-height');
+            $(image).addClass('expanded').css('height', 'auto').css('width', 'auto').data('height', height).data('width', width);;
+        }
+        else {
+            height = $(image).data('height');
+            width = $(image).data('width');
+            
+            $('#post-image-container').removeClass('max-height');
+            $(image).addClass('expanded').css('height', height + 'px').css('width', width + 'px');
+        }
     },
     /***
      * Create and display a text type post block.
@@ -1075,7 +1089,7 @@ var SwdView = {
      */
     fillPostImageContainer: function(post) {
         var i, imageTile, imageUrl, tileWidth, tileHeight, colCount;
-        
+
         switch (post.image_url.length) {
             case 1:
                 colCount = 1;
@@ -1087,30 +1101,30 @@ var SwdView = {
                 colCount = 3;
                 break;
         }
-        
+
         // Get image tile width & height, assuming a max of 375 for height.
         // Try for a square first.
         // Subtract 6 * colCount - 1 from total width.
-        tileWidth = ($('#post-image-container').width() - (6 * (colCount -1))) / post.image_url.length;
+        tileWidth = ($('#post-image-container').width() - (6 * (colCount - 1))) / post.image_url.length;
         tileHeight = Math.min(tileWidth, 500);
-        
+
         // Create at tile for each image.
         for (i = 1; i <= post.image_url.length; i++) {
             imageUrl = 'url(' + post.image_url[i - 1] + ')';
             imageTile = $('<div class="post-image-tile"></div>');
-            
+
             $(imageTile).height(tileHeight).width(tileWidth).css('background-image', imageUrl).appendTo('#post-image-container');
-            
+
             if (i % colCount === 0) {
                 $(imageTile).addClass('right');
             }
         }
-        
+
         // Set up mouse over effects and connect to event handlers.
         $('#post-image-container > .post-image-tile').hoverIntent(function() {
-                $(this).addClass('hover', 100);
-            }, function() {
-                $(this).removeClass('hover', 100);
+            $(this).addClass('hover', 100);
+        }, function() {
+            $(this).removeClass('hover', 100);
         }).click(SwdView.handlers['onClickPostImageTile']);
     },
     /***
@@ -1198,7 +1212,7 @@ var SwdView = {
                         SwdView.createTextLinkPostBlock(post);
                         break;
                 }
-                
+
                 // Every tiles, place an ad-tile.
 //                if (i % adSpread === 0 && i > 0 && adTileCount < 3) {
 //                    adTileCount++;
@@ -1217,10 +1231,10 @@ var SwdView = {
                 // Add an event handler for when it is clicked on.
                 $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
             }
-            
+
             // Determine how far apart each ad-tile will be.
             adSpread = Math.max(Math.floor(SwdView.getPostBlockCount() / 4), 5);
-            
+
             // Insert add tiles evenly throughout all the posts.
             for (i = 1; i <= 4; i++) {
                 $('#ad-tile-' + i).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
@@ -1336,7 +1350,7 @@ var SwdView = {
             // Hide the no-image container and display the post's attached image.
             $('#post-image-container').empty().show();
             $('#post-no-image-desc').hide();
-            
+
             // File the image container with post-image-tiles.
             SwdView.fillPostImageContainer(post);
         }
