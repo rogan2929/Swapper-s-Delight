@@ -824,10 +824,13 @@ a.link-title {
     height: 500px;
 }
 
+#post-image-container > .post-image-tile.expanding {
+    position: absolute;
+}
+
 #post-image-container > .post-image-tile.expanded {
     background-size: 100%;
     margin-right: 0;
-    position: absolute;
     left: 0;
     right: 0;
     top: 0;
