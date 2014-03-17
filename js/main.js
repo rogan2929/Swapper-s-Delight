@@ -204,7 +204,9 @@ var SwdModel = {
     },
     /***
      * Remove a group from the selected groups list by saving it to the HiddenGroups DB table.
+     * @param {type} uid
      * @param {type} gid
+     * @param {type} callbacks
      */
     hideGroup: function(uid, gid, callbacks) {
         var url = '/php/hide-group.php?uid=' + uid + '&gid=' + gid;
@@ -222,6 +224,8 @@ var SwdModel = {
     },
     /***
      * Restores all groups to the selected groups list.
+     * @param {type} uid
+     * @param {type} callbacks
      */
     restoreAllGroups: function(uid, callbacks) {
         var url = '/php/restore-groups.php?uid=' + uid;
@@ -236,7 +240,7 @@ var SwdModel = {
                 callbacks.error.call(SwdModel, response);
             }
         });
-    },
+    }
 };
 /**
  * Presenter for the Swapper's Delight program.
@@ -281,6 +285,7 @@ var SwdPresenter = {
     },
     /***
      * Top-level error handler function.
+     * @param {type} error
      */
     handleError: function(error) {
         switch (error.status) {
@@ -392,7 +397,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .close-button', 'click');
                                 SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
                                 SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
-                                SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#popup-comment-text', 'keyup')
+                                SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#popup-comment-text', 'keyup');
                                 SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
                                 SwdView.positionMenus();
 
@@ -484,6 +489,7 @@ var SwdPresenter = {
     /***
      * Load feed for the current group.
      * @param {type} loadNextPage
+     * @param {type} updatedTime
      */
     loadNewestPosts: function(loadNextPage, updatedTime) {
         // Get posts and then display them.
@@ -824,6 +830,7 @@ var SwdView = {
     /***
      * Add group to Group Select Menu.
      * @param {type} groups
+     * @param {type} hiddenGroups
      */
     addGroupsToSelectPanel: function(groups, hiddenGroups) {
         var i, groupItem;
@@ -994,6 +1001,7 @@ var SwdView = {
     /***
      * Changes the text shown in the "Select a Group" button.
      * @param {type} text Text to display inside the button.
+     * @param {type} postCount
      */
     setGroupButtonText: function(text, postCount) {
         if (postCount) {
@@ -1110,6 +1118,7 @@ var SwdView = {
     /***
      * Populate the main view with post blocks.
      * @param {type} posts
+     * @param {type} postType
      */
     populatePostBlocks: function(posts, postType) {
         var i, post, adSpread;
