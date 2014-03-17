@@ -262,7 +262,7 @@ a:visited {
     padding-top: 25px;
 }
 
-.floating-panel-content > #details-left-column {
+#details-left-column {
 /*    left: 0;
     right: 320px;
     position: absolute;
@@ -272,7 +272,7 @@ a:visited {
     border-right: 2px solid #f6f6f6;
 }
 
-.floating-panel-content > #details-right-column {
+#details-right-column {
     width: 300px;
 /*    right: 0;
     position: absolute;
@@ -839,6 +839,14 @@ a.link-title {
 
 .floating-panel-content .column > * {
     margin-bottom: 10px;
+}
+
+.floating-panel-content .column.right {
+    right: 0;
+}
+
+.floating-panel-content .column.left {
+    left: 0;
 }
 
 #overlay-app-loading {
