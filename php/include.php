@@ -292,7 +292,7 @@ function executeBatchQuery($fbSession, $gid, $constraints) {
             'include_headers' => false
         ));
      
-        if ($i == 1) {
+        if ($i == 0) {
             echo json_encode($response) . "<br/>";
         }
 
