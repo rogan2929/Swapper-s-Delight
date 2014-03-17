@@ -269,7 +269,7 @@ a:visited {
     top: 25px;
     bottom: 0;
     padding: 10px;*/
-    border-right: 2px solid #f6f6f6;
+/*    border-right: 2px solid #f6f6f6;*/
     width: 585px;
 }
 
@@ -826,8 +826,8 @@ a.link-title {
     cursor: pointer;
     display: inline-block;
     margin: 3px;
-    min-width: 180px;
-    min-height: 180px;
+    min-width: 183px;
+    min-height: 183px;
 }
 
 .floating-panel-content .column {
