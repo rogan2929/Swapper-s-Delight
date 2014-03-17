@@ -1065,6 +1065,17 @@ var SwdView = {
         $(postBlock).addClass('post-block-text').html(message).appendTo('#post-feed');
     },
     /***
+     * Fill the post-image-container with post-image-tiles.
+     * @param {type} post
+     */
+    fillPostImageContainer: function(post) {
+        var containerWidth;
+        
+        containerWidth = $('#post-container-width').width();
+        
+        alert(containerWidth);
+    },
+    /***
      * Create and display a link type post block.
      * @param {type} post
      */

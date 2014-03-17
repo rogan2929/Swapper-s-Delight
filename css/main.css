@@ -821,8 +821,9 @@ a.link-title {
 #post-image-container > .post-image-tile {
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     cursor: pointer;
+    display: inline-block;
 }
 
 #overlay-app-loading {
