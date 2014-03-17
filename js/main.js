@@ -1066,18 +1066,26 @@ var SwdView = {
      * @param {type} post
      */
     fillPostImageContainer: function(post) {
-        var i, imageTile, imageUrl, tileSize;
+        var i, imageTile, imageUrl, tileWidth, tileHeight;
         
-        //tileSize = Math.min(($('#post-image-container').width() - 12) / post.image_url.length, 600); // 12 = 4 * 3px margin width
-        tileSize = ($('#post-image-container').width() - 12) / post.image_url.length;
+        // Get image tile width & height, assuming a max of 370 for height.
+        tileWidth = ($('#post-image-container').width() - 12) / post.image_url.length;
+        tileHeight = Math.min(tileWidth, 370);
         
         // Create at tile for each image.
         for (i = 0; i < post.image_url.length; i++) {
             imageUrl = 'url(' + post.image_url[i] + ')';
             imageTile = $('<div class="post-image-tile"></div>');
             
-            $(imageTile).height(tileSize).width(tileSize).css('background-image', imageUrl).appendTo('#post-image-container');
+            $(imageTile).height(tileSize).width(tileWidth).css('background-image', imageUrl).appendTo('#post-image-container');
         }
+        
+        // Set up mouse over effects.
+        $('#post-image-container > .post-image-tile').hoverIntent(function() {
+                $(this).addClass('hover', 100);
+            }, function() {
+                $(this).removeClass('hover', 100);
+        });
     },
     /***
      * Create and display a link type post block.
@@ -1311,7 +1319,6 @@ var SwdView = {
             $('#post-no-image-desc').hide();
             
             // File the image container with post-image-tiles.
-            //$('#post-image').css('background-image', postImage);
             SwdView.fillPostImageContainer(post);
         }
         else {
@@ -1333,9 +1340,6 @@ var SwdView = {
 
         // Set link data and display it.
         if (post.post_type === 'link' || post.post_type === 'textlink') {
-            //linkData = '<div><p><a href="' + post.link_data.href + '" target="_blank" class="link-title">' + post.link_data.name + '</a></br>' + post.link_data.description + '</p></div>';
-            //$('#post-message-linkdata').html(linkData).show();
-
             $('#linkdata-href').attr('href', post.link_data.href).text(post.link_data.name);
             $('#linkdata-caption').text(post.link_data.caption);
 

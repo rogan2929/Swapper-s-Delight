@@ -828,6 +828,11 @@ a.link-title {
     margin: 3px;
     min-width: 183px;
     min-height: 183px;
+    background-color: #ccc;
+}
+
+#post-image-container > .post-image-tile.hover {
+    background-color: #aaa;
 }
 
 .floating-panel-content .column {
