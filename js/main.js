@@ -715,9 +715,6 @@ var SwdPresenter = {
                 success: function(response) {
                     post = response;
 
-                    // Try to retrieve image URL from object.
-                    //post['image_url'] = $('#' + id).data('image_url');
-
                     if (post) {
                         SwdPresenter.selectedPost = post;
                         SwdView.setLikePost(false);
@@ -1280,7 +1277,7 @@ var SwdView = {
      * @param {type} post Post to load into floating post details panel.
      */
     showPostDetails: function(post) {
-        var userImage, postImage, i, timeStamp, linkData;
+        var userImage, postImage, i, timeStamp;
 
         // Display the 'Delete' button for owned posts. Otherwise, hide it.
         if (post.actor_id === SwdPresenter.uid) {

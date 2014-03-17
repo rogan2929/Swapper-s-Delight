@@ -75,7 +75,6 @@ header('Pragma: no-cache');
                                     </div>
                                 </div>
                                 <div id='post-image-container' class='floating-panel-section'></div>
-                                <!--                            <div id='post-image' class='floating-panel-section'></div>-->
                                 <div id='post-message' class='floating-panel-section'>
                                     <div id='post-message-text'></div>
                                 </div>
@@ -101,8 +100,8 @@ header('Pragma: no-cache');
                                     <div id='post-comment-list'></div>
                                 </div>
                             </div>
-                            <div class='ajax-loading-div hidden'></div>
                         </div>
+                        <div class='ajax-loading-div hidden'></div>
                     </div>
                 </div>
 
