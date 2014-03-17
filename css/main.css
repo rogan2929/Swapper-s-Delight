@@ -815,7 +815,8 @@ a.link-title {
 }
 
 #post-image-container {
-    height: 350px;
+    width: 412px;
+    max-height: 412px;
 }
 
 #post-image-container > .post-image-tile {
@@ -825,6 +826,8 @@ a.link-title {
     cursor: pointer;
     display: inline-block;
     margin: 3px;
+    max-width: 200px;
+    max-height: 200px;
 }
 
 #overlay-app-loading {
