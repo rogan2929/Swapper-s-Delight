@@ -1087,13 +1087,13 @@ var SwdView = {
         tileHeight = Math.min(tileWidth, 375);
         
         // Create at tile for each image.
-        for (i = 0; i < post.image_url.length; i++) {
-            imageUrl = 'url(' + post.image_url[i] + ')';
+        for (i = 1; i <= post.image_url.length; i++) {
+            imageUrl = 'url(' + post.image_url[i - 1] + ')';
             imageTile = $('<div class="post-image-tile"></div>');
             
             $(imageTile).height(tileHeight).width(tileWidth).css('background-image', imageUrl).appendTo('#post-image-container');
             
-            if (i % colCount === 0 && i > 0) {
+            if (i % colCount === 0) {
                 $(imageTile).addClass('right');
             }
         }
