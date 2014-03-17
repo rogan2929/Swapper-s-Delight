@@ -825,9 +825,9 @@ a.link-title {
     background-size: contain;
     cursor: pointer;
     display: inline-block;
-    min-width: 180px;
-    min-height: 180px;
-    padding: 3px;
+    min-width: 177px;
+    min-height: 177px;
+    margin: 3px;
 }
 
 #post-image-container  > .post-image-tile.hover {
