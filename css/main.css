@@ -819,7 +819,7 @@ a.link-title {
     max-height: 375px;
 }
 
-#post-image-container .post-image-tile {
+#post-image-container > .post-image-tile {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -829,7 +829,7 @@ a.link-title {
     min-height: 183px;
 }
 
-#post-image-container .post-image-tile.hover {
+#post-image-container  > .post-image-tile.hover {
     background-color: #f6f6f6;
 }
 

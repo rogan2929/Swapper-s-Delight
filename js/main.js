@@ -1082,7 +1082,7 @@ var SwdView = {
         }
         
         // Set up mouse over effects.
-        $('#post-image-container .post-image-tile').hoverIntent(function() {
+        $('#post-image-container > .post-image-tile').hoverIntent(function() {
                 $(this).addClass('hover', 100);
             }, function() {
                 $(this).removeClass('hover', 100);
