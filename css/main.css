@@ -859,7 +859,7 @@ a.link-title {
 }
 
 #post-image-container > .post-image-tile.expanded .close-button:hover {
-    background-image: url('/img/panel-close-hover.png');
+    background-image: url('/img/panel-close-light-hover.png');
 }
 
 #post-image-container > .post-image-tile.right {
