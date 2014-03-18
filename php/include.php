@@ -222,7 +222,7 @@ function getOptimalWindowData($fbSession, $gid) {
             $windowSize = 4;
             $batchCount = 2;
             break;
-        case $count < 85:
+        case $count >= 65 && $count < 85:
             $windowSize = 3.5;
             $batchCount = 2;
             break;
