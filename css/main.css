@@ -842,6 +842,10 @@ a.link-title {
     margin-right: 6px;
 }
 
+#post-image-container > .post-image-tile .close-button {
+    pointer-events: none;
+}
+
 #post-image-container > .post-image-tile.right {
     margin-right: 0px;
 }
