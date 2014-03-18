@@ -264,11 +264,12 @@ a:visited {
 
 #details-left-column {
     width: 580px;
-    padding-right: 8px;
+    padding-right: 15px;
 }
 
 #details-right-column {
     width: 320px;
+    padding-right: 15px;
 }
 
 .ajax-loading-div {
