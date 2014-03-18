@@ -1120,7 +1120,7 @@ var SwdView = {
         
         // For only 1 image, set background-size to contain, rather than cover.
         if (post.image_url.length === 1) {
-            $(imageTile).css('background-size', 'contain');
+            $(imageTile).addClass('single');
         }
 
         // Set up mouse over effects and connect to event handlers.

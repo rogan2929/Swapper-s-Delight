@@ -846,6 +846,11 @@ a.link-title {
     display: none;
 }
 
+#post-image-container > .post-image-tile.single {
+    cursor: default;
+    background-size: contain;
+}
+
 #post-image-container > .post-image-tile.expanded .close-button {
     pointer-events: none;
     margin-top: 5px;
