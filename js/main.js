@@ -1051,11 +1051,11 @@ var SwdView = {
     toggleSelectedImage: function(image) {
         if (!$(image).hasClass('expanded')) {
             $('#post-image-container').addClass('max-height');
-            $(image).addClass('expanding').addClass('expanded');
+            $(image).addClass('expanded');
         }
         else {
             $('#post-image-container').removeClass('max-height');
-            $(image).removeClass('expanded').removeClass('expanding');
+            $(image).removeClass('expanded');
         }
     },
     /***
