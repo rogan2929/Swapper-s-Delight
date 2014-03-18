@@ -270,11 +270,11 @@ a:visited {
     bottom: 0;
     padding: 10px;*/
 /*    border-right: 2px solid #f6f6f6;*/
-    width: 585px;
+    width: 580px;
 }
 
 #details-right-column {
-    width: 330px;
+    width: 325px;
 /*    right: 0;
     position: absolute;
     top: 25px;
@@ -838,6 +838,7 @@ a.link-title {
     bottom: 0;
     width: auto !important;
     height: auto !important;
+    background-position: top left;
 }
 
 #post-image-container > .post-image-tile {
@@ -846,8 +847,8 @@ a.link-title {
     background-size: cover;
     cursor: pointer;
     display: inline-block;
-    min-width: 185px;
-    min-height: 185px;
+    min-width: 182px;
+    min-height: 182px;
     margin-right: 6px;
 }
 
