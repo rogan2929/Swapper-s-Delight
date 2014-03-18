@@ -844,6 +844,8 @@ a.link-title {
 
 #post-image-container > .post-image-tile .close-button {
     pointer-events: none;
+    margin-top: 5px;
+    margin-right: 5px;
 }
 
 #post-image-container > .post-image-tile.right {
