@@ -818,7 +818,6 @@ a.link-title {
 #post-image-container {
     max-height: 500px;
     position: relative;
-    overflow: auto;
 }
 
 #post-image-container.max-height {
