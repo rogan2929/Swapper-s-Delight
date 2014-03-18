@@ -298,8 +298,6 @@ function executeBatchQuery($fbSession, $gid, $constraints) {
             'batch' => json_encode($queries),
             'include_headers' => false
         ));
-
-        echo json_encode($response);
         
         // Sift through the results.
         for ($k = 0; $k < count($response); $k++) {
