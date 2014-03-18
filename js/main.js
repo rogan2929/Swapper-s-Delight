@@ -409,7 +409,7 @@ var SwdPresenter = {
                                     SwdView.setMainOverlayTransparency();
 
                                     // Start with displaying the group selection panel.
-                                    SwdView.toggleFloatingPanel('#select-group-panel', true);
+                                    SwdView.toggleFloatingPanel('#select-group-panel', true, 'drop');
                                 }, 1000);
                             },
                             error: SwdPresenter.handleError
@@ -596,7 +596,7 @@ var SwdPresenter = {
         // Prevent the event from bubbling up the DOM and closing the floating panel.
         e.stopPropagation();
 
-        SwdView.toggleFloatingPanel('#select-group-panel', true);
+        SwdView.toggleFloatingPanel('#select-group-panel', true, 'drop');
     },
     // Event Handlers (onX(e, args))
     onClickButtonNew: function(e, args) {
@@ -752,7 +752,7 @@ var SwdPresenter = {
         // Set selected group and load its feed.
         SwdPresenter.setSelectedGroup(group);
 
-        SwdView.toggleFloatingPanel('#select-group-panel', false);
+        SwdView.toggleFloatingPanel('#select-group-panel', false, 'drop');
     },
     onClickGroupClose: function(e, args) {
         var groupTile, target, gid;
@@ -1049,13 +1049,19 @@ var SwdView = {
      * @param {type} image
      */
     toggleSelectedImage: function(image) {
-        if (!$(image).hasClass('expanded')) {
+        if (!$(image).hasClass('expanded') && $('#post-image-container').children('.post-image-tile').length > 1) {
             $('#post-image-container').addClass('max-height');
             $(image).addClass('expanded');
+
+            // Hide all the other images.
+            $('#post-image-container > .post-image-tile').not(image).hide();
         }
         else {
             $('#post-image-container').removeClass('max-height');
             $(image).removeClass('expanded');
+
+            // Show all the other images.
+            $('#post-image-container > .post-image-tile').not(image).show();
         }
     },
     /***
@@ -1103,13 +1109,18 @@ var SwdView = {
         // Create at tile for each image.
         for (i = 1; i <= post.image_url.length; i++) {
             imageUrl = 'url(' + post.image_url[i - 1] + ')';
-            imageTile = $('<div class="post-image-tile"></div>');
+            imageTile = $('<div class="post-image-tile"><div class="close-button"></div></div>');
 
             $(imageTile).height(tileHeight).width(tileWidth).css('background-image', imageUrl).appendTo('#post-image-container');
 
             if (i % colCount === 0) {
                 $(imageTile).addClass('right');
             }
+        }
+
+        // For only 1 image, set background-size to contain, rather than cover.
+        if (post.image_url.length === 1) {
+            $(imageTile).addClass('single');
         }
 
         // Set up mouse over effects and connect to event handlers.
@@ -1456,16 +1467,26 @@ var SwdView = {
      * Shows or hides a 'floating panel'
      * @param {type} id
      * @param {type} show
+     * @param {type} effect
+     * @param {type} options
      */
-    toggleFloatingPanel: function(id, show) {
+    toggleFloatingPanel: function(id, show, effect, options) {
+        if (!effect) {
+            effect = 'drop';
+        }
+
+        if (!options) {
+            options = {};
+        }
+
         if (show) {
             // Make the panel modal by summoning an overlay.
             $('#overlay').show();
-            $(id).show("drop");
+            $(id).show(effect, options, 400);
         }
         else {
             $('#overlay').hide();
-            $(id).hide("drop");
+            $(id).hide(effect, options, 400);
         }
     }
 };
