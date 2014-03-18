@@ -820,7 +820,7 @@ a.link-title {
 
 #post-image-container > .post-image-tile.expanded {
     position: absolute;
-    background-size: 100%;
+    background-size: contain;
     margin-right: 0;
     left: 0;
     right: 0;
@@ -828,7 +828,7 @@ a.link-title {
     bottom: 0;
     width: auto !important;
     height: auto !important;
-    background-position: top left;
+/*    background-position: top left;*/
 }
 
 #post-image-container > .post-image-tile {
