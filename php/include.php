@@ -245,7 +245,7 @@ function getOptimalWindowData($fbSession, $gid) {
 //    }
 
     $windowSize = 4;
-    $batchCount = 1;
+    $batchCount = 2;
 
     return array('windowSize' => 3600 * $windowSize, 'batchCount' => $batchCount);
 }

@@ -35,6 +35,8 @@ $constraints[] = array(
 
 $posts = executeBatchQuery($fbSession, $gid, $constraints);
 
-echo count($posts);
+echo count($posts) . "</br/>";
+
+echo json_encode($posts);
 
 //echo count(getGroupPostsbyUid($fbSession, $gid, $uid));
