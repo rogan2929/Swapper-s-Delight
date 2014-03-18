@@ -217,35 +217,32 @@ function getOptimalWindowData($fbSession, $gid) {
     $count = count($response);
 
     // These values were reached through trial and error.
-//    switch ($count) {
-//        case $count < 65:
-//            $windowSize = 4;
-//            $batchCount = 2;
-//            break;
-//        case $count >= 65 && $count < 85:
-//            $windowSize = 3.5;
-//            $batchCount = 2;
-//            break;
-//        case $count >= 85 && $count < 115:
-//            $windowSize = 3;
-//            $batchCount = 2;
-//            break;
-//        case $count >= 115 && $count < 150:
-//            $windowSize = 2.5;
-//            $batchCount = 3;
-//            break;
-//        case $count >= 150 && $count < 225:
-//            $windowSize = 2;
-//            $batchCount = 3;
-//            break;
-//        default:
-//            $windowSize = 1;
-//            $batchCount = 4;
-//            break;
-//    }
-
-    $windowSize = 3;
-    $batchCount = 2;
+    switch ($count) {
+        case $count < 65:
+            $windowSize = 4;
+            $batchCount = 2;
+            break;
+        case $count >= 65 && $count < 85:
+            $windowSize = 3.5;
+            $batchCount = 2;
+            break;
+        case $count >= 85 && $count < 115:
+            $windowSize = 5;
+            $batchCount = 2;
+            break;
+        case $count >= 115 && $count < 150:
+            $windowSize = 2.5;
+            $batchCount = 3;
+            break;
+        case $count >= 150 && $count < 225:
+            $windowSize = 2;
+            $batchCount = 3;
+            break;
+        default:
+            $windowSize = 1;
+            $batchCount = 4;
+            break;
+    }
 
     return array('windowSize' => 3600 * $windowSize, 'batchCount' => $batchCount);
 }
