@@ -1482,7 +1482,13 @@ var SwdView = {
         if (show) {
             // Make the panel modal by summoning an overlay.
             $('#overlay').show();
-            $(id).show(effect, options, 400);
+
+            if (effect !== 'transfer') {
+                $(id).show(effect, options, 400);
+            }
+            else {
+                $(id).effect('transfer', options, 400);
+            }
         }
         else {
             $('#overlay').hide();
