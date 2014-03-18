@@ -850,6 +850,7 @@ a.link-title {
     pointer-events: none;
     margin-top: 5px;
     margin-right: 5px;
+    display: block;
 }
 
 #post-image-container > .post-image-tile.right {
