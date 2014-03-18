@@ -30,7 +30,7 @@ $constraints[] = array(
     'value' => $uid
 );
 
-$posts = executeBatchQuery($fbSession, $gid, $constraints);
+//$posts = executeBatchQuery($fbSession, $gid, $constraints);
 
 echo count($response) . "<br/>";
 echo count($posts);
