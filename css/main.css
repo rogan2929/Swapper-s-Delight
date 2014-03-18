@@ -263,13 +263,13 @@ a:visited {
 }
 
 #details-left-column {
-    width: 573px;
-    padding-right: 15px;
+    width: 580px;
+    padding-right: 8px;
 }
 
 #details-right-column {
-    width: 320px;
-    padding-right: 15px;
+    width: 312px;
+    padding-right: 8px;
 }
 
 .ajax-loading-div {
@@ -837,8 +837,8 @@ a.link-title {
     background-size: cover;
     cursor: pointer;
     display: inline-block;
-    min-width: 181px;
-    min-height: 181px;
+    min-width: 183px;
+    min-height: 183px;
     margin-right: 6px;
 }
 
