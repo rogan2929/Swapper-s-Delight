@@ -218,6 +218,10 @@ function getOptimalWindowData($fbSession, $gid) {
 
     // These values were reached through trial and error.
     switch ($count) {
+        case $count < 65:
+            $windowSize = 4;
+            $batchCount = 2;
+            break;
         case $count < 85:
             $windowSize = 3.5;
             $batchCount = 2;
