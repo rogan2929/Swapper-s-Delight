@@ -31,4 +31,5 @@ try {
     
     $loginUrl = $fbSession->getLoginUrl();
     http_response_code(401);
+    echo 'Access token expired.';
 }
