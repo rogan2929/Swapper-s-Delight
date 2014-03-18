@@ -22,9 +22,6 @@ $response = $fbSession->api(array(
     'query' => $query
         ));
 
-
-echo count($response) . "<br/>";
-
 $constraints = array();
 
 $constraints[] = array(
@@ -35,6 +32,7 @@ $constraints[] = array(
 
 $posts = executeBatchQuery($fbSession, $gid, $constraints);
 
-echo count($posts) . "</br/>";
+echo count($response) . "<br/>";
+echo count($posts);
 
 //echo count(getGroupPostsbyUid($fbSession, $gid, $uid));

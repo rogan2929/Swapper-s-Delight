@@ -296,8 +296,6 @@ function executeBatchQuery($fbSession, $gid, $constraints) {
             'include_headers' => false
         ));
         
-        echo json_encode($response);
-        
         // Sift through the results.
         for ($k = 0; $k < count($response); $k++) {
             $result = json_decode($response[$k]['body'], true);
