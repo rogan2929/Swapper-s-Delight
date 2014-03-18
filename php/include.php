@@ -214,6 +214,8 @@ function getOptimalWindowData($fbSession, $gid) {
         'query' => $query
     ));
 
+    echo json_encode($response);
+    
     $count = count($response);
     
     // These values were reached through trial and error.
