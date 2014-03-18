@@ -392,7 +392,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
                                 SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block.ui-widget.unique', 'click');
                                 SwdView.installHandler('onClickPostBlockLoadMore', SwdPresenter.onClickPostBlockLoadMore, '.post-block.load-more', 'click');
-                                SwdView.installHandler('onClickPostImage', SwdPresenter.onClickPostImage, '#post-image', 'click');
+                                SwdView.installHandler('onClickPostImageTile', SwdPresenter.onClickPostImageTile, '.post-image-tile', 'click');
                                 SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
                                 SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .close-button', 'click');
                                 SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
@@ -715,9 +715,6 @@ var SwdPresenter = {
                 success: function(response) {
                     post = response;
 
-                    // Try to retrieve image URL from object.
-                    //post['image_url'] = $('#' + id).data('image_url');
-
                     if (post) {
                         SwdPresenter.selectedPost = post;
                         SwdView.setLikePost(false);
@@ -737,8 +734,8 @@ var SwdPresenter = {
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', true);
         SwdPresenter.loadPosts(true);
     },
-    onClickPostImage: function(e, args) {
-        SwdView.showImageViewer(SwdPresenter.selectedPost);
+    onClickPostImageTile: function(e, args) {
+        SwdView.toggleSelectedImage($(e.currentTarget))
     },
     onClickSelectGroup: function(e, args) {
         var i, id, group;
@@ -891,7 +888,7 @@ var SwdView = {
         }, function() {
             $(this).removeClass('hover', 100);
         });
-        
+
         $('.post-block.ad-div').hide();
     },
     /**
@@ -1048,6 +1045,20 @@ var SwdView = {
         $(postBlock).appendTo('#post-feed');
     },
     /***
+     * Expands a selected post details image to fill its entire parent container.
+     * @param {type} image
+     */
+    toggleSelectedImage: function(image) {
+        if (!$(image).hasClass('expanded')) {
+            $('#post-image-container').addClass('max-height');
+            $(image).addClass('expanded');
+        }
+        else {
+            $('#post-image-container').removeClass('max-height');
+            $(image).removeClass('expanded');
+        }
+    },
+    /***
      * Create and display a text type post block.
      * @param {type} post
      */
@@ -1063,6 +1074,50 @@ var SwdView = {
         message = '<div class="visible-content wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
         $(postBlock).addClass('post-block-text').html(message).appendTo('#post-feed');
+    },
+    /***
+     * Fill the post-image-container with post-image-tiles.
+     * @param {type} post
+     */
+    fillPostImageContainer: function(post) {
+        var i, imageTile, imageUrl, tileWidth, tileHeight, colCount;
+
+        switch (post.image_url.length) {
+            case 1:
+                colCount = 1;
+                break;
+            case 2:
+                colCount = 2;
+                break;
+            default:
+                colCount = 3;
+                break;
+        }
+
+        // Get image tile width & height, assuming a max of 375 for height.
+        // Try for a square first.
+        // Subtract 6 * colCount - 1 from total width.
+        tileWidth = ($('#post-image-container').width() - (6 * (colCount - 1))) / post.image_url.length;
+        tileHeight = Math.min(tileWidth, 500);
+
+        // Create at tile for each image.
+        for (i = 1; i <= post.image_url.length; i++) {
+            imageUrl = 'url(' + post.image_url[i - 1] + ')';
+            imageTile = $('<div class="post-image-tile"></div>');
+
+            $(imageTile).height(tileHeight).width(tileWidth).css('background-image', imageUrl).appendTo('#post-image-container');
+
+            if (i % colCount === 0) {
+                $(imageTile).addClass('right');
+            }
+        }
+
+        // Set up mouse over effects and connect to event handlers.
+        $('#post-image-container > .post-image-tile').hoverIntent(function() {
+            $(this).addClass('hover', 100);
+        }, function() {
+            $(this).removeClass('hover', 100);
+        }).click(SwdView.handlers['onClickPostImageTile']);
     },
     /***
      * Create and display a link type post block.
@@ -1149,7 +1204,7 @@ var SwdView = {
                         SwdView.createTextLinkPostBlock(post);
                         break;
                 }
-                
+
                 // Every tiles, place an ad-tile.
 //                if (i % adSpread === 0 && i > 0 && adTileCount < 3) {
 //                    adTileCount++;
@@ -1168,10 +1223,10 @@ var SwdView = {
                 // Add an event handler for when it is clicked on.
                 $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
             }
-            
+
             // Determine how far apart each ad-tile will be.
             adSpread = Math.max(Math.floor(SwdView.getPostBlockCount() / 4), 5);
-            
+
             // Insert add tiles evenly throughout all the posts.
             for (i = 1; i <= 4; i++) {
                 $('#ad-tile-' + i).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
@@ -1235,13 +1290,6 @@ var SwdView = {
         return confirm(message);
     },
     /***
-     * Shows an image viewer for the given post, allowing the user to see photos in greater detail.
-     * @param {type} post
-     */
-    showImageViewer: function(post) {
-        alert(post.post_id);
-    },
-    /***
      * Displays an error message to the user.
      * @param {type} message
      */
@@ -1262,7 +1310,7 @@ var SwdView = {
      * @param {type} post Post to load into floating post details panel.
      */
     showPostDetails: function(post) {
-        var userImage, postImage, i, timeStamp, linkData;
+        var userImage, postImage, i, timeStamp;
 
         // Display the 'Delete' button for owned posts. Otherwise, hide it.
         if (post.actor_id === SwdPresenter.uid) {
@@ -1292,13 +1340,15 @@ var SwdView = {
             postImage = 'url("' + post.image_url[0] + '")';
 
             // Hide the no-image container and display the post's attached image.
-            $('#post-image').show();
+            $('#post-image-container').empty().show();
             $('#post-no-image-desc').hide();
-            $('#post-image').css('background-image', postImage);
+
+            // File the image container with post-image-tiles.
+            SwdView.fillPostImageContainer(post);
         }
         else {
             // Hide the image container.
-            $('#post-image').hide();
+            $('#post-image-container').hide();
             $('#post-no-image-desc').show();
         }
 
@@ -1315,9 +1365,6 @@ var SwdView = {
 
         // Set link data and display it.
         if (post.post_type === 'link' || post.post_type === 'textlink') {
-            //linkData = '<div><p><a href="' + post.link_data.href + '" target="_blank" class="link-title">' + post.link_data.name + '</a></br>' + post.link_data.description + '</p></div>';
-            //$('#post-message-linkdata').html(linkData).show();
-
             $('#linkdata-href').attr('href', post.link_data.href).text(post.link_data.name);
             $('#linkdata-caption').text(post.link_data.caption);
 

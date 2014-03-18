@@ -262,23 +262,13 @@ a:visited {
     padding-top: 25px;
 }
 
-.floating-panel-content > #details-left-column {
-    left: 0;
-    right: 320px;
-    position: absolute;
-    top: 25px;
-    bottom: 0;
-    padding: 10px;
-    border-right: 2px solid #f6f6f6;
+#details-left-column {
+    width: 580px;
+    padding-right: 8px;
 }
 
-.floating-panel-content > #details-right-column {
-    width: 300px;
-    right: 0;
-    position: absolute;
-    top: 25px;
-    bottom: 0;
-    padding: 10px;
+#details-right-column {
+    width: 320px;
 }
 
 .ajax-loading-div {
@@ -814,12 +804,70 @@ a.link-title {
     margin-bottom: 10px;
 }
 
-#post-image {
+#post-image-container {
+    max-height: 500px;
+    position: relative;
+}
+
+#post-image-container.max-height {
+    height: 500px;
+}
+
+#post-image-container > .post-image-tile.expanding {
+    position: absolute;
+}
+
+#post-image-container > .post-image-tile.expanded {
+    position: absolute;
+    background-size: 100%;
+    margin-right: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: auto !important;
+    height: auto !important;
+    background-position: top left;
+}
+
+#post-image-container > .post-image-tile {
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: contain;
-    height: 350px;
+    background-size: cover;
     cursor: pointer;
+    display: inline-block;
+    min-width: 183px;
+    min-height: 183px;
+    margin-right: 6px;
+}
+
+#post-image-container > .post-image-tile.right {
+    margin-right: 0px;
+}
+
+#post-image-container  > .post-image-tile.hover {
+    background-color: #f6f6f6;
+}
+
+.floating-panel-content .column {
+    position: absolute;
+    top: 25px;
+    bottom: 0;
+    padding: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.floating-panel-content .column > * {
+    margin-bottom: 10px;
+}
+
+.floating-panel-content .column.right {
+    right: 0;
+}
+
+.floating-panel-content .column.left {
+    left: 0;
 }
 
 #overlay-app-loading {

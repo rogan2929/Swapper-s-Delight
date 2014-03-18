@@ -63,38 +63,42 @@ header('Pragma: no-cache');
                 <div id='post-details-panel' class='floating-panel hidden'>
                     <div class='floating-panel-content ui-widget'>
                         <div class='close-button'></div>
-                        <div id='details-left-column' class='panel-post-column scroll-y'>
-                            <div id='post-details-user-data' class='facebook-user-header floating-panel-section'>
-                                <div class='facebook-user-photo'></div>
-                                <div class='facebook-poststamp'>
-                                    <a class='facebook-user-name' target='_blank'></a>
-                                    <span>-</span>
-                                    <span class='timestamp'></span>
-                                    <a target='_blank' class='post-permalink float-right wrappable-link'>Permalink</a>
+                        <div class='column left'>
+                            <div id='details-left-column'>
+                                <div id='post-details-user-data' class='facebook-user-header floating-panel-section'>
+                                    <div class='facebook-user-photo'></div>
+                                    <div class='facebook-poststamp'>
+                                        <a class='facebook-user-name' target='_blank'></a>
+                                        <span>-</span>
+                                        <span class='timestamp'></span>
+                                        <a target='_blank' class='post-permalink float-right wrappable-link'>Permalink</a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div id='post-image' class='floating-panel-section'></div>
-                            <div id='post-message' class='floating-panel-section'>
-                                <div id='post-message-text'></div>
-                            </div>
-                            <div id='post-message-linkdata' class='floating-panel-section'>
-                                <div>
-                                    <a id='linkdata-href' target='_blank' class='link-title'></a>
-                                    <span id='linkdata-caption'></span>
+                                <div id='post-image-container' class='floating-panel-section'></div>
+                                <div id='post-message' class='floating-panel-section'>
+                                    <div id='post-message-text'></div>
                                 </div>
-                                <img id='linkdata-img'>
-                                <span id='linkdata-desc'></span>
-                            </div>
-                            <div id='post-no-image-desc' class='floating-panel-section hidden'>
-                                <span class='hint'>Hint: Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. Click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook.</span>
+                                <div id='post-message-linkdata' class='floating-panel-section'>
+                                    <div>
+                                        <a id='linkdata-href' target='_blank' class='link-title'></a>
+                                        <span id='linkdata-caption'></span>
+                                    </div>
+                                    <img id='linkdata-img'>
+                                    <span id='linkdata-desc'></span>
+                                </div>
+                                <div id='post-no-image-desc' class='floating-panel-section hidden'>
+                                    <span class='hint'>Hint: Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. Click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook.</span>
+                                </div>
                             </div>
                         </div>
-                        <div id='details-right-column' class='panel-post-column scroll-y'>
-                            <div id='post-comments' class='floating-panel-section'>
-                                <div id='post-nocomments' class='italic'>
-                                    No comments yet.
+                        <div class='column right'>
+                            <div id='details-right-column'>
+                                <div id='post-comments' class='floating-panel-section'>
+                                    <div id='post-nocomments' class='italic'>
+                                        No comments yet.
+                                    </div>
+                                    <div id='post-comment-list'></div>
                                 </div>
-                                <div id='post-comment-list'></div>
                             </div>
                         </div>
                         <div class='ajax-loading-div hidden'></div>
@@ -184,12 +188,6 @@ header('Pragma: no-cache');
                 <textarea id='popup-comment-text' placeholder='Type a comment and press [Enter] to post it.'></textarea>
                 <div class='ajax-loading-div hidden'></div>
             </div>
-
-            <!--Image Viewer Panel-->
-            <div id='image-viewer' class='hidden'>
-
-            </div>
-
         </div>
 
         <!--Ad Tiles that will be dynamically placed.-->
@@ -222,7 +220,7 @@ header('Pragma: no-cache');
                 </p>
             </div>
         </div>
-        
+
         <div id='overlay-app-loading' class='ajax-loading-div'></div>
         <div id='overlay' class='hidden'></div>
         <div id='post-block-mask' class='post-block ui-widget hidden'></div>
