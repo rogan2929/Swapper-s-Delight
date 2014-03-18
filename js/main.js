@@ -1049,13 +1049,19 @@ var SwdView = {
      * @param {type} image
      */
     toggleSelectedImage: function(image) {
-        if (!$(image).hasClass('expanded')) {
+        if (!$(image).hasClass('expanded') && $('#post-image-container').children('.post-image-tile').length > 1) {
             $('#post-image-container').addClass('max-height');
             $(image).addClass('expanded');
+            
+            // Hide all the other images.
+            $('#post-image-container > .post-image-tile').not(image).hide();
         }
         else {
             $('#post-image-container').removeClass('max-height');
             $(image).removeClass('expanded');
+            
+            // Show all the other images.
+            $('#post-image-container > .post-image-tile').not(image).show();
         }
     },
     /***
