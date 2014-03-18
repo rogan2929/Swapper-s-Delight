@@ -263,7 +263,7 @@ a:visited {
 }
 
 #details-left-column {
-    width: 580px;
+    width: 573px;
     padding-right: 15px;
 }
 
@@ -837,8 +837,8 @@ a.link-title {
     background-size: cover;
     cursor: pointer;
     display: inline-block;
-    min-width: 183px;
-    min-height: 183px;
+    min-width: 181px;
+    min-height: 181px;
     margin-right: 6px;
 }
 
