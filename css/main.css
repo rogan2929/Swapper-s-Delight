@@ -805,6 +805,10 @@ a.link-title {
     margin-bottom: 10px;
 }
 
+.ui-effects-transfer {
+    border: 2px dotted gray;
+}
+
 #post-image-container {
     position: relative;
 }
