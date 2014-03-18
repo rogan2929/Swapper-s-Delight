@@ -1478,6 +1478,9 @@ var SwdView = {
         if (!options) {
             options = {};
         }
+        
+        effect = 'drop';
+        options = {};
 
         if (show) {
             // Make the panel modal by summoning an overlay.
