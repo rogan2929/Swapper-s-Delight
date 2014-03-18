@@ -22,6 +22,8 @@ $response = $fbSession->api(array(
     'query' => $query
         ));
 
+echo json_encode($response) . "<br/>";
+
 $constraints = array();
 
 $constraints[] = array(
