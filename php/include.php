@@ -224,23 +224,23 @@ function getOptimalWindowData($fbSession, $gid) {
             break;
         case $count >= 65 && $count < 85:
             $windowSize = 3.5;
-            $batchCount = 2;
+            $batchCount = 3;
             break;
         case $count >= 85 && $count < 115:
             $windowSize = 3;
-            $batchCount = 3;
+            $batchCount = 4;
             break;
         case $count >= 115 && $count < 150:
             $windowSize = 2.5;
-            $batchCount = 3;
+            $batchCount = 4;
             break;
         case $count >= 150 && $count < 225:
             $windowSize = 2;
-            $batchCount = 3;
+            $batchCount = 4;
             break;
         default:
             $windowSize = 1;
-            $batchCount = 4;
+            $batchCount = 5;
             break;
     }
 
