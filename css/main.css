@@ -851,6 +851,11 @@ a.link-title {
     margin-top: 5px;
     margin-right: 5px;
     display: block;
+    background-image: url('/img/close-button-red.png');
+}
+
+#post-image-container > .post-image-tile.expanded .close-button:hover {
+    background-image: url('/img/close-button-hover.png');
 }
 
 #post-image-container > .post-image-tile.right {
