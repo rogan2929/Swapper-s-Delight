@@ -1117,6 +1117,11 @@ var SwdView = {
                 $(imageTile).addClass('right');
             }
         }
+        
+        // For only 1 image, set background-size to contain, rather than cover.
+        if (post.image_url.length === 1) {
+            $(imageTile).css('background-size', 'contain');
+        }
 
         // Set up mouse over effects and connect to event handlers.
         $('#post-image-container > .post-image-tile').hoverIntent(function() {
