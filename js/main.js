@@ -409,7 +409,7 @@ var SwdPresenter = {
                                     SwdView.setMainOverlayTransparency();
 
                                     // Start with displaying the group selection panel.
-                                    SwdView.toggleFloatingPanel('#select-group-panel', true, 'transfer', {to: '#button-groups', className: 'ui-effects-transfer'});
+                                    SwdView.toggleFloatingPanel('#select-group-panel', true, 'drop');
                                 }, 1000);
                             },
                             error: SwdPresenter.handleError
@@ -596,7 +596,7 @@ var SwdPresenter = {
         // Prevent the event from bubbling up the DOM and closing the floating panel.
         e.stopPropagation();
 
-        SwdView.toggleFloatingPanel('#select-group-panel', true, 'transfer', {to: '#button-groups', className: 'ui-effects-transfer'});
+        SwdView.toggleFloatingPanel('#select-group-panel', true, 'drop');
     },
     // Event Handlers (onX(e, args))
     onClickButtonNew: function(e, args) {
@@ -752,7 +752,7 @@ var SwdPresenter = {
         // Set selected group and load its feed.
         SwdPresenter.setSelectedGroup(group);
 
-        SwdView.toggleFloatingPanel('#select-group-panel', false, 'transfer', {to: '#button-groups', className: 'ui-effects-transfer'});
+        SwdView.toggleFloatingPanel('#select-group-panel', false, 'drop');
     },
     onClickGroupClose: function(e, args) {
         var groupTile, target, gid;
@@ -1482,13 +1482,7 @@ var SwdView = {
         if (show) {
             // Make the panel modal by summoning an overlay.
             $('#overlay').show();
-
-            if (effect !== 'transfer') {
-                $(id).show(effect, options, 400);
-            }
-            else {
-                $(id).effect('transfer', options, 400);
-            }
+            $(id).show(effect, options, 400);
         }
         else {
             $('#overlay').hide();
