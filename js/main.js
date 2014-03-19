@@ -1204,7 +1204,7 @@ var SwdView = {
             }
 
             // Determine how far apart each ad-tile will be.
-            adSpread = Math.max(Math.floor(SwdView.getPostBlockCount() / 4), 5);
+            adSpread = Math.max(Math.floor(SwdView.getPostBlockCount() / 4), 7);
 
             // Insert add tiles evenly throughout all the posts.
             for (i = 1; i <= 4; i++) {
