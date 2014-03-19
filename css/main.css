@@ -856,6 +856,7 @@ a.link-title {
     min-width: 185px;
     min-height: 185px;
     margin-right: 6px;
+    margin-bottom: 6px;
 }
 
 #post-image-container .post-image-tile .close-button {
