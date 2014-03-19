@@ -198,11 +198,6 @@ a:visited {
     color: #f6f6f6;
 }
 
-.facebook-user-header .facebook-poststamp > *:first-child {
-    margin-left: 10px;
-    color: #f6f6f6;
-}
-
 .facebook-user-header .facebook-user-name {
     font-weight: bold;
 }
@@ -645,11 +640,9 @@ a:visited {
 }
 
 .facebook-user-header {
-    height: 65px;
-    line-height: 65px;
+/*    height: 65px;
+    line-height: 65px;*/
     color: #f6f6f6;
-/*    background: #13486b;*/
-/*    background: #eee;*/
     background-color: #4d81bf;
 }
 
@@ -934,12 +927,10 @@ a.link-title {
 }
 
 .facebook-user-header .facebook-poststamp {
-    line-height: 65px;
-    vertical-align: middle;    
-}
-
-.facebook-user-header .facebook-poststamp:not(:first-child) {
-    margin-left: 5px;
+    line-height: 1.4;
+    vertical-align: middle;
+    display: table-cell;
+    height: 65px;
 }
 
 #post-comments {
