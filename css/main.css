@@ -823,6 +823,7 @@ a.link-title {
 }
 
 #post-image-container {
+    margin-top: 10px;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -887,7 +888,7 @@ a.link-title {
 
 .floating-panel-content .column {
     position: absolute;
-    top: 25px;
+    top: 20px;
     bottom: 0;
     padding: 10px;
     overflow-y: auto;
