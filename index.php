@@ -61,7 +61,7 @@ header('Pragma: no-cache');
                 <!--Post Details Panel-->
 
                 <div id='post-details-panel' class='floating-panel hidden'>
-                    <div class='floating-panel-content ui-widget'>
+                    <div class='floating-panel-content tall ui-widget'>
                         <div class='close-button'></div>
                         <div class='column left'>
                             <div id='details-left-column'>
@@ -74,7 +74,6 @@ header('Pragma: no-cache');
                                         <a target='_blank' class='post-permalink float-right wrappable-link'>Permalink</a>
                                     </div>
                                 </div>
-                                <div id='post-image-container' class='floating-panel-section'></div>
                                 <div id='post-message' class='floating-panel-section'>
                                     <div id='post-message-text'></div>
                                 </div>
@@ -86,18 +85,19 @@ header('Pragma: no-cache');
                                     <img id='linkdata-img'>
                                     <span id='linkdata-desc'></span>
                                 </div>
-                                <div id='post-no-image-desc' class='floating-panel-section hidden'>
-                                    <span class='hint'>Hint: Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. Click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook.</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class='column right'>
-                            <div id='details-right-column'>
                                 <div id='post-comments' class='floating-panel-section'>
                                     <div id='post-nocomments' class='italic'>
                                         No comments yet.
                                     </div>
                                     <div id='post-comment-list'></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='column right'>
+                            <div id='details-right-column'>
+                                <div id='post-image-container' class='floating-panel-section'></div>
+                                <div id='post-no-image-desc' class='floating-panel-section hidden'>
+                                    <span class='hint'>Hint: Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. Click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook.</span>
                                 </div>
                             </div>
                         </div>

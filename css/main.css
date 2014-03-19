@@ -262,6 +262,11 @@ a:visited {
     padding-top: 25px;
 }
 
+.floating-panel > .floating-panel-content.tall {
+    bottom: 0;
+    top: 0;
+}
+
 #details-left-column {
     width: 580px;
     padding-right: 8px;
