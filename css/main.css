@@ -262,11 +262,15 @@ a:visited {
     padding-top: 25px;
 }
 
-.floating-panel > .floating-panel-content.fullsize {
+.floating-panel.fullsize {
+    width: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.floating-panel.fullsize > .floating-panel-content {
     bottom: 0;
     top: 0;
-    right: 0;
-    left: 0;
 }
 
 #details-left-column {

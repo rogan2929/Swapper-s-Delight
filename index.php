@@ -60,8 +60,8 @@ header('Pragma: no-cache');
 
                 <!--Post Details Panel-->
 
-                <div id='post-details-panel' class='floating-panel hidden'>
-                    <div class='floating-panel-content fullsize ui-widget'>
+                <div id='post-details-panel' class='floating-panel fullsize hidden'>
+                    <div class='floating-panel-content ui-widget'>
                         <div class='close-button'></div>
                         <div id='details-left-column' class='column left'>
                             <div id='post-details-user-data' class='facebook-user-header floating-panel-section'>
