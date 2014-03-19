@@ -979,7 +979,6 @@ var SwdView = {
      */
     setFloatingPanelHeight: function(height) {
         $('.floating-panel').height(height);
-        $('.floating-paenl.fullsize').height(height);
     },
     /***
      * Changes the text shown in the "Select a Group" button.
