@@ -19,7 +19,7 @@ textarea {
 }
 
 html {
-    font-size: 0.80em;
+    font-size: 0.85em;
     line-height: 1.4;
     overflow: hidden;
     /*    min-height: 800px;*/
@@ -968,6 +968,7 @@ a.link-title {
 
 .post-comment > .post-comment-text {
     margin-left: 5px;
+    font-size: 0.95em;
 }
 
 /*.post-comment a {
