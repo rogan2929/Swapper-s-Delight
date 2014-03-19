@@ -1034,7 +1034,7 @@ var SwdView = {
      * @param {type} image
      */
     toggleSelectedImage: function(image) {
-        if (!$(image).hasClass('expanded') && $('#post-image-container').children('.post-image-tile').length > 1) {
+        if (!$(image).hasClass('expanded') && $('#post-image-container > .content').children('.post-image-tile').length > 1) {
             $(image).addClass('expanded');
 
             // Hide all the other images.
