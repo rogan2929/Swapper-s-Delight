@@ -230,9 +230,9 @@ header('Pragma: no-cache');
         <script type="text/javascript">
             //<![CDATA[
             LSM_Slot({
-                adkey: '345',
+                adkey: '5a7',
                 ad_size: '300x250',
-                slot: 'slot93218',
+                slot: 'slot93684',
                 _render_div_id: 'ad-tile-1'
             });
             //]]>
@@ -241,9 +241,9 @@ header('Pragma: no-cache');
         <script type="text/javascript">
             //<![CDATA[
             LSM_Slot({
-                adkey: '553',
+                adkey: 'e8f',
                 ad_size: '300x250',
-                slot: 'slot93219',
+                slot: 'slot93683',
                 _render_div_id: 'ad-tile-2'
             });
             //]]>
@@ -252,9 +252,9 @@ header('Pragma: no-cache');
         <script type="text/javascript">
             //<![CDATA[
             LSM_Slot({
-                adkey: 'd33',
+                adkey: '4df',
                 ad_size: '300x250',
-                slot: 'slot93220',
+                slot: 'slot93685',
                 _render_div_id: 'ad-tile-3'
             });
             //]]>
