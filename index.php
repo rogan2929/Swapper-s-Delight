@@ -61,44 +61,41 @@ header('Pragma: no-cache');
                 <!--Post Details Panel-->
 
                 <div id='post-details-panel' class='floating-panel hidden'>
-                    <div class='floating-panel-content tall ui-widget'>
+                    <div class='floating-panel-content fullsize ui-widget'>
                         <div class='close-button'></div>
-                        <div class='column left'>
-                            <div id='details-left-column'>
-                                <div id='post-details-user-data' class='facebook-user-header floating-panel-section'>
-                                    <div class='facebook-user-photo'></div>
-                                    <div class='facebook-poststamp'>
-                                        <a class='facebook-user-name' target='_blank'></a>
-                                        <span>-</span>
-                                        <span class='timestamp'></span>
-                                        <a target='_blank' class='post-permalink float-right wrappable-link'>Permalink</a>
-                                    </div>
-                                </div>
-                                <div id='post-message' class='floating-panel-section'>
-                                    <div id='post-message-text'></div>
-                                </div>
-                                <div id='post-message-linkdata' class='floating-panel-section'>
-                                    <div>
-                                        <a id='linkdata-href' target='_blank' class='link-title'></a>
-                                        <span id='linkdata-caption'></span>
-                                    </div>
-                                    <img id='linkdata-img'>
-                                    <span id='linkdata-desc'></span>
-                                </div>
-                                <div id='post-comments' class='floating-panel-section'>
-                                    <div id='post-nocomments' class='italic'>
-                                        No comments yet.
-                                    </div>
-                                    <div id='post-comment-list'></div>
+                        <div id='details-left-column' class='column left'>
+                            <div id='post-details-user-data' class='facebook-user-header floating-panel-section'>
+                                <div class='facebook-user-photo'></div>
+                                <div class='facebook-poststamp'>
+                                    <a class='facebook-user-name' target='_blank'></a>
+                                    <span>-</span>
+                                    <span class='timestamp'></span>
+                                    <a target='_blank' class='post-permalink float-right wrappable-link'>Permalink</a>
                                 </div>
                             </div>
-                        </div>
-                        <div class='column right'>
-                            <div id='details-right-column'>
-                                <div id='post-image-container' class='floating-panel-section'></div>
-                                <div id='post-no-image-desc' class='floating-panel-section hidden'>
-                                    <span class='hint'>Hint: Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. Click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook.</span>
+                            <div id='post-message' class='floating-panel-section'>
+                                <div id='post-message-text'></div>
+                            </div>
+                            <div id='post-message-linkdata' class='floating-panel-section'>
+                                <div>
+                                    <a id='linkdata-href' target='_blank' class='link-title'></a>
+                                    <span id='linkdata-caption'></span>
                                 </div>
+                                <img id='linkdata-img'>
+                                <span id='linkdata-desc'></span>
+                            </div>
+                            <div id='post-comments' class='floating-panel-section'>
+                                <div id='button-show-new-comments' class='button hidden'></div>
+                                <div id='post-nocomments' class='italic'>
+                                    No comments yet.
+                                </div>
+                                <div id='post-comment-list'></div>
+                            </div>
+                        </div>
+                        <div id='details-right-column' class='column right'>
+                            <div id='post-image-container' class='floating-panel-section'></div>
+                            <div id='post-no-image-desc' class='floating-panel-section hidden'>
+                                <span class='hint'>Hint: Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. Click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook.</span>
                             </div>
                         </div>
                         <div class='ajax-loading-div hidden'></div>
