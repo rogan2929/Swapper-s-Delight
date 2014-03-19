@@ -847,11 +847,6 @@ var SwdView = {
             userImage = '';
         }
 
-        // Hide the 'no comments' div.
-        if ($('#post-nocomments').is(':visible')) {
-            $('#post-nocomments').hide();
-        }
-
         // Get a human-readable version of the comment's timestamp value.
         timeStamp = new moment(new Date(comment.time * 1000));
 
@@ -1369,7 +1364,6 @@ var SwdView = {
 
         // Populate the comments section.
         $('#post-comment-list').empty();
-        $('#post-nocomments').show();
 
         if (post.comments.length > 0) {
             for (i = 0; i < post.comments.length; i++) {
