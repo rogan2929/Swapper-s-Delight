@@ -83,6 +83,7 @@ header('Pragma: no-cache');
                                 <img id='linkdata-img'>
                                 <span id='linkdata-desc'></span>
                             </div>
+                            <div class='heading'>Comments</div>
                             <div id='post-comments' class='floating-panel-section'>
                                 <div id='button-show-new-comments' class='button hidden'></div>
                                 <div id='post-comment-list'></div>
