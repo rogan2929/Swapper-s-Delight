@@ -1107,7 +1107,7 @@ var SwdView = {
         }
 
         // Set up mouse over effects and connect to event handlers.
-        $('#post-image-container > .post-image-tile').hoverIntent(function() {
+        $('#post-image-container .post-image-tile').hoverIntent(function() {
             $(this).addClass('hover', 100);
         }, function() {
             $(this).removeClass('hover', 100);
@@ -1328,7 +1328,8 @@ var SwdView = {
             postImage = 'url("' + post.image_url[0] + '")';
 
             // Hide the no-image container and display the post's attached image.
-            $('#post-image-container > .content').empty().show();
+            $('#post-image-container > .content').empty();
+            $('#post-image-container').show();
             $('#post-no-image-desc').hide();
 
             // File the image container with post-image-tiles.
@@ -1337,6 +1338,7 @@ var SwdView = {
         else {
             // Hide the image container.
             $('#post-image-container').hide();
+            $('')
             $('#post-no-image-desc').show();
         }
 
