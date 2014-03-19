@@ -68,7 +68,6 @@ header('Pragma: no-cache');
                                 <div class='facebook-user-photo'></div>
                                 <div class='facebook-poststamp'>
                                     <a class='facebook-user-name' target='_blank'></a>
-                                    <span>-</span>
                                     <span class='timestamp'></span>
                                     <a target='_blank' class='post-permalink float-right wrappable-link'>Permalink</a>
                                 </div>

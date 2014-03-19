@@ -196,6 +196,7 @@ a:visited {
 .facebook-user-header .facebook-poststamp > * {
     margin-left: 4px;
     color: #f6f6f6;
+    display: block;
 }
 
 .facebook-user-header .facebook-user-name {
