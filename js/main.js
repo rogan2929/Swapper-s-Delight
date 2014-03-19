@@ -1,8 +1,8 @@
 "use strict";
 // "Enums"
 
-// PostType Enum
-var PostType = {
+// SelectedView Enum
+var SelectedView = {
     group: 0,
     myposts: 1,
     liked: 2,
@@ -246,8 +246,9 @@ var SwdModel = {
  * Presenter for the Swapper's Delight program.
  */
 var SwdPresenter = {
+    // Object variables and properties.
     oldestPost: null,
-    postType: PostType.group,
+    selectedView: SelectedView.group,
     selectedGroup: null,
     groups: null,
     prevOffset: null,
@@ -262,7 +263,7 @@ var SwdPresenter = {
     checkFBLoginStatus: function(callback) {
         FB.getLoginStatus(function(response) {
             // Check connection status, posting a login prompt if the user has disconnected.
-            // TODO: Replace with something better.
+            // TODO: This is stub function that doesn't appear to be able to do much.
             if (response.status !== 'connected') {
 //                SwdView.showMessage('Sorry, but your session has expired - automatically taking you back to the main page.');
 //
@@ -291,8 +292,7 @@ var SwdPresenter = {
         switch (error.status) {
             case 401:
                 // Access denied, most likely from an expired access token.
-                // Get a new access token.
-                // For now, simply refresh the page.
+                // Get a new access token by simply refreshing the page.
                 SwdView.showMessage('Sorry, but your session has expired - automatically taking you back to the main page.');
 
                 // Send the user to the app's main url.
@@ -306,6 +306,7 @@ var SwdPresenter = {
      * Entry point of program.
      */
     init: function() {
+        // Initialize the view.
         SwdView.initView();
 
         $.ajaxSetup({
@@ -321,11 +322,6 @@ var SwdPresenter = {
             });
 
             $('#loginbutton,#feedbutton').removeAttr('disabled');
-
-//            FB.Event.subscribe('auth.authResponseChange', function(response) {
-//                //SwdPresenter.uid = response.authResponse.userID;
-//                //SwdPresenter.startApp();
-//            });
 
             // Try to get a session going if there isn't one already.
             FB.getLoginStatus(function(response) {
@@ -350,7 +346,7 @@ var SwdPresenter = {
      * Starts the application after init has finished.
      */
     startApp: function() {
-        var i, selectedGroups;
+        var i;
 
         if (!SwdPresenter.groups) {
             // Retrieve group info for logged in user.
@@ -358,21 +354,12 @@ var SwdPresenter = {
                 success: function(response) {
                     SwdPresenter.groups = response;
 
-                    //selectedGroups = [];
-
                     // Call the polling function again after 100ms.
                     SwdPresenter.facebookPageInfoPoll();
 
-//                    // Find groups that have been marked as 'BST'
-//                    for (i = 0; i < SwdPresenter.groups.length; i++) {
-//                        if (SwdPresenter.groups[i].marked) {
-//                            selectedGroups.push(SwdPresenter.groups[i]);
-//                        }
-//                    }
-
                     if (SwdPresenter.groups) {
-                        //SwdPresenter.setSelectedGroup(selectedGroups[0]);
 
+                        // Retrieve the user's group preferences.
                         SwdModel.getHiddenGroups(SwdPresenter.uid, {
                             success: function(response) {
                                 SwdView.addGroupsToSelectPanel(SwdPresenter.groups, response);
@@ -384,6 +371,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickFloatingPanelCloseButton', SwdPresenter.onClickFloatingPanelCloseButton, '.floating-panel-content > .close-button', 'click');
                                 SwdView.installHandler('onClickFloatingPanelContent', SwdPresenter.onClickFloatingPanelContent, '.floating-panel-content', 'click');
                                 SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
+                                SwdView.installHandler('onClickLogout', SwdPresenter.onClickLogout, '#menu-item-logout', 'click');
                                 SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
                                 SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
                                 SwdView.installHandler('onClickPopupComment', SwdPresenter.onClickPopupComment, '#popup-comment', 'click');
@@ -415,9 +403,6 @@ var SwdPresenter = {
                             error: SwdPresenter.handleError
                         });
                     }
-                    else {
-                        // Have the view prompt the user to edit BST groups.
-                    }
                 },
                 error: SwdPresenter.handleError
             });
@@ -437,7 +422,7 @@ var SwdPresenter = {
 
             SwdPresenter.clientHeight = clientHeight;
 
-            // Calculate how far to offset things.
+            // Calculate how far to offset things. (In other words, only really do anything if the user has scrolled.
             offset = Math.max(scrollTop - offsetTop, 0);
 
             // Check to see if the offset has been updated.
@@ -455,12 +440,14 @@ var SwdPresenter = {
                 }
 
                 SwdView.setFloatingPanelHeight(height);
-
+                
+                // Change FB canvas size.
                 FB.Canvas.setSize({
                     height: Math.max($('html').height(), clientHeight)
                 });
             }
 
+            // Poll again in another 100 ms.
             setTimeout(SwdPresenter.facebookPageInfoPoll, 100);
         });
     },
@@ -516,29 +503,30 @@ var SwdPresenter = {
                     updatedTime = SwdPresenter.oldestPost.updated_time;
                 }
                 else {
+                    // Reloading all posts.
                     updatedTime = null;
                     SwdView.clearPosts();
-                    SwdPresenter.resetFbCanvasSize();
+                    SwdPresenter.refreshFbCanvasSize();
                     SwdView.toggleAjaxLoadingDiv('body', true);
                 }
 
-                switch (SwdPresenter.postType) {
-                    case PostType.group:
+                switch (SwdPresenter.selectedView) {
+                    case SelectedView.group:
                         SwdPresenter.loadNewestPosts(loadNextPage, updatedTime);
                         break;
-                    case PostType.myposts:
+                    case SelectedView.myposts:
                         if (!loadNextPage) {
                             // This request is so intensive, that it's best to return everything at once, rather than implement paging.
                             SwdPresenter.loadMyPosts();
                         }
                         break;
-                    case PostType.liked:
+                    case SelectedView.liked:
                         if (!loadNextPage) {
                             // This request is so intensive, that it's best to return everything at once, rather than implement paging.
                             SwdPresenter.loadLikedPosts();
                         }
                         break;
-                    case PostType.search:
+                    case SelectedView.search:
                         break;
                 }
             }
@@ -558,7 +546,7 @@ var SwdPresenter = {
         if (response) {
             // If a response came through, then display the posts.
             SwdPresenter.oldestPost = response[response.length - 1];
-            SwdView.populatePostBlocks(response, SwdPresenter.postType);
+            SwdView.populatePostBlocks(response, SwdPresenter.selectedView);
         }
         else
         if (!loadNextPage) {
@@ -567,12 +555,9 @@ var SwdPresenter = {
         }
     },
     /***
-     * Reset Facebook Canvas Size to default value of 800
+     * Update Facebook Canvas Size to match the canvas's clientHeight or html height, whichever is greater.
      */
-    resetFbCanvasSize: function() {
-//        FB.Canvas.setSize({
-//            height: 810
-//        });
+    refreshFbCanvasSize: function() {
         FB.Canvas.getPageInfo(function(pageInfo) {
             SwdPresenter.clientHeight = parseInt(pageInfo.clientHeight);
 
@@ -587,10 +572,10 @@ var SwdPresenter = {
      */
     setSelectedGroup: function(group) {
         SwdPresenter.selectedGroup = group;
-        SwdPresenter.postType = PostType.group;
+        SwdPresenter.selectedView = SelectedView.group;
         SwdPresenter.loadPosts(false);
         SwdView.setGroupButtonText(group.name);
-        SwdView.setSelectedPostType('button-nav-group');
+        SwdView.setSelectedView('button-nav-group');
     },
     onClickButtonGroups: function(e, args) {
         // Prevent the event from bubbling up the DOM and closing the floating panel.
@@ -633,18 +618,18 @@ var SwdPresenter = {
 
         switch (id) {
             case 'button-nav-group':
-                SwdPresenter.postType = PostType.group;
+                SwdPresenter.selectedView = SelectedView.group;
                 break;
             case 'button-nav-myposts':
-                SwdPresenter.postType = PostType.myposts;
+                SwdPresenter.selectedView = SelectedView.myposts;
                 break;
             case 'button-nav-liked':
-                SwdPresenter.postType = PostType.liked;
+                SwdPresenter.selectedView = SelectedView.liked;
                 break;
         }
 
         SwdPresenter.loadPosts(false);
-        SwdView.setSelectedPostType(id);
+        SwdView.setSelectedView(id);
     },
     onClickPopupComment: function(e, args) {
         e.stopPropagation();
@@ -1013,7 +998,7 @@ var SwdView = {
      * Set selected post type.
      * @param {type} id
      */
-    setSelectedPostType: function(id) {
+    setSelectedView: function(id) {
         $('.nav-button').removeClass('selected-nav');
         $('#' + id).addClass('selected-nav');
     },
@@ -1050,18 +1035,16 @@ var SwdView = {
      */
     toggleSelectedImage: function(image) {
         if (!$(image).hasClass('expanded') && $('#post-image-container').children('.post-image-tile').length > 1) {
-            $('#post-image-container').addClass('max-height');
             $(image).addClass('expanded');
 
             // Hide all the other images.
-            $('#post-image-container > .post-image-tile').not(image).hide();
+            $('#post-image-container .post-image-tile').not(image).hide();
         }
         else {
-            $('#post-image-container').removeClass('max-height');
             $(image).removeClass('expanded');
 
             // Show all the other images.
-            $('#post-image-container > .post-image-tile').not(image).show();
+            $('#post-image-container .post-image-tile').not(image).show();
         }
     },
     /***
@@ -1104,14 +1087,14 @@ var SwdView = {
         // Try for a square first.
         // Subtract 6 * colCount - 1 from total width.
         tileWidth = ($('#post-image-container').width() - (6 * (colCount - 1))) / post.image_url.length;
-        tileHeight = Math.min(tileWidth, 500);
+        tileHeight = Math.min(tileWidth, $('#post-image-container').height());
 
         // Create at tile for each image.
         for (i = 1; i <= post.image_url.length; i++) {
             imageUrl = 'url(' + post.image_url[i - 1] + ')';
             imageTile = $('<div class="post-image-tile"><div class="close-button"></div></div>');
 
-            $(imageTile).height(tileHeight).width(tileWidth).css('background-image', imageUrl).appendTo('#post-image-container');
+            $(imageTile).height(tileHeight).width(tileWidth).css('background-image', imageUrl).appendTo('#post-image-container > .content');
 
             if (i % colCount === 0) {
                 $(imageTile).addClass('right');
@@ -1184,9 +1167,9 @@ var SwdView = {
     /***
      * Populate the main view with post blocks.
      * @param {type} posts
-     * @param {type} postType
+     * @param {type} selectedView
      */
-    populatePostBlocks: function(posts, postType) {
+    populatePostBlocks: function(posts, selectedView) {
         var i, post, adSpread;
 
         SwdView.toggleAjaxLoadingDiv('body', false);
@@ -1215,19 +1198,13 @@ var SwdView = {
                         SwdView.createTextLinkPostBlock(post);
                         break;
                 }
-
-                // Every tiles, place an ad-tile.
-//                if (i % adSpread === 0 && i > 0 && adTileCount < 3) {
-//                    adTileCount++;
-//                    $('#ad-tile-' + adTileCount).show().appendTo('#post-feed');
-//                }
             }
 
             // Associate the click event handler for newly created posts.
             $('.post-block').not('.post-block.ad-div').click(SwdView.handlers['onClickPostBlock']);
 
             // Show the "Load More..." block if the group's main feed is being displayed.
-            if (postType === PostType.group) {
+            if (selectedView === SelectedView.group) {
                 // Add the 'Load More...' post block.
                 $('<div class="button post-block load-more ui-widget"><div class="ajax-loading-div hidden"></div><div class="load-more-text">Load more...</div></div>').appendTo('#post-feed');
 
@@ -1261,7 +1238,7 @@ var SwdView = {
                 $(this).removeClass('hover', 100);
             });
 
-            SwdPresenter.resetFbCanvasSize();
+            SwdPresenter.refreshFbCanvasSize();
         }
         else {
 //            $('#post-feed-noposts').show();
@@ -1351,7 +1328,7 @@ var SwdView = {
             postImage = 'url("' + post.image_url[0] + '")';
 
             // Hide the no-image container and display the post's attached image.
-            $('#post-image-container').empty().show();
+            $('#post-image-container > .content').empty().show();
             $('#post-no-image-desc').hide();
 
             // File the image container with post-image-tiles.

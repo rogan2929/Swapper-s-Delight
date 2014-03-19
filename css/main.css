@@ -787,6 +787,7 @@ a.link-title {
     margin-bottom: 10px;
     border: 2px solid #f6f6f6;
     padding: 7px;
+    position: relative;
 }
 
 .facebook-user-header.floating-panel-section {
@@ -817,18 +818,22 @@ a.link-title {
 }
 
 #post-image-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+#post-image-container > .content {
     position: relative;
 }
 
-#post-image-container.max-height {
-/*    height: 500px;*/
-}
-
-#post-image-container > .post-image-tile.expanding {
+#post-image-container .post-image-tile.expanding {
     position: absolute;
 }
 
-#post-image-container > .post-image-tile.expanded {
+#post-image-container .post-image-tile.expanded {
     position: absolute;
     background-size: contain;
     margin-right: 0;
@@ -838,7 +843,6 @@ a.link-title {
     bottom: 0;
     width: auto !important;
     height: auto !important;
-/*    background-position: top left;*/
 }
 
 #post-image-container > .post-image-tile {
@@ -847,8 +851,8 @@ a.link-title {
     background-size: cover;
     cursor: pointer;
     display: inline-block;
-    min-width: 186px;
-    min-height: 186px;
+    min-width: 185px;
+    min-height: 185px;
     margin-right: 6px;
 }
 

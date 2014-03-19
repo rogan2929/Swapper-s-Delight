@@ -93,7 +93,9 @@ header('Pragma: no-cache');
                             </div>
                         </div>
                         <div id='details-right-column' class='column right'>
-                            <div id='post-image-container' class='floating-panel-section'></div>
+                            <div id='post-image-container' class='floating-panel-section'>
+                                <div class='content'></div>
+                            </div>
                             <div id='post-no-image-desc' class='floating-panel-section hidden'>
                                 <span class='hint'>Hint: Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. Click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook.</span>
                             </div>
