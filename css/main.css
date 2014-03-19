@@ -196,11 +196,7 @@ a:visited {
 .facebook-user-header .facebook-poststamp > * {
     margin-left: 4px;
     color: #f6f6f6;
-}
-
-.facebook-user-header .facebook-poststamp > *:first-child {
-    margin-left: 10px;
-    color: #f6f6f6;
+    display: block;
 }
 
 .facebook-user-header .facebook-user-name {
@@ -262,13 +258,24 @@ a:visited {
     padding-top: 25px;
 }
 
+.floating-panel.fullsize {
+    width: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.floating-panel.fullsize > .floating-panel-content {
+    bottom: 0;
+    top: 0;
+}
+
 #details-left-column {
-    width: 580px;
+    width: 300px;
     padding-right: 8px;
 }
 
 #details-right-column {
-    width: 312px;
+    left: 328px;
     padding-right: 8px;
 }
 
@@ -634,11 +641,9 @@ a:visited {
 }
 
 .facebook-user-header {
-    height: 65px;
-    line-height: 65px;
+/*    height: 65px;
+    line-height: 65px;*/
     color: #f6f6f6;
-/*    background: #13486b;*/
-/*    background: #eee;*/
     background-color: #4d81bf;
 }
 
@@ -656,9 +661,16 @@ a:visited {
     font-size: 1.15em;
 }
 
-.facebook-poststamp .post-permalink {
-    display: inline-block;
+.facebook-user-header .post-permalink {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 1.3em;
     margin-right: 10px;
+    color: #f6f6f6;
 }
 
 .hint {
@@ -780,6 +792,7 @@ a.link-title {
     margin-bottom: 10px;
     border: 2px solid #f6f6f6;
     padding: 7px;
+    position: relative;
 }
 
 .facebook-user-header.floating-panel-section {
@@ -810,18 +823,19 @@ a.link-title {
 }
 
 #post-image-container {
-    position: relative;
+    margin-top: 10px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 
-#post-image-container.max-height {
-    height: 500px;
-}
-
-#post-image-container > .post-image-tile.expanding {
+#post-image-container .post-image-tile.expanding {
     position: absolute;
 }
 
-#post-image-container > .post-image-tile.expanded {
+#post-image-container .post-image-tile.expanded {
     position: absolute;
     background-size: contain;
     margin-right: 0;
@@ -831,30 +845,30 @@ a.link-title {
     bottom: 0;
     width: auto !important;
     height: auto !important;
-/*    background-position: top left;*/
 }
 
-#post-image-container > .post-image-tile {
+#post-image-container .post-image-tile {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     cursor: pointer;
     display: inline-block;
-    min-width: 183px;
-    min-height: 183px;
+    min-width: 185px;
+    min-height: 185px;
     margin-right: 6px;
+    margin-bottom: 6px;
 }
 
-#post-image-container > .post-image-tile .close-button {
+#post-image-container .post-image-tile .close-button {
     display: none;
 }
 
-#post-image-container > .post-image-tile.single {
+#post-image-container .post-image-tile.single {
     cursor: default;
     background-size: contain;
 }
 
-#post-image-container > .post-image-tile.expanded .close-button {
+#post-image-container .post-image-tile.expanded .close-button {
     margin-top: 5px;
     margin-right: 5px;
     display: block;
@@ -865,17 +879,17 @@ a.link-title {
 /*    background-image: url('/img/panel-close-light-hover.png');*/
 }
 
-#post-image-container > .post-image-tile.right {
+#post-image-container .post-image-tile.right {
     margin-right: 0px;
 }
 
-#post-image-container  > .post-image-tile.hover {
+#post-image-container .post-image-tile.hover {
     background-color: #f6f6f6;
 }
 
 .floating-panel-content .column {
     position: absolute;
-    top: 25px;
+    top: 20px;
     bottom: 0;
     padding: 10px;
     overflow-y: auto;
@@ -923,12 +937,10 @@ a.link-title {
 }
 
 .facebook-user-header .facebook-poststamp {
-    line-height: 65px;
-    vertical-align: middle;    
-}
-
-.facebook-user-header .facebook-poststamp:not(:first-child) {
-    margin-left: 5px;
+    line-height: 1.4;
+    vertical-align: middle;
+    display: table-cell;
+    height: 65px;
 }
 
 #post-comments {
