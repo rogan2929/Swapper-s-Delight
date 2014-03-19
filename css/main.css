@@ -829,10 +829,6 @@ a.link-title {
     left: 0;
 }
 
-#post-image-container > .content {
-    position: relative;
-}
-
 #post-image-container .post-image-tile.expanding {
     position: absolute;
 }

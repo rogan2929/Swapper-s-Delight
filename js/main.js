@@ -1034,7 +1034,7 @@ var SwdView = {
      * @param {type} image
      */
     toggleSelectedImage: function(image) {
-        if (!$(image).hasClass('expanded') && $('#post-image-container > .content').children('.post-image-tile').length > 1) {
+        if (!$(image).hasClass('expanded') && $('#post-image-container').children('.post-image-tile').length > 1) {
             $(image).addClass('expanded');
 
             // Hide all the other images.
@@ -1094,7 +1094,7 @@ var SwdView = {
             imageUrl = 'url(' + post.image_url[i - 1] + ')';
             imageTile = $('<div class="post-image-tile"><div class="close-button"></div></div>');
 
-            $(imageTile).height(tileHeight).width(tileWidth).css('background-image', imageUrl).appendTo('#post-image-container > .content');
+            $(imageTile).height(tileHeight).width(tileWidth).css('background-image', imageUrl).appendTo('#post-image-container');
 
             if (i % colCount === 0) {
                 $(imageTile).addClass('right');
@@ -1328,8 +1328,7 @@ var SwdView = {
             postImage = 'url("' + post.image_url[0] + '")';
 
             // Hide the no-image container and display the post's attached image.
-            $('#post-image-container > .content').empty();
-            $('#post-image-container').show();
+            $('#post-image-container').show().empty();
             $('#post-no-image-desc').hide();
 
             // File the image container with post-image-tiles.
@@ -1338,7 +1337,6 @@ var SwdView = {
         else {
             // Hide the image container.
             $('#post-image-container').hide();
-            $('')
             $('#post-no-image-desc').show();
         }
 
