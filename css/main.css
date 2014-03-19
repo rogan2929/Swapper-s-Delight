@@ -865,7 +865,7 @@ a.link-title {
 
 #post-image-container .post-image-tile.single {
     cursor: default;
-    background-size: initial;
+    background-size: contain;
 }
 
 #post-image-container .post-image-tile.expanded .close-button {
