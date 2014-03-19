@@ -203,7 +203,7 @@ function getSmallImageUrl($image) {
     do {
         $imageSize = getimagesize($image[$index]['source']);
         $index--;
-    } while ($imageSize[0] < 250 && $imageSize[1] < 150 && $index >= 0);
+    } while ($imageSize[0] < 250 && $imageSize[1] < 150 && $index > 0);
     
     return $image[$index]['source'];
 }
