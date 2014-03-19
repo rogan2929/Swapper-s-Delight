@@ -268,12 +268,12 @@ a:visited {
 }
 
 #details-left-column {
-    width: 580px;
+    width: 300px;
     padding-right: 8px;
 }
 
 #details-right-column {
-    width: 312px;
+    width: 590px;
     padding-right: 8px;
 }
 
@@ -819,7 +819,7 @@ a.link-title {
 }
 
 #post-image-container.max-height {
-    height: 500px;
+/*    height: 500px;*/
 }
 
 #post-image-container > .post-image-tile.expanding {
@@ -845,8 +845,8 @@ a.link-title {
     background-size: cover;
     cursor: pointer;
     display: inline-block;
-    min-width: 183px;
-    min-height: 183px;
+    min-width: 186px;
+    min-height: 186px;
     margin-right: 6px;
 }
 
