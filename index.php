@@ -69,8 +69,8 @@ header('Pragma: no-cache');
                                 <div class='facebook-poststamp'>
                                     <a class='facebook-user-name' target='_blank'></a>
                                     <span class='timestamp'></span>
-                                    <a target='_blank' class='post-permalink float-right wrappable-link'>Permalink</a>
                                 </div>
+                                <a target='_blank' class='post-permalink float-right wrappable-link'>Permalink</a>
                             </div>
                             <div id='post-message' class='floating-panel-section'>
                                 <div id='post-message-text'></div>
