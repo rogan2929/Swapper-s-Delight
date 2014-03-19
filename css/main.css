@@ -662,7 +662,13 @@ a:visited {
 }
 
 .facebook-poststamp .post-permalink {
-    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 1.3em;
     margin-right: 10px;
 }
 
