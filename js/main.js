@@ -1090,10 +1090,6 @@ var SwdView = {
             imageTile = $('<div class="post-image-tile"><div class="close-button"></div></div>');
 
             $(imageTile).height(tileHeight).width(tileWidth).css('background-image', imageUrl).appendTo('#post-image-container');
-
-            if (i % colCount === 0) {
-                $(imageTile).addClass('right');
-            }
         }
 
         // For only 1 image, set background-size to contain, rather than cover.
