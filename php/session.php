@@ -26,6 +26,8 @@ try {
     
     // Save as a session variable.
     $_SESSION['fbSession'] = $fbSession;
+    
+    echo json_encode($_SESSION['fbSession']);
 } catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
     // user ID even though the access token is invalid.
