@@ -22,17 +22,27 @@ $response = $fbSession->api(array(
     'query' => $query
         ));
 
-$constraints = array();
+$windowSize = $windowData['windowSize'];
+$windowStart = time();
+$windowEnd = $windowStart - $windowSize;
 
-$constraints[] = array(
-    'field' => 'actor_id',
-    'operator' => '=',
-    'value' => $uid
-);
+for ($i = 0; $i < 100; $i++) {
+    $request = '/' . $gid . '/feed?fields=id,from&since=' . $windowStart . '&until=' . $windowEnd . '&limit=5000&date_format=U';
+    echo $request . "<br/>";
+}
 
-$posts = executeBatchQuery($fbSession, $gid, $constraints);
-
-echo count($response) . "<br/>";
-echo count($posts);
+//
+//$constraints = array();
+//
+//$constraints[] = array(
+//    'field' => 'actor_id',
+//    'operator' => '=',
+//    'value' => $uid
+//);
+//
+//$posts = executeBatchQuery($fbSession, $gid, $constraints);
+//
+//echo count($response) . "<br/>";
+//echo count($posts);
 
 //echo count(getGroupPostsbyUid($fbSession, $gid, $uid));
