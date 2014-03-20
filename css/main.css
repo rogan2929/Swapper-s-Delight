@@ -801,8 +801,10 @@ a.link-title {
 .floating-panel-section {
     margin-bottom: 10px;
     border: 2px solid #f6f6f6;
-    padding: 7px;
+/*    padding: 7px;*/
     position: relative;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .facebook-user-header.floating-panel-section {
@@ -1105,7 +1107,7 @@ div.login-div {
     height: 4.5em;
     padding: 2px;
     position: relative;
-    margin-left: -2px;
+    
 }
 
 #post-comment-text > textarea {
