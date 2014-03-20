@@ -121,11 +121,11 @@ var SwdModel = {
      * @param {type} updatedTime
      * @param {type} callbacks Completed callback function.
      */
-    getNewestPosts: function(gid, updatedTime, callbacks) {
+    getNewestPosts: function(gid, refresh, callbacks) {
         var url = '/php/new-posts.php?gid=' + gid;
 
-        if (updatedTime) {
-            url += '&updatedTime=' + updatedTime;
+        if (refresh) {
+            url += '&refresh=' + refresh | 0;
         }
 
         $.ajax({
@@ -267,7 +267,6 @@ var SwdModel = {
  */
 var SwdPresenter = {
     // Object variables and properties.
-    oldestPost: null,
     selectedView: SelectedView.group,
     selectedGroup: null,
     groups: null,
@@ -477,7 +476,7 @@ var SwdPresenter = {
     loadLikedPosts: function() {
         SwdModel.getLikedPosts(SwdPresenter.uid, SwdPresenter.selectedGroup.gid, {
             success: function(response) {
-                SwdPresenter.loadPostsComplete(null, response);
+                SwdPresenter.loadPostsComplete(response);
             },
             error: SwdPresenter.handleError
         });
@@ -488,21 +487,20 @@ var SwdPresenter = {
     loadMyPosts: function() {
         SwdModel.getMyPosts(SwdPresenter.uid, SwdPresenter.selectedGroup.gid, {
             success: function(response) {
-                SwdPresenter.loadPostsComplete(null, response);
+                SwdPresenter.loadPostsComplete(response);
             },
             error: SwdPresenter.handleError
         });
     },
     /***
      * Load feed for the current group.
-     * @param {type} loadNextPage
-     * @param {type} updatedTime
+     * @param {type} refresh
      */
-    loadNewestPosts: function(loadNextPage, updatedTime) {
+    loadNewestPosts: function(refresh) {
         // Get posts and then display them.
-        SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, updatedTime, {
+        SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, refresh, {
             success: function(response) {
-                SwdPresenter.loadPostsComplete(loadNextPage, response);
+                SwdPresenter.loadPostsComplete(response);
             },
             error: SwdPresenter.handleError
         });
@@ -517,16 +515,16 @@ var SwdPresenter = {
         // Get posts and then display them.
         SwdModel.searchPosts(SwdPresenter.selectedGroup.gid, SwdPresenter.search, {
             success: function(response) {
-                SwdPresenter.loadPostsComplete(null, response);
+                SwdPresenter.loadPostsComplete(response);
             },
             error: SwdPresenter.handleError
         });
     },
     /***
      * High level post loading function.
-     * @param {type} loadNextPage
+     * @param {type} refresh
      */
-    loadPosts: function(loadNextPage) {
+    loadPosts: function(refresh) {
         var updatedTime;
 
         // Before calling anything, confirm login status.
@@ -534,12 +532,18 @@ var SwdPresenter = {
             if (!SwdPresenter.currentlyLoading) {
                 SwdPresenter.currentlyLoading = true;
 
-                if (loadNextPage && SwdPresenter.oldestPost) {
-                    updatedTime = SwdPresenter.oldestPost.updated_time;
-                }
-                else {
-                    // Reloading all posts.
-                    updatedTime = null;
+//                if (loadNextPage && SwdPresenter.oldestPost) {
+//                    updatedTime = SwdPresenter.oldestPost.updated_time;
+//                }
+//                else {
+//                    // Reloading all posts.
+//                    updatedTime = null;
+//                    SwdView.clearPosts();
+//                    SwdPresenter.refreshFbCanvasSize();
+//                    SwdView.toggleAjaxLoadingDiv('body', true);
+//                }
+
+                if (refresh) {
                     SwdView.clearPosts();
                     SwdPresenter.refreshFbCanvasSize();
                     SwdView.toggleAjaxLoadingDiv('body', true);
@@ -547,24 +551,24 @@ var SwdPresenter = {
 
                 switch (SwdPresenter.selectedView) {
                     case SelectedView.group:
-                        SwdPresenter.loadNewestPosts(loadNextPage, updatedTime);
+                        SwdPresenter.loadNewestPosts(refresh);
                         break;
                     case SelectedView.myposts:
                         if (!loadNextPage) {
                             // This request is so intensive, that it's best to return everything at once, rather than implement paging.
-                            SwdPresenter.loadMyPosts();
+                            SwdPresenter.loadMyPosts(refresh);
                         }
                         break;
                     case SelectedView.liked:
                         if (!loadNextPage) {
                             // This request is so intensive, that it's best to return everything at once, rather than implement paging.
-                            SwdPresenter.loadLikedPosts();
+                            SwdPresenter.loadLikedPosts(refresh);
                         }
                         break;
                     case SelectedView.search:
                         if (!loadNextPage) {
                             // This request is so intensive, that it's best to return everything at once, rather than implement paging.
-                            SwdPresenter.loadSearchPosts();
+                            SwdPresenter.loadSearchPosts(refresh);
                         }
                         break;
                 }
@@ -573,24 +577,12 @@ var SwdPresenter = {
     },
     /***
      * Function to wrap up any kind of post loading.
-     * @param {type} loadNextPage
      * @param {type} response
      */
-    loadPostsComplete: function(loadNextPage, response) {
-        if (!loadNextPage) {
-            // Clear previous results, unless loading a new page.
-            SwdPresenter.oldestPost = null;
-        }
-
+    loadPostsComplete: function(response) {
         if (response) {
             // If a response came through, then display the posts.
-            SwdPresenter.oldestPost = response[response.length - 1];
             SwdView.populatePostBlocks(response, SwdPresenter.selectedView);
-        }
-        else
-        if (!loadNextPage) {
-            // Otherwise, clear the previous oldest post.
-            SwdPresenter.oldestPost = null;
         }
     },
     /***
