@@ -1459,11 +1459,9 @@ var SwdView = {
      * @param {type} show
      */
     toggleAjaxLoadingDiv: function(parent, show) {
-        var visible = $('.ajax-loading-div').filter(':visible').length;
-        
         if (show) {
-            // Before showing a loading-div, make sure it's the only one.
-            if ($('.ajax-loading-div').filter(':visible').length === 1) {
+            // Before showing a loading-div, make sure no others are visible.
+            if ($('.ajax-loading-div').filter(':visible').length === 0) {
                 $(parent + ' .ajax-loading-div').show();
             }
         }
