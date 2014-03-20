@@ -15,5 +15,7 @@ if (http_response_code() != 401) {
         $fbSession->api('/' . $postId . '/likes', 'DELETE');
     }
     
+    // TODO: Update the cached FQL stream.
+    
     echo $userLikes;
 }

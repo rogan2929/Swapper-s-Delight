@@ -1,8 +1,5 @@
 <?php
 
-//require_once 'session.php';
-//require_once 'include.php';
-
 require_once 'session.php';
 require_once 'stream_data.php';
 
@@ -23,7 +20,7 @@ if (http_response_code() != 401) {
     // Slice the array for processing.
     $posts = array_slice($_SESSION['stream'], $offset, $limit);
     
-    $_SESSION['pagingOffset'] = $offset + $limit;    
+    $_SESSION['pagingOffset'] = $offset + $limit;
     
     echo json_encode(getPostData($fbSession, $posts));
 }

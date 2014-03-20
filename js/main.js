@@ -48,11 +48,10 @@ var SwdModel = {
     /***
      * Get posts in the group that are liked.
      * @param {type} gid
-     * @param {type} refresh
      * @param {type} callbacks
      */
-    getLikedPosts: function(gid, refresh, callbacks) {
-        var url = '/php/liked-posts.php?gid=' + gid + '&refresh=' + (refresh | 0);
+    getLikedPosts: function(gid, callbacks) {
+        var url = '/php/liked-posts.php?gid=' + gid;
 
         $.ajax({
             type: 'GET',
@@ -102,7 +101,7 @@ var SwdModel = {
      * @param {type} callbacks
      */
     getMyPosts: function(uid, gid, callbacks) {
-        var url = '/php/my-posts.php?gid=' + gid + '&uid=' + uid + '&refresh=' + (refresh | 0);
+        var url = '/php/my-posts.php?gid=' + gid + '&uid=' + uid;
 
         $.ajax({
             type: 'GET',
@@ -219,6 +218,25 @@ var SwdModel = {
         });
     },
     /***
+     * Refresh the cached FQL stream on the server.
+     * @param {type} gid
+     * @param {type} callbacks
+     */
+    refreshStream: function(gid, callbacks) {
+        var url = '/php/refresh-stream.php?gid=' + uid;
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(response) {
+                callbacks.success.call(SwdModel, response);
+            },
+            error: function(response) {
+                callbacks.error.call(SwdModel, response);
+            }
+        });
+    },
+    /***
      * Restores all groups to the selected groups list.
      * @param {type} uid
      * @param {type} callbacks
@@ -272,6 +290,7 @@ var SwdPresenter = {
     currentlyLoading: false,
     selectedPost: null,
     search: null,
+    refreshStream: null,
     /***
      * Confirm Facebook Login Status.
      * @param {type} callback
@@ -493,9 +512,17 @@ var SwdPresenter = {
      * @param {type} refresh
      */
     loadNewestPosts: function(refresh) {
+        // If there is already a timer function running, then clear it.
+        clearInterval(SwdPresenter.refreshStream);
+        
         // Get posts and then display them.
         SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, refresh, {
             success: function(response) {
+                // Set a timer function to periodically refresh the server-side FQL stream.
+                SwdPresenter.refreshStream = setInterval(function() {
+                    SwdModel.refreshStream(SwdPresenter.selectedGroup.gid);
+                }, 600000);
+                
                 SwdPresenter.loadPostsComplete(response);
             },
             error: SwdPresenter.handleError
@@ -549,13 +576,13 @@ var SwdPresenter = {
                         SwdPresenter.loadNewestPosts(refresh);
                         break;
                     case SelectedView.myposts:
-                        SwdPresenter.loadMyPosts(refresh);
+                        SwdPresenter.loadMyPosts();
                         break;
                     case SelectedView.liked:
-                        SwdPresenter.loadLikedPosts(refresh);
+                        SwdPresenter.loadLikedPosts();
                         break;
                     case SelectedView.search:
-                        SwdPresenter.loadSearchPosts(refresh);
+                        SwdPresenter.loadSearchPosts();
                         break;
                 }
             }
@@ -587,10 +614,10 @@ var SwdPresenter = {
      * Set currently selected group.
      * @param {type} group
      */
-    setSelectedGroup: function(group, refresh) {
+    setSelectedGroup: function(group) {
         SwdPresenter.selectedGroup = group;
         SwdPresenter.selectedView = SelectedView.group;
-        SwdPresenter.loadPosts(refresh);
+        SwdPresenter.loadPosts(true);
         SwdView.setGroupButtonText(group.name);
         SwdView.setSelectedView('button-nav-group');
     },
@@ -757,7 +784,7 @@ var SwdPresenter = {
         }
 
         // Set selected group and load its feed.
-        SwdPresenter.setSelectedGroup(group, true);
+        SwdPresenter.setSelectedGroup(group);
 
         SwdView.toggleFloatingPanel('#select-group-panel', false, 'drop');
     },

@@ -2,15 +2,26 @@
 
 function fetchStream($fbSession, $gid, $refresh = 0) {
     if (http_response_code() != 401) {
-        // On certain conditions, execute a new batch query to fetch the stream.
-        // 1. Last updated time > 5 minutes.
-        // 2. A new group was selected.
-        // 3. Stream has not been fetched yet.
-        if (!isset($_SESSION['stream']) || ($_SESSION['lastUpdateTime'] < time() - 300) || $_SESSION['gid'] != $gid || $refresh == 1) {
+        // Wait for other threads to finish updating the cached FQL stream.
+        waitForFetchStreamCompletion();
+
+        // Refresh the FQL stream.
+        if ($refresh == 1) {
+            $_SESSION['refreshing'] = true;
             $_SESSION['stream'] = queryStream($fbSession, $gid);
-            $_SESSION['lastUpdateTime'] = time();
             $_SESSION['gid'] = $gid;
+            $_SESSION['refreshing'] = false;
         }
+    }
+}
+
+/* * *
+ * Forcibly pause the thread in order for fetchStream to complete.
+ */
+
+function waitForFetchStreamCompletion() {
+    while ($_SESSION['refreshing'] == true) {
+        sleep(3);
     }
 }
 
@@ -49,7 +60,7 @@ function getPostData($fbSession, $posts, $limit) {
         $body = json_decode($response[$i]['body'], true);
         $result = array_merge($result, processStreamQuery($body[0]['fql_result_set'], $body[1]['fql_result_set'], $body[2]['fql_result_set']));
     }
-    
+
     return $result;
 }
 
@@ -71,7 +82,7 @@ function queryStream($fbSession, $gid) {
 
         // Construct the FB batch request
         for ($j = 0; $j < 50; $j++) {
-            $query = 'SELECT post_id,actor_id,message FROM stream WHERE source_id=' . $gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
+            $query = 'SELECT post_id,actor_id,message,like_info FROM stream WHERE source_id=' . $gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
 
             $queries[] = array(
                 'method' => 'GET',
