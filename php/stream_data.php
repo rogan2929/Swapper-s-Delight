@@ -310,20 +310,19 @@ function getLargeImageUrl($image) {
 
 function getSmallImageUrl($image) {
     // Grab the 'middle' image for a scaled version of the full size image.
-    //$index = intval(floor((count($image) / 2)));
-    $index = 0;
+    $index = intval(floor((count($image) / 2)));
 
     // Try to ensure a minimum width. If it is too small, then proceed to the next largest
     // image in the image collection. (0 being the largest).
-//    do {
-//        $imageSize = getimagesize($image[$index]['source']);
-//        $index--;
-//
-//        if ($index < 0) {
-//            $index = 0;
-//            break;
-//        }
-//    } while ($imageSize[0] < 250 && $imageSize[1] < 150);
+    do {
+        $imageSize = getimagesize($image[$index]['source']);
+        $index--;
+
+        if ($index < 0) {
+            $index = 0;
+            break;
+        }
+    } while ($imageSize[0] < 250 && $imageSize[1] < 150);
 
     return $image[$index]['source'];
 }
