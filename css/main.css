@@ -981,6 +981,7 @@ a.link-title {
 }
 
 .post-comment > .post-comment-text {
+    margin-top: 4px;
     margin-left: 5px;
     font-size: 0.95em;
 }
