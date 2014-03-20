@@ -24,6 +24,8 @@ session_start();
 // Save as a session variable.
 $_SESSION['fbSession'] = $fbSession;
 
+echo json_encode($_SESSION['fbSession']);
+
 // Test the access token.
 try {
     $userProfile = $fbSession->api('/me', 'GET');
