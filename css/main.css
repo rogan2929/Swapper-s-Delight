@@ -91,6 +91,10 @@ textarea {
     border: 1px solid #ccc;
 }
 
+input[type=text] {
+    border: 1px solid #ccc;
+}
+
 /* ==========================================================================
    Browse Happy prompt
    ========================================================================== */
@@ -1106,7 +1110,7 @@ div.login-div {
 #post-comment-text {
     height: 4.5em;
     position: relative;
-    width: 335px;
+    width: 333px;
     padding: 0;
 }
 
