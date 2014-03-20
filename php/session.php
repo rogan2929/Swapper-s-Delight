@@ -19,6 +19,7 @@ $fbSession = new Facebook(array(
     'cookie' => true
         ));
 
+session_start();
 
 // Save as a session variable.
 $_SESSION['fbSession'] = $fbSession;
