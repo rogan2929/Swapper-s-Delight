@@ -124,7 +124,7 @@ var SwdModel = {
     getNewestPosts: function(gid, refresh, offset, callbacks) {
         var url = '/php/new-posts.php?gid=' + gid + '&refresh=' + (refresh | 0);
 
-        if (offset) {
+        if (offset !== null) {
             url += '&offset=' + offset;
         }
 
