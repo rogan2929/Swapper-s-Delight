@@ -55,7 +55,7 @@ header('Pragma: no-cache');
                             <span>Liked Posts</span>
                         </div>
                     </div>
-                    <textarea id='main-search' rows='1' placeholder='Search this group'></textarea>
+                    <input type='text' id='main-search' placeholder='Search this group'>
                 </div>
                 <div id='post-feed' class='scroll-y'></div>
 

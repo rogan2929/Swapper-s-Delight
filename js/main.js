@@ -803,7 +803,7 @@ var SwdPresenter = {
         return true;
     },
     onKeyUpSearch: function(e, args) {        
-        if (e.which === 13 && !e.shiftKey) {
+        if (e.which === 13) {
             e.preventDefault();
             
             alert($('#main-search').val())
