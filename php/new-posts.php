@@ -9,8 +9,14 @@ require_once 'stream_data.php';
 $gid = $_GET['gid'];
 //$updatedTime = $_GET['updatedTime'];
 
+
+try {
 // Fetch the stream for the group.
 fetchStream($fbSession, $gid);
+}
+catch (FacebookApiException $e) {
+    echo $e->getMessage();
+}
 
 if (http_response_code() != 401) {
     //$constraints = array();
