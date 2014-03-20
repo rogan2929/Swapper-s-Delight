@@ -223,7 +223,7 @@ var SwdModel = {
      * @param {type} callbacks
      */
     refreshStream: function(gid, callbacks) {
-        var url = '/php/refresh-stream.php?gid=' + uid;
+        var url = '/php/refresh-stream.php?gid=' + gid;
 
         $.ajax({
             type: 'GET',
@@ -514,15 +514,18 @@ var SwdPresenter = {
     loadNewestPosts: function(refresh) {
         // If there is already a timer function running, then clear it.
         clearInterval(SwdPresenter.refreshStream);
-        
+
         // Get posts and then display them.
         SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, refresh, {
             success: function(response) {
                 // Set a timer function to periodically refresh the server-side FQL stream.
                 SwdPresenter.refreshStream = setInterval(function() {
-                    SwdModel.refreshStream(SwdPresenter.selectedGroup.gid);
+                    SwdModel.refreshStream(SwdPresenter.selectedGroup.gid, {
+                        success: function(response) {},
+                        error: SwdPresenter.handleError
+                    });
                 }, 600000);
-                
+
                 SwdPresenter.loadPostsComplete(response);
             },
             error: SwdPresenter.handleError
@@ -546,8 +549,9 @@ var SwdPresenter = {
     /***
      * High level post loading function.
      * @param {type} refresh
+     * @param {type} clearPosts
      */
-    loadPosts: function(refresh) {
+    loadPosts: function(refresh, clearPosts) {
         // Before calling anything, confirm login status.
         SwdPresenter.checkFBLoginStatus(function() {
             if (!SwdPresenter.currentlyLoading) {
@@ -564,7 +568,7 @@ var SwdPresenter = {
 //                    SwdView.toggleAjaxLoadingDiv('body', true);
 //                }
 
-                if (refresh) {
+                if (refresh || clearPosts) {
                     SwdView.clearPosts();
                     SwdPresenter.refreshFbCanvasSize();
                 }
@@ -661,9 +665,11 @@ var SwdPresenter = {
         window.open(SwdPresenter.selectedPost.permalink, '_blank');
     },
     onClickNavButton: function(e, args) {
-        var id;
+        var id, prevView;
 
         id = $(e.currentTarget).attr('id');
+
+        prevView = SwdPresenter.selectedView;
 
         switch (id) {
             case 'button-nav-group':
@@ -677,7 +683,8 @@ var SwdPresenter = {
                 break;
         }
 
-        SwdPresenter.loadPosts(false);
+        // Signal for posts to be loaded. Only clear existing posts if the view has changed.
+        SwdPresenter.loadPosts(false, (prevView !== SwdPresenter.selectedView));
         SwdView.setSelectedView(id);
     },
     onClickPopupComment: function(e, args) {
