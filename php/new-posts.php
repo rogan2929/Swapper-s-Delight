@@ -21,7 +21,7 @@ if (http_response_code() != 401) {
     $offset = $_SESSION['pagingOffset'];
     
     // Slice the array for processing.
-    $posts = array_slice($_SESSION['posts'], $offset, $limit);
+    $posts = array_slice($_SESSION['stream'], $offset, $limit);
     
     $_SESSION['pagingOffset'] = $offset + $limit;    
     
