@@ -1,6 +1,6 @@
 <?php
 
-require 'facebook.php';
+require_once 'facebook.php';
 require_once 'stream_data.php';
 
 $facebook = new Facebook(array(

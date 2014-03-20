@@ -1,6 +1,6 @@
 <?php
 
-require 'facebook.php';
+require_once 'facebook.php';
 
 $facebook = new Facebook(array(
     'appId' => $_SESSION['appId'],

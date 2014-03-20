@@ -1,6 +1,6 @@
 <?php
 
-require 'facebook.php';
+require_once 'facebook.php';
 
 function fetchStream($gid, $refresh = 0) {
     $facebook = new Facebook(array(
