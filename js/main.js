@@ -240,6 +240,26 @@ var SwdModel = {
                 callbacks.error.call(SwdModel, response);
             }
         });
+    },
+    /***
+     * Searches within a group's post.
+     * @param {type} gid
+     * @param {type} search
+     * @param {type} callbacks
+     */
+    searchPosts: function(gid, search, callbacks) {
+        var url = '/php/search-posts.php?gid=' + gid + '&=' + urlEncode(search);
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(response) {
+                callbacks.success.call(SwdModel, response);
+            },
+            error: function(response) {
+                callbacks.error.call(SwdModel, response);
+            }
+        });
     }
 };
 /**
@@ -256,6 +276,7 @@ var SwdPresenter = {
     uid: null,
     currentlyLoading: false,
     selectedPost: null,
+    search: null,
     /***
      * Confirm Facebook Login Status.
      * @param {type} callback
@@ -439,7 +460,7 @@ var SwdPresenter = {
                 }
 
                 SwdView.setFloatingPanelHeight(height);
-                
+
                 // Change FB canvas size.
                 FB.Canvas.setSize({
                     height: Math.max($('html').height(), clientHeight)
@@ -487,6 +508,20 @@ var SwdPresenter = {
         });
     },
     /***
+     * Load posts that match the given search term.
+     */
+    loadSearchPosts: function() {
+        SwdView.clearSelectedNav();
+        
+        // Get posts and then display them.
+        SwdModel.searchPosts(SwdPresenter.selectedGroup.gid, SwdPresenter.search, {
+            success: function(response) {
+                SwdPresenter.loadPostsComplete(null, response);
+            },
+            error: SwdPresenter.handleError
+        });
+    },
+    /***
      * High level post loading function.
      * @param {type} loadNextPage
      */
@@ -526,6 +561,10 @@ var SwdPresenter = {
                         }
                         break;
                     case SelectedView.search:
+                        if (!loadNextPage) {
+                            // This request is so intensive, that it's best to return everything at once, rather than implement paging.
+                            SwdPresenter.loadSearchPosts();
+                        }
                         break;
                 }
             }
@@ -802,11 +841,14 @@ var SwdPresenter = {
 
         return true;
     },
-    onKeyUpSearch: function(e, args) {        
+    onKeyUpSearch: function(e, args) {
         if (e.which === 13) {
             e.preventDefault();
             
-            alert($('#main-search').val())
+            SwdPresenter.selectedView = SelectedView.search;
+
+            SwdPresenter.search = $('#main-search').val();
+            SwdPresenter.loadPosts();
         }
     },
     onWindowResize: function(e, args) {
@@ -905,8 +947,10 @@ var SwdView = {
      */
     clearPostCommentText: function() {
         $('#post-comment-text').val('');
-//        $('#popup-comment').hide();
         SwdView.toggleAjaxLoadingDiv('#post-comment-wrapper', false);
+    },
+    clearSelectedNav: function() {
+        $('.nav-button').removeClass('selected-nav');
     },
     /***
      * Closes all Jquery UI menus.
