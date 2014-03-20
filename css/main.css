@@ -88,6 +88,11 @@ fieldset {
 
 textarea {
     resize: vertical;
+    border: 1px solid #ccc;
+}
+
+input[type=text] {
+    border: 1px solid #ccc;
 }
 
 /* ==========================================================================
@@ -342,6 +347,8 @@ a:visited {
     font-weight: bold;
     font-size: 1.05em;
     margin-bottom: 4px;
+/*    padding: 7px;
+    border: none !important;*/
 }
 
 #post-feed-noposts {
@@ -797,17 +804,14 @@ a.link-title {
 
 .floating-panel-section {
     margin-bottom: 10px;
-    border: 2px solid #f6f6f6;
-    padding: 7px;
+/*    border: 2px solid #f6f6f6;*/
+/*    padding: 7px;*/
     position: relative;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .facebook-user-header.floating-panel-section {
-    border: none !important;
-    padding: 0;
-}
-
-.heading.floating-panel-section {
     border: none !important;
     padding: 0;
 }
@@ -838,6 +842,7 @@ a.link-title {
     left: 0;
     overflow-y: auto;
     overflow-x: hidden;
+    padding: 0;
 }
 
 #post-image-container .post-image-tile.expanding {
@@ -1103,10 +1108,10 @@ div.login-div {
 }
 
 #post-comment-text {
-    border-width: 2px;
     height: 4.5em;
-    padding: 2px;
     position: relative;
+    width: 333px;
+    padding: 0;
 }
 
 #post-comment-text > textarea {

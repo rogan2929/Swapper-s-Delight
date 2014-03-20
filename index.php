@@ -55,7 +55,7 @@ header('Pragma: no-cache');
                             <span>Liked Posts</span>
                         </div>
                     </div>
-                    <textarea id='main-search' rows='1' placeholder='Search'></textarea>
+                    <input type='text' id='main-search' placeholder='Search this group'>
                 </div>
                 <div id='post-feed' class='scroll-y'></div>
 
@@ -71,7 +71,7 @@ header('Pragma: no-cache');
                                     <a class='facebook-user-name' target='_blank'></a>
                                     <span class='timestamp'></span>
                                 </div>
-                                <a target='_blank' class='post-permalink float-right wrappable-link'>Permalink</a>
+<!--                                <a target='_blank' class='post-permalink float-right wrappable-link'>Permalink</a>-->
                             </div>
                             <div id='post-message' class='floating-panel-section'>
                                 <div id='post-message-text'></div>
@@ -84,7 +84,10 @@ header('Pragma: no-cache');
                                 <img id='linkdata-img'>
                                 <span id='linkdata-desc'></span>
                             </div>
-                            <div class='heading'>Viewing all comments, newest first</div>
+                            <div id='post-comment-wrapper' class='floating-panel-section'>
+                                <textarea id='post-comment-text' placeholder='Type a comment and press [Enter] to post it.'></textarea>
+                                <div class='ajax-loading-div hidden'></div>
+                            </div>
                             <div id='post-comments' class='floating-panel-section'>
                                 <div id='button-show-new-comments' class='button hidden'></div>
                                 <div id='post-comment-list'></div>
@@ -149,11 +152,6 @@ header('Pragma: no-cache');
 
             <div id='post-details-toolbar' class='ui-widget toolbar floating-panel-toolbar hidden'>
                 <div class='toolbar-group float-left'>
-                    <div id='post-button-comment' class='button toolbar-button menu-button'>
-                        <span class='button-icon icon-comment'></span>
-                        <span>Comment</span>
-                        <a href='#popup-comment'></a>
-                    </div>
                     <div id='post-button-like' class='button toolbar-button'>
                         <span class='button-icon icon-like'></span>
                         <span>Like</span>
@@ -161,6 +159,9 @@ header('Pragma: no-cache');
                     <div id='post-button-pm' class='button toolbar-button'>
                         <span class='button-icon icon-pm'></span>
                         <span>Private Message</span>
+                    </div>
+                    <div id='post-button-permalink' class='button toolbar-button'>
+                        <span>View in Facebook</span>
                     </div>
                 </div>
                 <div class='toolbar-group float-right'>
@@ -179,10 +180,10 @@ header('Pragma: no-cache');
                 </div>
             </div>
 
-            <div id='popup-comment' class='menu floating-panel-menu ui-widget'>
-                <textarea id='popup-comment-text' placeholder='Type a comment and press [Enter] to post it.'></textarea>
-                <div class='ajax-loading-div hidden'></div>
-            </div>
+            <!--            <div id='popup-comment' class='menu floating-panel-menu ui-widget'>
+                            <textarea id='popup-comment-text' placeholder='Type a comment and press [Enter] to post it.'></textarea>
+                            <div class='ajax-loading-div hidden'></div>
+                        </div>-->
         </div>
 
         <!--Ad Tiles that will be dynamically placed.-->
@@ -225,52 +226,6 @@ header('Pragma: no-cache');
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
-
-        <!--LifeSiteMedia Ad Script-->
-
-        <script type="text/javascript">
-            //<![CDATA[
-            LSM_Slot({
-                adkey: '5a7',
-                ad_size: '300x250',
-                slot: 'slot93684',
-                _render_div_id: 'ad-tile-1'
-            });
-            //]]>
-        </script>
-
-        <script type="text/javascript">
-            //<![CDATA[
-            LSM_Slot({
-                adkey: 'e8f',
-                ad_size: '300x250',
-                slot: 'slot93683',
-                _render_div_id: 'ad-tile-2'
-            });
-            //]]>
-        </script>
-
-        <script type="text/javascript">
-            //<![CDATA[
-            LSM_Slot({
-                adkey: '4df',
-                ad_size: '300x250',
-                slot: 'slot93685',
-                _render_div_id: 'ad-tile-3'
-            });
-            //]]>
-        </script>
-
-        <script type="text/javascript">
-            //<![CDATA[
-            LSM_Slot({
-                adkey: '2e5',
-                ad_size: '300x250',
-                slot: 'slot93255',
-                _render_div_id: 'ad-tile-4'
-            });
-            //]]>
-        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

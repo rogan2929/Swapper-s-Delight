@@ -240,6 +240,26 @@ var SwdModel = {
                 callbacks.error.call(SwdModel, response);
             }
         });
+    },
+    /***
+     * Searches within a group's post.
+     * @param {type} gid
+     * @param {type} search
+     * @param {type} callbacks
+     */
+    searchPosts: function(gid, search, callbacks) {
+        var url = '/php/search-posts.php?gid=' + gid + '&search=' + encodeURIComponent(search);
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(response) {
+                callbacks.success.call(SwdModel, JSON.parse(response));
+            },
+            error: function(response) {
+                callbacks.error.call(SwdModel, response);
+            }
+        });
     }
 };
 /**
@@ -256,6 +276,7 @@ var SwdPresenter = {
     uid: null,
     currentlyLoading: false,
     selectedPost: null,
+    search: null,
     /***
      * Confirm Facebook Login Status.
      * @param {type} callback
@@ -346,8 +367,6 @@ var SwdPresenter = {
      * Starts the application after init has finished.
      */
     startApp: function() {
-        var i;
-
         if (!SwdPresenter.groups) {
             // Retrieve group info for logged in user.
             SwdModel.getGroupInfo({
@@ -373,8 +392,8 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
                                 SwdView.installHandler('onClickLogout', SwdPresenter.onClickLogout, '#menu-item-logout', 'click');
                                 SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
+                                SwdView.installHandler('onClickPermalink', SwdPresenter.onClickPermalink, '#post-button-permalink', 'click');
                                 SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
-                                SwdView.installHandler('onClickPopupComment', SwdPresenter.onClickPopupComment, '#popup-comment', 'click');
                                 SwdView.installHandler('onClickPostButtonDelete', SwdPresenter.onClickPostButtonDelete, '#post-button-delete', 'click');
                                 SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
                                 SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
@@ -385,7 +404,8 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .close-button', 'click');
                                 SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
                                 SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
-                                SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#popup-comment-text', 'keyup');
+                                SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#post-comment-text', 'keyup');
+                                SwdView.installHandler('onKeyUpSearch', SwdPresenter.onKeyUpSearch, '#main-search', 'keyup');
                                 SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
                                 SwdView.positionMenus();
 
@@ -440,7 +460,7 @@ var SwdPresenter = {
                 }
 
                 SwdView.setFloatingPanelHeight(height);
-                
+
                 // Change FB canvas size.
                 FB.Canvas.setSize({
                     height: Math.max($('html').height(), clientHeight)
@@ -488,6 +508,21 @@ var SwdPresenter = {
         });
     },
     /***
+     * Load posts that match the given search term.
+     */
+    loadSearchPosts: function() {
+        SwdView.clearSelectedNav();
+        SwdView.blurControl('#main-search');
+        
+        // Get posts and then display them.
+        SwdModel.searchPosts(SwdPresenter.selectedGroup.gid, SwdPresenter.search, {
+            success: function(response) {
+                SwdPresenter.loadPostsComplete(null, response);
+            },
+            error: SwdPresenter.handleError
+        });
+    },
+    /***
      * High level post loading function.
      * @param {type} loadNextPage
      */
@@ -527,6 +562,10 @@ var SwdPresenter = {
                         }
                         break;
                     case SelectedView.search:
+                        if (!loadNextPage) {
+                            // This request is so intensive, that it's best to return everything at once, rather than implement paging.
+                            SwdPresenter.loadSearchPosts();
+                        }
                         break;
                 }
             }
@@ -612,6 +651,9 @@ var SwdPresenter = {
     },
     onClickMenuButton: function(e, args) {
         SwdView.showUiMenu(e);
+    },
+    onClickPermalink: function(e, args) {
+        window.open(SwdPresenter.selectedPost.permalink, '_blank');
     },
     onClickNavButton: function(e, args) {
         var id = $(e.currentTarget).attr('id');
@@ -780,12 +822,12 @@ var SwdPresenter = {
             e.preventDefault();
 
             id = SwdPresenter.selectedPost.post_id;
-            comment = $('#popup-comment-text').val();
+            comment = $('#post-comment-text').val();
 
             // Before calling anything, confirm login status.
             SwdPresenter.checkFBLoginStatus(function() {
                 // Show the ajax loading div.
-                SwdView.toggleAjaxLoadingDiv('#popup-comment', true);
+                SwdView.toggleAjaxLoadingDiv('#post-comment-wrapper', true);
 
                 // Post the comment.
                 SwdModel.postComment(id, comment, {
@@ -799,6 +841,16 @@ var SwdPresenter = {
         }
 
         return true;
+    },
+    onKeyUpSearch: function(e, args) {
+        if (e.which === 13) {
+            e.preventDefault();
+            
+            SwdPresenter.selectedView = SelectedView.search;
+
+            SwdPresenter.search = $('#main-search').val();
+            SwdPresenter.loadPosts();
+        }
     },
     onWindowResize: function(e, args) {
         SwdView.positionMenus();
@@ -884,6 +936,9 @@ var SwdView = {
             SwdView.handlers[name].call(SwdPresenter, e, args);
         });
     },
+    blurControl: function(id) {
+        $(id).blur();
+    },
     /***
      * Clear all posts from the view.
      */
@@ -895,9 +950,11 @@ var SwdView = {
      * Clear comment box.
      */
     clearPostCommentText: function() {
-        $('#popup-comment-text').val('');
-        $('#popup-comment').hide();
-        SwdView.toggleAjaxLoadingDiv('#popup-comment', false);
+        $('#post-comment-text').val('');
+        SwdView.toggleAjaxLoadingDiv('#post-comment-wrapper', false);
+    },
+    clearSelectedNav: function() {
+        $('.nav-button').removeClass('selected-nav');
     },
     /***
      * Closes all Jquery UI menus.
@@ -1330,9 +1387,6 @@ var SwdView = {
             $('#post-image-container').hide();
             $('#post-no-image-desc').show();
         }
-
-        // Display permalink
-        $('.post-permalink').attr('href', post.permalink);
 
         // Display message content, or hide it if empty.
         if (post.message !== '') {
