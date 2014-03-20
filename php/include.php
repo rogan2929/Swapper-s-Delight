@@ -197,19 +197,19 @@ function getLargeImageUrl($image) {
 function getSmallImageUrl($image) {
     // Grab the 'middle' image for a scaled version of the full size image.
     $index = intval(floor((count($image) / 2)));
-    
+
     // Try to ensure a minimum width. If it is too small, then proceed to the next largest
     // image in the image collection. (0 being the largest).
     do {
         $imageSize = getimagesize($image[$index]['source']);
         $index--;
-        
+
         if ($index < 0) {
             $index = 0;
             break;
         }
     } while ($imageSize[0] < 250 && $imageSize[1] < 150);
-    
+
     return $image[$index]['source'];
 }
 
@@ -222,12 +222,14 @@ function getOptimalWindowData($fbSession, $gid) {
 
     $query = 'SELECT post_id FROM stream WHERE source_id = ' . $gid . ' AND updated_time <= ' . $startTime . ' AND updated_time >= ' . $endTime . ' LIMIT 100';
 
-    $response = $fbSession->api(array(
-        'method' => 'fql.query',
-        'query' => $query
-    ));
-    
-    echo json_encode($response);
+    try {
+        $response = $fbSession->api(array(
+            'method' => 'fql.query',
+            'query' => $query
+        ));
+    } catch (FacebookApiException $e) {
+        echo $e->getMessage();
+    }
 
     $count = count($response);
 
@@ -310,7 +312,7 @@ function executeBatchQuery($fbSession, $gid, $constraints = array()) {
             'batch' => json_encode($queries),
             'include_headers' => false
         ));
-        
+
         // Sift through the results.
         for ($k = 0; $k < count($response); $k++) {
             $result = json_decode($response[$k]['body'], true);
