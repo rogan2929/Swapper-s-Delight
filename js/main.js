@@ -248,7 +248,7 @@ var SwdModel = {
      * @param {type} callbacks
      */
     searchPosts: function(gid, search, callbacks) {
-        var url = '/php/search-posts.php?gid=' + gid + '&=' + urlEncode(search);
+        var url = '/php/search-posts.php?gid=' + gid + '&=' + urlencode(search);
 
         $.ajax({
             type: 'GET',
