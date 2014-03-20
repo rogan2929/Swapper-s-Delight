@@ -88,6 +88,7 @@ fieldset {
 
 textarea {
     resize: vertical;
+    border: 1px solid #ccc;
 }
 
 /* ==========================================================================
@@ -342,6 +343,8 @@ a:visited {
     font-weight: bold;
     font-size: 1.05em;
     margin-bottom: 4px;
+    padding: 7px;
+    border: none !important;
 }
 
 #post-feed-noposts {
@@ -807,11 +810,6 @@ a.link-title {
     padding: 0;
 }
 
-.heading.floating-panel-section {
-    border: none !important;
-    padding: 0;
-}
-
 #popup-logged-out {
     position: absolute;
     left: 0;
@@ -1104,10 +1102,10 @@ div.login-div {
 }
 
 #post-comment-text {
-    border-width: 2px;
     height: 4.5em;
     padding: 2px;
     position: relative;
+    margin-left: -2px;
 }
 
 #post-comment-text > textarea {
