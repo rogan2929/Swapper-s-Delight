@@ -54,6 +54,9 @@ header('Pragma: no-cache');
                         <!--                        <div id='button-nav-search' class='button nav-button'>
                                                     <span>Search</span>
                                                 </div>-->
+                        <div class='button nav-button'>
+                            <textarea id='main-search'></textarea>
+                        </div>
                     </div>
                 </div>
                 <div id='post-feed' class='scroll-y'></div>
@@ -137,7 +140,6 @@ header('Pragma: no-cache');
                         <span class='button-icon icon-menu'></span>
                         <a href='#popup-menu-main'></a>
                     </div>
-                    <textarea id='main-search'></textarea>
                 </div>
                 <div class='toolbar-group float-right'>
                     <div id='button-groups' class='button toolbar-button'>
