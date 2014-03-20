@@ -20,6 +20,8 @@ $fbSession = new Facebook(array(
     'cookie' => true
         ));
 
+echo json_encode($fbSession);
+
 // Test the access token.
 try {
     $userProfile = $fbSession->api('/me', 'GET');
