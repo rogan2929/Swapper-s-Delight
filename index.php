@@ -113,7 +113,7 @@ header('Pragma: no-cache');
                 <div id='select-group-panel' class='floating-panel hidden'>
                     <div class='floating-panel-content ui-widget scroll-y'>
                         <div class='close-button'></div>
-                        <span class='heading'>Choose a Group to View</span>
+                        <span class='heading'>Choose a group to start.</span>
                         <span class='hint'>Hint: You can also hide any groups that you don't want to see here. Don't worry; click <a id='restore-group-selection-items' href='#'>here</a> to bring them back.</span>
                         <div id='select-group-list' class='selection-list'>
                             <div id='select-group-no-groups' class='selection-item select-group'>
