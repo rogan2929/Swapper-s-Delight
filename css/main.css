@@ -283,6 +283,7 @@ a:visited {
 #details-right-column {
     left: 378px;
     padding-right: 8px;
+    overflow: hidden;
 }
 
 .ajax-loading-div {
@@ -835,6 +836,8 @@ a.link-title {
     bottom: 0;
     right: 0;
     left: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #post-image-container .post-image-tile.expanding {
