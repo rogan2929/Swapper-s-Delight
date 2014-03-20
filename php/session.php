@@ -22,7 +22,7 @@ $fbSession = new Facebook(array(
 session_start();
 
 // Save as a session variable.
-$_SESSION['fbSession'] = $fbSession;
+$_SESSION['fbSession'] = $fbSession->getAppSecret();
 
 echo json_encode($_SESSION['fbSession']);
 
