@@ -2,7 +2,11 @@
 
 require_once 'stream_data.php';
 
-$fbSession = $_SESSION['fbSession'];
+$facebook = new Facebook(array(
+    'appId' => $_SESSION['appId'],
+    'secret' => $_SESSION['appSecret'],
+    'cookie' => true
+        ));
 
 if (http_response_code() != 401) {
     $postId = $_GET['postId'];
@@ -16,7 +20,7 @@ if (http_response_code() != 401) {
     );
 
     // Run the query.
-    $response = $fbSession->api(array(
+    $response = $facebook->api(array(
         'method' => 'fql.multiquery',
         'queries' => $queries
     ));
@@ -66,7 +70,7 @@ if (http_response_code() != 401) {
     }
 
     // Query action links for the given post. (FQL's action_links column always returns null. Suspect a bug.)
-    $actions = $fbSession->api('/' . $postId . '?fields=actions');
+    $actions = $facebook->api('/' . $postId . '?fields=actions');
 
     $post['action_links'] = $actions['actions'];
 

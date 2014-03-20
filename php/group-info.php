@@ -2,7 +2,11 @@
 
 require_once 'session.php';
 
-$fbSession = $_SESSION['fbSession'];
+$facebook = new Facebook(array(
+    'appId' => $_SESSION['appId'],
+    'secret' => $_SESSION['appSecret'],
+    'cookie' => true
+        ));
 
 if (http_response_code() != 401) {
     $queries = array(
@@ -10,7 +14,7 @@ if (http_response_code() != 401) {
         'groupQuery' => 'SELECT gid,name,icon FROM group WHERE gid IN (SELECT gid FROM #memberQuery)'
     );
 
-    $response = $fbSession->api(array(
+    $response = $facebook->api(array(
         'method' => 'fql.multiquery',
         'queries' => $queries
     ));

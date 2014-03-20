@@ -13,7 +13,7 @@ $appId = '652991661414427';
 $appSecret = 'b8447ce73d2dcfccde6e30931cfb0a90';
 
 // Start up the Facebook object
-$fbSession = new Facebook(array(
+$facebook = new Facebook(array(
     'appId' => $appId,
     'secret' => $appSecret,
     'cookie' => true
@@ -21,20 +21,19 @@ $fbSession = new Facebook(array(
 
 session_start();
 
-// Save as a session variable.
-$_SESSION['fbSession'] = $fbSession->getAppSecret();
-
-echo json_encode($_SESSION['fbSession']);
+// Save session variables.
+$_SESSION['appId'] = $facebook->getAppId();
+$_SESSION['appSecret'] = $facebook->getAppSecret();
 
 // Test the access token.
 try {
-    $userProfile = $fbSession->api('/me', 'GET');
+    $userProfile = $facebook->api('/me', 'GET');
 } catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
     // user ID even though the access token is invalid.
     // In this case, we'll get an exception, so we'll
     // just ask the user to login again here.
 
-    $loginUrl = $fbSession->getLoginUrl();
+    $loginUrl = $facebook->getLoginUrl();
     http_response_code(401);
 }

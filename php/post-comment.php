@@ -1,13 +1,17 @@
 <?php
 
-
+$facebook = new Facebook(array(
+    'appId' => $_SESSION['appId'],
+    'secret' => $_SESSION['appSecret'],
+    'cookie' => true
+        ));
 
 if (http_response_code() != 401) {
     $postId = $_POST['postId'];
     $comment = $_POST['comment'];
 
     // Post the comment and get the response
-    $id = $fbSession->api('/' . $postId . '/comments', 'POST', array('message' => $comment));
+    $id = $facebook->api('/' . $postId . '/comments', 'POST', array('message' => $comment));
 
     // Get the comment and associated user data...
     $queries = array(
@@ -16,7 +20,7 @@ if (http_response_code() != 401) {
     );
 
     // Query Facebook's servers for the necessary data.
-    $response = $fbSession->api(array(
+    $response = $facebook->api(array(
         'method' => 'fql.multiquery',
         'queries' => $queries
     ));

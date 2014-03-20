@@ -1,8 +1,12 @@
 <?php
 
 function fetchStream($gid, $refresh = 0) {
-    $fbSession = $_SESSION['fbSession'];
-    
+    $facebook = new Facebook(array(
+        'appId' => $_SESSION['appId'],
+        'secret' => $_SESSION['appSecret'],
+        'cookie' => true
+    ));
+
     if (http_response_code() != 401) {
         // Wait for other threads to finish updating the cached FQL stream.
         waitForFetchStreamCompletion();
@@ -10,7 +14,7 @@ function fetchStream($gid, $refresh = 0) {
         // Refresh the FQL stream.
         if ($refresh == 1) {
             $_SESSION['refreshing'] = true;
-            $_SESSION['stream'] = queryStream($fbSession, $gid);
+            $_SESSION['stream'] = queryStream($facebook, $gid);
             $_SESSION['gid'] = $gid;
             $_SESSION['refreshing'] = false;
         }
@@ -32,8 +36,12 @@ function waitForFetchStreamCompletion() {
  */
 
 function getPostData($posts, $limit) {
-    $fbSession = $_SESSION['fbSession'];
-    
+    $facebook = new Facebook(array(
+        'appId' => $_SESSION['appId'],
+        'secret' => $_SESSION['appSecret'],
+        'cookie' => true
+    ));
+
     $queries = array();
     $result = array();
 
@@ -54,7 +62,7 @@ function getPostData($posts, $limit) {
     }
 
     // Execute a batch query.
-    $response = $fbSession->api('/', 'POST', array(
+    $response = $facebook->api('/', 'POST', array(
         'batch' => json_encode($queries),
         'include_headers' => false
     ));
@@ -72,8 +80,8 @@ function getPostData($posts, $limit) {
  * Query the FQL stream table for some basic data that will be cached.
  */
 
-function queryStream($fbSession, $gid) {
-    $windowData = getOptimalWindowData($fbSession, $gid);
+function queryStream($facebook, $gid) {
+    $windowData = getOptimalWindowData($facebook, $gid);
 
     $windowSize = $windowData['windowSize'];
     $windowStart = time();
@@ -98,7 +106,7 @@ function queryStream($fbSession, $gid) {
         }
 
         // Call the batch query.
-        $response = $fbSession->api('/', 'POST', array(
+        $response = $facebook->api('/', 'POST', array(
             'batch' => json_encode($queries),
             'include_headers' => false
         ));
@@ -114,13 +122,13 @@ function queryStream($fbSession, $gid) {
 /**
  * Determine the optimal window size to use in batch queries.
  */
-function getOptimalWindowData($fbSession, $gid) {
+function getOptimalWindowData($facebook, $gid) {
     $startTime = time();
     $endTime = time() - 3600;
 
     $query = 'SELECT post_id FROM stream WHERE source_id = ' . $gid . ' AND updated_time <= ' . $startTime . ' AND updated_time >= ' . $endTime . ' LIMIT 100';
 
-    $response = $fbSession->api(array(
+    $response = $facebook->api(array(
         'method' => 'fql.query',
         'query' => $query
     ));
