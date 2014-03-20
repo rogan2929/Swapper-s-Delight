@@ -84,7 +84,6 @@ header('Pragma: no-cache');
                                 <img id='linkdata-img'>
                                 <span id='linkdata-desc'></span>
                             </div>
-                            <div class='heading'>Viewing all comments, newest first</div>
                             <div id='post-comment-wrapper' class='floating-panel-section'>
                                 <textarea id='post-comment-text' placeholder='Type a comment and press [Enter] to post it.'></textarea>
                                 <div class='ajax-loading-div hidden'></div>
