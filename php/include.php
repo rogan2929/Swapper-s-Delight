@@ -228,6 +228,8 @@ function getOptimalWindowData($fbSession, $gid) {
     ));
 
     $count = count($response);
+    
+    echo $count;
 
     // These values were reached through trial and error.
     switch ($count) {
@@ -271,8 +273,6 @@ function executeBatchQuery($fbSession, $gid, $constraints = array()) {
     $batchRunCount = 50;
 
     $posts = array();
-    
-    echo 'TEST';
 
     for ($i = 0; $i < $windowData['batchCount']; $i++) {
         $queries = array();
