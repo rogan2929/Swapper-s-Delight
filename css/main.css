@@ -1107,7 +1107,7 @@ div.login-div {
     height: 4.5em;
     padding: 2px;
     position: relative;
-    
+    width: 100%;
 }
 
 #post-comment-text > textarea {
