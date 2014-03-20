@@ -51,9 +51,6 @@ header('Pragma: no-cache');
                         <div id='button-nav-liked' class='button nav-button'>
                             <span>Liked Posts</span>
                         </div>
-                        <!--                        <div id='button-nav-search' class='button nav-button'>
-                                                    <span>Search</span>
-                                                </div>-->
                     </div>
                     <textarea id='main-search' rows='1' placeholder='Search'></textarea>
                 </div>
