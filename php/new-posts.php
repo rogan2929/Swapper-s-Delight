@@ -12,7 +12,7 @@ $gid = $_GET['gid'];
 // Fetch the stream for the group.
 fetchStream($fbSession, $gid);
 
-echo 'TESTS';
+var_dump($_SESSION);
 
 if (http_response_code() != 401) {
     //$constraints = array();
