@@ -27,7 +27,7 @@ function getPostData($fbSession, $posts, $limit) {
     }
 
     // Build a multiquery for each post in the provided array.
-    for ($i = 0; $i < count($posts) && $i <= $limit; $i++) {
+    for ($i = 0; $i < count($posts) && $i < $limit; $i++) {
         $queries[] = array(
             'method' => 'POST',
             'relative_url' => 'method/fql.multiquery?queries=' . json_encode(array(
