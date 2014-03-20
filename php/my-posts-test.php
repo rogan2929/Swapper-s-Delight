@@ -28,13 +28,30 @@ $windowSize = $windowData['windowSize'];
 $windowStart = time();
 $windowEnd = $windowStart - $windowSize;
 
-for ($i = 0; $i < 100; $i++) {
+$posts = array();
+$myPosts = array();
+
+// Find owned posts.
+for ($i = 0; $i < 50; $i++) {
     $request = '/' . $gid . '/feed?fields=id,from&since=' . $windowStart . '&until=' . $windowEnd . '&limit=5000&date_format=U';
-    echo $request . "<br/>";
+    
+    $response = $fbSession->api($request);
+    
+    $posts = array_merge($posts, $response);
     
     $windowStart = $windowEnd;
     $windowEnd -= $windowSize;
 }
+
+for ($i = 0; $i < count($posts); $i++) {
+    $post = $posts[$i];
+    
+    if ($post['from']['id'] === $uid) {
+        $myPosts[] = $post['id'];
+    }
+}
+
+echo count($myPosts);
 
 //
 //$constraints = array();
