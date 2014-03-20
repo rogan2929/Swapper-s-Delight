@@ -6,7 +6,7 @@ function fetchStream($fbSession, $gid, $refresh = 0) {
         // 1. Last updated time > 5 minutes.
         // 2. A new group was selected.
         // 3. Stream has not been fetched yet.
-        if (!isset($_SESSION['stream']) || $_SESSION['lastUpdateTime'] < time() - 300 || $_SESSION['gid'] !== $gid || $refresh === 1) {
+        if (!isset($_SESSION['stream']) || ($_SESSION['lastUpdateTime'] < time() - 300) || $_SESSION['gid'] !== $gid || $refresh === 1) {
             $_SESSION['stream'] = queryStream($fbSession, $gid);
             $_SESSION['lastUpdateTime'] = time();
             $_SESSION['gid'] = $gid;

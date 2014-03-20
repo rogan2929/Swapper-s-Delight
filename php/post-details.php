@@ -1,7 +1,7 @@
 <?php
 
 require_once 'session.php';
-require_once 'include.php';
+require_once 'stream_data.php';
 
 if (http_response_code() != 401) {
     $postId = $_GET['postId'];
