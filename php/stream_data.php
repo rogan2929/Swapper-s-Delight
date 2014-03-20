@@ -1,8 +1,8 @@
 <?php
 
+require 'facebook.php';
+
 function fetchStream($gid, $refresh = 0) {
-    echo 'TEST';
-    
     $facebook = new Facebook(array(
         'appId' => $_SESSION['appId'],
         'secret' => $_SESSION['appSecret'],
