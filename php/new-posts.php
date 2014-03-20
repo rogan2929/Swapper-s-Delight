@@ -8,6 +8,8 @@ require_once 'stream_data';
 $gid = $_GET['gid'];
 //$updatedTime = $_GET['updatedTime'];
 
+echo 'TESTB';
+
 // Fetch the stream for the group.
 fetchStream($gid);
 
