@@ -48,15 +48,15 @@ try {
     echo $e->getMessage();
 }
 
-//for ($i = 0; $i < count($posts); $i++) {
-//    $post = $posts[$i];
-//    
-//    if ($post['from']['id'] === $uid) {
-//        $myPosts[] = $post['id'];
-//    }
-//}
-//
-//echo count($myPosts);
+for ($i = 0; $i < count($posts); $i++) {
+    $post = $posts[$i];
+    
+    if ($post['from']['id'] === $uid) {
+        $myPosts[] = $post['id'];
+    }
+}
+
+echo count($myPosts);
 
 //
 //$constraints = array();
