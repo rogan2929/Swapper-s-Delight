@@ -8,21 +8,21 @@ require_once 'stream_data';
 $gid = $_GET['gid'];
 //$updatedTime = $_GET['updatedTime'];
 
-echo 'TESTB';
+echo $gid;
 
 // Fetch the stream for the group.
-fetchStream($gid);
-
-if (http_response_code() != 401) {
-    //$constraints = array();
-    $limit = 25;
-    $offset = $_SESSION['pagingOffset'];
-    
-    $posts = array_slize($_SESSION['posts'], $offset, $limit);
-    
-    $_SESSION['pagingOffset'] = $offset + $limit;
-    
-    echo json_encode($posts);
+//fetchStream($gid);
+//
+//if (http_response_code() != 401) {
+//    //$constraints = array();
+//    $limit = 25;
+//    $offset = $_SESSION['pagingOffset'];
+//    
+//    $posts = array_slize($_SESSION['posts'], $offset, $limit);
+//    
+//    $_SESSION['pagingOffset'] = $offset + $limit;
+//    
+//    echo json_encode($posts);
 
 //    if ($updatedTime) {
 //        // Add to the constraints array.
@@ -46,4 +46,4 @@ if (http_response_code() != 401) {
 //
 //    // Return the result.
 //    echo json_encode($posts);
-}
+//}
