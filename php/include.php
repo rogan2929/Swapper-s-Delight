@@ -267,8 +267,8 @@ function executeBatchQuery($fbSession, $gid, $constraints = array()) {
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
 
-    $batchSize = 5000;
-    $batchRunCount = 50;
+    $batchSize = 50;
+    $batchRunCount = 10;
 
     $posts = array();
 
