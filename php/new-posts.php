@@ -8,10 +8,10 @@ require_once 'stream_data.php';
 $gid = $_GET['gid'];
 //$updatedTime = $_GET['updatedTime'];
 
-echo $gid;
-
 // Fetch the stream for the group.
 fetchStream($gid);
+
+echo $gid;
 
 if (http_response_code() != 401) {
     //$constraints = array();
