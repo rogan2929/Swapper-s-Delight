@@ -6,6 +6,9 @@ require_once 'stream_data.php';
 $gid = $_GET['gid'];
 $uid = $_GET['uid'];
 
+echo $gid . "<br/>";
+echo $uid;
+
 if (http_response_code() != 401) {
     $posts = array();
     $stream = $_SESSION['stream'];
