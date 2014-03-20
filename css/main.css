@@ -343,8 +343,8 @@ a:visited {
     font-weight: bold;
     font-size: 1.05em;
     margin-bottom: 4px;
-    padding: 7px;
-    border: none !important;
+/*    padding: 7px;
+    border: none !important;*/
 }
 
 #post-feed-noposts {
@@ -800,7 +800,7 @@ a.link-title {
 
 .floating-panel-section {
     margin-bottom: 10px;
-    border: 2px solid #f6f6f6;
+/*    border: 2px solid #f6f6f6;*/
 /*    padding: 7px;*/
     position: relative;
     padding-top: 5px;
