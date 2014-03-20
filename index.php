@@ -55,7 +55,7 @@ header('Pragma: no-cache');
                                                     <span>Search</span>
                                                 </div>-->
                     </div>
-                    <textarea id='main-search' placeholder='Search'></textarea>
+                    <textarea id='main-search' rows='1' placeholder='Search'></textarea>
                 </div>
                 <div id='post-feed' class='scroll-y'></div>
 

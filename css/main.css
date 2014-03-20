@@ -218,6 +218,7 @@ a:visited {
     padding-bottom: 4px;
     width: 140px;
     margin-top: 10px;
+    resize: none;
 }
 
 #main-panel {
