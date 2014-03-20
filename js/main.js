@@ -373,7 +373,6 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
                                 SwdView.installHandler('onClickPermalink', SwdPresenter.onClickPermalink, '#post-button-permalink', 'click');
                                 SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
-//                                SwdView.installHandler('onClickPopupComment', SwdPresenter.onClickPopupComment, '#popup-comment', 'click');
                                 SwdView.installHandler('onClickPostButtonDelete', SwdPresenter.onClickPostButtonDelete, '#post-button-delete', 'click');
                                 SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
                                 SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
@@ -385,6 +384,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
                                 SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
                                 SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#post-comment-text', 'keyup');
+                                SwdView.installHandler('onKeyUpSearch', SwdPresenter.onKeyUpSearch, '#main-search', 'keyup');
                                 SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
                                 SwdView.positionMenus();
 
@@ -801,6 +801,13 @@ var SwdPresenter = {
         }
 
         return true;
+    },
+    onKeyUpSearch: function(e, args) {        
+        if (e.which === 13 && !e.shiftKey) {
+            e.preventDefault();
+            
+            alert($('#main-search').val())
+        }
     },
     onWindowResize: function(e, args) {
         SwdView.positionMenus();
