@@ -5,8 +5,7 @@
  */
 
 function buildStreamQuery($gid, $constraints, $limit = 20) {
-    //$streamQuery = 'SELECT post_id,actor_id,updated_time,message,attachment,comment_info,created_time FROM stream WHERE source_id=' . $gid;
-    $streamQuery = 'SELECT post_id,actor_id,message FROM stream WHERE source_id=' . $gid;
+    $streamQuery = 'SELECT post_id,actor_id,updated_time,message,attachment,comment_info,created_time FROM stream WHERE source_id=' . $gid;
 
     // Check for constraints.
     for ($i = 0; $i < count($constraints); $i++) {
@@ -18,9 +17,9 @@ function buildStreamQuery($gid, $constraints, $limit = 20) {
     $streamQuery .= ' ORDER BY updated_time DESC LIMIT ' . $limit;
 
     $queries = array(
-        'streamQuery' => $streamQuery
-        //'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)',
-        //'userQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url,pic FROM user WHERE uid IN (SELECT actor_id FROM #streamQuery)'
+        'streamQuery' => $streamQuery,
+        'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)',
+        'userQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url,pic FROM user WHERE uid IN (SELECT actor_id FROM #streamQuery)'
     );
 
     return $queries;
@@ -305,7 +304,7 @@ function executeBatchQuery($fbSession, $gid, $constraints = array()) {
             $windowEnd -= $windowSize;
         }
         
-//        // Call the batch query.
+        // Call the batch query.
         $response = $fbSession->api('/', 'POST', array(
             'batch' => json_encode($queries),
             'include_headers' => false
