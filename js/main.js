@@ -489,7 +489,7 @@ var SwdPresenter = {
      * Load posts liked by user.
      */
     loadLikedPosts: function() {
-        SwdModel.getLikedPosts(SwdPresenter.uid, SwdPresenter.selectedGroup.gid, {
+        SwdModel.getLikedPosts(SwdPresenter.selectedGroup.gid, {
             success: function(response) {
                 SwdPresenter.loadPostsComplete(response);
             },
