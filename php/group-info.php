@@ -1,5 +1,7 @@
 <?php
 
+require_once 'session.php';
+
 $fbSession = $_SESSION['fbSession'];
 
 if (http_response_code() != 401) {

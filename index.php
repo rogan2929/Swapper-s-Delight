@@ -11,8 +11,6 @@ header('Pragma: no-cache');
 // Start a session.
 session_start();
 
-require_once '/php/session.php';
-
 ?>
 
 <!DOCTYPE html>
