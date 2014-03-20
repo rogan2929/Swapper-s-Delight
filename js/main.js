@@ -604,7 +604,7 @@ var SwdPresenter = {
     setSelectedGroup: function(group) {
         SwdPresenter.selectedGroup = group;
         SwdPresenter.selectedView = SelectedView.group;
-        SwdPresenter.loadPosts(false);
+        SwdPresenter.loadPosts(true);
         SwdView.setGroupButtonText(group.name);
         SwdView.setSelectedView('button-nav-group');
     },
