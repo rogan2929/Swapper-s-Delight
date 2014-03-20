@@ -15,6 +15,7 @@ fetchStream($fbSession, $gid, $refresh);
 if (http_response_code() != 401) {
     if ($refresh === 1) {
         $_SESSION['pagingOffset'] = 0;
+        echo $refresh;
     }
     
     $limit = 25;
