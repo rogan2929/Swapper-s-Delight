@@ -2,6 +2,8 @@
 
 $fbSession = $_SESSION['fbSession'];
 
+echo json_encode($fbSession);
+
 if (http_response_code() != 401) {
     $queries = array(
         'memberQuery' => 'SELECT gid,bookmark_order FROM group_member WHERE uid=me() ORDER BY bookmark_order',
