@@ -302,7 +302,7 @@ function executeBatchQuery($fbSession, $gid, $constraints = array()) {
             $windowStart -= $windowSize;
             $windowEnd -= $windowSize;
         }
-
+        
         // Call the batch query.
         $response = $fbSession->api('/', 'POST', array(
             'batch' => json_encode($queries),
