@@ -118,10 +118,15 @@ var SwdModel = {
      * AJAX call to FB group feed.
      * @param {type} gid Group id whose posts are to be retrieved.
      * @param {type} refresh
+     * @param {type} offset
      * @param {type} callbacks Completed callback function.
      */
-    getNewestPosts: function(gid, refresh, callbacks) {
+    getNewestPosts: function(gid, refresh, offset, callbacks) {
         var url = '/php/new-posts.php?gid=' + gid + '&refresh=' + (refresh | 0);
+
+        if (offset) {
+            url += '&offset=' + offset;
+        }
 
         $.ajax({
             type: 'GET',
@@ -511,12 +516,12 @@ var SwdPresenter = {
      * Load feed for the current group.
      * @param {type} refresh
      */
-    loadNewestPosts: function(refresh) {
+    loadNewestPosts: function(refresh, offset) {
         // If there is already a timer function running, then clear it.
         clearInterval(SwdPresenter.refreshStream);
 
         // Get posts and then display them.
-        SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, refresh, {
+        SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, refresh, offset, {
             success: function(response) {
                 // Set a timer function to periodically refresh the server-side FQL stream.
                 SwdPresenter.refreshStream = setInterval(function() {
@@ -549,35 +554,32 @@ var SwdPresenter = {
     /***
      * High level post loading function.
      * @param {type} refresh
-     * @param {type} clearPosts
+     * @param {type} viewChanged
      */
-    loadPosts: function(refresh, clearPosts) {
+    loadPosts: function(refresh, viewChanged) {
+        var offset;
+        
         // Before calling anything, confirm login status.
         SwdPresenter.checkFBLoginStatus(function() {
             if (!SwdPresenter.currentlyLoading) {
                 SwdPresenter.currentlyLoading = true;
 
-//                if (loadNextPage && SwdPresenter.oldestPost) {
-//                    updatedTime = SwdPresenter.oldestPost.updated_time;
-//                }
-//                else {
-//                    // Reloading all posts.
-//                    updatedTime = null;
-//                    SwdView.clearPosts();
-//                    SwdPresenter.refreshFbCanvasSize();
-//                    SwdView.toggleAjaxLoadingDiv('body', true);
-//                }
-
-                if (refresh || clearPosts) {
+                if (refresh || viewChanged) {
                     SwdView.clearPosts();
                     SwdPresenter.refreshFbCanvasSize();
+                    
+                    // If the view changed or the page has refreshed, reset the post offset to 0.
+                    offset = 0;
+                }
+                else {
+                    offset = null;
                 }
 
                 SwdView.toggleAjaxLoadingDiv('body', true);
 
                 switch (SwdPresenter.selectedView) {
                     case SelectedView.group:
-                        SwdPresenter.loadNewestPosts(refresh);
+                        SwdPresenter.loadNewestPosts(refresh, offset);
                         break;
                     case SelectedView.myposts:
                         SwdPresenter.loadMyPosts();

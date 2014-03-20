@@ -10,17 +10,19 @@ $refresh = $_GET['refresh'];
 fetchStream($fbSession, $gid, $refresh);
 
 if (http_response_code() != 401) {
-    if ($refresh == 1) {
-        $_SESSION['pagingOffset'] = 0;
+    // Check to see if an offset has been provided. (In the case of a refresh or view change.)
+    if (isset($_GET['offset'])) {
+        $offset = $_GET['offset'];
+    } else {
+        $offset = $_SESSION['pagingOffset'];
     }
-    
+
     $limit = 25;
-    $offset = $_SESSION['pagingOffset'];
-    
+
     // Slice the array for processing.
     $posts = array_slice($_SESSION['stream'], $offset, $limit);
-    
+
     $_SESSION['pagingOffset'] = $offset + $limit;
-    
+
     echo json_encode(getPostData($fbSession, $posts));
 }
