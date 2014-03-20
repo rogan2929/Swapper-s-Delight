@@ -10,7 +10,7 @@ $gid = $_GET['gid'];
 //$updatedTime = $_GET['updatedTime'];
 
 // Fetch the stream for the group.
-fetchStream($gid);
+fetchStream($fbSession, $gid);
 
 if (http_response_code() != 401) {
     //$constraints = array();
