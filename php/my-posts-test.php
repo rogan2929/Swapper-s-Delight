@@ -35,11 +35,9 @@ $myPosts = array();
 for ($i = 0; $i < 50; $i++) {
     $request = '/' . $gid . '/feed?fields=id,from&since=' . $windowStart . '&until=' . $windowEnd . '&limit=5000&date_format=U';
     
-    //$response = $fbSession->api($request);
+    $response = $fbSession->api($request);
     
-    //echo json_encode($response);
-    
-    echo 'TEST';
+    echo json_encode($response);
     
     //$posts = array_merge($posts, $response);
     
