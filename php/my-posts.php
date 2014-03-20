@@ -1,20 +1,25 @@
 <?php
 
 require_once 'session.php';
-require_once 'include.php';
+require_once 'stream_data.php';
+
+$gid = $_GET['gid'];
+$uid = $_GET['uid'];
+$refresh = $_GET['refresh'];
+
+// Fetch the stream for the group.
+fetchStream($fbSession, $gid, $refresh);
 
 if (http_response_code() != 401) {
-    $gid = $_GET['gid'];
-    $uid = $_GET['uid'];
+    $posts = array();
+    $stream = $_SESSION;
     
-    // Create the constraints array.
-    $constraints = array();
-
-    $constraints[] = array(
-        'field' => 'actor_id',
-        'operator' => '=',
-        'value' => $uid
-    );
-
-    echo json_encode(executeBatchQuery($fbSession, $gid, $constraints));
+    // Look through the cached stream, match by uid => actor_id
+    for ($i = 0; $i < count($stream); $i++) {
+        if ($stream[$i]['actor_id'] == $uid) {
+            $posts[] = $stream[$i];
+        }
+    }
+    
+    echo json_encode(getPostData($fbSession, $posts));
 }

@@ -9,8 +9,6 @@ require_once 'stream_data.php';
 $gid = $_GET['gid'];
 $refresh = $_GET['refresh'];
 
-echo $refresh . "<br/>";
-
 // Fetch the stream for the group.
 fetchStream($fbSession, $gid, $refresh);
 

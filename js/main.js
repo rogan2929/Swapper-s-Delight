@@ -47,12 +47,12 @@ var SwdModel = {
     },
     /***
      * Get posts in the group that are liked.
-     * @param {type} uid
      * @param {type} gid
+     * @param {type} refresh
      * @param {type} callbacks
      */
-    getLikedPosts: function(uid, gid, callbacks) {
-        var url = '/php/liked-posts.php?gid=' + gid + '&uid=' + uid;
+    getLikedPosts: function(gid, refresh, callbacks) {
+        var url = '/php/liked-posts.php?gid=' + gid + '&refresh=' + (refresh | 0);
 
         $.ajax({
             type: 'GET',
@@ -102,7 +102,7 @@ var SwdModel = {
      * @param {type} callbacks
      */
     getMyPosts: function(uid, gid, callbacks) {
-        var url = '/php/my-posts.php?gid=' + gid + '&uid=' + uid;
+        var url = '/php/my-posts.php?gid=' + gid + '&uid=' + uid + '&refresh=' + (refresh | 0);
 
         $.ajax({
             type: 'GET',
@@ -122,11 +122,7 @@ var SwdModel = {
      * @param {type} callbacks Completed callback function.
      */
     getNewestPosts: function(gid, refresh, callbacks) {
-        var url = '/php/new-posts.php?gid=' + gid;
-
-        if (refresh) {
-            url += '&refresh=' + (refresh | 0);
-        }
+        var url = '/php/new-posts.php?gid=' + gid + '&refresh=' + (refresh | 0);
 
         $.ajax({
             type: 'GET',
