@@ -57,6 +57,7 @@ for ($i = 0; $i < count($posts); $i++) {
 }
 
 echo count($posts);
+echo json_encode($posts);
 
 //
 //$constraints = array();
