@@ -48,14 +48,14 @@ function getPostData($fbSession, $posts, $limit) {
             ))
         );
     }
-    
-    echo json_encode($queries);
 
     // Execute a batch query.
     $response = $fbSession->api('/', 'POST', array(
         'batch' => json_encode($queries),
         'include_headers' => false
     ));
+    
+    echo json_encode($response);
 
     // Sift through the results.
     for ($i = 0; $i < count($response); $i++) {
