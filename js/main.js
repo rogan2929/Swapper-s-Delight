@@ -865,7 +865,7 @@ var SwdPresenter = {
             SwdPresenter.selectedView = SelectedView.search;
 
             SwdPresenter.search = $('#main-search').val();
-            SwdPresenter.loadPosts(false);
+            SwdPresenter.loadPosts(false, true);
         }
     },
     onWindowResize: function(e, args) {
