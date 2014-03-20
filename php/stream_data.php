@@ -8,6 +8,8 @@ require_once 'include.php';
  */
 
 function fetchStream($gid) {
+    echo 'TEST';
+    
     if (http_response_code() != 401) {
         // On certain conditions, execute a new batch query to fetch the stream.
         // 1. Last updated time > 5 minutes.
