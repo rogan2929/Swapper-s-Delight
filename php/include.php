@@ -222,14 +222,12 @@ function getOptimalWindowData($fbSession, $gid) {
 
     $query = 'SELECT post_id FROM stream WHERE source_id = ' . $gid . ' AND updated_time <= ' . $startTime . ' AND updated_time >= ' . $endTime . ' LIMIT 100';
 
-    try {
-        $response = $fbSession->api(array(
-            'method' => 'fql.query',
-            'query' => $query
-        ));
-    } catch (Exception $e) {
-        echo $e->getMessage();
-    }
+    echo var_dump($fbSession);
+    
+    $response = $fbSession->api(array(
+        'method' => 'fql.query',
+        'query' => $query
+    ));
 
     $count = count($response);
 
