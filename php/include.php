@@ -271,6 +271,8 @@ function executeBatchQuery($fbSession, $gid, $constraints = array()) {
     $batchRunCount = 50;
 
     $posts = array();
+    
+    echo 'TEST';
 
     for ($i = 0; $i < $windowData['batchCount']; $i++) {
         $queries = array();
@@ -293,8 +295,6 @@ function executeBatchQuery($fbSession, $gid, $constraints = array()) {
                 'operator' => '>=',
                 'value' => $windowEnd
             );
-            
-            echo 'TEST';
 
             $queries[] = array(
                 'method' => 'POST',
