@@ -511,7 +511,7 @@ var SwdPresenter = {
     loadSearchPosts: function() {
         SwdView.clearSelectedNav();
         SwdView.blurControl('#main-search');
-        
+
         // Get posts and then display them.
         SwdModel.searchPosts(SwdPresenter.selectedGroup.gid, SwdPresenter.search, {
             success: function(response) {
@@ -544,8 +544,9 @@ var SwdPresenter = {
                 if (refresh) {
                     SwdView.clearPosts();
                     SwdPresenter.refreshFbCanvasSize();
-                    SwdView.toggleAjaxLoadingDiv('body', true);
                 }
+
+                SwdView.toggleAjaxLoadingDiv('body', true);
 
                 switch (SwdPresenter.selectedView) {
                     case SelectedView.group:
@@ -590,10 +591,10 @@ var SwdPresenter = {
      * Set currently selected group.
      * @param {type} group
      */
-    setSelectedGroup: function(group) {
+    setSelectedGroup: function(group, refresh) {
         SwdPresenter.selectedGroup = group;
         SwdPresenter.selectedView = SelectedView.group;
-        SwdPresenter.loadPosts(false);
+        SwdPresenter.loadPosts(refresh);
         SwdView.setGroupButtonText(group.name);
         SwdView.setSelectedView('button-nav-group');
     },
@@ -611,7 +612,7 @@ var SwdPresenter = {
         SwdView.toggleFloatingPanel('#new-post-panel', true);
     },
     onClickButtonRefresh: function(e, args) {
-        SwdPresenter.loadPosts(false);
+        SwdPresenter.loadPosts(true);
     },
     onClickFloatingPanelCloseButton: function(e, args) {
         SwdView.toggleFloatingPanel('.floating-panel', false);
@@ -637,7 +638,9 @@ var SwdPresenter = {
         window.open(SwdPresenter.selectedPost.permalink, '_blank');
     },
     onClickNavButton: function(e, args) {
-        var id = $(e.currentTarget).attr('id');
+        var id;
+
+        id = $(e.currentTarget).attr('id');
 
         switch (id) {
             case 'button-nav-group':
@@ -758,7 +761,7 @@ var SwdPresenter = {
         }
 
         // Set selected group and load its feed.
-        SwdPresenter.setSelectedGroup(group);
+        SwdPresenter.setSelectedGroup(group, true);
 
         SwdView.toggleFloatingPanel('#select-group-panel', false, 'drop');
     },
@@ -826,7 +829,7 @@ var SwdPresenter = {
     onKeyUpSearch: function(e, args) {
         if (e.which === 13) {
             e.preventDefault();
-            
+
             SwdPresenter.selectedView = SelectedView.search;
 
             SwdPresenter.search = $('#main-search').val();
@@ -1457,11 +1460,12 @@ var SwdView = {
      */
     toggleAjaxLoadingDiv: function(parent, show) {
         if (show) {
-            //$(parent + ' .ajax-loading-div').fadeIn(100);
-            $(parent + ' .ajax-loading-div').show();
+            // Before showing a loading-div, make sure it's the only one.
+            if ($('.ajax-loading-div:visible').length === 1) {
+                $(parent + ' .ajax-loading-div').show();
+            }
         }
         else {
-            //$(parent + ' .ajax-loading-div').fadeOut(100);
             $(parent + ' .ajax-loading-div').hide();
         }
     },
