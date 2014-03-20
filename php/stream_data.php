@@ -15,15 +15,22 @@ function fetchStream($fbSession, $gid, $refresh = 0) {
             $_SESSION['lastUpdateTime'] = time();
             $_SESSION['gid'] = $gid;
             $_SESSION['pagingOffset'] = 0;
-            
-            echo json_encode($_SESSION['stream']);
         }
     }
 }
 
-function getPostData($stream, $offset, $length) {
+function getPostData($offset, $length) {
+    $stream = $_SESSION['stream'];
+    $queries = array();
     
+    for ($i = $offset; $i <= $offset + $length; $i++) {
+        
+    }
 }
+
+/* * *
+ * Query the FQL stream table for some basic data that will be cached.
+ */
 
 function queryStream($fbSession, $gid) {
     $windowData = getOptimalWindowData($fbSession, $gid);
@@ -31,7 +38,7 @@ function queryStream($fbSession, $gid) {
     $windowSize = $windowData['windowSize'];
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
-    
+
     $stream = array();
 
     for ($i = 0; $i < $windowData['batchCount']; $i++) {
@@ -39,7 +46,7 @@ function queryStream($fbSession, $gid) {
 
         // Construct the FB batch request
         for ($j = 0; $j < 50; $j++) {
-            $query = 'SELECT post_id,actor_id,message FROM stream WHERE source_id=' . $gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
+            $query = 'SELECT post_id,actor_id,message,updated_time FROM stream WHERE source_id=' . $gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
 
             $queries[] = array(
                 'method' => 'GET',
@@ -55,12 +62,12 @@ function queryStream($fbSession, $gid) {
             'batch' => json_encode($queries),
             'include_headers' => false
         ));
-        
+
         for ($j = 0; $j < count($response); $j++) {
             $stream = array_merge($stream, json_decode($response[$j]['body'], true));
         }
     }
-    
+
     return $stream;
 }
 
