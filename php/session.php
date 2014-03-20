@@ -3,7 +3,7 @@
 // Header required by IE.
 header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
 
-require_once ("facebook.php");
+require ("facebook.php");
 
 // Prod AppId and Secret
 //$appId = '1401018793479333';
@@ -22,7 +22,7 @@ $fbSession = new Facebook(array(
 session_start();
 
 // Save as a session variable.
-$_SESSION['fbSession'] = 'TEST';
+$_SESSION['fbSession'] = $fbSession;
 
 echo json_encode($_SESSION['fbSession']);
 
