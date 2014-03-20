@@ -346,8 +346,6 @@ var SwdPresenter = {
      * Starts the application after init has finished.
      */
     startApp: function() {
-        var i;
-
         if (!SwdPresenter.groups) {
             // Retrieve group info for logged in user.
             SwdModel.getGroupInfo({
@@ -373,6 +371,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
                                 SwdView.installHandler('onClickLogout', SwdPresenter.onClickLogout, '#menu-item-logout', 'click');
                                 SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
+                                SwdView.installHandler('onClickPermalink', SwdPresenter.onClickPermalink, '#post-button-permalink', 'click');
                                 SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
 //                                SwdView.installHandler('onClickPopupComment', SwdPresenter.onClickPopupComment, '#popup-comment', 'click');
                                 SwdView.installHandler('onClickPostButtonDelete', SwdPresenter.onClickPostButtonDelete, '#post-button-delete', 'click');
@@ -612,6 +611,9 @@ var SwdPresenter = {
     },
     onClickMenuButton: function(e, args) {
         SwdView.showUiMenu(e);
+    },
+    onClickPermalink: function(e, args) {
+        window.open(SwdPresenter.selectedPost.permalink, '_blank');
     },
     onClickNavButton: function(e, args) {
         var id = $(e.currentTarget).attr('id');
@@ -1330,9 +1332,6 @@ var SwdView = {
             $('#post-image-container').hide();
             $('#post-no-image-desc').show();
         }
-
-        // Display permalink
-        $('.post-permalink').attr('href', post.permalink);
 
         // Display message content, or hide it if empty.
         if (post.message !== '') {

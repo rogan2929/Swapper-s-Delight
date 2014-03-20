@@ -71,7 +71,7 @@ header('Pragma: no-cache');
                                     <a class='facebook-user-name' target='_blank'></a>
                                     <span class='timestamp'></span>
                                 </div>
-                                <a target='_blank' class='post-permalink float-right wrappable-link'>Permalink</a>
+<!--                                <a target='_blank' class='post-permalink float-right wrappable-link'>Permalink</a>-->
                             </div>
                             <div id='post-message' class='floating-panel-section'>
                                 <div id='post-message-text'></div>
@@ -164,6 +164,9 @@ header('Pragma: no-cache');
                     <div id='post-button-pm' class='button toolbar-button'>
                         <span class='button-icon icon-pm'></span>
                         <span>Private Message</span>
+                    </div>
+                    <div id='post-button-permalink' class='button toolbar-button'>
+                        <span>View in Facebook</span>
                     </div>
                 </div>
                 <div class='toolbar-group float-right'>
