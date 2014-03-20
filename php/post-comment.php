@@ -1,5 +1,7 @@
 <?php
 
+require 'facebook.php';
+
 $facebook = new Facebook(array(
     'appId' => $_SESSION['appId'],
     'secret' => $_SESSION['appSecret'],

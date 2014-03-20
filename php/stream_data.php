@@ -8,8 +8,6 @@ function fetchStream($gid, $refresh = 0) {
         'secret' => $_SESSION['appSecret'],
         'cookie' => true
     ));
-
-    echo json_encode($facebook);
     
     if (http_response_code() != 401) {
         // Wait for other threads to finish updating the cached FQL stream.
