@@ -870,21 +870,21 @@ a.link-title {
     margin-bottom: 6px;
 }
 
-#post-image-container .post-image-tile .close-button {
+/*#post-image-container .post-image-tile .close-button {
     display: none;
-}
+}*/
 
 #post-image-container .post-image-tile.single {
     cursor: default;
     background-size: contain;
 }
 
-#post-image-container .post-image-tile.expanded .close-button {
+/*#post-image-container .post-image-tile.expanded .close-button {
     margin-top: 5px;
     margin-right: 5px;
     display: block;
-/*    background-image: url('/img/panel-close-red.png');*/
-}
+    background-image: url('/img/panel-close-red.png');
+}*/
 
 #post-image-container > .post-image-tile.expanded .close-button:hover {
 /*    background-image: url('/img/panel-close-light-hover.png');*/
