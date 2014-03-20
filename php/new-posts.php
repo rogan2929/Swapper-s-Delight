@@ -3,6 +3,7 @@
 //require_once 'session.php';
 //require_once 'include.php';
 
+require_once 'session.php';
 require_once 'stream_data.php';
 
 $gid = $_GET['gid'];

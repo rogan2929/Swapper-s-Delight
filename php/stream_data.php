@@ -1,15 +1,12 @@
 <?php
 
-require_once 'session.php';
 require_once 'include.php';
-
-echo var_dump($fbSession);
 
 /* * *
  * Fetch the FQL stream table for the given group id.
  */
 
-function fetchStream($gid) {
+function fetchStream($fbSession, $gid) {
     if (http_response_code() != 401) {
         // On certain conditions, execute a new batch query to fetch the stream.
         // 1. Last updated time > 5 minutes.
