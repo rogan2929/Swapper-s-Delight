@@ -267,8 +267,8 @@ function executeBatchQuery($fbSession, $gid, $constraints = array()) {
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
 
-    $batchSize = 50;
-    $batchRunCount = 10;
+    $batchSize = 5000;
+    $batchRunCount = 50;
 
     $posts = array();
 
@@ -303,11 +303,13 @@ function executeBatchQuery($fbSession, $gid, $constraints = array()) {
             $windowEnd -= $windowSize;
         }
         
-        // Call the batch query.
-        $response = $fbSession->api('/', 'POST', array(
-            'batch' => json_encode($queries),
-            'include_headers' => false
-        ));
+        echo json_encode($queries);
+        
+//        // Call the batch query.
+//        $response = $fbSession->api('/', 'POST', array(
+//            'batch' => json_encode($queries),
+//            'include_headers' => false
+//        ));
 
         // Sift through the results.
         for ($k = 0; $k < count($response); $k++) {
