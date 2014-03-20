@@ -10,6 +10,6 @@ require_once 'include.php';
 require_once 'session.php';
 
 for ($i = 0; $i < 1000; $i++) {
-    $response = $fbSession->api('/120696471425768/feed');
+    $response = $fbSession->api('/120696471425768/feed?fields=id');
     echo json_encode($response) . '<br/>';
 }
