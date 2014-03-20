@@ -7,21 +7,25 @@ require_once 'session.php';
 require_once 'stream_data.php';
 
 $gid = $_GET['gid'];
-//$updatedTime = $_GET['updatedTime'];
+$refresh = $_GET['refresh'];
 
 // Fetch the stream for the group.
-fetchStream($fbSession, $gid);
+fetchStream($fbSession, $gid, $refresh);
 
 if (http_response_code() != 401) {
-    //$constraints = array();
+    if ($refresh === 1) {
+        $_SESSION['pagingOffset'] = 0;
+    }
+    
     $limit = 25;
     $offset = $_SESSION['pagingOffset'];
     
+    // Slice the array for processing.
     $posts = array_slice($_SESSION['posts'], $offset, $limit);
     
-    $_SESSION['pagingOffset'] = $offset + $limit;
+    $_SESSION['pagingOffset'] = $offset + $limit;    
     
-    echo json_encode($posts);
+    echo json_encode(getPostData($fbSession, $posts));
 }
 
 //    if ($updatedTime) {
