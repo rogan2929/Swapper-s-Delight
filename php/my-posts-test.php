@@ -56,7 +56,7 @@ for ($i = 0; $i < count($posts); $i++) {
     }
 }
 
-echo count($myPosts);
+echo count($posts);
 
 //
 //$constraints = array();
