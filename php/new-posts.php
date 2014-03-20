@@ -1,13 +1,12 @@
 <?php
 
-require_once 'session.php';
 require_once 'stream_data.php';
 
 $gid = $_GET['gid'];
 $refresh = $_GET['refresh'];
 
 // Fetch the stream for the group.
-fetchStream($fbSession, $gid, $refresh);
+fetchStream($gid, $refresh);
 
 if (http_response_code() != 401) {
     // Check to see if an offset has been provided. (In the case of a refresh or view change.)
@@ -24,5 +23,5 @@ if (http_response_code() != 401) {
 
     $_SESSION['pagingOffset'] = $offset + $limit;
 
-    echo json_encode(getPostData($fbSession, $posts));
+    echo json_encode(getPostData($posts));
 }

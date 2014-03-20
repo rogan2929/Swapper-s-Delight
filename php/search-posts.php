@@ -1,6 +1,5 @@
 <?php
 
-require_once 'session.php';
 require_once 'stream_data.php';
 
 $gid = $_GET['gid'];
@@ -17,5 +16,5 @@ if (http_response_code() != 401) {
         }
     }
     
-    echo json_encode(getPostData($fbSession, $posts));
+    echo json_encode(getPostData($posts));
 }

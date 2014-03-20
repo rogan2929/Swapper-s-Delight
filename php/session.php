@@ -20,11 +20,12 @@ $fbSession = new Facebook(array(
     'cookie' => true
         ));
 
-echo json_encode($fbSession);
-
 // Test the access token.
 try {
     $userProfile = $fbSession->api('/me', 'GET');
+    
+    // Save as a session variable.
+    $_SESSION['fbSession'] = $fbSession;
 } catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
     // user ID even though the access token is invalid.

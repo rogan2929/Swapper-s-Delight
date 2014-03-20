@@ -1,7 +1,8 @@
 <?php
 
-require_once 'session.php';
 require_once 'stream_data.php';
+
+$fbSession = $_SESSION['fbSession'];
 
 if (http_response_code() != 401) {
     $postId = $_GET['postId'];

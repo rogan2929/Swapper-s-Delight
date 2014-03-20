@@ -1,6 +1,8 @@
 <?php
 
-function fetchStream($fbSession, $gid, $refresh = 0) {
+function fetchStream($gid, $refresh = 0) {
+    $fbSession = $_SESSION['fbSession'];
+    
     if (http_response_code() != 401) {
         // Wait for other threads to finish updating the cached FQL stream.
         waitForFetchStreamCompletion();
@@ -29,7 +31,9 @@ function waitForFetchStreamCompletion() {
  * Retrieve additional data for the posts in the provided array.
  */
 
-function getPostData($fbSession, $posts, $limit) {
+function getPostData($posts, $limit) {
+    $fbSession = $_SESSION['fbSession'];
+    
     $queries = array();
     $result = array();
 

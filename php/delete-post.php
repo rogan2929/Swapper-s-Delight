@@ -1,6 +1,6 @@
 <?php
 
-require_once 'session.php';
+$fbSession = $_SESSION['fbSession'];
 
 $postId = $_GET['postId'];
 

@@ -1,10 +1,9 @@
 <?php
 
-require_once 'session.php';
-
 if (http_response_code() != 401) {
     $postId = $_POST['postId'];
     $userLikes = $_POST['userLikes'];
+    $fbSession = $_SESSION['fbSession'];
     
     if ($userLikes == true) {
         // Like the post.
