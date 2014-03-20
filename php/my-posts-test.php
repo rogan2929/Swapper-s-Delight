@@ -33,15 +33,15 @@ $myPosts = array();
 
 try {
 
-// Find owned posts.
+    // Find owned posts.
     for ($i = 0; $i < 50; $i++) {
         $request = '/' . $gid . '/feed?fields=id,from&since=' . $windowEnd . '&until=' . $windowStart . '&limit=5000&date_format=U';
         
-        echo $request . "<br/>";
+//        echo $request . "<br/>";
         
-//        $response = $fbSession->api($request);
-//
-//        $posts = array_merge($posts, $response);
+        $response = $fbSession->api($request);
+
+        $posts = array_merge($posts, $response['data']);
 
         $windowStart = $windowEnd;
         $windowEnd -= $windowSize;
@@ -50,16 +50,16 @@ try {
     echo $e->getMessage();
 }
 
-//for ($i = 0; $i < count($posts); $i++) {
-//    $post = $posts[$i];
-//    
-//    if ($post['from']['id'] === $uid) {
-//        $myPosts[] = $post['id'];
-//    }
-//}
-//
-//echo count($posts);
-//echo json_encode($posts);
+for ($i = 0; $i < count($posts); $i++) {
+    $post = $posts[$i];
+    
+    if ($post['from']['id'] === $uid) {
+        $myPosts[] = $post['id'];
+    }
+}
+
+echo count($posts);
+echo json_encode($posts);
 
 //
 //$constraints = array();
