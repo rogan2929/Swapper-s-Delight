@@ -200,15 +200,15 @@ function getSmallImageUrl($image) {
 
     // Try to ensure a minimum width. If it is too small, then proceed to the next largest
     // image in the image collection. (0 being the largest).
-    do {
-        $imageSize = getimagesize($image[$index]['source']);
-        $index--;
-
-        if ($index < 0) {
-            $index = 0;
-            break;
-        }
-    } while ($imageSize[0] < 250 && $imageSize[1] < 150);
+//    do {
+//        $imageSize = getimagesize($image[$index]['source']);
+//        $index--;
+//
+//        if ($index < 0) {
+//            $index = 0;
+//            break;
+//        }
+//    } while ($imageSize[0] < 250 && $imageSize[1] < 150);
 
     return $image[$index]['source'];
 }
@@ -303,13 +303,11 @@ function executeBatchQuery($fbSession, $gid, $constraints = array()) {
             $windowEnd -= $windowSize;
         }
         
-        echo var_dump($queries);
-        
 //        // Call the batch query.
-//        $response = $fbSession->api('/', 'POST', array(
-//            'batch' => json_encode($queries),
-//            'include_headers' => false
-//        ));
+        $response = $fbSession->api('/', 'POST', array(
+            'batch' => json_encode($queries),
+            'include_headers' => false
+        ));
 
         // Sift through the results.
         for ($k = 0; $k < count($response); $k++) {
