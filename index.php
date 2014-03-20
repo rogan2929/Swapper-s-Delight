@@ -228,7 +228,7 @@ header('Pragma: no-cache');
 
         <!--LifeSiteMedia Ad Script-->
 
-        <script type="text/javascript">
+<!--        <script type="text/javascript">
             //<![CDATA[
             LSM_Slot({
                 adkey: '5a7',
@@ -270,7 +270,7 @@ header('Pragma: no-cache');
                 _render_div_id: 'ad-tile-4'
             });
             //]]>
-        </script>
+        </script>-->
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
