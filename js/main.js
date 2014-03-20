@@ -374,7 +374,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickLogout', SwdPresenter.onClickLogout, '#menu-item-logout', 'click');
                                 SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
                                 SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
-                                SwdView.installHandler('onClickPopupComment', SwdPresenter.onClickPopupComment, '#popup-comment', 'click');
+//                                SwdView.installHandler('onClickPopupComment', SwdPresenter.onClickPopupComment, '#popup-comment', 'click');
                                 SwdView.installHandler('onClickPostButtonDelete', SwdPresenter.onClickPostButtonDelete, '#post-button-delete', 'click');
                                 SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
                                 SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
@@ -385,7 +385,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .close-button', 'click');
                                 SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
                                 SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
-                                SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#popup-comment-text', 'keyup');
+                                SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#post-comment-text', 'keyup');
                                 SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
                                 SwdView.positionMenus();
 
@@ -780,12 +780,12 @@ var SwdPresenter = {
             e.preventDefault();
 
             id = SwdPresenter.selectedPost.post_id;
-            comment = $('#popup-comment-text').val();
+            comment = $('#post-comment-text').val();
 
             // Before calling anything, confirm login status.
             SwdPresenter.checkFBLoginStatus(function() {
                 // Show the ajax loading div.
-                SwdView.toggleAjaxLoadingDiv('#popup-comment', true);
+                SwdView.toggleAjaxLoadingDiv('#post-comment-wrapper', true);
 
                 // Post the comment.
                 SwdModel.postComment(id, comment, {
@@ -895,9 +895,9 @@ var SwdView = {
      * Clear comment box.
      */
     clearPostCommentText: function() {
-        $('#popup-comment-text').val('');
-        $('#popup-comment').hide();
-        SwdView.toggleAjaxLoadingDiv('#popup-comment', false);
+        $('#post-comment-text').val('');
+//        $('#popup-comment').hide();
+        SwdView.toggleAjaxLoadingDiv('#post-comment-wrapper', false);
     },
     /***
      * Closes all Jquery UI menus.

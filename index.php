@@ -85,6 +85,10 @@ header('Pragma: no-cache');
                                 <span id='linkdata-desc'></span>
                             </div>
                             <div class='heading'>Viewing all comments, newest first</div>
+                            <div id='post-comment-wrapper' class='floating-panel-section'>
+                                <textarea id='post-comment-text' placeholder='Type a comment and press [Enter] to post it.'></textarea>
+                                <div class='ajax-loading-div hidden'></div>
+                            </div>
                             <div id='post-comments' class='floating-panel-section'>
                                 <div id='button-show-new-comments' class='button hidden'></div>
                                 <div id='post-comment-list'></div>
@@ -149,11 +153,11 @@ header('Pragma: no-cache');
 
             <div id='post-details-toolbar' class='ui-widget toolbar floating-panel-toolbar hidden'>
                 <div class='toolbar-group float-left'>
-                    <div id='post-button-comment' class='button toolbar-button menu-button'>
-                        <span class='button-icon icon-comment'></span>
-                        <span>Comment</span>
-                        <a href='#popup-comment'></a>
-                    </div>
+                    <!--                    <div id='post-button-comment' class='button toolbar-button menu-button'>
+                                            <span class='button-icon icon-comment'></span>
+                                            <span>Comment</span>
+                                            <a href='#popup-comment'></a>
+                                        </div>-->
                     <div id='post-button-like' class='button toolbar-button'>
                         <span class='button-icon icon-like'></span>
                         <span>Like</span>
@@ -179,10 +183,10 @@ header('Pragma: no-cache');
                 </div>
             </div>
 
-            <div id='popup-comment' class='menu floating-panel-menu ui-widget'>
-                <textarea id='popup-comment-text' placeholder='Type a comment and press [Enter] to post it.'></textarea>
-                <div class='ajax-loading-div hidden'></div>
-            </div>
+            <!--            <div id='popup-comment' class='menu floating-panel-menu ui-widget'>
+                            <textarea id='popup-comment-text' placeholder='Type a comment and press [Enter] to post it.'></textarea>
+                            <div class='ajax-loading-div hidden'></div>
+                        </div>-->
         </div>
 
         <!--Ad Tiles that will be dynamically placed.-->
