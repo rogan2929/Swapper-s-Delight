@@ -183,11 +183,6 @@ session_start();
                     <span>Logout</span>
                 </div>
             </div>
-
-            <!--            <div id='popup-comment' class='menu floating-panel-menu ui-widget'>
-                            <textarea id='popup-comment-text' placeholder='Type a comment and press [Enter] to post it.'></textarea>
-                            <div class='ajax-loading-div hidden'></div>
-                        </div>-->
         </div>
 
         <!--Ad Tiles that will be dynamically placed.-->
