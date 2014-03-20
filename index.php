@@ -226,52 +226,6 @@ header('Pragma: no-cache');
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
 
-        <!--LifeSiteMedia Ad Script-->
-
-<!--        <script type="text/javascript">
-            //<![CDATA[
-            LSM_Slot({
-                adkey: '5a7',
-                ad_size: '300x250',
-                slot: 'slot93684',
-                _render_div_id: 'ad-tile-1'
-            });
-            //]]>
-        </script>
-
-        <script type="text/javascript">
-            //<![CDATA[
-            LSM_Slot({
-                adkey: 'e8f',
-                ad_size: '300x250',
-                slot: 'slot93683',
-                _render_div_id: 'ad-tile-2'
-            });
-            //]]>
-        </script>
-
-        <script type="text/javascript">
-            //<![CDATA[
-            LSM_Slot({
-                adkey: '4df',
-                ad_size: '300x250',
-                slot: 'slot93685',
-                _render_div_id: 'ad-tile-3'
-            });
-            //]]>
-        </script>
-
-        <script type="text/javascript">
-            //<![CDATA[
-            LSM_Slot({
-                adkey: '2e5',
-                ad_size: '300x250',
-                slot: 'slot93255',
-                _render_div_id: 'ad-tile-4'
-            });
-            //]]>
-        </script>-->
-
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
             (function(b, o, i, l, e, r) {
