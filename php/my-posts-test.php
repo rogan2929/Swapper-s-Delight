@@ -31,18 +31,23 @@ $windowEnd = $windowStart - $windowSize;
 $posts = array();
 $myPosts = array();
 
+try {
+
 // Find owned posts.
-for ($i = 0; $i < 50; $i++) {
-    $request = '/' . $gid . '/feed?fields=id,from&since=' . $windowStart . '&until=' . $windowEnd . '&limit=5000&date_format=U';
-    
-    $response = $fbSession->api($request);
-    
-    echo json_encode($response);
-    
-    //$posts = array_merge($posts, $response);
-    
-    $windowStart = $windowEnd;
-    $windowEnd -= $windowSize;
+    for ($i = 0; $i < 50; $i++) {
+        $request = '/' . $gid . '/feed?fields=id,from&since=' . $windowStart . '&until=' . $windowEnd . '&limit=5000&date_format=U';
+
+        $response = $fbSession->api($request);
+
+        echo json_encode($response);
+
+        //$posts = array_merge($posts, $response);
+
+        $windowStart = $windowEnd;
+        $windowEnd -= $windowSize;
+    }
+} catch (FacebookApiException $e) {
+    echo $e->getMessage();
 }
 
 //for ($i = 0; $i < count($posts); $i++) {
