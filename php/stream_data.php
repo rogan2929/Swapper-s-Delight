@@ -1,9 +1,5 @@
 <?php
 
-/* * *
- * Fetch the FQL stream table for the given group id.
- */
-
 function fetchStream($fbSession, $gid, $refresh = 0) {
     if (http_response_code() != 401) {
         // On certain conditions, execute a new batch query to fetch the stream.
@@ -24,7 +20,8 @@ function fetchStream($fbSession, $gid, $refresh = 0) {
 
 function getPostData($fbSession, $posts, $limit) {
     $queries = array();
-    
+    $result = array();
+
     if (!isset($limit)) {
         $limit = count($posts);
     }
@@ -46,8 +43,12 @@ function getPostData($fbSession, $posts, $limit) {
         'batch' => json_encode($queries),
         'include_headers' => false
     ));
-    
-    return $response;
+
+    // Sift through the results.
+    for ($i = 0; $i < count($response); $i++) {
+        $body = json_decode($response[$i]['body'], true);
+        $result = array_merge($posts, processStreamQuery($body[0]['fql_result_set'], $result[1]['fql_result_set'], $result[2]['fql_result_set']));
+    }
 }
 
 /* * *
@@ -138,4 +139,178 @@ function getOptimalWindowData($fbSession, $gid) {
     }
 
     return array('windowSize' => 3600 * $windowSize, 'batchCount' => $batchCount);
+}
+
+/* * *
+ * Take a response and construct post objects out of it.
+ */
+
+function processStreamQuery($stream, $images, $users) {
+    $posts = array();
+
+    for ($i = 0; $i < count($stream); $i++) {
+        $post = $stream[$i];
+
+        // Parse associated data from the query.
+        $post['image_url'] = getImageUrlArray($post, $images, true);
+        $post['link_data'] = getLinkData($post);
+        $post['user'] = getUserData($post, $users);
+
+        // Erase any attachment data to save on object size.
+        // This has already been parsed out.
+        unset($post['attachment']);
+
+        $post['post_type'] = getPostType($post);
+
+        // Determine which kind of post this is.
+        // Replace any line breaks with <br/>
+        if (strlen($post['message']) > 0) {
+            $post['message'] = nl2br($post['message']);
+        }
+
+        // Add to the posts array.
+        $posts[] = $post;
+    }
+
+    return $posts;
+}
+
+/* * *
+ * For posts with an image, look for associated image data.
+ */
+
+function getImageUrlArray($post, $images, $thumbnails = true) {
+    $imageUrls = array();
+
+    if ($post['attachment'] && $post['attachment']['media']) {
+        // For posts with an image, look for associated image data.
+        for ($i = 0; $i < count($post['attachment']); $i++) {
+            if ($post['attachment']['media'][$i]) {
+                // Determine if this attachment is a photo or a link.
+                if ($post['attachment']['media'][$i]['type'] == 'photo' && $post['attachment']['media'][$i]['photo']) {
+                    // Get image's unique Facebook Id
+                    $fbid = $post['attachment']['media'][$i]['photo']['fbid'];
+
+                    // Find the image url from the given Facebook ID
+                    $imageUrls[] = getImageUrlFromFbId($fbid, $images, $thumbnails);
+                }
+            }
+        }
+    }
+
+    return $imageUrls;
+}
+
+/* * *
+ * Function to parse FQL attachment data for links.
+ */
+
+function getLinkData($post) {
+    $linkData = array();
+
+    // Loop through media attachments, looking for type 'link'.
+    if ($post['attachment'] && $post['attachment']['media'] && $post['attachment']['media'][0] &&
+            $post['attachment']['media'][0]['type'] == 'link') {
+        $linkData = $post['attachment'];
+    }
+
+    return $linkData;
+}
+
+/* * *
+ * Function to parse FQL user data.
+ */
+
+function getUserData($post, $users) {
+    $user = array();
+
+    for ($i = 0; $i < count($users); $i++) {
+        if ($post['actor_id'] == $users[$i]['uid']) {
+            $user = $users[$i];
+        }
+    }
+
+    return $user;
+}
+
+function getImageUrlFromFbId($fbid, $images, $thumbnails = true) {
+    $imageUrl = null;
+
+    for ($i = 0; $i < count($images); $i++) {
+        if ($fbid == $images[$i]['object_id']) {
+            // See if we are trying to retrieve a small image. (Usually last in the array.)
+            if ($thumbnails) {
+                $imageUrl = getSmallImageUrl($images[$i]['images']);
+            } else {
+                //$imageUrl = $images[$i]['images'][$index]['source'];
+                $imageUrl = getLargeImageUrl($images[$i]['images']);
+            }
+
+
+            break;
+        }
+    }
+
+    return $imageUrl;
+}
+
+/* * *
+ * Determines the post type:
+ *  1. Image Posts (text and non-text, doesn't matter.) ('image')
+ *  2. Text Only Posts ('text')
+ *  3. Link Only Posts ('link')
+ *  4. Link + Text Posts ('textlink')
+ */
+
+function getPostType($post) {
+    $postType = 'unknown';
+
+    // The logic below should catch everything.
+    if (count($post['image_url']) > 0) {
+        $postType = 'image';       // Image Post
+    } else if (strlen($post['message']) > 0) {
+        $postType = 'text';        // Assume text post, but this might change to link.
+    }
+
+    if (strlen($post['message']) == 0 && count($post['link_data']) > 0) {
+        $postType = 'link';        // Link post.
+    }
+
+    if (strlen($post['message']) > 0 && count($post['link_data']) > 0) {
+        $postType = 'textlink';    // Link + Text post.
+    }
+
+    return $postType;
+}
+
+/* * *
+ * In an array, find the largest Facebook image.
+ */
+
+function getLargeImageUrl($image) {
+    return $image[0]['source'];
+}
+
+/* * *
+ * In an array, find the smallest Facebook image.
+ */
+
+function getSmallImageUrl($image) {
+    // Grab the 'middle' image for a scaled version of the full size image.
+    //$index = intval(floor((count($image) / 2)));
+    $index = 0;
+
+    // Try to ensure a minimum width. If it is too small, then proceed to the next largest
+    // image in the image collection. (0 being the largest).
+//    do {
+//        $imageSize = getimagesize($image[$index]['source']);
+//        $index--;
+//
+//        if ($index < 0) {
+//            $index = 0;
+//            break;
+//        }
+//    } while ($imageSize[0] < 250 && $imageSize[1] < 150);
+
+    return $image[$index]['source'];
 }
