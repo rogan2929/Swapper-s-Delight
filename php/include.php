@@ -293,6 +293,8 @@ function executeBatchQuery($fbSession, $gid, $constraints = array()) {
                 'operator' => '>=',
                 'value' => $windowEnd
             );
+            
+            echo 'TEST';
 
             $queries[] = array(
                 'method' => 'POST',
@@ -308,8 +310,6 @@ function executeBatchQuery($fbSession, $gid, $constraints = array()) {
             'batch' => json_encode($queries),
             'include_headers' => false
         ));
-        
-        echo 'TEST';
         
         // Sift through the results.
         for ($k = 0; $k < count($response); $k++) {
