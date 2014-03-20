@@ -838,6 +838,7 @@ a.link-title {
     left: 0;
     overflow-y: auto;
     overflow-x: hidden;
+    padding: 0;
 }
 
 #post-image-container .post-image-tile.expanding {
