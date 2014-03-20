@@ -30,7 +30,7 @@ for ($i = 0; $i < 100; $i++) {
     $request = '/' . $gid . '/feed?fields=id,from&since=' . $windowStart . '&until=' . $windowEnd . '&limit=5000&date_format=U';
     echo $request . "<br/>";
     
-    $windowStart = $windowEnd;
+    $windowStart -= $windowSize;
     $windowEnd -= $windowSize;
 }
 
