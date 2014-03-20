@@ -47,7 +47,7 @@ function getPostData($fbSession, $posts, $limit) {
     // Sift through the results.
     for ($i = 0; $i < count($response); $i++) {
         $body = json_decode($response[$i]['body'], true);
-        $result = array_merge($posts, processStreamQuery($body[0]['fql_result_set'], $result[1]['fql_result_set'], $result[2]['fql_result_set']));
+        $result = array_merge($posts, processStreamQuery($body[0]['fql_result_set'], $body[1]['fql_result_set'], $body[2]['fql_result_set']));
     }
     
     return $result;
