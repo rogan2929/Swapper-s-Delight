@@ -34,6 +34,8 @@ function queryStream($fbSession, $gid) {
     $windowSize = $windowData['windowSize'];
     $windowStart = time();
     $windowEnd = $windowStart - $windowSize;
+    
+    $stream = array();
 
     for ($i = 0; $i < $windowData['batchCount']; $i++) {
         $queries = array();
@@ -57,10 +59,8 @@ function queryStream($fbSession, $gid) {
             'include_headers' => false
         ));
         
-        echo json_encode($response);
+        echo count($response);
     }
-
-    return $response['body']['data'];
 }
 
 /**
