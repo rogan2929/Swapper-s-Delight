@@ -217,7 +217,6 @@ function getSmallImageUrl($image) {
  * Determine the optimal window size to use in batch queries.
  */
 function getOptimalWindowData($fbSession, $gid) {
-    echo 'TEST';
     $startTime = time();
     $endTime = time() - 3600;
 
@@ -227,6 +226,8 @@ function getOptimalWindowData($fbSession, $gid) {
         'method' => 'fql.query',
         'query' => $query
     ));
+    
+    echo json_encode($response);
 
     $count = count($response);
 
