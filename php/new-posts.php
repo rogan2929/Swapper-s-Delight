@@ -11,8 +11,6 @@ $gid = $_GET['gid'];
 // Fetch the stream for the group.
 fetchStream($gid);
 
-echo $gid;
-
 if (http_response_code() != 401) {
     //$constraints = array();
     $limit = 25;
