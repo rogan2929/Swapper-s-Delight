@@ -254,7 +254,7 @@ var SwdModel = {
             type: 'GET',
             url: url,
             success: function(response) {
-                callbacks.success.call(SwdModel, response);
+                callbacks.success.call(SwdModel, JSON.parse(response));
             },
             error: function(response) {
                 callbacks.error.call(SwdModel, response);
