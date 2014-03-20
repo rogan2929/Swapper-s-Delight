@@ -44,7 +44,7 @@ function queryStream($fbSession, $gid) {
 
             $queries[] = array(
                 'method' => 'GET',
-                'relative_url' => 'method/fql.query?queries=' . urlencode($query)
+                'relative_url' => 'method/fql.query?query=' . urlencode($query)
             );
 
             $windowStart -= $windowSize;
