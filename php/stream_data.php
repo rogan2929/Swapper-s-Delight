@@ -14,7 +14,6 @@ function fetchStream($gid) {
         // 2. A new group was selected.
         // 3. Stream has not been fetched yet.
         if (!isset($_SESSION['posts']) || $_SESSION['lastUpdateTime'] < time() - 300 || $_SESSION['gid'] !== $gid) {
-            echo "TEST";
             $_SESSION['posts'] = executeBatchQuery($fbSession, $gid, null);
             $_SESSION['lastUpdateTime'] = time();
             $_SESSION['gid'] = $gid;

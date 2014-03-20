@@ -260,7 +260,7 @@ function getOptimalWindowData($fbSession, $gid) {
     return array('windowSize' => 3600 * $windowSize, 'batchCount' => $batchCount);
 }
 
-function executeBatchQuery($fbSession, $gid, $constraints) {
+function executeBatchQuery($fbSession, $gid, $constraints = array()) {
     $windowData = getOptimalWindowData($fbSession, $gid);
 
     $windowSize = $windowData['windowSize'];
