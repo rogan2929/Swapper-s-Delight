@@ -29,6 +29,9 @@ header('Pragma: no-cache');
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+
+        <!--LifesiteMedia Script-->
+        <script src="//ads.lfstmedia.com/getad?site=231280" type="text/javascript"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -222,6 +225,52 @@ header('Pragma: no-cache');
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
+
+        <!--LifeSiteMedia Ad Script-->
+
+        <script type="text/javascript">
+            //<![CDATA[
+            LSM_Slot({
+                adkey: '5a7',
+                ad_size: '300x250',
+                slot: 'slot93684',
+                _render_div_id: 'ad-tile-1'
+            });
+            //]]>
+        </script>
+
+        <script type="text/javascript">
+            //<![CDATA[
+            LSM_Slot({
+                adkey: 'e8f',
+                ad_size: '300x250',
+                slot: 'slot93683',
+                _render_div_id: 'ad-tile-2'
+            });
+            //]]>
+        </script>
+
+        <script type="text/javascript">
+            //<![CDATA[
+            LSM_Slot({
+                adkey: '4df',
+                ad_size: '300x250',
+                slot: 'slot93685',
+                _render_div_id: 'ad-tile-3'
+            });
+            //]]>
+        </script>
+
+        <script type="text/javascript">
+            //<![CDATA[
+            LSM_Slot({
+                adkey: '2e5',
+                ad_size: '300x250',
+                slot: 'slot93255',
+                _render_div_id: 'ad-tile-4'
+            });
+            //]]>
+        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

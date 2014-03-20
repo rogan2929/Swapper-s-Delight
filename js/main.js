@@ -10,10 +10,10 @@ var SelectedView = {
 };
 
 // Prod AppId
-//var AppId = '1401018793479333';
+var AppId = '1401018793479333';
 
 // Test AppId
-var AppId = '652991661414427';
+//var AppId = '652991661414427';
 
 // http://stackoverflow.com/questions/1102215/mvp-pattern-with-javascript-framework
 
