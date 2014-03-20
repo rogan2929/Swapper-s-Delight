@@ -17,7 +17,7 @@ if (http_response_code() != 401) {
     $limit = 25;
     $offset = $_SESSION['pagingOffset'];
     
-    $posts = array_slize($_SESSION['posts'], $offset, $limit);
+    $posts = array_slice($_SESSION['posts'], $offset, $limit);
     
     $_SESSION['pagingOffset'] = $offset + $limit;
     
