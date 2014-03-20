@@ -3,26 +3,25 @@
 //require_once 'session.php';
 //require_once 'include.php';
 
-require_once 'stream_data';
+require_once 'stream_data.php';
 
 $gid = $_GET['gid'];
 //$updatedTime = $_GET['updatedTime'];
 
-echo $gid;
-
 // Fetch the stream for the group.
-//fetchStream($gid);
-//
-//if (http_response_code() != 401) {
-//    //$constraints = array();
-//    $limit = 25;
-//    $offset = $_SESSION['pagingOffset'];
-//    
-//    $posts = array_slize($_SESSION['posts'], $offset, $limit);
-//    
-//    $_SESSION['pagingOffset'] = $offset + $limit;
-//    
-//    echo json_encode($posts);
+fetchStream($gid);
+
+if (http_response_code() != 401) {
+    //$constraints = array();
+    $limit = 25;
+    $offset = $_SESSION['pagingOffset'];
+    
+    $posts = array_slize($_SESSION['posts'], $offset, $limit);
+    
+    $_SESSION['pagingOffset'] = $offset + $limit;
+    
+    echo json_encode($posts);
+}
 
 //    if ($updatedTime) {
 //        // Add to the constraints array.
