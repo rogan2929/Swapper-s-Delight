@@ -685,8 +685,8 @@ var SwdPresenter = {
                 break;
         }
 
-        // Signal for posts to be loaded. Only clear existing posts if the view has changed.
-        SwdPresenter.loadPosts(false, (prevView !== SwdPresenter.selectedView));
+        // Signal for posts to be loaded.
+        SwdPresenter.loadPosts(false, true);
         SwdView.setSelectedView(id);
     },
     onClickPopupComment: function(e, args) {
