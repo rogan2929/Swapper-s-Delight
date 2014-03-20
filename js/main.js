@@ -118,7 +118,7 @@ var SwdModel = {
     /***
      * AJAX call to FB group feed.
      * @param {type} gid Group id whose posts are to be retrieved.
-     * @param {type} updatedTime
+     * @param {type} refresh
      * @param {type} callbacks Completed callback function.
      */
     getNewestPosts: function(gid, refresh, callbacks) {
@@ -525,8 +525,6 @@ var SwdPresenter = {
      * @param {type} refresh
      */
     loadPosts: function(refresh) {
-        var updatedTime;
-
         // Before calling anything, confirm login status.
         SwdPresenter.checkFBLoginStatus(function() {
             if (!SwdPresenter.currentlyLoading) {
@@ -554,22 +552,13 @@ var SwdPresenter = {
                         SwdPresenter.loadNewestPosts(refresh);
                         break;
                     case SelectedView.myposts:
-                        if (!loadNextPage) {
-                            // This request is so intensive, that it's best to return everything at once, rather than implement paging.
-                            SwdPresenter.loadMyPosts(refresh);
-                        }
+                        SwdPresenter.loadMyPosts(refresh);
                         break;
                     case SelectedView.liked:
-                        if (!loadNextPage) {
-                            // This request is so intensive, that it's best to return everything at once, rather than implement paging.
-                            SwdPresenter.loadLikedPosts(refresh);
-                        }
+                        SwdPresenter.loadLikedPosts(refresh);
                         break;
                     case SelectedView.search:
-                        if (!loadNextPage) {
-                            // This request is so intensive, that it's best to return everything at once, rather than implement paging.
-                            SwdPresenter.loadSearchPosts(refresh);
-                        }
+                        SwdPresenter.loadSearchPosts(refresh);
                         break;
                 }
             }
@@ -751,7 +740,7 @@ var SwdPresenter = {
     },
     onClickPostBlockLoadMore: function(e, args) {
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', true);
-        SwdPresenter.loadPosts(true);
+        SwdPresenter.loadPosts(false);
     },
     onClickPostImageTile: function(e, args) {
         SwdView.toggleSelectedImage($(e.currentTarget))
@@ -841,7 +830,7 @@ var SwdPresenter = {
             SwdPresenter.selectedView = SelectedView.search;
 
             SwdPresenter.search = $('#main-search').val();
-            SwdPresenter.loadPosts();
+            SwdPresenter.loadPosts(false);
         }
     },
     onWindowResize: function(e, args) {
