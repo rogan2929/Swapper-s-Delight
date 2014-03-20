@@ -125,7 +125,7 @@ var SwdModel = {
         var url = '/php/new-posts.php?gid=' + gid;
 
         if (refresh) {
-            url += '&refresh=' + refresh | 0;
+            url += '&refresh=' + (refresh | 0);
         }
 
         $.ajax({
