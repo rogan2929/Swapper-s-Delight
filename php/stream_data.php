@@ -6,20 +6,17 @@
 
 function fetchStream($fbSession, $gid, $refresh = 0) {
     if (http_response_code() != 401) {
-        $posts = array();
-
         // On certain conditions, execute a new batch query to fetch the stream.
         // 1. Last updated time > 5 minutes.
         // 2. A new group was selected.
         // 3. Stream has not been fetched yet.
         if (!isset($_SESSION['stream']) || $_SESSION['lastUpdateTime'] < time() - 300 || $_SESSION['gid'] !== $gid || $refresh === 1) {
-            //$_SESSION['posts'] = executeBatchQuery($fbSession, $gid);
-            //$streamQuery = 'SELECT post_id,actor_id,message FROM stream WHERE source_id=' . $gid;
-
             $_SESSION['stream'] = queryStream($fbSession, $gid);
             $_SESSION['lastUpdateTime'] = time();
             $_SESSION['gid'] = $gid;
             $_SESSION['pagingOffset'] = 0;
+            
+            echo json_encode($_SESSION['stream']);
         }
     }
 }
@@ -59,8 +56,12 @@ function queryStream($fbSession, $gid) {
             'include_headers' => false
         ));
         
-        echo count($response);
+        for ($j = 0; $j < count($response); $j++) {
+            $stream = array_merge($stream, json_decode($response[$j]['body'], true));
+        }
     }
+    
+    return $stream;
 }
 
 /**
