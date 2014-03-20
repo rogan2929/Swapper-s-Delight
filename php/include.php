@@ -221,8 +221,6 @@ function getOptimalWindowData($fbSession, $gid) {
     $endTime = time() - 3600;
 
     $query = 'SELECT post_id FROM stream WHERE source_id = ' . $gid . ' AND updated_time <= ' . $startTime . ' AND updated_time >= ' . $endTime . ' LIMIT 100';
-
-    echo var_dump($fbSession);
     
     $response = $fbSession->api(array(
         'method' => 'fql.query',

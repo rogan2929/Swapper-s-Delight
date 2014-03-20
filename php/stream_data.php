@@ -3,6 +3,8 @@
 require_once 'session.php';
 require_once 'include.php';
 
+echo var_dump($fbSession);
+
 /* * *
  * Fetch the FQL stream table for the given group id.
  */
