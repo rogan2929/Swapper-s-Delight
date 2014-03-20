@@ -275,11 +275,6 @@ a:visited {
     margin-right: 25px;
 }
 
-.floating-panel.fullsize > .floating-panel-content {
-    bottom: 25px;
-    top: 25px;
-}
-
 #details-left-column {
     width: 350px;
     padding-right: 8px;
