@@ -227,7 +227,7 @@ function getOptimalWindowData($fbSession, $gid) {
             'method' => 'fql.query',
             'query' => $query
         ));
-    } catch (FacebookApiException $e) {
+    } catch (Exception $e) {
         echo $e->getMessage();
     }
 
