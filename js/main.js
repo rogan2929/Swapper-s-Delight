@@ -512,6 +512,7 @@ var SwdPresenter = {
      */
     loadSearchPosts: function() {
         SwdView.clearSelectedNav();
+        SwdView.blurControl('#main-search');
         
         // Get posts and then display them.
         SwdModel.searchPosts(SwdPresenter.selectedGroup.gid, SwdPresenter.search, {
@@ -934,6 +935,9 @@ var SwdView = {
         $(selector).bind(event, function(e, args) {
             SwdView.handlers[name].call(SwdPresenter, e, args);
         });
+    },
+    blurControl: function(id) {
+        $(id).blur();
     },
     /***
      * Clear all posts from the view.
