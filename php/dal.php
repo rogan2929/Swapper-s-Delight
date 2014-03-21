@@ -168,6 +168,9 @@ class DataAccessLayer {
     private function api(/* polymorphic */) {
         $args = func_get_args();
         
+        // Insert the App Secret Proof into any API call.
+        $args[] = $this->appSecretProof;
+        
         try {
             // Call the facebook->api function.
             call_user_func_array(array($this->facebook, 'api'), $args);
