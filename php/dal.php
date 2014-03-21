@@ -41,6 +41,8 @@ class DataAccessLayer {
         }
         
         $this->appSecretProof = hash_hmac('sha256', $_SESSION['accessToken'], $this->APP_SECRET); 
+        
+        echo 'TEST';
 
         // Test the facebook object that was created.
         $this->api('/me');
