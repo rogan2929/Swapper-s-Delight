@@ -51,6 +51,8 @@ function getFacebookSession() {
     
     // Get the access token that was set earlier.
     $facebook->setAccessToken($_SESSION['accessToken']);
+    
+    echo $facebook->getAccessToken();
 
     // Ensure the session is valid.
     testFacebookSession($facebook);
