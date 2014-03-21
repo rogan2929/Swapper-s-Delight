@@ -46,9 +46,7 @@ function getFacebookSession() {
     // Create a Facebook object.
     $facebook = new Facebook(array(
         'appId' => $_SESSION['appId'],
-        'secret' => $_SESSION['appSecret'],
-        'cookie' => true,
-        'sharedSession' => true
+        'secret' => $_SESSION['appSecret']
     ));
     
     // Get the access token that was set earlier.
