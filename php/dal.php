@@ -85,7 +85,7 @@ class DataAccessLayer {
             'groupQuery' => 'SELECT gid,name,icon FROM group WHERE gid IN (SELECT gid FROM #memberQuery)'
         );
         
-        $response = $this->api('/fql', 'POST', array('q' => json_encode($queries)));
+        $response = $this->api('/fql', 'GET', array('q' => json_encode($queries)));
 
         // Grab the results of the query and return it.
         return $response[1] ['fql_result_set'];
