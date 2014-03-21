@@ -49,6 +49,9 @@ function getFacebookSession() {
         'secret' => $_SESSION['appSecret'],
     ));
 
+    echo $_SESSION['appId'] . "<br/>";
+    echo $_SESSION['appSecret'] . "<br/>";
+
     // Get the access token that was set earlier.
     $facebook->setAccessToken($_SESSION['accessToken']);
 
