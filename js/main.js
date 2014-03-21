@@ -523,10 +523,14 @@ var SwdPresenter = {
                 // Set a timer function to periodically refresh the server-side FQL stream.
                 SwdPresenter.refreshStream = setInterval(function() {
                     SwdModel.refreshStream(SwdPresenter.selectedGroup.gid, {
-                        success: function(response) {},
+                        success: function(response) {
+                        },
                         error: SwdPresenter.handleError
                     });
                 }, 600000);
+
+                // Update post offset.
+                SwdPresenter.postOffset += response.length;
 
                 SwdPresenter.loadPostsComplete(response);
             },
@@ -554,8 +558,6 @@ var SwdPresenter = {
      * @param {type} viewChanged
      */
     loadPosts: function(refresh, viewChanged) {
-        var offset;
-        
         // Before calling anything, confirm login status.
         SwdPresenter.checkFBLoginStatus(function() {
             if (!SwdPresenter.currentlyLoading) {
@@ -564,7 +566,7 @@ var SwdPresenter = {
                 if (refresh || viewChanged) {
                     SwdView.clearPosts();
                     SwdPresenter.refreshFbCanvasSize();
-                    
+
                     // If the view changed or the page has refreshed, reset the post offset to 0.
                     SwdPresenter.postOffset = 0;
                 }
@@ -594,8 +596,6 @@ var SwdPresenter = {
      */
     loadPostsComplete: function(response) {
         if (response) {
-            SwdPresenter.postOffset += response.length;
-            
             // If a response came through, then display the posts.
             SwdView.populatePostBlocks(response, SwdPresenter.selectedView);
         }

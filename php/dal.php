@@ -46,6 +46,11 @@ class DataAccessLayer {
 
         $this->appSecretProof = hash_hmac('sha256', $this->facebook->getAccessToken(), self::APP_SECRET);
 
+        // Retrieve the stream if it's there.
+        if (isset($_SESSION['stream'])) {
+            $this->stream = $_SESSION['stream'];
+        }
+
         // Test the facebook object that was created.
         $this->api('/me', 'GET');
 
@@ -63,21 +68,11 @@ class DataAccessLayer {
     }
 
     /**
-     * Set the currently loaded group's gid. Automatically fetches the stream when changed.
+     * Set the currently loaded group's gid.
      * @param type $gid
      */
     public function setGid($gid) {
-        // See if a new stream needs to be fetched.
-        if (!isset($_SESSION['gid']) || $_SESSION['gid'] !== $gid || !isset($_SESSION['stream'])) {
-            $this->gid = $gid;
-
-            // Fetch the new stream.
-            $this->fetchStream();
-        }
-        
-        $this->stream = $_SESSION['stream'];
-        
-        echo json_encode($this->stream);
+        $this->gid = $gid;
     }
 
     /** Methods * */
@@ -134,8 +129,13 @@ class DataAccessLayer {
         
     }
 
-    public function getNewPosts($refresh, $offset) {
-        
+    public function getNewPosts($refresh, $offset, $limit) {
+        // Get a new stream if necessary.
+        if ($refresh === 1) {
+            $this->fetchStream();
+        }
+
+        return $this->getPostData(array_slice($this->stream, $offset, $limit));
     }
 
     public function getPostDetails($postId) {
@@ -143,7 +143,8 @@ class DataAccessLayer {
     }
 
     public function refreshStream() {
-        
+        // Fetch the new stream.
+        $this->fetchStream();
     }
 
     public function searchPosts($search) {
@@ -199,6 +200,8 @@ class DataAccessLayer {
         $_SESSION['refreshing'] = true;
         $_SESSION['stream'] = $this->queryStream();
         $_SESSION['refreshing'] = false;
+
+        $this->stream = $_SESSION['stream'];
     }
 
     /**
@@ -246,6 +249,218 @@ class DataAccessLayer {
         }
 
         return array('windowSize' => 3600 * $windowSize, 'batchCount' => $batchCount);
+    }
+
+    /* 
+     * Retrieve additional data for the posts in the provided array.
+     */
+
+    private function getPostData($posts, $limit) {
+        $queries = array();
+        $result = array();
+
+        if (!isset($limit)) {
+            $limit = count($posts);
+        }
+
+        // Build a multiquery for each post in the provided array.
+        for ($i = 0; $i < count($posts) && $i < $limit; $i++) {
+            $queries[] = array(
+                'method' => 'POST',
+                'relative_url' => 'method/fql.multiquery?queries=' . json_encode(array(
+                    'streamQuery' => 'SELECT post_id,actor_id,updated_time,message,attachment,comment_info,created_time FROM stream WHERE post_id="' . $posts[$i]['post_id'] . '"',
+                    'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)',
+                    'userQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url,pic FROM user WHERE uid IN (SELECT actor_id FROM #streamQuery)'
+                ))
+            );
+        }
+
+        // Execute a batch query.
+        $response = $this->api('/', 'POST', array(
+            'batch' => json_encode($queries),
+            'include_headers' => false
+        ));
+
+        // Sift through the results.
+        for ($i = 0; $i < count($response); $i++) {
+            $body = json_decode($response[$i]['body'], true);
+            $result = array_merge($result, $this->processStreamQuery($body[0]['fql_result_set'], $body[1]['fql_result_set'], $body[2]['fql_result_set']));
+        }
+
+        return $result;
+    }
+
+    /* 
+     * Take a response and construct post objects out of it.
+     */
+
+    private function processStreamQuery($stream, $images, $users) {
+        $posts = array();
+
+        for ($i = 0; $i < count($stream); $i++) {
+            $post = $stream[$i];
+
+            // Parse associated data from the query.
+            $post['image_url'] = $this->getImageUrlArray($post, $images, true);
+            $post['link_data'] = $this->getLinkData($post);
+            $post['user'] = $this->getUserData($post, $users);
+
+            // Erase any attachment data to save on object size.
+            // This has already been parsed out.
+            unset($post['attachment']);
+
+            $post['post_type'] = $this->getPostType($post);
+
+            // Determine which kind of post this is.
+            // Replace any line breaks with <br/>
+            if (strlen($post['message']) > 0) {
+                $post['message'] = nl2br($post['message']);
+            }
+
+            // Add to the posts array.
+            $posts[] = $post;
+        }
+
+        return $posts;
+    }
+
+    /*  
+     * For posts with an image, look for associated image data.
+     */
+
+    private function getImageUrlArray($post, $images, $thumbnails = true) {
+        $imageUrls = array();
+
+        if ($post['attachment'] && $post['attachment']['media']) {
+            // For posts with an image, look for associated image data.
+            for ($i = 0; $i < count($post['attachment']); $i++) {
+                if ($post['attachment']['media'][$i]) {
+                    // Determine if this attachment is a photo or a link.
+                    if ($post['attachment']['media'][$i]['type'] == 'photo' && $post['attachment']['media'][$i]['photo']) {
+                        // Get image's unique Facebook Id
+                        $fbid = $post['attachment']['media'][$i]['photo']['fbid'];
+
+                        // Find the image url from the given Facebook ID
+                        $imageUrls[] = $this->getImageUrlFromFbId($fbid, $images, $thumbnails);
+                    }
+                }
+            }
+        }
+
+        return $imageUrls;
+    }
+
+    /*     * *
+     * Function to parse FQL attachment data for links.
+     */
+
+    private function getLinkData($post) {
+        $linkData = array();
+
+        // Loop through media attachments, looking for type 'link'.
+        if ($post['attachment'] && $post['attachment']['media'] && $post['attachment']['media'][0] &&
+                $post['attachment']['media'][0]['type'] == 'link') {
+            $linkData = $post['attachment'];
+        }
+
+        return $linkData;
+    }
+
+    /*
+     * Function to parse FQL user data.
+     */
+
+    private function getUserData($post, $users) {
+        $user = array();
+
+        for ($i = 0; $i < count($users); $i++) {
+            if ($post['actor_id'] == $users[$i]['uid']) {
+                $user = $users[$i];
+            }
+        }
+
+        return $user;
+    }
+
+    private function getImageUrlFromFbId($fbid, $images, $thumbnails = true) {
+        $imageUrl = null;
+
+        for ($i = 0; $i < count($images); $i++) {
+            if ($fbid == $images[$i]['object_id']) {
+                // See if we are trying to retrieve a small image. (Usually last in the array.)
+                if ($thumbnails) {
+                    $imageUrl = $this->getSmallImageUrl($images[$i]['images']);
+                } else {
+                    //$imageUrl = $images[$i]['images'][$index]['source'];
+                    $imageUrl = $this->getLargeImageUrl($images[$i]['images']);
+                }
+
+
+                break;
+            }
+        }
+
+        return $imageUrl;
+    }
+
+    /*
+     * Determines the post type:
+     *  1. Image Posts (text and non-text, doesn't matter.) ('image')
+     *  2. Text Only Posts ('text')
+     *  3. Link Only Posts ('link')
+     *  4. Link + Text Posts ('textlink')
+     */
+
+    private function getPostType($post) {
+        $postType = 'unknown';
+
+        // The logic below should catch everything.
+        if (count($post['image_url']) > 0) {
+            $postType = 'image';       // Image Post
+        } else if (strlen($post['message']) > 0) {
+            $postType = 'text';        // Assume text post, but this might change to link.
+        }
+
+        if (strlen($post['message']) == 0 && count($post['link_data']) > 0) {
+            $postType = 'link';        // Link post.
+        }
+
+        if (strlen($post['message']) > 0 && count($post['link_data']) > 0) {
+            $postType = 'textlink';    // Link + Text post.
+        }
+
+        return $postType;
+    }
+
+    /*     * *
+     * In an array, find the largest Facebook image.
+     */
+
+    private function getLargeImageUrl($image) {
+        return $image[0]['source'];
+    }
+
+    /*     * *
+     * In an array, find the smallest Facebook image.
+     */
+
+    private function getSmallImageUrl($image) {
+        // Grab the 'middle' image for a scaled version of the full size image.
+        $index = intval(floor((count($image) / 2)));
+
+        // Try to ensure a minimum width. If it is too small, then proceed to the next largest
+        // image in the image collection. (0 being the largest).
+        do {
+            $imageSize = getimagesize($image[$index]['source']);
+            $index--;
+
+            if ($index < 0) {
+                $index = 0;
+                break;
+            }
+        } while ($imageSize[0] < 250 && $imageSize[1] < 150);
+
+        return $image[$index]['source'];
     }
 
     /*
