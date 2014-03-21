@@ -27,13 +27,13 @@ function initSession() {
 
     session_start();
 
-    // Ensure the session is valid.
-    testFacebookSession($facebook);
-
     // Save session variables.
     $_SESSION['appId'] = $appId;
     $_SESSION['appSecret'] = $appSecret;
     $_SESSION['accessToken'] = $facebook->getAccessToken();
+
+    // Ensure the session is valid.
+    testFacebookSession($facebook);
 
     return $facebook;
 }
