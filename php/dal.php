@@ -32,9 +32,9 @@ class DataAccessLayer {
             'secret' => self::APP_SECRET,
             'cookie' => true
         ));
-        
-        echo var_dump($this->facebook);
 
+        echo var_dump($_SESSION);
+        
         // Look up an existing access token, if there is one.
         if (!isset($_SESSION['accessToken'])) {
             $_SESSION['accessToken'] = $this->facebook->getAccessToken();
