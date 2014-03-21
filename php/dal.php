@@ -46,7 +46,7 @@ class DataAccessLayer {
             $_SESSION['accessToken'] = $this->facebook->getAccessToken();
         }
 
-        $this->appSecretProof = hash_hmac('sha256', $this->facebook->getAccessToken(), $this->APP_SECRET);
+        $this->appSecretProof = hash_hmac('sha256', $this->facebook->getAccessToken(), self::APP_SECRET);
 
         // Test the facebook object that was created.
         $this->api('/me', 'GET');
@@ -169,8 +169,6 @@ class DataAccessLayer {
         
         // Insert appsecret_proof into each API call.
         $params['appsecret_proof'] = $this->appSecretProof;
-        
-        echo var_dump($params);
 
         try {
             // Call the facebook->api function.
