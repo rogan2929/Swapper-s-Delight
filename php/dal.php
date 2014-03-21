@@ -168,10 +168,10 @@ class DataAccessLayer {
     private function api(/* polymorphic */) {
         $args = func_get_args();
         
-        echo var_dump($args) . "<br/>";
-        
         try {
-            $this->facebook->api($args);
+            // Call the facebook->api function.
+            call_user_func_array(array($this->facebook, 'api'), $args);
+            
         } catch (FacebookApiException $ex) {
             $this->lastFacebookApiException = $ex;
 
