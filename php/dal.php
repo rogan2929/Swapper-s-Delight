@@ -27,22 +27,26 @@ class DataAccessLayer {
      */
 
     function __construct() {
+        if (!session_id()) {
+            session_start();
+        }
+
         $this->facebook = new Facebook(array(
             'appId' => self::APP_ID,
             'secret' => self::APP_SECRET,
             'cookie' => true
         ));
 
-        echo var_dump($_SESSION);
-        
+        echo var_dump(self::APP_SECRET);
+
         // Look up an existing access token, if there is one.
         if (!isset($_SESSION['accessToken'])) {
             $_SESSION['accessToken'] = $this->facebook->getAccessToken();
         } else {
             $this->facebook->setAccessToken($_SESSION['accessToken']);
         }
-        
-        $this->appSecretProof = hash_hmac('sha256', $_SESSION['accessToken'], $this->APP_SECRET); 
+
+        $this->appSecretProof = hash_hmac('sha256', $_SESSION['accessToken'], $this->APP_SECRET);
 
         // Test the facebook object that was created.
         $this->api('/me');
@@ -168,7 +172,7 @@ class DataAccessLayer {
             $this->facebook->api($args);
         } catch (FacebookApiException $ex) {
             $this->lastFacebookApiException = $ex;
-            
+
             echo $ex->getMessage();
 
             // Selectively decide how to handle the error, based on returned code.
