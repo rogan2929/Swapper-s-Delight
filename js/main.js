@@ -122,7 +122,7 @@ var SwdModel = {
      * @param {type} callbacks Completed callback function.
      */
     getNewestPosts: function(gid, refresh, offset, callbacks) {
-        var url = '/php/new-posts.php?gid=' + gid + '&refresh=' + (refresh | 0) + '&offset=' + offset;
+        var url = '/php/new-posts.php?gid=' + gid + '&refresh=' + (refresh | 0) + '&offset=' + offset + '&limit=25';
 
         $.ajax({
             type: 'GET',
@@ -326,19 +326,20 @@ var SwdPresenter = {
      * @param {type} error
      */
     handleError: function(error) {
-        SwdView.showError(error.responseText);
-//        switch (error.status) {
-//            case 401:
-//                // Access denied, most likely from an expired access token.
-//                // Get a new access token by simply refreshing the page.
-//                SwdView.showMessage('Sorry, but your session has expired - automatically taking you back to the main page.');
-//
-//                // Send the user to the app's main url.
-//                window.location = window.location.href;
-//                break;
-//            default:
-//                SwdView.showError(error.responseText);
-//        }
+        var message = JSON.parse(error.responseText);
+        
+        switch (error.status) {
+            case 401:
+                // Access denied, most likely from an expired access token.
+                // Get a new access token by simply refreshing the page.
+                SwdView.showMessage(message);
+                
+                // Send the user to the app's main url.
+                window.location = window.location.href;
+                break;
+            default:
+                SwdView.showError(message);
+        }
     },
     /**
      * Entry point of program.

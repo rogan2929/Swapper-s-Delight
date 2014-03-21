@@ -173,22 +173,18 @@ class DataAccessLayer {
             // Call the facebook->api function.
             return call_user_func_array(array($this->facebook, 'api'), $args);
         } catch (FacebookApiException $ex) {
-            http_response_code(500);
-            
+            // Selectively decide how to handle the error, based on returned code.
             // https://developers.facebook.com/docs/graph-api/using-graph-api/#errors
-            echo json_encode($ex->getResult());
-
-//            // Selectively decide how to handle the error, based on returned code.
-//            // https://developers.facebook.com/docs/graph-api/using-graph-api/#errors
-//            switch ($ex->getCode()) {
-//                case 'OAuthException':              // Invalid Session
-//                    http_response_code(401);
-//                    break;
-//                case '4':                           // Too many API calls.
-//                    break;
-//                case '17':                          // Too many user API calls.
-//                    break;
-//            }
+            switch ($ex->getCode()) {
+                case 'OAuthException':
+                    http_response_code(401);
+                    echo json_encode(array('message' => 'Sorry, but your session is no longer valid - automatically taking you back to the main page.'));
+                    break;
+                default:
+                    http_response_code(500);
+                    echo json_encode($ex->getResult());
+                    break;
+            }
         }
     }
 
@@ -254,7 +250,7 @@ class DataAccessLayer {
         return array('windowSize' => 3600 * $windowSize, 'batchCount' => $batchCount);
     }
 
-    /* 
+    /*
      * Retrieve additional data for the posts in the provided array.
      */
 
@@ -293,7 +289,7 @@ class DataAccessLayer {
         return $result;
     }
 
-    /* 
+    /*
      * Take a response and construct post objects out of it.
      */
 
@@ -327,7 +323,7 @@ class DataAccessLayer {
         return $posts;
     }
 
-    /*  
+    /*
      * For posts with an image, look for associated image data.
      */
 
