@@ -18,5 +18,7 @@ $facebook = new Facebook(array(
 
 echo var_dump($facebook);
 
+echo $facebook->getAccessToken();
+
 // Create a DAL object and retrieve the group info.
 //echo json_encode((new DataAccessLayer())->getGroupInfo());
