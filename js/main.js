@@ -122,11 +122,7 @@ var SwdModel = {
      * @param {type} callbacks Completed callback function.
      */
     getNewestPosts: function(gid, refresh, offset, callbacks) {
-        var url = '/php/new-posts.php?gid=' + gid + '&refresh=' + (refresh | 0);
-
-        if (offset !== null) {
-            url += '&offset=' + offset;
-        }
+        var url = '/php/new-posts.php?gid=' + gid + '&refresh=' + (refresh | 0) + '&offset=' + offset;
 
         $.ajax({
             type: 'GET',
@@ -296,6 +292,7 @@ var SwdPresenter = {
     selectedPost: null,
     search: null,
     refreshStream: null,
+    postOffset: 0,
     /***
      * Confirm Facebook Login Status.
      * @param {type} callback
@@ -569,17 +566,14 @@ var SwdPresenter = {
                     SwdPresenter.refreshFbCanvasSize();
                     
                     // If the view changed or the page has refreshed, reset the post offset to 0.
-                    offset = 0;
-                }
-                else {
-                    offset = null;
+                    SwdPresenter.postOffset = 0;
                 }
 
                 SwdView.toggleAjaxLoadingDiv('body', true);
 
                 switch (SwdPresenter.selectedView) {
                     case SelectedView.group:
-                        SwdPresenter.loadNewestPosts(refresh, offset);
+                        SwdPresenter.loadNewestPosts(refresh, SwdPresenter.postOffset);
                         break;
                     case SelectedView.myposts:
                         SwdPresenter.loadMyPosts();
@@ -600,6 +594,8 @@ var SwdPresenter = {
      */
     loadPostsComplete: function(response) {
         if (response) {
+            SwdPresenter.postOffset += response.length;
+            
             // If a response came through, then display the posts.
             SwdView.populatePostBlocks(response, SwdPresenter.selectedView);
         }

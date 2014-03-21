@@ -1,28 +1,5 @@
 <?php
 
-function fetchStream($facebook, $gid, $refresh = 0) {
-    // Wait for other threads to finish updating the cached FQL stream.
-    waitForFetchStreamCompletion();
-
-    // Refresh the FQL stream.
-    if ($refresh == 1) {
-        $_SESSION['refreshing'] = true;
-        $_SESSION['stream'] = queryStream($facebook, $gid);
-        $_SESSION['gid'] = $gid;
-        $_SESSION['refreshing'] = false;
-    }
-}
-
-/* * *
- * Forcibly pause the thread in order for fetchStream to complete.
- */
-
-function waitForFetchStreamCompletion() {
-    while ($_SESSION['refreshing'] == true) {
-        sleep(3);
-    }
-}
-
 /* * *
  * Retrieve additional data for the posts in the provided array.
  */
@@ -62,95 +39,7 @@ function getPostData($facebook, $posts, $limit) {
     return $result;
 }
 
-/* * *
- * Query the FQL stream table for some basic data that will be cached.
- */
 
-function queryStream($facebook, $gid) {
-    $windowData = getOptimalWindowData($facebook, $gid);
-
-    $windowSize = $windowData['windowSize'];
-    $windowStart = time();
-    $windowEnd = $windowStart - $windowSize;
-
-    $stream = array();
-
-    for ($i = 0; $i < $windowData['batchCount']; $i++) {
-        $queries = array();
-
-        // Construct the FB batch request
-        for ($j = 0; $j < 50; $j++) {
-            $query = 'SELECT post_id,actor_id,message,like_info FROM stream WHERE source_id=' . $gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
-
-            $queries[] = array(
-                'method' => 'GET',
-                'relative_url' => 'method/fql.query?query=' . urlencode($query)
-            );
-
-            $windowStart -= $windowSize;
-            $windowEnd -= $windowSize;
-        }
-
-        // Call the batch query.
-        $response = $facebook->api('/', 'POST', array(
-            'batch' => json_encode($queries),
-            'include_headers' => false
-        ));
-
-        for ($j = 0; $j < count($response); $j++) {
-            $stream = array_merge($stream, json_decode($response[$j]['body'], true));
-        }
-    }
-
-    return $stream;
-}
-
-/**
- * Determine the optimal window size to use in batch queries.
- */
-function getOptimalWindowData($facebook, $gid) {
-    $startTime = time();
-    $endTime = time() - 3600;
-
-    $query = 'SELECT post_id FROM stream WHERE source_id = ' . $gid . ' AND updated_time <= ' . $startTime . ' AND updated_time >= ' . $endTime . ' LIMIT 100';
-
-    $response = $facebook->api(array(
-        'method' => 'fql.query',
-        'query' => $query
-    ));
-
-    $count = count($response);
-
-    // These values were reached through trial and error.
-    switch ($count) {
-        case $count < 65:
-            $windowSize = 4;
-            $batchCount = 2;
-            break;
-        case $count >= 65 && $count < 85:
-            $windowSize = 3.5;
-            $batchCount = 2;
-            break;
-        case $count >= 85 && $count < 115:
-            $windowSize = 3.5;
-            $batchCount = 2;
-            break;
-        case $count >= 115 && $count < 150:
-            $windowSize = 2.5;
-            $batchCount = 2;
-            break;
-        case $count >= 150 && $count < 225:
-            $windowSize = 2;
-            $batchCount = 2;
-            break;
-        default:
-            $windowSize = 1;
-            $batchCount = 2;
-            break;
-    }
-
-    return array('windowSize' => 3600 * $windowSize, 'batchCount' => $batchCount);
-}
 
 /* * *
  * Take a response and construct post objects out of it.
