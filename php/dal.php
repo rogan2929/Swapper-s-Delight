@@ -33,7 +33,7 @@ class DataAccessLayer {
             'cookie' => true
         ));
         
-        echo $this->facebook->getAccessToken() . "<br/>";
+        echo var_dump($this->facebook);
 
         // Look up an existing access token, if there is one.
         if (!isset($_SESSION['accessToken'])) {
