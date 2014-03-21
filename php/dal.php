@@ -166,6 +166,8 @@ class DataAccessLayer {
             $this->facebook->api($args);
         } catch (FacebookApiException $ex) {
             $this->lastFacebookApiException = $ex;
+            
+            echo $ex->getMessage();
 
             // Selectively decide how to handle the error, based on returned code.
             // https://developers.facebook.com/docs/graph-api/using-graph-api/#errors
