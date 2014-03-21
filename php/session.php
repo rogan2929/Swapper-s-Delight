@@ -65,7 +65,7 @@ function getFacebookSession() {
 function testFacebookSession($facebook) {
     // Test the access token.
     try {
-        $facebook->api('/me', 'GET');
+        $facebook->api('/me');
     } catch (FacebookApiException $e) {
         // If the user is logged out, you can have a 
         // user ID even though the access token is invalid.
