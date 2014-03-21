@@ -49,7 +49,7 @@ class DataAccessLayer {
         $this->appSecretProof = hash_hmac('sha256', $_SESSION['accessToken'], $this->APP_SECRET);
 
         // Test the facebook object that was created.
-        $this->api('/me');
+        $this->api('/me', 'GET');
 
         $this->sqlConnectionInfo = array("UID" => "rogan2929@lreuagtc6u", "pwd" => "Revelation19:11", "Database" => "swapperAGiJRLgvy", "LoginTimeout" => 30, "Encrypt" => 1);
     }
