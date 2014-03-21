@@ -165,24 +165,20 @@ class DataAccessLayer {
     }
 
     /** Private Methods * */
-    private function api(/* polymorphic */) {
-        $args = func_get_args();
+    private function api($path, $method, $params = array()) {
         
-        // Insert the App Secret Proof into any API call.
-        $args[] = $this->appSecretProof;
-        
-        echo var_dump($args);
-        
+        // Insert appsecret_proof into each API call.
+        $params['appsecret_proof'] = $this->appSecretProof;
+
         try {
             // Call the facebook->api function.
-            call_user_func_array(array($this->facebook, 'api'), $args);
-            
+            $this->facebook->api($path, $method, $params);
+            //call_user_func_array(array($this->facebook, 'api'), array($path));
         } catch (FacebookApiException $ex) {
             $this->lastFacebookApiException = $ex;
 
             echo json_encode($ex->getResult());
 //            echo $ex->getMessage();
-
             // Selectively decide how to handle the error, based on returned code.
             // https://developers.facebook.com/docs/graph-api/using-graph-api/#errors
             switch ($ex->getCode()) {
