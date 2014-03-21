@@ -47,6 +47,7 @@ function getFacebookSession() {
     $facebook = new Facebook(array(
         'appId' => $_SESSION['appId'],
         'secret' => $_SESSION['appSecret'],
+        'appsecret_proof' => hash_hmac('sha256', $_SESSION['appId'], $_SESSION['appSecret']),
         'cookie' => true
     ));
 
