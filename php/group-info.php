@@ -1,22 +1,6 @@
 <?php
 
-require_once 'session.php';
+require 'dal.php';
 
-$facebook = initSession();
-
-if (http_response_code() != 401) {
-    $queries = array(
-        'memberQuery' => 'SELECT gid,bookmark_order FROM group_member WHERE uid=me() ORDER BY bookmark_order',
-        'groupQuery' => 'SELECT gid,name,icon FROM group WHERE gid IN (SELECT gid FROM #memberQuery)'
-    );
-
-    $response = $facebook->api(array(
-        'method' => 'fql.multiquery',
-        'queries' => $queries
-    ));
-
-    // Grab the results of the query.
-    $groups = $response[1] ['fql_result_set'];
-
-    echo json_encode($groups);
-}
+// Create a DAL object and retrieve the group info.
+echo json_encode((new DataAccessLayer())->getGroupInfo());
