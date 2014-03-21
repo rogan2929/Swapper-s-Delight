@@ -46,14 +46,15 @@ function getFacebookSession() {
     // Create a Facebook object.
     $facebook = new Facebook(array(
         'appId' => $_SESSION['appId'],
-        'secret' => $_SESSION['appSecret'],
-        'appsecret_proof' => hash_hmac('sha256', $_SESSION['accessToken'], $_SESSION['appSecret'])
+        'secret' => $_SESSION['appSecret']
     ));
 
+    echo $facebook->getAccessToken() . "<br/>";
+    
     // Get the access token that was set earlier.
     $facebook->setAccessToken($_SESSION['accessToken']);
     
-    echo var_dump($_SESSION);
+    echo $facebook->getAccessToken() . "<br/>";
 
     // Ensure the session is valid.
     testFacebookSession($facebook);
