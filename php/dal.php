@@ -84,8 +84,11 @@ class DataAccessLayer {
             'memberQuery' => 'SELECT gid,bookmark_order FROM group_member WHERE uid=me() ORDER BY bookmark_order',
             'groupQuery' => 'SELECT gid,name,icon FROM group WHERE gid IN (SELECT gid FROM #memberQuery)'
         );
-        
-        $response = $this->api('/fql', 'GET', array('q' => json_encode($queries)));
+
+        $response = $this->api(array(
+            'method' => 'fql.multiquery',
+            'queries' => $queries
+        ));
 
         // Grab the results of the query and return it.
         return $response[1] ['fql_result_set'];
@@ -144,14 +147,26 @@ class DataAccessLayer {
     }
 
     /** Private Methods * */
-    private function api($path, $method, $params = array()) {
-        
-        // Insert appsecret_proof into each API call.
-        $params['appsecret_proof'] = $this->appSecretProof;
+    private function api(/* polymorphic */) {
+        $args = func_get_args();
+
+        if (is_array($args[0])) {
+            // Array was passed as an argument.
+            $args[0]['appsecret_proof'] = $this->appSecretProof;
+        } else {
+            // Array was not passed as an argument.
+            if (is_array($args[1]) && empty($args[2])) {
+                $args[2] = $args[1];
+                $args[1] = 'GET';
+            }
+
+            // Insert appsecret_proof into each API call.
+            $args[2]['appsecret_proof'] = $this->appSecretProof;
+        }
 
         try {
             // Call the facebook->api function.
-            $this->facebook->api($path, $method, $params);
+            call_user_func_array(array($this->facebook, 'api'), $args);
         } catch (FacebookApiException $ex) {
             echo json_encode($ex->getResult());
 
