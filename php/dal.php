@@ -28,12 +28,12 @@ class DataAccessLayer {
 
     function __construct() {
         $this->facebook = new Facebook(array(
-            'appId' => $this->APP_ID,
+            'appId' => self::APP_ID,
             'secret' => $this->APP_SECRET,
             'cookie' => true
         ));
         
-        echo var_dump($this->APP_ID);
+        echo var_dump(self::APP_ID);
 
         // Look up an existing access token, if there is one.
         if (!isset($_SESSION['accessToken'])) {
