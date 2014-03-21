@@ -7,8 +7,8 @@ $refresh = $_GET['refresh'];
 $offset = $_GET['offset'];
 $limit = $_GET['limit'];
 
-$dat = new DataAccessLayer();
-$dat->setGid($gid);
+$dal = new DataAccessLayer();
+$dal->setGid($gid);
 
 // Call the appropriate method in the newly instantiated DAL object.
-echo json_encode($dat->getNewPosts($refresh, $offset, $limit));
+echo json_encode($dal->getNewPosts($refresh, $offset, $limit));

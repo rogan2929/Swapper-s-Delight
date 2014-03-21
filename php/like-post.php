@@ -1,23 +1,9 @@
 <?php
 
-require_once 'session.php';
+require_once 'dal.php';
 
 $postId = $_POST['postId'];
 $userLikes = $_POST['userLikes'];
 
-$facebook = getFacebookSession();
-
-if (http_response_code() != 401) {
-
-    if ($userLikes == true) {
-        // Like the post.
-        $facebook->api('/' . $postId . '/likes', 'POST', array('user_likes' => true));
-    } else {
-        // Delete the post's like.
-        $facebook->api('/' . $postId . '/likes', 'DELETE');
-    }
-
-    // TODO: Update the cached FQL stream.
-
-    echo $userLikes;
-}
+// Call the appropriate method in the newly instantiated DAL object.
+echo ((new DataAccessLayer())->likePost($postId, $userLikes));

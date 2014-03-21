@@ -104,11 +104,21 @@ class DataAccessLayer {
     // Post operation functions.
 
     public function deletePost($postId) {
-        
+        $this->api('/' . $postId, 'DELETE');
     }
 
-    public function likePost($postId) {
-        
+    public function likePost($postId, $userLikes) {
+        if ($userLikes == true) {
+            // Like the post.
+            $this->api('/' . $postId . '/likes', 'POST', array('user_likes' => true));
+        } else {
+            // Delete the post's like.
+            $this->api('/' . $postId . '/likes', 'DELETE');
+        }
+
+        // TODO: Update the cached FQL stream.
+
+        return $userLikes;
     }
 
     public function newPost() {
@@ -116,7 +126,31 @@ class DataAccessLayer {
     }
 
     public function postComment($postId, $comment) {
-        
+        // Post the comment and get the response
+        $id = $this->api('/' . $postId . '/comments', 'POST', array('message' => $comment));
+
+        // Get the comment and associated user data...
+        $queries = array(
+            'commentQuery' => 'SELECT fromid,text,text_tags,attachment,time FROM comment WHERE id=' . $id['id'],
+            'commentUserQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url FROM user WHERE uid IN (SELECT fromid FROM #commentQuery)'
+        );
+
+        // Query Facebook's servers for the necessary data.
+        $response = $this->api(array(
+            'method' => 'fql.multiquery',
+            'queries' => $queries
+        ));
+
+        // Construct a return object.
+        $newComment = $response[0]['fql_result_set'][0];
+        $newComment['user'] = $response[1]['fql_result_set'][0];
+
+        // Replace any line breaks with <br/>
+        if ($newComment['text']) {
+            $newComment['text'] = nl2br($newComment['text']);
+        }
+
+        return $newComment;
     }
 
     // Stream operation functions.
@@ -134,7 +168,7 @@ class DataAccessLayer {
         if ($refresh == 1) {
             $this->fetchStream();
         }
-        
+
         echo json_encode($this->stream);
 
         return $this->getPostData(array_slice($this->stream, $offset, $limit));
