@@ -47,15 +47,12 @@ function getFacebookSession() {
     $facebook = new Facebook(array(
         'appId' => $_SESSION['appId'],
         'secret' => $_SESSION['appSecret'],
-        'cookie' => true
+        'cookie' => true,
+        'sharedSession' => true
     ));
-
-    echo $facebook->getAccessToken() . "<br/>";
     
     // Get the access token that was set earlier.
-    $facebook->setAccessToken($_SESSION['accessToken']);
-    
-    echo $facebook->getAccessToken() . "<br/>";
+    //$facebook->setAccessToken($_SESSION['accessToken']);
 
     // Ensure the session is valid.
     testFacebookSession($facebook);
