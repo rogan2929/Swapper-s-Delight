@@ -3,37 +3,64 @@
 // Header required by IE.
 header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
 
-require ("facebook.php");
+require_once ("facebook.php");
 
-// Prod AppId and Secret
-//$appId = '1401018793479333';
-//$appSecret = '603325411a953e21ccbc29d2c7d50e7e';
-// Test AppId and Secret
-$appId = '652991661414427';
-$appSecret = 'b8447ce73d2dcfccde6e30931cfb0a90';
+function initSession() {
 
-// Start up the Facebook object
-$facebook = new Facebook(array(
-    'appId' => $appId,
-    'secret' => $appSecret,
-    'cookie' => true
-        ));
+    // Prod AppId and Secret
+    //$appId = '1401018793479333';
+    //$appSecret = '603325411a953e21ccbc29d2c7d50e7e';
+    // Test AppId and Secret
+    $appId = '652991661414427';
+    $appSecret = 'b8447ce73d2dcfccde6e30931cfb0a90';
 
-session_start();
+    // Create the Facebook object
+    $facebook = new Facebook(array(
+        'appId' => $appId,
+        'secret' => $appSecret,
+        'cookie' => true
+    ));
 
-// Save session variables.
-$_SESSION['appId'] = $facebook->getAppId();
-$_SESSION['appSecret'] = $facebook->getAppSecret();
+    session_start();
 
-// Test the access token.
-try {
-    $userProfile = $facebook->api('/me', 'GET');
-} catch (FacebookApiException $e) {
-    // If the user is logged out, you can have a 
-    // user ID even though the access token is invalid.
-    // In this case, we'll get an exception, so we'll
-    // just ask the user to login again here.
+    // Save session variables.
+    $_SESSION['appId'] = $facebook->getAppId();
+    $_SESSION['appSecret'] = $facebook->getAppSecret();
+    $_SESSION['accessToken'] = $facebook->getAccessToken();
 
-    $loginUrl = $facebook->getLoginUrl();
-    http_response_code(401);
+    // Ensure the session is valid.
+    testFacebookSession($facebook);
+
+    return $facebook;
+}
+
+function getFacebookSession() {
+    // Create a Facebook object.
+    $facebook = new Facebook(array(
+        'appId' => $_SESSION['appId'],
+        'secret' => $_SESSION['appSecret'],
+    ));
+    
+    // Get the access token that was set earlier.
+    $facebook->setAccessToken($_SESSION['accessToken']);
+    
+    // Ensure the session is valid.
+    testFacebookSession($facebook);
+    
+    return $facebook;
+}
+
+function testFacebookSession($facebook) {
+    // Test the access token.
+    try {
+        $facebook->api('/me', 'GET');
+    } catch (FacebookApiException $e) {
+        // If the user is logged out, you can have a 
+        // user ID even though the access token is invalid.
+        // In this case, we'll get an exception, so we'll
+        // just ask the user to login again here.
+
+        $loginUrl = $facebook->getLoginUrl();
+        http_response_code(401);
+    }
 }

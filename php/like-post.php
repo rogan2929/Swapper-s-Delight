@@ -1,27 +1,23 @@
 <?php
 
-require_once 'facebook.php';
+require_once 'session.php';
 
-$facebook = new Facebook(array(
-    'appId' => $_SESSION['appId'],
-    'secret' => $_SESSION['appSecret'],
-    'cookie' => true
-        ));
+$postId = $_POST['postId'];
+$userLikes = $_POST['userLikes'];
+
+$facebook = getFacebookSession();
 
 if (http_response_code() != 401) {
-    $postId = $_POST['postId'];
-    $userLikes = $_POST['userLikes'];
-    
+
     if ($userLikes == true) {
         // Like the post.
         $facebook->api('/' . $postId . '/likes', 'POST', array('user_likes' => true));
-    } 
-    else {
+    } else {
         // Delete the post's like.
         $facebook->api('/' . $postId . '/likes', 'DELETE');
     }
-    
+
     // TODO: Update the cached FQL stream.
-    
+
     echo $userLikes;
 }

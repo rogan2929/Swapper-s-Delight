@@ -1,17 +1,13 @@
 <?php
 
-require_once 'facebook.php';
 require_once 'stream_data.php';
+require_once 'session.php';
 
-$facebook = new Facebook(array(
-    'appId' => $_SESSION['appId'],
-    'secret' => $_SESSION['appSecret'],
-    'cookie' => true
-        ));
+$postId = $_GET['postId'];
+
+$facebook = getFacebookSession();
 
 if (http_response_code() != 401) {
-    $postId = $_GET['postId'];
-
     $queries = array(
         'detailsQuery' => 'SELECT post_id,message,actor_id,permalink,like_info,share_info,comment_info,tagged_ids,attachment,created_time FROM stream WHERE post_id="' . $postId . '"',
         'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #detailsQuery)',

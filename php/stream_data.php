@@ -1,25 +1,15 @@
 <?php
 
-require_once 'facebook.php';
+function fetchStream($facebook, $gid, $refresh = 0) {
+    // Wait for other threads to finish updating the cached FQL stream.
+    waitForFetchStreamCompletion();
 
-function fetchStream($gid, $refresh = 0) {
-    $facebook = new Facebook(array(
-        'appId' => $_SESSION['appId'],
-        'secret' => $_SESSION['appSecret'],
-        'cookie' => true
-    ));
-    
-    if (http_response_code() != 401) {
-        // Wait for other threads to finish updating the cached FQL stream.
-        waitForFetchStreamCompletion();
-
-        // Refresh the FQL stream.
-        if ($refresh == 1) {
-            $_SESSION['refreshing'] = true;
-            $_SESSION['stream'] = queryStream($facebook, $gid);
-            $_SESSION['gid'] = $gid;
-            $_SESSION['refreshing'] = false;
-        }
+    // Refresh the FQL stream.
+    if ($refresh == 1) {
+        $_SESSION['refreshing'] = true;
+        $_SESSION['stream'] = queryStream($facebook, $gid);
+        $_SESSION['gid'] = $gid;
+        $_SESSION['refreshing'] = false;
     }
 }
 
@@ -37,13 +27,7 @@ function waitForFetchStreamCompletion() {
  * Retrieve additional data for the posts in the provided array.
  */
 
-function getPostData($posts, $limit) {
-    $facebook = new Facebook(array(
-        'appId' => $_SESSION['appId'],
-        'secret' => $_SESSION['appSecret'],
-        'cookie' => true
-    ));
-
+function getPostData($facebook, $posts, $limit) {
     $queries = array();
     $result = array();
 

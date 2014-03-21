@@ -2,11 +2,7 @@
 
 require_once 'session.php';
 
-$facebook = new Facebook(array(
-    'appId' => $_SESSION['appId'],
-    'secret' => $_SESSION['appSecret'],
-    'cookie' => true
-        ));
+$facebook = initSession();
 
 if (http_response_code() != 401) {
     $queries = array(

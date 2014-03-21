@@ -1,8 +1,11 @@
 <?php
 
 require_once 'stream_data.php';
+require_once 'session.php';
 
 $gid = $_GET['gid'];
+
+$facebook = getFacebookSession();
 
 if (http_response_code() != 401) {
     $posts = array();
@@ -15,5 +18,5 @@ if (http_response_code() != 401) {
         }
     }
     
-    echo json_encode(getPostData($posts));
+    echo json_encode(getPostData($facebook, $posts));
 }

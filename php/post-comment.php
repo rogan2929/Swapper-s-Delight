@@ -1,17 +1,13 @@
 <?php
 
-require_once 'facebook.php';
+require_once 'session.php';
 
-$facebook = new Facebook(array(
-    'appId' => $_SESSION['appId'],
-    'secret' => $_SESSION['appSecret'],
-    'cookie' => true
-        ));
+$postId = $_POST['postId'];
+$comment = $_POST['comment'];
+
+$facebook = getFacebookSession();
 
 if (http_response_code() != 401) {
-    $postId = $_POST['postId'];
-    $comment = $_POST['comment'];
-
     // Post the comment and get the response
     $id = $facebook->api('/' . $postId . '/comments', 'POST', array('message' => $comment));
 

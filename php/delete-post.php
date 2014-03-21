@@ -1,14 +1,12 @@
 <?php
 
-require_once 'facebook.php';
-
-$facebook = new Facebook(array(
-    'appId' => $_SESSION['appId'],
-    'secret' => $_SESSION['appSecret'],
-    'cookie' => true
-        ));
+require_once 'session.php';
 
 $postId = $_GET['postId'];
 
+$facebook = getFacebookSession();
+
 // Delete the post with postId.
-$facebook->api('/' . $postId, 'DELETE');
+if (http_response_code() != 401) {
+    $facebook->api('/' . $postId, 'DELETE');
+}
