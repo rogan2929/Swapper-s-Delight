@@ -10,4 +10,5 @@ $limit = $_GET['limit'];
 $dat = new DataAccessLayer();
 $dat->setGid($gid);
 
+// Call the appropriate method in the newly instantiated DAL object.
 echo json_encode($dat->getNewPosts($refresh, $offset, $limit));
