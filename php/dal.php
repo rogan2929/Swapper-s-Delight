@@ -162,13 +162,11 @@ class DataAccessLayer {
 
             // Insert appsecret_proof into each API call.
             $args[2]['appsecret_proof'] = $this->appSecretProof;
-            
-            echo json_encode($args) . "<br/>";
         }
 
         try {
             // Call the facebook->api function.
-            call_user_func_array(array($this->facebook, 'api'), $args);
+            return call_user_func_array(array($this->facebook, 'api'), $args);
         } catch (FacebookApiException $ex) {
             echo json_encode($ex->getResult());
 
