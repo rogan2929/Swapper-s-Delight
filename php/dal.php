@@ -17,8 +17,6 @@ class DataAccessLayer {
     // Class members
     private $facebook;
     private $appSecretProof;
-    private $facebookState;
-    private $lastFacebookApiException;
     private $gid;
     private $stream;
     private $sqlConnectionInfo;
@@ -57,22 +55,6 @@ class DataAccessLayer {
     /** Getters and Setters * */
 
     /**
-     * Get the most recent FacebookApiException.
-     * @return type
-     */
-    public function getFacebookErrorMessage() {
-        return $this->$lastFacebookApiException->getMessage();
-    }
-
-    /**
-     * Get the Facebook state.
-     * @return type
-     */
-    public function getFacebookState() {
-        return $this->facebookState;
-    }
-
-    /**
      * Get the currently loaded group's gid.
      * @return type
      */
@@ -102,11 +84,8 @@ class DataAccessLayer {
             'memberQuery' => 'SELECT gid,bookmark_order FROM group_member WHERE uid=me() ORDER BY bookmark_order',
             'groupQuery' => 'SELECT gid,name,icon FROM group WHERE gid IN (SELECT gid FROM #memberQuery)'
         );
-
-        $response = $this->api(array(
-            'method' => 'fql.multiquery',
-            'queries' => $queries
-        ));
+        
+        $response = $this->api('/fql', 'POST', array('q' => json_encode($queries)));
 
         // Grab the results of the query and return it.
         return $response[1] ['fql_result_set'];
@@ -173,17 +152,14 @@ class DataAccessLayer {
         try {
             // Call the facebook->api function.
             $this->facebook->api($path, $method, $params);
-            //call_user_func_array(array($this->facebook, 'api'), array($path));
         } catch (FacebookApiException $ex) {
-            $this->lastFacebookApiException = $ex;
-
             echo json_encode($ex->getResult());
-//            echo $ex->getMessage();
+
             // Selectively decide how to handle the error, based on returned code.
             // https://developers.facebook.com/docs/graph-api/using-graph-api/#errors
             switch ($ex->getCode()) {
                 case 'OAuthException':              // Invalid Session
-                    //http_response_code(401);
+                    http_response_code(401);
                     break;
                 case '4':                           // Too many API calls.
                     break;

@@ -2,7 +2,7 @@
 
 require 'dal.php';
 
-$dal = new DataAccessLayer();
+echo json_encode((new DataAccessLayer())->getGroupInfo());
 
 //require 'facebook.php';
 //
