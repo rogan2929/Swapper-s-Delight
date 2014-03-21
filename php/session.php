@@ -47,8 +47,7 @@ function getFacebookSession() {
     $facebook = new Facebook(array(
         'appId' => $_SESSION['appId'],
         'secret' => $_SESSION['appSecret'],
-        'appsecret_proof' => hash_hmac('sha256', $_SESSION['accessToken'], $_SESSION['appSecret']),
-        'cookie' => true
+        'appsecret_proof' => hash_hmac('sha256', $_SESSION['accessToken'], $_SESSION['appSecret'])
     ));
 
     // Get the access token that was set earlier.
