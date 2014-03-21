@@ -32,6 +32,8 @@ class DataAccessLayer {
             'secret' => $this->APP_SECRET,
             'cookie' => true
         ));
+        
+        echo 'TEST';
 
         // Look up an existing access token, if there is one.
         if (!isset($_SESSION['accessToken'])) {
@@ -41,8 +43,6 @@ class DataAccessLayer {
         }
         
         $this->appSecretProof = hash_hmac('sha256', $_SESSION['accessToken'], $this->APP_SECRET); 
-        
-        echo 'TEST';
 
         // Test the facebook object that was created.
         $this->api('/me');
