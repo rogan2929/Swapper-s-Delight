@@ -28,8 +28,8 @@ class DataAccessLayer {
 
     function __construct() {
         $this->$facebook = new Facebook(array(
-            'appId' => self::APP_ID,
-            'secret' => self::APP_SECRET,
+            'appId' => $this->APP_ID,
+            'secret' => $this->APP_SECRET,
             'cookie' => true
         ));
 
