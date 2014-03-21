@@ -1,5 +1,7 @@
 <?php
 
+header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
+
 require 'facebook.php';
 
 class DataAccessLayer {
@@ -37,7 +39,7 @@ class DataAccessLayer {
             'cookie' => true
         ));
 
-        echo var_dump(self::APP_SECRET);
+        echo $this->facebook->getAccessToken();
 
         // Look up an existing access token, if there is one.
         if (!isset($_SESSION['accessToken'])) {
