@@ -39,11 +39,11 @@ class DataAccessLayer {
             'cookie' => true
         ));
 
-        // Look up an existing access token, if there is one.
-        if (!isset($_SESSION['accessToken'])) {
-            $_SESSION['accessToken'] = $this->facebook->getAccessToken();
-        } else {
+        // Look up an existing access token, if need be.
+        if ($this->facebook->getAccessToken() === null) {
             $this->facebook->setAccessToken($_SESSION['accessToken']);
+        } else {
+            $_SESSION['accessToken'] = $this->facebook->getAccessToken();
         }
 
         $this->appSecretProof = hash_hmac('sha256', $_SESSION['accessToken'], $this->APP_SECRET);
@@ -168,6 +168,8 @@ class DataAccessLayer {
     private function api(/* polymorphic */) {
         $args = func_get_args();
         try {
+            
+            
             $this->facebook->api('/me');
         } catch (FacebookApiException $ex) {
             $this->lastFacebookApiException = $ex;
