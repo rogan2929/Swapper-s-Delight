@@ -170,7 +170,7 @@ class DataAccessLayer {
         try {
             
             
-            $this->facebook->api('/me');
+            $this->facebook->api($args);
         } catch (FacebookApiException $ex) {
             $this->lastFacebookApiException = $ex;
 
