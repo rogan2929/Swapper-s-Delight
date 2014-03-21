@@ -168,7 +168,7 @@ class DataAccessLayer {
     private function api(/* polymorphic */) {
         $args = func_get_args();
         
-        echo json_encode($args) . "<br/>";
+        echo var_dump($args) . "<br/>";
         
         try {
             $this->facebook->api($args);
