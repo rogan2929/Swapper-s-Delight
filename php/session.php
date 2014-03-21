@@ -43,11 +43,15 @@ function initSession() {
  */
 
 function getFacebookSession() {
+    $appSecretProof = hash_hmac('sha256', $_SESSION['accessToken'], $_SESSION['appSecret']);
+    
+    echo $appSecretProof;
+    
     // Create a Facebook object.
     $facebook = new Facebook(array(
         'appId' => $_SESSION['appId'],
         'secret' => $_SESSION['appSecret'],
-        'appsecret_proof' => hash_hmac('sha256', $_SESSION['accessToken'], $_SESSION['appSecret'])
+        'appsecret_proof' => $appSecretProof
     ));
 
     // Get the access token that was set earlier.
