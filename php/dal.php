@@ -131,7 +131,7 @@ class DataAccessLayer {
 
     public function getNewPosts($refresh, $offset, $limit) {
         // Get a new stream if necessary.
-        if ($refresh === 1) {
+        if ($refresh == 1) {
             $this->fetchStream();
         }
 
