@@ -73,6 +73,7 @@ function testFacebookSession($facebook) {
         // just ask the user to login again here.
 
         $loginUrl = $facebook->getLoginUrl();
+        echo $e->getMessage();
         http_response_code(401);
     }
 }
