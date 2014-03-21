@@ -162,6 +162,8 @@ class DataAccessLayer {
 
             // Insert appsecret_proof into each API call.
             $args[2]['appsecret_proof'] = $this->appSecretProof;
+            
+            echo json_encode($args) . "<br/>";
         }
 
         try {
