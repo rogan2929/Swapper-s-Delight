@@ -32,6 +32,8 @@ class DataAccessLayer {
             'secret' => $this->APP_SECRET,
             'cookie' => true
         ));
+        
+        echo $this->facebook->getAccessToken() . "<br/>";
 
         // Look up an existing access token, if there is one.
         if (!isset($_SESSION['accessToken'])) {
@@ -173,6 +175,7 @@ class DataAccessLayer {
             // https://developers.facebook.com/docs/graph-api/using-graph-api/#errors
             switch ($ex->getCode()) {
                 case 'OAuthException':              // Invalid Session
+                    http_response_code(401);
                     break;
                 case '4':                           // Too many API calls.
                     break;
