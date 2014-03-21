@@ -173,7 +173,6 @@ class DataAccessLayer {
             // https://developers.facebook.com/docs/graph-api/using-graph-api/#errors
             switch ($ex->getCode()) {
                 case 'OAuthException':              // Invalid Session
-                    http_response_code(401);
                     break;
                 case '4':                           // Too many API calls.
                     break;
