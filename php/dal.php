@@ -145,8 +145,6 @@ class DataAccessLayer {
     public function refreshStream() {
         // Fetch the new stream.
         $this->fetchStream();
-        
-        echo json_encode($this->stream);
     }
 
     public function searchPosts($search) {
@@ -178,7 +176,7 @@ class DataAccessLayer {
             // Selectively decide how to handle the error, based on returned code.
             // https://developers.facebook.com/docs/graph-api/using-graph-api/#errors
             switch ($ex->getCode()) {
-                case 'OAuthException':
+                case '190':
                     http_response_code(401);
                     echo json_encode(array('message' => 'Sorry, but your session is no longer valid - automatically taking you back to the main page.'));
                     break;

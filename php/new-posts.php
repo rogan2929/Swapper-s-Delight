@@ -9,6 +9,5 @@ $limit = $_GET['limit'];
 
 $dat = new DataAccessLayer();
 $dat->setGid($gid);
-$dat->refreshStream();
 
-//echo json_encode($dat->getNewPosts($refresh, $offset, $limit));
+echo json_encode($dat->getNewPosts($refresh, $offset, $limit));
