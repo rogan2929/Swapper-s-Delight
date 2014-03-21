@@ -39,8 +39,6 @@ class DataAccessLayer {
             'cookie' => true
         ));
 
-        echo $this->facebook->getAccessToken() . "<br/>";
-
         // Look up an existing access token, if there is one.
         if (!isset($_SESSION['accessToken'])) {
             $_SESSION['accessToken'] = $this->facebook->getAccessToken();
@@ -169,6 +167,8 @@ class DataAccessLayer {
     /** Private Methods * */
     private function api(/* polymorphic */) {
         $args = func_get_args();
+        
+        echo json_encode($args) . "<br/>";
 
         try {
             $this->facebook->api($args);
