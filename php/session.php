@@ -31,8 +31,8 @@ function initSession() {
     testFacebookSession($facebook);
 
     // Save session variables.
-    $_SESSION['appId'] = $facebook->getAppId();
-    $_SESSION['appSecret'] = $facebook->getAppSecret();
+    $_SESSION['appId'] = $appId;
+    $_SESSION['appSecret'] = $appSecret;
     $_SESSION['accessToken'] = $facebook->getAccessToken();
 
     return $facebook;
