@@ -171,6 +171,8 @@ class DataAccessLayer {
         // Insert the App Secret Proof into any API call.
         $args[] = $this->appSecretProof;
         
+        echo var_dump($args);
+        
         try {
             // Call the facebook->api function.
             call_user_func_array(array($this->facebook, 'api'), $args);
