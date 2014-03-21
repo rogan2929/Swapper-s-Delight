@@ -5,6 +5,10 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
 
 require_once ("facebook.php");
 
+/* * *
+ * Initialize a Facebook + PHP session.
+ */
+
 function initSession() {
 
     // Prod AppId and Secret
@@ -23,16 +27,20 @@ function initSession() {
 
     session_start();
 
+    // Ensure the session is valid.
+    testFacebookSession($facebook);
+
     // Save session variables.
     $_SESSION['appId'] = $facebook->getAppId();
     $_SESSION['appSecret'] = $facebook->getAppSecret();
     $_SESSION['accessToken'] = $facebook->getAccessToken();
 
-    // Ensure the session is valid.
-    testFacebookSession($facebook);
-
     return $facebook;
 }
+
+/* * *
+ * Retrieve the Facebook session object.
+ */
 
 function getFacebookSession() {
     // Create a Facebook object.
@@ -40,15 +48,19 @@ function getFacebookSession() {
         'appId' => $_SESSION['appId'],
         'secret' => $_SESSION['appSecret'],
     ));
-    
+
     // Get the access token that was set earlier.
     $facebook->setAccessToken($_SESSION['accessToken']);
-    
+
     // Ensure the session is valid.
     testFacebookSession($facebook);
-    
+
     return $facebook;
 }
+
+/* * *
+ * Test the Facebook session object.
+ */
 
 function testFacebookSession($facebook) {
     // Test the access token.
