@@ -145,6 +145,8 @@ class DataAccessLayer {
     public function refreshStream() {
         // Fetch the new stream.
         $this->fetchStream();
+        
+        echo json_encode($this->stream);
     }
 
     public function searchPosts($search) {
