@@ -326,18 +326,19 @@ var SwdPresenter = {
      * @param {type} error
      */
     handleError: function(error) {
-        switch (error.status) {
-            case 401:
-                // Access denied, most likely from an expired access token.
-                // Get a new access token by simply refreshing the page.
-                SwdView.showMessage('Sorry, but your session has expired - automatically taking you back to the main page.');
-
-                // Send the user to the app's main url.
-                window.location = window.location.href;
-                break;
-            default:
-                SwdView.showError(error.responseText);
-        }
+        SwdView.showError(error.responseText);
+//        switch (error.status) {
+//            case 401:
+//                // Access denied, most likely from an expired access token.
+//                // Get a new access token by simply refreshing the page.
+//                SwdView.showMessage('Sorry, but your session has expired - automatically taking you back to the main page.');
+//
+//                // Send the user to the app's main url.
+//                window.location = window.location.href;
+//                break;
+//            default:
+//                SwdView.showError(error.responseText);
+//        }
     },
     /**
      * Entry point of program.

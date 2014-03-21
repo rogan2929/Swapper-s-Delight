@@ -173,19 +173,22 @@ class DataAccessLayer {
             // Call the facebook->api function.
             return call_user_func_array(array($this->facebook, 'api'), $args);
         } catch (FacebookApiException $ex) {
+            http_response_code(500);
+            
+            // https://developers.facebook.com/docs/graph-api/using-graph-api/#errors
             echo json_encode($ex->getResult());
 
-            // Selectively decide how to handle the error, based on returned code.
-            // https://developers.facebook.com/docs/graph-api/using-graph-api/#errors
-            switch ($ex->getCode()) {
-                case 'OAuthException':              // Invalid Session
-                    http_response_code(401);
-                    break;
-                case '4':                           // Too many API calls.
-                    break;
-                case '17':                          // Too many user API calls.
-                    break;
-            }
+//            // Selectively decide how to handle the error, based on returned code.
+//            // https://developers.facebook.com/docs/graph-api/using-graph-api/#errors
+//            switch ($ex->getCode()) {
+//                case 'OAuthException':              // Invalid Session
+//                    http_response_code(401);
+//                    break;
+//                case '4':                           // Too many API calls.
+//                    break;
+//                case '17':                          // Too many user API calls.
+//                    break;
+//            }
         }
     }
 
