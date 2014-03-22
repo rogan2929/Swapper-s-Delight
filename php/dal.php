@@ -504,7 +504,7 @@ class DataAccessLayer {
         $stream = array();
 
         // Construct the FB query request
-        for ($b = 0; $b < 2; $b++) {
+//        for ($b = 0; $b < 2; $b++) {
             $queries = array();
 
             for ($i = 0; $i < 10; $i++) {
@@ -522,7 +522,7 @@ class DataAccessLayer {
             for ($i = 0; $i < count($response); $i++) {
                 $stream = array_merge($stream, json_decode($response['fql_result_set'][$i], true));
             }
-        }
+//        }
 
 //        for ($i = 0; $i < $windowData['batchCount']; $i++) {
 //            $queries = array();
