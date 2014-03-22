@@ -503,8 +503,6 @@ class DataAccessLayer {
 
         // Construct the FB query request
         $queries = array();
-        
-        echo ($windowSize / 3600) . "<br/>";
 
         // Build a multiquery for each post in the provided array.
         for ($i = 0; $i < 5; $i++) {
@@ -522,6 +520,8 @@ class DataAccessLayer {
                 'relative_url' => 'method/fql.multiquery?queries=' . json_encode($multiqueries)
             );
         }
+        
+        echo json_encode($queries);
 
         // Execute a batch query.
         $response = $this->api('/', 'POST', array(
@@ -529,7 +529,7 @@ class DataAccessLayer {
             'include_headers' => false
         ));
         
-        echo json_encode($response);
+        //echo json_encode($response);
 
         for ($i = 0; $i < count($response); $i++) {
             $stream = array_merge($stream, json_decode($response[$i]['body']['fql_result_set'], true));
