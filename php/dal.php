@@ -507,7 +507,7 @@ class DataAccessLayer {
         for ($b = 0; $b < 2; $b++) {
             $queries = array();
 
-            for ($i = 0; $i < 35; $i++) {
+            for ($i = 0; $i < 10; $i++) {
                 $queries['query_' . $i] = 'SELECT post_id,actor_id,message,like_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
 
                 $windowStart -= $windowSize;
