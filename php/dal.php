@@ -169,8 +169,6 @@ class DataAccessLayer {
             $this->fetchStream();
         }
 
-        echo json_encode($this->stream);
-
         return $this->getPostData(array_slice($this->stream, $offset, $limit));
     }
 
@@ -510,14 +508,14 @@ class DataAccessLayer {
         // Build a multiquery for each post in the provided array.
         for ($i = 0; $i < 5; $i++) {
             $multiqueries = array();
-            
+
             for ($j = 0; $j < 10; $j++) {
                 $multiqueries['query_' . $i] = 'SELECT post_id,actor_id,message,like_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
-                
+
                 $windowStart -= $windowSize;
                 $windowEnd -= $windowSize;
             }
-            
+
             $queries[] = array(
                 'method' => 'POST',
                 'relative_url' => 'method/fql.multiquery?queries=' . json_encode($multiqueries)
@@ -529,8 +527,10 @@ class DataAccessLayer {
             'batch' => json_encode($queries),
             'include_headers' => false
         ));
-        
-        echo json_encode($response);
+
+        for ($i = 0; $i < count($response); $i++) {
+            $stream = array_merge($stream, json_decode($response[$i]['body'], true));
+        }
 
 //            for ($i = 0; $i < 10; $i++) {
 //                $queries['query_' . $i] = 'SELECT post_id,actor_id,message,like_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
