@@ -521,7 +521,6 @@ class DataAccessLayer {
             );
         }
         
-        echo json_encode($queries);
 
         // Execute a batch query.
         $response = $this->api('/', 'POST', array(
@@ -529,7 +528,7 @@ class DataAccessLayer {
             'include_headers' => false
         ));
         
-        //echo json_encode($response);
+        echo json_encode($response);
 
         for ($i = 0; $i < count($response); $i++) {
             $stream = array_merge($stream, json_decode($response[$i]['body']['fql_result_set'], true));
