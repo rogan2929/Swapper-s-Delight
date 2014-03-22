@@ -502,7 +502,6 @@ class DataAccessLayer {
         $stream = array();
 
         // Construct the FB query request
-//        for ($b = 0; $b < 2; $b++) {
         $queries = array();
 
         // Build a multiquery for each post in the provided array.
@@ -527,54 +526,12 @@ class DataAccessLayer {
             'batch' => json_encode($queries),
             'include_headers' => false
         ));
+        
+        echo json_encode($response);
 
         for ($i = 0; $i < count($response); $i++) {
             $stream = array_merge($stream, json_decode($response[$i]['body'], true));
         }
-
-//            for ($i = 0; $i < 10; $i++) {
-//                $queries['query_' . $i] = 'SELECT post_id,actor_id,message,like_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
-//
-//                $windowStart -= $windowSize;
-//                $windowEnd -= $windowSize;
-//            }
-//
-//            $response = $this->api(array(
-//                'method' => 'fql.multiquery',
-//                'queries' => $queries
-//            ));
-//
-//            echo json_encode($response) . "<br/>";
-//            for ($i = 0; $i < count($response); $i++) {
-//                $stream = array_merge($stream, json_decode($response['fql_result_set'][$i], true));
-//            }
-//        }
-//        for ($i = 0; $i < $windowData['batchCount']; $i++) {
-//            $queries = array();
-//
-//            // Construct the FB query request
-//            for ($j = 0; $j < 50; $j++) {
-//                $query = 'SELECT post_id,actor_id,message,like_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
-//
-//                $queries[] = array(
-//                    'method' => 'GET',
-//                    'relative_url' => 'method/fql.query?query=' . urlencode($query)
-//                );
-//
-//                $windowStart -= $windowSize;
-//                $windowEnd -= $windowSize;
-//            }
-//
-////            // Call the batch query.
-////            $response = $this->api('/', 'POST', array(
-////                'batch' => json_encode($queries),
-////                'include_headers' => false
-////            ));
-////
-////            for ($j = 0; $j < count($response); $j++) {
-////                $stream = array_merge($stream, json_decode($response[$j]['body'], true));
-////            }
-//        }
 
         return $stream;
     }
