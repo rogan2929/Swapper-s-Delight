@@ -521,6 +521,8 @@ class DataAccessLayer {
             );
         }
         
+        echo json_encode($queries) . '<br/>';
+        
 
         // Execute a batch query.
         $response = $this->api('/', 'POST', array(
