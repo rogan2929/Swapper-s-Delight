@@ -509,7 +509,7 @@ class DataAccessLayer {
             $multiqueries = array();
 
             for ($j = 0; $j < 10; $j++) {
-                $multiqueries['query_' . ($i * $j)] = 'SELECT post_id,actor_id,message,like_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
+                $multiqueries['query_' . $j] = 'SELECT post_id,actor_id,message,like_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
 
                 $windowStart -= $windowSize;
                 $windowEnd -= $windowSize;
