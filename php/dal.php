@@ -515,7 +515,7 @@ class DataAccessLayer {
         ));
 
         for ($i = 0; $i < count($response); $i++) {
-            $stream = array_merge($stream, json_decode($response[$i]['fql_result_set'], true));
+            $stream = array_merge($stream, json_decode($response['fql_result_set'][$i], true));
         }
 
 //        for ($i = 0; $i < $windowData['batchCount']; $i++) {
