@@ -252,6 +252,8 @@ class DataAccessLayer {
             'method' => 'fql.query',
             'query' => $query
         ));
+        
+        echo json_encode($response) . "<br/>";
 
         $count = count($response);
 
@@ -511,8 +513,6 @@ class DataAccessLayer {
             $windowStart -= $windowSize;
             $windowEnd -= $windowSize;
         }
-
-        echo json_encode($queries) . "<br/>";
 
         $response = $this->api(array(
             'method' => 'fql.multiquery',
