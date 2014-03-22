@@ -501,28 +501,27 @@ class DataAccessLayer {
         $windowStart = time();
         $windowEnd = $windowStart - $windowSize;
 
-        echo $windowSize . "<br/>";
-        echo $windowStart . "<br/>";
-        echo $windowEnd . "<br/>";
-        
         $stream = array();
-        $queries = array();
 
         // Construct the FB query request
-        for ($i = 0; $i < 50; $i++) {
-            $queries['query_' . $i] = 'SELECT post_id,actor_id,message,like_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
+        for ($b = 0; $b < 2; $b++) {
+            $queries = array();
 
-            $windowStart -= $windowSize;
-            $windowEnd -= $windowSize;
-        }
+            for ($i = 0; $i < 35; $i++) {
+                $queries['query_' . $i] = 'SELECT post_id,actor_id,message,like_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
 
-        $response = $this->api(array(
-            'method' => 'fql.multiquery',
-            'queries' => $queries
-        ));
+                $windowStart -= $windowSize;
+                $windowEnd -= $windowSize;
+            }
 
-        for ($i = 0; $i < count($response); $i++) {
-            $stream = array_merge($stream, json_decode($response['fql_result_set'][$i], true));
+            $response = $this->api(array(
+                'method' => 'fql.multiquery',
+                'queries' => $queries
+            ));
+
+            for ($i = 0; $i < count($response); $i++) {
+                $stream = array_merge($stream, json_decode($response['fql_result_set'][$i], true));
+            }
         }
 
 //        for ($i = 0; $i < $windowData['batchCount']; $i++) {
