@@ -512,6 +512,8 @@ class DataAccessLayer {
             $windowEnd -= $windowSize;
         }
 
+        echo json_encode($queries) . "<br/>";
+
         $response = $this->api(array(
             'method' => 'fql.multiquery',
             'queries' => $queries
