@@ -252,8 +252,6 @@ class DataAccessLayer {
             'method' => 'fql.query',
             'query' => $query
         ));
-        
-        echo json_encode($response) . "<br/>";
 
         $count = count($response);
 
@@ -503,6 +501,10 @@ class DataAccessLayer {
         $windowStart = time();
         $windowEnd = $windowStart - $windowSize;
 
+        echo $windowSize . "<br/>";
+        echo $windowStart . "<br/>";
+        echo $windowEnd . "<br/>";
+        
         $stream = array();
         $queries = array();
 
