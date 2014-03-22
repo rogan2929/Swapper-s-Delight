@@ -505,27 +505,48 @@ class DataAccessLayer {
 
         // Construct the FB query request
 //        for ($b = 0; $b < 2; $b++) {
-            $queries = array();
+        $queries = array();
 
-            for ($i = 0; $i < 35; $i++) {
-                $queries['query_' . $i] = 'SELECT post_id,actor_id,message,like_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
-
+        // Build a multiquery for each post in the provided array.
+        for ($i = 0; $i < 5; $i++) {
+            $multiqueries = array();
+            
+            for ($j = 0; $j < 10; $j++) {
+                $multiqueries['query_' . $i] = 'SELECT post_id,actor_id,message,like_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
+                
                 $windowStart -= $windowSize;
                 $windowEnd -= $windowSize;
             }
-
-            $response = $this->api(array(
-                'method' => 'fql.multiquery',
-                'queries' => $queries
-            ));
-
-            echo json_encode($response) . "<br/>";
             
+            $queries[] = array(
+                'method' => 'POST',
+                'relative_url' => 'method/fql.multiquery?queries=' . json_encode($multiqueries)
+            );
+        }
+
+        // Execute a batch query.
+        $response = $this->api('/', 'POST', array(
+            'batch' => json_encode($queries),
+            'include_headers' => false
+        ));
+
+//            for ($i = 0; $i < 10; $i++) {
+//                $queries['query_' . $i] = 'SELECT post_id,actor_id,message,like_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
+//
+//                $windowStart -= $windowSize;
+//                $windowEnd -= $windowSize;
+//            }
+//
+//            $response = $this->api(array(
+//                'method' => 'fql.multiquery',
+//                'queries' => $queries
+//            ));
+//
+//            echo json_encode($response) . "<br/>";
 //            for ($i = 0; $i < count($response); $i++) {
 //                $stream = array_merge($stream, json_decode($response['fql_result_set'][$i], true));
 //            }
 //        }
-
 //        for ($i = 0; $i < $windowData['batchCount']; $i++) {
 //            $queries = array();
 //
