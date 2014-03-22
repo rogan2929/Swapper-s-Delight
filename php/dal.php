@@ -503,6 +503,8 @@ class DataAccessLayer {
 
         // Construct the FB query request
         $queries = array();
+        
+        echo ($windowSize / 3600) . "<br/>";
 
         // Build a multiquery for each post in the provided array.
         for ($i = 0; $i < 5; $i++) {
