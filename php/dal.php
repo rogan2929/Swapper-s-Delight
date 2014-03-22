@@ -507,9 +507,10 @@ class DataAccessLayer {
         // Construct the FB query request
         for ($i = 0; $i < 50; $i++) {
             $queries['query_' . $i] = 'SELECT post_id,actor_id,message,like_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
+
+            $windowStart -= $windowSize;
+            $windowEnd -= $windowSize;
         }
-        
-        echo json_encode($queries) . "<br/>";
 
         $response = $this->api(array(
             'method' => 'fql.multiquery',
