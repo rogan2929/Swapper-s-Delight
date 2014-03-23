@@ -8,6 +8,8 @@ header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 header('Cache-Control: no-cache, must-revalidate');
 header('Pragma: no-cache');
 
+require_once '/php/dal.php';
+
 if (!session_id()) {
     session_start();
 }
