@@ -507,7 +507,7 @@ class DataAccessLayer {
         $queries = array();
 
         // Build a multiquery for each post in the provided array.
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $multiqueries = array();
 
             for ($j = 0; $j < 10; $j++) {
