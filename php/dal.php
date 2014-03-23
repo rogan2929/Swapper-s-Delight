@@ -15,13 +15,11 @@ class DataAccessLayer {
     const APP_SECRET = 'b8447ce73d2dcfccde6e30931cfb0a90';
 
     // Class members
-    private $accessToken;
+    private $facebook;
     private $appSecretProof;
-    
     private $gid;
     private $stream;
     private $sqlConnectionInfo;
-    private $refreshing;
 
     /*
      * Swd constructor.
@@ -29,6 +27,33 @@ class DataAccessLayer {
      */
 
     function __construct() {
+        if (!session_id()) {
+            session_start();
+        }
+
+        $this->facebook = new Facebook(array(
+            'appId' => self::APP_ID,
+            'secret' => self::APP_SECRET,
+            'cookie' => true
+        ));
+
+        // Look up an existing access token, if need be.
+        if ($this->facebook->getAccessToken() === null) {
+            $this->facebook->setAccessToken($_SESSION['accessToken']);
+        } else {
+            $_SESSION['accessToken'] = $this->facebook->getAccessToken();
+        }
+
+        $this->appSecretProof = hash_hmac('sha256', $this->facebook->getAccessToken(), self::APP_SECRET);
+
+        // Retrieve the stream if it's there.
+        if (isset($_SESSION['stream'])) {
+            $this->stream = $_SESSION['stream'];
+        }
+
+        // Test the facebook object that was created.
+        $this->api('/me', 'GET');
+
         $this->sqlConnectionInfo = array("UID" => "rogan2929@lreuagtc6u", "pwd" => "Revelation19:11", "Database" => "swapperAGiJRLgvy", "LoginTimeout" => 30, "Encrypt" => 1);
     }
 
@@ -162,22 +187,6 @@ class DataAccessLayer {
 
     /** Private Methods * */
     private function api(/* polymorphic */) {
-        // Create the facebook object.
-        $facebook = new Facebook(array(
-            'appId' => self::APP_ID,
-            'secret' => self::APP_SECRET,
-            'cookie' => true
-        ));
-
-        // Look up an existing access token, if need be.
-        if ($facebook->getAccessToken() === null) {
-            $facebook->setAccessToken($this->accessToken);
-        } else {
-            $this->accessToken = $facebook->getAccessToken();
-        }
-
-        $this->appSecretProof = hash_hmac('sha256', $facebook->getAccessToken(), self::APP_SECRET);
-
         $args = func_get_args();
 
         if (is_array($args[0])) {
@@ -196,7 +205,7 @@ class DataAccessLayer {
 
         try {
             // Call the facebook->api function.
-            return call_user_func_array(array($facebook, 'api'), $args);
+            return call_user_func_array(array($this->facebook, 'api'), $args);
         } catch (FacebookApiException $ex) {
             // Selectively decide how to handle the error, based on returned code.
             // https://developers.facebook.com/docs/graph-api/using-graph-api/#errors
@@ -214,15 +223,18 @@ class DataAccessLayer {
     }
 
     private function fetchStream() {
+        // Save $gid to session for later use.
+        $_SESSION['gid'] = $this->gid;
+
         // Wait for other threads to finish updating the cached FQL stream.
         $this->waitForFetchStreamCompletion();
 
         // Refresh the FQL stream.
-        $this->refreshing = true;
-        $this->stream = $this->queryStream();
-        $this->refreshing = false;
+        $_SESSION['refreshing'] = true;
+        $_SESSION['stream'] = $this->queryStream();
+        $_SESSION['refreshing'] = false;
 
-        
+        $this->stream = $_SESSION['stream'];
     }
 
     /**
@@ -508,6 +520,7 @@ class DataAccessLayer {
                 'relative_url' => 'method/fql.multiquery?queries=' . json_encode($multiqueries)
             );
         }
+        
         // Build a multiquery for each post in the provided array.
 //        for ($i = 0; $i < 50; $i++) {
 //            $query = 'SELECT post_id,actor_id,message,like_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
@@ -520,13 +533,14 @@ class DataAccessLayer {
 //                'relative_url' => 'method/fql.query?query=' . urlencode($query)
 //            );
 //        }
+
         // Execute a batch query.
         $response = $this->api('/', 'POST', array(
             'batch' => json_encode($queries),
             'include_headers' => false
         ));
 
-        //echo json_encode($response);
+        echo json_encode($response);
 
         for ($i = 0; $i < count($response); $i++) {
             $stream = array_merge($stream, json_decode($response['body'][$i]['fql_result_set'], true));
@@ -540,7 +554,7 @@ class DataAccessLayer {
      */
 
     private function waitForFetchStreamCompletion() {
-        while ($this->refreshing == true) {
+        while ($_SESSION['refreshing'] == true) {
             sleep(3);
         }
     }
