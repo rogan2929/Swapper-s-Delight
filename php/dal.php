@@ -501,8 +501,6 @@ class DataAccessLayer {
 
         $stream = array();
 
-        echo ($windowSize / 3600) . "<br/>";
-
         // Construct the FB query request
         $queries = array();
 
