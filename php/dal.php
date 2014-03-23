@@ -500,6 +500,8 @@ class DataAccessLayer {
         $windowEnd = $windowStart - $windowSize;
 
         $stream = array();
+        
+        echo ($windowSize / 3600) . "<br/>";
 
         // Construct the FB query request
         $queries = array();
@@ -520,9 +522,6 @@ class DataAccessLayer {
                 'relative_url' => 'method/fql.multiquery?queries=' . json_encode($multiqueries)
             );
         }
-        
-        echo json_encode($queries) . '<br/>';
-        
 
         // Execute a batch query.
         $response = $this->api('/', 'POST', array(
