@@ -495,7 +495,7 @@ class DataAccessLayer {
      */
 
     private function queryStream() {
-        $windowSize = 3 * 3600;//$this->getOptimalWindowSize();
+        $windowSize = 6 * 3600;//$this->getOptimalWindowSize();
         $windowStart = time();
         $windowEnd = $windowStart - $windowSize;
 
