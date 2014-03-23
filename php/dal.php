@@ -175,6 +175,8 @@ class DataAccessLayer {
         } else {
             $this->accessToken = $facebook->getAccessToken();
         }
+        
+        echo 'TEST';
 
         $this->appSecretProof = hash_hmac('sha256', $facebook->getAccessToken(), self::APP_SECRET);
 
