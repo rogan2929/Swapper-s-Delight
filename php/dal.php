@@ -168,6 +168,8 @@ class DataAccessLayer {
             'secret' => self::APP_SECRET,
             'cookie' => true
         ));
+        
+        echo 'TEST';
 
         // Look up an existing access token, if need be.
         if ($facebook->getAccessToken() === null) {
@@ -175,8 +177,6 @@ class DataAccessLayer {
         } else {
             $this->accessToken = $facebook->getAccessToken();
         }
-        
-        echo 'TEST';
 
         $this->appSecretProof = hash_hmac('sha256', $facebook->getAccessToken(), self::APP_SECRET);
 
