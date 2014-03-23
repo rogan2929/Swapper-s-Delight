@@ -168,8 +168,6 @@ class DataAccessLayer {
             'secret' => self::APP_SECRET,
             'cookie' => true
         ));
-        
-        echo 'TEST';
 
         // Look up an existing access token, if need be.
         if ($facebook->getAccessToken() === null) {
