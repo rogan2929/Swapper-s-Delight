@@ -540,7 +540,7 @@ class DataAccessLayer {
             'include_headers' => false
         ));
         
-        echo var_dump($response[0]['body']);
+        echo var_dump(json_decode($response[0]['body'], true));
 
         for ($i = 0; $i < count($response); $i++) {
             //$stream = array_merge($stream, json_decode($response['body'][$i]['fql_result_set'], true));
