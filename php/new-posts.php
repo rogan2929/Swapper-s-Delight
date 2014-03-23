@@ -7,7 +7,7 @@ $refresh = $_GET['refresh'];
 $offset = $_GET['offset'];
 $limit = $_GET['limit'];
 
-$dal = new DataAccessLayer();
+$dal = $_SESSION['dal'];
 $dal->setGid($gid);
 
 // Call the appropriate method in the newly instantiated DAL object.

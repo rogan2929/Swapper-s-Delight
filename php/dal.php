@@ -15,11 +15,13 @@ class DataAccessLayer {
     const APP_SECRET = 'b8447ce73d2dcfccde6e30931cfb0a90';
 
     // Class members
-    private $facebook;
+    private $accessToken;
     private $appSecretProof;
+    
     private $gid;
     private $stream;
     private $sqlConnectionInfo;
+    private $refreshing;
 
     /*
      * Swd constructor.
@@ -27,33 +29,6 @@ class DataAccessLayer {
      */
 
     function __construct() {
-        if (!session_id()) {
-            session_start();
-        }
-
-        $this->facebook = new Facebook(array(
-            'appId' => self::APP_ID,
-            'secret' => self::APP_SECRET,
-            'cookie' => true
-        ));
-
-        // Look up an existing access token, if need be.
-        if ($this->facebook->getAccessToken() === null) {
-            $this->facebook->setAccessToken($_SESSION['accessToken']);
-        } else {
-            $_SESSION['accessToken'] = $this->facebook->getAccessToken();
-        }
-
-        $this->appSecretProof = hash_hmac('sha256', $this->facebook->getAccessToken(), self::APP_SECRET);
-
-        // Retrieve the stream if it's there.
-        if (isset($_SESSION['stream'])) {
-            $this->stream = $_SESSION['stream'];
-        }
-
-        // Test the facebook object that was created.
-        $this->api('/me', 'GET');
-
         $this->sqlConnectionInfo = array("UID" => "rogan2929@lreuagtc6u", "pwd" => "Revelation19:11", "Database" => "swapperAGiJRLgvy", "LoginTimeout" => 30, "Encrypt" => 1);
     }
 
@@ -187,6 +162,22 @@ class DataAccessLayer {
 
     /** Private Methods * */
     private function api(/* polymorphic */) {
+        // Create the facebook object.
+        $facebook = new Facebook(array(
+            'appId' => self::APP_ID,
+            'secret' => self::APP_SECRET,
+            'cookie' => true
+        ));
+
+        // Look up an existing access token, if need be.
+        if ($facebook->getAccessToken() === null) {
+            $facebook->setAccessToken($this->accessToken);
+        } else {
+            $this->accessToken = $facebook->getAccessToken();
+        }
+
+        $this->appSecretProof = hash_hmac('sha256', $facebook->getAccessToken(), self::APP_SECRET);
+
         $args = func_get_args();
 
         if (is_array($args[0])) {
@@ -205,7 +196,7 @@ class DataAccessLayer {
 
         try {
             // Call the facebook->api function.
-            return call_user_func_array(array($this->facebook, 'api'), $args);
+            return call_user_func_array(array($facebook, 'api'), $args);
         } catch (FacebookApiException $ex) {
             // Selectively decide how to handle the error, based on returned code.
             // https://developers.facebook.com/docs/graph-api/using-graph-api/#errors
@@ -223,18 +214,15 @@ class DataAccessLayer {
     }
 
     private function fetchStream() {
-        // Save $gid to session for later use.
-        $_SESSION['gid'] = $this->gid;
-
         // Wait for other threads to finish updating the cached FQL stream.
         $this->waitForFetchStreamCompletion();
 
         // Refresh the FQL stream.
-        $_SESSION['refreshing'] = true;
-        $_SESSION['stream'] = $this->queryStream();
-        $_SESSION['refreshing'] = false;
+        $this->refreshing = true;
+        $this->stream = $this->queryStream();
+        $this->refreshing = false;
 
-        $this->stream = $_SESSION['stream'];
+        
     }
 
     /**
@@ -532,7 +520,6 @@ class DataAccessLayer {
 //                'relative_url' => 'method/fql.query?query=' . urlencode($query)
 //            );
 //        }
-
         // Execute a batch query.
         $response = $this->api('/', 'POST', array(
             'batch' => json_encode($queries),
@@ -553,7 +540,7 @@ class DataAccessLayer {
      */
 
     private function waitForFetchStreamCompletion() {
-        while ($_SESSION['refreshing'] == true) {
+        while ($this->refreshing == true) {
             sleep(3);
         }
     }

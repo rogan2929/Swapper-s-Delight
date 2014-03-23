@@ -8,6 +8,13 @@ header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 header('Cache-Control: no-cache, must-revalidate');
 header('Pragma: no-cache');
 
+if (!session_id()) {
+    session_start();
+}
+
+// Set up the data access layer object and save it.
+$_SESSION['dal'] = new DataAccessLayer();
+
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +79,7 @@ header('Pragma: no-cache');
                                     <a class='facebook-user-name' target='_blank'></a>
                                     <span class='timestamp'></span>
                                 </div>
-<!--                                <a target='_blank' class='post-permalink float-right wrappable-link'>Permalink</a>-->
+                                <!--                                <a target='_blank' class='post-permalink float-right wrappable-link'>Permalink</a>-->
                             </div>
                             <div id='post-message' class='floating-panel-section'>
                                 <div id='post-message-text'></div>
