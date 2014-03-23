@@ -495,31 +495,43 @@ class DataAccessLayer {
      */
 
     private function queryStream() {
-        $windowSize = 6 * 3600;//$this->getOptimalWindowSize();
+        $windowSize = 6 * 3600; //$this->getOptimalWindowSize();
         $windowStart = time();
         $windowEnd = $windowStart - $windowSize;
 
         $stream = array();
-        
+
         echo ($windowSize / 3600) . "<br/>";
 
         // Construct the FB query request
         $queries = array();
 
         // Build a multiquery for each post in the provided array.
-        for ($i = 0; $i < 5; $i++) {
-            $multiqueries = array();
+//        for ($i = 0; $i < 5; $i++) {
+//            $multiqueries = array();
+//
+//            for ($j = 0; $j < 10; $j++) {
+//                $multiqueries['query_' . $j] = 'SELECT post_id,actor_id,message,like_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
+//
+//                $windowStart -= $windowSize;
+//                $windowEnd -= $windowSize;
+//            }
+//
+//            $queries[] = array(
+//                'method' => 'POST',
+//                'relative_url' => 'method/fql.multiquery?queries=' . json_encode($multiqueries)
+//            );
+//        }
+        // Build a multiquery for each post in the provided array.
+        for ($i = 0; $i < 50; $i++) {
+            $query = 'SELECT post_id,actor_id,message,like_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
 
-            for ($j = 0; $j < 10; $j++) {
-                $multiqueries['query_' . $j] = 'SELECT post_id,actor_id,message,like_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
-
-                $windowStart -= $windowSize;
-                $windowEnd -= $windowSize;
-            }
+            $windowStart -= $windowSize;
+            $windowEnd -= $windowSize;
 
             $queries[] = array(
                 'method' => 'POST',
-                'relative_url' => 'method/fql.multiquery?queries=' . json_encode($multiqueries)
+                'relative_url' => 'method/fql.multiquery?queries=' . json_encode($query)
             );
         }
 
@@ -528,7 +540,7 @@ class DataAccessLayer {
             'batch' => json_encode($queries),
             'include_headers' => false
         ));
-        
+
         echo json_encode($response);
 
         for ($i = 0; $i < count($response); $i++) {
