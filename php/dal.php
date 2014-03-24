@@ -541,7 +541,7 @@ class DataAccessLayer {
             $windowEnd -= $windowSize;
             
             $queries[] = array(
-                'method' => 'POST',
+                'method' => 'GET',
                 'relative_url' => $query
             );
         }
