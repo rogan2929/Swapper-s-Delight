@@ -535,7 +535,7 @@ class DataAccessLayer {
         // 557832747592865/feed?fields=id,message,from&limit=5000&since=1395619933&until=xxxx
 
         for ($i = 0; $i < 50; $i++) {
-            $query = '/' . $this->gid . '/feed?fields=id,message,from&limit=5000&since=' . $windowStart . '&until=' . $windowEnd;
+            $query = '/' . $this->gid . '/feed?fields=id,message,from&limit=5000&since=' . $windowEnd . '&until=' . $windowStart;
 
             $windowStart -= $windowSize;
             $windowEnd -= $windowSize;
