@@ -558,12 +558,20 @@ class DataAccessLayer {
                 $body = json_decode($response[$k]['body'], true);
                 $stream = array_merge($stream, $body['data']);
             }
-
-//            for ($j = 0; $j < count($response); $j++) {
-//                $stream = array_merge($stream, json_decode($response[$j]['body']['data']), true);
-//            }
         }
-
+        
+        // Shape the stream to make it look like it came from an FQL query.
+        // id => post_id
+        // from['id'] => actor_id
+        
+        for ($i = 0; $i < count($stream); $i++) {
+            $stream[$i]['post_id'] = $stream[$i]['id'];
+            unset($stream[$i]['id']);
+            
+            $stream[$i]['actor_id'] = $stream[$i]['from']['id'];
+            unset($stream[$i]['from']['id']);
+        }
+        
         echo json_encode($stream);
 
         return $stream;
