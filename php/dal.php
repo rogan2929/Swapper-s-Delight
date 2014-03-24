@@ -571,8 +571,6 @@ class DataAccessLayer {
             $stream[$i]['actor_id'] = $stream[$i]['from']['id'];
             unset($stream[$i]['from']['id']);
         }
-        
-        echo json_encode($stream);
 
         return $stream;
     }
