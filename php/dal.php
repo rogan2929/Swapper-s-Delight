@@ -534,7 +534,7 @@ class DataAccessLayer {
 //        }
         // 557832747592865/feed?fields=id,message,from&limit=5000&since=1395619933&until=xxxx
 
-        for ($i = 0; $i < 400; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             $query = '/' . $this->gid . '/feed?fields=id,message,from&limit=5000&since=' . $windowStart . '&until=' . $windowEnd;
 
             $windowStart -= $windowSize;
@@ -552,9 +552,7 @@ class DataAccessLayer {
             'include_headers' => false
         ));
 
-        $body = json_decode($response[0]['body'], true);
-
-        echo json_encode($body[0]['fql_result_set']);
+        echo json_encode($response);
 
         for ($i = 0; $i < count($response); $i++) {
             //$stream = array_merge($stream, json_decode($response['body'][$i]['fql_result_set'], true));
