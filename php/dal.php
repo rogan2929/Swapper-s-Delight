@@ -552,6 +552,8 @@ class DataAccessLayer {
                 'batch' => json_encode($queries),
                 'include_headers' => false
             ));
+            
+            echo json_encode($response);
 
 //            for ($j = 0; $j < count($response); $j++) {
 //                //$stream = array_merge($stream, json_decode($response['body'][$i]['fql_result_set'], true));
