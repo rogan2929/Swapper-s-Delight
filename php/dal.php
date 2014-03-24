@@ -534,25 +534,27 @@ class DataAccessLayer {
 //        }
         // 557832747592865/feed?fields=id,message,from&limit=5000&since=1395619933&until=xxxx
 
-        for ($i = 0; $i < 50; $i++) {
-            $query = '/' . $this->gid . '/feed?fields=id,message,from&limit=5000&since=' . $windowEnd . '&until=' . $windowStart;
+        for ($j = 0; $j < 12; $j++) {
+            for ($i = 0; $i < 50; $i++) {
+                $query = '/' . $this->gid . '/feed?fields=id,message,from&limit=5000&since=' . $windowEnd . '&until=' . $windowStart;
 
-            $windowStart -= $windowSize;
-            $windowEnd -= $windowSize;
-            
-            $queries[] = array(
-                'method' => 'GET',
-                'relative_url' => $query
-            );
+                $windowStart -= $windowSize;
+                $windowEnd -= $windowSize;
+
+                $queries[] = array(
+                    'method' => 'GET',
+                    'relative_url' => $query
+                );
+            }
+
+            // Execute a batch query.
+            $response = $this->api('/', 'POST', array(
+                'batch' => json_encode($queries),
+                'include_headers' => false
+            ));
+
+            echo json_encode($response);
         }
-
-        // Execute a batch query.
-        $response = $this->api('/', 'POST', array(
-            'batch' => json_encode($queries),
-            'include_headers' => false
-        ));
-
-        echo json_encode($response);
 
         for ($i = 0; $i < count($response); $i++) {
             //$stream = array_merge($stream, json_decode($response['body'][$i]['fql_result_set'], true));
