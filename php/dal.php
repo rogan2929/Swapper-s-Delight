@@ -520,7 +520,6 @@ class DataAccessLayer {
 //                'relative_url' => 'method/fql.multiquery?queries=' . json_encode($multiqueries)
 //            );
 //        }
-        
         // Build a multiquery for each post in the provided array.
 //        for ($i = 0; $i < 50; $i++) {
 //            $query = 'SELECT post_id,actor_id,message,like_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
@@ -533,19 +532,28 @@ class DataAccessLayer {
 //                'relative_url' => 'method/fql.query?query=' . urlencode($query)
 //            );
 //        }
-        
         // 557832747592865/feed?fields=id,message,from&limit=5000&since=1395619933&until=xxxx
-        
-        for ($i = 0; $i < )
+
+        for ($i = 0; $i < 400; $i++) {
+            $query = '/' . $this->gid . '/feed?fields=id,message,from&limit=5000&since=' . $windowStart . '&until=' . $windowEnd;
+
+            $windowStart -= $windowSize;
+            $windowEnd -= $windowSize;
+            
+            $queries[] = array(
+                'method' => 'GET',
+                'relative_url' => $query
+            );
+        }
 
         // Execute a batch query.
         $response = $this->api('/', 'POST', array(
             'batch' => json_encode($queries),
             'include_headers' => false
         ));
-        
+
         $body = json_decode($response[0]['body'], true);
-        
+
         echo json_encode($body[0]['fql_result_set']);
 
         for ($i = 0; $i < count($response); $i++) {
