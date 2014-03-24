@@ -553,7 +553,7 @@ class DataAccessLayer {
                 'include_headers' => false
             ));
             
-            echo json_encode($response['data']);
+            echo var_dump($response) . "<br/><br/>";
 
 //            for ($j = 0; $j < count($response); $j++) {
 //                $stream = array_merge($stream, json_decode($response['data']), true);
