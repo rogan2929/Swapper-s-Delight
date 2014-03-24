@@ -502,7 +502,7 @@ class DataAccessLayer {
         $stream = array();
 
         // Construct the FB query request
-        $queries = array();
+//        $queries = array();
 
         // Build a multiquery for each post in the provided array.
 //        for ($i = 0; $i < 10; $i++) {
@@ -535,6 +535,8 @@ class DataAccessLayer {
         // 557832747592865/feed?fields=id,message,from&limit=5000&since=1395619933&until=xxxx
 
         for ($i = 0; $i < 12; $i++) {
+            $queries = array();
+            
             for ($j = 0; $j < 50; $j++) {
                 $query = '/' . $this->gid . '/feed?fields=id,message,from&limit=5000&since=' . $windowEnd . '&until=' . $windowStart;
 
