@@ -534,8 +534,8 @@ class DataAccessLayer {
 //        }
         // 557832747592865/feed?fields=id,message,from&limit=5000&since=1395619933&until=xxxx
 
-        for ($j = 0; $j < 12; $j++) {
-            for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 12; $i++) {
+            for ($j = 0; $j < 50; $j++) {
                 $query = '/' . $this->gid . '/feed?fields=id,message,from&limit=5000&since=' . $windowEnd . '&until=' . $windowStart;
 
                 $windowStart -= $windowSize;
@@ -553,14 +553,15 @@ class DataAccessLayer {
                 'include_headers' => false
             ));
 
-            echo json_encode($response);
+//            for ($j = 0; $j < count($response); $j++) {
+//                //$stream = array_merge($stream, json_decode($response['body'][$i]['fql_result_set'], true));
+//                //echo json_encode($response[$i]['body']);
+//                //echo var_dump($response[$i]['body']);
+//                $stream = array_merge($stream, json_decode($response['data']), true);
+//            }
         }
-
-        for ($i = 0; $i < count($response); $i++) {
-            //$stream = array_merge($stream, json_decode($response['body'][$i]['fql_result_set'], true));
-            //echo json_encode($response[$i]['body']);
-            //echo var_dump($response[$i]['body']);
-        }
+        
+//        echo json_encode($stream);
 
         return $stream;
     }
