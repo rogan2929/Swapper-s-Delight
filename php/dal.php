@@ -555,7 +555,7 @@ class DataAccessLayer {
             ));
 
             for ($k = 0; $k < count($response); $k++) {
-                $body = json_decode($response[$k]['body']);
+                $body = json_decode($response[$k]['body'], true);
                 echo var_dump($body['data']);
             }
 
