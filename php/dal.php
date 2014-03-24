@@ -554,9 +554,7 @@ class DataAccessLayer {
                 'include_headers' => false
             ));
 
-            if ($i == 0) {
-                echo var_dump($response[0]['body']);
-            }
+            echo var_dump($response[1]['body']);
 
 //            for ($j = 0; $j < count($response); $j++) {
 //                $stream = array_merge($stream, json_decode($response[$j]['body']['data']), true);
