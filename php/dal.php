@@ -552,15 +552,13 @@ class DataAccessLayer {
                 'batch' => json_encode($queries),
                 'include_headers' => false
             ));
-            
-            echo var_dump($response) . "<br/><br/>";
 
-//            for ($j = 0; $j < count($response); $j++) {
-//                $stream = array_merge($stream, json_decode($response['data']), true);
-//            }
+            for ($j = 0; $j < count($response); $j++) {
+                $stream = array_merge($stream, json_decode($response[$j]['body']['data']), true);
+            }
         }
         
-//        echo json_encode($stream);
+        echo json_encode($stream);
 
         return $stream;
     }
