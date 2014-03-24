@@ -555,7 +555,7 @@ class DataAccessLayer {
             ));
 
             if ($i == 0) {
-                echo json_encode($response[0]);
+                echo var_dump($response[0]['body']);
             }
 
 //            for ($j = 0; $j < count($response); $j++) {
