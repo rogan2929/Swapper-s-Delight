@@ -1,13 +1,7 @@
 <?php
 
-require_once 'stream_data.php';
-require_once 'session.php';
+require_once 'dal.php';
 
-$gid = $_GET['gid'];
+$dal = new DataAccessLayer();
 
-$facebook = getFacebookSession();
-
-// Refresh the stream for the group.
-if (http_response_code() != 401) {
-    fetchStream($facebook, $gid, 1);
-}
+$dal->getNewPosts($refresh, $offset, $limit));
