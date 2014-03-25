@@ -309,34 +309,6 @@ var SwdPresenter = {
     refreshStreamInterval: null,
     postOffset: 0,
     /***
-     * Confirm Facebook Login Status.
-     * @param {type} callback
-     */
-    checkFBLoginStatus: function(callback) {
-        FB.getLoginStatus(function(response) {
-            // Check connection status, posting a login prompt if the user has disconnected.
-            // TODO: This is stub function that doesn't appear to be able to do much.
-            if (response.status !== 'connected') {
-//                SwdView.showMessage('Sorry, but your session has expired - automatically taking you back to the main page.');
-//
-//                // Send the user to the app's main url.
-//                window.location = window.location.href;
-//                window.location.reload();
-
-//                FB.login(function(response) {
-//                    if (response.status === 'connected') {
-//                        callback.call(SwdPresenter);
-//                    }
-//                }, {
-//                    scope: 'user_groups,user_likes,publish_stream,read_stream'
-//                });
-            }
-            else {
-                callback.call(SwdPresenter);
-            }
-        });
-    },
-    /***
      * Top-level error handler function.
      * @param {type} error
      */
@@ -576,38 +548,35 @@ var SwdPresenter = {
      * @param {type} viewChanged
      */
     loadPosts: function(refresh, viewChanged) {
-        // Before calling anything, confirm login status.
-        SwdPresenter.checkFBLoginStatus(function() {
-            if (!SwdPresenter.currentlyLoading) {
-                SwdPresenter.currentlyLoading = true;
+        if (!SwdPresenter.currentlyLoading) {
+            SwdPresenter.currentlyLoading = true;
 
-                if (refresh || viewChanged) {
-                    SwdView.clearPosts();
-                    SwdPresenter.refreshFbCanvasSize();
+            if (refresh || viewChanged) {
+                SwdView.clearPosts();
+                SwdPresenter.refreshFbCanvasSize();
 
-                    // If the view changed or the page has refreshed, reset the post offset to 0.
-                    SwdPresenter.postOffset = 0;
-                }
-
-                SwdView.toggleElement('#overlay-loading-posts', true);
-                SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', true);
-
-                switch (SwdPresenter.selectedView) {
-                    case SelectedView.group:
-                        SwdPresenter.loadNewestPosts(refresh, SwdPresenter.postOffset);
-                        break;
-                    case SelectedView.myposts:
-                        SwdPresenter.loadMyPosts(SwdPresenter.postOffset);
-                        break;
-                    case SelectedView.liked:
-                        SwdPresenter.loadLikedPosts(SwdPresenter.postOffset);
-                        break;
-                    case SelectedView.search:
-                        SwdPresenter.loadSearchPosts(SwdPresenter.postOffset);
-                        break;
-                }
+                // If the view changed or the page has refreshed, reset the post offset to 0.
+                SwdPresenter.postOffset = 0;
             }
-        });
+
+            SwdView.toggleElement('#overlay-loading-posts', true);
+            SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', true);
+
+            switch (SwdPresenter.selectedView) {
+                case SelectedView.group:
+                    SwdPresenter.loadNewestPosts(refresh, SwdPresenter.postOffset);
+                    break;
+                case SelectedView.myposts:
+                    SwdPresenter.loadMyPosts(SwdPresenter.postOffset);
+                    break;
+                case SelectedView.liked:
+                    SwdPresenter.loadLikedPosts(SwdPresenter.postOffset);
+                    break;
+                case SelectedView.search:
+                    SwdPresenter.loadSearchPosts(SwdPresenter.postOffset);
+                    break;
+            }
+        }
     },
     /***
      * Function to wrap up any kind of post loading.
@@ -734,15 +703,12 @@ var SwdPresenter = {
 
         SwdView.setLikePost(userLikes);
 
-        // Before calling anything, confirm login status.
-        SwdPresenter.checkFBLoginStatus(function() {
-            // Post the comment.
-            SwdModel.likePost(id, userLikes, {
-                success: function(response) {
-                    SwdPresenter.selectedPost.like_info.user_likes = userLikes;
-                },
-                error: SwdPresenter.handleError
-            });
+        // Post the comment.
+        SwdModel.likePost(id, userLikes, {
+            success: function(response) {
+                SwdPresenter.selectedPost.like_info.user_likes = userLikes;
+            },
+            error: SwdPresenter.handleError
         });
     },
     onClickPostButtonPm: function(e, args) {
@@ -766,29 +732,26 @@ var SwdPresenter = {
         // Prevent the event from bubbling up the DOM and immediately causing the displayed panel to close.
         e.stopPropagation();
 
-        // Before calling anything, confirm login status.
-        SwdPresenter.checkFBLoginStatus(function() {
-            SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
-            SwdView.toggleFloatingPanel('#post-details-panel', true);
-            SwdView.toggleToolbar('#post-details-toolbar', true);
+        SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
+        SwdView.toggleFloatingPanel('#post-details-panel', true);
+        SwdView.toggleToolbar('#post-details-toolbar', true);
 
-            SwdModel.getPostDetails(id, {
-                success: function(response) {
-                    post = response;
+        SwdModel.getPostDetails(id, {
+            success: function(response) {
+                post = response;
 
-                    if (post) {
-                        SwdPresenter.selectedPost = post;
-                        SwdView.setLikePost(false);
-                        SwdView.showPostDetails(post);
-                    }
-                    else {
-                        // TODO: Do a real error message.
-                        SwdPresenter.selectedPost = null;
-                        alert('Unable to display post. It was most likely deleted.');
-                    }
-                },
-                error: SwdPresenter.handleError
-            });
+                if (post) {
+                    SwdPresenter.selectedPost = post;
+                    SwdView.setLikePost(false);
+                    SwdView.showPostDetails(post);
+                }
+                else {
+                    // TODO: Do a real error message.
+                    SwdPresenter.selectedPost = null;
+                    alert('Unable to display post. It was most likely deleted.');
+                }
+            },
+            error: SwdPresenter.handleError
         });
     },
     onClickPostBlockLoadMore: function(e, args) {
@@ -858,19 +821,16 @@ var SwdPresenter = {
             id = SwdPresenter.selectedPost.post_id;
             comment = $('#post-comment-text').val();
 
-            // Before calling anything, confirm login status.
-            SwdPresenter.checkFBLoginStatus(function() {
-                // Show the ajax loading div.
-                SwdView.toggleAjaxLoadingDiv('#post-comment-wrapper', true);
+            // Show the ajax loading div.
+            SwdView.toggleAjaxLoadingDiv('#post-comment-wrapper', true);
 
-                // Post the comment.
-                SwdModel.postComment(id, comment, {
-                    success: function(response) {
-                        SwdView.addPostComment(response);
-                        SwdView.clearPostCommentText();
-                    },
-                    error: SwdPresenter.handleError
-                });
+            // Post the comment.
+            SwdModel.postComment(id, comment, {
+                success: function(response) {
+                    SwdView.addPostComment(response);
+                    SwdView.clearPostCommentText();
+                },
+                error: SwdPresenter.handleError
             });
         }
 
