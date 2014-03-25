@@ -536,9 +536,6 @@ var SwdPresenter = {
                     });
                 }, 600000);
 
-                // Update post offset.
-                SwdPresenter.postOffset += response.length;
-
                 SwdPresenter.loadPostsComplete(response);
             },
             error: SwdPresenter.handleError
@@ -605,6 +602,9 @@ var SwdPresenter = {
      */
     loadPostsComplete: function(response) {
         if (response) {
+            // Update post offset.
+            SwdPresenter.postOffset += response.length;
+
             // If a response came through, then display the posts.
             SwdView.populatePostBlocks(response);
         }
