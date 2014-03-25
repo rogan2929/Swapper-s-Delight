@@ -222,13 +222,13 @@ class DataAccessLayer {
         }
 
         // Extract image data for the post.
-        $post['image_url'] = getImageUrlArray($post, $images, false);
+        $post['image_url'] = $this->getImageUrlArray($post, $images, false);
 
         // Extract link data.
-        $post['link_data'] = getLinkData($post);
+        $post['link_data'] = $this->getLinkData($post);
 
         // Determine type of post.
-        $post['post_type'] = getPostType($post);
+        $post['post_type'] = $this->getPostType($post);
 
         // Erase attachment data (to make the object smaller), since this has already been parse.
         unset($post['attachment']);
