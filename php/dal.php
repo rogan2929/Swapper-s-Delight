@@ -213,7 +213,7 @@ class DataAccessLayer {
 
         // Look through the cached stream for liked posts.
         for ($i = 0; $i < count($this->stream); $i++) {
-            if (stripos($this->stream[$i]['message'], $search) === false) {
+            if (stripos($this->stream[$i]['message'], $search) !== false) {
                 $posts[] = $this->stream[$i];
             }
         }
