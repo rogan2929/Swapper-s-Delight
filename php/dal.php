@@ -387,10 +387,10 @@ class DataAccessLayer {
         }
         
         // Slice and dice the array.
-        $posts = array_slice($posts, $offset, $limit);
+        $page = array_slice($posts, $offset, $limit);
 
         // Build a multiquery for each post in the provided array.
-        for ($i = 0; $i < count($posts) && $i < $limit; $i++) {
+        for ($i = 0; $i < count($page) && $i < $limit; $i++) {
             $queries[] = array(
                 'method' => 'POST',
                 'relative_url' => 'method/fql.multiquery?queries=' . json_encode(array(
