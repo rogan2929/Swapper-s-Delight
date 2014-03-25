@@ -81,12 +81,10 @@ var SwdModel = {
             }
         });
     },
-    getHiddenGroups: function(uid, callbacks) {
-        var url = '/php/hidden-groups.php?uid=' + uid;
-
+    getHiddenGroups: function(callbacks) {
         $.ajax({
             type: 'GET',
-            url: url,
+            url: '/php/hidden-groups.php',
             success: function(response) {
                 callbacks.success.call(SwdModel, response);
             },
@@ -240,15 +238,12 @@ var SwdModel = {
     },
     /***
      * Restores all groups to the selected groups list.
-     * @param {type} uid
      * @param {type} callbacks
      */
-    restoreAllGroups: function(uid, callbacks) {
-        var url = '/php/restore-groups.php?uid=' + uid;
-
+    restoreAllGroups: function(callbacks) {
         $.ajax({
             type: 'GET',
-            url: url,
+            url: '/php/restore-groups.php',
             success: function(response) {
                 callbacks.success.call(SwdModel, response);
             },
@@ -398,7 +393,7 @@ var SwdPresenter = {
                     if (SwdPresenter.groups) {
 
                         // Retrieve the user's group preferences.
-                        SwdModel.getHiddenGroups(SwdPresenter.uid, {
+                        SwdModel.getHiddenGroups({
                             success: function(response) {
                                 SwdView.addGroupsToSelectPanel(SwdPresenter.groups, response);
 
@@ -823,7 +818,7 @@ var SwdPresenter = {
     },
     onClickRestoreGroupSelectionItems: function(e, args) {
         // Restore all group selection items.
-        SwdModel.restoreAllGroups(SwdPresenter.uid, {
+        SwdModel.restoreAllGroups({
             success: function() {
                 SwdView.showAllGroupSelectionItems();
             },

@@ -20,6 +20,7 @@ class DataAccessLayer {
     private $gid;
     private $stream;
     private $sqlConnectionInfo;
+    private $sqlServer;
 
     /*
      * Swd constructor.
@@ -55,6 +56,7 @@ class DataAccessLayer {
         $this->api('/me', 'GET');
 
         $this->sqlConnectionInfo = array("UID" => "rogan2929@lreuagtc6u", "pwd" => "Revelation19:11", "Database" => "swapperAGiJRLgvy", "LoginTimeout" => 30, "Encrypt" => 1);
+        $this->sqlServer = "tcp:lreuagtc6u.database.windows.net,1433";
     }
 
     /** Getters and Setters * */
@@ -94,11 +96,41 @@ class DataAccessLayer {
     }
 
     public function getHiddenGroups() {
-        
+        $uid = $this->getMe();
+
+        $conn = sqlsrv_connect($this->sqlServer, $this->sqlConnectionInfo);
+
+        if ($conn === false) {
+            die(print('Could not connect to database.'));
+        }
+
+        $sql = 'SELECT HiddenGroup FROM HiddenGroups WHERE UID=\'' . $uid . '\'';
+
+        // Execute the query.
+        $result = sqlsrv_query($conn, $sql);
+
+        $hiddenGroups = '';
+
+        while ($row = sqlsrv_fetch_array($result)) {
+            $hiddenGroups .= $row['HiddenGroup'] . ' ';
+        }
+
+        return $hiddenGroups;
     }
 
     public function hideGroup($gid) {
-        
+        $uid = $this->getMe();
+ 
+        $conn = sqlsrv_connect($this->sqlServer, $this->sqlConnectionInfo);
+
+        if ($conn === false) {
+            die(print('Could not connect to database.'));
+        }
+
+        $sql = 'INSERT INTO HiddenGroups (UID, HiddenGroup) VALUES (\'' . $uid . '\', \'' . $gid . '\')';
+
+        // Execute the query.
+        sqlsrv_query($conn, $sql);
     }
 
     // Post operation functions.
@@ -125,7 +157,7 @@ class DataAccessLayer {
         
     }
 
-    public function postComment($postId, $comment) {        
+    public function postComment($postId, $comment) {
         // Post the comment and get the response
         $id = $this->api('/' . $postId . '/comments', 'POST', array('message' => $comment));
 
@@ -271,6 +303,21 @@ class DataAccessLayer {
         }
     }
 
+    public function restoreGroups() {
+        $uid = $this->getMe();
+
+        $conn = sqlsrv_connect($this->sqlServer, $this->sqlConnectionInfo);
+
+        if ($conn === false) {
+            die(print('Could not connect to database.'));
+        }
+
+        $sql = 'DELETE FROM HiddenGroups WHERE UID=\'' . $uid . '\'';
+
+        // Execute the query.
+        sqlsrv_query($conn, $sql);
+    }
+
     public function searchPosts($search, $offset, $limit) {
         $posts = array();
 
@@ -385,7 +432,7 @@ class DataAccessLayer {
         if (!isset($limit)) {
             $limit = 50;        // Max batch size.
         }
-        
+
         // Slice and dice the array.
         $page = array_slice($posts, $offset, $limit);
 
@@ -412,7 +459,7 @@ class DataAccessLayer {
             $body = json_decode($response[$i]['body'], true);
             $result = array_merge($result, $this->processStreamQuery($body[0]['fql_result_set'], $body[1]['fql_result_set'], $body[2]['fql_result_set']));
         }
-        
+
         // If there are no posts to load, then insert an terminating post.
         if ($offset + $limit >= count($posts)) {
             $result[] = array('post_id' => 'terminator');
