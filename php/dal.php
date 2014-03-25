@@ -273,12 +273,16 @@ class DataAccessLayer {
         $startTime = time();
         $endTime = time() - 3600;
 
-        $query = 'SELECT post_id FROM stream WHERE source_id = ' . $this->gid . ' AND updated_time <= ' . $startTime . ' AND updated_time >= ' . $endTime . ' LIMIT 100';
-
-        $response = $this->api(array(
-            'method' => 'fql.query',
-            'query' => $query
-        ));
+//        $query = 'SELECT post_id FROM stream WHERE source_id = ' . $this->gid . ' AND updated_time <= ' . $startTime . ' AND updated_time >= ' . $endTime . ' LIMIT 100';
+//
+//        $response = $this->api(array(
+//            'method' => 'fql.query',
+//            'query' => $query
+//        ));
+        
+        $request = '/' . $this->gid . '/feed?fields=id&since=' . $endTime . '&until=' . $startTime . ' LIMIT 100';
+        
+        $response = $this->api($request);
 
         $count = count($response);
 
