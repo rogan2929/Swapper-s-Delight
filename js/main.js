@@ -453,7 +453,7 @@ var SwdPresenter = {
      */
     facebookPageInfoPoll: function() {
         FB.Canvas.getPageInfo(function(pageInfo) {
-            var scrollTop, offsetTop, clientHeight, offset, height, scrollPos;
+            var scrollTop, offsetTop, clientHeight, offset, height;
 
             scrollTop = parseInt(pageInfo.scrollTop);
             offsetTop = parseInt(pageInfo.offsetTop);
