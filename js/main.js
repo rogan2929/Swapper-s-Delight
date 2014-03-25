@@ -479,7 +479,7 @@ var SwdPresenter = {
                 }
 
                 SwdView.setFloatingPanelHeight(height);
-                SwdView.setFloatingOverlayHeight(height + clientHeight);
+                SwdView.setFloatingOverlayHeight(clientHeight);
 
                 // Change FB canvas size.
                 FB.Canvas.setSize({
