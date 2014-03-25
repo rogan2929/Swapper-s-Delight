@@ -1,13 +1,9 @@
 <?php
 
-require_once 'dat.php';
+require_once 'dal.php';
 
 $postId = $_POST['postId'];
 $comment = $_POST['comment'];
-
-
-echo $postId . "<br/>";
-echo $comment . "<br/>";
 
 $dal = new DataAccessLayer();
 
