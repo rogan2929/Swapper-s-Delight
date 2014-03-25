@@ -592,7 +592,7 @@ class DataAccessLayer {
     private function getPostType($post) {
         $postType = 'unknown';
 
-        // The logic below should catch everything.
+        // The logic below should catch everything. If it does, then we have for some reason picked up a post with no visible content.
         if (count($post['image_url']) > 0) {
             $postType = 'image';       // Image Post
         } else if (strlen($post['message']) > 0) {
