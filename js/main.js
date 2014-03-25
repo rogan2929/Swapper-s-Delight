@@ -432,9 +432,6 @@ var SwdPresenter = {
                                 setTimeout(function() {
                                     SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
 
-                                    // Set the main ajax overlay to be semi-transparent.
-                                    //SwdView.setMainOverlayTransparency();
-
                                     // Start with displaying the group selection panel.
                                     SwdView.toggleFloatingPanel('#select-group-panel', true, 'drop');
                                 }, 1000);
@@ -1040,7 +1037,7 @@ var SwdView = {
             top: Math.max(offset + 55, 0)
         }, 100);
 
-        $('.toolbar').animate({
+        $('.toolbar, .floating-overlay').animate({
             top: Math.max(offset, 0)
         }, 100);
 
@@ -1343,13 +1340,6 @@ var SwdView = {
         else {
             $('#post-button-like span:nth-child(2)').text('Like');
         }
-    },
-    /***
-     * Sets the main overlay to a semi-transparent state.
-     */
-    setMainOverlayTransparency: function() {
-        // Set the main ajax overlay to be semi-transparent.
-        $('#overlay-app-loading').addClass('semi-transparent');
     },
     /***
      * Displays a confirmation dialog (Yes/No) to the user.
