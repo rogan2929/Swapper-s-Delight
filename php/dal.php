@@ -628,8 +628,6 @@ class DataAccessLayer {
                 'batch' => json_encode($queries),
                 'include_headers' => false
             ));
-            
-            echo json_encode($response);
 
             for ($k = 0; $k < count($response); $k++) {
                 $body = json_decode($response[$k]['body'], true);
