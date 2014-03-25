@@ -164,8 +164,6 @@ class DataAccessLayer {
                 $posts[] = $this->stream[$i];
             }
         }
-        
-        echo json_encode($this->stream);
 
         return $this->getPostData($posts);
     }
@@ -583,11 +581,11 @@ class DataAccessLayer {
                     $likeInfo = $stream[$i]['likes']['data'][$j];
                     
                     if ($likeInfo['id'] == $uid) {
-                        $stream[$i]['user_likes]'] = 1;
+                        $stream[$i]['user_likes'] = 1;
                     }
                 }
                 
-                //unset($stream[$i]['likes']);
+                unset($stream[$i]['likes']);
             }
         }
 
