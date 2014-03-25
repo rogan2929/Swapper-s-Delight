@@ -583,7 +583,7 @@ class DataAccessLayer {
                     }
                 }
                 
-                unset($stream[$i]['likes']);
+                //unset($stream[$i]['likes']);
             }
         }
 
