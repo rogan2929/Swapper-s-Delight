@@ -871,10 +871,10 @@ a.link-title {
     background-size: cover;
     cursor: pointer;
     display: inline-block;
-    min-width: 185px;
-    min-height: 185px;
-    margin-right: 6px;
-    margin-bottom: 6px;
+    min-width: 181px;
+    min-height: 181px;
+    margin-right: 10px;
+    margin-bottom: 10px;
 }
 
 /*#post-image-container .post-image-tile .close-button {
