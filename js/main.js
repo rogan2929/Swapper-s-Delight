@@ -218,16 +218,34 @@ var SwdModel = {
         });
     },
     /***
-     * Refresh the cached FQL stream on the server.
-     * @param {type} gid
+     * Retrieve the latest comment counts for displayed posts.
+     * @param {type} postIds
      * @param {type} callbacks
      */
-    refreshStream: function(gid, callbacks) {
-        var url = '/php/refresh-stream.php?gid=' + gid;
-
+    refreshCommentCounts: function(postIds, callbacks) {
+        $.ajax({
+            type: 'POST',
+            url: '/php/refresh-comment-counts.php',
+            dataType: 'json',
+            data: {
+                'postIds': postIds
+            },
+            success: function(response) {
+                callbacks.success.call(SwdModel, response);
+            },
+            error: function(response) {
+                callbacks.error.call(SwdModel, response);
+            }
+        });
+    },
+    /***
+     * Refresh the cached FQL stream on the server.
+     * @param {type} callbacks
+     */
+    refreshStream: function(callbacks) {
         $.ajax({
             type: 'GET',
-            url: url,
+            url: '/php/refresh-stream.php',
             success: function(response) {
                 callbacks.success.call(SwdModel, response);
             },
@@ -287,36 +305,9 @@ var SwdPresenter = {
     currentlyLoading: false,
     selectedPost: null,
     search: null,
-    refreshStream: null,
+    refreshCommentCountInterval: null,
+    refreshStreamInterval: null,
     postOffset: 0,
-    /***
-     * Confirm Facebook Login Status.
-     * @param {type} callback
-     */
-    checkFBLoginStatus: function(callback) {
-        FB.getLoginStatus(function(response) {
-            // Check connection status, posting a login prompt if the user has disconnected.
-            // TODO: This is stub function that doesn't appear to be able to do much.
-            if (response.status !== 'connected') {
-//                SwdView.showMessage('Sorry, but your session has expired - automatically taking you back to the main page.');
-//
-//                // Send the user to the app's main url.
-//                window.location = window.location.href;
-//                window.location.reload();
-
-//                FB.login(function(response) {
-//                    if (response.status === 'connected') {
-//                        callback.call(SwdPresenter);
-//                    }
-//                }, {
-//                    scope: 'user_groups,user_likes,publish_stream,read_stream'
-//                });
-            }
-            else {
-                callback.call(SwdPresenter);
-            }
-        });
-    },
     /***
      * Top-level error handler function.
      * @param {type} error
@@ -515,14 +506,14 @@ var SwdPresenter = {
      */
     loadNewestPosts: function(refresh, offset) {
         // If there is already a timer function running, then clear it.
-        clearInterval(SwdPresenter.refreshStream);
+        clearInterval(SwdPresenter.refreshStreamInterval);
 
         // Get posts and then display them.
         SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, refresh, offset, {
             success: function(response) {
                 // Set a timer function to periodically refresh the server-side FQL stream.
-                SwdPresenter.refreshStream = setInterval(function() {
-                    SwdModel.refreshStream(SwdPresenter.selectedGroup.gid, {
+                SwdPresenter.refreshStreamInterval = setInterval(function() {
+                    SwdModel.refreshStream({
                         success: function(response) {
                         },
                         error: SwdPresenter.handleError
@@ -557,38 +548,35 @@ var SwdPresenter = {
      * @param {type} viewChanged
      */
     loadPosts: function(refresh, viewChanged) {
-        // Before calling anything, confirm login status.
-        SwdPresenter.checkFBLoginStatus(function() {
-            if (!SwdPresenter.currentlyLoading) {
-                SwdPresenter.currentlyLoading = true;
+        if (!SwdPresenter.currentlyLoading) {
+            SwdPresenter.currentlyLoading = true;
 
-                if (refresh || viewChanged) {
-                    SwdView.clearPosts();
-                    SwdPresenter.refreshFbCanvasSize();
+            if (refresh || viewChanged) {
+                SwdView.clearPosts();
+                SwdPresenter.refreshFbCanvasSize();
 
-                    // If the view changed or the page has refreshed, reset the post offset to 0.
-                    SwdPresenter.postOffset = 0;
-                }
-
-                SwdView.toggleElement('#overlay-loading-posts', true);
-                SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', true);
-                
-                switch (SwdPresenter.selectedView) {
-                    case SelectedView.group:
-                        SwdPresenter.loadNewestPosts(refresh, SwdPresenter.postOffset);
-                        break;
-                    case SelectedView.myposts:
-                        SwdPresenter.loadMyPosts(SwdPresenter.postOffset);
-                        break;
-                    case SelectedView.liked:
-                        SwdPresenter.loadLikedPosts(SwdPresenter.postOffset);
-                        break;
-                    case SelectedView.search:
-                        SwdPresenter.loadSearchPosts(SwdPresenter.postOffset);
-                        break;
-                }
+                // If the view changed or the page has refreshed, reset the post offset to 0.
+                SwdPresenter.postOffset = 0;
             }
-        });
+
+            SwdView.toggleElement('#overlay-loading-posts', true);
+            SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', true);
+
+            switch (SwdPresenter.selectedView) {
+                case SelectedView.group:
+                    SwdPresenter.loadNewestPosts(refresh, SwdPresenter.postOffset);
+                    break;
+                case SelectedView.myposts:
+                    SwdPresenter.loadMyPosts(SwdPresenter.postOffset);
+                    break;
+                case SelectedView.liked:
+                    SwdPresenter.loadLikedPosts(SwdPresenter.postOffset);
+                    break;
+                case SelectedView.search:
+                    SwdPresenter.loadSearchPosts(SwdPresenter.postOffset);
+                    break;
+            }
+        }
     },
     /***
      * Function to wrap up any kind of post loading.
@@ -715,15 +703,12 @@ var SwdPresenter = {
 
         SwdView.setLikePost(userLikes);
 
-        // Before calling anything, confirm login status.
-        SwdPresenter.checkFBLoginStatus(function() {
-            // Post the comment.
-            SwdModel.likePost(id, userLikes, {
-                success: function(response) {
-                    SwdPresenter.selectedPost.like_info.user_likes = userLikes;
-                },
-                error: SwdPresenter.handleError
-            });
+        // Post the comment.
+        SwdModel.likePost(id, userLikes, {
+            success: function(response) {
+                SwdPresenter.selectedPost.like_info.user_likes = userLikes;
+            },
+            error: SwdPresenter.handleError
         });
     },
     onClickPostButtonPm: function(e, args) {
@@ -747,29 +732,26 @@ var SwdPresenter = {
         // Prevent the event from bubbling up the DOM and immediately causing the displayed panel to close.
         e.stopPropagation();
 
-        // Before calling anything, confirm login status.
-        SwdPresenter.checkFBLoginStatus(function() {
-            SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
-            SwdView.toggleFloatingPanel('#post-details-panel', true);
-            SwdView.toggleToolbar('#post-details-toolbar', true);
+        SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
+        SwdView.toggleFloatingPanel('#post-details-panel', true);
+        SwdView.toggleToolbar('#post-details-toolbar', true);
 
-            SwdModel.getPostDetails(id, {
-                success: function(response) {
-                    post = response;
+        SwdModel.getPostDetails(id, {
+            success: function(response) {
+                post = response;
 
-                    if (post) {
-                        SwdPresenter.selectedPost = post;
-                        SwdView.setLikePost(false);
-                        SwdView.showPostDetails(post);
-                    }
-                    else {
-                        // TODO: Do a real error message.
-                        SwdPresenter.selectedPost = null;
-                        alert('Unable to display post. It was most likely deleted.');
-                    }
-                },
-                error: SwdPresenter.handleError
-            });
+                if (post) {
+                    SwdPresenter.selectedPost = post;
+                    SwdView.setLikePost(false);
+                    SwdView.showPostDetails(post);
+                }
+                else {
+                    // TODO: Do a real error message.
+                    SwdPresenter.selectedPost = null;
+                    alert('Unable to display post. It was most likely deleted.');
+                }
+            },
+            error: SwdPresenter.handleError
         });
     },
     onClickPostBlockLoadMore: function(e, args) {
@@ -839,19 +821,16 @@ var SwdPresenter = {
             id = SwdPresenter.selectedPost.post_id;
             comment = $('#post-comment-text').val();
 
-            // Before calling anything, confirm login status.
-            SwdPresenter.checkFBLoginStatus(function() {
-                // Show the ajax loading div.
-                SwdView.toggleAjaxLoadingDiv('#post-comment-wrapper', true);
+            // Show the ajax loading div.
+            SwdView.toggleAjaxLoadingDiv('#post-comment-wrapper', true);
 
-                // Post the comment.
-                SwdModel.postComment(id, comment, {
-                    success: function(response) {
-                        SwdView.addPostComment(response);
-                        SwdView.clearPostCommentText();
-                    },
-                    error: SwdPresenter.handleError
-                });
+            // Post the comment.
+            SwdModel.postComment(id, comment, {
+                success: function(response) {
+                    SwdView.addPostComment(response);
+                    SwdView.clearPostCommentText();
+                },
+                error: SwdPresenter.handleError
             });
         }
 
@@ -1087,8 +1066,7 @@ var SwdView = {
         tileImage = 'url(' + post.image_url[0] + ')';
 
         // Create the visible block.
-        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"><div class="visible-content" style="background-image: ' + tileImage + '"></div></div>');
-        //$(postBlock).addClass('post-block-image').css('background-image', 'url("' + post.image_url[0] + '")');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"><div class="visible-content" style="background-image: ' + tileImage + '"><div class="comment-count">' + post.comment_info.comment_count + '</div></div></div>');
 
         $(postBlock).addClass('post-block-image');
 
@@ -1097,7 +1075,7 @@ var SwdView = {
 
         timeStamp = new moment(new Date(post.created_time * 1000));
 
-        message = '<div class="wrapper hidden-content"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+        message = '<div class="wrapper hidden-content"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
         $(postBlock).append('<div class="post-block post-block-text hidden-block">' + message + '</div>');
 
@@ -1134,7 +1112,7 @@ var SwdView = {
 
         timeStamp = new moment(new Date(post.created_time * 1000));
 
-        message = '<div class="visible-content wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+        message = '<div class="visible-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
         $(postBlock).addClass('post-block-text').html(message).appendTo('#post-feed');
     },
@@ -1193,7 +1171,7 @@ var SwdView = {
         linkImage = 'url(' + post.link_data.media[0].src + ')';
 
         postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
-        description = '<div class="visible-content wrapper"><p class="content"><span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
+        description = '<div class="visible-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description + '</p></div>';
 
         $(postBlock).addClass('post-block-link').html(description);
 
@@ -1202,7 +1180,7 @@ var SwdView = {
 
         timeStamp = new moment(new Date(post.created_time * 1000));
 
-        message = '<div class="hidden-content wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+        message = '<div class="hidden-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
         $(postBlock).append('<div class="post-block post-block-text hidden-block">' + message + '</div>');
 
@@ -1221,7 +1199,7 @@ var SwdView = {
 
         timeStamp = new moment(new Date(post.created_time * 1000));
 
-        message = '<div class="visible-content wrapper"><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+        message = '<div class="visible-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
         $(postBlock).addClass('post-block-textlink').html(message);
 
@@ -1230,7 +1208,7 @@ var SwdView = {
         description = '<span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span><br/>' + post.link_data.description;
 
         // Create the link text block that resides below the visible block.
-        $(postBlock).append('<div class="post-block post-block-link hidden-block"><div class="hidden-content wrapper"><p class="content">' + description + '</p></div></div>');
+        $(postBlock).append('<div class="post-block post-block-link hidden-block"><div class="hidden-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content">' + description + '</p></div></div>');
 
         $(postBlock).appendTo('#post-feed');
     },

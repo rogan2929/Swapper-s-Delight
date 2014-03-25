@@ -298,6 +298,10 @@ class DataAccessLayer {
 
         return $post;
     }
+    
+    public function refreshCommentCounts($postIds) {
+        
+    }
 
     public function refreshStream() {
         if (isset($_SESSION['gid'])) {

@@ -455,14 +455,6 @@ a:visited {
     color: #f6f6f6;
 }
 
-/*.button:hover, 
-.menu-item:hover, 
-.post-block.post-block-text:hover,
-.post-block.post-block-link:hover,
-.post-block.post-block-textlink:hover {
-    background-color: #ccc;
-}*/
-
 .nav-button {
     display: block;
     height: 40px;
@@ -624,11 +616,28 @@ a:visited {
     margin: 3px;
     margin-bottom: -1px;
     cursor: pointer;
+    position: relative;
 /*    color: #f6f6f6;*/
 /*    background-image: url('/img/tile-background.png');*/
 }
 
+.post-block .comment-count {
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #4DB849;
+    color: #f6f6f6;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
+}
 
+.post-block .comment-count.updated {
+    background-color: #e35765;
+}
 
 .post-block .visible-content {
     background-size: cover;
