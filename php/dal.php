@@ -165,7 +165,7 @@ class DataAccessLayer {
             }
         }
 
-        return $this->getPostData(array_slice($posts, $offset, $limit));
+        return $this->getPostData($posts, $offset, $limit);
     }
 
     public function getMe() {
@@ -183,7 +183,7 @@ class DataAccessLayer {
             }
         }
 
-        return $this->getPostData(array_slice($posts, $offset, $limit));
+        return $this->getPostData($posts, $offset, $limit);
     }
 
     public function getNewPosts($refresh, $offset, $limit) {
@@ -192,7 +192,7 @@ class DataAccessLayer {
             $this->fetchStream();
         }
 
-        return $this->getPostData(array_slice($this->stream, $offset, $limit));
+        return $this->getPostData($this->stream, $offset, $limit);
     }
 
     public function getPostDetails($postId) {
@@ -281,7 +281,7 @@ class DataAccessLayer {
             }
         }
 
-        return $this->getPostData(array_slice($posts, $offset, $limit));
+        return $this->getPostData($posts, $offset, $limit);
     }
 
     /** Private Methods * */
@@ -378,13 +378,16 @@ class DataAccessLayer {
      * Retrieve additional data for the posts in the provided array.
      */
 
-    private function getPostData($posts, $limit) {
+    private function getPostData($posts, $offset, $limit) {
         $queries = array();
         $result = array();
 
         if (!isset($limit)) {
             $limit = 50;        // Max batch size.
         }
+        
+        // Slice and dice the array.
+        $posts = array_slice($posts, $offset, $limit);
 
         // Build a multiquery for each post in the provided array.
         for ($i = 0; $i < count($posts) && $i < $limit; $i++) {
@@ -411,7 +414,7 @@ class DataAccessLayer {
         }
         
         // If there are no posts to load, then insert an terminating post.
-        if (count($posts) < $limit) {
+        if ($offset + $limit >= count($posts)) {
             $result[] = array('post_id' => 'terminator');
         }
 
