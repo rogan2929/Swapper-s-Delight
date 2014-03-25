@@ -1058,6 +1058,7 @@ div.right-toolbar-button {
     margin-top: 52px;
     position: relative;
     min-height: 1500px;
+    padding-bottom: 25px;
 }
 
 #left-rail {

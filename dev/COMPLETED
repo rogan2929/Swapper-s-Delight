@@ -9,3 +9,4 @@ Find ad provider and place their ads.
 Fix unlike post. (Issue "DELETE" to /OBJECT_ID/likes.)
 Show or hide groups that the user chooses. Can either be saved locally (per computer) or in the DB.
 Multiple image viewing support.
+Implement Search Post functionality, by FB user and by keyword.
