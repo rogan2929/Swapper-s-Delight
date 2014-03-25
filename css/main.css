@@ -616,6 +616,7 @@ a:visited {
     margin: 3px;
     margin-bottom: -1px;
     cursor: pointer;
+    position: relative;
 /*    color: #f6f6f6;*/
 /*    background-image: url('/img/tile-background.png');*/
 }
