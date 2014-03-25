@@ -933,6 +933,9 @@ a.link-title {
     right: 0;
     top: 0;
     bottom: 0;
+}
+
+#overlay-app-loading {
     background-color: white;
 }
 
