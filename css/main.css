@@ -624,11 +624,14 @@ a:visited {
 .post-block .comment-count {
     height: 30px;
     width: 30px;
+    line-height: 30px;
     position: absolute;
     top: 5px;
     right: 5px;
-    background-color: #e35765;
+    background-color: #4DB849;
     color: #f6f6f6;
+    font-weight: bold;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
 }
 
 .post-block .visible-content {
