@@ -170,7 +170,7 @@ class DataAccessLayer {
             }
         }
         
-        return $posts;
+        return $this->getPostData($posts);
     }
 
     public function getNewPosts($refresh, $offset, $limit) {
