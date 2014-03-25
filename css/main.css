@@ -455,14 +455,6 @@ a:visited {
     color: #f6f6f6;
 }
 
-/*.button:hover, 
-.menu-item:hover, 
-.post-block.post-block-text:hover,
-.post-block.post-block-link:hover,
-.post-block.post-block-textlink:hover {
-    background-color: #ccc;
-}*/
-
 .nav-button {
     display: block;
     height: 40px;
@@ -628,7 +620,15 @@ a:visited {
 /*    background-image: url('/img/tile-background.png');*/
 }
 
-
+.post-block .comment-count {
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #e35765;
+    color: #f6f6f6;
+}
 
 .post-block .visible-content {
     background-size: cover;

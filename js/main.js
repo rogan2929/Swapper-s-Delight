@@ -1087,7 +1087,7 @@ var SwdView = {
         tileImage = 'url(' + post.image_url[0] + ')';
 
         // Create the visible block.
-        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"><div class="visible-content" style="background-image: ' + tileImage + '"></div></div>');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"><div class="comment-count">' + post.comment_info.comment_count + '</div><div class="visible-content" style="background-image: ' + tileImage + '"></div></div>');
         //$(postBlock).addClass('post-block-image').css('background-image', 'url("' + post.image_url[0] + '")');
 
         $(postBlock).addClass('post-block-image');
