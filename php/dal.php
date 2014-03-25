@@ -156,20 +156,33 @@ class DataAccessLayer {
     // Stream operation functions.
 
     public function getLikedPosts() {
-        
+        $posts = array();
+
+        // Look through the cached stream for liked posts.
+        for ($i = 0; $i < count($this->stream); $i++) {
+            if ($this->stream[$i]['user_likes'] == 1) {
+                $posts[] = $this->stream[$i];
+            }
+        }
+
+        return $this->getPostData($posts);
+    }
+
+    public function getMe() {
+        return $this->api('/me')['id'];
     }
 
     public function getMyPosts() {
         $uid = $this->api('/me')['id'];
         $posts = array();
-        
+
         // Look through the cached stream, match by uid => actor_id
         for ($i = 0; $i < count($this->stream); $i++) {
             if ($this->stream[$i]['actor_id'] == $uid) {
                 $posts[] = $this->stream[$i];
             }
         }
-        
+
         return $this->getPostData($posts);
     }
 
@@ -515,43 +528,14 @@ class DataAccessLayer {
 
         $stream = array();
 
-        // Construct the FB query request
-//        $queries = array();
-        // Build a multiquery for each post in the provided array.
-//        for ($i = 0; $i < 10; $i++) {
-//            $multiqueries = array();
-//
-//            for ($j = 0; $j < 30; $j++) {
-//                $multiqueries['query_' . $j] = 'SELECT post_id,actor_id,message,like_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
-//
-//                $windowStart -= $windowSize;
-//                $windowEnd -= $windowSize;
-//            }
-//
-//            $queries[] = array(
-//                'method' => 'POST',
-//                'relative_url' => 'method/fql.multiquery?queries=' . json_encode($multiqueries)
-//            );
-//        }
-        // Build a multiquery for each post in the provided array.
-//        for ($i = 0; $i < 50; $i++) {
-//            $query = 'SELECT post_id,actor_id,message,like_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
-//
-//            $windowStart -= $windowSize;
-//            $windowEnd -= $windowSize;
-//
-//            $queries[] = array(
-//                'method' => 'POST',
-//                'relative_url' => 'method/fql.query?query=' . urlencode($query)
-//            );
-//        }
-        // 557832747592865/feed?fields=id,message,from&limit=5000&since=1395619933&until=xxxx
+        $uid = $this->getMe();
 
-        for ($i = 0; $i < 2; $i++) {
+        // Pull the feed for stream data.
+        for ($i = 0; $i < 5; $i++) {
             $queries = array();
 
             for ($j = 0; $j < 50; $j++) {
-                $query = '/' . $this->gid . '/feed?fields=id,message,from&limit=5000&since=' . $windowEnd . '&until=' . $windowStart;
+                $query = '/' . $this->gid . '/feed?fields=id,message,from,likes&limit=5000&since=' . $windowEnd . '&until=' . $windowStart;
 
                 $windowStart -= $windowSize;
                 $windowEnd -= $windowSize;
@@ -577,13 +561,28 @@ class DataAccessLayer {
         // Shape the stream to make it look like it came from an FQL query.
         // id => post_id
         // from['id'] => actor_id
+        // likes['data'] => user_likes
 
         for ($i = 0; $i < count($stream); $i++) {
             $stream[$i]['post_id'] = $stream[$i]['id'];
             unset($stream[$i]['id']);
 
             $stream[$i]['actor_id'] = $stream[$i]['from']['id'];
-            unset($stream[$i]['from']['id']);
+            unset($stream[$i]['from']);
+            
+            $stream[$i]['user_likes'] = 0;
+
+            if (isset($stream[$i]['likes']) && isset($stream[$i]['likes']['data'])) {
+                for ($j = 0; $j < count($stream[$i]['likes']['data']); $j++) {
+                    $likeInfo = $stream[$i]['likes']['data'][$j];
+                    
+                    if ($likeInfo['id'] == $uid) {
+                        $stream[$i]['user_likes]'] = 1;
+                    }
+                }
+                
+                unset($stream[$i]['likes']);
+            }
         }
 
         return $stream;
