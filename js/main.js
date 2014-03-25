@@ -478,7 +478,8 @@ var SwdPresenter = {
                     height = clientHeight - offsetTop - 10 - 42;
                 }
 
-                SwdView.setFloatingHeight(height);
+                SwdView.setFloatingPanelHeight(height);
+                SwdView.setFloatingOverlayHeight(height + clientHeight);
 
                 // Change FB canvas size.
                 FB.Canvas.setSize({
@@ -1048,11 +1049,18 @@ var SwdView = {
         }, 100);
     },
     /***
-     * Calculate the height of all floating panels, based on how large the FB canvas is.
+     * Calculate the height of all floating panels.
      * @param {type} height
      */
-    setFloatingHeight: function(height) {
-        $('.floating-panel, .floating-overlay').height(height);
+    setFloatingPanelHeight: function(height) {
+        $('.floating-panel').height(height);
+    },
+    /***
+     * Calculate the height of all floating overlays.
+     * @param {type} height
+     */
+    setFloatingOverlayHeight: function(height) {
+        $('.floating-overlay').height(height);
     },
     /***
      * Changes the text shown in the "Select a Group" button.
