@@ -49,7 +49,7 @@ var SwdModel = {
      * Get posts in the group that are liked.
      * @param {type} callbacks
      */
-    getLikedPosts: function(gid, callbacks) {
+    getLikedPosts: function(callbacks) {
         $.ajax({
             type: 'GET',
             url: '/php/liked-posts.php',
