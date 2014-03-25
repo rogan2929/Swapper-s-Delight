@@ -251,12 +251,11 @@ var SwdModel = {
     },
     /***
      * Searches within a group's post.
-     * @param {type} gid
      * @param {type} search
      * @param {type} callbacks
      */
-    searchPosts: function(gid, search, callbacks) {
-        var url = '/php/search-posts.php?gid=' + gid + '&search=' + encodeURIComponent(search);
+    searchPosts: function(search, callbacks) {
+        var url = '/php/search-posts.php?search=' + encodeURIComponent(search);
 
         $.ajax({
             type: 'GET',
@@ -540,7 +539,7 @@ var SwdPresenter = {
         SwdView.blurControl('#main-search');
 
         // Get posts and then display them.
-        SwdModel.searchPosts(SwdPresenter.selectedGroup.gid, SwdPresenter.search, {
+        SwdModel.searchPosts(SwdPresenter.search, {
             success: function(response) {
                 SwdPresenter.loadPostsComplete(response);
             },

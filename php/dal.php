@@ -209,7 +209,16 @@ class DataAccessLayer {
     }
 
     public function searchPosts($search) {
-        
+        $posts = array();
+
+        // Look through the cached stream for liked posts.
+        for ($i = 0; $i < count($this->stream); $i++) {
+            if (stripos($this->stream[$i]['message'], $search) === false) {
+                $posts[] = $this->stream[$i];
+            }
+        }
+
+        return $this->getPostData($posts);
     }
 
     /** Private Methods * */
@@ -277,9 +286,9 @@ class DataAccessLayer {
 //            'method' => 'fql.query',
 //            'query' => $query
 //        ));
-        
+
         $request = '/' . $this->gid . '/feed?fields=id&since=' . $endTime . '&until=' . $startTime . ' LIMIT 100';
-        
+
         $response = $this->api($request);
 
         $count = count($response);
@@ -573,18 +582,18 @@ class DataAccessLayer {
 
             $stream[$i]['actor_id'] = $stream[$i]['from']['id'];
             unset($stream[$i]['from']);
-            
+
             $stream[$i]['user_likes'] = 0;
 
             if (isset($stream[$i]['likes']) && isset($stream[$i]['likes']['data'])) {
                 for ($j = 0; $j < count($stream[$i]['likes']['data']); $j++) {
                     $likeInfo = $stream[$i]['likes']['data'][$j];
-                    
+
                     if ($likeInfo['id'] == $uid) {
                         $stream[$i]['user_likes'] = 1;
                     }
                 }
-                
+
                 unset($stream[$i]['likes']);
             }
         }
