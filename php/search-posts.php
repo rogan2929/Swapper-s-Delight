@@ -2,6 +2,7 @@
 
 require_once 'dal.php';
 
+$search = $_GET['search'];
 $offset = $_GET['offset'];
 $limit = $_GET['limit'];
 
