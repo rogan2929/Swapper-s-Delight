@@ -1431,6 +1431,8 @@ var SwdView = {
         else {
             $('#post-message-linkdata').hide();
         }
+        
+        $('.post-permalink').attr('href', post.permalink);
 
         // Populate the comments section.
         $('#post-comment-list').empty();
