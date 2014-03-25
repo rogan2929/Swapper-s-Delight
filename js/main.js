@@ -47,12 +47,16 @@ var SwdModel = {
     },
     /***
      * Get posts in the group that are liked.
+     * 
+     * @param {type} offset
      * @param {type} callbacks
      */
-    getLikedPosts: function(callbacks) {
+    getLikedPosts: function(offset, callbacks) {
+        var url = '/php/liked-posts.php?offset=' + offset + '&limit=50';
+
         $.ajax({
             type: 'GET',
-            url: '/php/liked-posts.php',
+            url: url,
             success: function(response) {
                 callbacks.success.call(SwdModel, JSON.parse(response));
             },
@@ -93,12 +97,16 @@ var SwdModel = {
     },
     /***
      * Get posts that are owned by the current user in the provided group. Go back 42 days.
+     * 
+     * @param {type} offset
      * @param {type} callbacks
      */
-    getMyPosts: function(callbacks) {
+    getMyPosts: function(offset, callbacks) {
+        var url = '/php/my-posts.php?offset=' + offset + '&limit=50';
+
         $.ajax({
             type: 'GET',
-            url: '/php/my-posts.php',
+            url: url,
             success: function(response) {
                 callbacks.success.call(SwdModel, JSON.parse(response));
             },
@@ -252,10 +260,11 @@ var SwdModel = {
     /***
      * Searches within a group's post.
      * @param {type} search
+     * @param {type} offset
      * @param {type} callbacks
      */
-    searchPosts: function(search, callbacks) {
-        var url = '/php/search-posts.php?search=' + encodeURIComponent(search);
+    searchPosts: function(search, offset, callbacks) {
+        var url = '/php/search-posts.php?search=' + encodeURIComponent(search) + '&offset=' + offset + '&limit=25';
 
         $.ajax({
             type: 'GET',
@@ -319,13 +328,13 @@ var SwdPresenter = {
      */
     handleError: function(error) {
         var message = JSON.parse(error.responseText);
-        
+
         switch (error.status) {
             case 401:
                 // Access denied, most likely from an expired access token.
                 // Get a new access token by simply refreshing the page.
                 SwdView.showMessage(message);
-                
+
                 // Send the user to the app's main url.
                 window.location = window.location.href;
                 break;
@@ -483,9 +492,11 @@ var SwdPresenter = {
     },
     /***
      * Load posts liked by user.
+     * 
+     * @param {type} offset
      */
-    loadLikedPosts: function() {
-        SwdModel.getLikedPosts({
+    loadLikedPosts: function(offset) {
+        SwdModel.getLikedPosts(offset, {
             success: function(response) {
                 SwdPresenter.loadPostsComplete(response);
             },
@@ -494,9 +505,11 @@ var SwdPresenter = {
     },
     /***
      * Load posts owned by user.
+     * 
+     * @param {type} offset
      */
-    loadMyPosts: function() {
-        SwdModel.getMyPosts({
+    loadMyPosts: function(offset) {
+        SwdModel.getMyPosts(offset, {
             success: function(response) {
                 SwdPresenter.loadPostsComplete(response);
             },
@@ -533,13 +546,15 @@ var SwdPresenter = {
     },
     /***
      * Load posts that match the given search term.
+     * 
+     * @param {type} offset
      */
-    loadSearchPosts: function() {
+    loadSearchPosts: function(offset) {
         SwdView.clearSelectedNav();
         SwdView.blurControl('#main-search');
 
         // Get posts and then display them.
-        SwdModel.searchPosts(SwdPresenter.search, {
+        SwdModel.searchPosts(SwdPresenter.search, offset, {
             success: function(response) {
                 SwdPresenter.loadPostsComplete(response);
             },
@@ -572,13 +587,13 @@ var SwdPresenter = {
                         SwdPresenter.loadNewestPosts(refresh, SwdPresenter.postOffset);
                         break;
                     case SelectedView.myposts:
-                        SwdPresenter.loadMyPosts();
+                        SwdPresenter.loadMyPosts(SwdPresenter.postOffset);
                         break;
                     case SelectedView.liked:
-                        SwdPresenter.loadLikedPosts();
+                        SwdPresenter.loadLikedPosts(SwdPresenter.postOffset);
                         break;
                     case SelectedView.search:
-                        SwdPresenter.loadSearchPosts();
+                        SwdPresenter.loadSearchPosts(SwdPresenter.postOffset);
                         break;
                 }
             }
@@ -591,7 +606,7 @@ var SwdPresenter = {
     loadPostsComplete: function(response) {
         if (response) {
             // If a response came through, then display the posts.
-            SwdView.populatePostBlocks(response, SwdPresenter.selectedView);
+            SwdView.populatePostBlocks(response);
         }
     },
     /***
@@ -1221,9 +1236,8 @@ var SwdView = {
     /***
      * Populate the main view with post blocks.
      * @param {type} posts
-     * @param {type} selectedView
      */
-    populatePostBlocks: function(posts, selectedView) {
+    populatePostBlocks: function(posts) {
         var i, post, adSpread;
 
         SwdView.toggleAjaxLoadingDiv('body', false);
@@ -1258,13 +1272,13 @@ var SwdView = {
             $('.post-block').not('.post-block.ad-div').click(SwdView.handlers['onClickPostBlock']);
 
             // Show the "Load More..." block if the group's main feed is being displayed.
-            if (selectedView === SelectedView.group) {
-                // Add the 'Load More...' post block.
-                $('<div class="button post-block load-more ui-widget"><div class="ajax-loading-div hidden"></div><div class="load-more-text">Load more...</div></div>').appendTo('#post-feed');
+//            if (selectedView === SelectedView.group) {
+            // Add the 'Load More...' post block.
+            $('<div class="button post-block load-more ui-widget"><div class="ajax-loading-div hidden"></div><div class="load-more-text">Load more...</div></div>').appendTo('#post-feed');
 
-                // Add an event handler for when it is clicked on.
-                $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
-            }
+            // Add an event handler for when it is clicked on.
+            $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
+//            }
 
             // Determine how far apart each ad-tile will be.
             adSpread = Math.max(Math.floor(SwdView.getPostBlockCount() / 4), 7);

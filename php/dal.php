@@ -155,7 +155,7 @@ class DataAccessLayer {
 
     // Stream operation functions.
 
-    public function getLikedPosts() {
+    public function getLikedPosts($offset, $limit) {
         $posts = array();
 
         // Look through the cached stream for liked posts.
@@ -165,14 +165,14 @@ class DataAccessLayer {
             }
         }
 
-        return $this->getPostData($posts);
+        return $this->getPostData(array_slice($posts, $offset, $limit));
     }
 
     public function getMe() {
         return $this->api('/me')['id'];
     }
 
-    public function getMyPosts() {
+    public function getMyPosts($offset, $limit) {
         $uid = $this->api('/me')['id'];
         $posts = array();
 
@@ -183,7 +183,7 @@ class DataAccessLayer {
             }
         }
 
-        return $this->getPostData($posts);
+        return $this->getPostData(array_slice($posts, $offset, $limit));
     }
 
     public function getNewPosts($refresh, $offset, $limit) {
@@ -208,7 +208,7 @@ class DataAccessLayer {
         }
     }
 
-    public function searchPosts($search) {
+    public function searchPosts($search, $offset, $limit) {
         $posts = array();
 
         // Look through the cached stream for liked posts.
@@ -218,7 +218,7 @@ class DataAccessLayer {
             }
         }
 
-        return $this->getPostData($posts);
+        return $this->getPostData(array_slice($posts, $offset, $limit));
     }
 
     /** Private Methods * */
@@ -280,13 +280,6 @@ class DataAccessLayer {
         $startTime = time();
         $endTime = time() - 3600;
 
-//        $query = 'SELECT post_id FROM stream WHERE source_id = ' . $this->gid . ' AND updated_time <= ' . $startTime . ' AND updated_time >= ' . $endTime . ' LIMIT 100';
-//
-//        $response = $this->api(array(
-//            'method' => 'fql.query',
-//            'query' => $query
-//        ));
-
         $request = '/' . $this->gid . '/feed?fields=id&since=' . $endTime . '&until=' . $startTime . ' LIMIT 100';
 
         $response = $this->api($request);
@@ -327,7 +320,7 @@ class DataAccessLayer {
         $result = array();
 
         if (!isset($limit)) {
-            $limit = count($posts);
+            $limit = 50;        // Max batch size.
         }
 
         // Build a multiquery for each post in the provided array.
@@ -341,7 +334,7 @@ class DataAccessLayer {
                 ))
             );
         }
-
+        
         // Execute a batch query.
         $response = $this->api('/', 'POST', array(
             'batch' => json_encode($queries),
