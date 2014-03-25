@@ -537,7 +537,7 @@ class DataAccessLayer {
         $uid = $this->getMe();
 
         // Pull the feed for stream data.
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 2; $i++) {
             $queries = array();
 
             for ($j = 0; $j < 50; $j++) {
