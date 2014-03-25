@@ -47,12 +47,12 @@ var SwdModel = {
     },
     /***
      * Get posts in the group that are liked.
-     * @param {type} uid
-     * @param {type} gid
+     * 
+     * @param {type} offset
      * @param {type} callbacks
      */
-    getLikedPosts: function(uid, gid, callbacks) {
-        var url = '/php/liked-posts.php?gid=' + gid + '&uid=' + uid;
+    getLikedPosts: function(offset, callbacks) {
+        var url = '/php/liked-posts.php?offset=' + offset + '&limit=50';
 
         $.ajax({
             type: 'GET',
@@ -81,12 +81,10 @@ var SwdModel = {
             }
         });
     },
-    getHiddenGroups: function(uid, callbacks) {
-        var url = '/php/hidden-groups.php?uid=' + uid;
-
+    getHiddenGroups: function(callbacks) {
         $.ajax({
             type: 'GET',
-            url: url,
+            url: '/php/hidden-groups.php',
             success: function(response) {
                 callbacks.success.call(SwdModel, response);
             },
@@ -97,12 +95,12 @@ var SwdModel = {
     },
     /***
      * Get posts that are owned by the current user in the provided group. Go back 42 days.
-     * @param {type} uid
-     * @param {type} gid
+     * 
+     * @param {type} offset
      * @param {type} callbacks
      */
-    getMyPosts: function(uid, gid, callbacks) {
-        var url = '/php/my-posts.php?gid=' + gid + '&uid=' + uid;
+    getMyPosts: function(offset, callbacks) {
+        var url = '/php/my-posts.php?offset=' + offset + '&limit=50';
 
         $.ajax({
             type: 'GET',
@@ -118,15 +116,12 @@ var SwdModel = {
     /***
      * AJAX call to FB group feed.
      * @param {type} gid Group id whose posts are to be retrieved.
-     * @param {type} updatedTime
+     * @param {type} refresh
+     * @param {type} offset
      * @param {type} callbacks Completed callback function.
      */
-    getNewestPosts: function(gid, updatedTime, callbacks) {
-        var url = '/php/new-posts.php?gid=' + gid;
-
-        if (updatedTime) {
-            url += '&updatedTime=' + updatedTime;
-        }
+    getNewestPosts: function(gid, refresh, offset, callbacks) {
+        var url = '/php/new-posts.php?gid=' + gid + '&refresh=' + (refresh | 0) + '&offset=' + offset + '&limit=25';
 
         $.ajax({
             type: 'GET',
@@ -223,12 +218,12 @@ var SwdModel = {
         });
     },
     /***
-     * Restores all groups to the selected groups list.
-     * @param {type} uid
+     * Refresh the cached FQL stream on the server.
+     * @param {type} gid
      * @param {type} callbacks
      */
-    restoreAllGroups: function(uid, callbacks) {
-        var url = '/php/restore-groups.php?uid=' + uid;
+    refreshStream: function(gid, callbacks) {
+        var url = '/php/refresh-stream.php?gid=' + gid;
 
         $.ajax({
             type: 'GET',
@@ -242,13 +237,29 @@ var SwdModel = {
         });
     },
     /***
-     * Searches within a group's post.
-     * @param {type} gid
-     * @param {type} search
+     * Restores all groups to the selected groups list.
      * @param {type} callbacks
      */
-    searchPosts: function(gid, search, callbacks) {
-        var url = '/php/search-posts.php?gid=' + gid + '&search=' + encodeURIComponent(search);
+    restoreAllGroups: function(callbacks) {
+        $.ajax({
+            type: 'GET',
+            url: '/php/restore-groups.php',
+            success: function(response) {
+                callbacks.success.call(SwdModel, response);
+            },
+            error: function(response) {
+                callbacks.error.call(SwdModel, response);
+            }
+        });
+    },
+    /***
+     * Searches within a group's post.
+     * @param {type} search
+     * @param {type} offset
+     * @param {type} callbacks
+     */
+    searchPosts: function(search, offset, callbacks) {
+        var url = '/php/search-posts.php?search=' + encodeURIComponent(search) + '&offset=' + offset + '&limit=25';
 
         $.ajax({
             type: 'GET',
@@ -267,7 +278,6 @@ var SwdModel = {
  */
 var SwdPresenter = {
     // Object variables and properties.
-    oldestPost: null,
     selectedView: SelectedView.group,
     selectedGroup: null,
     groups: null,
@@ -277,6 +287,8 @@ var SwdPresenter = {
     currentlyLoading: false,
     selectedPost: null,
     search: null,
+    refreshStream: null,
+    postOffset: 0,
     /***
      * Confirm Facebook Login Status.
      * @param {type} callback
@@ -310,17 +322,19 @@ var SwdPresenter = {
      * @param {type} error
      */
     handleError: function(error) {
+        var message = JSON.parse(error.responseText);
+
         switch (error.status) {
             case 401:
                 // Access denied, most likely from an expired access token.
                 // Get a new access token by simply refreshing the page.
-                SwdView.showMessage('Sorry, but your session has expired - automatically taking you back to the main page.');
+                SwdView.showMessage(message);
 
                 // Send the user to the app's main url.
                 window.location = window.location.href;
                 break;
             default:
-                SwdView.showError(error.responseText);
+                SwdView.showError(message);
         }
     },
     /**
@@ -379,7 +393,7 @@ var SwdPresenter = {
                     if (SwdPresenter.groups) {
 
                         // Retrieve the user's group preferences.
-                        SwdModel.getHiddenGroups(SwdPresenter.uid, {
+                        SwdModel.getHiddenGroups({
                             success: function(response) {
                                 SwdView.addGroupsToSelectPanel(SwdPresenter.groups, response);
 
@@ -411,10 +425,7 @@ var SwdPresenter = {
 
                                 // Sleep for 1 second, allowing facebookPageInfoPoll() to complete for the first time.
                                 setTimeout(function() {
-                                    SwdView.toggleAjaxLoadingDiv('body', false);
-
-                                    // Set the main ajax overlay to be semi-transparent.
-                                    SwdView.setMainOverlayTransparency();
+                                    SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
 
                                     // Start with displaying the group selection panel.
                                     SwdView.toggleFloatingPanel('#select-group-panel', true, 'drop');
@@ -434,7 +445,7 @@ var SwdPresenter = {
      */
     facebookPageInfoPoll: function() {
         FB.Canvas.getPageInfo(function(pageInfo) {
-            var scrollTop, offsetTop, clientHeight, offset, height, scrollPos;
+            var scrollTop, offsetTop, clientHeight, offset, height;
 
             scrollTop = parseInt(pageInfo.scrollTop);
             offsetTop = parseInt(pageInfo.offsetTop);
@@ -460,6 +471,7 @@ var SwdPresenter = {
                 }
 
                 SwdView.setFloatingPanelHeight(height);
+                SwdView.setFloatingOverlayHeight(clientHeight);
 
                 // Change FB canvas size.
                 FB.Canvas.setSize({
@@ -473,99 +485,106 @@ var SwdPresenter = {
     },
     /***
      * Load posts liked by user.
+     * 
+     * @param {type} offset
      */
-    loadLikedPosts: function() {
-        SwdModel.getLikedPosts(SwdPresenter.uid, SwdPresenter.selectedGroup.gid, {
+    loadLikedPosts: function(offset) {
+        SwdModel.getLikedPosts(offset, {
             success: function(response) {
-                SwdPresenter.loadPostsComplete(null, response);
+                SwdPresenter.loadPostsComplete(response);
             },
             error: SwdPresenter.handleError
         });
     },
     /***
      * Load posts owned by user.
+     * 
+     * @param {type} offset
      */
-    loadMyPosts: function() {
-        SwdModel.getMyPosts(SwdPresenter.uid, SwdPresenter.selectedGroup.gid, {
+    loadMyPosts: function(offset) {
+        SwdModel.getMyPosts(offset, {
             success: function(response) {
-                SwdPresenter.loadPostsComplete(null, response);
+                SwdPresenter.loadPostsComplete(response);
             },
             error: SwdPresenter.handleError
         });
     },
     /***
      * Load feed for the current group.
-     * @param {type} loadNextPage
-     * @param {type} updatedTime
+     * @param {type} refresh
      */
-    loadNewestPosts: function(loadNextPage, updatedTime) {
+    loadNewestPosts: function(refresh, offset) {
+        // If there is already a timer function running, then clear it.
+        clearInterval(SwdPresenter.refreshStream);
+
         // Get posts and then display them.
-        SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, updatedTime, {
+        SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, refresh, offset, {
             success: function(response) {
-                SwdPresenter.loadPostsComplete(loadNextPage, response);
+                // Set a timer function to periodically refresh the server-side FQL stream.
+                SwdPresenter.refreshStream = setInterval(function() {
+                    SwdModel.refreshStream(SwdPresenter.selectedGroup.gid, {
+                        success: function(response) {
+                        },
+                        error: SwdPresenter.handleError
+                    });
+                }, 600000);
+
+                SwdPresenter.loadPostsComplete(response);
             },
             error: SwdPresenter.handleError
         });
     },
     /***
      * Load posts that match the given search term.
+     * 
+     * @param {type} offset
      */
-    loadSearchPosts: function() {
+    loadSearchPosts: function(offset) {
         SwdView.clearSelectedNav();
         SwdView.blurControl('#main-search');
-        
+
         // Get posts and then display them.
-        SwdModel.searchPosts(SwdPresenter.selectedGroup.gid, SwdPresenter.search, {
+        SwdModel.searchPosts(SwdPresenter.search, offset, {
             success: function(response) {
-                SwdPresenter.loadPostsComplete(null, response);
+                SwdPresenter.loadPostsComplete(response);
             },
             error: SwdPresenter.handleError
         });
     },
     /***
      * High level post loading function.
-     * @param {type} loadNextPage
+     * @param {type} refresh
+     * @param {type} viewChanged
      */
-    loadPosts: function(loadNextPage) {
-        var updatedTime;
-
+    loadPosts: function(refresh, viewChanged) {
         // Before calling anything, confirm login status.
         SwdPresenter.checkFBLoginStatus(function() {
             if (!SwdPresenter.currentlyLoading) {
                 SwdPresenter.currentlyLoading = true;
 
-                if (loadNextPage && SwdPresenter.oldestPost) {
-                    updatedTime = SwdPresenter.oldestPost.updated_time;
-                }
-                else {
-                    // Reloading all posts.
-                    updatedTime = null;
+                if (refresh || viewChanged) {
                     SwdView.clearPosts();
                     SwdPresenter.refreshFbCanvasSize();
-                    SwdView.toggleAjaxLoadingDiv('body', true);
+
+                    // If the view changed or the page has refreshed, reset the post offset to 0.
+                    SwdPresenter.postOffset = 0;
                 }
 
+                SwdView.toggleElement('#overlay-loading-posts', true);
+                SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', true);
+                
                 switch (SwdPresenter.selectedView) {
                     case SelectedView.group:
-                        SwdPresenter.loadNewestPosts(loadNextPage, updatedTime);
+                        SwdPresenter.loadNewestPosts(refresh, SwdPresenter.postOffset);
                         break;
                     case SelectedView.myposts:
-                        if (!loadNextPage) {
-                            // This request is so intensive, that it's best to return everything at once, rather than implement paging.
-                            SwdPresenter.loadMyPosts();
-                        }
+                        SwdPresenter.loadMyPosts(SwdPresenter.postOffset);
                         break;
                     case SelectedView.liked:
-                        if (!loadNextPage) {
-                            // This request is so intensive, that it's best to return everything at once, rather than implement paging.
-                            SwdPresenter.loadLikedPosts();
-                        }
+                        SwdPresenter.loadLikedPosts(SwdPresenter.postOffset);
                         break;
                     case SelectedView.search:
-                        if (!loadNextPage) {
-                            // This request is so intensive, that it's best to return everything at once, rather than implement paging.
-                            SwdPresenter.loadSearchPosts();
-                        }
+                        SwdPresenter.loadSearchPosts(SwdPresenter.postOffset);
                         break;
                 }
             }
@@ -573,24 +592,15 @@ var SwdPresenter = {
     },
     /***
      * Function to wrap up any kind of post loading.
-     * @param {type} loadNextPage
      * @param {type} response
      */
-    loadPostsComplete: function(loadNextPage, response) {
-        if (!loadNextPage) {
-            // Clear previous results, unless loading a new page.
-            SwdPresenter.oldestPost = null;
-        }
-
+    loadPostsComplete: function(response) {
         if (response) {
+            // Update post offset.
+            SwdPresenter.postOffset += response.length;
+
             // If a response came through, then display the posts.
-            SwdPresenter.oldestPost = response[response.length - 1];
-            SwdView.populatePostBlocks(response, SwdPresenter.selectedView);
-        }
-        else
-        if (!loadNextPage) {
-            // Otherwise, clear the previous oldest post.
-            SwdPresenter.oldestPost = null;
+            SwdView.populatePostBlocks(response);
         }
     },
     /***
@@ -612,7 +622,7 @@ var SwdPresenter = {
     setSelectedGroup: function(group) {
         SwdPresenter.selectedGroup = group;
         SwdPresenter.selectedView = SelectedView.group;
-        SwdPresenter.loadPosts(false);
+        SwdPresenter.loadPosts(true);
         SwdView.setGroupButtonText(group.name);
         SwdView.setSelectedView('button-nav-group');
     },
@@ -630,7 +640,7 @@ var SwdPresenter = {
         SwdView.toggleFloatingPanel('#new-post-panel', true);
     },
     onClickButtonRefresh: function(e, args) {
-        SwdPresenter.loadPosts(false);
+        SwdPresenter.loadPosts(true);
     },
     onClickFloatingPanelCloseButton: function(e, args) {
         SwdView.toggleFloatingPanel('.floating-panel', false);
@@ -656,7 +666,11 @@ var SwdPresenter = {
         window.open(SwdPresenter.selectedPost.permalink, '_blank');
     },
     onClickNavButton: function(e, args) {
-        var id = $(e.currentTarget).attr('id');
+        var id, prevView;
+
+        id = $(e.currentTarget).attr('id');
+
+        prevView = SwdPresenter.selectedView;
 
         switch (id) {
             case 'button-nav-group':
@@ -670,7 +684,8 @@ var SwdPresenter = {
                 break;
         }
 
-        SwdPresenter.loadPosts(false);
+        // Signal for posts to be loaded.
+        SwdPresenter.loadPosts(false, true);
         SwdView.setSelectedView(id);
     },
     onClickPopupComment: function(e, args) {
@@ -759,7 +774,7 @@ var SwdPresenter = {
     },
     onClickPostBlockLoadMore: function(e, args) {
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', true);
-        SwdPresenter.loadPosts(true);
+        SwdPresenter.loadPosts(false);
     },
     onClickPostImageTile: function(e, args) {
         SwdView.toggleSelectedImage($(e.currentTarget))
@@ -803,7 +818,7 @@ var SwdPresenter = {
     },
     onClickRestoreGroupSelectionItems: function(e, args) {
         // Restore all group selection items.
-        SwdModel.restoreAllGroups(SwdPresenter.uid, {
+        SwdModel.restoreAllGroups({
             success: function() {
                 SwdView.showAllGroupSelectionItems();
             },
@@ -845,11 +860,11 @@ var SwdPresenter = {
     onKeyUpSearch: function(e, args) {
         if (e.which === 13) {
             e.preventDefault();
-            
+
             SwdPresenter.selectedView = SelectedView.search;
 
             SwdPresenter.search = $('#main-search').val();
-            SwdPresenter.loadPosts();
+            SwdPresenter.loadPosts(false, true);
         }
     },
     onWindowResize: function(e, args) {
@@ -1017,7 +1032,7 @@ var SwdView = {
             top: Math.max(offset + 55, 0)
         }, 100);
 
-        $('.toolbar').animate({
+        $('.toolbar, .floating-overlay').animate({
             top: Math.max(offset, 0)
         }, 100);
 
@@ -1026,11 +1041,18 @@ var SwdView = {
         }, 100);
     },
     /***
-     * Calculate the height of all floating panels, based on how large the FB canvas is.
+     * Calculate the height of all floating panels.
      * @param {type} height
      */
     setFloatingPanelHeight: function(height) {
         $('.floating-panel').height(height);
+    },
+    /***
+     * Calculate the height of all floating overlays.
+     * @param {type} height
+     */
+    setFloatingOverlayHeight: function(height) {
+        $('.floating-overlay').height(height);
     },
     /***
      * Changes the text shown in the "Select a Group" button.
@@ -1138,8 +1160,8 @@ var SwdView = {
         // Get image tile width & height, assuming a max of 375 for height.
         // Try for a square first.
         // Subtract 6 * colCount - 1 from total width.
-        tileWidth = ($('#post-image-container').width() - (6 * (colCount))) / post.image_url.length;
-        tileHeight = Math.min(tileWidth, $('#post-image-container').height());
+        tileWidth = ($('#post-image-container').width() - (10 * (colCount))) / post.image_url.length;
+        tileHeight = Math.min(tileWidth, $('#post-image-container').height()) - 14;
 
         // Create at tile for each image.
         for (i = 1; i <= post.image_url.length; i++) {
@@ -1215,12 +1237,12 @@ var SwdView = {
     /***
      * Populate the main view with post blocks.
      * @param {type} posts
-     * @param {type} selectedView
      */
-    populatePostBlocks: function(posts, selectedView) {
-        var i, post, adSpread;
+    populatePostBlocks: function(posts) {
+        var i, post, adSpread, terminatorReached;
 
-        SwdView.toggleAjaxLoadingDiv('body', false);
+        SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
+        SwdView.toggleElement('#overlay-loading-posts', false);
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', false);
 
         // If there is a feed to display, then display it.
@@ -1231,20 +1253,25 @@ var SwdView = {
             for (i = 0; i < posts.length; i++) {
                 post = posts[i];
 
-                // Switch based on post_type
-                switch (post.post_type) {
-                    case 'image':
-                        SwdView.createImagePostBlock(post);
-                        break;
-                    case 'text':
-                        SwdView.createTextPostBlock(post);
-                        break;
-                    case 'link':
-                        SwdView.createLinkPostBlock(post);
-                        break;
-                    case 'textlink':
-                        SwdView.createTextLinkPostBlock(post);
-                        break;
+                if (post.post_id !== 'terminator') {
+                    // Switch based on post_type
+                    switch (post.post_type) {
+                        case 'image':
+                            SwdView.createImagePostBlock(post);
+                            break;
+                        case 'text':
+                            SwdView.createTextPostBlock(post);
+                            break;
+                        case 'link':
+                            SwdView.createLinkPostBlock(post);
+                            break;
+                        case 'textlink':
+                            SwdView.createTextLinkPostBlock(post);
+                            break;
+                    }
+                }
+                else {
+                    terminatorReached = true;
                 }
             }
 
@@ -1252,8 +1279,8 @@ var SwdView = {
             $('.post-block').not('.post-block.ad-div').click(SwdView.handlers['onClickPostBlock']);
 
             // Show the "Load More..." block if the group's main feed is being displayed.
-            if (selectedView === SelectedView.group) {
-                // Add the 'Load More...' post block.
+            // Add the 'Load More...' post block.
+            if (!terminatorReached) {
                 $('<div class="button post-block load-more ui-widget"><div class="ajax-loading-div hidden"></div><div class="load-more-text">Load more...</div></div>').appendTo('#post-feed');
 
                 // Add an event handler for when it is clicked on.
@@ -1308,13 +1335,6 @@ var SwdView = {
         else {
             $('#post-button-like span:nth-child(2)').text('Like');
         }
-    },
-    /***
-     * Sets the main overlay to a semi-transparent state.
-     */
-    setMainOverlayTransparency: function() {
-        // Set the main ajax overlay to be semi-transparent.
-        $('#overlay-app-loading').addClass('semi-transparent');
     },
     /***
      * Displays a confirmation dialog (Yes/No) to the user.
@@ -1412,6 +1432,8 @@ var SwdView = {
             $('#post-message-linkdata').hide();
         }
 
+        $('.post-permalink').attr('href', post.permalink);
+
         // Populate the comments section.
         $('#post-comment-list').empty();
 
@@ -1476,12 +1498,26 @@ var SwdView = {
      */
     toggleAjaxLoadingDiv: function(parent, show) {
         if (show) {
-            //$(parent + ' .ajax-loading-div').fadeIn(100);
-            $(parent + ' .ajax-loading-div').show();
+            // Before showing a loading-div, make sure no others are visible.
+            if ($('.ajax-loading-div').filter(':visible').length === 0) {
+                $(parent + ' .ajax-loading-div').show();
+            }
         }
         else {
-            //$(parent + ' .ajax-loading-div').fadeOut(100);
             $(parent + ' .ajax-loading-div').hide();
+        }
+    },
+    /***
+     * Shows or hides an element with the given selector.
+     * @param {type} element
+     * @param {type} show
+     */
+    toggleElement: function(element, show) {
+        if (show) {
+            $(element).show();
+        }
+        else {
+            $(element).hide();
         }
     },
     /***

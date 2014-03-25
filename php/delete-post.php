@@ -1,8 +1,7 @@
 <?php
 
-require_once 'session.php';
+require_once 'dal.php';
 
 $postId = $_GET['postId'];
 
-// Delete the post with postId.
-$fbSession->api('/' . $postId, 'DELETE');
+(new DataAccessLayer())->deletePost($postId);

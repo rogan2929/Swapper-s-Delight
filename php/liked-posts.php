@@ -1,20 +1,10 @@
 <?php
 
-require_once 'session.php';
-require_once 'include.php';
+require_once 'dal.php';
 
-if (http_response_code() != 401) {
-    $gid = $_GET['gid'];
-    $uid = $_GET['uid'];
-    
-    // Create the constraints array.
-    $constraints = array();
+$offset = $_GET['offset'];
+$limit = $_GET['limit'];
 
-    $constraints[] = array(
-        'field' => 'like_info.user_likes',
-        'operator' => '=',
-        'value' => '1'
-    );
+$dal = new DataAccessLayer();
 
-    echo json_encode(executeBatchQuery($fbSession, $gid, $constraints));
-}
+echo json_encode($dal->getLikedPosts($offset, $limit));

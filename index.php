@@ -7,6 +7,7 @@ header('Expires: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
 header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 header('Cache-Control: no-cache, must-revalidate');
 header('Pragma: no-cache');
+
 ?>
 
 <!DOCTYPE html>
@@ -179,11 +180,6 @@ header('Pragma: no-cache');
                     <span>Logout</span>
                 </div>
             </div>
-
-            <!--            <div id='popup-comment' class='menu floating-panel-menu ui-widget'>
-                            <textarea id='popup-comment-text' placeholder='Type a comment and press [Enter] to post it.'></textarea>
-                            <div class='ajax-loading-div hidden'></div>
-                        </div>-->
         </div>
 
         <!--Ad Tiles that will be dynamically placed.-->
@@ -217,7 +213,9 @@ header('Pragma: no-cache');
             </div>
         </div>
 
-        <div id='overlay-app-loading' class='ajax-loading-div'></div>
+        <div id='overlay-loading-posts' class='floating-overlay'>
+            <div class='ajax-loading-div semi-transparent'></div>
+        </div>
         <div id='overlay' class='hidden'></div>
         <div id='post-block-mask' class='post-block ui-widget hidden'></div>
         <div id='selection-item-mask' class='button selection-item ui-widget hidden'></div>

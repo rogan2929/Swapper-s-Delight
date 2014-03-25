@@ -304,6 +304,10 @@ a:visited {
     z-index: 1000;
 }
 
+.transparent {
+    background: transparent;
+}
+
 .selection-list {
     list-style: none;
     padding: 0;
@@ -324,8 +328,8 @@ a:visited {
     display: table-cell !important;
     vertical-align: middle;
     text-align: center;
-    height: 136px;
-    width: 136px;
+    height: 100px;
+    width: 139px;
 }
 
 .selection-item-content > div {
@@ -852,7 +856,7 @@ a.link-title {
 #post-image-container .post-image-tile.expanded {
     position: absolute;
     background-size: contain;
-    margin-right: 0;
+    margin-right: 10px;
     left: 0;
     right: 0;
     top: 0;
@@ -867,10 +871,10 @@ a.link-title {
     background-size: cover;
     cursor: pointer;
     display: inline-block;
-    min-width: 185px;
-    min-height: 185px;
-    margin-right: 6px;
-    margin-bottom: 6px;
+    min-width: 181px;
+    min-height: 181px;
+    margin-right: 10px;
+    margin-bottom: 10px;
 }
 
 /*#post-image-container .post-image-tile .close-button {
@@ -905,6 +909,7 @@ a.link-title {
     position: absolute;
     top: 20px;
     bottom: 0;
+    margin-bottom: 0;
     padding: 10px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -922,12 +927,15 @@ a.link-title {
     left: 0;
 }
 
-#overlay-app-loading {
+#overlay-app-loading, .floating-overlay {
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
+}
+
+#overlay-app-loading {
     background-color: white;
 }
 
@@ -981,6 +989,7 @@ a.link-title {
 }
 
 .post-comment > .post-comment-text {
+    margin-top: 4px;
     margin-left: 5px;
     font-size: 0.95em;
 }
@@ -1048,7 +1057,7 @@ div.right-toolbar-button {
     margin-left: 170px;
     margin-top: 52px;
     position: relative;
-    min-height: 800px;
+    min-height: 1500px;
 }
 
 #left-rail {

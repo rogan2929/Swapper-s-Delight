@@ -1,19 +1,9 @@
 <?php
 
-require_once 'session.php';
+require_once 'dal.php';
 
-if (http_response_code() != 401) {
-    $postId = $_POST['postId'];
-    $userLikes = $_POST['userLikes'];
-    
-    if ($userLikes == true) {
-        // Like the post.
-        $fbSession->api('/' . $postId . '/likes', 'POST', array('user_likes' => true));
-    } 
-    else {
-        // Delete the post's like.
-        $fbSession->api('/' . $postId . '/likes', 'DELETE');
-    }
-    
-    echo $userLikes;
-}
+$postId = $_POST['postId'];
+$userLikes = $_POST['userLikes'];
+
+// Call the appropriate method in the newly instantiated DAL object.
+echo ((new DataAccessLayer())->likePost($postId, $userLikes));
