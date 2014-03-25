@@ -305,7 +305,7 @@ var SwdPresenter = {
     currentlyLoading: false,
     selectedPost: null,
     search: null,
-    refreshCommentCount: null,
+    refreshCommentCountInterval: null,
     refreshStreamInterval: null,
     postOffset: 0,
     /***
