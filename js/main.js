@@ -430,10 +430,10 @@ var SwdPresenter = {
 
                                 // Sleep for 1 second, allowing facebookPageInfoPoll() to complete for the first time.
                                 setTimeout(function() {
-                                    SwdView.toggleAjaxLoadingDiv('body', false);
+                                    SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
 
                                     // Set the main ajax overlay to be semi-transparent.
-                                    SwdView.setMainOverlayTransparency();
+                                    //SwdView.setMainOverlayTransparency();
 
                                     // Start with displaying the group selection panel.
                                     SwdView.toggleFloatingPanel('#select-group-panel', true, 'drop');
