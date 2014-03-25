@@ -1238,7 +1238,7 @@ var SwdView = {
      * @param {type} posts
      */
     populatePostBlocks: function(posts) {
-        var i, post, adSpread;
+        var i, post, adSpread, terminatorReached;
 
         SwdView.toggleAjaxLoadingDiv('body', false);
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', false);
@@ -1269,7 +1269,7 @@ var SwdView = {
                     }
                 }
                 else {
-                    alert('terminator reached.');
+                    terminatorReached = true;
                 }
             }
 
@@ -1277,13 +1277,13 @@ var SwdView = {
             $('.post-block').not('.post-block.ad-div').click(SwdView.handlers['onClickPostBlock']);
 
             // Show the "Load More..." block if the group's main feed is being displayed.
-//            if (selectedView === SelectedView.group) {
             // Add the 'Load More...' post block.
-            $('<div class="button post-block load-more ui-widget"><div class="ajax-loading-div hidden"></div><div class="load-more-text">Load more...</div></div>').appendTo('#post-feed');
+            if (!terminatorReached) {
+                $('<div class="button post-block load-more ui-widget"><div class="ajax-loading-div hidden"></div><div class="load-more-text">Load more...</div></div>').appendTo('#post-feed');
 
-            // Add an event handler for when it is clicked on.
-            $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
-//            }
+                // Add an event handler for when it is clicked on.
+                $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
+            }
 
             // Determine how far apart each ad-tile will be.
             adSpread = Math.max(Math.floor(SwdView.getPostBlockCount() / 4), 7);
