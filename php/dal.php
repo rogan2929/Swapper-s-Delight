@@ -409,6 +409,11 @@ class DataAccessLayer {
             $body = json_decode($response[$i]['body'], true);
             $result = array_merge($result, $this->processStreamQuery($body[0]['fql_result_set'], $body[1]['fql_result_set'], $body[2]['fql_result_set']));
         }
+        
+        // If there are no posts to load, then insert an terminating post.
+        if (count($posts) < $limit) {
+            $result[] = array('post_id' => 'terminator');
+        }
 
         return $result;
     }

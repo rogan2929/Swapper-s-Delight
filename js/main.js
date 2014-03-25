@@ -1251,20 +1251,25 @@ var SwdView = {
             for (i = 0; i < posts.length; i++) {
                 post = posts[i];
 
-                // Switch based on post_type
-                switch (post.post_type) {
-                    case 'image':
-                        SwdView.createImagePostBlock(post);
-                        break;
-                    case 'text':
-                        SwdView.createTextPostBlock(post);
-                        break;
-                    case 'link':
-                        SwdView.createLinkPostBlock(post);
-                        break;
-                    case 'textlink':
-                        SwdView.createTextLinkPostBlock(post);
-                        break;
+                if (post.post_id !== 'terminator') {
+                    // Switch based on post_type
+                    switch (post.post_type) {
+                        case 'image':
+                            SwdView.createImagePostBlock(post);
+                            break;
+                        case 'text':
+                            SwdView.createTextPostBlock(post);
+                            break;
+                        case 'link':
+                            SwdView.createLinkPostBlock(post);
+                            break;
+                        case 'textlink':
+                            SwdView.createTextLinkPostBlock(post);
+                            break;
+                    }
+                }
+                else {
+                    alert('terminator reached.');
                 }
             }
 
@@ -1431,7 +1436,7 @@ var SwdView = {
         else {
             $('#post-message-linkdata').hide();
         }
-        
+
         $('.post-permalink').attr('href', post.permalink);
 
         // Populate the comments section.
