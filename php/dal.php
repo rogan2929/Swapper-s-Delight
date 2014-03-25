@@ -164,8 +164,6 @@ class DataAccessLayer {
                 $posts[] = $this->stream[$i];
             }
         }
-        
-        echo json_encode($this->stream);
 
         return $this->getPostData($posts);
     }
