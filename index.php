@@ -214,6 +214,9 @@ header('Pragma: no-cache');
         </div>
 
         <div id='overlay-app-loading' class='ajax-loading-div'></div>
+        <div id='overlay-loading-posts' class='floating-panel hidden'>
+            <div class='ajax-loading-div'></div>
+        </div>
         <div id='overlay' class='hidden'></div>
         <div id='post-block-mask' class='post-block ui-widget hidden'></div>
         <div id='selection-item-mask' class='button selection-item ui-widget hidden'></div>
