@@ -304,6 +304,10 @@ a:visited {
     z-index: 1000;
 }
 
+.transparent {
+    background: transparent;
+}
+
 .selection-list {
     list-style: none;
     padding: 0;

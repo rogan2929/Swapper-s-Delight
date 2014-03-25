@@ -577,7 +577,7 @@ var SwdPresenter = {
                     SwdPresenter.postOffset = 0;
                 }
 
-                SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', true);
+                SwdView.toggleAjaxLoadingDiv('body', true);
                 
                 switch (SwdPresenter.selectedView) {
                     case SelectedView.group:
@@ -1240,7 +1240,7 @@ var SwdView = {
     populatePostBlocks: function(posts) {
         var i, post, adSpread, terminatorReached;
 
-        SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
+        SwdView.toggleAjaxLoadingDiv('body', false);
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', false);
 
         // If there is a feed to display, then display it.
