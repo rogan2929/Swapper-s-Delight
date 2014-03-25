@@ -151,7 +151,7 @@ class DataAccessLayer {
         // TODO: Update the cached post stream.
         for ($i = 0; $i < count($this->stream); $i++) {
             if ($this->stream[$i]['post_id'] == $postId) {
-                $this->stream[$i]['user_likes'] = (int)$userLikes;
+                $this->stream[$i]['user_likes'] = $userLikes;
             }
         }
 
