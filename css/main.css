@@ -631,7 +631,12 @@ a:visited {
     background-color: #4DB849;
     color: #f6f6f6;
     font-weight: bold;
+    text-align: center;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
+}
+
+.post-block .comment-count.updated {
+    background-color: #e35765;
 }
 
 .post-block .visible-content {

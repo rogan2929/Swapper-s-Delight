@@ -218,16 +218,34 @@ var SwdModel = {
         });
     },
     /***
-     * Refresh the cached FQL stream on the server.
-     * @param {type} gid
+     * Retrieve the latest comment counts for displayed posts.
+     * @param {type} postIds
      * @param {type} callbacks
      */
-    refreshStream: function(gid, callbacks) {
-        var url = '/php/refresh-stream.php?gid=' + gid;
-
+    refreshCommentCounts: function(postIds, callbacks) {
+        $.ajax({
+            type: 'POST',
+            url: '/php/refresh-comment-counts.php',
+            dataType: 'json',
+            data: {
+                'postIds': postIds
+            },
+            success: function(response) {
+                callbacks.success.call(SwdModel, response);
+            },
+            error: function(response) {
+                callbacks.error.call(SwdModel, response);
+            }
+        });
+    },
+    /***
+     * Refresh the cached FQL stream on the server.
+     * @param {type} callbacks
+     */
+    refreshStream: function(callbacks) {
         $.ajax({
             type: 'GET',
-            url: url,
+            url: '/php/refresh-stream.php',
             success: function(response) {
                 callbacks.success.call(SwdModel, response);
             },
@@ -287,7 +305,8 @@ var SwdPresenter = {
     currentlyLoading: false,
     selectedPost: null,
     search: null,
-    refreshStream: null,
+    refreshCommentCount: null,
+    refreshStreamInterval: null,
     postOffset: 0,
     /***
      * Confirm Facebook Login Status.
@@ -515,14 +534,14 @@ var SwdPresenter = {
      */
     loadNewestPosts: function(refresh, offset) {
         // If there is already a timer function running, then clear it.
-        clearInterval(SwdPresenter.refreshStream);
+        clearInterval(SwdPresenter.refreshStreamInterval);
 
         // Get posts and then display them.
         SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, refresh, offset, {
             success: function(response) {
                 // Set a timer function to periodically refresh the server-side FQL stream.
-                SwdPresenter.refreshStream = setInterval(function() {
-                    SwdModel.refreshStream(SwdPresenter.selectedGroup.gid, {
+                SwdPresenter.refreshStreamInterval = setInterval(function() {
+                    SwdModel.refreshStream({
                         success: function(response) {
                         },
                         error: SwdPresenter.handleError
@@ -572,7 +591,7 @@ var SwdPresenter = {
 
                 SwdView.toggleElement('#overlay-loading-posts', true);
                 SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', true);
-                
+
                 switch (SwdPresenter.selectedView) {
                     case SelectedView.group:
                         SwdPresenter.loadNewestPosts(refresh, SwdPresenter.postOffset);
