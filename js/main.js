@@ -100,7 +100,7 @@ var SwdModel = {
      * @param {type} callbacks
      */
     getMyPosts: function(offset, callbacks) {
-        var url = '/php/my-posts.php?offset=' + offset + '&limit=50';
+        var url = '/php/my-posts.php?offset=' + offset + '&limit=75';
 
         $.ajax({
             type: 'GET',

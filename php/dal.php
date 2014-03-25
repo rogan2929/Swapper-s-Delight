@@ -321,9 +321,9 @@ class DataAccessLayer {
     public function searchPosts($search, $offset, $limit) {
         $posts = array();
 
-        // Look through the cached stream for liked posts.
+        // Look through the cached stream for posts whose message or user matches the search term.
         for ($i = 0; $i < count($this->stream); $i++) {
-            if (stripos($this->stream[$i]['message'], $search) !== false) {
+            if (stripos($this->stream[$i]['message'], $search) !== false || stripos($this->stream[$i]['actor_name'], $search) !== false) {
                 $posts[] = $this->stream[$i];
             }
         }
@@ -692,6 +692,7 @@ class DataAccessLayer {
             unset($stream[$i]['id']);
 
             $stream[$i]['actor_id'] = $stream[$i]['from']['id'];
+            $stream[$i]['actor_name'] = $stream[$i]['from']['name'];
             unset($stream[$i]['from']);
 
             $stream[$i]['user_likes'] = 0;
