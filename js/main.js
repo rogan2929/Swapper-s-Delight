@@ -478,7 +478,7 @@ var SwdPresenter = {
                     height = clientHeight - offsetTop - 10 - 42;
                 }
 
-                SwdView.setFloatingPanelHeight(height);
+                SwdView.setFloatingHeight(height);
 
                 // Change FB canvas size.
                 FB.Canvas.setSize({
@@ -577,7 +577,8 @@ var SwdPresenter = {
                     SwdPresenter.postOffset = 0;
                 }
 
-                SwdView.toggleAjaxLoadingDiv('body', true);
+                SwdView.toggleElement('#overlay-loading-posts', true);
+                SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', true);
                 
                 switch (SwdPresenter.selectedView) {
                     case SelectedView.group:
@@ -1050,8 +1051,8 @@ var SwdView = {
      * Calculate the height of all floating panels, based on how large the FB canvas is.
      * @param {type} height
      */
-    setFloatingPanelHeight: function(height) {
-        $('.floating-panel').height(height);
+    setFloatingHeight: function(height) {
+        $('.floating-panel, .floating-overlay').height(height);
     },
     /***
      * Changes the text shown in the "Select a Group" button.
@@ -1240,7 +1241,8 @@ var SwdView = {
     populatePostBlocks: function(posts) {
         var i, post, adSpread, terminatorReached;
 
-        SwdView.toggleAjaxLoadingDiv('body', false);
+        SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
+        SwdView.toggleElement('#overlay-loading-posts', false);
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', false);
 
         // If there is a feed to display, then display it.
@@ -1510,6 +1512,19 @@ var SwdView = {
         }
         else {
             $(parent + ' .ajax-loading-div').hide();
+        }
+    },
+    /***
+     * Shows or hides an element with the given selector.
+     * @param {type} element
+     * @param {type} show
+     */
+    toggleElement: function(element, show) {
+        if (show) {
+            $(element).show();
+        }
+        else {
+            $(element).hide();
         }
     },
     /***

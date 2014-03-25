@@ -927,7 +927,7 @@ a.link-title {
     left: 0;
 }
 
-#overlay-app-loading {
+#overlay-app-loading, .floating-overlay {
     position: absolute;
     left: 0;
     right: 0;
