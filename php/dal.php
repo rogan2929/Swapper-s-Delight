@@ -126,6 +126,9 @@ class DataAccessLayer {
     }
 
     public function postComment($postId, $comment) {
+        echo $postId . "<br/>";
+        echo $comment . "<br/>";
+        
         // Post the comment and get the response
         $id = $this->api('/' . $postId . '/comments', 'POST', array('message' => $comment));
 
