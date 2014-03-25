@@ -96,16 +96,12 @@ var SwdModel = {
     },
     /***
      * Get posts that are owned by the current user in the provided group. Go back 42 days.
-     * @param {type} uid
-     * @param {type} gid
      * @param {type} callbacks
      */
-    getMyPosts: function(uid, gid, callbacks) {
-        var url = '/php/my-posts.php?gid=' + gid + '&uid=' + uid;
-
+    getMyPosts: function(callbacks) {
         $.ajax({
             type: 'GET',
-            url: url,
+            url: '/php/my-posts.php',
             success: function(response) {
                 callbacks.success.call(SwdModel, JSON.parse(response));
             },
@@ -504,7 +500,7 @@ var SwdPresenter = {
      * Load posts owned by user.
      */
     loadMyPosts: function() {
-        SwdModel.getMyPosts(SwdPresenter.uid, SwdPresenter.selectedGroup.gid, {
+        SwdModel.getMyPosts({
             success: function(response) {
                 SwdPresenter.loadPostsComplete(response);
             },

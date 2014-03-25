@@ -160,7 +160,17 @@ class DataAccessLayer {
     }
 
     public function getMyPosts() {
+        $uid = $this->api('/me')['id'];
+        $posts = array();
         
+        // Look through the cached stream, match by uid => actor_id
+        for ($i = 0; $i < count($this->stream); $i++) {
+            if ($this->stream[$i]['actor_id'] == $uid) {
+                $posts[] = $this->stream[$i];
+            }
+        }
+        
+        return $posts;
     }
 
     public function getNewPosts($refresh, $offset, $limit) {
@@ -177,8 +187,12 @@ class DataAccessLayer {
     }
 
     public function refreshStream() {
-        // Fetch the new stream.
-        $this->fetchStream();
+        if (isset($_SESSION['gid'])) {
+            $this->setGid($_SESSION['gid']);
+
+            // Fetch the new stream.
+            $this->fetchStream();
+        }
     }
 
     public function searchPosts($search) {
@@ -559,15 +573,15 @@ class DataAccessLayer {
                 $stream = array_merge($stream, $body['data']);
             }
         }
-        
+
         // Shape the stream to make it look like it came from an FQL query.
         // id => post_id
         // from['id'] => actor_id
-        
+
         for ($i = 0; $i < count($stream); $i++) {
             $stream[$i]['post_id'] = $stream[$i]['id'];
             unset($stream[$i]['id']);
-            
+
             $stream[$i]['actor_id'] = $stream[$i]['from']['id'];
             unset($stream[$i]['from']['id']);
         }
