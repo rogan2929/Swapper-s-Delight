@@ -1426,8 +1426,6 @@ var SwdView = {
         
         // Look for links and make them clickable.
         $('#linkdata-desc, #post-message-text').linkify();
-        
-        //$('#post-details-panel').linkify();
 
         // Wrap stuff up.
         SwdView.setLikePost(post.like_info.user_likes);
