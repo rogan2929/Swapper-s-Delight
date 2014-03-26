@@ -13,3 +13,4 @@ Allow creation of tags in posts and comments.
 Fix issue of trying to bring up a post that is no longer there.
 Replace dialogs with nicer ones.
 Dynamic comment count updating through AJAX.
+Prevent sessions from running forever. (Implement a refresh limit.)

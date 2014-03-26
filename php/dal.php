@@ -291,11 +291,6 @@ class DataAccessLayer {
             }
         }
 
-        // Query action links for the given post. (FQL's action_links column always returns null. Suspect a bug.)
-//        $actions = $this->api('/' . $postId . '?fields=actions');
-//
-//        $post['action_links'] = $actions['actions'];
-
         return $post;
     }
     
@@ -668,7 +663,7 @@ class DataAccessLayer {
             $queries = array();
 
             for ($j = 0; $j < 50; $j++) {
-                $query = '/' . $this->gid . '/feed?fields=id,message,from,likes&limit=5000&since=' . $windowEnd . '&until=' . $windowStart;
+                $query = '/' . $this->gid . '/feed?fields=id,message,from,likes,comments&limit=5000&since=' . $windowEnd . '&until=' . $windowStart;
 
                 $windowStart -= $windowSize;
                 $windowEnd -= $windowSize;
