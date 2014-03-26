@@ -598,9 +598,6 @@ var SwdPresenter = {
     refreshFbCanvasSize: function() {
         FB.Canvas.getPageInfo(function(pageInfo) {
             SwdPresenter.clientHeight = parseInt(pageInfo.clientHeight);
-            
-            var htmlHeight = $('html').height();
-            var postFeedHeight = $('#post-feed').height();
 
             FB.Canvas.setSize({
                 height: Math.max($('body').height(), SwdPresenter.clientHeight)
