@@ -1121,24 +1121,26 @@ var SwdView = {
      * @param {type} post
      */
     fillPostImageContainer: function(post) {
-        var i, imageTile, imageUrl, tileWidth, tileHeight, colCount;
+        var i, imageTile, imageUrl, tileWidth, tileHeight, colCount, marginRight;
 
         switch (post.image_url.length) {
             case 1:
                 colCount = 1;
+                marginRight = 0;
                 break;
             case 2:
                 colCount = 2;
+                marginRight = 10 * (colCount);
                 break;
             default:
                 colCount = 3;
+                marginRight = 10 * (colCount);
                 break;
         }
 
         // Get image tile width & height, assuming a max of 375 for height.
         // Try for a square first.
-        // Subtract 6 * colCount - 1 from total width.
-        tileWidth = ($('#post-image-container').width() - (10 * (colCount))) / post.image_url.length;
+        tileWidth = ($('#post-image-container').width() - marginRight) / post.image_url.length;
         tileHeight = Math.min(tileWidth, $('#post-image-container').height()) - 14;
 
         // Create at tile for each image.

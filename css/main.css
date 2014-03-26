@@ -283,12 +283,14 @@ a:visited {
 #details-left-column {
     width: 350px;
     padding-right: 8px;
+    margin-left: 10px;
 }
 
 #details-right-column {
     left: 378px;
     padding-right: 8px;
     overflow: hidden;
+    margin-right: 10px;
 }
 
 .ajax-loading-div {
@@ -847,7 +849,7 @@ a.link-title {
 }
 
 #post-image-container {
-    margin-top: 10px;
+    margin: 10px;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -865,7 +867,6 @@ a.link-title {
 #post-image-container .post-image-tile.expanded {
     position: absolute;
     background-size: contain;
-    margin-right: 10px;
     left: 0;
     right: 0;
     top: 0;
@@ -893,6 +894,7 @@ a.link-title {
 #post-image-container .post-image-tile.single {
     cursor: default;
     background-size: contain;
+    margin-right: 0;
 }
 
 /*#post-image-container .post-image-tile.expanded .close-button {
@@ -916,12 +918,13 @@ a.link-title {
 
 .floating-panel-content .column {
     position: absolute;
-    top: 20px;
+    top: 30px;
     bottom: 0;
-    margin-bottom: 0;
+    margin-bottom: 10px;
     padding: 10px;
     overflow-y: auto;
     overflow-x: hidden;
+    border: 1px solid #ccc;
 }
 
 .floating-panel-content .column > * {

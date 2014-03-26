@@ -291,11 +291,6 @@ class DataAccessLayer {
             }
         }
 
-        // Query action links for the given post. (FQL's action_links column always returns null. Suspect a bug.)
-//        $actions = $this->api('/' . $postId . '?fields=actions');
-//
-//        $post['action_links'] = $actions['actions'];
-
         return $post;
     }
     
