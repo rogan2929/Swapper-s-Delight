@@ -897,7 +897,7 @@ var SwdView = {
         timeStamp = new moment(new Date(comment.time * 1000));
 
         commentDiv = $('<div class="post-comment"><div><a href="' + comment.user.profile_url + '" target="_blank">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><div class="timestamp">' + timeStamp.calendar() + '</div></div><div class="post-comment-text">' + comment.text + '</div></div>');
-        $(commentDiv).hide().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
+        $(commentDiv).hide().linkify().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
     },
     /**
      * Init function for SwdView.
