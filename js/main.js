@@ -603,7 +603,7 @@ var SwdPresenter = {
             var postFeedHeight = $('#post-feed').height();
 
             FB.Canvas.setSize({
-                height: Math.max($('html').height(), SwdPresenter.clientHeight)
+                height: Math.max($('html').height(), 1500)
             });
         });
     },
