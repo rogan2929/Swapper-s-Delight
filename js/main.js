@@ -515,10 +515,11 @@ var SwdPresenter = {
                 SwdPresenter.refreshStreamInterval = setInterval(function() {
                     SwdModel.refreshStream({
                         success: function(response) {
+                            // TODO: Trigger a view update.
                         },
                         error: SwdPresenter.handleError
                     });
-                }, 600000);
+                }, 300000);
 
                 SwdPresenter.loadPostsComplete(response);
             },
