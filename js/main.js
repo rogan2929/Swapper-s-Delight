@@ -1422,6 +1422,9 @@ var SwdView = {
                 SwdView.addPostComment(post.comments[i]);
             }
         }
+        
+        // Look for links and make them clickable.
+        $('#post-details-panel').linkify();
 
         // Wrap stuff up.
         SwdView.setLikePost(post.like_info.user_likes);
