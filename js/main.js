@@ -1425,7 +1425,7 @@ var SwdView = {
         }
         
         // Look for links and make them clickable.
-        $('#post-message-linkdata').linkify();
+        //$('#post-message-linkdata').linkify();
         $('#post-message-text').linkify();
         
         //$('#post-details-panel').linkify();
