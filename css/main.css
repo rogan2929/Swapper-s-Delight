@@ -22,7 +22,6 @@ html {
     font-size: 0.80em;
     line-height: 1.4;
     overflow: hidden;
-    min-height: 1500px;
     /*    min-height: 800px;*/
 }
 
@@ -1073,6 +1072,7 @@ div.right-toolbar-button {
     margin-top: 52px;
     position: relative;
     padding-bottom: 25px;
+    min-height: 1500px;
 }
 
 #left-rail {
