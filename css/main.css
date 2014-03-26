@@ -756,6 +756,10 @@ a:visited {
     display: block;
 }
 
+.post-block .link-title {
+    margin-bottom: 6px;
+}
+
 a.link-title {
     color: #105cb6;
     display: block;
