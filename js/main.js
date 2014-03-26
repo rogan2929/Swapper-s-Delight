@@ -466,7 +466,7 @@ var SwdPresenter = {
 
                 // Change FB canvas size.
                 FB.Canvas.setSize({
-                    height: Math.max($('html').height(), clientHeight)
+                    height: Math.max($('body').height(), clientHeight)
                 });
             }
 
@@ -600,7 +600,7 @@ var SwdPresenter = {
             SwdPresenter.clientHeight = parseInt(pageInfo.clientHeight);
 
             FB.Canvas.setSize({
-                height: Math.max($('html').height(), SwdPresenter.clientHeight)
+                height: Math.max($('body').height(), SwdPresenter.clientHeight)
             });
         });
     },
