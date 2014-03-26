@@ -650,19 +650,43 @@ class DataAccessLayer {
      */
 
     private function queryStream() {
-        $windowSize = $this->getOptimalWindowSize();
+        $uid = $this->getMe();
+        
         $windowStart = time();
+        $windowSize = $this->getOptimalWindowSize();
+        
+        // Execute a batch request against the group's feed.
+        $stream = $this->getFeedData($uid, $windowStart, time(), 50, 2);
+        
+        // Update the $windowStart time to reflect how many times $windowSize has been subtracted from $windowStart.
+        $windowStart = $windowStart - ($windowSize * 50 * 2);
+        
+        // Execute a second request to pick up posts that are even older, but with a larger window size.
+        $stream = array_merge($stream, $this->getFeedData($uid, 12 * 3600, $windowStart, 10));
+        
+        return $stream;
+    }
+    
+    /**
+     * Execute a batch request against the selected group's feed.
+     * 
+     * @param type $uid
+     * @param type $windowSize
+     * @param type $windowStart
+     * @param type $batchSize
+     * @param type $iterations
+     * @return array
+     */
+    private function getFeedData($uid, $windowSize, $windowStart, $batchSize, $iterations = 1) {
         $windowEnd = $windowStart - $windowSize;
 
         $stream = array();
 
-        $uid = $this->getMe();
-
         // Pull the feed for stream data.
-        for ($i = 0; $i < 2; $i++) {
+        for ($i = 0; $i < $iterations; $i++) {
             $queries = array();
 
-            for ($j = 0; $j < 50; $j++) {
+            for ($j = 0; $j < $batchSize; $j++) {
                 $query = '/' . $this->gid . '/feed?fields=id,message,from,likes,comments&limit=5000&since=' . $windowEnd . '&until=' . $windowStart;
 
                 $windowStart -= $windowSize;
@@ -726,5 +750,4 @@ class DataAccessLayer {
             sleep(3);
         }
     }
-
 }
