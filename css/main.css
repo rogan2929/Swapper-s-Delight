@@ -1131,10 +1131,21 @@ div.login-div {
     margin-bottom: 0;
 }
 
+.dialog-box .message .message-icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 305px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 .dialog-box .message .message-text {
     top: 0;
     bottom: 0;
-    left: 40px;
+    left: 100px;
     right: 0;
     position: absolute;
 }
@@ -1143,8 +1154,8 @@ div.login-div {
     
 }
 
-#popup-info-message {
-    
+#popup-info-message .message-icon {
+    background-image: url('/img/info.png');
 }
 
 #popup-confirm-message {
