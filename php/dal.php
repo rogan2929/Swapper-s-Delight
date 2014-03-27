@@ -250,6 +250,7 @@ class DataAccessLayer {
         // Check to ensure that post data was actually returned.
         if (count($response['data']) == 0) {
             $e = new Exception('Post data was not found. It may have been deleted.');
+            echo count($response['data']) . "<br/>";
             echo $e->getMessage();
             throw $e;
         }
