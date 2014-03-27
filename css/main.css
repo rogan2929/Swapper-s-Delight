@@ -1091,7 +1091,7 @@ div.login-div {
     margin-top: -2px;
 }
 
-.ui-widget.dialog-box {
+.floating-panel-content.dialog-box {
     border: 1px solid #ccc;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
     position: absolute;
