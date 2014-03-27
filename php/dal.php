@@ -248,7 +248,7 @@ class DataAccessLayer {
         ));
         
         // Check to ensure that post data was actually returned.
-        if (!isset($response[0]['data']['name'])) {
+        if (!isset($response[0]['data']['fql_result_set'][0])) {
             $e = new Exception('Sorry, but this post couldn\'t be loaded. It may have been deleted.');
             echo $e->getMessage();
             throw $e;
