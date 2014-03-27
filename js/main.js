@@ -746,13 +746,12 @@ var SwdPresenter = {
                     SwdView.setLikePost(false);
                     SwdView.showPostDetails(post);
                 }
-                else {
-                    // TODO: Do a real error message.
-                    SwdPresenter.selectedPost = null;
-                    alert('Unable to display post. It was most likely deleted.');
-                }
             },
-            error: SwdPresenter.handleError
+            error: function(response) {
+                SwdView.toggleFloatingPanel('#post-details-panel', false);
+                SwdView.toggleToolbar('', false);
+                SwdPresenter.handleError.call(SwdPresenter, response);
+            }
         });
     },
     onClickPostBlockLoadMore: function(e, args) {

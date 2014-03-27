@@ -246,6 +246,11 @@ class DataAccessLayer {
             'method' => 'fql.multiquery',
             'queries' => $queries
         ));
+        
+        // Check to ensure that post data was actually returned.
+        if (count($response['data']) == 0) {
+            throw new Exception('Post data was not found. It may have been deleted.');
+        }
 
         // Begin parsing the returned data.
         $post = $response[0]['fql_result_set'][0];
