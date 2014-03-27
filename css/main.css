@@ -1091,6 +1091,14 @@ div.login-div {
     margin-top: -2px;
 }
 
+.button.dialog-button {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    font-size: 0.95em;
+    background-color: #ddd;
+}
+
 .floating-panel-content.dialog-box {
     border: 1px solid #ccc;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
@@ -1102,7 +1110,7 @@ div.login-div {
     margin: auto;
     height: 140px;
     width: 350px;
-    overflow-x: none;
+    overflow-x: hidden;
     overflow-y: auto;
     padding: 10px;
 }
