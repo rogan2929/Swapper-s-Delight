@@ -1033,7 +1033,7 @@ var SwdView = {
             top: Math.max(offset + 55, 0)
         }, 100);
 
-        $('.toolbar, .floating-overlay').animate({
+        $('.toolbar, .floating-overlay, .dialog-box').animate({
             top: Math.max(offset, 0)
         }, 100);
 
