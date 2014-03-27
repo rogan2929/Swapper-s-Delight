@@ -658,6 +658,8 @@ class DataAccessLayer {
         // Execute a batch request against the group's feed.
         $stream = $this->getFeedData($uid, $windowStart, time(), 50, 2);
         
+        echo json_encode($stream);
+        
         // Update the $windowStart time to reflect how many times $windowSize has been subtracted from $windowStart.
         $windowStart = $windowStart - ($windowSize * 50 * 2);
         
@@ -737,8 +739,6 @@ class DataAccessLayer {
                 unset($stream[$i]['likes']);
             }
         }
-        
-        echo json_encode($stream);
 
         return $stream;
     }
