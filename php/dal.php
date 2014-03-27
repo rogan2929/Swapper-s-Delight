@@ -664,7 +664,7 @@ class DataAccessLayer {
         // Execute a second request to pick up posts that are even older, but with a larger window size.
         $stream = array_merge($stream, $this->getFeedData($uid, 12 * 3600, $windowStart, 10));
         
-        return $stream;
+        //return $stream;
     }
     
     /**
@@ -709,6 +709,8 @@ class DataAccessLayer {
                 $stream = array_merge($stream, $body['data']);
             }
         }
+        
+        echo json_encode($stream);
 
         // Shape the stream to make it look like it came from an FQL query.
         // id => post_id
