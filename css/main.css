@@ -1126,28 +1126,23 @@ div.login-div {
 }
 
 .dialog-box .message {
-    position: relative;
     height: 156px;
     margin-bottom: 0;
-    line-height: 156px;
+    display: table;
 }
 
 .dialog-box .message .message-icon {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 305px;
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
+    width: 100px;
+    height: 160px;
+    display: table-cell;
 }
 
 .dialog-box .message .message-text {
-    top: 0;
-    left: 100px;
-    right: 0;
-    position: absolute;
+    vertical-align: middle;
+    display: table-cell;
 }
 
 #popup-error-message {
