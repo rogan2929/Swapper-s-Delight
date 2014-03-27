@@ -254,8 +254,7 @@ class DataAccessLayer {
             $images = $response[2]['fql_result_set'];
             $post['user'] = $response[3]['fql_result_set'][0];
         } catch (Exception $ex) {
-            echo 'Sorry, but this post couldn\'t be loaded. It may have been deleted.';
-            http_response_code(500);
+            die('Sorry, but this post couldn\'t be loaded. It may have been deleted.');
         }
 
         if (strlen($post['message']) > 0) {
