@@ -134,22 +134,22 @@ header('Pragma: no-cache');
                             <div class='message-icon'></div>
                             <span class='message-text'></span>
                         </div>
-                        <div class='button button-ok'>OK</div>
+                        <div class='button dialog-button button-ok'>OK</div>
                     </div>
                     <div id='popup-info-message' class='ui-widget floating-panel-content dialog-box hidden'>
                         <div class='message'>
                             <div class='message-icon'></div>
                             <span class='message-text'></span>
                         </div>
-                        <div class='button button-ok'>OK</div>
+                        <div class='button dialog-button button-ok'>OK</div>
                     </div>
                     <div id='popup-confirm-message' class='ui-widget floating-panel-content dialog-box hidden'>
                         <div class='message'>
                             <div class='message-icon'></div>
                             <span class='message-text'></span>
                         </div>
-                        <div class='button button-yes'>Yes</div>
-                        <div class='button button-no'>No</div>
+                        <div class='button dialog-button button-yes'>Yes</div>
+                        <div class='button dialog-button button-no'>No</div>
                     </div>
                 </div>
             </div>
