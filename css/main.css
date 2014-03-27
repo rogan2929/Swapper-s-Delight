@@ -1091,12 +1091,13 @@ div.login-div {
     margin-top: -2px;
 }
 
-.button.dialog-button {
+.dialog-button {
     display: block;
     height: 30px;
     line-height: 30px;
     font-size: 0.95em;
     background-color: #ddd;
+    width: 80px;
 }
 
 .floating-panel-content.dialog-box {
