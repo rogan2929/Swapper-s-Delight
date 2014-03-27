@@ -1145,8 +1145,8 @@ div.login-div {
     display: table-cell;
 }
 
-#popup-error-message {
-    
+#popup-error-message .message-icon {
+    background-image: url('/img/error.png');
 }
 
 #popup-info-message .message-icon {
