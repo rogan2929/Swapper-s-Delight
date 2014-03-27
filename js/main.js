@@ -397,6 +397,9 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
                                 SwdView.installHandler('onClickLogout', SwdPresenter.onClickLogout, '#menu-item-logout', 'click');
                                 SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
+                                SwdView.installHandler('onClickMessageButtonNo', SwdPresenter.onClickMessageButtonNo, '.dialog-box .button-no', 'click');
+                                SwdView.installHandler('onClickMessageButtonOk', SwdPresenter.onClickMessageButtonOk, '.dialog-box .button-ok', 'click');
+                                SwdView.installHandler('onClickMessageButtonYes', SwdPresenter.onClickMessageButtonYes, '.dialog-box .button-yes', 'click');
                                 SwdView.installHandler('onClickPermalink', SwdPresenter.onClickPermalink, '#post-button-permalink', 'click');
                                 SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
                                 SwdView.installHandler('onClickPostButtonDelete', SwdPresenter.onClickPostButtonDelete, '#post-button-delete', 'click');
@@ -626,10 +629,12 @@ var SwdPresenter = {
         // Prevent the event from bubbling up the DOM and closing the floating panel.
         e.stopPropagation();
 
-        SwdView.toggleFloatingPanel('#new-post-panel', true);
+        SwdView.showMessage('TEST');
+
+        //SwdView.toggleFloatingPanel('#new-post-panel', true);
     },
     onClickButtonRefresh: function(e, args) {
-        SwdPresenter.loadPosts(false);
+        SwdPresenter.loadPosts(false, true);
     },
     onClickFloatingPanelCloseButton: function(e, args) {
         SwdView.toggleFloatingPanel('.floating-panel', false);
@@ -647,6 +652,15 @@ var SwdPresenter = {
         // User selected 'logout' from the settings menu.
         // Take them back to their main Facebook page.
         window.location = "www.facebook.com";
+    },
+    onClickMessageButtonNo: function(e, args) {
+        
+    },
+    onClickMessageButtonOk: function(e, args) {
+        SwdView.closeMessageBoxes();
+    },    
+    onClickMessageButtonYes: function(e, args) {
+        
     },
     onClickMenuButton: function(e, args) {
         SwdView.showUiMenu(e);
@@ -897,8 +911,7 @@ var SwdView = {
         timeStamp = new moment(new Date(comment.time * 1000));
 
         commentDiv = $('<div class="post-comment"><div><a href="' + comment.user.profile_url + '" target="_blank">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><div class="timestamp">' + timeStamp.calendar() + '</div></div><div class="post-comment-text">' + comment.text + '</div></div>');
-        $(commentDiv).children('.post-comment-text').linkify();
-        $(commentDiv).hide().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
+        $(commentDiv).hide().linkify().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
     },
     /**
      * Init function for SwdView.
@@ -952,10 +965,18 @@ var SwdView = {
         $('.nav-button').removeClass('selected-nav');
     },
     /***
-     * Closes all Jquery UI menus.
+     * Closes all menus.
      */
     closeAllUiMenus: function() {
         $('.menu').hide();
+    },
+    /***
+     * Closes all message boxes.
+     * @returns {undefined}
+     */
+    closeMessageBoxes: function() {
+        $('#message-box-overlay').hide();
+        $('.ui-widget.dialog-box').fadeOut();
     },
     /***
      * Sets menu positions.
@@ -1339,8 +1360,9 @@ var SwdView = {
      * @param {type} message
      */
     showMessage: function(message) {
-        // TODO: Replace with a nice dialog box.
-        alert(message);
+        $('#message-box-overlay').show();
+        $('#popup-info-message .message-text').text(message);
+        $('#popup-info-message').fadeIn();
     },
     /***
      * Shows the post details for the selected post.

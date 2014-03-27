@@ -7,7 +7,6 @@ header('Expires: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
 header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 header('Cache-Control: no-cache, must-revalidate');
 header('Pragma: no-cache');
-
 ?>
 
 <!DOCTYPE html>
@@ -180,66 +179,90 @@ header('Pragma: no-cache');
                     <span>Logout</span>
                 </div>
             </div>
-        </div>
 
-        <!--Ad Tiles that will be dynamically placed.-->
-
-        <div id='ad-tile-1' class='post-block ui-widget ad-div post-block-text'>
-            <div class='wrapper'>
-                <p class='content'>
-                    Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
-                </p>
+            <div id='message-box-overlay' class='floating-overlay hidden'>
+                <div id='popup-error-message' class='ui-widget dialog-box hidden'>
+                    <div class='message'>
+                        <div class='message-icon'></div>
+                        <span class='message-text'></span>
+                    </div>
+                    <div class='button-ok'>OK</div>
+                </div>
+                <div id='popup-info-message' class='ui-widget dialog-box hidden'>
+                    <div class='message'>
+                        <div class='message-icon'></div>
+                        <span class='message-text'></span>
+                    </div>
+                    <div class='button-ok'>OK</div>
+                </div>
+                <div id='popup-confirm-message' class='ui-widget dialog-box hidden'>
+                    <div class='message'>
+                        <div class='message-icon'></div>
+                        <span class='message-text'></span>
+                    </div>
+                    <div class='button-yes'>Yes</div>
+                    <div class='button-no'>No</div>
+                </div>
             </div>
-        </div>
-        <div id='ad-tile-2' class='post-block ui-widget ad-div post-block-text'>
-            <div class='wrapper'>
-                <p class='content'>
-                    Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
-                </p>
-            </div>
-        </div>
-        <div id='ad-tile-3' class='post-block ui-widget ad-div post-block-text'>
-            <div class='wrapper'>
-                <p class='content'>
-                    Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
-                </p>
-            </div>
-        </div>
-        <div id='ad-tile-4' class='post-block ui-widget ad-div post-block-text'>
-            <div class='wrapper'>
-                <p class='content'>
-                    Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
-                </p>
-            </div>
-        </div>
 
-        <div id='overlay-loading-posts' class='floating-overlay'>
-            <div class='ajax-loading-div semi-transparent'></div>
-        </div>
-        <div id='overlay' class='hidden'></div>
-        <div id='post-block-mask' class='post-block ui-widget hidden'></div>
-        <div id='selection-item-mask' class='button selection-item ui-widget hidden'></div>
+            <!--Ad Tiles that will be dynamically placed.-->
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
+            <div id='ad-tile-1' class='post-block ui-widget ad-div post-block-text'>
+                <div class='wrapper'>
+                    <p class='content'>
+                        Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+                    </p>
+                </div>
+            </div>
+            <div id='ad-tile-2' class='post-block ui-widget ad-div post-block-text'>
+                <div class='wrapper'>
+                    <p class='content'>
+                        Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+                    </p>
+                </div>
+            </div>
+            <div id='ad-tile-3' class='post-block ui-widget ad-div post-block-text'>
+                <div class='wrapper'>
+                    <p class='content'>
+                        Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+                    </p>
+                </div>
+            </div>
+            <div id='ad-tile-4' class='post-block ui-widget ad-div post-block-text'>
+                <div class='wrapper'>
+                    <p class='content'>
+                        Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+                    </p>
+                </div>
+            </div>
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            (function(b, o, i, l, e, r) {
-                b.GoogleAnalyticsObject = l;
-                b[l] || (b[l] = function() {
-                    (b[l].q = b[l].q || []).push(arguments)
-                });
-                b[l].l = +new Date;
-                e = o.createElement(i);
-                r = o.getElementsByTagName(i)[0];
-                e.src = '//www.google-analytics.com/analytics.js';
-                r.parentNode.insertBefore(e, r)
-            }(window, document, 'script', 'ga'));
-            ga('create', 'UA-XXXXX-X');
-            ga('send', 'pageview');
-        </script>
+            <div id='overlay-loading-posts' class='floating-overlay'>
+                <div class='ajax-loading-div semi-transparent'></div>
+            </div>
+            <div id='overlay' class='hidden'></div>
+            <div id='post-block-mask' class='post-block ui-widget hidden'></div>
+            <div id='selection-item-mask' class='button selection-item ui-widget hidden'></div>
+
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+            <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+            <script src="js/plugins.js"></script>
+            <script src="js/main.js"></script>
+
+            <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+            <script>
+                (function(b, o, i, l, e, r) {
+                    b.GoogleAnalyticsObject = l;
+                    b[l] || (b[l] = function() {
+                        (b[l].q = b[l].q || []).push(arguments)
+                    });
+                    b[l].l = +new Date;
+                    e = o.createElement(i);
+                    r = o.getElementsByTagName(i)[0];
+                    e.src = '//www.google-analytics.com/analytics.js';
+                    r.parentNode.insertBefore(e, r)
+                }(window, document, 'script', 'ga'));
+                ga('create', 'UA-XXXXX-X');
+                ga('send', 'pageview');
+            </script>
     </body>
 </html>
