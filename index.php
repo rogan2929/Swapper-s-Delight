@@ -125,6 +125,31 @@ header('Pragma: no-cache');
                         </div>
                     </div>
                 </div>
+                
+                <!--Message Boxes-->
+
+                <div id='popup-error-message' class='ui-widget dialog-box hidden'>
+                    <div class='message'>
+                        <div class='message-icon'></div>
+                        <span class='message-text'></span>
+                    </div>
+                    <div class='button button-ok'>OK</div>
+                </div>
+                <div id='popup-info-message' class='ui-widget dialog-box hidden'>
+                    <div class='message'>
+                        <div class='message-icon'></div>
+                        <span class='message-text'></span>
+                    </div>
+                    <div class='button button-ok'>OK</div>
+                </div>
+                <div id='popup-confirm-message' class='ui-widget dialog-box hidden'>
+                    <div class='message'>
+                        <div class='message-icon'></div>
+                        <span class='message-text'></span>
+                    </div>
+                    <div class='button button-yes'>Yes</div>
+                    <div class='button button-no'>No</div>
+                </div>
             </div>
 
             <div id='main-toolbar' class='ui-widget toolbar'>
@@ -178,29 +203,6 @@ header('Pragma: no-cache');
                 <div id='menu-item-logout' class='menu-item'>
                     <span>Logout</span>
                 </div>
-            </div>
-
-            <div id='popup-error-message' class='ui-widget dialog-box hidden'>
-                <div class='message'>
-                    <div class='message-icon'></div>
-                    <span class='message-text'></span>
-                </div>
-                <div class='button button-ok'>OK</div>
-            </div>
-            <div id='popup-info-message' class='ui-widget dialog-box hidden'>
-                <div class='message'>
-                    <div class='message-icon'></div>
-                    <span class='message-text'></span>
-                </div>
-                <div class='button button-ok'>OK</div>
-            </div>
-            <div id='popup-confirm-message' class='ui-widget dialog-box hidden'>
-                <div class='message'>
-                    <div class='message-icon'></div>
-                    <span class='message-text'></span>
-                </div>
-                <div class='button button-yes'>Yes</div>
-                <div class='button button-no'>No</div>
             </div>
 
             <!--Ad Tiles that will be dynamically placed.-->
