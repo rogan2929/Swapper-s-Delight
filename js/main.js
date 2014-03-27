@@ -975,7 +975,6 @@ var SwdView = {
      * @returns {undefined}
      */
     closeMessageBoxes: function() {
-        //$('#overlay').hide();
         $('.ui-widget.dialog-box').fadeOut(function() {
             SwdView.toggleFloatingPanel('#message-box-panel', false);
         });
@@ -1362,7 +1361,6 @@ var SwdView = {
      * @param {type} message
      */
     showMessage: function(message) {
-        //$('#overlay').show();
         SwdView.toggleFloatingPanel('#message-box-panel', true);
         $('#popup-info-message .message-text').text(message);
         $('#popup-info-message').fadeIn();
@@ -1547,11 +1545,11 @@ var SwdView = {
 
         if (show) {
             // Make the panel modal by summoning an overlay.
-            //$('#overlay').show();
+            $('#overlay').show();
             $(id).show(effect, options, 400);
         }
         else {
-            //$('#overlay').hide();
+            $('#overlay').hide();
             $(id).hide(effect, options, 400);
         }
     }
