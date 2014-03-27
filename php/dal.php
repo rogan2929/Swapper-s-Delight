@@ -709,8 +709,6 @@ class DataAccessLayer {
                 $stream = array_merge($stream, $body['data']);
             }
         }
-        
-        echo json_encode($stream);
 
         // Shape the stream to make it look like it came from an FQL query.
         // id => post_id
@@ -739,6 +737,8 @@ class DataAccessLayer {
                 unset($stream[$i]['likes']);
             }
         }
+        
+        echo json_encode($stream);
 
         return $stream;
     }
