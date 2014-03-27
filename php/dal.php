@@ -658,13 +658,15 @@ class DataAccessLayer {
         // Execute a batch request against the group's feed.
         $stream = $this->getFeedData($uid, $windowStart, time(), 50, 2);
         
+        echo json_encode($stream);
+        
         // Update the $windowStart time to reflect how many times $windowSize has been subtracted from $windowStart.
         $windowStart = $windowStart - ($windowSize * 50 * 2);
         
         // Execute a second request to pick up posts that are even older, but with a larger window size.
         $stream = array_merge($stream, $this->getFeedData($uid, 12 * 3600, $windowStart, 10));
         
-        return $stream;
+        //return $stream;
     }
     
     /**
