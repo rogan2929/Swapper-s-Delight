@@ -656,7 +656,7 @@ class DataAccessLayer {
         $windowSize = $this->getOptimalWindowSize();
         
         // Execute a batch request against the group's feed.
-        $stream = $this->getFeedData($uid, $windowStart, time(), 50, 2);
+        $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 2);
         
         echo json_encode($stream);
         
