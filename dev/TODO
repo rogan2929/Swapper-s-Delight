@@ -12,6 +12,16 @@ Allow creation of tags in posts and comments.
 Replace dialogs with nicer ones.
 Dynamic comment count updating through AJAX.
 Prevent sessions from running forever. (Implement a refresh limit.)
+View group info panel.
+    Description
+    Admin
+    Contact info
+    Privacy
+    pic_cover
+    View Group in Facebook
+Like Button
+Captions for shared photos.
+Fix liking so that when a post is liked, it's cached stream counterpart is updated to reflect this.
 
 
 The 'Maybe' List:

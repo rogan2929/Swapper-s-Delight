@@ -134,10 +134,10 @@ header('Pragma: no-cache');
                         <span class='button-icon icon-new'></span>
                         <span>New Post</span>
                     </div>
-<!--                    <div id='button-refresh' class='button toolbar-button'>
+                    <div id='button-refresh' class='button toolbar-button'>
                         <span class='button-icon icon-refresh'></span>
                         <span>Refresh</span>
-                    </div>-->
+                    </div>
                     <div id='button-menu-main' class='button toolbar-button menu-button icon-only'>
                         <span class='button-icon icon-menu'></span>
                         <a href='#popup-menu-main'></a>
