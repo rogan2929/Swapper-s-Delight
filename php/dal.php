@@ -248,10 +248,8 @@ class DataAccessLayer {
         ));
         
         // Check to ensure that post data was actually returned.
-        if (count($response['data']) == 0) {
+        if (!isset($response['data']['fql_result_set']) == 0) {
             $e = new Exception('Sorry, but this post couldn\'t be loaded. It may have been deleted.');
-            echo count($response['data']) . "<br/>";
-            echo json_encode($response);
             echo $e->getMessage();
             throw $e;
         }
