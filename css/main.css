@@ -1153,8 +1153,8 @@ div.login-div {
     background-image: url('/img/info.png');
 }
 
-#popup-confirm-message {
-    
+#popup-confirm-message .message-icon {
+    background-image: url('/img/confirm.png');
 }
 
 /* Ellipses */

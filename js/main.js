@@ -630,7 +630,7 @@ var SwdPresenter = {
         // Prevent the event from bubbling up the DOM and closing the floating panel.
         e.stopPropagation();
 
-        SwdView.showError('Integer sed ipsum elit. Sed a vulputate lorem. Etiam lacus elit, pellentesque at interdum quis, tempor sit amet sem. Quisque tempus posuere orci, in placerat ante pellentesque id.');
+        SwdView.showConfirmation('Integer sed ipsum elit. Sed a vulputate lorem. Etiam lacus elit, pellentesque at interdum quis, tempor sit amet sem. Quisque tempus posuere orci, in placerat ante pellentesque id.');
 
         //SwdView.toggleFloatingPanel('#new-post-panel', true);
     },
@@ -1342,12 +1342,12 @@ var SwdView = {
     },
     /***
      * Displays a confirmation dialog (Yes/No) to the user.
-     * Returns true for Yes, false for No.
      * @param {type} message
-     * @returns {bool}
      */
     showConfirmation: function(message) {
-        return confirm(message);
+        SwdView.toggleFloatingPanel('#message-box-panel', true);
+        $('#popup-confirm-message .message-text').text(message);
+        $('#popup-confirm-message').fadeIn();
     },
     /***
      * Displays an error message to the user.
