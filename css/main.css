@@ -1096,12 +1096,12 @@ div.login-div {
     margin-bottom: 0;
 }
 
-.dialog-group:not(:first-child) {
+.dialog-group :not(:first-child) {
     margin-left: 7px;
 }
 
 .dialog-button {
-    display: block;
+    display: inline-block;
     height: 30px;
     line-height: 30px;
     font-size: 0.95em;
