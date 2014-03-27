@@ -313,7 +313,7 @@ var SwdPresenter = {
      * @param {type} error
      */
     handleError: function(error) {
-        var message = JSON.parse(error.responseText);
+        var message = error.responseText;
 
         switch (error.status) {
             case 401:
@@ -391,7 +391,7 @@ var SwdPresenter = {
                                 // Install Event Handlers
                                 SwdView.installHandler('onClickButtonGroups', SwdPresenter.onClickButtonGroups, '#button-groups', 'click');
                                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
-                                SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
+                                //SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
                                 SwdView.installHandler('onClickFloatingPanelCloseButton', SwdPresenter.onClickFloatingPanelCloseButton, '.floating-panel-content > .close-button', 'click');
                                 SwdView.installHandler('onClickFloatingPanelContent', SwdPresenter.onClickFloatingPanelContent, '.floating-panel-content', 'click');
                                 SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
@@ -628,9 +628,9 @@ var SwdPresenter = {
 
         SwdView.toggleFloatingPanel('#new-post-panel', true);
     },
-    onClickButtonRefresh: function(e, args) {
-        SwdPresenter.loadPosts(true);
-    },
+//    onClickButtonRefresh: function(e, args) {
+//        SwdPresenter.loadPosts(true);
+//    },
     onClickFloatingPanelCloseButton: function(e, args) {
         SwdView.toggleFloatingPanel('.floating-panel', false);
         SwdView.toggleToolbar('', false);
@@ -746,13 +746,12 @@ var SwdPresenter = {
                     SwdView.setLikePost(false);
                     SwdView.showPostDetails(post);
                 }
-                else {
-                    // TODO: Do a real error message.
-                    SwdPresenter.selectedPost = null;
-                    alert('Unable to display post. It was most likely deleted.');
-                }
             },
-            error: SwdPresenter.handleError
+            error: function(response) {
+                SwdView.toggleFloatingPanel('#post-details-panel', false);
+                SwdView.toggleToolbar('', false);
+                SwdPresenter.handleError.call(SwdPresenter, response);
+            }
         });
     },
     onClickPostBlockLoadMore: function(e, args) {
