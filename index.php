@@ -185,22 +185,22 @@ header('Pragma: no-cache');
                     <div class='message-icon'></div>
                     <span class='message-text'></span>
                 </div>
-                <div class='button-ok'>OK</div>
+                <div class='button button-ok'>OK</div>
             </div>
             <div id='popup-info-message' class='ui-widget dialog-box hidden'>
                 <div class='message'>
                     <div class='message-icon'></div>
                     <span class='message-text'></span>
                 </div>
-                <div class='button-ok'>OK</div>
+                <div class='button button-ok'>OK</div>
             </div>
             <div id='popup-confirm-message' class='ui-widget dialog-box hidden'>
                 <div class='message'>
                     <div class='message-icon'></div>
                     <span class='message-text'></span>
                 </div>
-                <div class='button-yes'>Yes</div>
-                <div class='button-no'>No</div>
+                <div class='button button-yes'>Yes</div>
+                <div class='button button-no'>No</div>
             </div>
 
             <!--Ad Tiles that will be dynamically placed.-->
