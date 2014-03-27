@@ -1038,7 +1038,7 @@ var SwdView = {
             top: Math.max(offset, 0)
         }, 100);
 
-        $('.floating-panel, .dialog-box').animate({
+        $('.floating-panel').animate({
             top: Math.max(offset + 47, 47)
         }, 100);
     },
