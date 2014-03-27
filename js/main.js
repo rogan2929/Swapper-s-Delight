@@ -654,13 +654,13 @@ var SwdPresenter = {
         window.location = "www.facebook.com";
     },
     onClickMessageButtonNo: function(e, args) {
-        
+
     },
     onClickMessageButtonOk: function(e, args) {
         SwdView.closeMessageBoxes();
-    },    
+    },
     onClickMessageButtonYes: function(e, args) {
-        
+
     },
     onClickMenuButton: function(e, args) {
         SwdView.showUiMenu(e);
@@ -975,8 +975,10 @@ var SwdView = {
      * @returns {undefined}
      */
     closeMessageBoxes: function() {
-        $('#overlay').hide();
-        $('.ui-widget.dialog-box').fadeOut();
+        //$('#overlay').hide();
+        $('.ui-widget.dialog-box').fadeOut(function() {
+            SwdView.toggleFloatingPanel('#message-box-panel', false);
+        });
     },
     /***
      * Sets menu positions.
@@ -1033,11 +1035,11 @@ var SwdView = {
             top: Math.max(offset + 55, 0)
         }, 100);
 
-        $('.toolbar, .floating-overlay, .dialog-box').animate({
+        $('.toolbar, .floating-overlay').animate({
             top: Math.max(offset, 0)
         }, 100);
 
-        $('.floating-panel').animate({
+        $('.floating-panel, .dialog-box').animate({
             top: Math.max(offset + 47, 47)
         }, 100);
     },
@@ -1360,7 +1362,8 @@ var SwdView = {
      * @param {type} message
      */
     showMessage: function(message) {
-        $('#overlay').show();
+        //$('#overlay').show();
+        SwdView.toggleFloatingPanel('#message-box-panel', true);
         $('#popup-info-message .message-text').text(message);
         $('#popup-info-message').fadeIn();
     },
@@ -1445,7 +1448,7 @@ var SwdView = {
                 SwdView.addPostComment(post.comments[i]);
             }
         }
-        
+
         // Look for links and make them clickable.
         $('#linkdata-desc, #post-message-text').linkify();
 
@@ -1544,11 +1547,11 @@ var SwdView = {
 
         if (show) {
             // Make the panel modal by summoning an overlay.
-            $('#overlay').show();
+            //$('#overlay').show();
             $(id).show(effect, options, 400);
         }
         else {
-            $('#overlay').hide();
+            //$('#overlay').hide();
             $(id).hide(effect, options, 400);
         }
     }

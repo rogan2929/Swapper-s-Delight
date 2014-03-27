@@ -125,30 +125,32 @@ header('Pragma: no-cache');
                         </div>
                     </div>
                 </div>
-                
+
                 <!--Message Boxes-->
 
-                <div id='popup-error-message' class='ui-widget dialog-box hidden'>
-                    <div class='message'>
-                        <div class='message-icon'></div>
-                        <span class='message-text'></span>
+                <div id='message-box-panel' class='floating-panel hidden'>
+                    <div id='popup-error-message' class='ui-widget dialog-box hidden'>
+                        <div class='message'>
+                            <div class='message-icon'></div>
+                            <span class='message-text'></span>
+                        </div>
+                        <div class='button button-ok'>OK</div>
                     </div>
-                    <div class='button button-ok'>OK</div>
-                </div>
-                <div id='popup-info-message' class='ui-widget dialog-box hidden'>
-                    <div class='message'>
-                        <div class='message-icon'></div>
-                        <span class='message-text'></span>
+                    <div id='popup-info-message' class='ui-widget dialog-box hidden'>
+                        <div class='message'>
+                            <div class='message-icon'></div>
+                            <span class='message-text'></span>
+                        </div>
+                        <div class='button button-ok'>OK</div>
                     </div>
-                    <div class='button button-ok'>OK</div>
-                </div>
-                <div id='popup-confirm-message' class='ui-widget dialog-box hidden'>
-                    <div class='message'>
-                        <div class='message-icon'></div>
-                        <span class='message-text'></span>
+                    <div id='popup-confirm-message' class='ui-widget dialog-box hidden'>
+                        <div class='message'>
+                            <div class='message-icon'></div>
+                            <span class='message-text'></span>
+                        </div>
+                        <div class='button button-yes'>Yes</div>
+                        <div class='button button-no'>No</div>
                     </div>
-                    <div class='button button-yes'>Yes</div>
-                    <div class='button button-no'>No</div>
                 </div>
             </div>
 
