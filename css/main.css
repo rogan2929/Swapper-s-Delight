@@ -1093,6 +1093,7 @@ div.login-div {
 
 .dialog-group {
     float: right;
+    margin-bottom: 0;
 }
 
 .dialog-group:not(:first-child) {
@@ -1106,7 +1107,6 @@ div.login-div {
     font-size: 0.95em;
     background-color: #ddd;
     width: 80px;
-    margin-bottom: 0;
 }
 
 .floating-panel-content.dialog-box {
