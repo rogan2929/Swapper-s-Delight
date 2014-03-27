@@ -1355,8 +1355,8 @@ var SwdView = {
      */
     showError: function(message) {
         SwdView.toggleFloatingPanel('#message-box-panel', true);
-        $('#popup-info-error .message-text').text(message);
-        $('#popup-info-error').fadeIn();
+        $('#popup-error-message .message-text').text(message);
+        $('#popup-error-message').fadeIn();
     },
     /***
      * Displays an information message to the user.
