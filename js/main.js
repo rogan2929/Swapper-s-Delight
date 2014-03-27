@@ -309,7 +309,7 @@ var SwdPresenter = {
     refreshStreamInterval: null,
     postOffset: 0,
     modal: false,
-    modalResponse: null,
+    modalCallback: null,
     /***
      * Top-level error handler function.
      * @param {type} error
@@ -478,6 +478,14 @@ var SwdPresenter = {
             // Poll again in another 100 ms.
             setTimeout(SwdPresenter.facebookPageInfoPoll, 100);
         });
+    },
+    /**
+     * Handle the result of modal message dialog.
+     * @param {type} response
+     */
+    handleModalResponse: function(response) {
+        SwdPresenter.modal = false;
+        SwdPresenter.modalCallback.call(SwdPresenter, response);
     },
     /***
      * Load posts liked by user.
@@ -665,18 +673,15 @@ var SwdPresenter = {
         window.location = "www.facebook.com";
     },
     onClickMessageButtonNo: function(e, args) {
-        SwdPresenter.modalResponse = 0;
-        SwdPresenter.modal = false;
+        SwdPresenter.handleModalResponse(0)
         SwdView.closeMessageBoxes();
     },
     onClickMessageButtonOk: function(e, args) {
-        SwdPresenter.modalResponse = 0;
-        SwdPresenter.modal = false;
+        SwdPresenter.handleModalResponse(0)
         SwdView.closeMessageBoxes();
     },
     onClickMessageButtonYes: function(e, args) {
-        SwdPresenter.modalResponse = 1;
-        SwdPresenter.modal = false;
+        SwdPresenter.handleModalResponse(1)
         SwdView.closeMessageBoxes();
     },
     onClickMenuButton: function(e, args) {
@@ -712,20 +717,25 @@ var SwdPresenter = {
         e.stopPropagation();
     },
     onClickPostButtonDelete: function(e, args) {
-        if (SwdView.showConfirmation('Are you sure you want to delete this post? You won\'t be able to get it back.')) {
-            SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
 
-            // Delete the post and then remove it from the feed.
-            SwdModel.deletePost(SwdPresenter.selectedPost.post_id, {
-                success: function(response) {
-                    SwdView.toggleAjaxLoadingDiv('#post-details-panel', false);
-                    SwdView.toggleFloatingPanel('#post-details-panel', false);
-                    SwdView.toggleToolbar('', false);
-                    SwdView.removePost('#' + SwdPresenter.selectedPost.post_id);
-                },
-                fail: SwdPresenter.handleError
-            });
+        SwdPresenter.modalCallback = function(response) {
+            if (response) {
+                SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
+
+                // Delete the post and then remove it from the feed.
+                SwdModel.deletePost(SwdPresenter.selectedPost.post_id, {
+                    success: function(response) {
+                        SwdView.toggleAjaxLoadingDiv('#post-details-panel', false);
+                        SwdView.toggleFloatingPanel('#post-details-panel', false);
+                        SwdView.toggleToolbar('', false);
+                        SwdView.removePost('#' + SwdPresenter.selectedPost.post_id);
+                    },
+                    fail: SwdPresenter.handleError
+                });
+            }
         }
+
+        SwdView.showConfirmation('Are you sure you want to delete this post? You won\'t be able to get it back.');
     },
     onClickPostButtonLike: function(e, args) {
         var id, userLikes;
