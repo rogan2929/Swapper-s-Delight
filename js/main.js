@@ -309,6 +309,7 @@ var SwdPresenter = {
     refreshStreamInterval: null,
     postOffset: 0,
     modal: false,
+    modalResponse: null,
     /***
      * Top-level error handler function.
      * @param {type} error
@@ -608,6 +609,13 @@ var SwdPresenter = {
             });
         });
     },
+    /**
+     * Setter for SwdPresenter.modal.
+     * @param {type} modal
+     */
+    setModal: function(modal) {
+        SwdPresenter.modal = modal;
+    },
     /***
      * Set currently selected group.
      * @param {type} group
@@ -645,9 +653,11 @@ var SwdPresenter = {
         SwdView.closeAllUiMenus();
     },
     onClickHtml: function(e, args) {
-        SwdView.closeAllUiMenus();
-        SwdView.toggleFloatingPanel('.floating-panel', false);
-        SwdView.toggleToolbar('', false);
+        if (!SwdPresenter.modal) {
+            SwdView.closeAllUiMenus();
+            SwdView.toggleFloatingPanel('.floating-panel', false);
+            SwdView.toggleToolbar('', false);
+        }
     },
     onClickLogout: function(e, args) {
         // User selected 'logout' from the settings menu.
@@ -655,13 +665,19 @@ var SwdPresenter = {
         window.location = "www.facebook.com";
     },
     onClickMessageButtonNo: function(e, args) {
+        SwdPresenter.modalResponse = 0;
+        SwdPresenter.modal = false;
         SwdView.closeMessageBoxes();
     },
     onClickMessageButtonOk: function(e, args) {
+        SwdPresenter.modalResponse = 0;
+        SwdPresenter.modal = false;
         SwdView.closeMessageBoxes();
     },
     onClickMessageButtonYes: function(e, args) {
-
+        SwdPresenter.modalResponse = 1;
+        SwdPresenter.modal = false;
+        SwdView.closeMessageBoxes();
     },
     onClickMenuButton: function(e, args) {
         SwdView.showUiMenu(e);
@@ -1345,6 +1361,7 @@ var SwdView = {
      * @param {type} message
      */
     showConfirmation: function(message) {
+        SwdPresenter.setModal(true);
         SwdView.toggleFloatingPanel('#message-box-panel', true);
         $('#popup-confirm-message .message-text').text(message);
         $('#popup-confirm-message').fadeIn();
@@ -1354,6 +1371,7 @@ var SwdView = {
      * @param {type} message
      */
     showError: function(message) {
+        SwdPresenter.setModal(true);
         SwdView.toggleFloatingPanel('#message-box-panel', true);
         $('#popup-error-message .message-text').text(message);
         $('#popup-error-message').fadeIn();
@@ -1363,6 +1381,7 @@ var SwdView = {
      * @param {type} message
      */
     showMessage: function(message) {
+        SwdPresenter.setModal(true);
         SwdView.toggleFloatingPanel('#message-box-panel', true);
         $('#popup-info-message .message-text').text(message);
         $('#popup-info-message').fadeIn();
