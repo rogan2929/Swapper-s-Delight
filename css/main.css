@@ -1098,6 +1098,7 @@ div.login-div {
     font-size: 0.95em;
     background-color: #ddd;
     width: 80px;
+    margin-bottom: 0;
 }
 
 .floating-panel-content.dialog-box {
@@ -1109,7 +1110,7 @@ div.login-div {
     left: 0;
     right: 0;
     margin: auto;
-    height: 160px;
+    height: 190px;
     width: 400px;
     overflow-x: hidden;
     overflow-y: auto;
@@ -1124,7 +1125,7 @@ div.login-div {
 
 .dialog-box .message .message-text {
     top: 0;
-    bottom: 35px;
+    bottom: 0;
     left: 40px;
     right: 0;
     position: absolute;
