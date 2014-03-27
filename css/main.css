@@ -1098,8 +1098,9 @@ div.login-div {
     top: 0;
     bottom: 0;
     z-index: 1002;
-    heigth: 200px;
+    height: 200px;
     width: 500px;
+    margin: auto;
 }
 
 #popup-error-message {

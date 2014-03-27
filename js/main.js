@@ -975,7 +975,7 @@ var SwdView = {
      * @returns {undefined}
      */
     closeMessageBoxes: function() {
-        $('#message-box-overlay').hide();
+        $('#overlay').hide();
         $('.ui-widget.dialog-box').fadeOut();
     },
     /***
@@ -1360,7 +1360,7 @@ var SwdView = {
      * @param {type} message
      */
     showMessage: function(message) {
-        $('#message-box-overlay').show();
+        $('#overlay').show();
         $('#popup-info-message .message-text').text(message);
         $('#popup-info-message').fadeIn();
     },
