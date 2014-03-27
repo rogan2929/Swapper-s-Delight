@@ -1129,6 +1129,7 @@ div.login-div {
     position: relative;
     height: 156px;
     margin-bottom: 0;
+    line-height: 156px;
 }
 
 .dialog-box .message .message-icon {
@@ -1144,7 +1145,6 @@ div.login-div {
 
 .dialog-box .message .message-text {
     top: 0;
-    bottom: 0;
     left: 100px;
     right: 0;
     position: absolute;
