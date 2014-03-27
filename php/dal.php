@@ -664,7 +664,7 @@ class DataAccessLayer {
         // Execute a second request to pick up posts that are even older, but with a larger window size.
         $stream = array_merge($stream, $this->getFeedData($uid, 12 * 3600, $windowStart, 10));
         
-        //return $stream;
+        return $stream;
     }
     
     /**
@@ -703,8 +703,6 @@ class DataAccessLayer {
                 'batch' => json_encode($queries),
                 'include_headers' => false
             ));
-            
-            echo json_encode($response);
 
             for ($k = 0; $k < count($response); $k++) {
                 $body = json_decode($response[$k]['body'], true);
