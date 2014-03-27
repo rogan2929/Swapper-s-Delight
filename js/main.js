@@ -630,7 +630,7 @@ var SwdPresenter = {
         // Prevent the event from bubbling up the DOM and closing the floating panel.
         e.stopPropagation();
 
-        SwdView.showMessage('Integer sed ipsum elit. Sed a vulputate lorem. Etiam lacus elit, pellentesque at interdum quis, tempor sit amet sem. Quisque tempus posuere orci, in placerat ante pellentesque id.');
+        SwdView.showError('Integer sed ipsum elit. Sed a vulputate lorem. Etiam lacus elit, pellentesque at interdum quis, tempor sit amet sem. Quisque tempus posuere orci, in placerat ante pellentesque id.');
 
         //SwdView.toggleFloatingPanel('#new-post-panel', true);
     },
@@ -1354,8 +1354,9 @@ var SwdView = {
      * @param {type} message
      */
     showError: function(message) {
-        // TODO: Replace with a nice dialog box.
-        alert(message);
+        SwdView.toggleFloatingPanel('#message-box-panel', true);
+        $('#popup-info-error .message-text').text(message);
+        $('#popup-info-error').fadeIn();
     },
     /***
      * Displays an information message to the user.
