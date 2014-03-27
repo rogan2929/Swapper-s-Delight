@@ -1091,6 +1091,14 @@ div.login-div {
     margin-top: -2px;
 }
 
+.dialog-group {
+    float: right;
+}
+
+.dialog-group:not(:first-child) {
+    margin-left: 7px;
+}
+
 .dialog-button {
     display: block;
     height: 30px;
