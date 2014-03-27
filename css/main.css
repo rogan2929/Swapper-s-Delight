@@ -575,6 +575,7 @@ a:visited {
     font-weight: bold;
     text-align: center;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
+    border-radius: 3px;
 }
 
 .post-block .comment-count.updated {
