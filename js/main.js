@@ -655,7 +655,7 @@ var SwdPresenter = {
         window.location = "www.facebook.com";
     },
     onClickMessageButtonNo: function(e, args) {
-
+        SwdView.closeMessageBoxes();
     },
     onClickMessageButtonOk: function(e, args) {
         SwdView.closeMessageBoxes();
