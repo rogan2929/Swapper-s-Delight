@@ -1092,7 +1092,9 @@ div.login-div {
 }
 
 .ui-widget.dialog-box {
-    position: fixed;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
+    position: absolute;
     left: 10%;
     right: 10%;
     top: 10%;
