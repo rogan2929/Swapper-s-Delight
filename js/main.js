@@ -313,7 +313,7 @@ var SwdPresenter = {
      * @param {type} error
      */
     handleError: function(error) {
-        var message = JSON.parse(error.responseText);
+        var message = error.responseText;
 
         switch (error.status) {
             case 401:
