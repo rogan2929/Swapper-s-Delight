@@ -659,7 +659,8 @@ var SwdPresenter = {
         // Prevent the event from bubbling up the DOM and closing the floating panel.
         e.stopPropagation();
 
-        SwdView.showConfirmation('Integer sed ipsum elit. Sed a vulputate lorem. Etiam lacus elit, pellentesque at interdum quis, tempor sit amet sem. Quisque tempus posuere orci, in placerat ante pellentesque id.');
+        SwdPresenter.message('Integer sed ipsum elit. Sed a vulputate lorem. Etiam lacus elit, pellentesque at interdum quis, tempor sit amet sem. Quisque tempus posuere orci, in placerat ante pellentesque id.');
+        
 
         //SwdView.toggleFloatingPanel('#new-post-panel', true);
     },
