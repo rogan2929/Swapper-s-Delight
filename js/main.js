@@ -676,7 +676,7 @@ var SwdPresenter = {
         // Prompt for deletion of the comment.
         SwdPresenter.message('confirm', 'Delete this comment?', function(response) {
             if (response === 1) {
-                SwdView.removeComment(id);
+                SwdView.removeComment('#' + id);
                 SwdModel.deleteObject(id, function() {});
             }
         });
