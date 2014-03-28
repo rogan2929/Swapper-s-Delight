@@ -891,7 +891,7 @@ var SwdPresenter = {
             // Post the comment.
             SwdModel.postComment(id, comment, {
                 success: function(response) {
-                    SwdView.addPostComment(response);
+                    SwdView.addPostComment(response, SwdPresenter.uid);
                     SwdView.clearPostCommentText();
                 },
                 error: SwdPresenter.handleError
@@ -946,7 +946,12 @@ var SwdView = {
             $(this).removeClass('hover', 100);
         });
     },
-    addPostComment: function(comment) {
+    /***
+     * Display a post's comment.
+     * @param {type} comment
+     * @param {type} uid
+     */
+    addPostComment: function(comment, uid) {
         var commentDiv, timeStamp, userImage;
 
         // Set user image
@@ -961,6 +966,12 @@ var SwdView = {
         timeStamp = new moment(new Date(comment.time * 1000));
 
         commentDiv = $('<div class="post-comment"><div><a href="' + comment.user.profile_url + '" target="_blank">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><div class="timestamp">' + timeStamp.calendar() + '</div></div><div class="post-comment-text">' + comment.text + '</div></div>');
+        
+        // If the current user is the owner of the comment, display the delete and edit buttons.
+        if (comment.user.id === uid) {
+            $(commentDiv).first().append('<div class="close-button"></div>');
+        }
+        
         $(commentDiv).hide().linkify().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
     },
     /**
@@ -1489,7 +1500,7 @@ var SwdView = {
 
         if (post.comments.length > 0) {
             for (i = 0; i < post.comments.length; i++) {
-                SwdView.addPostComment(post.comments[i]);
+                SwdView.addPostComment(post.comments[i], SwdPresenter.uid);
             }
         }
 

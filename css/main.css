@@ -950,14 +950,6 @@ a.link-title {
     font-size: 0.95em;
 }
 
-/*.post-comment a {
-    color: #444;
-}
-
-.post-comment a:visited {
-    color: #444;
-}*/
-
 #overlay, #message-overlay {
     background: #ddd;
     position: absolute;
