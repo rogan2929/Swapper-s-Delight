@@ -464,21 +464,36 @@ class DataAccessLayer {
                     'userQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url,pic FROM user WHERE uid IN (SELECT actor_id FROM #streamQuery)'
                 ))
             );
+        }
 
+        $processed = 0;
 
-            // Execute a batch query if the limit has been reached. (Either every 50 posts, or if less than 50, then the post count.)
-            if ($i > 1 && $i % 50 == 0 || $i % count($page) == 0) {
-                $response = $this->api('/', 'POST', array(
-                    'batch' => json_encode($queries),
-                    'include_headers' => false
-                ));
+        // Execute the batch queries in chunks of 50.
+        for ($i = 0; $i < count($queries); $i += 50) {
+            $response = $this->api('/', 'POST', array(
+                'batch' => json_encode(array_slice($queries, $i, 50)),
+                'include_headers' => false
+            ));
 
-                // Sift through the results.
-                for ($j = 0; $j < count($response); $j++) {
-                    $body = json_decode($response[$j]['body'], true);
-                    $result = array_merge($result, $this->processStreamQuery($body[0]['fql_result_set'], $body[1]['fql_result_set'], $body[2]['fql_result_set']));
-                }
+            // Sift through the results.
+            for ($j = 0; $j < count($response); $j++) {
+                $body = json_decode($response[$j]['body'], true);
+                $result = array_merge($result, $this->processStreamQuery($body[0]['fql_result_set'], $body[1]['fql_result_set'], $body[2]['fql_result_set']));
             }
+
+            $processed++;
+        }
+
+        // Grab the remainder.
+        $response = $this->api('/', 'POST', array(
+            'batch' => json_encode(array_slice($queries, $processed + 1, 50)),
+            'include_headers' => false
+        ));
+
+        // Sift through the results.
+        for ($i = 0; $i < count($response); $i++) {
+            $body = json_decode($response[$i]['body'], true);
+            $result = array_merge($result, $this->processStreamQuery($body[0]['fql_result_set'], $body[1]['fql_result_set'], $body[2]['fql_result_set']));
         }
 
         // If there are no posts to load, then insert an terminating post.
