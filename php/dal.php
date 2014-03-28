@@ -467,7 +467,7 @@ class DataAccessLayer {
 
 
             // Execute a batch query if the limit has been reached. (Either every 50 posts, or if less than 50, then the post count.)
-            if ($i > 0 && $i % 50 == 0 || $i % count($page) == 0) {
+            if ($i > 1 && $i % 50 == 0 || $i % count($page) == 0) {
                 $response = $this->api('/', 'POST', array(
                     'batch' => json_encode($queries),
                     'include_headers' => false
