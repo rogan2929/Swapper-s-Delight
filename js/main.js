@@ -29,14 +29,14 @@ var SwdModel = {
 
     },
     /***
-     * Delete a post from a group's feed.
-     * @param {type} postId
+     * Delete an object from Facebook.
+     * @param {type} id
      * @param {type} callbacks
      */
-    deletePost: function(postId, callbacks) {
+    deleteObject: function(id, callbacks) {
         $.ajax({
             type: 'GET',
-            url: '/php/delete-post.php?postId=' + postId,
+            url: '/php/delete-object.php?id=' + id,
             success: function(response) {
                 callbacks.success.call(SwdModel, response);
             },
@@ -308,6 +308,7 @@ var SwdPresenter = {
     refreshCommentCountInterval: null,
     refreshStreamInterval: null,
     postOffset: 0,
+    messageCallback: null,
     /***
      * Top-level error handler function.
      * @param {type} error
@@ -319,13 +320,15 @@ var SwdPresenter = {
             case 401:
                 // Access denied, most likely from an expired access token.
                 // Get a new access token by simply refreshing the page.
-                SwdView.showMessage(message);
+                //SwdView.showMessage(message);
+                SwdPresenter.message('info', message, function(response) {
+                    // Send the user to the app's main url.
+                    window.location = window.location.href;
+                });
 
-                // Send the user to the app's main url.
-                window.location = window.location.href;
                 break;
             default:
-                SwdView.showError(message);
+                SwdPresenter.message('error', message);
         }
     },
     /**
@@ -392,11 +395,17 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickButtonGroups', SwdPresenter.onClickButtonGroups, '#button-groups', 'click');
                                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
                                 SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
+                                SwdView.installHandler('onClickCommentDelete', SwdPresenter.onClickCommentDelete, '.post-comment .delete-button', 'click');
                                 SwdView.installHandler('onClickFloatingPanelCloseButton', SwdPresenter.onClickFloatingPanelCloseButton, '.floating-panel-content > .close-button', 'click');
                                 SwdView.installHandler('onClickFloatingPanelContent', SwdPresenter.onClickFloatingPanelContent, '.floating-panel-content', 'click');
+                                SwdView.installHandler('onClickFloatingPanelModal', SwdPresenter.onClickFloatingPanelModal, '.floating-panel.modal', 'click');
                                 SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
                                 SwdView.installHandler('onClickLogout', SwdPresenter.onClickLogout, '#menu-item-logout', 'click');
                                 SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
+                                SwdView.installHandler('onClickMessageButtonNo', SwdPresenter.onClickMessageButtonNo, '.dialog-box .button-no', 'click');
+                                SwdView.installHandler('onClickMessageButtonOk', SwdPresenter.onClickMessageButtonOk, '.dialog-box .button-ok', 'click');
+                                SwdView.installHandler('onClickMessageButtonYes', SwdPresenter.onClickMessageButtonYes, '.dialog-box .button-yes', 'click');
+                                SwdView.installHandler('onClickMessageOverlay', SwdPresenter.onClickMessageOverlay, '#message-overlay', 'click');
                                 SwdView.installHandler('onClickPermalink', SwdPresenter.onClickPermalink, '#post-button-permalink', 'click');
                                 SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
                                 SwdView.installHandler('onClickPostButtonDelete', SwdPresenter.onClickPostButtonDelete, '#post-button-delete', 'click');
@@ -593,6 +602,34 @@ var SwdPresenter = {
         }
     },
     /***
+     * Brings up a message dialog box.
+     * @param {type} type
+     * @param {type} message
+     * @param {type} callback
+     */
+    message: function(type, message, callback) {
+        if (callback) {
+            SwdPresenter.messageCallback = callback;
+        }
+        else {
+            SwdPresenter.messageCallback = null;
+        }
+
+        SwdView.toggleFloatingPanel('#message-box-panel', true, null, null, '#message-overlay');
+
+        switch (type) {
+            case 'info':
+                SwdView.showMessage(message);
+                break;
+            case 'confirm':
+                SwdView.showConfirmation(message);
+                break;
+            case 'error':
+                SwdView.showError(message);
+                break
+        }
+    },
+    /***
      * Update Facebook Canvas Size to match the canvas's clientHeight or html height, whichever is greater.
      */
     refreshFbCanvasSize: function() {
@@ -629,7 +666,20 @@ var SwdPresenter = {
         SwdView.toggleFloatingPanel('#new-post-panel', true);
     },
     onClickButtonRefresh: function(e, args) {
-        SwdPresenter.loadPosts(false);
+        SwdPresenter.loadPosts(false, true);
+    },
+    onClickCommentDelete: function(e, args) {
+        var id;
+        
+        id = $(e.currentTarget).parent().attr('id');
+        
+        // Prompt for deletion of the comment.
+        SwdPresenter.message('confirm', 'Delete this comment?', function(response) {
+            if (response === 1) {
+                SwdView.removeComment('#' + id);
+                SwdModel.deleteObject(id, function() {});
+            }
+        });
     },
     onClickFloatingPanelCloseButton: function(e, args) {
         SwdView.toggleFloatingPanel('.floating-panel', false);
@@ -637,6 +687,9 @@ var SwdPresenter = {
     },
     onClickFloatingPanelContent: function(e, args) {
         SwdView.closeAllUiMenus();
+    },
+    onClickFloatingPanelModal: function(e, args) {
+        e.stopPropagation();
     },
     onClickHtml: function(e, args) {
         SwdView.closeAllUiMenus();
@@ -648,8 +701,31 @@ var SwdPresenter = {
         // Take them back to their main Facebook page.
         window.location = "www.facebook.com";
     },
+    onClickMessageButtonNo: function(e, args) {
+        if (SwdPresenter.messageCallback) {
+            SwdPresenter.messageCallback.call(SwdPresenter, 0);
+        }
+
+        SwdView.closeMessageBoxes();
+    },
+    onClickMessageButtonOk: function(e, args) {
+        if (SwdPresenter.messageCallback) {
+            SwdPresenter.messageCallback.call(SwdPresenter, 0);
+        }
+        SwdView.closeMessageBoxes();
+    },
+    onClickMessageButtonYes: function(e, args) {
+        if (SwdPresenter.messageCallback) {
+            SwdPresenter.messageCallback.call(SwdPresenter, 1);
+        }
+
+        SwdView.closeMessageBoxes();
+    },
     onClickMenuButton: function(e, args) {
         SwdView.showUiMenu(e);
+    },
+    onClickMessageOverlay: function(e, args) {
+        e.stopPropagation();
     },
     onClickPermalink: function(e, args) {
         window.open(SwdPresenter.selectedPost.permalink, '_blank');
@@ -681,20 +757,22 @@ var SwdPresenter = {
         e.stopPropagation();
     },
     onClickPostButtonDelete: function(e, args) {
-        if (SwdView.showConfirmation('Are you sure you want to delete this post? You won\'t be able to get it back.')) {
-            SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
+        SwdPresenter.message('confirm', 'Are you sure you want to delete this post? You won\'t be able to get it back.', function(response) {
+            if (response !== 0) {
+                SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
 
-            // Delete the post and then remove it from the feed.
-            SwdModel.deletePost(SwdPresenter.selectedPost.post_id, {
-                success: function(response) {
-                    SwdView.toggleAjaxLoadingDiv('#post-details-panel', false);
-                    SwdView.toggleFloatingPanel('#post-details-panel', false);
-                    SwdView.toggleToolbar('', false);
-                    SwdView.removePost('#' + SwdPresenter.selectedPost.post_id);
-                },
-                fail: SwdPresenter.handleError
-            });
-        }
+                // Delete the post and then remove it from the feed.
+                SwdModel.deleteObject(SwdPresenter.selectedPost.post_id, {
+                    success: function(response) {
+                        SwdView.toggleAjaxLoadingDiv('#post-details-panel', false);
+                        SwdView.toggleFloatingPanel('#post-details-panel', false);
+                        SwdView.toggleToolbar('', false);
+                        SwdView.removePost('#' + SwdPresenter.selectedPost.post_id);
+                    },
+                    fail: SwdPresenter.handleError
+                });
+            }
+        });
     },
     onClickPostButtonLike: function(e, args) {
         var id, userLikes;
@@ -827,7 +905,7 @@ var SwdPresenter = {
             // Post the comment.
             SwdModel.postComment(id, comment, {
                 success: function(response) {
-                    SwdView.addPostComment(response);
+                    SwdView.addPostComment(response, SwdPresenter.uid);
                     SwdView.clearPostCommentText();
                 },
                 error: SwdPresenter.handleError
@@ -882,7 +960,12 @@ var SwdView = {
             $(this).removeClass('hover', 100);
         });
     },
-    addPostComment: function(comment) {
+    /***
+     * Display a post's comment.
+     * @param {type} comment
+     * @param {type} uid
+     */
+    addPostComment: function(comment, uid) {
         var commentDiv, timeStamp, userImage;
 
         // Set user image
@@ -897,7 +980,16 @@ var SwdView = {
         timeStamp = new moment(new Date(comment.time * 1000));
 
         commentDiv = $('<div class="post-comment"><div><a href="' + comment.user.profile_url + '" target="_blank">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><div class="timestamp">' + timeStamp.calendar() + '</div></div><div class="post-comment-text">' + comment.text + '</div></div>');
-        $(commentDiv).hide().linkify().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
+        
+        // If the current user is the owner of the comment, display the delete and edit buttons.
+        if (comment.user.uid === uid) {
+            $(commentDiv).append('<div class="delete-button"></div>');
+        }
+        
+        $(commentDiv).attr('id', comment.id).hide().linkify().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
+        
+        // Hook up the click event handler.
+        $(commentDiv).children('.delete-button').click(SwdView.handlers['onClickCommentDelete']);
     },
     /**
      * Init function for SwdView.
@@ -951,10 +1043,17 @@ var SwdView = {
         $('.nav-button').removeClass('selected-nav');
     },
     /***
-     * Closes all Jquery UI menus.
+     * Closes all menus.
      */
     closeAllUiMenus: function() {
         $('.menu').hide();
+    },
+    /***
+     * Closes all message boxes.
+     * @returns {undefined}
+     */
+    closeMessageBoxes: function() {
+        SwdView.toggleFloatingPanel('#message-box-panel', false, null, null, '#message-overlay');
     },
     /***
      * Sets menu positions.
@@ -971,6 +1070,15 @@ var SwdView = {
                 my: 'left top',
                 at: 'left bottom'
             });
+        });
+    },
+    /***
+     * Remove a comment from the view.
+     * @param {type} id
+     */
+    removeComment: function(id) {
+        $(id).fadeOut(function() {
+            $(this).remove();
         });
     },
     /***
@@ -1318,28 +1426,27 @@ var SwdView = {
     },
     /***
      * Displays a confirmation dialog (Yes/No) to the user.
-     * Returns true for Yes, false for No.
      * @param {type} message
-     * @returns {bool}
      */
     showConfirmation: function(message) {
-        return confirm(message);
+        $('#popup-confirm-message .message-text').text(message);
+        $('#popup-confirm-message').fadeIn();
     },
     /***
      * Displays an error message to the user.
      * @param {type} message
      */
     showError: function(message) {
-        // TODO: Replace with a nice dialog box.
-        alert(message);
+        $('#popup-error-message .message-text').text(message);
+        $('#popup-error-message').fadeIn();
     },
     /***
      * Displays an information message to the user.
      * @param {type} message
      */
     showMessage: function(message) {
-        // TODO: Replace with a nice dialog box.
-        alert(message);
+        $('#popup-info-message .message-text').text(message);
+        $('#popup-info-message').fadeIn();
     },
     /***
      * Shows the post details for the selected post.
@@ -1419,10 +1526,10 @@ var SwdView = {
 
         if (post.comments.length > 0) {
             for (i = 0; i < post.comments.length; i++) {
-                SwdView.addPostComment(post.comments[i]);
+                SwdView.addPostComment(post.comments[i], SwdPresenter.uid);
             }
         }
-        
+
         // Look for links and make them clickable.
         $('#linkdata-desc, #post-message-text').linkify();
 
@@ -1506,11 +1613,12 @@ var SwdView = {
     /***
      * Shows or hides a 'floating panel'
      * @param {type} id
+     * @param {type} id
      * @param {type} show
      * @param {type} effect
      * @param {type} options
      */
-    toggleFloatingPanel: function(id, show, effect, options) {
+    toggleFloatingPanel: function(id, show, effect, options, overlay) {
         if (!effect) {
             effect = 'drop';
         }
@@ -1519,13 +1627,17 @@ var SwdView = {
             options = {};
         }
 
+        if (!overlay) {
+            overlay = '#overlay';
+        }
+
         if (show) {
             // Make the panel modal by summoning an overlay.
-            $('#overlay').show();
+            $(overlay).show();
             $(id).show(effect, options, 400);
         }
         else {
-            $('#overlay').hide();
+            $(overlay).hide();
             $(id).hide(effect, options, 400);
         }
     }

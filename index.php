@@ -7,7 +7,6 @@ header('Expires: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
 header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 header('Cache-Control: no-cache, must-revalidate');
 header('Pragma: no-cache');
-
 ?>
 
 <!DOCTYPE html>
@@ -126,6 +125,39 @@ header('Pragma: no-cache');
                         </div>
                     </div>
                 </div>
+
+                <!--Message Boxes-->
+
+                <div id='message-box-panel' class='floating-panel modal hidden'>
+                    <div id='popup-error-message' class='ui-widget floating-panel-content dialog-box hidden'>
+                        <div class='message'>
+                            <div class='message-icon'></div>
+                            <span class='message-text'></span>
+                        </div>
+                        <div class='dialog-group'>
+                            <div class='button dialog-button button-ok'>OK</div>
+                        </div>
+                    </div>
+                    <div id='popup-info-message' class='ui-widget floating-panel-content dialog-box hidden'>
+                        <div class='message'>
+                            <div class='message-icon'></div>
+                            <span class='message-text'></span>
+                        </div>
+                        <div class='dialog-group'>
+                            <div class='button dialog-button button-ok'>OK</div>
+                        </div>
+                    </div>
+                    <div id='popup-confirm-message' class='ui-widget floating-panel-content dialog-box hidden'>
+                        <div class='message'>
+                            <div class='message-icon'></div>
+                            <span class='message-text'></span>
+                        </div>
+                        <div class='dialog-group'>
+                            <div class='button dialog-button button-yes'>Yes</div>
+                            <div class='button dialog-button button-no'>No</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div id='main-toolbar' class='ui-widget toolbar'>
@@ -180,36 +212,40 @@ header('Pragma: no-cache');
                     <span>Logout</span>
                 </div>
             </div>
-        </div>
 
-        <!--Ad Tiles that will be dynamically placed.-->
+            <!--Ad Tiles that will be dynamically placed.-->
 
-        <div id='ad-tile-1' class='post-block ui-widget ad-div post-block-text'>
-            <div class='wrapper'>
-                <p class='content'>
-                    Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
-                </p>
+            <div id='ad-tile-1' class='post-block ui-widget ad-div post-block-text'>
+                <div class='wrapper'>
+                    <p class='content'>
+                        Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+                    </p>
+                </div>
             </div>
-        </div>
-        <div id='ad-tile-2' class='post-block ui-widget ad-div post-block-text'>
-            <div class='wrapper'>
-                <p class='content'>
-                    Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
-                </p>
+            <div id='ad-tile-2' class='post-block ui-widget ad-div post-block-text'>
+                <div class='wrapper'>
+                    <p class='content'>
+                        Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+                    </p>
+                </div>
             </div>
-        </div>
-        <div id='ad-tile-3' class='post-block ui-widget ad-div post-block-text'>
-            <div class='wrapper'>
-                <p class='content'>
-                    Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
-                </p>
+            <div id='ad-tile-3' class='post-block ui-widget ad-div post-block-text'>
+                <div class='wrapper'>
+                    <p class='content'>
+                        Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+                    </p>
+                </div>
             </div>
-        </div>
-        <div id='ad-tile-4' class='post-block ui-widget ad-div post-block-text'>
-            <div class='wrapper'>
-                <p class='content'>
-                    Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
-                </p>
+            <div id='ad-tile-4' class='post-block ui-widget ad-div post-block-text'>
+                <div class='wrapper'>
+                    <p class='content'>
+                        Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+                    </p>
+                </div>
+            </div>
+
+            <div id='overlay-loading-posts' class='floating-overlay'>
+                <div class='ajax-loading-div semi-transparent'></div>
             </div>
         </div>
 

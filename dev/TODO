@@ -9,7 +9,6 @@ Include prompt to change app settings so that others using Swapper's Delight can
 Delete comments?
 Acknowledge tags in posts and comments.
 Allow creation of tags in posts and comments.
-Replace dialogs with nicer ones.
 Dynamic comment count updating through AJAX.
 Prevent sessions from running forever. (Implement a refresh limit.)
 View group info panel.
