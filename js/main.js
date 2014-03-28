@@ -308,6 +308,7 @@ var SwdPresenter = {
     refreshCommentCountInterval: null,
     refreshStreamInterval: null,
     postOffset: 0,
+    messageCallback: null,
     /***
      * Top-level error handler function.
      * @param {type} error
@@ -319,13 +320,14 @@ var SwdPresenter = {
             case 401:
                 // Access denied, most likely from an expired access token.
                 // Get a new access token by simply refreshing the page.
-                SwdView.showMessage(message);
+                //SwdView.showMessage(message);
+                SwdPresenter.message('info', message);
 
                 // Send the user to the app's main url.
                 window.location = window.location.href;
                 break;
             default:
-                SwdView.showError(message);
+                SwdPresenter.message('error', message);
         }
     },
     /**
@@ -477,14 +479,6 @@ var SwdPresenter = {
             setTimeout(SwdPresenter.facebookPageInfoPoll, 100);
         });
     },
-    /**
-     * Handle the result of modal message dialog.
-     * @param {type} response
-     */
-    handleModalResponse: function(response) {
-        SwdPresenter.modal = false;
-        SwdPresenter.modalCallback.call(SwdPresenter, response);
-    },
     /***
      * Load posts liked by user.
      * 
@@ -610,6 +604,13 @@ var SwdPresenter = {
      * @param {type} callback
      */
     message: function(type, message, callback) {
+        if (callback) {
+            SwdPresenter.messageCallback = callback;
+        }
+        else {
+            SwdPresenter.messageCallback = null;
+        }
+        
         switch (type) {
             case 'info':
                 SwdView.showMessage(message);
@@ -620,10 +621,6 @@ var SwdPresenter = {
             case 'error':
                 SwdView.showError(message);
                 break
-        }
-
-        if (callback) {
-            callback.call(SwdPresenter, SwdPresenter.messageResponse);
         }
     },
     /***
@@ -688,15 +685,15 @@ var SwdPresenter = {
         e.stopPropagation();
     },
     onClickMessageButtonNo: function(e, args) {
-        SwdPresenter.handleModalResponse(0)
+        SwdPresenter.messageCallback.call(SwdPresenter, 0);
         SwdView.closeMessageBoxes();
     },
     onClickMessageButtonOk: function(e, args) {
-        SwdPresenter.handleModalResponse(0)
+        SwdPresenter.messageCallback.call(SwdPresenter, 0);
         SwdView.closeMessageBoxes();
     },
     onClickMessageButtonYes: function(e, args) {
-        SwdPresenter.handleModalResponse(1)
+        SwdPresenter.messageCallback.call(SwdPresenter, 1);
         SwdView.closeMessageBoxes();
     },
     onClickMenuButton: function(e, args) {
@@ -732,7 +729,6 @@ var SwdPresenter = {
         e.stopPropagation();
     },
     onClickPostButtonDelete: function(e, args) {
-        //SwdView.showConfirmation('Are you sure you want to delete this post? You won\'t be able to get it back.');
         SwdPresenter.message('confirm', 'Are you sure you want to delete this post? You won\'t be able to get it back.', function(response) {
             if (response) {
                 SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
