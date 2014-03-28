@@ -12,3 +12,4 @@ Multiple image viewing support.
 Implement Search Post functionality, by FB user and by keyword.
 Fix issue of trying to bring up a post that is no longer there.
 Replace dialogs with nicer ones.
+Delete comments?
