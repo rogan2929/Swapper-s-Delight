@@ -958,7 +958,7 @@ a.link-title {
     color: #444;
 }*/
 
-#overlay {
+#overlay, #message-overlay {
     background: #ddd;
     position: absolute;
     opacity: 0.75;
@@ -967,6 +967,10 @@ a.link-title {
     top: 0;
     bottom: 0;
     z-index: 999;
+}
+
+#message-overlay {
+    z-index: 2000;
 }
 
 .ui-widget {
@@ -1123,6 +1127,7 @@ div.login-div {
     overflow-x: hidden;
     overflow-y: auto;
     padding: 10px;
+    z-index: 2001;
 }
 
 .dialog-box .message {

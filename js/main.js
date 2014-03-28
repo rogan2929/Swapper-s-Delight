@@ -308,8 +308,6 @@ var SwdPresenter = {
     refreshCommentCountInterval: null,
     refreshStreamInterval: null,
     postOffset: 0,
-    modal: false,
-    modalCallback: null,
     /***
      * Top-level error handler function.
      * @param {type} error
@@ -606,6 +604,29 @@ var SwdPresenter = {
         }
     },
     /***
+     * Brings up a message dialog box.
+     * @param {type} type
+     * @param {type} message
+     * @param {type} callback
+     */
+    message: function(type, message, callback) {
+        switch (type) {
+            case 'info':
+                SwdView.showMessage(message);
+                break;
+            case 'confirm':
+                SwdView.showConfirmation(message);
+                break;
+            case 'error':
+                SwdView.showError(message);
+                break
+        }
+
+        if (callback) {
+            callback.call(SwdPresenter, SwdPresenter.messageResponse);
+        }
+    },
+    /***
      * Update Facebook Canvas Size to match the canvas's clientHeight or html height, whichever is greater.
      */
     refreshFbCanvasSize: function() {
@@ -616,13 +637,6 @@ var SwdPresenter = {
                 height: Math.max($('body').height(), SwdPresenter.clientHeight)
             });
         });
-    },
-    /**
-     * Setter for SwdPresenter.modal.
-     * @param {type} modal
-     */
-    setModal: function(modal) {
-        SwdPresenter.modal = modal;
     },
     /***
      * Set currently selected group.
@@ -661,16 +675,17 @@ var SwdPresenter = {
         SwdView.closeAllUiMenus();
     },
     onClickHtml: function(e, args) {
-        if (!SwdPresenter.modal) {
-            SwdView.closeAllUiMenus();
-            SwdView.toggleFloatingPanel('.floating-panel', false);
-            SwdView.toggleToolbar('', false);
-        }
+        SwdView.closeAllUiMenus();
+        SwdView.toggleFloatingPanel('.floating-panel', false);
+        SwdView.toggleToolbar('', false);
     },
     onClickLogout: function(e, args) {
         // User selected 'logout' from the settings menu.
         // Take them back to their main Facebook page.
         window.location = "www.facebook.com";
+    },
+    onClickMessageOverlay: function(e, args) {
+        e.stopPropagation();
     },
     onClickMessageButtonNo: function(e, args) {
         SwdPresenter.handleModalResponse(0)
@@ -717,8 +732,8 @@ var SwdPresenter = {
         e.stopPropagation();
     },
     onClickPostButtonDelete: function(e, args) {
-
-        SwdPresenter.modalCallback = function(response) {
+        //SwdView.showConfirmation('Are you sure you want to delete this post? You won\'t be able to get it back.');
+        SwdPresenter.message('confirm', 'Are you sure you want to delete this post? You won\'t be able to get it back.', function(response) {
             if (response) {
                 SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
 
@@ -733,9 +748,7 @@ var SwdPresenter = {
                     fail: SwdPresenter.handleError
                 });
             }
-        }
-
-        SwdView.showConfirmation('Are you sure you want to delete this post? You won\'t be able to get it back.');
+        });
     },
     onClickPostButtonLike: function(e, args) {
         var id, userLikes;
@@ -1003,7 +1016,7 @@ var SwdView = {
      */
     closeMessageBoxes: function() {
         $('.ui-widget.dialog-box').fadeOut(function() {
-            SwdView.toggleFloatingPanel('#message-box-panel', false);
+            SwdView.toggleFloatingPanel('#message-box-panel', false, null, null, '#message-overlay');
         });
     },
     /***
@@ -1371,8 +1384,7 @@ var SwdView = {
      * @param {type} message
      */
     showConfirmation: function(message) {
-        SwdPresenter.setModal(true);
-        SwdView.toggleFloatingPanel('#message-box-panel', true);
+        SwdView.toggleFloatingPanel('#message-box-panel', true, null, null, '#message-overlay');
         $('#popup-confirm-message .message-text').text(message);
         $('#popup-confirm-message').fadeIn();
     },
@@ -1381,8 +1393,7 @@ var SwdView = {
      * @param {type} message
      */
     showError: function(message) {
-        SwdPresenter.setModal(true);
-        SwdView.toggleFloatingPanel('#message-box-panel', true);
+        SwdView.toggleFloatingPanel('#message-box-panel', true, null, null, '#message-overlay');
         $('#popup-error-message .message-text').text(message);
         $('#popup-error-message').fadeIn();
     },
@@ -1391,8 +1402,7 @@ var SwdView = {
      * @param {type} message
      */
     showMessage: function(message) {
-        SwdPresenter.setModal(true);
-        SwdView.toggleFloatingPanel('#message-box-panel', true);
+        SwdView.toggleFloatingPanel('#message-box-panel', true, null, null, '#message-overlay');
         $('#popup-info-message .message-text').text(message);
         $('#popup-info-message').fadeIn();
     },
@@ -1561,11 +1571,12 @@ var SwdView = {
     /***
      * Shows or hides a 'floating panel'
      * @param {type} id
+     * @param {type} id
      * @param {type} show
      * @param {type} effect
      * @param {type} options
      */
-    toggleFloatingPanel: function(id, show, effect, options) {
+    toggleFloatingPanel: function(id, show, effect, options, overlay) {
         if (!effect) {
             effect = 'drop';
         }
@@ -1573,14 +1584,18 @@ var SwdView = {
         if (!options) {
             options = {};
         }
+        
+        if (!overlay) {
+            overlay = '#overlay';
+        }
 
         if (show) {
             // Make the panel modal by summoning an overlay.
-            $('#overlay').show();
+            $(overlay).show();
             $(id).show(effect, options, 400);
         }
         else {
-            $('#overlay').hide();
+            $(overlay).hide();
             $(id).hide(effect, options, 400);
         }
     }
