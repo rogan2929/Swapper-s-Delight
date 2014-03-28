@@ -669,7 +669,16 @@ var SwdPresenter = {
         SwdPresenter.loadPosts(false, true);
     },
     onClickCommentDelete: function(e, args) {
-        alert('test');
+        var id, commentId;
+        
+        id = $(e.currentTarget).attr('id');
+        
+        // Prompt for deletion of the comment.
+        SwdPresenter.message('confirm', 'Delete this comment?', function(response) {
+            if (response === 1) {
+                SwdView.removeComment(e.currentTarget);
+            }
+        });
     },
     onClickFloatingPanelCloseButton: function(e, args) {
         SwdView.toggleFloatingPanel('.floating-panel', false);
@@ -976,7 +985,7 @@ var SwdView = {
             $(commentDiv).append('<div class="delete-button"></div>');
         }
         
-        $(commentDiv).hide().linkify().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
+        $(commentDiv).attr('id', comment.object_id).hide().linkify().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
         
         // Hook up the click event handler.
         $(commentDiv).children('.delete-button').click(SwdView.handlers['onClickCommentDelete']);
@@ -1060,6 +1069,15 @@ var SwdView = {
                 my: 'left top',
                 at: 'left bottom'
             });
+        });
+    },
+    /***
+     * Remove a comment from the view.
+     * @param {type} id
+     */
+    removeComment: function(id) {
+        $(id).fadeOut(function() {
+            $(this).remove();
         });
     },
     /***
