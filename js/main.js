@@ -662,11 +662,7 @@ var SwdPresenter = {
         // Prevent the event from bubbling up the DOM and closing the floating panel.
         e.stopPropagation();
 
-        SwdPresenter.message('info', 'Integer sed ipsum elit. Sed a vulputate lorem. Etiam lacus elit, pellentesque at interdum quis, tempor sit amet sem. Quisque tempus posuere orci, in placerat ante pellentesque id.', function (response) {
-            alert(response);
-        });
-
-        //SwdView.toggleFloatingPanel('#new-post-panel', true);
+        SwdView.toggleFloatingPanel('#new-post-panel', true);
     },
     onClickButtonRefresh: function(e, args) {
         SwdPresenter.loadPosts(false, true);
@@ -748,7 +744,7 @@ var SwdPresenter = {
     },
     onClickPostButtonDelete: function(e, args) {
         SwdPresenter.message('confirm', 'Are you sure you want to delete this post? You won\'t be able to get it back.', function(response) {
-            if (response) {
+            if (response !== 0) {
                 SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
 
                 // Delete the post and then remove it from the feed.
