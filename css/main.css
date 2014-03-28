@@ -947,7 +947,7 @@ a.link-title {
 
 .post-comment {
     margin-bottom: 12px;
-/*    font-size: 0.95em !important;*/
+    position: relative;
 }
 
 .post-comment > div:first-child {

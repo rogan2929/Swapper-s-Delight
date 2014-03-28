@@ -395,6 +395,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickButtonGroups', SwdPresenter.onClickButtonGroups, '#button-groups', 'click');
                                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
                                 SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
+                                SwdView.installHandler('onClickCommentDelete', SwdPresenter.onClickCommentDelete, '.post-comment .delete-button', 'click');
                                 SwdView.installHandler('onClickFloatingPanelCloseButton', SwdPresenter.onClickFloatingPanelCloseButton, '.floating-panel-content > .close-button', 'click');
                                 SwdView.installHandler('onClickFloatingPanelContent', SwdPresenter.onClickFloatingPanelContent, '.floating-panel-content', 'click');
                                 SwdView.installHandler('onClickFloatingPanelModal', SwdPresenter.onClickFloatingPanelModal, '.floating-panel.modal', 'click');
@@ -666,6 +667,9 @@ var SwdPresenter = {
     },
     onClickButtonRefresh: function(e, args) {
         SwdPresenter.loadPosts(false, true);
+    },
+    onClickCommentDelete: function(e, args) {
+        alert('test');
     },
     onClickFloatingPanelCloseButton: function(e, args) {
         SwdView.toggleFloatingPanel('.floating-panel', false);
@@ -964,16 +968,18 @@ var SwdView = {
 
         // Get a human-readable version of the comment's timestamp value.
         timeStamp = new moment(new Date(comment.time * 1000));
+
+        commentDiv = $('<div class="post-comment"><div><a href="' + comment.user.profile_url + '" target="_blank">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><div class="timestamp">' + timeStamp.calendar() + '</div></div><div class="post-comment-text">' + comment.text + '</div></div>');
         
         // If the current user is the owner of the comment, display the delete and edit buttons.
         if (comment.user.uid === uid) {
-            commentDiv = $('<div class="post-comment"><div><a href="' + comment.user.profile_url + '" target="_blank">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><div class="timestamp">' + timeStamp.calendar() + '</div><div class="delete-button"></div></div><div class="post-comment-text">' + comment.text + '</div></div>');
-        }
-        else {
-            commentDiv = $('<div class="post-comment"><div><a href="' + comment.user.profile_url + '" target="_blank">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><div class="timestamp">' + timeStamp.calendar() + '</div></div><div class="post-comment-text">' + comment.text + '</div></div>');
+            $(commentDiv).append('<div class="delete-button"></div>');
         }
         
         $(commentDiv).hide().linkify().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
+        
+        // Hook up the click event handler.
+        $(commentDiv).children('.delete-button').click(SwdView.handlers['onClickCommentDelete']);
     },
     /**
      * Init function for SwdView.
