@@ -2,6 +2,6 @@
 
 require_once 'dal.php';
 
-$postId = $_GET['postId'];
+$id = $_GET['id'];
 
-(new DataAccessLayer())->deleteObject($postId);
+(new DataAccessLayer())->deleteObject($id);
