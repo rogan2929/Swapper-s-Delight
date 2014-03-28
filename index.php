@@ -253,6 +253,7 @@ header('Pragma: no-cache');
             <div class='ajax-loading-div semi-transparent'></div>
         </div>
         <div id='overlay' class='hidden'></div>
+        <div id='message-overlay' class='hidden'></div>
         <div id='post-block-mask' class='post-block ui-widget hidden'></div>
         <div id='selection-item-mask' class='button selection-item ui-widget hidden'></div>
 
