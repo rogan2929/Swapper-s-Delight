@@ -121,7 +121,7 @@ var SwdModel = {
      * @param {type} callbacks Completed callback function.
      */
     getNewestPosts: function(gid, refresh, offset, callbacks) {
-        var url = '/php/new-posts.php?gid=' + gid + '&refresh=' + (refresh | 0) + '&offset=' + offset + '&limit=25';
+        var url = '/php/new-posts.php?gid=' + gid + '&refresh=' + (refresh | 0) + '&offset=' + offset + '&limit=51';
 
         $.ajax({
             type: 'GET',

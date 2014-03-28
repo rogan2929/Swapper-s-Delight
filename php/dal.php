@@ -120,7 +120,7 @@ class DataAccessLayer {
 
     public function hideGroup($gid) {
         $uid = $this->getMe();
- 
+
         $conn = sqlsrv_connect($this->sqlServer, $this->sqlConnectionInfo);
 
         if ($conn === false) {
@@ -246,7 +246,7 @@ class DataAccessLayer {
             'method' => 'fql.multiquery',
             'queries' => $queries
         ));
-        
+
         // Check to ensure that post data was actually returned.
         // This is done by checking for post_id in the fql_result_set.
         if (!isset($response[0]['fql_result_set'][0]['post_id'])) {
@@ -256,13 +256,12 @@ class DataAccessLayer {
         }
 
         try {
-        // Begin parsing the returned data.
-        $post = $response[0]['fql_result_set'][0];
-        $post['comments'] = $response[1]['fql_result_set'];
-        $images = $response[2]['fql_result_set'];
-        $post['user'] = $response[3]['fql_result_set'][0];
-        }
-        catch (Exception $ex) {
+            // Begin parsing the returned data.
+            $post = $response[0]['fql_result_set'][0];
+            $post['comments'] = $response[1]['fql_result_set'];
+            $images = $response[2]['fql_result_set'];
+            $post['user'] = $response[3]['fql_result_set'][0];
+        } catch (Exception $ex) {
             echo 'Sorry, but this post couldn\'t be loaded. It may have been deleted.';
             http_response_code(500);
         }
@@ -307,7 +306,7 @@ class DataAccessLayer {
 
         return $post;
     }
-    
+
     public function refreshCommentCounts($postIds) {
         
     }
@@ -455,7 +454,8 @@ class DataAccessLayer {
         $page = array_slice($posts, $offset, $limit);
 
         // Build a multiquery for each post in the provided array.
-        for ($i = 0; $i < count($page) && $i < $limit; $i++) {
+        // If count($page) > 50, then it has to be broken up, since the maximum batch size is only 50.
+        for ($i = 0; $i < count($page); $i++) {
             $queries[] = array(
                 'method' => 'POST',
                 'relative_url' => 'method/fql.multiquery?queries=' . json_encode(array(
@@ -464,18 +464,21 @@ class DataAccessLayer {
                     'userQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url,pic FROM user WHERE uid IN (SELECT actor_id FROM #streamQuery)'
                 ))
             );
-        }
 
-        // Execute a batch query.
-        $response = $this->api('/', 'POST', array(
-            'batch' => json_encode($queries),
-            'include_headers' => false
-        ));
 
-        // Sift through the results.
-        for ($i = 0; $i < count($response); $i++) {
-            $body = json_decode($response[$i]['body'], true);
-            $result = array_merge($result, $this->processStreamQuery($body[0]['fql_result_set'], $body[1]['fql_result_set'], $body[2]['fql_result_set']));
+            // Execute a batch query if the limit has been reached. (Either every 50 posts, or if less than 50, then the post count.)
+            if ($i % 50 == 0 || $i % count($page) == 0) {
+                $response = $this->api('/', 'POST', array(
+                    'batch' => json_encode($queries),
+                    'include_headers' => false
+                ));
+
+                // Sift through the results.
+                for ($j = 0; $j < count($response); $j++) {
+                    $body = json_decode($response[$j]['body'], true);
+                    $result = array_merge($result, $this->processStreamQuery($body[0]['fql_result_set'], $body[1]['fql_result_set'], $body[2]['fql_result_set']));
+                }
+            }
         }
 
         // If there are no posts to load, then insert an terminating post.
@@ -665,22 +668,22 @@ class DataAccessLayer {
 
     private function queryStream() {
         $uid = $this->getMe();
-        
+
         $windowStart = time();
         $windowSize = $this->getOptimalWindowSize();
-        
+
         // Execute a batch request against the group's feed.
         $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 2);
-        
+
         // Update the $windowStart time to reflect how many times $windowSize has been subtracted from $windowStart.
         $windowStart = $windowStart - ($windowSize * 50 * 2);
-        
+
         // Execute a second request to pick up posts that are even older, but with a larger window size.
         $stream = array_merge($stream, $this->getFeedData($uid, 12 * 3600, $windowStart, 10));
-        
+
         return $stream;
     }
-    
+
     /**
      * Execute a batch request against the selected group's feed.
      * 
@@ -764,4 +767,5 @@ class DataAccessLayer {
             sleep(3);
         }
     }
+
 }
