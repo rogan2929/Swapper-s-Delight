@@ -669,14 +669,14 @@ var SwdPresenter = {
         SwdPresenter.loadPosts(false, true);
     },
     onClickCommentDelete: function(e, args) {
-        var id, commentId;
+        var id;
         
-        id = $(e.currentTarget).attr('id');
+        id = $(e.currentTarget).parent().attr('id');
         
         // Prompt for deletion of the comment.
         SwdPresenter.message('confirm', 'Delete this comment?', function(response) {
             if (response === 1) {
-                SwdView.removeComment(e.currentTarget);
+                SwdView.removeComment(id);
             }
         });
     },
