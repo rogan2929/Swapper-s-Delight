@@ -262,6 +262,22 @@ a:visited {
     cursor: pointer;
 }
 
+.delete-button {
+    height: 20px;
+    width: 20px;
+    z-index: 1001;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-image: url('/img/delete.png');
+    background-repeat: no-repeat;
+}
+
+.delete-button:hover {
+    background-image: url('/img/delete-hover.png');
+    cursor: pointer;
+}
+
 .floating-panel > .floating-panel-content {
     border: 1px solid #ccc;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
