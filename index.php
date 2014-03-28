@@ -243,10 +243,6 @@ header('Pragma: no-cache');
                     </p>
                 </div>
             </div>
-
-            <div id='overlay-loading-posts' class='floating-overlay'>
-                <div class='ajax-loading-div semi-transparent'></div>
-            </div>
         </div>
 
         <div id='overlay-loading-posts' class='floating-overlay'>
