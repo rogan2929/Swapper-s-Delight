@@ -1127,6 +1127,9 @@ div.login-div {
     overflow-x: hidden;
     overflow-y: auto;
     padding: 10px;
+}
+
+.modal {
     z-index: 2001;
 }
 

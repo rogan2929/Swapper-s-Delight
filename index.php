@@ -128,7 +128,7 @@ header('Pragma: no-cache');
 
                 <!--Message Boxes-->
 
-                <div id='message-box-panel' class='floating-panel hidden'>
+                <div id='message-box-panel' class='floating-panel modal hidden'>
                     <div id='popup-error-message' class='ui-widget floating-panel-content dialog-box hidden'>
                         <div class='message'>
                             <div class='message-icon'></div>
