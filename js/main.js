@@ -29,14 +29,14 @@ var SwdModel = {
 
     },
     /***
-     * Delete a post from a group's feed.
-     * @param {type} postId
+     * Delete an object from Facebook.
+     * @param {type} id
      * @param {type} callbacks
      */
-    deletePost: function(postId, callbacks) {
+    deleteObject: function(id, callbacks) {
         $.ajax({
             type: 'GET',
-            url: '/php/delete-post.php?postId=' + postId,
+            url: '/php/delete-object.php?id=' + id,
             success: function(response) {
                 callbacks.success.call(SwdModel, response);
             },
@@ -677,6 +677,7 @@ var SwdPresenter = {
         SwdPresenter.message('confirm', 'Delete this comment?', function(response) {
             if (response === 1) {
                 SwdView.removeComment(id);
+                SwdModel.deleteObject(id, function() {});
             }
         });
     },
@@ -761,7 +762,7 @@ var SwdPresenter = {
                 SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
 
                 // Delete the post and then remove it from the feed.
-                SwdModel.deletePost(SwdPresenter.selectedPost.post_id, {
+                SwdModel.deleteObject(SwdPresenter.selectedPost.post_id, {
                     success: function(response) {
                         SwdView.toggleAjaxLoadingDiv('#post-details-panel', false);
                         SwdView.toggleFloatingPanel('#post-details-panel', false);

@@ -135,8 +135,8 @@ class DataAccessLayer {
 
     // Post operation functions.
 
-    public function deletePost($postId) {
-        $this->api('/' . $postId, 'DELETE');
+    public function deleteObject($id) {
+        $this->api('/' . $id, 'DELETE');
     }
 
     public function likePost($postId, $userLikes) {
