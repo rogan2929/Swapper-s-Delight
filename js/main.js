@@ -402,6 +402,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickMessageButtonNo', SwdPresenter.onClickMessageButtonNo, '.dialog-box .button-no', 'click');
                                 SwdView.installHandler('onClickMessageButtonOk', SwdPresenter.onClickMessageButtonOk, '.dialog-box .button-ok', 'click');
                                 SwdView.installHandler('onClickMessageButtonYes', SwdPresenter.onClickMessageButtonYes, '.dialog-box .button-yes', 'click');
+                                SwdView.installHandler('onClickMessageOverlay', SwdPresenter.onClickMessageOverlay, '#message-overlay', 'click');
                                 SwdView.installHandler('onClickPermalink', SwdPresenter.onClickPermalink, '#post-button-permalink', 'click');
                                 SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
                                 SwdView.installHandler('onClickPostButtonDelete', SwdPresenter.onClickPostButtonDelete, '#post-button-delete', 'click');
