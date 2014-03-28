@@ -969,7 +969,7 @@ var SwdView = {
         
         // If the current user is the owner of the comment, display the delete and edit buttons.
         if (comment.user.uid === uid) {
-            $(commentDiv).children(0).append('<div class="delete-button"></div>');
+            $(commentDiv).append('<div class="delete-button"></div>');
         }
         
         $(commentDiv).hide().linkify().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
