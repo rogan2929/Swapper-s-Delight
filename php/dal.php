@@ -465,10 +465,23 @@ class DataAccessLayer {
                 ))
             );
         }
-        
-        echo json_encode($queries);
 
         $processed = 0;
+        
+        while ($processed < count($page)) {
+            $response = $this->api('/', 'POST', array(
+                'batch' => json_encode(array_slice($queries, $processed, 50)),
+                'include_headers' => false
+            ));
+            
+            // Sift through the results.
+            for ($i = 0; $i < count($response); $i++) {
+                $body = json_decode($response[$i]['body'], true);
+                $result = array_merge($result, $this->processStreamQuery($body[0]['fql_result_set'], $body[1]['fql_result_set'], $body[2]['fql_result_set']));
+            }
+            
+            $processed += count($response);
+        }
 
 //        // Execute the batch queries in chunks of 50.
 //        for ($i = 0; $i < count($queries); $i += 50) {
