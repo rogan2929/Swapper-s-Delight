@@ -397,13 +397,13 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
                                 SwdView.installHandler('onClickFloatingPanelCloseButton', SwdPresenter.onClickFloatingPanelCloseButton, '.floating-panel-content > .close-button', 'click');
                                 SwdView.installHandler('onClickFloatingPanelContent', SwdPresenter.onClickFloatingPanelContent, '.floating-panel-content', 'click');
+                                SwdView.installHandler('onClickFloatingPanelModal', SwdPresenter.onClickFloatingPanelModal, '.floating-panel.modal', 'click');
                                 SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
                                 SwdView.installHandler('onClickLogout', SwdPresenter.onClickLogout, '#menu-item-logout', 'click');
                                 SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
                                 SwdView.installHandler('onClickMessageButtonNo', SwdPresenter.onClickMessageButtonNo, '.dialog-box .button-no', 'click');
                                 SwdView.installHandler('onClickMessageButtonOk', SwdPresenter.onClickMessageButtonOk, '.dialog-box .button-ok', 'click');
                                 SwdView.installHandler('onClickMessageButtonYes', SwdPresenter.onClickMessageButtonYes, '.dialog-box .button-yes', 'click');
-                                SwdView.installHandler('onClickMessageOverlay', SwdPresenter.onClickMessageOverlay, '#message-overlay', 'click');
                                 SwdView.installHandler('onClickPermalink', SwdPresenter.onClickPermalink, '#post-button-permalink', 'click');
                                 SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
                                 SwdView.installHandler('onClickPostButtonDelete', SwdPresenter.onClickPostButtonDelete, '#post-button-delete', 'click');
@@ -678,6 +678,9 @@ var SwdPresenter = {
     onClickFloatingPanelContent: function(e, args) {
         SwdView.closeAllUiMenus();
     },
+    onClickFloatingPanelModal: function(e, args) {
+        e.stopPropagation();
+    },
     onClickHtml: function(e, args) {
         SwdView.closeAllUiMenus();
         SwdView.toggleFloatingPanel('.floating-panel', false);
@@ -687,9 +690,6 @@ var SwdPresenter = {
         // User selected 'logout' from the settings menu.
         // Take them back to their main Facebook page.
         window.location = "www.facebook.com";
-    },
-    onClickMessageOverlay: function(e, args) {
-        e.stopPropagation();
     },
     onClickMessageButtonNo: function(e, args) {
         if (SwdPresenter.messageCallback) {
