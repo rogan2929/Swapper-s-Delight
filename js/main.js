@@ -321,10 +321,11 @@ var SwdPresenter = {
                 // Access denied, most likely from an expired access token.
                 // Get a new access token by simply refreshing the page.
                 //SwdView.showMessage(message);
-                SwdPresenter.message('info', message);
+                SwdPresenter.message('info', message, function(response) {
+                    // Send the user to the app's main url.
+                    window.location = window.location.href;
+                });
 
-                // Send the user to the app's main url.
-                window.location = window.location.href;
                 break;
             default:
                 SwdPresenter.message('error', message);
@@ -611,9 +612,9 @@ var SwdPresenter = {
         else {
             SwdPresenter.messageCallback = null;
         }
-        
+
         SwdView.toggleFloatingPanel('#message-box-panel', true, null, null, '#message-overlay');
-        
+
         switch (type) {
             case 'info':
                 SwdView.showMessage(message);
@@ -660,8 +661,10 @@ var SwdPresenter = {
         // Prevent the event from bubbling up the DOM and closing the floating panel.
         e.stopPropagation();
 
-        SwdPresenter.message('confirm', 'Integer sed ipsum elit. Sed a vulputate lorem. Etiam lacus elit, pellentesque at interdum quis, tempor sit amet sem. Quisque tempus posuere orci, in placerat ante pellentesque id.');
-        
+        SwdPresenter.message('confirm', 'Integer sed ipsum elit. Sed a vulputate lorem. Etiam lacus elit, pellentesque at interdum quis, tempor sit amet sem. Quisque tempus posuere orci, in placerat ante pellentesque id.', function (response) {
+            alert(response);
+        });
+
 
         //SwdView.toggleFloatingPanel('#new-post-panel', true);
     },
@@ -689,15 +692,23 @@ var SwdPresenter = {
         e.stopPropagation();
     },
     onClickMessageButtonNo: function(e, args) {
-        SwdPresenter.messageCallback.call(SwdPresenter, 0);
+        if (SwdPresenter.messageCallback) {
+            SwdPresenter.messageCallback.call(SwdPresenter, 0);
+        }
+
         SwdView.closeMessageBoxes();
     },
     onClickMessageButtonOk: function(e, args) {
-        SwdPresenter.messageCallback.call(SwdPresenter, 0);
+        if (SwdPresenter.messageCallback) {
+            SwdPresenter.messageCallback.call(SwdPresenter, 0);
+        }
         SwdView.closeMessageBoxes();
     },
     onClickMessageButtonYes: function(e, args) {
-        SwdPresenter.messageCallback.call(SwdPresenter, 1);
+        if (SwdPresenter.messageCallback) {
+            SwdPresenter.messageCallback.call(SwdPresenter, 1);
+        }
+
         SwdView.closeMessageBoxes();
     },
     onClickMenuButton: function(e, args) {
@@ -1579,7 +1590,7 @@ var SwdView = {
         if (!options) {
             options = {};
         }
-        
+
         if (!overlay) {
             overlay = '#overlay';
         }
