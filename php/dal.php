@@ -468,6 +468,7 @@ class DataAccessLayer {
 
         $processed = 0;
         
+        // Execute the batch queries in chunks of 50.
         while ($processed < count($page)) {
             $response = $this->api('/', 'POST', array(
                 'batch' => json_encode(array_slice($queries, $processed, 50)),
