@@ -611,6 +611,8 @@ var SwdPresenter = {
             SwdPresenter.messageCallback = null;
         }
         
+        SwdView.toggleFloatingPanel('#message-box-panel', true, null, null, '#message-overlay');
+        
         switch (type) {
             case 'info':
                 SwdView.showMessage(message);
@@ -1011,9 +1013,7 @@ var SwdView = {
      * @returns {undefined}
      */
     closeMessageBoxes: function() {
-        $('.ui-widget.dialog-box').fadeOut(function() {
-            SwdView.toggleFloatingPanel('#message-box-panel', false, null, null, '#message-overlay');
-        });
+        SwdView.toggleFloatingPanel('#message-box-panel', false, null, null, '#message-overlay');
     },
     /***
      * Sets menu positions.
@@ -1380,7 +1380,6 @@ var SwdView = {
      * @param {type} message
      */
     showConfirmation: function(message) {
-        SwdView.toggleFloatingPanel('#message-box-panel', true, null, null, '#message-overlay');
         $('#popup-confirm-message .message-text').text(message);
         $('#popup-confirm-message').fadeIn();
     },
@@ -1389,7 +1388,6 @@ var SwdView = {
      * @param {type} message
      */
     showError: function(message) {
-        SwdView.toggleFloatingPanel('#message-box-panel', true, null, null, '#message-overlay');
         $('#popup-error-message .message-text').text(message);
         $('#popup-error-message').fadeIn();
     },
@@ -1398,7 +1396,6 @@ var SwdView = {
      * @param {type} message
      */
     showMessage: function(message) {
-        SwdView.toggleFloatingPanel('#message-box-panel', true, null, null, '#message-overlay');
         $('#popup-info-message .message-text').text(message);
         $('#popup-info-message').fadeIn();
     },
