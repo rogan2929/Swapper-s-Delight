@@ -414,7 +414,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickPostBlockLoadMore', SwdPresenter.onClickPostBlockLoadMore, '.post-block.load-more', 'click');
                                 SwdView.installHandler('onClickPostImageTile', SwdPresenter.onClickPostImageTile, '.post-image-tile', 'click');
                                 SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
-                                SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .delete-button', 'click');
+                                SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .close-button', 'click');
                                 SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
                                 SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
                                 SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#post-comment-text', 'keyup');
@@ -930,7 +930,7 @@ var SwdView = {
         $('#select-group-no-groups').hide();
 
         for (i = 0; i < groups.length; i++) {
-            groupItem = $('<div id="' + groups[i].gid + '" class="button group-selection-item selection-item select-group"><div class="delete-button"></div><div class="selection-item-content"><span class="button-icon" style="background-image: url(' + groups[i].icon + ')"></span><div>' + groups[i].name + '</div></div></div>');
+            groupItem = $('<div id="' + groups[i].gid + '" class="button group-selection-item selection-item select-group"><div class="close-button"></div><div class="selection-item-content"><span class="button-icon" style="background-image: url(' + groups[i].icon + ')"></span><div>' + groups[i].name + '</div></div></div>');
 
             // Look through the string containing hiddenGroup IDs. If there is a match, hide the group.
             if (hiddenGroups && hiddenGroups.indexOf(groups[i].gid) !== -1) {
