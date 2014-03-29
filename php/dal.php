@@ -686,6 +686,10 @@ class DataAccessLayer {
 
         return $stream;
     }
+    
+    public function getStream() {
+        return $this->stream;
+    }
 
     /**
      * Execute a batch request against the selected group's feed.
