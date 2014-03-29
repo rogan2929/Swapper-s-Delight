@@ -6,7 +6,6 @@ Helper Popups:
     Point out controls for post details toolbar.
 Include prompt to change app settings so that others using Swapper's Delight can see the current user's photos.
     https://www.facebook.com/settings?tab=applications&section=friends_share&view (Apps Others Use)
-Delete comments?
 Acknowledge tags in posts and comments.
 Allow creation of tags in posts and comments.
 Dynamic comment count updating through AJAX.
