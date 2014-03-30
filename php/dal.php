@@ -692,15 +692,25 @@ class DataAccessLayer {
         $uid = $this->getMe();
 
         $windowStart = time();
+        $windowStart2 = $windowStart;
         $windowSize = $this->getOptimalWindowSize();
 
         // Execute a batch request against the group's feed.
         echo $windowSize . ' ';
         $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 2);
+        $windowStart = $windowStart - ($windowSize * 50 * 2);
+
+        // Execute a second request to pick up posts that are even older, but with a larger window size.
+        $stream = array_merge($stream, $this->getFeedData($uid, 12 * 3600, $windowStart, 10));
         echo count($stream) . "<br/>";
         
         echo $windowSize * 2 . ' ';
-        $stream = $this->getFeedData($uid, $windowSize * 2, $windowStart, 50, 1);
+        $stream = $this->getFeedData($uid, $windowSize, $windowStart2, 50, 1);
+        $windowStart2 = $windowStart2 - ($windowSize * 50 * 1);
+        $stream = $this->getFeedData($uid, $windowSize * 2, $windowStart2, 25, 1);
+
+        // Execute a second request to pick up posts that are even older, but with a larger window size.
+        $stream = array_merge($stream, $this->getFeedData($uid, 12 * 3600, $windowStart2, 10));
         echo count($stream);
     }
     
