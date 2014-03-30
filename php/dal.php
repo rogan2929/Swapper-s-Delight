@@ -75,6 +75,7 @@ class DataAccessLayer {
      */
     public function setGid($gid) {
         $this->gid = $gid;
+        $_SESSION['gid'] = $gid;
     }
 
     /** Methods * */
@@ -467,20 +468,20 @@ class DataAccessLayer {
         }
 
         $processed = 0;
-        
+
         // Execute the batch queries in chunks of 50.
         while ($processed < count($page)) {
             $response = $this->api('/', 'POST', array(
                 'batch' => json_encode(array_slice($queries, $processed, 50)),
                 'include_headers' => false
             ));
-            
+
             // Sift through the results.
             for ($i = 0; $i < count($response); $i++) {
                 $body = json_decode($response[$i]['body'], true);
                 $result = array_merge($result, $this->processStreamQuery($body[0]['fql_result_set'], $body[1]['fql_result_set'], $body[2]['fql_result_set']));
             }
-            
+
             $processed += count($response);
         }
 
@@ -676,15 +677,42 @@ class DataAccessLayer {
         $windowSize = $this->getOptimalWindowSize();
 
         // Execute a batch request against the group's feed.
-        $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 2);
+//        $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 2);
+//
+//        // Update the $windowStart time to reflect how many times $windowSize has been subtracted from $windowStart.
+//        $windowStart = $windowStart - ($windowSize * 50 * 2);
+//
+//        // Execute a second request to pick up posts that are even older, but with a larger window size.
+//        $stream = array_merge($stream, $this->getFeedData($uid, 12 * 3600, $windowStart, 10));
 
-        // Update the $windowStart time to reflect how many times $windowSize has been subtracted from $windowStart.
-        $windowStart = $windowStart - ($windowSize * 50 * 2);
-
-        // Execute a second request to pick up posts that are even older, but with a larger window size.
-        $stream = array_merge($stream, $this->getFeedData($uid, 12 * 3600, $windowStart, 10));
+        $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 1);
+        $windowStart = $windowStart - ($windowSize * 50 * 1);
+        $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 2, $windowStart, 13, 1));
+        $windowStart = $windowStart - ($windowSize * 13 * 1);
+        $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 3, $windowStart, 12, 1));
 
         return $stream;
+    }
+
+    public function testStream() {
+        $uid = $this->getMe();
+
+        $windowStart = time();
+        $windowStart2 = $windowStart;
+        $windowSize = $this->getOptimalWindowSize();
+
+        // Execute a batch request against the group's feed.
+        echo $windowSize . ' ';
+        $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 2);
+        echo count($stream) . "<br/>";
+
+        echo $windowSize . ' ';
+        $stream2 = $this->getFeedData($uid, $windowSize, $windowStart2, 50, 1);
+        $windowStart2 = $windowStart2 - ($windowSize * 50 * 1);
+        $stream2 = array_merge($stream2, $this->getFeedData($uid, $windowSize * 2, $windowStart2, 13, 1));
+        $windowStart2 = $windowStart2 - ($windowSize * 13 * 1);
+        $stream2 = array_merge($stream2, $this->getFeedData($uid, $windowSize * 3, $windowStart2, 12, 1));
+        echo count($stream2);
     }
 
     /**
