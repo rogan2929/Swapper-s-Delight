@@ -225,12 +225,21 @@ a:visited {
     padding-top: 6px;
     padding-bottom: 6px;
     width: 138px;
-/*    margin-top: 10px;*/
+    /*    margin-top: 10px;*/
     resize: none;
 }
 
 #like-button-wrapper {
-    
+    position: relative;
+}
+
+#like-button-wrapper > iframe {
+    width: 300px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 #main-panel {
