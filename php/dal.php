@@ -700,7 +700,7 @@ class DataAccessLayer {
         $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 2);
         echo count($stream) . "<br/>";
         
-        echo $windowSize * 2 . ' ';
+        echo $windowSize . ' ';
         $stream2 = $this->getFeedData($uid, $windowSize, $windowStart2, 25, 1);
         $windowStart2 = $windowStart2 - ($windowSize * 25 * 1);
         $stream2 = array_merge($stream2, $this->getFeedData($uid, $windowSize * 2, $windowStart2, 25, 1));
