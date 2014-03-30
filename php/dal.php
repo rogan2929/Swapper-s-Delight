@@ -677,7 +677,7 @@ class DataAccessLayer {
         $windowSize = $this->getOptimalWindowSize();
 
         // Execute a batch request against the group's feed.
-        $stream = $this->getFeedData($uid, $windowSize * 2, $windowStart, 50, 1);
+        $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 2);
 
         // Update the $windowStart time to reflect how many times $windowSize has been subtracted from $windowStart.
         $windowStart = $windowStart - ($windowSize * 50 * 2);
