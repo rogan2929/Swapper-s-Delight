@@ -688,6 +688,22 @@ class DataAccessLayer {
         return $stream;
     }
     
+    public function testStream() {
+        $uid = $this->getMe();
+
+        $windowStart = time();
+        $windowSize = $this->getOptimalWindowSize();
+
+        // Execute a batch request against the group's feed.
+        echo $windowSize . ' ';
+        $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 2);
+        echo count($stream);
+        
+        echo $windowSize * 2 . ' ';
+        $stream = $this->getFeedData($uid, $windowSize * 2, $windowStart, 50, 1);
+        echo count($stream);
+    }
+    
     public function getStream() {
         return $this->stream;
     }
