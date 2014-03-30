@@ -234,12 +234,13 @@ a:visited {
 }
 
 #like-button-wrapper > iframe {
-    width: 200px;
+/*    width: 200px;
     position: absolute;
     left: 0;
     right: 0;
     margin-right: auto;
-    margin-left: auto;
+    margin-left: auto;*/
+    text-align: center;
 }
 
 #main-panel {
