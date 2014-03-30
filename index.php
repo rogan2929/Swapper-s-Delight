@@ -22,6 +22,7 @@ header('Pragma: no-cache');
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Swapper's Delight Buy, Sell, and Trade Assistant">
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
