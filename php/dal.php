@@ -697,10 +697,10 @@ class DataAccessLayer {
         // Execute a batch request against the group's feed.
         echo $windowSize . ' ';
         $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 2);
-        echo count($stream);
+        echo count($stream) . "<br/>";
         
         echo $windowSize * 2 . ' ';
-        $stream = $this->getFeedData($uid, $windowSize * 2, $windowStart, 50, 1);
+        $stream = $this->getFeedData($uid, $windowSize * 1.5, $windowStart, 50, 1);
         echo count($stream);
     }
     
