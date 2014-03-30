@@ -75,6 +75,7 @@ class DataAccessLayer {
      */
     public function setGid($gid) {
         $this->gid = $gid;
+        $_SESSION['gid'] = $gid;
     }
 
     /** Methods * */
@@ -312,10 +313,8 @@ class DataAccessLayer {
     }
 
     public function refreshStream() {
-        if (isset($_SESSION['gid']) || isset($this->gid)) {
+        if (isset($_SESSION['gid'])) {
             $this->setGid($_SESSION['gid']);
-            
-            echo 'TEST';
 
             // Fetch the new stream.
             $this->fetchStream();
