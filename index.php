@@ -23,6 +23,7 @@ header('Pragma: no-cache');
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="og:description" content="Swapper's Delight Buy, Sell, and Trade Assistant">
+        <meta name='og:image' content='https://fbcdn-photos-f-a.akamaihd.net/hphotos-ak-prn1/t39.2081-0/851559_1428631484051397_43248421_n.png'>
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
