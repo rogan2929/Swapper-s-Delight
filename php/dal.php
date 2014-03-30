@@ -312,7 +312,7 @@ class DataAccessLayer {
     }
 
     public function refreshStream() {
-        if (isset($_SESSION['gid'])) {
+        if (isset($_SESSION['gid']) && !isset($this->gid)) {
             $this->setGid($_SESSION['gid']);
 
             // Fetch the new stream.
