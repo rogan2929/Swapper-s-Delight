@@ -700,7 +700,7 @@ class DataAccessLayer {
         echo count($stream) . "<br/>";
         
         echo $windowSize * 2 . ' ';
-        $stream = $this->getFeedData($uid, $windowSize * 1.5, $windowStart, 50, 1);
+        $stream = $this->getFeedData($uid, $windowSize * 2, $windowStart, 50, 1);
         echo count($stream);
     }
     
