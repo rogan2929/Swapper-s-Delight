@@ -22,6 +22,7 @@ header('Pragma: no-cache');
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Swapper's Delight Buy, Sell, and Trade Assistant">
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
@@ -56,6 +57,9 @@ header('Pragma: no-cache');
                         </div>
                     </div>
                     <input type='text' id='main-search' placeholder='Search this group'>
+                    <div id='like-button-wrapper'>
+                        <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fapps.facebook.com%2F1401018793479333&amp;width=200&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=1401018793479333" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:21px;" allowTransparency="true"></iframe>
+                    </div>
                 </div>
                 <div id='post-feed' class='scroll-y'></div>
 
