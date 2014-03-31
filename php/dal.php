@@ -250,6 +250,14 @@ class DataAccessLayer {
     public function getMe() {
         return $this->api('/me')['id'];
     }
+    
+    /**
+     * Getter for $this->stream.
+     * @return type
+     */
+    public function getStream() {
+        return $this->stream;
+    }
 
     /**
      * Retrieves posts owned by the current user.
