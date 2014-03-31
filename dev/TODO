@@ -21,6 +21,8 @@ Like Button
 Captions for shared photos.
 Fix liking so that when a post is liked, it's cached stream counterpart is updated to reflect this.
 
+Two Timers:
+Refresh Comment Count Timer = 4 minutes.
 
 The 'Maybe' List:
 Add functionality to filter 'My Posts' by comment data.

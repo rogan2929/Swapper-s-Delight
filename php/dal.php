@@ -309,7 +309,9 @@ class DataAccessLayer {
     }
 
     public function refreshCommentCounts($postIds) {
-        
+        for ($i = 0; $i < $postIds; $i++) {
+            
+        }
     }
 
     public function refreshStream() {

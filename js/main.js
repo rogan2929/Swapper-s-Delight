@@ -307,6 +307,7 @@ var SwdPresenter = {
     search: null,
     refreshCommentCountInterval: null,
     refreshStreamInterval: null,
+    refreshStreamCount: 0,
     postOffset: 0,
     messageCallback: null,
     /***
@@ -489,9 +490,20 @@ var SwdPresenter = {
      * @param {type} offset
      */
     loadLikedPosts: function(offset) {
+        clearInterval(SwdPresenter.refreshCommentCountInterval);
+        
         SwdModel.getLikedPosts(offset, {
             success: function(response) {
                 SwdPresenter.loadPostsComplete(response);
+                
+                SwdPresenter.refreshCommentCountInterval = setInterval(function () {
+                    SwdModel.refreshCommentCounts(null, {
+                        success: function(response) {
+                            
+                        },
+                        error: SwdPresenter.handleError
+                    })
+                }, 240000);     // 4 minutes.
             },
             error: SwdPresenter.handleError
         });
@@ -516,6 +528,7 @@ var SwdPresenter = {
     loadNewestPosts: function(refresh, offset) {
         // If there is already a timer function running, then clear it.
         clearInterval(SwdPresenter.refreshStreamInterval);
+        SwdPresenter.refreshStreamCount = 0;
 
         // Get posts and then display them.
         SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, refresh, offset, {
@@ -524,11 +537,17 @@ var SwdPresenter = {
                 SwdPresenter.refreshStreamInterval = setInterval(function() {
                     SwdModel.refreshStream({
                         success: function(response) {
-                            // TODO: Trigger a view update.
+                            // Update the number of times this timer has been executed.
+                            SwdPresenter.refreshStreamCount++;
+                            
+                            // Every 4 executions, reload the posts.
+                            if (SwdPresenter.refreshStreamCount == 4) {
+                                SwdPresenter.loadPosts(false, true);
+                            }
                         },
                         error: SwdPresenter.handleError
                     });
-                }, 300000);
+                }, 450000);     // 7.5 minutes.
 
                 SwdPresenter.loadPostsComplete(response);
             },

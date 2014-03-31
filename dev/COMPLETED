@@ -13,3 +13,4 @@ Implement Search Post functionality, by FB user and by keyword.
 Fix issue of trying to bring up a post that is no longer there.
 Replace dialogs with nicer ones.
 Delete comments?
+Refresh Stream Timer = 7.5 minutes. Every 4 timer executions, refresh the posts.
