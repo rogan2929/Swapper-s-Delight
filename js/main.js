@@ -305,11 +305,11 @@ var SwdPresenter = {
     currentlyLoading: false,
     selectedPost: null,
     search: null,
-    refreshCommentCountInterval: null,
     refreshStreamInterval: null,
     refreshStreamCount: 0,
     postOffset: 0,
     messageCallback: null,
+    postIds: [],
     /***
      * Top-level error handler function.
      * @param {type} error
@@ -535,7 +535,7 @@ var SwdPresenter = {
                             }
                             else {
                                 // Get refreshed data.
-                                SwdModel.getRefreshedStreamData(null, {
+                                SwdModel.getRefreshedStreamData(SwdPresenter.postIds, {
                                     success: function(response) {
                                         alert(response.length);
                                     },
@@ -579,6 +579,7 @@ var SwdPresenter = {
             SwdPresenter.currentlyLoading = true;
 
             if (refresh || viewChanged) {
+                SwdPresenter.postIds = [];
                 SwdView.clearPosts();
                 SwdPresenter.refreshFbCanvasSize();
 
@@ -610,9 +611,16 @@ var SwdPresenter = {
      * @param {type} response
      */
     loadPostsComplete: function(response) {
+        var i;
+        
         if (response) {
             // Update post offset.
             SwdPresenter.postOffset += response.length;
+            
+            // Capture the ids of all the posts that were just returned.
+            for (i = 0; i < response.length; i++) {
+                SwdPresenter.postIds.push(response[i].post_id);
+            }
 
             // If a response came through, then display the posts.
             SwdView.populatePostBlocks(response);
