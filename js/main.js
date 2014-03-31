@@ -1256,8 +1256,8 @@ var SwdView = {
     displayRefreshedPostData: function(posts) {
         var i;
         
-        // Update comment counts.
         for (i = 0; i < posts.length; i++) {
+            // Update comment counts.
             $('#' + posts[i].post_id).children('div.comment-count').text(posts[i].comment_count);
         }
     },
