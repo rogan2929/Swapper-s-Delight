@@ -1259,7 +1259,8 @@ var SwdView = {
         for (i = 0; i < posts.length; i++) {
             // Update comment counts.
             //$('#' + posts[i].post_id).children('div.comment-count').text(posts[i].comment_count);
-            alert('#' + posts[i].post_id);
+            //alert('#' + posts[i].post_id);
+            $('#' + posts[i].post_id + ' .comment-count').text(posts[i].comment_count);
         }
     },
     /***
