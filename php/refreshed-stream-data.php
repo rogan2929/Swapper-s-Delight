@@ -2,7 +2,7 @@
 
 require_once 'dal.php';
 
-$postIds = $_POST['postIds'];
+$postIds = json_decode($_POST['postIds']);
 
 $dal = new DataAccessLayer();
 
