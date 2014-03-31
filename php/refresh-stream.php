@@ -4,4 +4,4 @@ require_once 'dal.php';
 
 $dal = new DataAccessLayer();
 
-$dal->refreshStream();
+echo $dal->refreshStream();

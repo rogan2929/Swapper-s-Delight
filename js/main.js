@@ -222,10 +222,10 @@ var SwdModel = {
      * @param {type} postIds
      * @param {type} callbacks
      */
-    refreshCommentCounts: function(postIds, callbacks) {
+    getRefreshedStreamData: function(postIds, callbacks) {
         $.ajax({
             type: 'POST',
-            url: '/php/refresh-comment-counts.php',
+            url: '/php/refreshed-stream-data.php',
             dataType: 'json',
             data: {
                 'postIds': postIds
@@ -490,20 +490,9 @@ var SwdPresenter = {
      * @param {type} offset
      */
     loadLikedPosts: function(offset) {
-        clearInterval(SwdPresenter.refreshCommentCountInterval);
-        
         SwdModel.getLikedPosts(offset, {
             success: function(response) {
                 SwdPresenter.loadPostsComplete(response);
-                
-                SwdPresenter.refreshCommentCountInterval = setInterval(function () {
-                    SwdModel.refreshCommentCounts(null, {
-                        success: function(response) {
-                            
-                        },
-                        error: SwdPresenter.handleError
-                    })
-                }, 240000);     // 4 minutes.
             },
             error: SwdPresenter.handleError
         });
@@ -541,13 +530,22 @@ var SwdPresenter = {
                             SwdPresenter.refreshStreamCount++;
                             
                             // Every 4 executions, reload the posts.
-                            if (SwdPresenter.refreshStreamCount == 4) {
+                            if (SwdPresenter.refreshStreamCount === 4) {
                                 SwdPresenter.loadPosts(false, true);
+                            }
+                            else {
+                                // Get refreshed data.
+                                SwdModel.getRefreshedStreamData(null, {
+                                    success: function(response) {
+                                        
+                                    },
+                                    error: SwdPresenter.handleError
+                                });
                             }
                         },
                         error: SwdPresenter.handleError
                     });
-                }, 450000);     // 7.5 minutes.
+                }, 300000);     // 5 minutes.
 
                 SwdPresenter.loadPostsComplete(response);
             },

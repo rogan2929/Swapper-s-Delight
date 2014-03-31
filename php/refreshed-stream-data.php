@@ -6,4 +6,4 @@ $postIds = $_POST['postIds'];
 
 $dal = new DataAccessLayer();
 
-echo json_encode($dal->refreshCommentCounts($postIds));
+echo json_encode($dal->getRefreshedStreamData($postIds));
