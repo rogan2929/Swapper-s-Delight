@@ -22,10 +22,11 @@ header('Pragma: no-cache');
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="og:description" content="Swapper's Delight Buy, Sell, and Trade Assistant">
+        <meta name='og:image' content='https://fbcdn-photos-f-a.akamaihd.net/hphotos-ak-prn1/t39.2081-0/851559_1428631484051397_43248421_n.png'>
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <!--        <link rel="stylesheet" href="css/flick-red/jquery-ui-1.10.4.custom.min.css">-->
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
@@ -56,6 +57,9 @@ header('Pragma: no-cache');
                         </div>
                     </div>
                     <input type='text' id='main-search' placeholder='Search this group'>
+                    <div id='like-button-wrapper'>
+                        <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fapps.facebook.com%2F1401018793479333&amp;width=200&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=1401018793479333" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:21px;" allowTransparency="true"></iframe>
+                    </div>
                 </div>
                 <div id='post-feed' class='scroll-y'></div>
 

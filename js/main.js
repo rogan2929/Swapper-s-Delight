@@ -100,7 +100,7 @@ var SwdModel = {
      * @param {type} callbacks
      */
     getMyPosts: function(offset, callbacks) {
-        var url = '/php/my-posts.php?offset=' + offset + '&limit=75';
+        var url = '/php/my-posts.php?offset=' + offset + '&limit=50';
 
         $.ajax({
             type: 'GET',
@@ -222,13 +222,13 @@ var SwdModel = {
      * @param {type} postIds
      * @param {type} callbacks
      */
-    refreshCommentCounts: function(postIds, callbacks) {
+    getRefreshedStreamData: function(postIds, callbacks) {
         $.ajax({
             type: 'POST',
-            url: '/php/refresh-comment-counts.php',
+            url: '/php/refreshed-stream-data.php',
             dataType: 'json',
             data: {
-                'postIds': postIds
+                'postIds': JSON.stringify(postIds)
             },
             success: function(response) {
                 callbacks.success.call(SwdModel, response);
@@ -305,10 +305,11 @@ var SwdPresenter = {
     currentlyLoading: false,
     selectedPost: null,
     search: null,
-    refreshCommentCountInterval: null,
     refreshStreamInterval: null,
+    refreshStreamCount: 0,
     postOffset: 0,
     messageCallback: null,
+    postIds: [],
     /***
      * Top-level error handler function.
      * @param {type} error
@@ -516,6 +517,7 @@ var SwdPresenter = {
     loadNewestPosts: function(refresh, offset) {
         // If there is already a timer function running, then clear it.
         clearInterval(SwdPresenter.refreshStreamInterval);
+        SwdPresenter.refreshStreamCount = 0;
 
         // Get posts and then display them.
         SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, refresh, offset, {
@@ -524,11 +526,26 @@ var SwdPresenter = {
                 SwdPresenter.refreshStreamInterval = setInterval(function() {
                     SwdModel.refreshStream({
                         success: function(response) {
-                            // TODO: Trigger a view update.
+                            // Update the number of times this timer has been executed.
+                            SwdPresenter.refreshStreamCount++;
+                            
+                            // Every 4 executions, reload the posts.
+                            if (SwdPresenter.refreshStreamCount === 4) {
+                                SwdPresenter.loadPosts(false, true);
+                            }
+                            else {
+                                // Get refreshed data.
+                                SwdModel.getRefreshedStreamData(SwdPresenter.postIds, {
+                                    success: function(response) {
+                                        SwdView.displayRefreshedPostData(response);
+                                    },
+                                    error: SwdPresenter.handleError
+                                });
+                            }
                         },
                         error: SwdPresenter.handleError
                     });
-                }, 300000);
+                }, 300000);     // 5 minutes.
 
                 SwdPresenter.loadPostsComplete(response);
             },
@@ -562,6 +579,7 @@ var SwdPresenter = {
             SwdPresenter.currentlyLoading = true;
 
             if (refresh || viewChanged) {
+                SwdPresenter.postIds = [];
                 SwdView.clearPosts();
                 SwdPresenter.refreshFbCanvasSize();
 
@@ -593,9 +611,16 @@ var SwdPresenter = {
      * @param {type} response
      */
     loadPostsComplete: function(response) {
+        var i;
+        
         if (response) {
             // Update post offset.
             SwdPresenter.postOffset += response.length;
+            
+            // Capture the ids of all the posts that were just returned.
+            for (i = 0; i < response.length; i++) {
+                SwdPresenter.postIds.push(response[i].post_id);
+            }
 
             // If a response came through, then display the posts.
             SwdView.populatePostBlocks(response);
@@ -1223,6 +1248,18 @@ var SwdView = {
         message = '<div class="visible-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
         $(postBlock).addClass('post-block-text').html(message).appendTo('#post-feed');
+    },
+    /***
+     * Displays refreshed post data.
+     * @param {type} posts
+     */
+    displayRefreshedPostData: function(posts) {
+        var i;
+        
+        for (i = 0; i < posts.length; i++) {
+            // Update comment counts.
+            $('#' + posts[i].post_id + ' .comment-count').text(posts[i].comment_count);
+        }
     },
     /***
      * Fill the post-image-container with post-image-tiles.
