@@ -228,7 +228,7 @@ var SwdModel = {
             url: '/php/refreshed-stream-data.php',
             dataType: 'json',
             data: {
-                'postIds': postIds
+                'postIds': JSON.stringify(postIds)
             },
             success: function(response) {
                 callbacks.success.call(SwdModel, response);
