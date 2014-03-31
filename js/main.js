@@ -537,7 +537,7 @@ var SwdPresenter = {
                                 // Get refreshed data.
                                 SwdModel.getRefreshedStreamData(SwdPresenter.postIds, {
                                     success: function(response) {
-                                        alert(response.length);
+                                        SwdView.displayRefreshedPostData(response);
                                     },
                                     error: SwdPresenter.handleError
                                 });
@@ -1248,6 +1248,18 @@ var SwdView = {
         message = '<div class="visible-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
         $(postBlock).addClass('post-block-text').html(message).appendTo('#post-feed');
+    },
+    /***
+     * Displays refreshed post data.
+     * @param {type} posts
+     */
+    displayRefreshedPostData: function(posts) {
+        var i;
+        
+        // Update comment counts.
+        for (i = 0; i < posts.length; i++) {
+            $('#' + posts[i].post_id).children('div.comment-count').text(posts[i].comment_count);
+        }
     },
     /***
      * Fill the post-image-container with post-image-tiles.

@@ -779,15 +779,6 @@ class DataAccessLayer {
         $windowStart = time();
         $windowSize = $this->getOptimalWindowSize();
 
-        // Execute a batch request against the group's feed.
-//        $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 2);
-//
-//        // Update the $windowStart time to reflect how many times $windowSize has been subtracted from $windowStart.
-//        $windowStart = $windowStart - ($windowSize * 50 * 2);
-//
-//        // Execute a second request to pick up posts that are even older, but with a larger window size.
-//        $stream = array_merge($stream, $this->getFeedData($uid, 12 * 3600, $windowStart, 10));
-
         $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 1);
         $windowStart = $windowStart - ($windowSize * 50 * 1);
         $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 2, $windowStart, 13, 1));
@@ -796,27 +787,6 @@ class DataAccessLayer {
 
         return $stream;
     }
-
-//    public function testStream() {
-//        $uid = $this->getMe();
-//
-//        $windowStart = time();
-//        $windowStart2 = $windowStart;
-//        $windowSize = $this->getOptimalWindowSize();
-//
-//        // Execute a batch request against the group's feed.
-//        echo $windowSize . ' ';
-//        $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 2);
-//        echo count($stream) . "<br/>";
-//
-//        echo $windowSize . ' ';
-//        $stream2 = $this->getFeedData($uid, $windowSize, $windowStart2, 50, 1);
-//        $windowStart2 = $windowStart2 - ($windowSize * 50 * 1);
-//        $stream2 = array_merge($stream2, $this->getFeedData($uid, $windowSize * 2, $windowStart2, 13, 1));
-//        $windowStart2 = $windowStart2 - ($windowSize * 13 * 1);
-//        $stream2 = array_merge($stream2, $this->getFeedData($uid, $windowSize * 3, $windowStart2, 12, 1));
-//        echo count($stream2);
-//    }
 
     /**
      * Execute a batch request against the selected group's feed.
@@ -886,6 +856,14 @@ class DataAccessLayer {
                 }
 
                 unset($stream[$i]['likes']);
+            }
+            
+            $stream[$i]['comment_count'] = 0;
+            
+            if (isset($stream[$i]['comments']) && isset($stream[$i]['comments']['data'])) {
+                $stream[$i]['comment_count'] = count($stream[$i]['comments']['data']);
+                
+                unset ($stream[$i]['comments']);
             }
         }
 
