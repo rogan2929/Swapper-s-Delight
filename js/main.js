@@ -537,7 +537,7 @@ var SwdPresenter = {
                                 // Get refreshed data.
                                 SwdModel.getRefreshedStreamData(null, {
                                     success: function(response) {
-                                        
+                                        alert(response.length);
                                     },
                                     error: SwdPresenter.handleError
                                 });
