@@ -375,7 +375,7 @@ class DataAccessLayer {
     public function getRefreshedStreamData($postIds) {
         $posts = array();
         
-        for ($i = 0; $i < $postIds; $i++) {
+        for ($i = 0; $i < count($postIds); $i++) {
             for ($j = 0; $j < count($this->stream); $j++) {
                 if ($postIds[$i] == $this->stream[$j]['post_id']) {
                     $posts[] = $this->stream[$j];
