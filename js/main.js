@@ -676,11 +676,11 @@ var SwdPresenter = {
     timerIncrement: function() {
         SwdPresenter.idleTime++;
 
-        if (SwdPresenter.idleTime > 2) {
+        if (SwdPresenter.idleTime > 34) {
             // After 35, do a full refresh of the canvas app.
             window.location = window.location.href;
         }
-        else if (SwdPresenter.idleTime > 1) {
+        else if (SwdPresenter.idleTime > 19) {
             // After 20 minutes, do a reload of the current page.
             SwdPresenter.loadPosts(false, true);
         }
