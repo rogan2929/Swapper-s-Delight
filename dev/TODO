@@ -8,7 +8,6 @@ Include prompt to change app settings so that others using Swapper's Delight can
     https://www.facebook.com/settings?tab=applications&section=friends_share&view (Apps Others Use)
 Acknowledge tags in posts and comments.
 Allow creation of tags in posts and comments.
-Dynamic comment count updating through AJAX.
 Prevent sessions from running forever. (Implement a refresh limit.)
 View group info panel.
     Description
@@ -20,9 +19,6 @@ View group info panel.
 Like Button
 Captions for shared photos.
 Fix liking so that when a post is liked, it's cached stream counterpart is updated to reflect this.
-
-Two Timers:
-Refresh Comment Count Timer = 4 minutes.
 
 The 'Maybe' List:
 Add functionality to filter 'My Posts' by comment data.
