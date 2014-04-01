@@ -830,6 +830,8 @@ class DataAccessLayer {
                     'relative_url' => 'method/fql.query?query=' . json_encode($query)
                 );
             }
+            
+            echo json_encode($queries);
 
             // Execute a batch query.
             $response = $this->api('/', 'POST', array(
