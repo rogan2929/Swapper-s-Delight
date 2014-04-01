@@ -571,7 +571,7 @@ var SwdPresenter = {
      * @param {type} viewChanged
      */
     loadPosts: function(refresh, viewChanged) {
-        if (!SwdPresenter.currentlyLoading) {
+        if (!SwdPresenter.currentlyLoading && SwdPresenter.selectedGroup !== null) {
             SwdPresenter.currentlyLoading = true;
 
             if (refresh || viewChanged) {
