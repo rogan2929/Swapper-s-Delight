@@ -1445,16 +1445,22 @@ var SwdView = {
             for (i = 1; i <= 4; i++) {
                 $('#ad-tile-' + i).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
             }
+                    
+            $('.post-block.hidden-block').hide();
 
             // After a delay, show the hidden content for any moused over image post blocks.
             // Use the hoverIntent plugin.
             $('.post-block').not('.post-block.post-block-text').hoverIntent({
                 over: function() {
-                    $(this).children('.visible-content').hide('slide', 200);
+                    $(this).children('.visible-content').hide('slide', 200, function() {
+                        $(this).children('.post-block.hidden-block').fadeIn(100);
+                    });
                     //$(this).children('.visible-content').fadeOut(100);
                 },
                 out: function() {
-                    $(this).children('.visible-content').show('slide', 200);
+                    $(this).children('.visible-content').show('slide', 200, function() {
+                        $(this).children('.post-block.hidden-block').fadeOut(100);
+                    });
                     //$(this).children('.visible-content').fadeIn(100);
                 },
                 timeout: 400
