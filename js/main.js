@@ -937,7 +937,7 @@ var SwdPresenter = {
             SwdView.toggleAjaxLoadingDiv('#post-comment-wrapper', true);
             
             // Increment the post's tile's comment count.
-            SwdView.incrementCommentCount(postId);
+            SwdView.incrementCommentCount(id);
 
             // Post the comment.
             SwdModel.postComment(id, comment, {
