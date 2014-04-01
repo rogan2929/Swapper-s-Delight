@@ -827,7 +827,7 @@ class DataAccessLayer {
 
                 $queries[] = array(
                     'method' => 'POST',
-                    'relative_url' => 'method/fql.query?query=' . urlencode($query)
+                    'relative_url' => 'method/fql.query?query=' . $query
                 );
             }
             
