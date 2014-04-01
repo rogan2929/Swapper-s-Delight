@@ -17,3 +17,4 @@ Refresh Stream Timer = 5 minutes. Every 4 timer executions, refresh the posts.
 Dynamic comment count updating through AJAX.
 Prevent sessions from running forever. (Implement a refresh limit.)
 Like Button
+Posting comments updates the tile's comment count.
