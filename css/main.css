@@ -590,7 +590,7 @@ a:visited {
 .post-block.post-block-link,
 .post-block.post-block-textlink {
     display: inline-block;
-    box-shadow: #ccc 1px 1px 4px;
+/*    box-shadow: #ccc 1px 1px 4px;*/
     height: 250px;
     width: 300px;
     overflow: hidden;
