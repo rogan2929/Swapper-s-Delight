@@ -620,6 +620,7 @@ a:visited {
     background-size: cover;
     height: 250px;
     width: 300px;
+    display: inline-block;
 }
 
 .post-block.load-more {
@@ -701,6 +702,7 @@ a:visited {
 .post-block.hidden-block {
     margin: 0 !important;
     background-color: #ccc;
+    display: inline-block;
 }
 
 .post-block.unique.post-block-text.hover {
