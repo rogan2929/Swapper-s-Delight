@@ -355,7 +355,7 @@ a:visited {
     padding: 4px !important;
     position: relative;
     border-radius: 5px;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
+    box-shadow: #ccc 1px 1px 4px;
 }
 
 .selection-item-content {
@@ -583,7 +583,7 @@ a:visited {
 .post-block.post-block-textlink {
     display: inline-block;
 /*    background-color: #ddd;*/
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
+    box-shadow: #ccc 1px 1px 4px;
     height: 250px;
     width: 300px;
     overflow: hidden;
