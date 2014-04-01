@@ -699,8 +699,7 @@ a:visited {
 
 .post-block.hidden-block {
     margin: 0 !important;
-    background-color: #aaa;
-    color: white;
+    background-color: #ccc;
 }
 
 .post-block.unique.post-block-text.hover {
