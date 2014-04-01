@@ -851,7 +851,7 @@ class DataAccessLayer {
             }
             
             if (isset($stream[$i]['like_info'])) {
-                $stream[$i]['user_likes'] = $stream[$i]['like_info']['user_likes'];
+                $stream[$i]['user_likes'] = (int)$stream[$i]['like_info']['user_likes'];
                 unset($stream[$i]['like_info']);
             }
         }
