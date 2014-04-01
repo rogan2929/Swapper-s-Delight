@@ -8,7 +8,6 @@ Include prompt to change app settings so that others using Swapper's Delight can
     https://www.facebook.com/settings?tab=applications&section=friends_share&view (Apps Others Use)
 Acknowledge tags in posts and comments.
 Allow creation of tags in posts and comments.
-Prevent sessions from running forever. (Implement a refresh limit.)
 View group info panel.
     Description
     Admin
