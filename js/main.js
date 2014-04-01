@@ -1450,10 +1450,12 @@ var SwdView = {
             // Use the hoverIntent plugin.
             $('.post-block').not('.post-block.post-block-text').hoverIntent({
                 over: function() {
-                    $(this).children('.visible-content').hide('blind', 200);
+                    //$(this).children('.visible-content').hide('blind', 200);
+                    $(this).children('.visible-content').fadeOut(100);
                 },
                 out: function() {
-                    $(this).children('.visible-content').show('blind', 200);
+                    //$(this).children('.visible-content').show('blind', 200);
+                    $(this).children('.visible-content').fadeIn(100);
                 },
                 timeout: 400
             });
