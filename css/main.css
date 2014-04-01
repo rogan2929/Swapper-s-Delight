@@ -302,6 +302,12 @@ a:visited {
     margin-right: 25px;
 }
 
+.floating-panel.collapsed {
+    width: auto;
+    margin-left: 120px;
+    margin-right: 120px;
+}
+
 #details-left-column {
     width: 350px;
     padding-right: 8px;
@@ -1141,19 +1147,6 @@ div.login-div {
     right: 0;
     margin: auto;
     height: 190px;
-    width: 400px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    padding: 10px;
-}
-
-.floating-panel-content.collapsed {
-    position: absolute;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
     width: 400px;
     overflow-x: hidden;
     overflow-y: auto;
