@@ -111,7 +111,7 @@ header('Pragma: no-cache');
                 <!--New Post Panel-->
 
                 <div id='new-post-panel' class='floating-panel hidden'>
-                    <div class='floating-panel-content ui-widget scroll-y'>
+                    <div class='floating-panel-content collapsed ui-widget scroll-y'>
                         <div class='close-button'></div>
                     </div>
                 </div>
