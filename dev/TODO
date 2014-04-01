@@ -15,9 +15,9 @@ View group info panel.
     Privacy
     pic_cover
     View Group in Facebook
-Like Button
 Captions for shared photos.
 Fix liking so that when a post is liked, it's cached stream counterpart is updated to reflect this.
+Posting comments updates the tile's comment count.
 
 The 'Maybe' List:
 Add functionality to filter 'My Posts' by comment data.

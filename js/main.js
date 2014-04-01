@@ -935,6 +935,9 @@ var SwdPresenter = {
 
             // Show the ajax loading div.
             SwdView.toggleAjaxLoadingDiv('#post-comment-wrapper', true);
+            
+            // Increment the post's tile's comment count.
+            SwdView.incrementCommentCount(postId);
 
             // Post the comment.
             SwdModel.postComment(id, comment, {
@@ -1048,6 +1051,15 @@ var SwdView = {
         });
 
         $('.post-block.ad-div').hide();
+    },
+    /***
+     * Increment the given post's comment count.
+     * @param {type} postId
+     */
+    incrementCommentCount: function(postId) {
+        var count = parseInt($('#' + postId + ' div.comment-count').text());
+        
+        $('#' + postId + ' div.comment-count').text(count++);
     },
     /**
      * Installs an event handler and connects it to the presenter.
