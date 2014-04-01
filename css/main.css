@@ -28,8 +28,9 @@ html {
 body {
     overflow: hidden;
 /*    background-color: #f1f1f1;*/
-    background-color: #E4EAF2;
+/*    background-color: #E4EAF2;*/
     /*    font-size: 0.98em;*/
+    background: url(/img/grey_wash_wall.png)
 }
 
 /*
@@ -351,12 +352,18 @@ a:visited {
 
 .selection-item {
     display: inline-block;
-    background-color: #f6f6f6;
+    background-color: #4d81bf;
+    color: #f6f6f6;
     margin: 5px;
     padding: 4px !important;
     position: relative;
     border-radius: 5px;
     box-shadow: #ccc 1px 1px 4px;
+}
+
+.selection-item.hover {
+    color: #444;
+    background-color: #f6f6f6;
 }
 
 .selection-item-content {
@@ -700,7 +707,7 @@ a:visited {
     color: #f6f6f6;
 }
 
-.post-block.unique.post-block-text.hover, .selection-item.hover {
+.post-block.unique.post-block-text.hover {
     background-color: #4d81bf !important;
     color: #f6f6f6;
 }
