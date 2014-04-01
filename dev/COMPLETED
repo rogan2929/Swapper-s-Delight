@@ -18,3 +18,4 @@ Dynamic comment count updating through AJAX.
 Prevent sessions from running forever. (Implement a refresh limit.)
 Like Button
 Posting comments updates the tile's comment count.
+Fix liking so that when a post is liked, it's cached stream counterpart is updated to reflect this.
