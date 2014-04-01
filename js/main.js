@@ -1057,11 +1057,8 @@ var SwdView = {
      * @param {type} postId
      */
     incrementCommentCount: function(postId) {
-        var count = parseInt($('#' + postId + ' div.comment-count').text());
-        
-        alert(count);
-        
-        $('#' + postId + ' div.comment-count').text(count++);
+        var count = parseInt($('#' + postId + ' div.comment-count').text()) + 1; 
+        $('#' + postId + ' div.comment-count').text(count);
     },
     /**
      * Installs an event handler and connects it to the presenter.
