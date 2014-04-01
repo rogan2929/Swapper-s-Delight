@@ -820,14 +820,17 @@ class DataAccessLayer {
 
             for ($j = 0; $j < $batchSize; $j++) {
                 //$query = '/' . $this->gid . '/feed?fields=id,message,from,likes,comments&limit=5000&since=' . $windowEnd . '&until=' . $windowStart;
-                $query = 'SELECT post_id,message,actor_id,like_info,comment_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000';
+                $query = array(
+                    'streamQuery' => 'SELECT post_id,message,actor_id,like_info,comment_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000',
+                    'userQuery' => 'SELECT first_name,last_name FROM user WHERE actor_id IN (SELECT actor_id FROM #streamQuery)'
+                );
 
                 $windowStart -= $windowSize;
                 $windowEnd -= $windowSize;
 
                 $queries[] = array(
                     'method' => 'POST',
-                    'relative_url' => 'method/fql.query?query=' . $query
+                    'relative_url' => 'method/fql.multiquery?queries=' . json_encode($query)
                 );
             }
 
@@ -839,7 +842,9 @@ class DataAccessLayer {
 
             for ($k = 0; $k < count($response); $k++) {
                 $body = json_decode($response[$k]['body'], true);
-                $stream = array_merge($stream, $body);
+                $stream = array_merge($stream, $body[0]['fql_result_set']);
+                
+                $stream[$k]['actor_name'] = $body[1]['fql_result_set']['first_name'] . ' ' . $body[1]['fql_result_set']['last_name'];
             }
         }
 
