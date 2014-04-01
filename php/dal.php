@@ -834,9 +834,6 @@ class DataAccessLayer {
                     'relative_url' => 'method/fql.multiquery?queries=' . json_encode($query)
                 );
             }
-            
-            echo count($stream) . "<br/>";
-            echo count($users) . "<br/>";
 
             // Execute a batch query.
             $response = $this->api('/', 'POST', array(
@@ -852,6 +849,9 @@ class DataAccessLayer {
                 $users = array_merge($users, $body[1]['fql_result_set']);
             }
         }
+        
+        echo count($stream) . "<br/>";
+        echo count($users) . "<br/>";
         
         echo json_encode($users);
 
