@@ -113,6 +113,7 @@ header('Pragma: no-cache');
                 <div id='new-post-panel' class='floating-panel collapsed hidden'>
                     <div class='floating-panel-content ui-widget scroll-y'>
                         <div class='close-button'></div>
+                        <div class='heading'>Create a new group post.</div>
                     </div>
                 </div>
 
