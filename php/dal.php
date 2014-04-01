@@ -819,7 +819,8 @@ class DataAccessLayer {
             $queries = array();
 
             for ($j = 0; $j < $batchSize; $j++) {
-                $query = '/' . $this->gid . '/feed?fields=id,message,from,likes,comments&limit=5000&since=' . $windowEnd . '&until=' . $windowStart;
+                //$query = '/' . $this->gid . '/feed?fields=id,message,from,likes,comments&limit=5000&since=' . $windowEnd . '&until=' . $windowStart;
+                $query = 'SELECT post_id,message,actor_id,like_info,comment_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time > ' . $windowEnd;
 
                 $windowStart -= $windowSize;
                 $windowEnd -= $windowSize;
@@ -842,41 +843,49 @@ class DataAccessLayer {
             }
         }
 
-        // Shape the stream to make it look like it came from an FQL query.
-        // id => post_id
-        // from['id'] => actor_id
-        // likes['data'] => user_likes
-
+        // Clean up the response a little bit for our own purposes.
         for ($i = 0; $i < count($stream); $i++) {
-            $stream[$i]['post_id'] = $stream[$i]['id'];
-            unset($stream[$i]['id']);
-
-            $stream[$i]['actor_id'] = $stream[$i]['from']['id'];
-            $stream[$i]['actor_name'] = $stream[$i]['from']['name'];
-            unset($stream[$i]['from']);
-
-            $stream[$i]['user_likes'] = 0;
-
-            if (isset($stream[$i]['likes']) && isset($stream[$i]['likes']['data'])) {
-                for ($j = 0; $j < count($stream[$i]['likes']['data']); $j++) {
-                    $likeInfo = $stream[$i]['likes']['data'][$j];
-
-                    if ($likeInfo['id'] == $uid) {
-                        $stream[$i]['user_likes'] = 1;
-                    }
-                }
-
-                unset($stream[$i]['likes']);
+            if (isset($stream[$i]['comment_info'])) {
+                $stream[$i]['comment_count'] = $stream[$i]['comment_info']['comment_count'];
+                unset($stream[$i]['comment_info']);
             }
             
-            $stream[$i]['comment_count'] = 0;
-            
-            if (isset($stream[$i]['comments']) && isset($stream[$i]['comments']['data'])) {
-                $stream[$i]['comment_count'] = count($stream[$i]['comments']['data']);
-                
-                unset ($stream[$i]['comments']);
+            if (isset($stream[$i]['like_info'])) {
+                $stream[$i]['user_likes'] = $stream[$i]['like_info']['user_likes'];
+                unset($stream[$i]['like_info']);
             }
         }
+
+//        for ($i = 0; $i < count($stream); $i++) {
+//            $stream[$i]['post_id'] = $stream[$i]['id'];
+//            unset($stream[$i]['id']);
+//
+//            $stream[$i]['actor_id'] = $stream[$i]['from']['id'];
+//            $stream[$i]['actor_name'] = $stream[$i]['from']['name'];
+//            unset($stream[$i]['from']);
+//
+//            $stream[$i]['user_likes'] = 0;
+//
+//            if (isset($stream[$i]['likes']) && isset($stream[$i]['likes']['data'])) {
+//                for ($j = 0; $j < count($stream[$i]['likes']['data']); $j++) {
+//                    $likeInfo = $stream[$i]['likes']['data'][$j];
+//
+//                    if ($likeInfo['id'] == $uid) {
+//                        $stream[$i]['user_likes'] = 1;
+//                    }
+//                }
+//
+//                unset($stream[$i]['likes']);
+//            }
+//            
+//            $stream[$i]['comment_count'] = 0;
+//            
+//            if (isset($stream[$i]['comments']) && isset($stream[$i]['comments']['data'])) {
+//                $stream[$i]['comment_count'] = count($stream[$i]['comments']['data']);
+//                
+//                unset ($stream[$i]['comments']);
+//            }
+//        }
 
         return $stream;
     }
