@@ -1455,16 +1455,11 @@ var SwdView = {
                     $(this).children('.visible-content').hide('slide', 200, function() {
                         $(this).next('.post-block.hidden-block').fadeIn(100);
                     });
-                    //$(this).children('.visible-content').fadeOut(100);
                 },
                 out: function() {
                     $(this).children('.post-block.hidden-block').fadeOut(100, function() {
                         $(this).prev('.visible-content').show('slide', 200);
                     });
-//                    $(this).children('.visible-content').show('slide', 200, function() {
-//                        $(this).next('.post-block.hidden-block').fadeOut(100);
-//                    });
-                    //$(this).children('.visible-content').fadeIn(100);
                 },
                 timeout: 400
             });
