@@ -826,8 +826,8 @@ class DataAccessLayer {
                 $windowEnd -= $windowSize;
 
                 $queries[] = array(
-                    'method' => 'GET',
-                    'relative_url' => $query
+                    'method' => 'POST',
+                    'relative_url' => 'method/fql.query?query=' . json_encode($query)
                 );
             }
 
