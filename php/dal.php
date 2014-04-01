@@ -849,10 +849,7 @@ class DataAccessLayer {
                 $users = array_merge($users, $body[1]['fql_result_set']);
             }
         }
-        
-        echo count($stream) . "<br/>";
-        echo count($users) . "<br/>";
-        
+
         echo json_encode($users);
 
         // Clean up the response a little bit for our own purposes.
