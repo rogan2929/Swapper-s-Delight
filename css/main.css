@@ -582,7 +582,6 @@ a:visited {
 .post-block.post-block-link,
 .post-block.post-block-textlink {
     display: inline-block;
-/*    background-color: #ddd;*/
     box-shadow: #ccc 1px 1px 4px;
     height: 250px;
     width: 300px;
@@ -591,8 +590,6 @@ a:visited {
     margin-bottom: -1px;
     cursor: pointer;
     position: relative;
-    /*    color: #f6f6f6;*/
-    /*    background-image: url('/img/tile-background.png');*/
 }
 
 .post-block .comment-count {
@@ -684,7 +681,6 @@ a:visited {
 .post-block.post-block-text .wrapper,
 .post-block.post-block-link .wrapper,
 .post-block.post-block-textlink .wrapper {
-    background: #f6f6f6;
     overflow: hidden;
     height: 250px;
 }
@@ -998,7 +994,7 @@ a.link-title {
 }
 
 .ui-widget {
-    background: white;
+    background-color: #f6f6f6;
     border-radius: 5px;
 }
 
