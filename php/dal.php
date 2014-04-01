@@ -850,8 +850,6 @@ class DataAccessLayer {
             }
         }
 
-        echo json_encode($users);
-
         // Clean up the response a little bit for our own purposes.
         for ($i = 0; $i < count($stream); $i++) {
             if (isset($stream[$i]['comment_info'])) {
@@ -863,12 +861,12 @@ class DataAccessLayer {
                 $stream[$i]['user_likes'] = (int)$stream[$i]['like_info']['user_likes'];
                 unset($stream[$i]['like_info']);
             }
-            
-            $user = array_search($stream[$i]['actor_id'], $users);
-            
-            if ($user) {
-                $stream[$i]['actor_name'] = $users[$key]['first_name'] . ' ' . $users[$key]['last_name'];
-            }
+//            
+//            $user = array_search($stream[$i]['actor_id'], $users);
+//            
+//            if ($user) {
+//                $stream[$i]['actor_name'] = $users[$key]['first_name'] . ' ' . $users[$key]['last_name'];
+//            }
             
 //            for ($j = 0; $j < count($users); $j++) {
 //                if ($stream[$i]['actor_id'] == $users[$j]['uid']) {
