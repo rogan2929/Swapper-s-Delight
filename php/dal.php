@@ -177,6 +177,8 @@ class DataAccessLayer {
                 $this->stream[$i]['user_likes'] = (int)$userLikes;
             }
         }
+        
+        $_SESSION['stream'] = $this->stream;
 
         return $userLikes;
     }
