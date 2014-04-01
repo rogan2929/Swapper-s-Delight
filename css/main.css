@@ -354,7 +354,11 @@ a:visited {
     position: relative;
     border-radius: 5px;
     box-shadow: #ccc 1px 1px 4px;
-    background-color: #f6f6f6;
+    background-color: #f1f1f1;
+}
+
+.button.selection-item.hover {
+    background-color: #ccc;
 }
 
 .selection-item-content {
@@ -589,7 +593,7 @@ a:visited {
     margin-bottom: 1px;
     cursor: pointer;
     position: relative;
-    background-color: #f6f6f6;
+    background-color: #f1f1f1;
 }
 
 .post-block .comment-count {
@@ -700,8 +704,7 @@ a:visited {
 }
 
 .post-block.unique.post-block-text.hover {
-    background-color: #aaa;
-    color: white;
+    background-color: #ccc;
 }
 
 .post-block.load-more.hover {
@@ -1051,6 +1054,7 @@ div.right-toolbar-button {
     padding: 10px;
     margin-left: 10px;
     margin-top: 2px;
+    background-color: #f1f1f1;
 }
 
 #left-rail > *:not(:last-child) {
