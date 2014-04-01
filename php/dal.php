@@ -841,7 +841,7 @@ class DataAccessLayer {
 
             for ($k = 0; $k < count($response); $k++) {
                 $body = json_decode($response[$k]['body'], true);
-                $stream = array_merge($stream, $body['data']);
+                $stream = array_merge($stream, $body);
             }
         }
 
