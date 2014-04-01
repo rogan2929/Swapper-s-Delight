@@ -27,7 +27,8 @@ html {
 
 body {
     overflow: hidden;
-    background-color: #f1f1f1;
+/*    background-color: #f1f1f1;*/
+    background-color: #e7ebf2;
     /*    font-size: 0.98em;*/
 }
 
@@ -349,11 +350,12 @@ a:visited {
 
 .selection-item {
     display: inline-block;
-    background-color: #ddd;
+    background-color: #f6f6f6;
     margin: 5px;
     padding: 4px !important;
     position: relative;
     border-radius: 5px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
 }
 
 .selection-item-content {
@@ -580,7 +582,8 @@ a:visited {
 .post-block.post-block-link,
 .post-block.post-block-textlink {
     display: inline-block;
-    background-color: #ddd;
+/*    background-color: #ddd;*/
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
     height: 250px;
     width: 300px;
     overflow: hidden;
@@ -681,6 +684,7 @@ a:visited {
 .post-block.post-block-text .wrapper,
 .post-block.post-block-link .wrapper,
 .post-block.post-block-textlink .wrapper {
+    background: #f6f6f6;
     overflow: hidden;
     height: 250px;
 }
