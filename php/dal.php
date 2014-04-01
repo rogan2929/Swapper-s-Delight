@@ -862,11 +862,11 @@ class DataAccessLayer {
                 unset($stream[$i]['like_info']);
             }
             
-//            for ($j = 0; $j < count($users); $j++) {
-//                if ($stream[$i]['actor_id'] == $users[$j]['uid']) {
-//                    $stream[$i]['actor_name'] = $users[$j]['first_name'] . ' ' . $users[$j]['last_name'];
-//                }
-//            }
+            for ($j = 0; $j < count($users); $j++) {
+                if ($stream[$i]['actor_id'] == $users[$j]['uid']) {
+                    $stream[$i]['actor_name'] = $users[$j]['first_name'] . ' ' . $users[$j]['last_name'];
+                }
+            }
         }
 
 //        for ($i = 0; $i < count($stream); $i++) {
