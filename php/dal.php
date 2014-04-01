@@ -844,7 +844,7 @@ class DataAccessLayer {
                 $body = json_decode($response[$k]['body'], true);
                 $stream = array_merge($stream, $body[0]['fql_result_set']);
                 
-                $stream[$k]['actor_name'] = $body[1]['fql_result_set']['first_name'] . ' ' . $body[1]['fql_result_set']['last_name'];
+                //$stream[$k]['actor_name'] = $body[1]['fql_result_set']['first_name'] . ' ' . $body[1]['fql_result_set']['last_name'];
             }
         }
 
