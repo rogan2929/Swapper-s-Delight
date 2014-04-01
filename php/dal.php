@@ -820,7 +820,7 @@ class DataAccessLayer {
 
             for ($j = 0; $j < $batchSize; $j++) {
                 //$query = '/' . $this->gid . '/feed?fields=id,message,from,likes,comments&limit=5000&since=' . $windowEnd . '&until=' . $windowStart;
-                $query = 'SELECT post_id,message,actor_id,like_info,comment_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time > ' . $windowEnd;
+                $query = 'SELECT post_id,message,actor_id,like_info,comment_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd;
 
                 $windowStart -= $windowSize;
                 $windowEnd -= $windowSize;
@@ -830,6 +830,8 @@ class DataAccessLayer {
                     'relative_url' => 'method/fql.query?query=' . urlencode($query)
                 );
             }
+            
+            echo json_encode($queries) . "<br/><br/><br/>";
 
             // Execute a batch query.
             $response = $this->api('/', 'POST', array(
