@@ -171,12 +171,15 @@ class DataAccessLayer {
             $this->api('/' . $postId . '/likes', 'DELETE');
         }
 
-        // TODO: Update the cached post stream.
+        // Update the cached post stream.
         for ($i = 0; $i < count($this->stream); $i++) {
             if ($this->stream[$i]['post_id'] == $postId) {
-                $this->stream[$i]['user_likes'] = $userLikes;
+                $this->stream[$i]['user_likes'] = (int)$userLikes;
             }
         }
+        
+        // Save the updated stream.
+        $_SESSION['stream'] = $this->stream;
 
         return $userLikes;
     }
