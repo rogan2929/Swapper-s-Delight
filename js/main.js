@@ -1057,7 +1057,7 @@ var SwdView = {
      * @param {type} postId
      */
     incrementCommentCount: function(postId) {
-        var count = parseInt($('#' + postId + ' div.comment-count').text()) + 1; 
+        var count = parseInt($('#' + postId + ' div.comment-count').first().text()) + 1; 
         $('#' + postId + ' div.comment-count').text(count);
     },
     /**
