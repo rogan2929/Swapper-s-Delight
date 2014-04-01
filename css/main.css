@@ -27,7 +27,8 @@ html {
 
 body {
     overflow: hidden;
-    background: url(/img/textured_paper.png);
+    background-color: white;
+/*    background: url(/img/textured_paper.png);*/
 }
 
 /*
@@ -588,6 +589,7 @@ a:visited {
     margin-bottom: 1px;
     cursor: pointer;
     position: relative;
+    background-color: #f6f6f6;
 }
 
 .post-block .comment-count {
