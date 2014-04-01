@@ -813,6 +813,7 @@ class DataAccessLayer {
         $windowEnd = $windowStart - $windowSize;
 
         $stream = array();
+        $users = array();
 
         // Pull the feed for stream data.
         for ($i = 0; $i < $iterations; $i++) {
@@ -840,10 +841,12 @@ class DataAccessLayer {
                 'include_headers' => false
             ));
 
+            // Parse the response.
             for ($k = 0; $k < count($response); $k++) {
                 $body = json_decode($response[$k]['body'], true);
-                $stream = array_merge($stream, $body[0]['fql_result_set']);
                 
+                $stream = array_merge($stream, $body[0]['fql_result_set']);
+                $users = array_merge($users, $body[1]['fql_result_set']);
                 //$stream[$k]['actor_name'] = $body[1]['fql_result_set']['first_name'] . ' ' . $body[1]['fql_result_set']['last_name'];
             }
         }
@@ -858,6 +861,12 @@ class DataAccessLayer {
             if (isset($stream[$i]['like_info'])) {
                 $stream[$i]['user_likes'] = (int)$stream[$i]['like_info']['user_likes'];
                 unset($stream[$i]['like_info']);
+            }
+            
+            for ($j = 0; $j < count($users); $j++) {
+                if ($stream[$i]['actor_id'] == $users[$j]['uid']) {
+                    $stream[$i]['actor_name'] = $users[$j]['first_name'] . ' ' . $users[$j]['last_name'];
+                }
             }
         }
 
