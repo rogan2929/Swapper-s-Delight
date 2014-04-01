@@ -864,6 +864,12 @@ class DataAccessLayer {
                 unset($stream[$i]['like_info']);
             }
             
+            $user = array_search($stream[$i]['actor_id'], $users);
+            
+            if ($user) {
+                $stream[$i]['actor_name'] = $users[$key]['first_name'] . ' ' . $users[$key]['last_name'];
+            }
+            
 //            for ($j = 0; $j < count($users); $j++) {
 //                if ($stream[$i]['actor_id'] == $users[$j]['uid']) {
 //                    $stream[$i]['actor_name'] = $users[$j]['first_name'] . ' ' . $users[$j]['last_name'];
