@@ -1453,13 +1453,13 @@ var SwdView = {
             $('.post-block').not('.post-block.post-block-text').hoverIntent({
                 over: function() {
                     $(this).children('.visible-content').hide('slide', 200, function() {
-                        $(this).children('.post-block.hidden-block').fadeIn(100);
+                        $(this).next('.post-block.hidden-block').fadeIn(100);
                     });
                     //$(this).children('.visible-content').fadeOut(100);
                 },
                 out: function() {
                     $(this).children('.visible-content').show('slide', 200, function() {
-                        $(this).children('.post-block.hidden-block').fadeOut(100);
+                        $(this).next('.post-block.hidden-block').fadeOut(100);
                     });
                     //$(this).children('.visible-content').fadeIn(100);
                 },
