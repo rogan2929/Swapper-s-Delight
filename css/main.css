@@ -359,6 +359,7 @@ a:visited {
 
 .button.selection-item.hover {
     background-color: #ccc;
+    color: #444;
 }
 
 .selection-item-content {
