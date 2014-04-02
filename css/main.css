@@ -910,10 +910,14 @@ a.link-title {
 
 .floating-panel-content .column.right {
     right: 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .floating-panel-content .column.left {
     left: 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 #overlay-app-loading, .floating-overlay {
