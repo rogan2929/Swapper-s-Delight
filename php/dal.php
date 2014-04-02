@@ -518,7 +518,7 @@ class DataAccessLayer {
      */
     private function fetchStream() {
         // Save $gid to session for later use.
-        $_SESSION['gid'] = $this->gid;
+        //$_SESSION['gid'] = $this->gid;
 
         // Wait for other threads to finish updating the cached FQL stream.
         $this->waitForFetchStreamCompletion();
