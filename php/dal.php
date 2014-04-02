@@ -420,7 +420,7 @@ class DataAccessLayer {
         $result = false;
 
         if (isset($_SESSION['gid'])) {
-            $this->setGid($_SESSION['gid']);
+            $this->gid = $_SESSION['gid'];
 
             // Fetch the new stream.
             $this->fetchStream();
