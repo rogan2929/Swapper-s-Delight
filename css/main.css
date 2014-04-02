@@ -203,7 +203,6 @@ a:visited {
 }*/
 
 .facebook-user-header .facebook-poststamp > * {
-    margin-left: 4px;
     color: #f6f6f6;
     display: block;
 }
@@ -646,19 +645,12 @@ a:visited {
 }
 
 .facebook-user-header {
-    /*    height: 65px;
-        line-height: 65px;*/
     color: #f6f6f6;
     background-color: #4d81bf;
+    border-radius: 4px;
+    padding: 5px;
+    box-shadow: #ccc 1px 1px 4px;
 }
-
-/*.facebook-user-header a {
-    color: #444;
-}
-
-.facebook-user-header a:visited {
-    color: #444;
-}*/
 
 .load-more > .load-more-text {
     line-height: 250px;
@@ -805,10 +797,10 @@ a.link-title {
     padding-bottom: 5px;
 }
 
-.facebook-user-header.floating-panel-section {
+/*.facebook-user-header.floating-panel-section {
     border: none !important;
     padding: 0;
-}
+}*/
 
 #popup-logged-out {
     position: absolute;
@@ -910,10 +902,14 @@ a.link-title {
 
 .floating-panel-content .column.right {
     right: 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .floating-panel-content .column.left {
     left: 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 #overlay-app-loading, .floating-overlay {
@@ -945,6 +941,13 @@ a.link-title {
     background-repeat: no-repeat;
     background-size: cover;
     float: left;
+    margin-right: 5px;
+    border-radius: 4px;
+}
+
+.post-comment .facebook-user-photo {
+    height: 37px;
+    width: 37px;
 }
 
 .facebook-user-header .facebook-poststamp {
@@ -970,7 +973,9 @@ a.link-title {
 
 .post-comment > div:first-child {
     background-color: #eee;
-    padding: 5px;
+    padding: 6px;
+    border-radius: 4px;
+    box-shadow: #ccc 1px 1px 4px;
 }
 
 .post-comment a:first-child {

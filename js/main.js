@@ -1022,7 +1022,10 @@ var SwdView = {
         // Get a human-readable version of the comment's timestamp value.
         timeStamp = new moment(new Date(comment.time * 1000));
 
-        commentDiv = $('<div class="post-comment"><div><a href="' + comment.user.profile_url + '" target="_blank">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><div class="timestamp">' + timeStamp.calendar() + '</div></div><div class="post-comment-text">' + comment.text + '</div></div>');
+        commentDiv = $('<div class="post-comment"><div><div class="facebook-user-photo"></div><a href="' + comment.user.profile_url + '" target="_blank">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><div class="timestamp">' + timeStamp.calendar() + '</div></div><div class="post-comment-text">' + comment.text + '</div></div>');
+
+        // Set the user's photo.
+        $(commentDiv).find('.facebook-user-photo').css('background-image', userImage);
 
         // If the current user is the owner of the comment, display the delete and edit buttons.
         if (comment.user.uid === uid) {

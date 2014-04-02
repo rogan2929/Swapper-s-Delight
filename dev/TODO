@@ -1,11 +1,11 @@
-Implement 'New' post functionality.
+*Implement 'New' post functionality.
 Implement check to see that app has the correct permissions.
-Artwork.
-Privacy Policy.
+*Artwork.
+*Privacy Policy.
 Include prompt to change app settings so that others using Swapper's Delight can see the current user's photos.
     https://www.facebook.com/settings?tab=applications&section=friends_share&view (Apps Others Use)
-Acknowledge tags in posts and comments.
-Allow creation of tags in posts and comments.
+*Acknowledge tags in posts and comments.
+*Render images that are posted in comments.
 View group info panel.
     Description
     Admin
