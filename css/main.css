@@ -649,6 +649,8 @@ a:visited {
         line-height: 65px;*/
     color: #f6f6f6;
     background-color: #4d81bf;
+    border-radius: 4px;
+    padding: 5px;
 }
 
 /*.facebook-user-header a {
@@ -804,10 +806,10 @@ a.link-title {
     padding-bottom: 5px;
 }
 
-.facebook-user-header.floating-panel-section {
+/*.facebook-user-header.floating-panel-section {
     border: none !important;
     padding: 0;
-}
+}*/
 
 #popup-logged-out {
     position: absolute;
@@ -949,6 +951,7 @@ a.link-title {
     background-size: cover;
     float: left;
     margin-right: 5px;
+    border-radius: 4px;
 }
 
 .post-comment .facebook-user-photo {
@@ -980,6 +983,7 @@ a.link-title {
 .post-comment > div:first-child {
     background-color: #eee;
     padding: 6px;
+    border-radius: 4px;
 }
 
 .post-comment a:first-child {
