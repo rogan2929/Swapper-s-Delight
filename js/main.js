@@ -547,7 +547,6 @@ var SwdPresenter = {
                 // Asynchronously call SwdModel.fullyPopulateStream in order to fully populate the cached stream on the backend.
                 SwdModel.refreshStream({
                     success: function(response) {
-                        
                     },
                     error: SwdPresenter.handleError
                 });
