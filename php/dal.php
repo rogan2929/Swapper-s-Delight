@@ -306,7 +306,7 @@ class DataAccessLayer {
     public function getNewPosts($refresh, $offset, $limit) {
         // Get a new stream if necessary.
         if ($refresh == 1) {
-            $this->fetchStream();
+            $this->fetchStream($refresh);
         }
 
         return $this->getPostData($this->stream, $offset, $limit);
@@ -421,7 +421,7 @@ class DataAccessLayer {
             $this->gid = $_SESSION['gid'];
 
             // Fetch the new stream.
-            $this->fetchStream();
+            $this->fetchStream(false);
         }
 
         return count($this->stream);
@@ -512,13 +512,13 @@ class DataAccessLayer {
     /**
      * Fetches the group's post stream.
      */
-    private function fetchStream() {
+    private function fetchStream($prefetchOnly) {
         // Wait for other threads to finish updating the cached FQL stream.
         $this->waitForFetchStreamCompletion();
 
         // Refresh the FQL stream.
         $_SESSION['refreshing'] = true;
-        $_SESSION['stream'] = $this->queryStream();
+        $_SESSION['stream'] = $this->queryStream($prefetchOnly);
         $_SESSION['refreshing'] = false;
 
         $this->stream = $_SESSION['stream'];
@@ -793,19 +793,17 @@ class DataAccessLayer {
      * Query the FQL stream table for some basic data that will be cached.
      */
 
-    private function queryStream() {
+    private function queryStream($prefetchOnly) {
         $uid = $this->getMe();
 
         $windowStart = time();
         $windowSize = $this->getOptimalWindowSize();
 
-        // Check to see if this is the first time queryStream has been called since changing groups.
-        if ($_SESSION['stream'] == null) {
-            // If stream is null, then this is the first load for a newly selected group.
+        // Check to see if this this is only prefetching the stream data.
+        if ($prefetchOnly) {
             $stream = $this->getFeedData($uid, $windowSize, $windowStart, 15, 1);
         }
         else {
-            // If it's not, then the stream has already been prefetched, so the longer load can take place.
             $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 1);
             $windowStart = $windowStart - ($windowSize * 50 * 1);
             $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 2, $windowStart, 13, 1));
