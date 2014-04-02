@@ -27,7 +27,6 @@ header('Pragma: no-cache');
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <!--        <link rel="stylesheet" href="css/flick-red/jquery-ui-1.10.4.custom.min.css">-->
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
@@ -102,6 +101,7 @@ header('Pragma: no-cache');
                             <div id='post-image-container' class='floating-panel-section'></div>
                             <div id='post-no-image-desc' class='floating-panel-section hidden'>
                                 <span class='hint'>Hint: Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. Click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook.</span>
+<!--                                <span><a href='#' class='privacy-settings-about'>What's this all about?</a></span>-->
                             </div>
                         </div>
                         <div class='ajax-loading-div hidden'></div>
@@ -110,9 +110,10 @@ header('Pragma: no-cache');
 
                 <!--New Post Panel-->
 
-                <div id='new-post-panel' class='floating-panel hidden'>
+                <div id='new-post-panel' class='floating-panel collapsed hidden'>
                     <div class='floating-panel-content ui-widget scroll-y'>
                         <div class='close-button'></div>
+                        <div class='heading'>Create a new group post.</div>
                     </div>
                 </div>
 

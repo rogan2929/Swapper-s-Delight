@@ -1,15 +1,11 @@
 Implement 'New' post functionality.
 Implement check to see that app has the correct permissions.
 Artwork.
-Helper Popups:
-    Start here with group choosing.
-    Point out controls for post details toolbar.
+Privacy Policy.
 Include prompt to change app settings so that others using Swapper's Delight can see the current user's photos.
     https://www.facebook.com/settings?tab=applications&section=friends_share&view (Apps Others Use)
 Acknowledge tags in posts and comments.
 Allow creation of tags in posts and comments.
-Dynamic comment count updating through AJAX.
-Prevent sessions from running forever. (Implement a refresh limit.)
 View group info panel.
     Description
     Admin
@@ -17,10 +13,7 @@ View group info panel.
     Privacy
     pic_cover
     View Group in Facebook
-Like Button
 Captions for shared photos.
-Fix liking so that when a post is liked, it's cached stream counterpart is updated to reflect this.
-
 
 The 'Maybe' List:
 Add functionality to filter 'My Posts' by comment data.

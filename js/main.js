@@ -222,13 +222,13 @@ var SwdModel = {
      * @param {type} postIds
      * @param {type} callbacks
      */
-    refreshCommentCounts: function(postIds, callbacks) {
+    getRefreshedStreamData: function(postIds, callbacks) {
         $.ajax({
             type: 'POST',
-            url: '/php/refresh-comment-counts.php',
+            url: '/php/refreshed-stream-data.php',
             dataType: 'json',
             data: {
-                'postIds': postIds
+                'postIds': JSON.stringify(postIds)
             },
             success: function(response) {
                 callbacks.success.call(SwdModel, response);
@@ -305,10 +305,12 @@ var SwdPresenter = {
     currentlyLoading: false,
     selectedPost: null,
     search: null,
-    refreshCommentCountInterval: null,
     refreshStreamInterval: null,
     postOffset: 0,
     messageCallback: null,
+    postIds: [],
+    idleTime: 0,
+    idleInterval: null,
     /***
      * Top-level error handler function.
      * @param {type} error
@@ -419,7 +421,9 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
                                 SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
                                 SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#post-comment-text', 'keyup');
+                                SwdView.installHandler('onKeyPress', SwdPresenter.onKeyPress, document, 'keypress');
                                 SwdView.installHandler('onKeyUpSearch', SwdPresenter.onKeyUpSearch, '#main-search', 'keyup');
+                                SwdView.installHandler('onMouseMove', SwdPresenter.onMouseMove, document, 'mousemove');
                                 SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
                                 SwdView.positionMenus();
 
@@ -430,6 +434,9 @@ var SwdPresenter = {
                                     // Start with displaying the group selection panel.
                                     SwdView.toggleFloatingPanel('#select-group-panel', true, 'drop');
                                 }, 1000);
+
+                                // Start the idle timer.
+                                SwdPresenter.idleInterval = setInterval(SwdPresenter.timerIncrement, 60000);     // 1 minute
                             },
                             error: SwdPresenter.handleError
                         });
@@ -524,11 +531,17 @@ var SwdPresenter = {
                 SwdPresenter.refreshStreamInterval = setInterval(function() {
                     SwdModel.refreshStream({
                         success: function(response) {
-                            // TODO: Trigger a view update.
+                            // Get refreshed data.
+                            SwdModel.getRefreshedStreamData(SwdPresenter.postIds, {
+                                success: function(response) {
+                                    SwdView.displayRefreshedPostData(response);
+                                },
+                                error: SwdPresenter.handleError
+                            });
                         },
                         error: SwdPresenter.handleError
                     });
-                }, 300000);
+                }, 300000);     // 5 minutes.
 
                 SwdPresenter.loadPostsComplete(response);
             },
@@ -558,19 +571,20 @@ var SwdPresenter = {
      * @param {type} viewChanged
      */
     loadPosts: function(refresh, viewChanged) {
-        if (!SwdPresenter.currentlyLoading) {
+        if (!SwdPresenter.currentlyLoading && SwdPresenter.selectedGroup !== null) {
             SwdPresenter.currentlyLoading = true;
 
             if (refresh || viewChanged) {
+                SwdPresenter.postIds = [];
                 SwdView.clearPosts();
                 SwdPresenter.refreshFbCanvasSize();
 
                 // If the view changed or the page has refreshed, reset the post offset to 0.
                 SwdPresenter.postOffset = 0;
-            }
 
-            SwdView.toggleElement('#overlay-loading-posts', true);
-            SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', true);
+                SwdView.toggleElement('#overlay-loading-posts', true);
+                SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', true);
+            }
 
             switch (SwdPresenter.selectedView) {
                 case SelectedView.group:
@@ -593,9 +607,16 @@ var SwdPresenter = {
      * @param {type} response
      */
     loadPostsComplete: function(response) {
+        var i;
+
         if (response) {
             // Update post offset.
             SwdPresenter.postOffset += response.length;
+
+            // Capture the ids of all the posts that were just returned.
+            for (i = 0; i < response.length; i++) {
+                SwdPresenter.postIds.push(response[i].post_id);
+            }
 
             // If a response came through, then display the posts.
             SwdView.populatePostBlocks(response);
@@ -652,6 +673,18 @@ var SwdPresenter = {
         SwdView.setGroupButtonText(group.name);
         SwdView.setSelectedView('button-nav-group');
     },
+    timerIncrement: function() {
+        SwdPresenter.idleTime++;
+
+        if (SwdPresenter.idleTime > 34) {
+            // After 35, do a full refresh of the canvas app.
+            window.location = window.location.href;
+        }
+        else if (SwdPresenter.idleTime > 19) {
+            // After 20 minutes, do a reload of the current page.
+            SwdPresenter.loadPosts(false, true);
+        }
+    },
     onClickButtonGroups: function(e, args) {
         // Prevent the event from bubbling up the DOM and closing the floating panel.
         e.stopPropagation();
@@ -670,14 +703,15 @@ var SwdPresenter = {
     },
     onClickCommentDelete: function(e, args) {
         var id;
-        
+
         id = $(e.currentTarget).parent().attr('id');
-        
+
         // Prompt for deletion of the comment.
         SwdPresenter.message('confirm', 'Delete this comment?', function(response) {
             if (response === 1) {
                 SwdView.removeComment('#' + id);
-                SwdModel.deleteObject(id, function() {});
+                SwdModel.deleteObject(id, function() {
+                });
             }
         });
     },
@@ -901,6 +935,9 @@ var SwdPresenter = {
 
             // Show the ajax loading div.
             SwdView.toggleAjaxLoadingDiv('#post-comment-wrapper', true);
+            
+            // Increment the post's tile's comment count.
+            SwdView.incrementCommentCount(id);
 
             // Post the comment.
             SwdModel.postComment(id, comment, {
@@ -914,6 +951,9 @@ var SwdPresenter = {
 
         return true;
     },
+    onKeyPress: function(e, args) {
+        SwdPresenter.idleTime = 0;
+    },
     onKeyUpSearch: function(e, args) {
         if (e.which === 13) {
             e.preventDefault();
@@ -923,6 +963,9 @@ var SwdPresenter = {
             SwdPresenter.search = $('#main-search').val();
             SwdPresenter.loadPosts(false, true);
         }
+    },
+    onMouseMove: function(e, args) {
+        SwdPresenter.idleTime = 0;
     },
     onWindowResize: function(e, args) {
         SwdView.positionMenus();
@@ -980,14 +1023,14 @@ var SwdView = {
         timeStamp = new moment(new Date(comment.time * 1000));
 
         commentDiv = $('<div class="post-comment"><div><a href="' + comment.user.profile_url + '" target="_blank">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><div class="timestamp">' + timeStamp.calendar() + '</div></div><div class="post-comment-text">' + comment.text + '</div></div>');
-        
+
         // If the current user is the owner of the comment, display the delete and edit buttons.
         if (comment.user.uid === uid) {
             $(commentDiv).append('<div class="delete-button"></div>');
         }
-        
+
         $(commentDiv).attr('id', comment.id).hide().linkify().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
-        
+
         // Hook up the click event handler.
         $(commentDiv).children('.delete-button').click(SwdView.handlers['onClickCommentDelete']);
     },
@@ -1008,6 +1051,14 @@ var SwdView = {
         });
 
         $('.post-block.ad-div').hide();
+    },
+    /***
+     * Increment the given post's comment count.
+     * @param {type} postId
+     */
+    incrementCommentCount: function(postId) {
+        var count = parseInt($('#' + postId + ' div.comment-count').first().text()) + 1; 
+        $('#' + postId + ' div.comment-count').text(count);
     },
     /**
      * Installs an event handler and connects it to the presenter.
@@ -1225,6 +1276,18 @@ var SwdView = {
         $(postBlock).addClass('post-block-text').html(message).appendTo('#post-feed');
     },
     /***
+     * Displays refreshed post data.
+     * @param {type} posts
+     */
+    displayRefreshedPostData: function(posts) {
+        var i;
+
+        for (i = 0; i < posts.length; i++) {
+            // Update comment counts.
+            $('#' + posts[i].post_id + ' .comment-count').text(posts[i].comment_count);
+        }
+    },
+    /***
      * Fill the post-image-container with post-image-tiles.
      * @param {type} post
      */
@@ -1382,15 +1445,21 @@ var SwdView = {
             for (i = 1; i <= 4; i++) {
                 $('#ad-tile-' + i).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
             }
+                    
+            $('.post-block.hidden-block').hide();
 
             // After a delay, show the hidden content for any moused over image post blocks.
             // Use the hoverIntent plugin.
             $('.post-block').not('.post-block.post-block-text').hoverIntent({
                 over: function() {
-                    $(this).children('.visible-content').hide('blind', 300);
+                    $(this).children('.visible-content').hide('slide', 200, function() {
+                        $(this).next('.post-block.hidden-block').fadeIn(100);
+                    });
                 },
                 out: function() {
-                    $(this).children('.visible-content').show('blind', 300);
+                    $(this).children('.post-block.hidden-block').fadeOut(100, function() {
+                        $(this).prev('.visible-content').show('slide', 200);
+                    });
                 },
                 timeout: 400
             });

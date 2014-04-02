@@ -81,6 +81,10 @@ class DataAccessLayer {
     /** Methods * */
     // Group management functions.
 
+    /**
+     * Look up group membership information for the current user.
+     * @return type
+     */
     public function getGroupInfo() {
         $queries = array(
             'memberQuery' => 'SELECT gid,bookmark_order FROM group_member WHERE uid=me() ORDER BY bookmark_order',
@@ -96,6 +100,10 @@ class DataAccessLayer {
         return $response[1] ['fql_result_set'];
     }
 
+    /**
+     * Queries the Swapper's Delight SQL backend for groups that the user has marked as 'hidden'.
+     * @return string
+     */
     public function getHiddenGroups() {
         $uid = $this->getMe();
 
@@ -119,6 +127,10 @@ class DataAccessLayer {
         return $hiddenGroups;
     }
 
+    /**
+     * Mark the group with provided gid as hidden.
+     * @param type $gid
+     */
     public function hideGroup($gid) {
         $uid = $this->getMe();
 
@@ -136,10 +148,20 @@ class DataAccessLayer {
 
     // Post operation functions.
 
+    /**
+     * Delete a Facebook Object.
+     * @param type $id
+     */
     public function deleteObject($id) {
         $this->api('/' . $id, 'DELETE');
     }
 
+    /**
+     * Like a post.
+     * @param type $postId
+     * @param type $userLikes
+     * @return type
+     */
     public function likePost($postId, $userLikes) {
         if ($userLikes == true) {
             // Like the post.
@@ -149,20 +171,32 @@ class DataAccessLayer {
             $this->api('/' . $postId . '/likes', 'DELETE');
         }
 
-        // TODO: Update the cached post stream.
+        // Update the cached post stream.
         for ($i = 0; $i < count($this->stream); $i++) {
             if ($this->stream[$i]['post_id'] == $postId) {
-                $this->stream[$i]['user_likes'] = $userLikes;
+                $this->stream[$i]['user_likes'] = (int)$userLikes;
             }
         }
+        
+        // Save the updated stream.
+        $_SESSION['stream'] = $this->stream;
 
         return $userLikes;
     }
 
+    /**
+     * Create a new post.
+     */
     public function newPost() {
         
     }
 
+    /**
+     * Post a comment on a post.
+     * @param type $postId
+     * @param type $comment
+     * @return type
+     */
     public function postComment($postId, $comment) {
         // Post the comment and get the response
         $id = $this->api('/' . $postId . '/comments', 'POST', array('message' => $comment));
@@ -193,6 +227,12 @@ class DataAccessLayer {
 
     // Stream operation functions.
 
+    /**
+     * Retrieve posts that are liked by the current user.
+     * @param type $offset
+     * @param type $limit
+     * @return type
+     */
     public function getLikedPosts($offset, $limit) {
         $posts = array();
 
@@ -206,10 +246,28 @@ class DataAccessLayer {
         return $this->getPostData($posts, $offset, $limit);
     }
 
+    /**
+     * Returns the UID of the currently logged in user.
+     * @return type
+     */
     public function getMe() {
         return $this->api('/me')['id'];
     }
+    
+    /**
+     * Getter for $this->stream.
+     * @return type
+     */
+    public function getStream() {
+        return $this->stream;
+    }
 
+    /**
+     * Retrieves posts owned by the current user.
+     * @param type $offset
+     * @param type $limit
+     * @return type
+     */
     public function getMyPosts($offset, $limit) {
         $uid = $this->api('/me')['id'];
         $posts = array();
@@ -224,6 +282,13 @@ class DataAccessLayer {
         return $this->getPostData($posts, $offset, $limit);
     }
 
+    /**
+     * Retrieves posts newly created in the specified group. Optionally can trigger a refresh of the stream cache.
+     * @param type $refresh
+     * @param type $offset
+     * @param type $limit
+     * @return type
+     */
     public function getNewPosts($refresh, $offset, $limit) {
         // Get a new stream if necessary.
         if ($refresh == 1) {
@@ -233,6 +298,12 @@ class DataAccessLayer {
         return $this->getPostData($this->stream, $offset, $limit);
     }
 
+    /**
+     * Retrieves additional data for the given post id.
+     * @param type $postId
+     * @return type
+     * @throws Exception
+     */
     public function getPostDetails($postId) {
         $queries = array(
             'detailsQuery' => 'SELECT post_id,message,actor_id,permalink,like_info,share_info,comment_info,tagged_ids,attachment,created_time FROM stream WHERE post_id="' . $postId . '"',
@@ -308,19 +379,47 @@ class DataAccessLayer {
         return $post;
     }
 
-    public function refreshCommentCounts($postIds) {
+    /**
+     * Retrieves refreshed stream data for the given post ids.
+     * @param type $postIds
+     */
+    public function getRefreshedStreamData($postIds) {
+        $posts = array();
         
+        for ($i = 0; $i < count($postIds); $i++) {
+            for ($j = 0; $j < count($this->stream); $j++) {
+                if ($postIds[$i] == $this->stream[$j]['post_id']) {
+                    $posts[] = $this->stream[$j];
+                }
+            }
+        }
+        
+        // Return the updated stream data.
+        return $posts;
     }
 
+    /**
+     * Performs an update the local stream cache.
+     * @return boolean
+     */
     public function refreshStream() {
+        $result = false;
+
         if (isset($_SESSION['gid'])) {
             $this->setGid($_SESSION['gid']);
 
             // Fetch the new stream.
             $this->fetchStream();
+
+            $result = true;
         }
+
+        return $result;
     }
 
+    /**
+     * Removes all of the current user's hidden groups from the Swapper's Delight backend.
+     */
     public function restoreGroups() {
         $uid = $this->getMe();
 
@@ -336,6 +435,13 @@ class DataAccessLayer {
         sqlsrv_query($conn, $sql);
     }
 
+    /**
+     * Search the stream cache for posts that match the search string. Search is based on message and poster's name.
+     * @param type $search
+     * @param type $offset
+     * @param type $limit
+     * @return type
+     */
     public function searchPosts($search, $offset, $limit) {
         $posts = array();
 
@@ -350,6 +456,11 @@ class DataAccessLayer {
     }
 
     /** Private Methods * */
+
+    /**
+     * A wrapper for $facebook->api. Error handling is built in.
+     * @return type
+     */
     private function api(/* polymorphic */) {
         $args = func_get_args();
 
@@ -386,6 +497,9 @@ class DataAccessLayer {
         }
     }
 
+    /**
+     * Fetches the group's post stream.
+     */
     private function fetchStream() {
         // Save $gid to session for later use.
         $_SESSION['gid'] = $this->gid;
@@ -676,15 +790,6 @@ class DataAccessLayer {
         $windowStart = time();
         $windowSize = $this->getOptimalWindowSize();
 
-        // Execute a batch request against the group's feed.
-//        $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 2);
-//
-//        // Update the $windowStart time to reflect how many times $windowSize has been subtracted from $windowStart.
-//        $windowStart = $windowStart - ($windowSize * 50 * 2);
-//
-//        // Execute a second request to pick up posts that are even older, but with a larger window size.
-//        $stream = array_merge($stream, $this->getFeedData($uid, 12 * 3600, $windowStart, 10));
-
         $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 1);
         $windowStart = $windowStart - ($windowSize * 50 * 1);
         $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 2, $windowStart, 13, 1));
@@ -692,27 +797,6 @@ class DataAccessLayer {
         $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 3, $windowStart, 12, 1));
 
         return $stream;
-    }
-
-    public function testStream() {
-        $uid = $this->getMe();
-
-        $windowStart = time();
-        $windowStart2 = $windowStart;
-        $windowSize = $this->getOptimalWindowSize();
-
-        // Execute a batch request against the group's feed.
-        echo $windowSize . ' ';
-        $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 2);
-        echo count($stream) . "<br/>";
-
-        echo $windowSize . ' ';
-        $stream2 = $this->getFeedData($uid, $windowSize, $windowStart2, 50, 1);
-        $windowStart2 = $windowStart2 - ($windowSize * 50 * 1);
-        $stream2 = array_merge($stream2, $this->getFeedData($uid, $windowSize * 2, $windowStart2, 13, 1));
-        $windowStart2 = $windowStart2 - ($windowSize * 13 * 1);
-        $stream2 = array_merge($stream2, $this->getFeedData($uid, $windowSize * 3, $windowStart2, 12, 1));
-        echo count($stream2);
     }
 
     /**
@@ -729,20 +813,25 @@ class DataAccessLayer {
         $windowEnd = $windowStart - $windowSize;
 
         $stream = array();
+        $users = array();
 
         // Pull the feed for stream data.
         for ($i = 0; $i < $iterations; $i++) {
             $queries = array();
 
             for ($j = 0; $j < $batchSize; $j++) {
-                $query = '/' . $this->gid . '/feed?fields=id,message,from,likes,comments&limit=5000&since=' . $windowEnd . '&until=' . $windowStart;
+                //$query = '/' . $this->gid . '/feed?fields=id,message,from,likes,comments&limit=5000&since=' . $windowEnd . '&until=' . $windowStart;
+                $query = array(
+                    'streamQuery' => 'SELECT post_id,message,actor_id,like_info,comment_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000',
+                    'userQuery' => 'SELECT first_name,last_name,uid FROM user WHERE uid IN (SELECT actor_id FROM #streamQuery)'
+                );
 
                 $windowStart -= $windowSize;
                 $windowEnd -= $windowSize;
 
                 $queries[] = array(
-                    'method' => 'GET',
-                    'relative_url' => $query
+                    'method' => 'POST',
+                    'relative_url' => 'method/fql.multiquery?queries=' . json_encode($query)
                 );
             }
 
@@ -752,39 +841,77 @@ class DataAccessLayer {
                 'include_headers' => false
             ));
 
+            // Parse the response.
             for ($k = 0; $k < count($response); $k++) {
                 $body = json_decode($response[$k]['body'], true);
-                $stream = array_merge($stream, $body['data']);
+                
+                $stream = array_merge($stream, $body[0]['fql_result_set']);
+                $users = array_merge($users, $body[1]['fql_result_set']);
             }
         }
 
-        // Shape the stream to make it look like it came from an FQL query.
-        // id => post_id
-        // from['id'] => actor_id
-        // likes['data'] => user_likes
-
+        // Clean up the response a little bit for our own purposes.
         for ($i = 0; $i < count($stream); $i++) {
-            $stream[$i]['post_id'] = $stream[$i]['id'];
-            unset($stream[$i]['id']);
-
-            $stream[$i]['actor_id'] = $stream[$i]['from']['id'];
-            $stream[$i]['actor_name'] = $stream[$i]['from']['name'];
-            unset($stream[$i]['from']);
-
-            $stream[$i]['user_likes'] = 0;
-
-            if (isset($stream[$i]['likes']) && isset($stream[$i]['likes']['data'])) {
-                for ($j = 0; $j < count($stream[$i]['likes']['data']); $j++) {
-                    $likeInfo = $stream[$i]['likes']['data'][$j];
-
-                    if ($likeInfo['id'] == $uid) {
-                        $stream[$i]['user_likes'] = 1;
-                    }
-                }
-
-                unset($stream[$i]['likes']);
+            if (isset($stream[$i]['comment_info'])) {
+                $stream[$i]['comment_count'] = $stream[$i]['comment_info']['comment_count'];
+                unset($stream[$i]['comment_info']);
             }
+            
+            if (isset($stream[$i]['like_info'])) {
+                $stream[$i]['user_likes'] = (int)$stream[$i]['like_info']['user_likes'];
+                unset($stream[$i]['like_info']);
+            }
+            
+            for ($j = 0; $j < count($users); $j++) {
+                if ($stream[$i]['actor_id'] == $users[$j]['uid']) {
+                    $stream[$i]['actor_name'] = $users[$j]['first_name'] . ' ' . $users[$j]['last_name'];
+                }
+            }
+            
+//            
+//            $user = array_search($stream[$i]['actor_id'], $users);
+//            
+//            if ($user) {
+//                $stream[$i]['actor_name'] = $users[$key]['first_name'] . ' ' . $users[$key]['last_name'];
+//            }
+            
+//            for ($j = 0; $j < count($users); $j++) {
+//                if ($stream[$i]['actor_id'] == $users[$j]['uid']) {
+//                    $stream[$i]['actor_name'] = $users[$j]['first_name'] . ' ' . $users[$j]['last_name'];
+//                }
+//            }
         }
+
+//        for ($i = 0; $i < count($stream); $i++) {
+//            $stream[$i]['post_id'] = $stream[$i]['id'];
+//            unset($stream[$i]['id']);
+//
+//            $stream[$i]['actor_id'] = $stream[$i]['from']['id'];
+//            $stream[$i]['actor_name'] = $stream[$i]['from']['name'];
+//            unset($stream[$i]['from']);
+//
+//            $stream[$i]['user_likes'] = 0;
+//
+//            if (isset($stream[$i]['likes']) && isset($stream[$i]['likes']['data'])) {
+//                for ($j = 0; $j < count($stream[$i]['likes']['data']); $j++) {
+//                    $likeInfo = $stream[$i]['likes']['data'][$j];
+//
+//                    if ($likeInfo['id'] == $uid) {
+//                        $stream[$i]['user_likes'] = 1;
+//                    }
+//                }
+//
+//                unset($stream[$i]['likes']);
+//            }
+//            
+//            $stream[$i]['comment_count'] = 0;
+//            
+//            if (isset($stream[$i]['comments']) && isset($stream[$i]['comments']['data'])) {
+//                $stream[$i]['comment_count'] = count($stream[$i]['comments']['data']);
+//                
+//                unset ($stream[$i]['comments']);
+//            }
+//        }
 
         return $stream;
     }
