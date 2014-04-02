@@ -547,24 +547,26 @@ var SwdPresenter = {
                 // Asynchronously call SwdModel.fullyPopulateStream in order to fully populate the cached stream on the backend.
                 SwdModel.refreshStream({
                     success: function(response) {
-                        // Set a timer function to periodically refresh the server-side FQL stream.
-                        SwdPresenter.refreshStreamInterval = setInterval(function() {
-                            SwdModel.refreshStream({
-                                success: function(response) {
-                                    // Get refreshed data.
-                                    SwdModel.getRefreshedStreamData(SwdPresenter.postIds, {
-                                        success: function(response) {
-                                            SwdView.displayRefreshedPostData(response);
-                                        },
-                                        error: SwdPresenter.handleError
-                                    });
-                                },
-                                error: SwdPresenter.handleError
-                            });
-                        }, 300000);     // 5 minutes.
+                        
                     },
                     error: SwdPresenter.handleError
                 });
+
+                // Set a timer function to periodically refresh the server-side FQL stream.
+                SwdPresenter.refreshStreamInterval = setInterval(function() {
+                    SwdModel.refreshStream({
+                        success: function(response) {
+                            // Get refreshed data.
+                            SwdModel.getRefreshedStreamData(SwdPresenter.postIds, {
+                                success: function(response) {
+                                    SwdView.displayRefreshedPostData(response);
+                                },
+                                error: SwdPresenter.handleError
+                            });
+                        },
+                        error: SwdPresenter.handleError
+                    });
+                }, 300000);     // 5 minutes.
 
                 SwdPresenter.loadPostsComplete(response);
             },
