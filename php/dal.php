@@ -84,7 +84,7 @@ class DataAccessLayer {
             $this->gid = $gid;
             
             $this->stream = null;
-            unset($_SESSION['stream']);
+            $_SESSION['stream'] = null;
         }
     }
 
@@ -417,15 +417,11 @@ class DataAccessLayer {
      * @return boolean
      */
     public function refreshStream() {
-        echo $_SESSION['gid'] . "<br/>";
-        
         if (isset($_SESSION['gid'])) {
             $this->gid = $_SESSION['gid'];
 
             // Fetch the new stream.
             $this->fetchStream();
-
-            $result = true;
         }
 
         return count($this->stream);
@@ -517,9 +513,6 @@ class DataAccessLayer {
      * Fetches the group's post stream.
      */
     private function fetchStream() {
-        // Save $gid to session for later use.
-        //$_SESSION['gid'] = $this->gid;
-
         // Wait for other threads to finish updating the cached FQL stream.
         $this->waitForFetchStreamCompletion();
 
@@ -807,7 +800,7 @@ class DataAccessLayer {
         $windowSize = $this->getOptimalWindowSize();
 
         // Check to see if this is the first time queryStream has been called since changing groups.
-        if ($this->stream == null) {
+        if ($_SESSION['stream'] == null) {
             // If stream is null, then this is the first load for a newly selected group.
             $stream = $this->getFeedData($uid, $windowSize, $windowStart, 15, 1);
         }
