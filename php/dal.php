@@ -417,8 +417,6 @@ class DataAccessLayer {
      * @return boolean
      */
     public function refreshStream() {
-        $result = false;
-
         if (isset($_SESSION['gid'])) {
             $this->gid = $_SESSION['gid'];
 
@@ -428,7 +426,7 @@ class DataAccessLayer {
             $result = true;
         }
 
-        return $result;
+        return count($this->stream);
     }
 
     /**
