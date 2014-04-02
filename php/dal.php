@@ -823,7 +823,7 @@ class DataAccessLayer {
                 //$query = '/' . $this->gid . '/feed?fields=id,message,from,likes,comments&limit=5000&since=' . $windowEnd . '&until=' . $windowStart;
                 $query = array(
                     'streamQuery' => 'SELECT post_id,message,actor_id,like_info,comment_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000',
-                    'userQuery' => 'SELECT first_name,last_name FROM user WHERE uid IN (SELECT actor_id FROM #streamQuery)'
+                    'userQuery' => 'SELECT first_name,last_name,uid FROM user WHERE uid IN (SELECT actor_id FROM #streamQuery)'
                 );
 
                 $windowStart -= $windowSize;
