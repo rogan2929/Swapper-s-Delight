@@ -793,7 +793,7 @@ class DataAccessLayer {
         $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 1);
         $windowStart = $windowStart - ($windowSize * 50 * 1);
         $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 2, $windowStart, 13, 1));
-        $windowStart = $windowStart - ($windowSize * 13 * 1);
+        $windowStart = $windowStart - ($windowSize * 2 * 13 * 1);
         $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 3, $windowStart, 12, 1));
 
         return $stream;
