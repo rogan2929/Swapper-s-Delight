@@ -203,7 +203,6 @@ a:visited {
 }*/
 
 .facebook-user-header .facebook-poststamp > * {
-    margin-left: 4px;
     color: #f6f6f6;
     display: block;
 }
@@ -949,6 +948,12 @@ a.link-title {
     background-repeat: no-repeat;
     background-size: cover;
     float: left;
+    margin-right: 5px;
+}
+
+.post-comment .facebook-user-photo {
+    height: 37px;
+    width: 37px;
 }
 
 .facebook-user-header .facebook-poststamp {
@@ -974,7 +979,7 @@ a.link-title {
 
 .post-comment > div:first-child {
     background-color: #eee;
-    padding: 5px;
+    padding: 6px;
 }
 
 .post-comment a:first-child {
