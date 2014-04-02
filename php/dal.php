@@ -417,6 +417,8 @@ class DataAccessLayer {
      * @return boolean
      */
     public function refreshStream() {
+        echo $_SESSION['gid'] . "<br/>";
+        
         if (isset($_SESSION['gid'])) {
             $this->gid = $_SESSION['gid'];
 
