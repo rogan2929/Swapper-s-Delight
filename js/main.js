@@ -46,6 +46,23 @@ var SwdModel = {
         });
     },
     /***
+     * Trigger a full population of the cached stream.
+     * @param {type} gid
+     * @param {type} callbacks
+     */
+    fullyPopulateStream: function(gid, callbacks) {
+        $.ajax({
+            type: 'GET',
+            url: '/php/refresh-stream.php?gid=' + gid,
+            success: function(response) {
+                callbacks.success.call(SwdModel, response);
+            },
+            error: function(response) {
+                callbacks.error.call(SwdModel, response);
+            }
+        });
+    },
+    /***
      * Get posts in the group that are liked.
      * 
      * @param {type} offset
@@ -585,6 +602,15 @@ var SwdPresenter = {
                 SwdView.toggleElement('#overlay-loading-posts', true);
                 SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', true);
             }
+            
+            if (refresh && !viewChanged) {
+                // Asynchronously call SwdModel.fullyPopulateStream in order to fully populate the cached stream on the backend.
+                SwdModel.fullyPopulateStream(SwdPresenter.selectedGroup.gid, {
+                    success: function(response) {
+                    },
+                    error: SwdPresenter.handleError
+                });
+            }
 
             switch (SwdPresenter.selectedView) {
                 case SelectedView.group:
@@ -935,7 +961,7 @@ var SwdPresenter = {
 
             // Show the ajax loading div.
             SwdView.toggleAjaxLoadingDiv('#post-comment-wrapper', true);
-            
+
             // Increment the post's tile's comment count.
             SwdView.incrementCommentCount(id);
 
@@ -1060,7 +1086,7 @@ var SwdView = {
      * @param {type} postId
      */
     incrementCommentCount: function(postId) {
-        var count = parseInt($('#' + postId + ' div.comment-count').first().text()) + 1; 
+        var count = parseInt($('#' + postId + ' div.comment-count').first().text()) + 1;
         $('#' + postId + ' div.comment-count').text(count);
     },
     /**
@@ -1448,7 +1474,7 @@ var SwdView = {
             for (i = 1; i <= 4; i++) {
                 $('#ad-tile-' + i).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
             }
-                    
+
             $('.post-block.hidden-block').hide();
 
             // After a delay, show the hidden content for any moused over image post blocks.

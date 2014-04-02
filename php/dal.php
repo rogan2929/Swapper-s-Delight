@@ -51,6 +51,9 @@ class DataAccessLayer {
         if (isset($_SESSION['stream'])) {
             $this->stream = $_SESSION['stream'];
         }
+        else {
+            $this->stream = null;
+        }
 
         // Test the facebook object that was created.
         $this->api('/me', 'GET');
@@ -74,8 +77,15 @@ class DataAccessLayer {
      * @param type $gid
      */
     public function setGid($gid) {
-        $this->gid = $gid;
-        $_SESSION['gid'] = $gid;
+        // Check if a new group is being set.
+        if ($_SESSION['gid'] != $gid) {
+            $_SESSION['gid'] = $gid;
+
+            $this->gid = $gid;
+            
+            $this->stream = null;
+            unset($_SESSION['stream']);
+        }
     }
 
     /** Methods * */
@@ -174,10 +184,10 @@ class DataAccessLayer {
         // Update the cached post stream.
         for ($i = 0; $i < count($this->stream); $i++) {
             if ($this->stream[$i]['post_id'] == $postId) {
-                $this->stream[$i]['user_likes'] = (int)$userLikes;
+                $this->stream[$i]['user_likes'] = (int) $userLikes;
             }
         }
-        
+
         // Save the updated stream.
         $_SESSION['stream'] = $this->stream;
 
@@ -235,6 +245,8 @@ class DataAccessLayer {
      */
     public function getLikedPosts($offset, $limit) {
         $posts = array();
+        
+        $this->waitForFetchStreamCompletion();
 
         // Look through the cached stream for liked posts.
         for ($i = 0; $i < count($this->stream); $i++) {
@@ -253,7 +265,7 @@ class DataAccessLayer {
     public function getMe() {
         return $this->api('/me')['id'];
     }
-    
+
     /**
      * Getter for $this->stream.
      * @return type
@@ -271,6 +283,8 @@ class DataAccessLayer {
     public function getMyPosts($offset, $limit) {
         $uid = $this->api('/me')['id'];
         $posts = array();
+        
+        $this->waitForFetchStreamCompletion();
 
         // Look through the cached stream, match by uid => actor_id
         for ($i = 0; $i < count($this->stream); $i++) {
@@ -385,7 +399,7 @@ class DataAccessLayer {
      */
     public function getRefreshedStreamData($postIds) {
         $posts = array();
-        
+
         for ($i = 0; $i < count($postIds); $i++) {
             for ($j = 0; $j < count($this->stream); $j++) {
                 if ($postIds[$i] == $this->stream[$j]['post_id']) {
@@ -393,7 +407,7 @@ class DataAccessLayer {
                 }
             }
         }
-        
+
         // Return the updated stream data.
         return $posts;
     }
@@ -444,6 +458,8 @@ class DataAccessLayer {
      */
     public function searchPosts($search, $offset, $limit) {
         $posts = array();
+        
+        $this->waitForFetchStreamCompletion();
 
         // Look through the cached stream for posts whose message or user matches the search term.
         for ($i = 0; $i < count($this->stream); $i++) {
@@ -790,11 +806,19 @@ class DataAccessLayer {
         $windowStart = time();
         $windowSize = $this->getOptimalWindowSize();
 
-        $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 1);
-        $windowStart = $windowStart - ($windowSize * 50 * 1);
-        $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 2, $windowStart, 13, 1));
-        $windowStart = $windowStart - ($windowSize * 2 * 13 * 1);
-        $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 3, $windowStart, 12, 1));
+        // Check to see if this is the first time queryStream has been called since changing groups.
+        if ($this->stream == null) {
+            // If stream is null, then this is the first load for a newly selected group.
+            $stream = $this->getFeedData($uid, $windowSize, $windowStart, 15, 1);
+        }
+        else {
+            // If it's not, then the stream has already been prefetched, so the longer load can take place.
+            $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 1);
+            $windowStart = $windowStart - ($windowSize * 50 * 1);
+            $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 2, $windowStart, 13, 1));
+            $windowStart = $windowStart - ($windowSize * 2 * 13 * 1);
+            $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 3, $windowStart, 12, 1));
+        }
 
         return $stream;
     }
@@ -844,7 +868,7 @@ class DataAccessLayer {
             // Parse the response.
             for ($k = 0; $k < count($response); $k++) {
                 $body = json_decode($response[$k]['body'], true);
-                
+
                 $stream = array_merge($stream, $body[0]['fql_result_set']);
                 $users = array_merge($users, $body[1]['fql_result_set']);
             }
@@ -856,25 +880,24 @@ class DataAccessLayer {
                 $stream[$i]['comment_count'] = $stream[$i]['comment_info']['comment_count'];
                 unset($stream[$i]['comment_info']);
             }
-            
+
             if (isset($stream[$i]['like_info'])) {
-                $stream[$i]['user_likes'] = (int)$stream[$i]['like_info']['user_likes'];
+                $stream[$i]['user_likes'] = (int) $stream[$i]['like_info']['user_likes'];
                 unset($stream[$i]['like_info']);
             }
-            
+
             for ($j = 0; $j < count($users); $j++) {
                 if ($stream[$i]['actor_id'] == $users[$j]['uid']) {
                     $stream[$i]['actor_name'] = $users[$j]['first_name'] . ' ' . $users[$j]['last_name'];
                 }
             }
-            
+
 //            
 //            $user = array_search($stream[$i]['actor_id'], $users);
 //            
 //            if ($user) {
 //                $stream[$i]['actor_name'] = $users[$key]['first_name'] . ' ' . $users[$key]['last_name'];
 //            }
-            
 //            for ($j = 0; $j < count($users); $j++) {
 //                if ($stream[$i]['actor_id'] == $users[$j]['uid']) {
 //                    $stream[$i]['actor_name'] = $users[$j]['first_name'] . ' ' . $users[$j]['last_name'];
