@@ -645,21 +645,12 @@ a:visited {
 }
 
 .facebook-user-header {
-    /*    height: 65px;
-        line-height: 65px;*/
     color: #f6f6f6;
     background-color: #4d81bf;
     border-radius: 4px;
     padding: 5px;
+    box-shadow: #ccc 1px 1px 4px;
 }
-
-/*.facebook-user-header a {
-    color: #444;
-}
-
-.facebook-user-header a:visited {
-    color: #444;
-}*/
 
 .load-more > .load-more-text {
     line-height: 250px;
@@ -984,6 +975,7 @@ a.link-title {
     background-color: #eee;
     padding: 6px;
     border-radius: 4px;
+    box-shadow: #ccc 1px 1px 4px;
 }
 
 .post-comment a:first-child {
