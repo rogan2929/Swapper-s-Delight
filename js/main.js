@@ -545,11 +545,13 @@ var SwdPresenter = {
         SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, refresh, offset, {
             success: function(response) {
                 // Asynchronously call SwdModel.fullyPopulateStream in order to fully populate the cached stream on the backend.
-                SwdModel.refreshStream({
-                    success: function(response) {
-                    },
-                    error: SwdPresenter.handleError
-                });
+                if (refresh) {
+                    SwdModel.refreshStream({
+                        success: function(response) {
+                        },
+                        error: SwdPresenter.handleError
+                    });
+                }
 
                 // Set a timer function to periodically refresh the server-side FQL stream.
                 SwdPresenter.refreshStreamInterval = setInterval(function() {

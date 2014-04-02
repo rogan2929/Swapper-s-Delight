@@ -515,8 +515,6 @@ class DataAccessLayer {
     private function fetchStream($prefetchOnly) {
         // Wait for other threads to finish updating the cached FQL stream.
         $this->waitForFetchStreamCompletion();
-
-        sleep(10);
         
         // Refresh the FQL stream.
         $_SESSION['refreshing'] = true;
