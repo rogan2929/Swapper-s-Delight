@@ -544,6 +544,13 @@ var SwdPresenter = {
         // Get posts and then display them.
         SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, refresh, offset, {
             success: function(response) {
+                // Asynchronously call SwdModel.fullyPopulateStream in order to fully populate the cached stream on the backend.
+                SwdModel.refreshStream({
+                    success: function(response) {
+                    },
+                    error: SwdPresenter.handleError
+                });
+
                 // Set a timer function to periodically refresh the server-side FQL stream.
                 SwdPresenter.refreshStreamInterval = setInterval(function() {
                     SwdModel.refreshStream({
@@ -601,15 +608,6 @@ var SwdPresenter = {
 
                 SwdView.toggleElement('#overlay-loading-posts', true);
                 SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', true);
-            }
-            
-            if (refresh && !viewChanged) {
-                // Asynchronously call SwdModel.fullyPopulateStream in order to fully populate the cached stream on the backend.
-                SwdModel.fullyPopulateStream(SwdPresenter.selectedGroup.gid, {
-                    success: function(response) {
-                    },
-                    error: SwdPresenter.handleError
-                });
             }
 
             switch (SwdPresenter.selectedView) {
