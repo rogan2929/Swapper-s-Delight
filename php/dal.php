@@ -5,7 +5,39 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
 require 'facebook.php';
 
 class GraphApiClient {
+
+    /** Constants * */
+    // Prod
+    //const APP_ID = '1401018793479333';
+    //const APP_SECRET = '603325411a953e21ccbc29d2c7d50e7e';
+    // Test
+    const APP_ID = '652991661414427';
+    const APP_SECRET = 'b8447ce73d2dcfccde6e30931cfb0a90';
     
+    private $facebook;
+    private $appSecretProof;
+
+    function __construct() {
+        if (!session_id()) {
+            session_start();
+        }
+
+        $this->facebook = new Facebook(array(
+            'appId' => self::APP_ID,
+            'secret' => self::APP_SECRET,
+            'cookie' => true
+        ));
+
+        // Look up an existing access token, if need be.
+        if ($this->facebook->getAccessToken() === null) {
+            $this->facebook->setAccessToken($_SESSION['accessToken']);
+        } else {
+            $_SESSION['accessToken'] = $this->facebook->getAccessToken();
+        }
+
+        $this->appSecretProof = hash_hmac('sha256', $this->facebook->getAccessToken(), self::APP_SECRET);
+    }
+
 }
 
 class GroupManager {
@@ -22,13 +54,7 @@ class StreamProcessor {
 
 class DataAccessLayer {
 
-    /** Constants * */
-    // Prod
-    //const APP_ID = '1401018793479333';
-    //const APP_SECRET = '603325411a953e21ccbc29d2c7d50e7e';
-    // Test
-    const APP_ID = '652991661414427';
-    const APP_SECRET = 'b8447ce73d2dcfccde6e30931cfb0a90';
+
 
     // Class members
     private $facebook;
@@ -37,7 +63,6 @@ class DataAccessLayer {
     private $stream;
     private $sqlConnectionInfo;
     private $sqlServer;
-    
     private $streamManager;
     private $streamProcessor;
     private $groupManager;
@@ -71,8 +96,7 @@ class DataAccessLayer {
         // Retrieve the stream if it's there.
         if (isset($_SESSION['stream'])) {
             $this->stream = $_SESSION['stream'];
-        }
-        else {
+        } else {
             $this->stream = null;
         }
 
@@ -103,7 +127,7 @@ class DataAccessLayer {
             $_SESSION['gid'] = $gid;
 
             $this->gid = $gid;
-            
+
             $this->stream = null;
             $_SESSION['stream'] = null;
         }
@@ -266,7 +290,7 @@ class DataAccessLayer {
      */
     public function getLikedPosts($offset, $limit) {
         $posts = array();
-        
+
         $this->waitForFetchStreamCompletion();
 
         // Look through the cached stream for liked posts.
@@ -304,7 +328,7 @@ class DataAccessLayer {
     public function getMyPosts($offset, $limit) {
         $uid = $this->api('/me')['id'];
         $posts = array();
-        
+
         $this->waitForFetchStreamCompletion();
 
         // Look through the cached stream, match by uid => actor_id
@@ -475,7 +499,7 @@ class DataAccessLayer {
      */
     public function searchPosts($search, $offset, $limit) {
         $posts = array();
-        
+
         $this->waitForFetchStreamCompletion();
 
         // Look through the cached stream for posts whose message or user matches the search term.
@@ -536,7 +560,7 @@ class DataAccessLayer {
     private function fetchStream($prefetchOnly) {
         // Wait for other threads to finish updating the cached FQL stream.
         $this->waitForFetchStreamCompletion();
-        
+
         // Refresh the FQL stream.
         $_SESSION['refreshing'] = true;
         $_SESSION['stream'] = $this->queryStream($prefetchOnly);
@@ -823,8 +847,7 @@ class DataAccessLayer {
         // Check to see if this this is only prefetching the stream data.
         if ($prefetchOnly) {
             $stream = $this->getFeedData($uid, $windowSize, $windowStart, 15, 1);
-        }
-        else {
+        } else {
             $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 1);
             $windowStart = $windowStart - ($windowSize * 50 * 1);
             $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 2, $windowStart, 13, 1));
