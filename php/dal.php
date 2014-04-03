@@ -13,7 +13,7 @@ class GraphApiClient {
     // Test
     const APP_ID = '652991661414427';
     const APP_SECRET = 'b8447ce73d2dcfccde6e30931cfb0a90';
-    
+
     private $facebook;
     private $appSecretProof;
 
@@ -36,16 +36,36 @@ class GraphApiClient {
         }
 
         $this->appSecretProof = hash_hmac('sha256', $this->facebook->getAccessToken(), self::APP_SECRET);
+
+        // Test the facebook object that was created.
+        $this->api('/me', 'GET');
     }
 
 }
 
 class GroupManager {
-    
+
+    private $sqlConnectionInfo;
+    private $sqlServer;
+
+    function __construct() {
+        $this->sqlConnectionInfo = array("UID" => "rogan2929@lreuagtc6u", "pwd" => "Revelation19:11", "Database" => "swapperAGiJRLgvy", "LoginTimeout" => 30, "Encrypt" => 1);
+        $this->sqlServer = "tcp:lreuagtc6u.database.windows.net,1433";
+    }
+
 }
 
 class StreamManager {
-    
+
+    function __construct() {
+        // Retrieve the stream if it's there.
+        if (isset($_SESSION['stream'])) {
+            $this->stream = $_SESSION['stream'];
+        } else {
+            $this->stream = null;
+        }
+    }
+
 }
 
 class StreamProcessor {
@@ -54,15 +74,11 @@ class StreamProcessor {
 
 class DataAccessLayer {
 
-
-
     // Class members
     private $facebook;
     private $appSecretProof;
     private $gid;
     private $stream;
-    private $sqlConnectionInfo;
-    private $sqlServer;
     private $streamManager;
     private $streamProcessor;
     private $groupManager;
@@ -74,37 +90,10 @@ class DataAccessLayer {
      */
 
     function __construct() {
-        if (!session_id()) {
-            session_start();
-        }
-
-        $this->facebook = new Facebook(array(
-            'appId' => self::APP_ID,
-            'secret' => self::APP_SECRET,
-            'cookie' => true
-        ));
-
-        // Look up an existing access token, if need be.
-        if ($this->facebook->getAccessToken() === null) {
-            $this->facebook->setAccessToken($_SESSION['accessToken']);
-        } else {
-            $_SESSION['accessToken'] = $this->facebook->getAccessToken();
-        }
-
-        $this->appSecretProof = hash_hmac('sha256', $this->facebook->getAccessToken(), self::APP_SECRET);
-
-        // Retrieve the stream if it's there.
-        if (isset($_SESSION['stream'])) {
-            $this->stream = $_SESSION['stream'];
-        } else {
-            $this->stream = null;
-        }
-
-        // Test the facebook object that was created.
-        $this->api('/me', 'GET');
-
-        $this->sqlConnectionInfo = array("UID" => "rogan2929@lreuagtc6u", "pwd" => "Revelation19:11", "Database" => "swapperAGiJRLgvy", "LoginTimeout" => 30, "Encrypt" => 1);
-        $this->sqlServer = "tcp:lreuagtc6u.database.windows.net,1433";
+        $this->graphApiClient = new GraphApiClient();
+        $this->streamManager = new StreamManager();
+        $this->groupManager = new GroupManager();
+        $this->streamProcessor = new StreamProcessor();
     }
 
     /** Getters and Setters * */
