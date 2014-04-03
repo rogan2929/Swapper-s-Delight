@@ -35,10 +35,51 @@ class GraphApiClient {
             $_SESSION['accessToken'] = $this->facebook->getAccessToken();
         }
 
+        // Set the AppSecretProof, which is required for FB api calls.
         $this->appSecretProof = hash_hmac('sha256', $this->facebook->getAccessToken(), self::APP_SECRET);
 
-        // Test the facebook object that was created.
+        // Test the facebook object that was created successfully.
         $this->api('/me', 'GET');
+    }
+
+    /**
+     * A wrapper for $facebook->api. Error handling is built in.
+     * @return type
+     */
+    public function api(/* polymorphic */) {
+        $args = func_get_args();
+
+        if (is_array($args[0])) {
+            // Array was passed as an argument.
+            $args[0]['appsecret_proof'] = $this->appSecretProof;
+        } else {
+            // Array was not passed as an argument.
+            if (is_array($args[1]) && empty($args[2])) {
+                $args[2] = $args[1];
+                $args[1] = 'GET';
+            }
+
+            // Insert appsecret_proof into each API call.
+            $args[2]['appsecret_proof'] = $this->appSecretProof;
+        }
+
+        try {
+            // Call the facebook->api function.
+            return call_user_func_array(array($this->facebook, 'api'), $args);
+        } catch (FacebookApiException $ex) {
+            // Selectively decide how to handle the error, based on returned code.
+            // https://developers.facebook.com/docs/graph-api/using-graph-api/#errors
+            switch ($ex->getCode()) {
+                case '190':
+                    http_response_code(401);
+                    echo json_encode(array('message' => 'Sorry, but your session is no longer valid - automatically taking you back to the main page.'));
+                    break;
+                default:
+                    http_response_code(500);
+                    echo json_encode($ex->getResult());
+                    break;
+            }
+        }
     }
 
 }
@@ -450,7 +491,7 @@ class DataAccessLayer {
      * Performs an update the local stream cache.
      * @return boolean
      */
-    public function refreshStream() {
+    public function refreshStream($gid) {
         if (isset($_SESSION['gid'])) {
             $this->gid = $_SESSION['gid'];
 
@@ -502,46 +543,6 @@ class DataAccessLayer {
     }
 
     /** Private Methods * */
-
-    /**
-     * A wrapper for $facebook->api. Error handling is built in.
-     * @return type
-     */
-    private function api(/* polymorphic */) {
-        $args = func_get_args();
-
-        if (is_array($args[0])) {
-            // Array was passed as an argument.
-            $args[0]['appsecret_proof'] = $this->appSecretProof;
-        } else {
-            // Array was not passed as an argument.
-            if (is_array($args[1]) && empty($args[2])) {
-                $args[2] = $args[1];
-                $args[1] = 'GET';
-            }
-
-            // Insert appsecret_proof into each API call.
-            $args[2]['appsecret_proof'] = $this->appSecretProof;
-        }
-
-        try {
-            // Call the facebook->api function.
-            return call_user_func_array(array($this->facebook, 'api'), $args);
-        } catch (FacebookApiException $ex) {
-            // Selectively decide how to handle the error, based on returned code.
-            // https://developers.facebook.com/docs/graph-api/using-graph-api/#errors
-            switch ($ex->getCode()) {
-                case '190':
-                    http_response_code(401);
-                    echo json_encode(array('message' => 'Sorry, but your session is no longer valid - automatically taking you back to the main page.'));
-                    break;
-                default:
-                    http_response_code(500);
-                    echo json_encode($ex->getResult());
-                    break;
-            }
-        }
-    }
 
     /**
      * Fetches the group's post stream.
@@ -915,50 +916,7 @@ class DataAccessLayer {
                     $stream[$i]['actor_name'] = $users[$j]['first_name'] . ' ' . $users[$j]['last_name'];
                 }
             }
-
-//            
-//            $user = array_search($stream[$i]['actor_id'], $users);
-//            
-//            if ($user) {
-//                $stream[$i]['actor_name'] = $users[$key]['first_name'] . ' ' . $users[$key]['last_name'];
-//            }
-//            for ($j = 0; $j < count($users); $j++) {
-//                if ($stream[$i]['actor_id'] == $users[$j]['uid']) {
-//                    $stream[$i]['actor_name'] = $users[$j]['first_name'] . ' ' . $users[$j]['last_name'];
-//                }
-//            }
         }
-
-//        for ($i = 0; $i < count($stream); $i++) {
-//            $stream[$i]['post_id'] = $stream[$i]['id'];
-//            unset($stream[$i]['id']);
-//
-//            $stream[$i]['actor_id'] = $stream[$i]['from']['id'];
-//            $stream[$i]['actor_name'] = $stream[$i]['from']['name'];
-//            unset($stream[$i]['from']);
-//
-//            $stream[$i]['user_likes'] = 0;
-//
-//            if (isset($stream[$i]['likes']) && isset($stream[$i]['likes']['data'])) {
-//                for ($j = 0; $j < count($stream[$i]['likes']['data']); $j++) {
-//                    $likeInfo = $stream[$i]['likes']['data'][$j];
-//
-//                    if ($likeInfo['id'] == $uid) {
-//                        $stream[$i]['user_likes'] = 1;
-//                    }
-//                }
-//
-//                unset($stream[$i]['likes']);
-//            }
-//            
-//            $stream[$i]['comment_count'] = 0;
-//            
-//            if (isset($stream[$i]['comments']) && isset($stream[$i]['comments']['data'])) {
-//                $stream[$i]['comment_count'] = count($stream[$i]['comments']['data']);
-//                
-//                unset ($stream[$i]['comments']);
-//            }
-//        }
 
         return $stream;
     }

@@ -1,6 +1,5 @@
 <?php
 
-require_once 'dal.php';
+require_once 'include/dal.php';
 
-// Call the appropriate method in the newly instantiated DAL object.
 echo json_encode((new DataAccessLayer())->getGroupInfo());

@@ -259,10 +259,12 @@ var SwdModel = {
      * Refresh the cached FQL stream on the server.
      * @param {type} callbacks
      */
-    refreshStream: function(callbacks) {
+    refreshStream: function(gid, callbacks) {
+        var url = '/php/refresh-stream.php?gid=' + gid
+        
         $.ajax({
             type: 'GET',
-            url: '/php/refresh-stream.php',
+            url: url,
             success: function(response) {
                 callbacks.success.call(SwdModel, response);
             },
@@ -545,7 +547,7 @@ var SwdPresenter = {
         SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, refresh, offset, {
             success: function(response) {
                 // Asynchronously call SwdModel.fullyPopulateStream in order to fully populate the cached stream on the backend.
-                SwdModel.refreshStream({
+                SwdModel.refreshStream(SwdPresenter.selectedGroup.gid, {
                     success: function(response) {
                     },
                     error: SwdPresenter.handleError
@@ -553,7 +555,7 @@ var SwdPresenter = {
 
                 // Set a timer function to periodically refresh the server-side FQL stream.
                 SwdPresenter.refreshStreamInterval = setInterval(function() {
-                    SwdModel.refreshStream({
+                    SwdModel.refreshStream(SwdPresenter.selectedGroup.gid, {
                         success: function(response) {
                             // Get refreshed data.
                             SwdModel.getRefreshedStreamData(SwdPresenter.postIds, {

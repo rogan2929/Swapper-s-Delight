@@ -1,7 +1,5 @@
 <?php
 
-require_once 'dal.php';
+require_once 'include/dal.php';
 
-$id = $_GET['id'];
-
-(new DataAccessLayer())->deleteObject($id);
+echo (new DataAccessLayer())->deleteObject(filter_input(INPUT_GET, 'id'));

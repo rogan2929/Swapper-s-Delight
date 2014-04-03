@@ -1,7 +1,5 @@
 <?php
 
-require_once 'dal.php';
+require_once 'include/dal.php';
 
-$dal = new DataAccessLayer();
-
-$dal->restoreGroups();
+echo (new DataAccessLayer())->restoreGroups();
