@@ -4,6 +4,22 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
 
 require 'facebook.php';
 
+class GraphApiClient {
+    
+}
+
+class GroupManager {
+    
+}
+
+class StreamManager {
+    
+}
+
+class StreamProcessor {
+    
+}
+
 class DataAccessLayer {
 
     /** Constants * */
@@ -21,6 +37,11 @@ class DataAccessLayer {
     private $stream;
     private $sqlConnectionInfo;
     private $sqlServer;
+    
+    private $streamManager;
+    private $streamProcessor;
+    private $groupManager;
+    private $graphApiClient;
 
     /*
      * Swd constructor.
