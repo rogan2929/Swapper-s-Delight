@@ -71,9 +71,9 @@ class GraphApiClient {
             // Call the facebook->api function.
             return call_user_func_array(array($this->facebook, 'api'), $args);
         } catch (FacebookApiException $ex) {
-            // Selectively decide how to handle the error, based on returned code.
             // https://developers.facebook.com/docs/graph-api/using-graph-api/#errors
             
+            // Set a 400 response code and then exit with the FB exception message.
             http_response_code(400);
             
             die($ex->getMessage());
