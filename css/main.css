@@ -975,13 +975,14 @@ a.link-title {
 .post-comment {
     margin-bottom: 12px;
     position: relative;
+    background-color: #eee;
+    border-radius: 4px;
+    padding: 4px;
+    box-shadow: #ccc 1px 1px 3px;
 }
 
 .post-comment > div:first-child {
-    background-color: #eee;
     padding: 6px;
-    border-radius: 4px;
-    box-shadow: #ccc 1px 1px 4px;
 }
 
 .post-comment a:first-child {
