@@ -348,6 +348,9 @@ var SwdPresenter = {
                 });
 
                 break;
+            case 500:
+                SwdPresenter.message('error', 'Oops! Something happened. Try reloading the app and with any luck, the problem will go away on its own.');
+                break;
             default:
                 SwdPresenter.message('error', message);
         }
