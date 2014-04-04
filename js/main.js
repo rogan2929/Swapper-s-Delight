@@ -1023,7 +1023,7 @@ var SwdView = {
      * @param {type} uid
      */
     addPostComment: function(comment, uid) {
-        var commentDiv, timeStamp, userImage;
+        var commentDiv, timeStamp, userImage, i, imageUrl, commentImage;
 
         // Set user image
         if (comment.user.pic_square) {
@@ -1040,6 +1040,15 @@ var SwdView = {
 
         // Set the user's photo.
         $(commentDiv).find('.facebook-user-photo').css('background-image', userImage);
+
+        // Display any images.
+        if (comment.image_url && comment.image_url.length > 0) {
+            for (i = 1; i <= comment.image_url.length; i++) {
+                imageUrl = 'url(' + comment.image_url[i - 1] + ')';
+                commentImage = $('<div class="post-comment-image"></div>');
+                $(commentImage).css('background-image', imageUrl).appendTo($(commentDiv).children('div'));
+            }
+        }
 
         // If the current user is the owner of the comment, display the delete and edit buttons.
         if (comment.user.uid === uid) {

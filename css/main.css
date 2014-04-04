@@ -856,13 +856,15 @@ a.link-title {
     margin-bottom: 10px;
 }
 
-.post-comment .comment-image {
+.post-comment .post-comment-image {
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     cursor: pointer;
-    display: inline-block;
-    margin-bottom: 10px;
+    margin: 10px;
+    height: 200px;
+    width: 315px;
+    background-color: #f6f6f6;
 }
 
 /*#post-image-container .post-image-tile .close-button {
