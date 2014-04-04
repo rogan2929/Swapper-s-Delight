@@ -81,7 +81,7 @@ error_reporting(E_ALL);
                                     <div id='post-details-user-data'>
                                         <div class='facebook-user-photo'></div>
                                         <a class='facebook-user-name' target='_blank'></a>
-                                        <span class='timestamp'></span>
+                                        <div class='timestamp'></div>
                                     </div>
                                     <div id='post-message' class='activity-text'>
                                         <div id='post-message-text'></div>
