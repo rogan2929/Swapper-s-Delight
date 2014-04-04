@@ -212,7 +212,7 @@ class GroupManager {
      * @return string
      */
     public function getHiddenGroups() {
-        $uid = $this->getMe();
+        $uid = $this->graphApiClient->getMe();
 
         $conn = sqlsrv_connect($this->sqlServer, $this->sqlConnectionInfo);
 
@@ -239,7 +239,7 @@ class GroupManager {
      * @param type $gid
      */
     public function hideGroup($gid) {
-        $uid = $this->getMe();
+        $uid = $this->graphApiClient->getMe();
 
         $conn = sqlsrv_connect($this->sqlServer, $this->sqlConnectionInfo);
 
@@ -257,7 +257,7 @@ class GroupManager {
      * Removes all of the current user's hidden groups from the Swapper's Delight backend.
      */
     public function restoreGroups() {
-        $uid = $this->getMe();
+        $uid = $this->graphApiClient->getMe();
 
         $conn = sqlsrv_connect($this->sqlServer, $this->sqlConnectionInfo);
 
@@ -792,7 +792,7 @@ class CachedFeed {
      */
 
     private function queryStream($prefetchOnly) {
-        $uid = $this->getMe();
+        $uid = $this->graphApiClient->getMe();
 
         $windowStart = time();
         $windowSize = $this->getOptimalWindowSize();
