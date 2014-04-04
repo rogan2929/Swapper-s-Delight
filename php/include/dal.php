@@ -306,6 +306,7 @@ class CachedFeed {
      * @return type
      */
     public function getStream() {
+        echo 'test';
         return $this->stream;
     }
 
