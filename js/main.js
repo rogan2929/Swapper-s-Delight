@@ -1046,7 +1046,7 @@ var SwdView = {
             for (i = 1; i <= comment.image_url.length; i++) {
                 imageUrl = 'url(' + comment.image_url[i - 1] + ')';
                 commentImage = $('<div class="post-comment-image"></div>');
-                $(commentImage).css('background-image', imageUrl).appendTo($(commentDiv).children('div'));
+                $(commentImage).css('background-image', imageUrl).appendTo($(commentDiv));
             }
         }
 
