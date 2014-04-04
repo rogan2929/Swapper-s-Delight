@@ -229,10 +229,6 @@ a:visited {
     resize: none;
 }
 
-#like-button-wrapper {
-    margin-left: 10px;
-}
-
 #main-panel {
     right: 0;
     left: 0;
@@ -1065,6 +1061,10 @@ div.right-toolbar-button {
 
 #left-rail > *:not(:last-child) {
     margin-bottom: 8px;
+}
+
+#left-rail .separator {
+    border-bottom: 1px solid #ccc;
 }
 
 .toolbar {
