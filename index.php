@@ -59,11 +59,13 @@ error_reporting(E_ALL);
                         </div>
                     </div>
                     <input type='text' id='main-search' placeholder='Search this group'>
+                    <div class='separator'></div>
+                    <a href='https://www.facebook.com/SwappersDelight' target='_blank'>Swapper's Delight on Facebook</a>
                     <div id='like-button-wrapper'>
                         <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fapps.facebook.com%2F1401018793479333&amp;width=200&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=1401018793479333" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:21px;" allowTransparency="true"></iframe>
                     </div>
-                    <a href='https://www.facebook.com/SwappersDelight' target='_blank'>View Swapper's Delight on Facebook</a>
                 </div>
+                
                 <div id='post-feed' class='scroll-y'></div>
 
                 <!--Post Details Panel-->
