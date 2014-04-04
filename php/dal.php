@@ -283,8 +283,7 @@ class CachedFeed {
     private $stream;
 
     function __construct() {
-        echo session_save_path() . "<br/>";
-        
+
         // Retrieve the stream if it's there.
         if (isset($_SESSION['stream'])) {
             $this->stream = $_SESSION['stream'];
