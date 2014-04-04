@@ -1,9 +1,11 @@
 <?php
 
-require_once 'dal.php';
+require_once 'include/dal.php';
 
 $gid = '120696471425768';
 
-$dal = new DataAccessLayer();
+$feed = new CachedFeed();
 
-echo json_encode($dal->getStream());
+//echo var_dump($feed);
+
+echo json_encode($feed->getStream());

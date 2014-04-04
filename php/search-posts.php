@@ -1,11 +1,5 @@
 <?php
 
-require_once 'dal.php';
+require_once 'include/dal.php';
 
-$search = $_GET['search'];
-$offset = $_GET['offset'];
-$limit = $_GET['limit'];
-
-$dal = new DataAccessLayer();
-
-echo json_encode($dal->searchPosts($search, $offset, $limit));
+echo json_encode((new CachedFeed())->searchPosts(filter_input(INPUT_GET, 'search'), filter_input(INPUT_GET, 'offset'), filter_input(INPUT_GET, 'limit')));

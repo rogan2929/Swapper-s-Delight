@@ -2,9 +2,16 @@
 
 header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
 
-require 'facebook.php';
+require_once 'facebook.php';
 
-class DataAccessLayer {
+if (!session_id()) {
+    session_start();
+}
+
+/**
+ * Wrapper for the Facebook object.
+ */
+class GraphApiClient {
 
     /** Constants * */
     // Prod
@@ -14,23 +21,10 @@ class DataAccessLayer {
     //const APP_ID = '652991661414427';
     //const APP_SECRET = 'b8447ce73d2dcfccde6e30931cfb0a90';
 
-    // Class members
     private $facebook;
     private $appSecretProof;
-    private $gid;
-    private $stream;
-    private $sqlConnectionInfo;
-    private $sqlServer;
-
-    /*
-     * Swd constructor.
-     * 
-     */
 
     function __construct() {
-        if (!session_id()) {
-            session_start();
-        }
 
         $this->facebook = new Facebook(array(
             'appId' => self::APP_ID,
@@ -45,108 +39,54 @@ class DataAccessLayer {
             $_SESSION['accessToken'] = $this->facebook->getAccessToken();
         }
 
+        // Set the AppSecretProof, which is required for FB api calls.
         $this->appSecretProof = hash_hmac('sha256', $this->facebook->getAccessToken(), self::APP_SECRET);
 
-        // Retrieve the stream if it's there.
-        if (isset($_SESSION['stream'])) {
-            $this->stream = $_SESSION['stream'];
+        // Test the facebook object that was created successfully.
+        $this->api('/me', 'GET');
+    }
+
+    /**
+     * A wrapper for $facebook->api. Error handling is built in.
+     * @return object
+     */
+    public function api(/* polymorphic */) {
+        $args = func_get_args();
+
+        if (is_array($args[0])) {
+            // Array was passed as an argument.
+            $args[0]['appsecret_proof'] = $this->appSecretProof;
+        } else {
+            // Array was not passed as an argument.
+            if (is_array($args[1]) && empty($args[2])) {
+                $args[2] = $args[1];
+                $args[1] = 'GET';
+            }
+
+            // Insert appsecret_proof into each API call.
+            $args[2]['appsecret_proof'] = $this->appSecretProof;
         }
 
-        // Test the facebook object that was created.
-        $this->api('/me', 'GET');
-
-        $this->sqlConnectionInfo = array("UID" => "rogan2929@lreuagtc6u", "pwd" => "Revelation19:11", "Database" => "swapperAGiJRLgvy", "LoginTimeout" => 30, "Encrypt" => 1);
-        $this->sqlServer = "tcp:lreuagtc6u.database.windows.net,1433";
-    }
-
-    /** Getters and Setters * */
-
-    /**
-     * Get the currently loaded group's gid.
-     * @return type
-     */
-    public function getGid() {
-        return $this->gid;
+        try {
+            // Call the facebook->api function.
+            return call_user_func_array(array($this->facebook, 'api'), $args);
+        } catch (FacebookApiException $ex) {
+            // https://developers.facebook.com/docs/graph-api/using-graph-api/#errors
+            
+            // Set a 400 response code and then exit with the FB exception message.
+            http_response_code(400);
+            
+            die($ex->getMessage());
+        }
     }
 
     /**
-     * Set the currently loaded group's gid.
-     * @param type $gid
-     */
-    public function setGid($gid) {
-        $this->gid = $gid;
-        $_SESSION['gid'] = $gid;
-    }
-
-    /** Methods * */
-    // Group management functions.
-
-    /**
-     * Look up group membership information for the current user.
-     * @return type
-     */
-    public function getGroupInfo() {
-        $queries = array(
-            'memberQuery' => 'SELECT gid,bookmark_order FROM group_member WHERE uid=me() ORDER BY bookmark_order',
-            'groupQuery' => 'SELECT gid,name,icon FROM group WHERE gid IN (SELECT gid FROM #memberQuery)'
-        );
-
-        $response = $this->api(array(
-            'method' => 'fql.multiquery',
-            'queries' => $queries
-        ));
-
-        // Grab the results of the query and return it.
-        return $response[1] ['fql_result_set'];
-    }
-
-    /**
-     * Queries the Swapper's Delight SQL backend for groups that the user has marked as 'hidden'.
+     * Returns the UID of the currently logged in user.
      * @return string
      */
-    public function getHiddenGroups() {
-        $uid = $this->getMe();
-
-        $conn = sqlsrv_connect($this->sqlServer, $this->sqlConnectionInfo);
-
-        if ($conn === false) {
-            die(print('Could not connect to database.'));
-        }
-
-        $sql = 'SELECT HiddenGroup FROM HiddenGroups WHERE UID=\'' . $uid . '\'';
-
-        // Execute the query.
-        $result = sqlsrv_query($conn, $sql);
-
-        $hiddenGroups = '';
-
-        while ($row = sqlsrv_fetch_array($result)) {
-            $hiddenGroups .= $row['HiddenGroup'] . ' ';
-        }
-
-        return $hiddenGroups;
+    public function getMe() {
+        return $this->api('/me')['id'];
     }
-
-    /**
-     * Mark the group with provided gid as hidden.
-     * @param type $gid
-     */
-    public function hideGroup($gid) {
-        $uid = $this->getMe();
-
-        $conn = sqlsrv_connect($this->sqlServer, $this->sqlConnectionInfo);
-
-        if ($conn === false) {
-            die(print('Could not connect to database.'));
-        }
-
-        $sql = 'INSERT INTO HiddenGroups (UID, HiddenGroup) VALUES (\'' . $uid . '\', \'' . $gid . '\')';
-
-        // Execute the query.
-        sqlsrv_query($conn, $sql);
-    }
-
-    // Post operation functions.
 
     /**
      * Delete a Facebook Object.
@@ -171,15 +111,15 @@ class DataAccessLayer {
             $this->api('/' . $postId . '/likes', 'DELETE');
         }
 
-        // Update the cached post stream.
-        for ($i = 0; $i < count($this->stream); $i++) {
-            if ($this->stream[$i]['post_id'] == $postId) {
-                $this->stream[$i]['user_likes'] = (int)$userLikes;
-            }
-        }
-        
-        // Save the updated stream.
-        $_SESSION['stream'] = $this->stream;
+//        // Update the cached post stream.
+//        for ($i = 0; $i < count($this->stream); $i++) {
+//            if ($this->stream[$i]['post_id'] == $postId) {
+//                $this->stream[$i]['user_likes'] = (int) $userLikes;
+//            }
+//        }
+//
+//        // Save the updated stream.
+//        $_SESSION['stream'] = $this->stream;
 
         return $userLikes;
     }
@@ -225,7 +165,145 @@ class DataAccessLayer {
         return $newComment;
     }
 
-    // Stream operation functions.
+}
+
+/**
+ * Class for managing a user's saved group data.
+ */
+class GroupManager {
+
+    private $sqlConnectionInfo;
+    private $sqlServer;
+    private $graphApiClient;
+
+    function __construct() {
+        $this->sqlConnectionInfo = array("UID" => "rogan2929@lreuagtc6u", "pwd" => "Revelation19:11", "Database" => "swapperAGiJRLgvy", "LoginTimeout" => 30, "Encrypt" => 1);
+        $this->sqlServer = "tcp:lreuagtc6u.database.windows.net,1433";
+
+        $this->graphApiClient = new GraphApiClient();
+    }
+
+    /**
+     * Look up group membership information for the current user.
+     * @return array
+     */
+    public function getGroupInfo() {
+        $queries = array(
+            'memberQuery' => 'SELECT gid,bookmark_order FROM group_member WHERE uid=me() ORDER BY bookmark_order',
+            'groupQuery' => 'SELECT gid,name,icon FROM group WHERE gid IN (SELECT gid FROM #memberQuery)'
+        );
+
+        $response = $this->graphApiClient->api(array(
+            'method' => 'fql.multiquery',
+            'queries' => $queries
+        ));
+
+        // Grab the results of the query and return it.
+        return $response[1] ['fql_result_set'];
+    }
+
+    /**
+     * Queries the Swapper's Delight SQL backend for groups that the user has marked as 'hidden'.
+     * @return string
+     */
+    public function getHiddenGroups() {
+        $uid = $this->graphApiClient->getMe();
+
+        $conn = sqlsrv_connect($this->sqlServer, $this->sqlConnectionInfo);
+
+        if ($conn === false) {
+            die(print('Could not connect to database.'));
+        }
+
+        $sql = 'SELECT HiddenGroup FROM HiddenGroups WHERE UID=\'' . $uid . '\'';
+
+        // Execute the query.
+        $result = sqlsrv_query($conn, $sql);
+
+        $hiddenGroups = '';
+
+        while ($row = sqlsrv_fetch_array($result)) {
+            $hiddenGroups .= $row['HiddenGroup'] . ' ';
+        }
+
+        return $hiddenGroups;
+    }
+
+    /**
+     * Mark the group with provided gid as hidden.
+     * @param type $gid
+     */
+    public function hideGroup($gid) {
+        $uid = $this->graphApiClient->getMe();
+
+        $conn = sqlsrv_connect($this->sqlServer, $this->sqlConnectionInfo);
+
+        if ($conn === false) {
+            die(print('Could not connect to database.'));
+        }
+
+        $sql = 'INSERT INTO HiddenGroups (UID, HiddenGroup) VALUES (\'' . $uid . '\', \'' . $gid . '\')';
+
+        // Execute the query.
+        sqlsrv_query($conn, $sql);
+    }
+
+    /**
+     * Removes all of the current user's hidden groups from the Swapper's Delight backend.
+     */
+    public function restoreGroups() {
+        $uid = $this->graphApiClient->getMe();
+
+        $conn = sqlsrv_connect($this->sqlServer, $this->sqlConnectionInfo);
+
+        if ($conn === false) {
+            die(print('Could not connect to database.'));
+        }
+
+        $sql = 'DELETE FROM HiddenGroups WHERE UID=\'' . $uid . '\'';
+
+        // Execute the query.
+        sqlsrv_query($conn, $sql);
+    }
+
+}
+
+/**
+ * Class that manages the cached version of the Facebook group's feed.
+ */
+class CachedFeed {
+
+    private $graphApiClient;
+    private $gid;
+    private $stream;
+
+    function __construct() {
+
+        // Retrieve the stream if it's there.
+        if (isset($_SESSION['stream'])) {
+            $this->stream = $_SESSION['stream'];
+        } else {
+            $this->stream = null;
+        }
+
+        $this->graphApiClient = new GraphApiClient();
+    }
+
+    /**
+     * Set the currently loaded group's gid.
+     * @param type $gid
+     */
+    public function setGid($gid) {
+        $this->gid = $gid;
+    }
+
+    /**
+     * Getter for $this->stream.
+     * @return type
+     */
+    public function getStream() {
+        return $this->stream;
+    }
 
     /**
      * Retrieve posts that are liked by the current user.
@@ -235,6 +313,8 @@ class DataAccessLayer {
      */
     public function getLikedPosts($offset, $limit) {
         $posts = array();
+
+        $this->waitForFetchStreamCompletion();
 
         // Look through the cached stream for liked posts.
         for ($i = 0; $i < count($this->stream); $i++) {
@@ -247,30 +327,16 @@ class DataAccessLayer {
     }
 
     /**
-     * Returns the UID of the currently logged in user.
-     * @return type
-     */
-    public function getMe() {
-        return $this->api('/me')['id'];
-    }
-    
-    /**
-     * Getter for $this->stream.
-     * @return type
-     */
-    public function getStream() {
-        return $this->stream;
-    }
-
-    /**
      * Retrieves posts owned by the current user.
      * @param type $offset
      * @param type $limit
      * @return type
      */
     public function getMyPosts($offset, $limit) {
-        $uid = $this->api('/me')['id'];
+        $uid = $this->graphApiClient->getMe();
         $posts = array();
+
+        $this->waitForFetchStreamCompletion();
 
         // Look through the cached stream, match by uid => actor_id
         for ($i = 0; $i < count($this->stream); $i++) {
@@ -292,7 +358,7 @@ class DataAccessLayer {
     public function getNewPosts($refresh, $offset, $limit) {
         // Get a new stream if necessary.
         if ($refresh == 1) {
-            $this->fetchStream();
+            $this->fetchStream($refresh);
         }
 
         return $this->getPostData($this->stream, $offset, $limit);
@@ -314,7 +380,7 @@ class DataAccessLayer {
         );
 
         // Run the query.
-        $response = $this->api(array(
+        $response = $this->graphApiClient->api(array(
             'method' => 'fql.multiquery',
             'queries' => $queries
         ));
@@ -385,7 +451,7 @@ class DataAccessLayer {
      */
     public function getRefreshedStreamData($postIds) {
         $posts = array();
-        
+
         for ($i = 0; $i < count($postIds); $i++) {
             for ($j = 0; $j < count($this->stream); $j++) {
                 if ($postIds[$i] == $this->stream[$j]['post_id']) {
@@ -393,7 +459,7 @@ class DataAccessLayer {
                 }
             }
         }
-        
+
         // Return the updated stream data.
         return $posts;
     }
@@ -402,37 +468,13 @@ class DataAccessLayer {
      * Performs an update the local stream cache.
      * @return boolean
      */
-    public function refreshStream() {
-        $result = false;
+    public function refreshStream($gid) {
+        $this->gid = $gid;
 
-        if (isset($_SESSION['gid'])) {
-            $this->setGid($_SESSION['gid']);
+        // Fetch the new stream.
+        $this->fetchStream(false);
 
-            // Fetch the new stream.
-            $this->fetchStream();
-
-            $result = true;
-        }
-
-        return $result;
-    }
-
-    /**
-     * Removes all of the current user's hidden groups from the Swapper's Delight backend.
-     */
-    public function restoreGroups() {
-        $uid = $this->getMe();
-
-        $conn = sqlsrv_connect($this->sqlServer, $this->sqlConnectionInfo);
-
-        if ($conn === false) {
-            die(print('Could not connect to database.'));
-        }
-
-        $sql = 'DELETE FROM HiddenGroups WHERE UID=\'' . $uid . '\'';
-
-        // Execute the query.
-        sqlsrv_query($conn, $sql);
+        return count($this->stream);
     }
 
     /**
@@ -444,6 +486,8 @@ class DataAccessLayer {
      */
     public function searchPosts($search, $offset, $limit) {
         $posts = array();
+
+        $this->waitForFetchStreamCompletion();
 
         // Look through the cached stream for posts whose message or user matches the search term.
         for ($i = 0; $i < count($this->stream); $i++) {
@@ -458,58 +502,15 @@ class DataAccessLayer {
     /** Private Methods * */
 
     /**
-     * A wrapper for $facebook->api. Error handling is built in.
-     * @return type
-     */
-    private function api(/* polymorphic */) {
-        $args = func_get_args();
-
-        if (is_array($args[0])) {
-            // Array was passed as an argument.
-            $args[0]['appsecret_proof'] = $this->appSecretProof;
-        } else {
-            // Array was not passed as an argument.
-            if (is_array($args[1]) && empty($args[2])) {
-                $args[2] = $args[1];
-                $args[1] = 'GET';
-            }
-
-            // Insert appsecret_proof into each API call.
-            $args[2]['appsecret_proof'] = $this->appSecretProof;
-        }
-
-        try {
-            // Call the facebook->api function.
-            return call_user_func_array(array($this->facebook, 'api'), $args);
-        } catch (FacebookApiException $ex) {
-            // Selectively decide how to handle the error, based on returned code.
-            // https://developers.facebook.com/docs/graph-api/using-graph-api/#errors
-            switch ($ex->getCode()) {
-                case '190':
-                    http_response_code(401);
-                    echo json_encode(array('message' => 'Sorry, but your session is no longer valid - automatically taking you back to the main page.'));
-                    break;
-                default:
-                    http_response_code(500);
-                    echo json_encode($ex->getResult());
-                    break;
-            }
-        }
-    }
-
-    /**
      * Fetches the group's post stream.
      */
-    private function fetchStream() {
-        // Save $gid to session for later use.
-        $_SESSION['gid'] = $this->gid;
-
+    private function fetchStream($prefetchOnly) {
         // Wait for other threads to finish updating the cached FQL stream.
         $this->waitForFetchStreamCompletion();
 
         // Refresh the FQL stream.
         $_SESSION['refreshing'] = true;
-        $_SESSION['stream'] = $this->queryStream();
+        $_SESSION['stream'] = $this->queryStream($prefetchOnly);
         $_SESSION['refreshing'] = false;
 
         $this->stream = $_SESSION['stream'];
@@ -524,7 +525,7 @@ class DataAccessLayer {
 
         $request = '/' . $this->gid . '/feed?fields=id&since=' . $endTime . '&until=' . $startTime . ' LIMIT 100';
 
-        $response = $this->api($request);
+        $response = $this->graphApiClient->api($request);
 
         $count = count($response);
 
@@ -585,7 +586,7 @@ class DataAccessLayer {
 
         // Execute the batch queries in chunks of 50.
         while ($processed < count($page)) {
-            $response = $this->api('/', 'POST', array(
+            $response = $this->graphApiClient->api('/', 'POST', array(
                 'batch' => json_encode(array_slice($queries, $processed, 50)),
                 'include_headers' => false
             ));
@@ -784,17 +785,22 @@ class DataAccessLayer {
      * Query the FQL stream table for some basic data that will be cached.
      */
 
-    private function queryStream() {
-        $uid = $this->getMe();
+    private function queryStream($prefetchOnly) {
+        $uid = $this->graphApiClient->getMe();
 
         $windowStart = time();
         $windowSize = $this->getOptimalWindowSize();
 
-        $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 1);
-        $windowStart = $windowStart - ($windowSize * 50 * 1);
-        $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 2, $windowStart, 13, 1));
-        $windowStart = $windowStart - ($windowSize * 2 * 13 * 1);
-        $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 3, $windowStart, 12, 1));
+        // Check to see if this this is only prefetching the stream data.
+        if ($prefetchOnly) {
+            $stream = $this->getFeedData($uid, $windowSize, $windowStart, 15, 1);
+        } else {
+            $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 1);
+            $windowStart = $windowStart - ($windowSize * 50 * 1);
+            $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 2, $windowStart, 13, 1));
+            $windowStart = $windowStart - ($windowSize * 2 * 13 * 1);
+            $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 3, $windowStart, 12, 1));
+        }
 
         return $stream;
     }
@@ -836,7 +842,7 @@ class DataAccessLayer {
             }
 
             // Execute a batch query.
-            $response = $this->api('/', 'POST', array(
+            $response = $this->graphApiClient->api('/', 'POST', array(
                 'batch' => json_encode($queries),
                 'include_headers' => false
             ));
@@ -844,7 +850,7 @@ class DataAccessLayer {
             // Parse the response.
             for ($k = 0; $k < count($response); $k++) {
                 $body = json_decode($response[$k]['body'], true);
-                
+
                 $stream = array_merge($stream, $body[0]['fql_result_set']);
                 $users = array_merge($users, $body[1]['fql_result_set']);
             }
@@ -856,62 +862,18 @@ class DataAccessLayer {
                 $stream[$i]['comment_count'] = $stream[$i]['comment_info']['comment_count'];
                 unset($stream[$i]['comment_info']);
             }
-            
+
             if (isset($stream[$i]['like_info'])) {
-                $stream[$i]['user_likes'] = (int)$stream[$i]['like_info']['user_likes'];
+                $stream[$i]['user_likes'] = (int) $stream[$i]['like_info']['user_likes'];
                 unset($stream[$i]['like_info']);
             }
-            
+
             for ($j = 0; $j < count($users); $j++) {
                 if ($stream[$i]['actor_id'] == $users[$j]['uid']) {
                     $stream[$i]['actor_name'] = $users[$j]['first_name'] . ' ' . $users[$j]['last_name'];
                 }
             }
-            
-//            
-//            $user = array_search($stream[$i]['actor_id'], $users);
-//            
-//            if ($user) {
-//                $stream[$i]['actor_name'] = $users[$key]['first_name'] . ' ' . $users[$key]['last_name'];
-//            }
-            
-//            for ($j = 0; $j < count($users); $j++) {
-//                if ($stream[$i]['actor_id'] == $users[$j]['uid']) {
-//                    $stream[$i]['actor_name'] = $users[$j]['first_name'] . ' ' . $users[$j]['last_name'];
-//                }
-//            }
         }
-
-//        for ($i = 0; $i < count($stream); $i++) {
-//            $stream[$i]['post_id'] = $stream[$i]['id'];
-//            unset($stream[$i]['id']);
-//
-//            $stream[$i]['actor_id'] = $stream[$i]['from']['id'];
-//            $stream[$i]['actor_name'] = $stream[$i]['from']['name'];
-//            unset($stream[$i]['from']);
-//
-//            $stream[$i]['user_likes'] = 0;
-//
-//            if (isset($stream[$i]['likes']) && isset($stream[$i]['likes']['data'])) {
-//                for ($j = 0; $j < count($stream[$i]['likes']['data']); $j++) {
-//                    $likeInfo = $stream[$i]['likes']['data'][$j];
-//
-//                    if ($likeInfo['id'] == $uid) {
-//                        $stream[$i]['user_likes'] = 1;
-//                    }
-//                }
-//
-//                unset($stream[$i]['likes']);
-//            }
-//            
-//            $stream[$i]['comment_count'] = 0;
-//            
-//            if (isset($stream[$i]['comments']) && isset($stream[$i]['comments']['data'])) {
-//                $stream[$i]['comment_count'] = count($stream[$i]['comments']['data']);
-//                
-//                unset ($stream[$i]['comments']);
-//            }
-//        }
 
         return $stream;
     }

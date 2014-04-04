@@ -1,9 +1,5 @@
 <?php
 
-require_once 'dal.php';
+require_once 'include/dal.php';
 
-$postId = $_GET['postId'];
-
-$dal = new DataAccessLayer();
-
-echo json_encode($dal->getPostDetails($postId));
+echo json_encode((new CachedFeed())->getPostDetails(filter_input(INPUT_GET, 'postId')));

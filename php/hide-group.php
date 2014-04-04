@@ -1,7 +1,5 @@
 <?php
 
-require_once 'dal.php';
+require_once 'include/dal.php';
 
-$dal = new DataAccessLayer();
-
-$dal->hideGroup($_GET['gid']);
+echo (new GroupManager())->hideGroup(filter_input(INPUT_GET, 'gid'));

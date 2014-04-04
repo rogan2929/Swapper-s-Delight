@@ -1,10 +1,5 @@
 <?php
 
-require_once 'dal.php';
+require_once 'include/dal.php';
 
-$offset = $_GET['offset'];
-$limit = $_GET['limit'];
-
-$dal = new DataAccessLayer();
-
-echo json_encode($dal->getMyPosts($offset, $limit));
+echo json_encode((new CachedFeed())->getMyPosts(filter_input(INPUT_GET, 'offset'), filter_input(INPUT_GET, 'limit')));

@@ -1,14 +1,8 @@
 <?php
 
-require_once 'dal.php';
+require_once 'include/dal.php';
 
-$gid = $_GET['gid'];
-$refresh = $_GET['refresh'];
-$offset = $_GET['offset'];
-$limit = $_GET['limit'];
+$feed = new CachedFeed();
+$feed->setGid(filter_input(INPUT_GET, 'gid'));
 
-$dal = new DataAccessLayer();
-$dal->setGid($gid);
-
-// Call the appropriate method in the newly instantiated DAL object.
-echo json_encode($dal->getNewPosts($refresh, $offset, $limit));
+echo json_encode($feed->getNewPosts(filter_input(INPUT_GET, 'refresh'), filter_input(INPUT_GET, 'offset'), filter_input(INPUT_GET, 'limit')));

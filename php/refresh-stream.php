@@ -1,7 +1,5 @@
 <?php
 
-require_once 'dal.php';
+require_once 'include/dal.php';
 
-$dal = new DataAccessLayer();
-
-echo $dal->refreshStream();
+echo (new CachedFeed())->refreshStream(filter_input(INPUT_GET, 'gid'));

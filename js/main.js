@@ -242,10 +242,12 @@ var SwdModel = {
      * Refresh the cached FQL stream on the server.
      * @param {type} callbacks
      */
-    refreshStream: function(callbacks) {
+    refreshStream: function(gid, callbacks) {
+        var url = '/php/refresh-stream.php?gid=' + gid
+
         $.ajax({
             type: 'GET',
-            url: '/php/refresh-stream.php',
+            url: url,
             success: function(response) {
                 callbacks.success.call(SwdModel, response);
             },
@@ -328,6 +330,9 @@ var SwdPresenter = {
                     window.location = window.location.href;
                 });
 
+                break;
+            case 500:
+                SwdPresenter.message('error', 'Oops! Something happened. Try reloading the app, and with any luck, the problem will go away on its own.');
                 break;
             default:
                 SwdPresenter.message('error', message);
@@ -527,9 +532,18 @@ var SwdPresenter = {
         // Get posts and then display them.
         SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, refresh, offset, {
             success: function(response) {
+                if (refresh) {
+                    // Asynchronously call SwdModel.refreshStream in order to fully populate the cached stream on the backend.
+                    SwdModel.refreshStream(SwdPresenter.selectedGroup.gid, {
+                        success: function(response) {
+                        },
+                        error: SwdPresenter.handleError
+                    });
+                }
+
                 // Set a timer function to periodically refresh the server-side FQL stream.
                 SwdPresenter.refreshStreamInterval = setInterval(function() {
-                    SwdModel.refreshStream({
+                    SwdModel.refreshStream(SwdPresenter.selectedGroup.gid, {
                         success: function(response) {
                             // Get refreshed data.
                             SwdModel.getRefreshedStreamData(SwdPresenter.postIds, {
@@ -935,7 +949,7 @@ var SwdPresenter = {
 
             // Show the ajax loading div.
             SwdView.toggleAjaxLoadingDiv('#post-comment-wrapper', true);
-            
+
             // Increment the post's tile's comment count.
             SwdView.incrementCommentCount(id);
 
@@ -1060,7 +1074,7 @@ var SwdView = {
      * @param {type} postId
      */
     incrementCommentCount: function(postId) {
-        var count = parseInt($('#' + postId + ' div.comment-count').first().text()) + 1; 
+        var count = parseInt($('#' + postId + ' div.comment-count').first().text()) + 1;
         $('#' + postId + ' div.comment-count').text(count);
     },
     /**
@@ -1393,7 +1407,7 @@ var SwdView = {
      * @param {type} posts
      */
     populatePostBlocks: function(posts) {
-        var i, post, adSpread, terminatorReached;
+        var i, post, adSpread, terminatorReached, adDiv;
 
         SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
         SwdView.toggleElement('#overlay-loading-posts', false);
@@ -1442,13 +1456,18 @@ var SwdView = {
             }
 
             // Determine how far apart each ad-tile will be.
-            adSpread = Math.max(Math.floor(SwdView.getPostBlockCount() / 4), 7);
+            adSpread = Math.max(Math.floor(SwdView.getPostBlockCount() / 4), 10);
 
             // Insert add tiles evenly throughout all the posts.
             for (i = 1; i <= 4; i++) {
-                $('#ad-tile-' + i).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
+                adDiv = $('#ad-tile-' + i);
+
+                // If an ad-tile is hidden, then display it. Otherwise, leave it alone.
+                if ($(adDiv).is(':hidden')) {
+                    $('#ad-tile-' + i).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
+                }
             }
-                    
+
             $('.post-block.hidden-block').hide();
 
             // After a delay, show the hidden content for any moused over image post blocks.
