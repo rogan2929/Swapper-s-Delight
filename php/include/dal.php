@@ -74,7 +74,7 @@ class GraphApiClient {
             // Selectively decide how to handle the error, based on returned code.
             // https://developers.facebook.com/docs/graph-api/using-graph-api/#errors
             
-            echo $ex->getMessage();
+            die($ex->getMessage());
         }
     }
 
