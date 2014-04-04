@@ -321,6 +321,8 @@ class CachedFeed {
         $posts = array();
 
         $this->waitForFetchStreamCompletion();
+        
+        echo 'TEST';
 
         // Look through the cached stream for liked posts.
         for ($i = 0; $i < count($this->stream); $i++) {
@@ -328,6 +330,8 @@ class CachedFeed {
                 $posts[] = $this->stream[$i];
             }
         }
+        
+        echo json_encode($posts);
 
         return $this->getPostData($posts, $offset, $limit);
     }
