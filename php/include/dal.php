@@ -109,10 +109,6 @@ class StreamManager {
 
 }
 
-class StreamProcessor {
-    
-}
-
 class DataAccessLayer {
 
     // Class members
