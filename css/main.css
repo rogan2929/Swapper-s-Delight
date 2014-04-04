@@ -952,11 +952,8 @@ a.link-title {
     width: 37px;
 }
 
-.facebook-user-header .facebook-poststamp {
-    line-height: 1.4;
-    vertical-align: middle;
-    display: table-cell;
-    height: 65px;
+.post-activity-section .activity-text {
+    
 }
 
 #post-comments {
