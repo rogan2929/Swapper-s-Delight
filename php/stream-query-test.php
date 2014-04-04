@@ -4,7 +4,7 @@ require_once 'include/dal.php';
 
 $gid = '120696471425768';
 
-echo session_save_path();
+echo session_save_path() . "<br/>";
 
 $feed = new CachedFeed();
 
