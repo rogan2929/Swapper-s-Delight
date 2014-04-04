@@ -83,9 +83,7 @@ error_reporting(E_ALL);
                                         <a class='facebook-user-name' target='_blank'></a>
                                         <div class='timestamp'></div>
                                     </div>
-                                    <div id='post-message' class='activity-text'>
-                                        <div id='post-message-text'></div>
-                                    </div>
+                                    <div id='post-message-text' class='activity-text'></div>
                                     <div id='post-message-linkdata' class='linkdata'>
                                         <div>
                                             <a id='linkdata-href' target='_blank' class='link-title'></a>
