@@ -936,7 +936,7 @@ a.link-title {
 
 }
 
-.facebook-user-photo {
+.post-activity-section .facebook-user-photo {
     height: 65px;
     width: 65px;
     display: inline-block;
@@ -947,7 +947,7 @@ a.link-title {
     margin-right: 5px;
 }
 
-.post-comment .facebook-user-photo {
+.post-activity-section.post-comment .facebook-user-photo {
     height: 37px;
     width: 37px;
 }
@@ -971,7 +971,7 @@ a.link-title {
     font-style: italic;
 }
 
-.post-comment {
+.post-activity-section {
     margin-bottom: 12px;
     position: relative;
     background-color: #eee;
@@ -988,7 +988,7 @@ a.link-title {
     font-size: 0.98em;
 }
 
-.post-comment > .post-comment-text {
+.post-activity-section > .activity-text {
     margin-top: 4px;
     margin-left: 5px;
     font-size: 0.95em;

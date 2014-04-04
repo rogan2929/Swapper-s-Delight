@@ -77,24 +77,23 @@ error_reporting(E_ALL);
                         <div class='close-button'></div>
                         <div id='details-left-column' class='column left'>
                             <div id='post-content' class='floating-panel-section'>
-                                <div id='post-details-user-data' class='facebook-user-header'>
-                                    <div class='facebook-user-photo'></div>
-                                    <div class='facebook-poststamp'>
+                                <div>
+                                    <div id='post-details-user-data' class='post-activity-section'>
+                                        <div class='facebook-user-photo'></div>
                                         <a class='facebook-user-name' target='_blank'></a>
                                         <span class='timestamp'></span>
                                     </div>
-                                    <!--                                <a target='_blank' class='post-permalink float-right wrappable-link'>Permalink</a>-->
-                                </div>
-                                <div id='post-message'>
-                                    <div id='post-message-text'></div>
-                                </div>
-                                <div id='post-message-linkdata'>
-                                    <div>
-                                        <a id='linkdata-href' target='_blank' class='link-title'></a>
-                                        <span id='linkdata-caption'></span>
+                                    <div id='post-message' class='activity-text'>
+                                        <div id='post-message-text'></div>
                                     </div>
-                                    <img id='linkdata-img'>
-                                    <span id='linkdata-desc'></span>
+                                    <div id='post-message-linkdata' class='linkdata'>
+                                        <div>
+                                            <a id='linkdata-href' target='_blank' class='link-title'></a>
+                                            <span class='linkdata-caption'></span>
+                                        </div>
+                                        <img class='linkdata-img'>
+                                        <span class='linkdata-desc'></span>
+                                    </div>
                                 </div>
                             </div>
                             <div id='post-comment-wrapper' class='floating-panel-section'>
