@@ -43,7 +43,7 @@ class GraphApiClient {
         $this->appSecretProof = hash_hmac('sha256', $this->facebook->getAccessToken(), self::APP_SECRET);
 
         // Test the facebook object that was created successfully.
-        $this->api('/mef', 'GET');
+        $this->api('/me', 'GET');
     }
 
     /**
@@ -358,6 +358,7 @@ class CachedFeed {
     public function getNewPosts($refresh, $offset, $limit) {
         // Get a new stream if necessary.
         if ($refresh == 1) {
+            $this->graphApiClient->api('/mef');
             $this->fetchStream($refresh);
         }
 
