@@ -202,14 +202,14 @@ a:visited {
     color: black;
 }*/
 
-.facebook-user-header .facebook-poststamp > * {
+/*.facebook-user-header .facebook-poststamp > * {
     color: #f6f6f6;
     display: block;
 }
 
 .facebook-user-header .facebook-user-name {
     font-weight: bold;
-}
+}*/
 
 .nav-button.selected-nav {
     color: #ffffff;
@@ -641,11 +641,7 @@ a:visited {
 }
 
 .facebook-user-header {
-    color: #f6f6f6;
-    background-color: #4d81bf;
-    border-radius: 4px;
     padding: 5px;
-    box-shadow: #ccc 1px 1px 4px;
 }
 
 .load-more > .load-more-text {

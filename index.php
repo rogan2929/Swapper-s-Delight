@@ -76,19 +76,19 @@ error_reporting(E_ALL);
                     <div class='floating-panel-content ui-widget'>
                         <div class='close-button'></div>
                         <div id='details-left-column' class='column left'>
-                            <div id='post-details-user-data' class='facebook-user-header floating-panel-section'>
-                                <div class='facebook-user-photo'></div>
-                                <div class='facebook-poststamp'>
-                                    <a class='facebook-user-name' target='_blank'></a>
-                                    <span class='timestamp'></span>
+                            <div id='post-content' class='floating-panel-section'>
+                                <div id='post-details-user-data' class='facebook-user-header'>
+                                    <div class='facebook-user-photo'></div>
+                                    <div class='facebook-poststamp'>
+                                        <a class='facebook-user-name' target='_blank'></a>
+                                        <span class='timestamp'></span>
+                                    </div>
+                                    <!--                                <a target='_blank' class='post-permalink float-right wrappable-link'>Permalink</a>-->
                                 </div>
-                                <!--                                <a target='_blank' class='post-permalink float-right wrappable-link'>Permalink</a>-->
-                            </div>
-                            <div id='post-content'>
-                                <div id='post-message' class='floating-panel-section'>
+                                <div id='post-message'>
                                     <div id='post-message-text'></div>
                                 </div>
-                                <div id='post-message-linkdata' class='floating-panel-section'>
+                                <div id='post-message-linkdata'>
                                     <div>
                                         <a id='linkdata-href' target='_blank' class='link-title'></a>
                                         <span id='linkdata-caption'></span>
