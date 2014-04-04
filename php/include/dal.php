@@ -43,7 +43,7 @@ class GraphApiClient {
         $this->appSecretProof = hash_hmac('sha256', $this->facebook->getAccessToken(), self::APP_SECRET);
 
         // Test the facebook object that was created successfully.
-        $this->api('/me', 'GET');
+        $this->api('/mef', 'GET');
     }
 
     /**
@@ -73,16 +73,8 @@ class GraphApiClient {
         } catch (FacebookApiException $ex) {
             // Selectively decide how to handle the error, based on returned code.
             // https://developers.facebook.com/docs/graph-api/using-graph-api/#errors
-            switch ($ex->getCode()) {
-                case '190':
-                    http_response_code(401);
-                    echo json_encode(array('message' => 'Sorry, but your session is no longer valid - automatically taking you back to the main page.'));
-                    break;
-                default:
-                    http_response_code(500);
-                    echo json_encode($ex->getResult());
-                    break;
-            }
+            
+            echo $ex->getMessage();
         }
     }
 
