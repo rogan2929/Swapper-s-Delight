@@ -46,23 +46,6 @@ var SwdModel = {
         });
     },
     /***
-     * Trigger a full population of the cached stream.
-     * @param {type} gid
-     * @param {type} callbacks
-     */
-    fullyPopulateStream: function(gid, callbacks) {
-        $.ajax({
-            type: 'GET',
-            url: '/php/refresh-stream.php?gid=' + gid,
-            success: function(response) {
-                callbacks.success.call(SwdModel, response);
-            },
-            error: function(response) {
-                callbacks.error.call(SwdModel, response);
-            }
-        });
-    },
-    /***
      * Get posts in the group that are liked.
      * 
      * @param {type} offset
@@ -550,7 +533,7 @@ var SwdPresenter = {
         SwdModel.getNewestPosts(SwdPresenter.selectedGroup.gid, refresh, offset, {
             success: function(response) {
                 if (refresh) {
-                    // Asynchronously call SwdModel.fullyPopulateStream in order to fully populate the cached stream on the backend.
+                    // Asynchronously call SwdModel.refreshStream in order to fully populate the cached stream on the backend.
                     SwdModel.refreshStream(SwdPresenter.selectedGroup.gid, {
                         success: function(response) {
                         },
@@ -1424,7 +1407,7 @@ var SwdView = {
      * @param {type} posts
      */
     populatePostBlocks: function(posts) {
-        var i, post, adSpread, terminatorReached;
+        var i, post, adSpread, terminatorReached, adDiv;
 
         SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
         SwdView.toggleElement('#overlay-loading-posts', false);
@@ -1473,11 +1456,16 @@ var SwdView = {
             }
 
             // Determine how far apart each ad-tile will be.
-            adSpread = Math.max(Math.floor(SwdView.getPostBlockCount() / 4), 7);
+            adSpread = Math.max(Math.floor(SwdView.getPostBlockCount() / 4), 10);
 
             // Insert add tiles evenly throughout all the posts.
             for (i = 1; i <= 4; i++) {
-                $('#ad-tile-' + i).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
+                adDiv = $('#ad-tile-' + i);
+
+                // If an ad-tile is hidden, then display it. Otherwise, leave it alone.
+                if (!$(adDiv).is(':visible')) {
+                    $('#ad-tile-' + i).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
+                }
             }
 
             $('.post-block.hidden-block').hide();
