@@ -2,4 +2,4 @@
 
 require_once 'include/dal.php';
 
-echo (new DataAccessLayer())->getHiddenGroups();
+echo (new GroupManager())->getHiddenGroups();
