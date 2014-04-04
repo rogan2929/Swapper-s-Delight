@@ -473,12 +473,10 @@ class CachedFeed {
      * @return boolean
      */
     public function refreshStream($gid) {
-        if (isset($_SESSION['gid'])) {
-            $this->gid = $_SESSION['gid'];
+        $this->gid = $gid;
 
-            // Fetch the new stream.
-            $this->fetchStream(false);
-        }
+        // Fetch the new stream.
+        $this->fetchStream(false);
 
         return count($this->stream);
     }
