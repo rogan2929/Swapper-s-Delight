@@ -1,6 +1,6 @@
 <?php
 
-require_once 'dal.php';
+require_once 'include/dal.php';
 
 $gid = '120696471425768';
 
