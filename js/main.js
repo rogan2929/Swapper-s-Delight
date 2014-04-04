@@ -1047,6 +1047,10 @@ var SwdView = {
                 imageUrl = 'url(' + comment.image_url[i - 1] + ')';
                 commentImage = $('<div class="post-comment-image"></div>');
                 $(commentImage).css('background-image', imageUrl).appendTo($(commentDiv));
+                
+                $(commentImage).click(function() {
+                    alert('test');
+                });
             }
         }
 
@@ -1059,6 +1063,8 @@ var SwdView = {
 
         // Hook up the click event handler.
         $(commentDiv).children('.delete-button').click(SwdView.handlers['onClickCommentDelete']);
+        
+        
     },
     /**
      * Init function for SwdView.
