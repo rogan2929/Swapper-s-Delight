@@ -84,16 +84,18 @@ error_reporting(E_ALL);
                                 </div>
                                 <!--                                <a target='_blank' class='post-permalink float-right wrappable-link'>Permalink</a>-->
                             </div>
-                            <div id='post-message' class='floating-panel-section'>
-                                <div id='post-message-text'></div>
-                            </div>
-                            <div id='post-message-linkdata' class='floating-panel-section'>
-                                <div>
-                                    <a id='linkdata-href' target='_blank' class='link-title'></a>
-                                    <span id='linkdata-caption'></span>
+                            <div id='post-content'>
+                                <div id='post-message' class='floating-panel-section'>
+                                    <div id='post-message-text'></div>
                                 </div>
-                                <img id='linkdata-img'>
-                                <span id='linkdata-desc'></span>
+                                <div id='post-message-linkdata' class='floating-panel-section'>
+                                    <div>
+                                        <a id='linkdata-href' target='_blank' class='link-title'></a>
+                                        <span id='linkdata-caption'></span>
+                                    </div>
+                                    <img id='linkdata-img'>
+                                    <span id='linkdata-desc'></span>
+                                </div>
                             </div>
                             <div id='post-comment-wrapper' class='floating-panel-section'>
                                 <textarea id='post-comment-text' placeholder='Type a comment and press [Enter] to post it.'></textarea>

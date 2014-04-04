@@ -964,8 +964,11 @@ a.link-title {
 }
 
 #post-comments {
-    border: none;
     padding: 0;
+}
+
+#post-content {
+    border-bottom: 1px solid #ccc;
 }
 
 .italic {
