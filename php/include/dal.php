@@ -283,13 +283,13 @@ class CachedFeed {
     private $stream;
 
     function __construct() {
+        echo var_dump($_SESSION['stream']);
+        
         // Retrieve the stream if it's there.
         if (isset($_SESSION['stream'])) {
             $this->stream = $_SESSION['stream'];
-            echo 'TEST';
         } else {
             $this->stream = null;
-            echo 'TEST2';
         }
 
         $this->graphApiClient = new GraphApiClient();
