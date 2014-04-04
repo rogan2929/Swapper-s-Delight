@@ -431,7 +431,7 @@ class CachedFeed {
             $post['comments'][$i]['image_url'] = array();
 
             if ($post['comments'][$i]['attachment'] && $post['comments'][$i]['attachment']['media']) {
-                echo var_dump($post['comments'][$i]['attachment']['media'][0]) . "<br/>";
+                echo var_dump($post['comments'][$i]['attachment']['media']['image']) . "<br/>";
                 // For posts with an image, look for associated image data.
 //                for ($j = 0; $j < count($post['comments'][$i]['attachment']['media']); $j++) {
 //                    echo var_dump($post['comments'][$i]['attachment']['media'][$j]);
