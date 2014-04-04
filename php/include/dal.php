@@ -358,7 +358,6 @@ class CachedFeed {
     public function getNewPosts($refresh, $offset, $limit) {
         // Get a new stream if necessary.
         if ($refresh == 1) {
-            $this->graphApiClient->api('/mef');
             $this->fetchStream($refresh);
         }
 
