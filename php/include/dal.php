@@ -2,7 +2,11 @@
 
 header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
 
-require 'facebook.php';
+require_once 'facebook.php';
+
+if (!session_id()) {
+    session_start();
+}
 
 /**
  * Wrapper for the Facebook object.
@@ -21,9 +25,6 @@ class GraphApiClient {
     private $appSecretProof;
 
     function __construct() {
-        if (!session_id()) {
-            session_start();
-        }
 
         $this->facebook = new Facebook(array(
             'appId' => self::APP_ID,
