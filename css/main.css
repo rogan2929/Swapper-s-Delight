@@ -936,6 +936,14 @@ a.link-title {
 
 }
 
+#post-details-user-data {
+    height: 60px;
+}
+
+.post-activity-section.original-content .activity-text {
+    font-size: 1.0em;
+}
+
 .post-activity-section .facebook-user-photo {
     height: 65px;
     width: 65px;
