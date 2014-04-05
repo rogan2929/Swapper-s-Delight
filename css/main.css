@@ -581,7 +581,8 @@ a:visited {
 
 .block {
     box-shadow: #ccc 1px 1px 4px;
-    border: 1px solid #e5e6e9;
+/*    border: 1px solid #e5e6e9;*/
+    border-radius: 5px;
 }
 
 /*http://jsfiddle.net/E78q3/*/
