@@ -1464,7 +1464,7 @@ var SwdView = {
             // Show the "Load More..." block if the group's main feed is being displayed.
             // Add the 'Load More...' post block.
             if (!terminatorReached) {
-                $('<div class="button post-block load-more"><div class="ajax-loading-div hidden"></div><div class="load-more-text">Load more...</div></div>').appendTo('#post-feed');
+                $('<div class="button post-block block load-more"><div class="ajax-loading-div hidden"></div><div class="load-more-text">Load more...</div></div>').appendTo('#post-feed');
 
                 // Add an event handler for when it is clicked on.
                 $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
