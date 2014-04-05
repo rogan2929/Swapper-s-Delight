@@ -506,7 +506,7 @@ a:visited {
     line-height: 42px;
     border-radius: 0px;
     font-size: 1.1em;
-    color: #f6f6f6;
+/*    color: #f6f6f6;*/
 }
 
 .button.menu-button {
@@ -529,11 +529,11 @@ a:visited {
 }
 
 .toolbar-button .button-icon.icon-new {
-    background-image: url('/icons/paperplus32w.png');
+    background-image: url('/icons/paperplus32.png');
 }
 
 .toolbar-button .button-icon.icon-refresh {
-    background-image: url('/icons/exchange32w.png');
+    background-image: url('/icons/exchange32.png');
 }
 
 .toolbar-button .button-icon.icon-search {
@@ -541,23 +541,23 @@ a:visited {
 }
 
 .toolbar-button .button-icon.icon-menu {
-    background-image: url('/icons/gear32w.png');
+    background-image: url('/icons/gear32.png');
 }
 
 .toolbar-button .button-icon.icon-comment {
-    background-image: url('/icons/comment32w.png');
+    background-image: url('/icons/comment32.png');
 }
 
 .toolbar-button .button-icon.icon-like {
-    background-image: url('/icons/heart32w.png');
+    background-image: url('/icons/heart32.png');
 }
 
 .toolbar-button .button-icon.icon-pm {
-    background-image: url('/icons/mail32w.png');
+    background-image: url('/icons/mail32.png');
 }
 
 .toolbar-button .button-icon.icon-delete {
-    background-image: url('/icons/recycle32w.png');
+    background-image: url('/icons/recycle32.png');
 }
 
 #button-menu-main {
@@ -1019,8 +1019,8 @@ div.right-toolbar-button {
     position: fixed;
     width: 100%;
     z-index: 100;
-    background-color: #105cb6;
-    box-shadow: #ccc 1px 1px 4px;
+/*    background-color: #105cb6;
+    box-shadow: #ccc 1px 1px 4px;*/
 }
 
 .toolbar.floating-panel-toolbar {

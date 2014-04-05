@@ -172,7 +172,7 @@ error_reporting(E_ALL);
                 </div>
             </div>
 
-            <div id='main-toolbar' class='ui-widget toolbar'>
+            <div id='main-toolbar' class='block toolbar'>
                 <div class='toolbar-group float-left'>
                     <div id='button-new' class='button toolbar-button'>
                         <span class='button-icon icon-new'></span>
@@ -195,7 +195,7 @@ error_reporting(E_ALL);
                 <div style='clear: both;'></div>
             </div>
 
-            <div id='post-details-toolbar' class='ui-widget toolbar floating-panel-toolbar hidden'>
+            <div id='post-details-toolbar' class='block toolbar floating-panel-toolbar hidden'>
                 <div class='toolbar-group float-left'>
                     <div id='post-button-like' class='button toolbar-button'>
                         <span class='button-icon icon-like'></span>
