@@ -307,14 +307,12 @@ a:visited {
 #details-left-column {
     width: 350px;
     padding-right: 8px;
-    margin-left: 10px;
 }
 
 #details-right-column {
     left: 378px;
     padding-right: 8px;
     overflow: hidden;
-    margin-right: 10px;
 }
 
 .ajax-loading-div {
@@ -841,8 +839,8 @@ a.link-title {
 
 .floating-panel-content .column {
     position: absolute;
-    top: 10px;
-    bottom: 0;
+    top: 30px;
+    bottom: 30px;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -852,13 +850,13 @@ a.link-title {
 }
 
 .floating-panel-content .column.right {
-    right: 0;
+    right: 30px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
 
 .floating-panel-content .column.left {
-    left: 0;
+    left: 30px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }

@@ -74,6 +74,7 @@ error_reporting(E_ALL);
 
                 <div id='post-details-panel' class='floating-panel fullsize hidden'>
                     <div class='floating-panel-content ui-widget'>
+                        <div class='close-button'></div>
                         <div id='details-left-column' class='column left'>
                             <div id='post-content' class='floating-panel-section'>
                                 <div class='post-activity-section block original-content'>
@@ -117,6 +118,7 @@ error_reporting(E_ALL);
 
                 <div id='new-post-panel' class='floating-panel collapsed hidden'>
                     <div class='floating-panel-content ui-widget scroll-y'>
+                        <div class='close-button'></div>
                         <div class='heading'>Create a new group post.</div>
                     </div>
                 </div>
@@ -125,6 +127,7 @@ error_reporting(E_ALL);
 
                 <div id='select-group-panel' class='floating-panel hidden'>
                     <div class='floating-panel-content ui-widget scroll-y'>
+                        <div class='close-button'></div>
                         <span class='heading'>Choose a group to start.</span>
                         <span class='hint'>Hint: You can also hide any groups that you don't want to see here. Don't worry; click <a id='restore-group-selection-items' href='#'>here</a> to bring them back.</span>
                         <div id='select-group-list' class='selection-list'>
