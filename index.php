@@ -46,7 +46,7 @@ error_reporting(E_ALL);
             <div id='fb-root'></div>
 
             <div id='main-panel'>
-                <div id='left-rail' class='ui-widget scroll-y'>
+                <div id='left-rail' class='block scroll-y'>
                     <div id='left-rail-nav'>
                         <div id='button-nav-group' class='button nav-button selected-nav'>
                             <span>Newest Posts</span>
