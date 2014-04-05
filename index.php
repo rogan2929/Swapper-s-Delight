@@ -92,11 +92,11 @@ error_reporting(E_ALL);
                                         <img class='linkdata-img'>
                                         <span class='linkdata-desc'></span>
                                     </div>
+                                    <div id='post-comment-wrapper' class='floating-panel-section'>
+                                        <textarea id='post-comment-text' placeholder='Type a comment and press [Enter] to post it.'></textarea>
+                                        <div class='ajax-loading-div hidden'></div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div id='post-comment-wrapper' class='floating-panel-section'>
-                                <textarea id='post-comment-text' placeholder='Type a comment and press [Enter] to post it.'></textarea>
-                                <div class='ajax-loading-div hidden'></div>
                             </div>
                             <div id='post-comments' class='floating-panel-section'>
                                 <div id='button-show-new-comments' class='button hidden'></div>
