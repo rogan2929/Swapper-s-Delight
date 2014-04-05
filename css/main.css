@@ -27,7 +27,7 @@ html {
 
 body {
     overflow: hidden;
-    background-color: white;
+    background-color: #f1f1f1;
 /*    background: url(/img/textured_paper.png);*/
 }
 
@@ -343,19 +343,24 @@ a:visited {
     margin-right: -5px;
 }
 
+.block.hover {
+    background-color: #ccc;
+    color: #444;
+}
+
 .selection-item {
     margin: 5px;
     padding: 4px !important;
     position: relative;
-    border-radius: 5px;
+/*    border-radius: 5px;
     box-shadow: #ccc 1px 1px 4px;
-    background-color: #f1f1f1;
+    background-color: #f1f1f1;*/
 }
 
-.button.selection-item.hover {
+/*.button.selection-item.hover {
     background-color: #ccc;
     color: #444;
-}
+}*/
 
 .selection-item-content {
     display: table-cell !important;
@@ -574,6 +579,11 @@ a:visited {
     background-color: #e35765;
 }
 
+.block {
+    box-shadow: #ccc 1px 1px 4px;
+    border: 1px solid #e5e6e9;
+}
+
 /*http://jsfiddle.net/E78q3/*/
 
 .post-block,
@@ -581,7 +591,6 @@ a:visited {
 .post-block.post-block-link,
 .post-block.post-block-textlink {
     display: inline-block;
-    box-shadow: #aaa 1px 1px 4px;
     height: 250px;
     width: 300px;
     overflow: hidden;
@@ -589,7 +598,6 @@ a:visited {
     margin-bottom: 4px;
     cursor: pointer;
     position: relative;
-    background-color: #f1f1f1;
 }
 
 .post-block .comment-count {
