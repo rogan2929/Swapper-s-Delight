@@ -418,7 +418,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickPostButtonDelete', SwdPresenter.onClickPostButtonDelete, '#post-button-delete', 'click');
                                 SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
                                 SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
-                                SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block.ui-widget.unique', 'click');
+                                SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block.block.unique', 'click');
                                 SwdView.installHandler('onClickPostBlockLoadMore', SwdPresenter.onClickPostBlockLoadMore, '.post-block.load-more', 'click');
                                 SwdView.installHandler('onClickPostImageTile', SwdPresenter.onClickPostImageTile, '.post-image-tile', 'click');
                                 SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
@@ -1257,7 +1257,7 @@ var SwdView = {
         tileImage = 'url(' + post.image_url[0] + ')';
 
         // Create the visible block.
-        postBlock = $('<div id="' + post.post_id + '" class="post-block block ui-widget unique"><div class="visible-content" style="background-image: ' + tileImage + '"><div class="comment-count">' + post.comment_info.comment_count + '</div></div></div>');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block block unique"><div class="visible-content" style="background-image: ' + tileImage + '"><div class="comment-count">' + post.comment_info.comment_count + '</div></div></div>');
 
         $(postBlock).addClass('post-block-image');
 
@@ -1297,7 +1297,7 @@ var SwdView = {
     createTextPostBlock: function(post) {
         var postBlock, message, userImage, timeStamp;
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block block ui-widget unique"></div>');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block block unique"></div>');
 
         userImage = 'url(' + post.user.pic + ')';
 
@@ -1375,7 +1375,7 @@ var SwdView = {
 
         linkImage = 'url(' + post.link_data.media[0].src + ')';
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block block ui-widget unique"></div>');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block block unique"></div>');
         description = '<div class="visible-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span>' + post.link_data.description + '</p></div>';
 
         $(postBlock).addClass('post-block-link').html(description);
@@ -1398,7 +1398,7 @@ var SwdView = {
     createTextLinkPostBlock: function(post) {
         var postBlock, message, userImage, timeStamp, description, linkImage;
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block block ui-widget unique"></div>');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block block unique"></div>');
 
         userImage = 'url(' + post.user.pic + ')';
 
@@ -1464,7 +1464,7 @@ var SwdView = {
             // Show the "Load More..." block if the group's main feed is being displayed.
             // Add the 'Load More...' post block.
             if (!terminatorReached) {
-                $('<div class="button post-block load-more ui-widget"><div class="ajax-loading-div hidden"></div><div class="load-more-text">Load more...</div></div>').appendTo('#post-feed');
+                $('<div class="button post-block load-more"><div class="ajax-loading-div hidden"></div><div class="load-more-text">Load more...</div></div>').appendTo('#post-feed');
 
                 // Add an event handler for when it is clicked on.
                 $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
