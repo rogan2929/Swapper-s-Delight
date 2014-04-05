@@ -841,7 +841,7 @@ a.link-title {
 
 .floating-panel-content .column {
     position: absolute;
-    top: 30px;
+    top: 10px;
     bottom: 0;
     overflow-y: auto;
     overflow-x: hidden;
