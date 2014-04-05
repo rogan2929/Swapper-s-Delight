@@ -845,10 +845,6 @@ a.link-title {
     overflow-x: hidden;
 }
 
-.floating-panel-content .column > * {
-    margin-bottom: 10px;
-}
-
 .floating-panel-content .column.right {
     right: 25px;
     border-top-right-radius: 5px;
