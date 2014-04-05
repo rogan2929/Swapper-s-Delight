@@ -1020,6 +1020,7 @@ div.right-toolbar-button {
     width: 100%;
     z-index: 100;
     background-color: #105cb6;
+    box-shadow: #ccc 1px 1px 4px;
 }
 
 .toolbar.floating-panel-toolbar {
