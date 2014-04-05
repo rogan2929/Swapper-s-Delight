@@ -807,10 +807,6 @@ a.link-title {
     z-index: 1003;
 }
 
-.floating-panel-content > * {
-    margin-bottom: 10px;
-}
-
 .ui-effects-transfer {
     border: 2px dotted gray;
 }
@@ -895,7 +891,6 @@ a.link-title {
     position: absolute;
     top: 30px;
     bottom: 0;
-    margin-bottom: 10px;
     overflow-y: auto;
     overflow-x: hidden;
 }
