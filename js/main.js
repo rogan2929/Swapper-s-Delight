@@ -1268,7 +1268,7 @@ var SwdView = {
 
         message = '<div class="wrapper hidden-content"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
-        $(postBlock).append('<div class="post-block block post-block-text hidden-block">' + message + '</div>');
+        $(postBlock).append('<div class="post-block block hover post-block-text hidden-block">' + message + '</div>');
 
         $(postBlock).appendTo('#post-feed');
     },
@@ -1387,7 +1387,7 @@ var SwdView = {
 
         message = '<div class="hidden-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
-        $(postBlock).append('<div class="post-block block post-block-text hidden-block">' + message + '</div>');
+        $(postBlock).append('<div class="post-block block hover post-block-text hidden-block">' + message + '</div>');
 
         $(postBlock).appendTo('#post-feed');
     },
@@ -1413,7 +1413,7 @@ var SwdView = {
         description = '<span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span>' + post.link_data.description;
 
         // Create the link text block that resides below the visible block.
-        $(postBlock).append('<div class="post-block block post-block-link hidden-block"><div class="hidden-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content">' + description + '</p></div></div>');
+        $(postBlock).append('<div class="post-block block hover post-block-link hidden-block"><div class="hidden-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content">' + description + '</p></div></div>');
 
         $(postBlock).appendTo('#post-feed');
     },
