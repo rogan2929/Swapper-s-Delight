@@ -1001,7 +1001,7 @@ var SwdView = {
         $('#select-group-no-groups').hide();
 
         for (i = 0; i < groups.length; i++) {
-            groupItem = $('<div id="' + groups[i].gid + '" class="button group-selection-item selection-item select-group"><div class="close-button"></div><div class="selection-item-content"><span class="button-icon" style="background-image: url(' + groups[i].icon + ')"></span><div>' + groups[i].name + '</div></div></div>');
+            groupItem = $('<div id="' + groups[i].gid + '" class="button block group-selection-item selection-item select-group"><div class="close-button"></div><div class="selection-item-content"><span class="button-icon" style="background-image: url(' + groups[i].icon + ')"></span><div>' + groups[i].name + '</div></div></div>');
 
             // Look through the string containing hiddenGroup IDs. If there is a match, hide the group.
             if (hiddenGroups && hiddenGroups.indexOf(groups[i].gid) !== -1) {
@@ -1257,7 +1257,7 @@ var SwdView = {
         tileImage = 'url(' + post.image_url[0] + ')';
 
         // Create the visible block.
-        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"><div class="visible-content" style="background-image: ' + tileImage + '"><div class="comment-count">' + post.comment_info.comment_count + '</div></div></div>');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block block ui-widget unique"><div class="visible-content" style="background-image: ' + tileImage + '"><div class="comment-count">' + post.comment_info.comment_count + '</div></div></div>');
 
         $(postBlock).addClass('post-block-image');
 
@@ -1268,7 +1268,7 @@ var SwdView = {
 
         message = '<div class="wrapper hidden-content"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
-        $(postBlock).append('<div class="post-block post-block-text hidden-block">' + message + '</div>');
+        $(postBlock).append('<div class="post-block block post-block-text hidden-block">' + message + '</div>');
 
         $(postBlock).appendTo('#post-feed');
     },
@@ -1297,7 +1297,7 @@ var SwdView = {
     createTextPostBlock: function(post) {
         var postBlock, message, userImage, timeStamp;
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block block ui-widget unique"></div>');
 
         userImage = 'url(' + post.user.pic + ')';
 
@@ -1375,7 +1375,7 @@ var SwdView = {
 
         linkImage = 'url(' + post.link_data.media[0].src + ')';
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block block ui-widget unique"></div>');
         description = '<div class="visible-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span>' + post.link_data.description + '</p></div>';
 
         $(postBlock).addClass('post-block-link').html(description);
@@ -1387,7 +1387,7 @@ var SwdView = {
 
         message = '<div class="hidden-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
-        $(postBlock).append('<div class="post-block post-block-text hidden-block">' + message + '</div>');
+        $(postBlock).append('<div class="post-block block post-block-text hidden-block">' + message + '</div>');
 
         $(postBlock).appendTo('#post-feed');
     },
@@ -1398,7 +1398,7 @@ var SwdView = {
     createTextLinkPostBlock: function(post) {
         var postBlock, message, userImage, timeStamp, description, linkImage;
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block block ui-widget unique"></div>');
 
         userImage = 'url(' + post.user.pic + ')';
 
@@ -1413,7 +1413,7 @@ var SwdView = {
         description = '<span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span>' + post.link_data.description;
 
         // Create the link text block that resides below the visible block.
-        $(postBlock).append('<div class="post-block post-block-link hidden-block"><div class="hidden-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content">' + description + '</p></div></div>');
+        $(postBlock).append('<div class="post-block block post-block-link hidden-block"><div class="hidden-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content">' + description + '</p></div></div>');
 
         $(postBlock).appendTo('#post-feed');
     },
