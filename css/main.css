@@ -560,6 +560,34 @@ a:visited {
     background-image: url('/icons/recycle32.png');
 }
 
+.toolbar-button:hover .button-icon.icon-new {
+    background-image: url('/icons/paperplus32w.png');
+}
+
+.toolbar-button:hover .button-icon.icon-refresh {
+    background-image: url('/icons/exchange32w.png');
+}
+
+.toolbar-button:hover .button-icon.icon-menu {
+    background-image: url('/icons/gear32w.png');
+}
+
+.toolbar-button:hover .button-icon.icon-comment {
+    background-image: url('/icons/comment32w.png');
+}
+
+.toolbar-button:hover .button-icon.icon-like {
+    background-image: url('/icons/heart32w.png');
+}
+
+.toolbar-button:hover .button-icon.icon-pm {
+    background-image: url('/icons/mail32w.png');
+}
+
+.toolbar-button:hover .button-icon.icon-delete {
+    background-image: url('/icons/recycle32w.png');
+}
+
 #button-menu-main {
     min-width: 0 !important;
 }
