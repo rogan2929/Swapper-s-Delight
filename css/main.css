@@ -940,6 +940,11 @@ a.link-title {
     height: 60px;
 }
 
+#post-content {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
 .post-activity-section.original-content .activity-text {
     font-size: 1.0em;
 }
