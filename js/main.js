@@ -1324,27 +1324,24 @@ var SwdView = {
      * @param {type} post
      */
     fillPostImageContainer: function(post) {
-        var i, imageTile, imageUrl, tileWidth, tileHeight, colCount, marginRight;
+        var i, imageTile, imageUrl, tileWidth, tileHeight, colCount;
 
         switch (post.image_url.length) {
             case 1:
                 colCount = 1;
-                marginRight = 0;
                 break;
             case 2:
                 colCount = 2;
-                marginRight = 10 * (colCount);
                 break;
             default:
                 colCount = 3;
-                marginRight = 10 * (colCount);
                 break;
         }
 
         // Get image tile width & height, assuming a max of 375 for height.
         // Try for a square first.
-        tileWidth = ($('#post-image-container').width() - marginRight) / post.image_url.length;
-        tileHeight = Math.min(tileWidth, $('#post-image-container').height()) - 14;
+        tileWidth = ($('#post-image-container').width() - colCount * 10) / post.image_url.length;
+        tileHeight = Math.min(tileWidth, $('#post-image-container').height());
 
         // Create at tile for each image.
         for (i = 1; i <= post.image_url.length; i++) {
@@ -1359,12 +1356,7 @@ var SwdView = {
             $(imageTile).addClass('single');
         }
 
-        // Set up mouse over effects and connect to event handlers.
-//        $('#post-image-container .post-image-tile').hoverIntent(function() {
-//            $(this).addClass('hover', 100);
-//        }, function() {
-//            $(this).removeClass('hover', 100);
-//        }).click(SwdView.handlers['onClickPostImageTile']);
+        // Connect to click event handler.
         $('#post-image-container .post-image-tile').click(SwdView.handlers['onClickPostImageTile']);
     },
     /***
