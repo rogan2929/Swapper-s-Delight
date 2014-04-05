@@ -784,8 +784,6 @@ a.link-title {
     right: 0;
     top: 0;
     bottom: 0;
-    margin-right: 0;
-    margin-bottom: 0;
     width: auto !important;
     height: auto !important;
 }
@@ -831,10 +829,6 @@ a.link-title {
 #post-image-container .post-image-tile.right {
     margin-right: 0px;
 }
-
-/*#post-image-container .post-image-tile.hover {
-    background-color: #f6f6f6;
-}*/
 
 .floating-panel-content .column {
     position: absolute;

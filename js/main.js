@@ -1360,11 +1360,12 @@ var SwdView = {
         }
 
         // Set up mouse over effects and connect to event handlers.
-        $('#post-image-container .post-image-tile').hoverIntent(function() {
-            $(this).addClass('hover', 100);
-        }, function() {
-            $(this).removeClass('hover', 100);
-        }).click(SwdView.handlers['onClickPostImageTile']);
+//        $('#post-image-container .post-image-tile').hoverIntent(function() {
+//            $(this).addClass('hover', 100);
+//        }, function() {
+//            $(this).removeClass('hover', 100);
+//        }).click(SwdView.handlers['onClickPostImageTile']);
+        $('#post-image-container .post-image-tile').click(SwdView.handlers['onClickPostImageTile']);
     },
     /***
      * Create and display a link type post block.
