@@ -817,7 +817,6 @@ a.link-title {
 }
 
 #post-image-container {
-    margin: 10px;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -889,19 +888,17 @@ a.link-title {
     margin-right: 0px;
 }
 
-#post-image-container .post-image-tile.hover {
+/*#post-image-container .post-image-tile.hover {
     background-color: #f6f6f6;
-}
+}*/
 
 .floating-panel-content .column {
     position: absolute;
     top: 30px;
     bottom: 0;
     margin-bottom: 10px;
-    padding: 10px;
     overflow-y: auto;
     overflow-x: hidden;
-    border: 1px solid #ccc;
 }
 
 .floating-panel-content .column > * {
