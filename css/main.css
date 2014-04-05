@@ -943,6 +943,7 @@ a.link-title {
 #post-content {
     margin-bottom: 0px;
     padding-bottom: 0px;
+    padding-top: 0px;
 }
 
 .post-activity-section.original-content .activity-text {
