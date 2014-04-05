@@ -699,10 +699,6 @@ a:visited {
     display: inline-block;
 }
 
-.post-block.unique.post-block-text.hover {
-    background-color: #ccc;
-}
-
 .post-block.load-more.hover {
     background-color: #aaa;
 }
