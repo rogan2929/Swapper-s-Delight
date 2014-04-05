@@ -991,10 +991,7 @@ a.link-title {
 .post-activity-section {
     margin-bottom: 12px;
     position: relative;
-    background-color: #eee;
-    border-radius: 4px;
     padding: 4px;
-    box-shadow: #ccc 1px 1px 3px;
 }
 
 .post-activity-section.original-content {

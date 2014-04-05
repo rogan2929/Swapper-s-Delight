@@ -77,7 +77,7 @@ error_reporting(E_ALL);
                         <div class='close-button'></div>
                         <div id='details-left-column' class='column left'>
                             <div id='post-content' class='floating-panel-section'>
-                                <div class='post-activity-section original-content'>
+                                <div class='post-activity-section block original-content'>
                                     <div id='post-details-user-data'>
                                         <div class='facebook-user-photo'></div>
                                         <a class='facebook-user-name' target='_blank'></a>
