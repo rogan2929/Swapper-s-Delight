@@ -956,8 +956,8 @@ a.link-title {
 }
 
 .post-activity-section .facebook-user-photo {
-    height: 65px;
-    width: 65px;
+    height: 60px;
+    width: 60px;
     display: inline-block;
     background-position: center center;
     background-repeat: no-repeat;
@@ -969,10 +969,6 @@ a.link-title {
 .post-activity-section.post-comment .facebook-user-photo {
     height: 37px;
     width: 37px;
-}
-
-.post-activity-section .activity-text {
-    
 }
 
 #post-comments {
@@ -989,21 +985,12 @@ a.link-title {
     padding: 10px;
 }
 
-.post-activity-section.original-content {
-    
-}
-
-.post-activity-section > div:first-child {
-    padding: 6px;
-}
-
 .post-comment a:first-child {
     font-size: 0.98em;
 }
 
 .post-activity-section > .activity-text {
-    margin-top: 4px;
-    margin-left: 5px;
+    margin-top: 8px;
     font-size: 0.95em;
 }
 
