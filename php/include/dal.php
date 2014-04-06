@@ -800,13 +800,17 @@ class CachedFeed {
 
         // Check to see if this this is only prefetching the stream data.
         if ($prefetchOnly) {
-            $stream = $this->getFeedData($uid, $windowSize, $windowStart, 15, 1);
+            $stream = $this->getFeedData($uid, $windowSize, $windowStart, 14, 1);
+            $windowStart = $windowStart - ($windowSize * 14 * 1);
+            $stream = array_merge($stream, $this->getFeedData($uid, 3600 * 24 * 30, $windowStart, 1, 1));
         } else {
             $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 1);
             $windowStart = $windowStart - ($windowSize * 50 * 1);
             $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 2, $windowStart, 13, 1));
             $windowStart = $windowStart - ($windowSize * 2 * 13 * 1);
-            $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 3, $windowStart, 12, 1));
+            $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 3, $windowStart, 11, 1));
+            $windowStart = $windowStart - ($windowSize * 3 * 11 * 1);
+            $stream = array_merge($stream, $this->getFeedData($uid, 3600 * 24 * 30, $windowStart, 1, 1));
         }
 
         return $stream;
