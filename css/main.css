@@ -821,9 +821,8 @@ a.link-title {
     background-size: cover;
     cursor: pointer;
     display: inline-block;
-    min-width: 181px;
-    min-height: 181px;
     margin: 10px;
+    border: 1px solid #dddddd;
 }
 
 .post-comment .post-comment-image {
