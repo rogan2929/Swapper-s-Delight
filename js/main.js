@@ -927,9 +927,10 @@ var SwdPresenter = {
     },
     onClickRestoreGroupSelectionItems: function(e, args) {
         // Restore all group selection items.
+        SwdView.showAllGroupSelectionItems();
+
         SwdModel.restoreAllGroups({
             success: function() {
-                SwdView.showAllGroupSelectionItems();
             },
             error: SwdPresenter.handleError
         });
