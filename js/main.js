@@ -1350,6 +1350,10 @@ var SwdView = {
             imageUrl = 'url(' + post.image_url[i - 1] + ')';
             imageTile = $('<div class="post-image-tile"></div>');
 
+            if (i % colCount === 0) {
+                $(imageTile).addClass('right');
+            }
+
             $(imageTile).height(tileHeight).width(tileWidth).css('background-image', imageUrl).appendTo('#post-image-container');
         }
 
