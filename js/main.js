@@ -1051,7 +1051,7 @@ var SwdView = {
                 $(commentImage).css('background-image', imageUrl).appendTo($(commentDiv));
 
                 $(commentImage).click(function() {
-                    alert('test');
+                    //alert('test');
                 });
             }
         }
