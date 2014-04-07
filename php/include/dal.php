@@ -526,7 +526,7 @@ class CachedFeed {
     /**
      * Determine the optimal window size to use in batch queries.
      */
-    private function getOptimalWindowSize() {
+    public function getOptimalWindowSize() {
         $startTime = time();
         $endTime = time() - 3600;
 
@@ -804,13 +804,14 @@ class CachedFeed {
             $windowStart = $windowStart - ($windowSize * 14 * 1);
             $stream = array_merge($stream, $this->getFeedData($uid, 3600 * 24 * 30, $windowStart, 1, 1));
         } else {
-            $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 1);
+            // TODO: Somehow offload this onto a background thread.
+            $stream = $dal->getFeedData($uid, $windowSize, $windowStart, 50, 1);
             $windowStart = $windowStart - ($windowSize * 50 * 1);
-            $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 2, $windowStart, 13, 1));
+            $stream = array_merge($stream, $dal->getFeedData($uid, $windowSize * 2, $windowStart, 13, 1));
             $windowStart = $windowStart - ($windowSize * 2 * 13 * 1);
-            $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 3, $windowStart, 11, 1));
+            $stream = array_merge($stream, $dal->getFeedData($uid, $windowSize * 3, $windowStart, 11, 1));
             $windowStart = $windowStart - ($windowSize * 3 * 11 * 1);
-            $stream = array_merge($stream, $this->getFeedData($uid, 3600 * 24 * 30, $windowStart, 1, 1));
+            $stream = array_merge($stream, $dal->getFeedData($uid, 3600 * 24 * 30, $windowStart, 1, 1));
         }
 
         return $stream;
@@ -826,7 +827,7 @@ class CachedFeed {
      * @param type $iterations
      * @return array
      */
-    private function getFeedData($uid, $windowSize, $windowStart, $batchSize, $iterations = 1) {
+    public function getFeedData($uid, $windowSize, $windowStart, $batchSize, $iterations = 1) {
         $windowEnd = $windowStart - $windowSize;
 
         $stream = array();
