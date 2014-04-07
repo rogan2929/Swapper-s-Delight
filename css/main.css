@@ -815,6 +815,7 @@ a.link-title {
     bottom: 0;
     width: auto !important;
     height: auto !important;
+    margin: 10px;
 }
 
 #post-image-container .post-image-tile {
