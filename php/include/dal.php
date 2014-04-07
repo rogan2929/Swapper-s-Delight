@@ -72,10 +72,9 @@ class GraphApiClient {
             return call_user_func_array(array($this->facebook, 'api'), $args);
         } catch (FacebookApiException $ex) {
             // https://developers.facebook.com/docs/graph-api/using-graph-api/#errors
-            
             // Set a 400 response code and then exit with the FB exception message.
             http_response_code(400);
-            
+
             die($ex->getMessage());
         }
     }
@@ -421,14 +420,22 @@ class CachedFeed {
         // Erase attachment data (to make the object smaller), since this has already been parse.
         unset($post['attachment']);
 
-        $commentUserData = array();
-
         // Begin parsing comment data.
         for ($i = 0; $i < count($post['comments']); $i++) {
             // Replace any line breaks with <br/>
             if ($post['comments'][$i]['text']) {
                 $post['comments'][$i]['text'] = nl2br($post['comments'][$i]['text']);
             }
+
+            // Set image urls.
+            $post['comments'][$i]['image_url'] = array();
+
+            if ($post['comments'][$i]['attachment'] && $post['comments'][$i]['attachment']['media']) {
+                //echo var_dump($post['comments'][$i]['attachment']['media']['image']) . "<br/>";
+                $post['comments'][$i]['image_url'][] = $post['comments'][$i]['attachment']['media']['image']['src'];
+            }
+
+            unset($post['comments'][$i]['attachment']);
 
             // For each comment, attach user data to it.
             for ($j = 0; $j < count($response[4]['fql_result_set']); $j++) {
@@ -793,13 +800,17 @@ class CachedFeed {
 
         // Check to see if this this is only prefetching the stream data.
         if ($prefetchOnly) {
-            $stream = $this->getFeedData($uid, $windowSize, $windowStart, 15, 1);
+            $stream = $this->getFeedData($uid, $windowSize, $windowStart, 14, 1);
+            $windowStart = $windowStart - ($windowSize * 14 * 1);
+            $stream = array_merge($stream, $this->getFeedData($uid, 3600 * 24 * 30, $windowStart, 1, 1));
         } else {
             $stream = $this->getFeedData($uid, $windowSize, $windowStart, 50, 1);
             $windowStart = $windowStart - ($windowSize * 50 * 1);
             $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 2, $windowStart, 13, 1));
             $windowStart = $windowStart - ($windowSize * 2 * 13 * 1);
-            $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 3, $windowStart, 12, 1));
+            $stream = array_merge($stream, $this->getFeedData($uid, $windowSize * 3, $windowStart, 11, 1));
+            $windowStart = $windowStart - ($windowSize * 3 * 11 * 1);
+            $stream = array_merge($stream, $this->getFeedData($uid, 3600 * 24 * 30, $windowStart, 1, 1));
         }
 
         return $stream;

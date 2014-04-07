@@ -418,7 +418,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickPostButtonDelete', SwdPresenter.onClickPostButtonDelete, '#post-button-delete', 'click');
                                 SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
                                 SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
-                                SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block.ui-widget.unique', 'click');
+                                SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block.block.unique', 'click');
                                 SwdView.installHandler('onClickPostBlockLoadMore', SwdPresenter.onClickPostBlockLoadMore, '.post-block.load-more', 'click');
                                 SwdView.installHandler('onClickPostImageTile', SwdPresenter.onClickPostImageTile, '.post-image-tile', 'click');
                                 SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
@@ -437,7 +437,7 @@ var SwdPresenter = {
                                     SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
 
                                     // Start with displaying the group selection panel.
-                                    SwdView.toggleFloatingPanel('#select-group-panel', true, 'drop');
+                                    SwdView.toggleFloatingPanel('#select-group-panel', true, 'fade');
                                 }, 1000);
 
                                 // Start the idle timer.
@@ -703,7 +703,7 @@ var SwdPresenter = {
         // Prevent the event from bubbling up the DOM and closing the floating panel.
         e.stopPropagation();
 
-        SwdView.toggleFloatingPanel('#select-group-panel', true, 'drop');
+        SwdView.toggleFloatingPanel('#select-group-panel', true, 'fade');
     },
     // Event Handlers (onX(e, args))
     onClickButtonNew: function(e, args) {
@@ -902,7 +902,7 @@ var SwdPresenter = {
         // Set selected group and load its feed.
         SwdPresenter.setSelectedGroup(group);
 
-        SwdView.toggleFloatingPanel('#select-group-panel', false, 'drop');
+        SwdView.toggleFloatingPanel('#select-group-panel', false, 'fade');
     },
     onClickGroupClose: function(e, args) {
         var groupTile, target, gid;
@@ -915,20 +915,22 @@ var SwdPresenter = {
 
         gid = $(groupTile).attr('id');
 
+        // Remove the item from view.
+        SwdView.hideGroupFromSelectPanel(groupTile);
+
         // Remove the item from the back end.
         SwdModel.hideGroup(SwdPresenter.uid, gid, {
             success: function() {
-                // Remove the item from view.
-                SwdView.hideGroupFromSelectPanel(groupTile);
             },
             fail: SwdPresenter.handleError
         });
     },
     onClickRestoreGroupSelectionItems: function(e, args) {
         // Restore all group selection items.
+        SwdView.showAllGroupSelectionItems();
+
         SwdModel.restoreAllGroups({
             success: function() {
-                SwdView.showAllGroupSelectionItems();
             },
             error: SwdPresenter.handleError
         });
@@ -1001,7 +1003,7 @@ var SwdView = {
         $('#select-group-no-groups').hide();
 
         for (i = 0; i < groups.length; i++) {
-            groupItem = $('<div id="' + groups[i].gid + '" class="button group-selection-item selection-item select-group"><div class="close-button"></div><div class="selection-item-content"><span class="button-icon" style="background-image: url(' + groups[i].icon + ')"></span><div>' + groups[i].name + '</div></div></div>');
+            groupItem = $('<div id="' + groups[i].gid + '" class="block group-selection-item selection-item select-group"><div class="close-button"></div><div class="selection-item-content"><span class="button-icon" style="background-image: url(' + groups[i].icon + ')"></span><div>' + groups[i].name + '</div></div></div>');
 
             // Look through the string containing hiddenGroup IDs. If there is a match, hide the group.
             if (hiddenGroups && hiddenGroups.indexOf(groups[i].gid) !== -1) {
@@ -1023,7 +1025,7 @@ var SwdView = {
      * @param {type} uid
      */
     addPostComment: function(comment, uid) {
-        var commentDiv, timeStamp, userImage;
+        var commentDiv, timeStamp, userImage, i, imageUrl, commentImage;
 
         // Set user image
         if (comment.user.pic_square) {
@@ -1036,10 +1038,23 @@ var SwdView = {
         // Get a human-readable version of the comment's timestamp value.
         timeStamp = new moment(new Date(comment.time * 1000));
 
-        commentDiv = $('<div class="post-comment"><div><div class="facebook-user-photo"></div><a href="' + comment.user.profile_url + '" target="_blank">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><div class="timestamp">' + timeStamp.calendar() + '</div></div><div class="post-comment-text">' + comment.text + '</div></div>');
+        commentDiv = $('<div class="post-activity-section block post-comment"><div><div class="facebook-user-photo"></div><a href="' + comment.user.profile_url + '" target="_blank">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><div class="timestamp">' + timeStamp.calendar() + '</div></div><div class="activity-text">' + comment.text + '</div></div>');
 
         // Set the user's photo.
         $(commentDiv).find('.facebook-user-photo').css('background-image', userImage);
+
+        // Display any images.
+        if (comment.image_url && comment.image_url.length > 0) {
+            for (i = 1; i <= comment.image_url.length; i++) {
+                imageUrl = 'url(' + comment.image_url[i - 1] + ')';
+                commentImage = $('<div class="post-comment-image"></div>');
+                $(commentImage).css('background-image', imageUrl).appendTo($(commentDiv));
+
+                $(commentImage).click(function() {
+                    alert('test');
+                });
+            }
+        }
 
         // If the current user is the owner of the comment, display the delete and edit buttons.
         if (comment.user.uid === uid) {
@@ -1050,6 +1065,8 @@ var SwdView = {
 
         // Hook up the click event handler.
         $(commentDiv).children('.delete-button').click(SwdView.handlers['onClickCommentDelete']);
+
+
     },
     /**
      * Init function for SwdView.
@@ -1242,7 +1259,7 @@ var SwdView = {
         tileImage = 'url(' + post.image_url[0] + ')';
 
         // Create the visible block.
-        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"><div class="visible-content" style="background-image: ' + tileImage + '"><div class="comment-count">' + post.comment_info.comment_count + '</div></div></div>');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block block unique"><div class="visible-content" style="background-image: ' + tileImage + '"><div class="comment-count">' + post.comment_info.comment_count + '</div></div></div>');
 
         $(postBlock).addClass('post-block-image');
 
@@ -1253,7 +1270,7 @@ var SwdView = {
 
         message = '<div class="wrapper hidden-content"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
-        $(postBlock).append('<div class="post-block post-block-text hidden-block">' + message + '</div>');
+        $(postBlock).append('<div class="post-block block hover post-block-text hidden-block">' + message + '</div>');
 
         $(postBlock).appendTo('#post-feed');
     },
@@ -1282,7 +1299,7 @@ var SwdView = {
     createTextPostBlock: function(post) {
         var postBlock, message, userImage, timeStamp;
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block block unique"></div>');
 
         userImage = 'url(' + post.user.pic + ')';
 
@@ -1309,32 +1326,33 @@ var SwdView = {
      * @param {type} post
      */
     fillPostImageContainer: function(post) {
-        var i, imageTile, imageUrl, tileWidth, tileHeight, colCount, marginRight;
+        var i, imageTile, imageUrl, tileWidth, tileHeight, colCount;
 
         switch (post.image_url.length) {
             case 1:
                 colCount = 1;
-                marginRight = 0;
                 break;
             case 2:
                 colCount = 2;
-                marginRight = 10 * (colCount);
                 break;
             default:
                 colCount = 3;
-                marginRight = 10 * (colCount);
                 break;
         }
 
         // Get image tile width & height, assuming a max of 375 for height.
         // Try for a square first.
-        tileWidth = ($('#post-image-container').width() - marginRight) / post.image_url.length;
-        tileHeight = Math.min(tileWidth, $('#post-image-container').height()) - 14;
+        tileWidth = ($('#post-image-container').width() - colCount * 12) / colCount - (10 / colCount);
+        tileHeight = Math.min(tileWidth, $('#post-image-container').height());
 
         // Create at tile for each image.
         for (i = 1; i <= post.image_url.length; i++) {
             imageUrl = 'url(' + post.image_url[i - 1] + ')';
             imageTile = $('<div class="post-image-tile"></div>');
+
+            if (i % colCount === 0) {
+                $(imageTile).addClass('right');
+            }
 
             $(imageTile).height(tileHeight).width(tileWidth).css('background-image', imageUrl).appendTo('#post-image-container');
         }
@@ -1344,12 +1362,8 @@ var SwdView = {
             $(imageTile).addClass('single');
         }
 
-        // Set up mouse over effects and connect to event handlers.
-        $('#post-image-container .post-image-tile').hoverIntent(function() {
-            $(this).addClass('hover', 100);
-        }, function() {
-            $(this).removeClass('hover', 100);
-        }).click(SwdView.handlers['onClickPostImageTile']);
+        // Connect to click event handler.
+        $('#post-image-container .post-image-tile').click(SwdView.handlers['onClickPostImageTile']);
     },
     /***
      * Create and display a link type post block.
@@ -1360,7 +1374,7 @@ var SwdView = {
 
         linkImage = 'url(' + post.link_data.media[0].src + ')';
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block block unique"></div>');
         description = '<div class="visible-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span>' + post.link_data.description + '</p></div>';
 
         $(postBlock).addClass('post-block-link').html(description);
@@ -1372,7 +1386,7 @@ var SwdView = {
 
         message = '<div class="hidden-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
-        $(postBlock).append('<div class="post-block post-block-text hidden-block">' + message + '</div>');
+        $(postBlock).append('<div class="post-block block hover post-block-text hidden-block">' + message + '</div>');
 
         $(postBlock).appendTo('#post-feed');
     },
@@ -1383,7 +1397,7 @@ var SwdView = {
     createTextLinkPostBlock: function(post) {
         var postBlock, message, userImage, timeStamp, description, linkImage;
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block ui-widget unique"></div>');
+        postBlock = $('<div id="' + post.post_id + '" class="post-block block unique"></div>');
 
         userImage = 'url(' + post.user.pic + ')';
 
@@ -1398,7 +1412,7 @@ var SwdView = {
         description = '<span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span>' + post.link_data.description;
 
         // Create the link text block that resides below the visible block.
-        $(postBlock).append('<div class="post-block post-block-link hidden-block"><div class="hidden-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content">' + description + '</p></div></div>');
+        $(postBlock).append('<div class="post-block block hover post-block-link hidden-block"><div class="hidden-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content">' + description + '</p></div></div>');
 
         $(postBlock).appendTo('#post-feed');
     },
@@ -1449,7 +1463,7 @@ var SwdView = {
             // Show the "Load More..." block if the group's main feed is being displayed.
             // Add the 'Load More...' post block.
             if (!terminatorReached) {
-                $('<div class="button post-block load-more ui-widget"><div class="ajax-loading-div hidden"></div><div class="load-more-text">Load more...</div></div>').appendTo('#post-feed');
+                $('<div class="button post-block block load-more"><div class="ajax-loading-div hidden"></div><div class="load-more-text">Load more...</div></div>').appendTo('#post-feed');
 
                 // Add an event handler for when it is clicked on.
                 $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
@@ -1711,7 +1725,7 @@ var SwdView = {
      */
     toggleFloatingPanel: function(id, show, effect, options, overlay) {
         if (!effect) {
-            effect = 'drop';
+            effect = 'fade';
         }
 
         if (!options) {

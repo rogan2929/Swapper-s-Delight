@@ -46,7 +46,7 @@ error_reporting(E_ALL);
             <div id='fb-root'></div>
 
             <div id='main-panel'>
-                <div id='left-rail' class='ui-widget scroll-y'>
+                <div id='left-rail' class='block scroll-y'>
                     <div id='left-rail-nav'>
                         <div id='button-nav-group' class='button nav-button selected-nav'>
                             <span>Newest Posts</span>
@@ -76,37 +76,36 @@ error_reporting(E_ALL);
                     <div class='floating-panel-content ui-widget'>
                         <div class='close-button'></div>
                         <div id='details-left-column' class='column left'>
-                            <div id='post-details-user-data' class='facebook-user-header floating-panel-section'>
-                                <div class='facebook-user-photo'></div>
-                                <div class='facebook-poststamp'>
-                                    <a class='facebook-user-name' target='_blank'></a>
-                                    <span class='timestamp'></span>
+                            <div id='post-content' class='floating-panel-section'>
+                                <div class='post-activity-section block original-content'>
+                                    <div id='post-details-user-data'>
+                                        <div class='facebook-user-photo'></div>
+                                        <a class='facebook-user-name' target='_blank'></a>
+                                        <div class='timestamp'></div>
+                                    </div>
+                                    <div id='post-message-text' class='activity-text'></div>
+                                    <div id='post-message-linkdata' class='linkdata'>
+                                        <div>
+                                            <a id='linkdata-href' target='_blank' class='link-title'></a>
+                                            <span class='linkdata-caption'></span>
+                                        </div>
+                                        <img class='linkdata-img'>
+                                        <span class='linkdata-desc'></span>
+                                    </div>
+                                    <div id='post-comment-wrapper'>
+                                        <textarea id='post-comment-text' placeholder='Type a comment and press [Enter] to post it.'></textarea>
+                                        <div class='ajax-loading-div hidden'></div>
+                                    </div>
                                 </div>
-                                <!--                                <a target='_blank' class='post-permalink float-right wrappable-link'>Permalink</a>-->
-                            </div>
-                            <div id='post-message' class='floating-panel-section'>
-                                <div id='post-message-text'></div>
-                            </div>
-                            <div id='post-message-linkdata' class='floating-panel-section'>
-                                <div>
-                                    <a id='linkdata-href' target='_blank' class='link-title'></a>
-                                    <span id='linkdata-caption'></span>
-                                </div>
-                                <img id='linkdata-img'>
-                                <span id='linkdata-desc'></span>
-                            </div>
-                            <div id='post-comment-wrapper' class='floating-panel-section'>
-                                <textarea id='post-comment-text' placeholder='Type a comment and press [Enter] to post it.'></textarea>
-                                <div class='ajax-loading-div hidden'></div>
                             </div>
                             <div id='post-comments' class='floating-panel-section'>
                                 <div id='button-show-new-comments' class='button hidden'></div>
                                 <div id='post-comment-list'></div>
                             </div>
                         </div>
-                        <div id='details-right-column' class='column right'>
-                            <div id='post-image-container' class='floating-panel-section'></div>
-                            <div id='post-no-image-desc' class='floating-panel-section hidden'>
+                        <div id='details-right-column' class='column block right'>
+                            <div id='post-image-container'></div>
+                            <div id='post-no-image-desc' class='hidden'>
                                 <span class='hint'>Hint: Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. Click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook.</span>
 <!--                                <span><a href='#' class='privacy-settings-about'>What's this all about?</a></span>-->
                             </div>
@@ -173,7 +172,7 @@ error_reporting(E_ALL);
                 </div>
             </div>
 
-            <div id='main-toolbar' class='ui-widget toolbar'>
+            <div id='main-toolbar' class='block toolbar'>
                 <div class='toolbar-group float-left'>
                     <div id='button-new' class='button toolbar-button'>
                         <span class='button-icon icon-new'></span>
@@ -196,7 +195,7 @@ error_reporting(E_ALL);
                 <div style='clear: both;'></div>
             </div>
 
-            <div id='post-details-toolbar' class='ui-widget toolbar floating-panel-toolbar hidden'>
+            <div id='post-details-toolbar' class='block toolbar floating-panel-toolbar hidden'>
                 <div class='toolbar-group float-left'>
                     <div id='post-button-like' class='button toolbar-button'>
                         <span class='button-icon icon-like'></span>
