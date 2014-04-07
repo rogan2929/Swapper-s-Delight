@@ -437,7 +437,7 @@ var SwdPresenter = {
                                     SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
 
                                     // Start with displaying the group selection panel.
-                                    SwdView.toggleFloatingPanel('#select-group-panel', true, 'drop');
+                                    SwdView.toggleFloatingPanel('#select-group-panel', true, 'fade');
                                 }, 1000);
 
                                 // Start the idle timer.
@@ -703,7 +703,7 @@ var SwdPresenter = {
         // Prevent the event from bubbling up the DOM and closing the floating panel.
         e.stopPropagation();
 
-        SwdView.toggleFloatingPanel('#select-group-panel', true, 'drop');
+        SwdView.toggleFloatingPanel('#select-group-panel', true, 'fade');
     },
     // Event Handlers (onX(e, args))
     onClickButtonNew: function(e, args) {
@@ -902,7 +902,7 @@ var SwdPresenter = {
         // Set selected group and load its feed.
         SwdPresenter.setSelectedGroup(group);
 
-        SwdView.toggleFloatingPanel('#select-group-panel', false, 'drop');
+        SwdView.toggleFloatingPanel('#select-group-panel', false, 'fade');
     },
     onClickGroupClose: function(e, args) {
         var groupTile, target, gid;
@@ -1721,7 +1721,7 @@ var SwdView = {
      */
     toggleFloatingPanel: function(id, show, effect, options, overlay) {
         if (!effect) {
-            effect = 'drop';
+            effect = 'fade';
         }
 
         if (!options) {
