@@ -822,6 +822,7 @@ a.link-title {
     cursor: pointer;
     display: inline-block;
     margin-left: 10px;
+    margin-bottom: 10px;
     border: 1px solid #dddddd;
 }
 
