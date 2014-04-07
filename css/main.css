@@ -826,10 +826,6 @@ a.link-title {
     border: 1px solid #dddddd;
 }
 
-#post-image-container .post-image-tile:last-child {
-    margin-right: 10px;
-}
-
 .post-comment .post-comment-image {
     background-position: center center;
     background-repeat: no-repeat;
@@ -840,25 +836,8 @@ a.link-title {
     width: 315px;
 }
 
-/*#post-image-container .post-image-tile .close-button {
-    display: none;
-}*/
-
-/*#post-image-container .post-image-tile.single {
-    cursor: default;
-    background-size: contain;
-    margin-right: 0;
-}*/
-
-/*#post-image-container .post-image-tile.expanded .close-button {
-    margin-top: 5px;
-    margin-right: 5px;
-    display: block;
-    background-image: url('/img/panel-close-red.png');
-}*/
-
 #post-image-container .post-image-tile.right {
-    margin-right: 0px;
+    margin-right: 10px;
 }
 
 .floating-panel-content .column {
