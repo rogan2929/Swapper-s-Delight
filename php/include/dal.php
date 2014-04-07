@@ -793,25 +793,23 @@ class CachedFeed {
      */
 
     private function queryStream($prefetchOnly) {
-        $uid = $this->graphApiClient->getMe();
-
         $windowStart = time();
         $windowSize = $this->getOptimalWindowSize();
 
         // Check to see if this this is only prefetching the stream data.
         if ($prefetchOnly) {
-            $stream = $this->getFeedData($uid, $windowSize, $windowStart, 14, 1);
+            $stream = $this->getFeedData($windowSize, $windowStart, 14, 1);
             $windowStart = $windowStart - ($windowSize * 14 * 1);
-            $stream = array_merge($stream, $this->getFeedData($uid, 3600 * 24 * 30, $windowStart, 1, 1));
+            $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
         } else {
             // TODO: Somehow offload this onto a background thread.
-            $stream = $dal->getFeedData($uid, $windowSize, $windowStart, 50, 1);
+            $stream = $dal->getFeedData($windowSize, $windowStart, 50, 1);
             $windowStart = $windowStart - ($windowSize * 50 * 1);
-            $stream = array_merge($stream, $dal->getFeedData($uid, $windowSize * 2, $windowStart, 13, 1));
+            $stream = array_merge($stream, $dal->getFeedData($windowSize * 2, $windowStart, 13, 1));
             $windowStart = $windowStart - ($windowSize * 2 * 13 * 1);
-            $stream = array_merge($stream, $dal->getFeedData($uid, $windowSize * 3, $windowStart, 11, 1));
+            $stream = array_merge($stream, $dal->getFeedData($windowSize * 3, $windowStart, 11, 1));
             $windowStart = $windowStart - ($windowSize * 3 * 11 * 1);
-            $stream = array_merge($stream, $dal->getFeedData($uid, 3600 * 24 * 30, $windowStart, 1, 1));
+            $stream = array_merge($stream, $dal->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
         }
 
         return $stream;
@@ -820,14 +818,13 @@ class CachedFeed {
     /**
      * Execute a batch request against the selected group's feed.
      * 
-     * @param type $uid
      * @param type $windowSize
      * @param type $windowStart
      * @param type $batchSize
      * @param type $iterations
      * @return array
      */
-    public function getFeedData($uid, $windowSize, $windowStart, $batchSize, $iterations = 1) {
+    public function getFeedData($windowSize, $windowStart, $batchSize, $iterations = 1) {
         $windowEnd = $windowStart - $windowSize;
 
         $stream = array();
