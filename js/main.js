@@ -1280,14 +1280,13 @@ var SwdView = {
      */
     toggleSelectedImage: function(image) {
         if (!$(image).hasClass('expanded') && $('#post-image-container').children('.post-image-tile').length > 1) {
-            
+            $(image).addClass('expanded');
 
             // Hide all the other images.
             $('#post-image-container .post-image-tile').not(image).hide();
-            $(image).addClass('expanded', 200);
         }
         else {
-            $(image).removeClass('expanded', 200);
+            $(image).removeClass('expanded');
 
             // Show all the other images.
             $('#post-image-container .post-image-tile').not(image).show();
