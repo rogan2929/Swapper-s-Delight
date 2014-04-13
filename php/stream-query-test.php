@@ -1,6 +1,6 @@
 <?php
 
-require_once 'graph/data-access.php';
+require_once 'graph/include.php';
 
 $gid = '120696471425768';
 

@@ -1,6 +1,6 @@
 <?php
 
-require_once 'graph/data-access.php';
+require_once 'graph/include.php';
 
 $feed = new CachedFeed();
 $feed->setGid(filter_input(INPUT_GET, 'gid'));

@@ -1,5 +1,5 @@
 <?php
 
-require_once 'graph/data-access.php';
+require_once 'graph/include.php';
 
 echo json_encode((new GroupManager())->getGroupInfo());
