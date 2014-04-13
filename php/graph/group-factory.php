@@ -36,9 +36,15 @@ class GroupFactory {
             'method' => 'fql.multiquery',
             'queries' => $queries
         ));
+        
+        $groups = array();
+        
+        for ($i = 0; $i < count($response[1]['fql_result_set']); $i++) {
+            $groups[] = new Group($response[1]['fql_result_set']['gid'], $response[1]['fql_result_set']['name'], $response[1]['fql_result_set']['icon']);
+        }
 
         // Grab the results of the query and return it.
-        return $response[1] ['fql_result_set'];
+        return $groups;
     }
 
     /**

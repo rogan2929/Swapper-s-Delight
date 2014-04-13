@@ -21,6 +21,7 @@ class GraphApiClient {
     // Prod
     //const APP_ID = '1401018793479333';
     //const APP_SECRET = '603325411a953e21ccbc29d2c7d50e7e';
+    
     // Test
     const APP_ID = '652991661414427';
     const APP_SECRET = 'b8447ce73d2dcfccde6e30931cfb0a90';
@@ -98,74 +99,4 @@ class GraphApiClient {
     public function deleteObject($id) {
         $this->api('/' . $id, 'DELETE');
     }
-
-    /**
-     * Like a post.
-     * @param type $postId
-     * @param type $userLikes
-     * @return type
-     */
-    public function likePost($postId, $userLikes) {
-        if ($userLikes == true) {
-            // Like the post.
-            $this->api('/' . $postId . '/likes', 'POST', array('user_likes' => true));
-        } else {
-            // Delete the post's like.
-            $this->api('/' . $postId . '/likes', 'DELETE');
-        }
-
-//        // Update the cached post stream.
-//        for ($i = 0; $i < count($this->stream); $i++) {
-//            if ($this->stream[$i]['post_id'] == $postId) {
-//                $this->stream[$i]['user_likes'] = (int) $userLikes;
-//            }
-//        }
-//
-//        // Save the updated stream.
-//        $_SESSION['stream'] = $this->stream;
-
-        return $userLikes;
-    }
-
-    /**
-     * Create a new post.
-     */
-    public function newPost() {
-        
-    }
-
-    /**
-     * Post a comment on a post.
-     * @param type $postId
-     * @param type $comment
-     * @return type
-     */
-    public function postComment($postId, $comment) {
-        // Post the comment and get the response
-        $id = $this->api('/' . $postId . '/comments', 'POST', array('message' => $comment));
-
-        // Get the comment and associated user data...
-        $queries = array(
-            'commentQuery' => 'SELECT fromid,text,text_tags,attachment,time,id FROM comment WHERE id=' . $id['id'],
-            'commentUserQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url FROM user WHERE uid IN (SELECT fromid FROM #commentQuery)'
-        );
-
-        // Query Facebook's servers for the necessary data.
-        $response = $this->api(array(
-            'method' => 'fql.multiquery',
-            'queries' => $queries
-        ));
-
-        // Construct a return object.
-        $newComment = $response[0]['fql_result_set'][0];
-        $newComment['user'] = $response[1]['fql_result_set'][0];
-
-        // Replace any line breaks with <br/>
-        if ($newComment['text']) {
-            $newComment['text'] = nl2br($newComment['text']);
-        }
-
-        return $newComment;
-    }
-
 }

@@ -17,7 +17,7 @@ class PostFactory {
 
     function __construct() {
 
-// Retrieve the stream if it's there.
+        // Retrieve the stream if it's there.
         if (isset($_SESSION['stream'])) {
             $this->stream = $_SESSION['stream'];
         } else {
@@ -25,6 +25,90 @@ class PostFactory {
         }
 
         $this->graphApiClient = new GraphApiClient();
+    }
+    
+    /**
+     * Create a new post.
+     */
+    public function newPost() {
+        
+    }
+    
+    /**
+     * Post a comment on a post.
+     * @param type $postId
+     * @param type $comment
+     * @return type
+     */
+    public function postComment($postId, $comment) {
+        // Post the comment and get the response
+        $id = $this->api('/' . $postId . '/comments', 'POST', array('message' => $comment));
+
+        // Get the comment and associated user data...
+        $queries = array(
+            'commentQuery' => 'SELECT fromid,text,text_tags,attachment,time,id FROM comment WHERE id=' . $id['id'],
+            'commentUserQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url FROM user WHERE uid IN (SELECT fromid FROM #commentQuery)'
+        );
+
+        // Query Facebook's servers for the necessary data.
+        $response = $this->api(array(
+            'method' => 'fql.multiquery',
+            'queries' => $queries
+        ));
+
+        // Construct a return object.
+        $newComment = $response[0]['fql_result_set'][0];
+        $newComment['user'] = $response[1]['fql_result_set'][0];
+
+        // Replace any line breaks with <br/>
+        if ($newComment['text']) {
+            $newComment['text'] = nl2br($newComment['text']);
+        }
+        
+        // Create an entity object.
+        $comment = new Comment();
+        $comment->setId($newComment['id']);
+        $comment->setMessage($newComment['text']);
+        $comment->setCreatedTime($newComment['time']);
+        
+        $user = new User();
+        $user->setId($newComment['user']['uid']);
+        $user->setLastName($newComment['user']['last_name']);
+        $user->setFirstName($newComment['user']['first_name']);
+        $user->setPicSquare($newComment['user']['pic_square']);
+        $user->setProfileUrl($newComment['user']['profile_url']);
+        
+        $comment->setActor($user);
+
+        return $comment;
+    }
+    
+    /**
+     * Like a post.
+     * @param type $postId
+     * @param type $userLikes
+     * @return type
+     */
+    public function likePost($postId, $userLikes) {
+        if ($userLikes == true) {
+            // Like the post.
+            $this->api('/' . $postId . '/likes', 'POST', array('user_likes' => true));
+        } else {
+            // Delete the post's like.
+            $this->api('/' . $postId . '/likes', 'DELETE');
+        }
+
+//        // Update the cached post stream.
+//        for ($i = 0; $i < count($this->stream); $i++) {
+//            if ($this->stream[$i]['post_id'] == $postId) {
+//                $this->stream[$i]['user_likes'] = (int) $userLikes;
+//            }
+//        }
+//
+//        // Save the updated stream.
+//        $_SESSION['stream'] = $this->stream;
+
+        return $userLikes;
     }
 
     /**
@@ -54,7 +138,7 @@ class PostFactory {
 
         $this->waitForFetchStreamCompletion();
 
-// Look through the cached stream for liked posts.
+        // Look through the cached stream for liked posts.
         for ($i = 0; $i < count($this->stream); $i++) {
             if ($this->stream[$i]['user_likes'] == 1) {
                 $posts[] = $this->stream[$i];

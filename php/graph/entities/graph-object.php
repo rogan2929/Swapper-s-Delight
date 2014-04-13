@@ -35,5 +35,4 @@ class GraphObject {
     public function setUpdatedTime($updatedTime) {
         $this->updatedTime = $updatedTime;
     }
-
 }
