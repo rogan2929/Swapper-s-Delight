@@ -2,8 +2,8 @@
 
 header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
 
-require_once 'facebook.php';
-require_once 'entities.php';
+require_once 'facebook/facebook.php';
+require_once 'entities/include.php';
 
 if (!session_id()) {
     session_start();
