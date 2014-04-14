@@ -83,7 +83,7 @@ class GraphApiClient {
      * @return string
      */
     public function getMe() {
-        return $this->api('/me')['id'];
+        return ($this->api('/me'))['id'];
     }
 
     /**
