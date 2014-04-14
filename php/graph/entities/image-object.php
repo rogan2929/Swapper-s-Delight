@@ -10,6 +10,7 @@ require_once 'graph-object.php';
  */
 class ImageObject extends GraphObject {
 
+    private $id;
     private $url;
     private $width;
     private $height;
@@ -17,6 +18,14 @@ class ImageObject extends GraphObject {
     function __construct($id, $url) {
         $this->id = $id;
         $this->url = $url;
+    }
+    
+    public function getId() {
+        return $this->id;
+    }
+
+    public function setId($id) {
+        $this->id = $id;
     }
 
     public function getUrl() {
@@ -43,4 +52,7 @@ class ImageObject extends GraphObject {
         $this->height = $height;
     }
 
+    public function jsonSerialize() {
+        return get_object_vars($this);
+    }
 }

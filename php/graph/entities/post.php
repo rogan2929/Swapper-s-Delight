@@ -10,14 +10,50 @@ require_once 'graph-object.php';
  */
 class Post extends GraphObject {
 
+    protected $id;
     protected $message;
     protected $actor;
     protected $commentCount;
     protected $likeCount;
     protected $userLikes;
-    protected $imageData;
     protected $linkData;
     protected $type;
+    protected $permalink;
+    protected $comments;
+    protected $imageObjects;
+
+    public function getImageObjects() {
+        return $this->imageObjects;
+    }
+
+    public function setImageObjects($imageObjects) {
+        $this->imageObjects = $imageObjects;
+    }
+
+
+    public function getComments() {
+        return $this->comments;
+    }
+
+    public function setComments($comments) {
+        $this->comments = $comments;
+    }
+
+    public function getPermalink() {
+        return $this->permalink;
+    }
+
+    public function setPermalink($permalink) {
+        $this->permalink = $permalink;
+    }
+    
+    public function getId() {
+        return $this->id;
+    }
+
+    public function setId($id) {
+        $this->id = $id;
+    }
 
     public function getMessage() {
         return $this->message;
@@ -37,10 +73,6 @@ class Post extends GraphObject {
 
     public function getUserLikes() {
         return $this->userLikes;
-    }
-
-    public function getImageData() {
-        return $this->imageData;
     }
 
     public function getLinkData() {
@@ -71,10 +103,6 @@ class Post extends GraphObject {
         $this->userLikes = $userLikes;
     }
 
-    public function setImageData($imageData) {
-        $this->imageData = $imageData;
-    }
-
     public function setLinkData($linkData) {
         $this->linkData = $linkData;
     }
@@ -83,4 +111,7 @@ class Post extends GraphObject {
         $this->type = $type;
     }
 
+    public function jsonSerialize() {
+        return get_object_vars($this);
+    }
 }

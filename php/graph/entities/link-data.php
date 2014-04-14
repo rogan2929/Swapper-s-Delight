@@ -6,7 +6,7 @@
  * @author rogan2929
  *
  */
-class LinkData {
+class LinkData implements JsonSerializable {
 
     private $caption;
     private $href;
@@ -52,5 +52,9 @@ class LinkData {
 
     public function setSrc($src) {
         $this->src = $src;
+    }
+    
+    public function jsonSerialize() {
+        return get_object_vars($this);
     }
 }
