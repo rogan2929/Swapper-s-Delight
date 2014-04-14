@@ -2,4 +2,4 @@
 
 require_once 'graph/include.php';
 
-echo (new GroupManager())->getHiddenGroups();
+echo (new GroupFactory())->getHiddenGroups();
