@@ -1,11 +1,6 @@
 <?php
 
-try {
-	require_once 'graph/include.php';
-}
-catch (Exception $e) {
-	echo $e->getMessage();
-}
+require_once 'graph/include.php';
 
 //$groupFactory = new GroupFactory();
 

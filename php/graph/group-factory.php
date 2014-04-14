@@ -12,11 +12,11 @@ class GroupFactory {
     private $sqlServer;
     private $graphApiClient;
     
-    private const $UID = "rogan2929@lreuagtc6u";
-    private const $pwd = "Revelation19:11";
+    const UID = "rogan2929@lreuagtc6u";
+    const PWD = "Revelation19:11";
 
     function __construct() {
-        $this->sqlConnectionInfo = array("UID" => $this-UID, "pwd" => $pwd, "Database" => "swapperAGiJRLgvy", "LoginTimeout" => 30, "Encrypt" => 1);
+        $this->sqlConnectionInfo = array("UID" => $this->UID, "pwd" => $this->PWD, "Database" => "swapperAGiJRLgvy", "LoginTimeout" => 30, "Encrypt" => 1);
         $this->sqlServer = "tcp:lreuagtc6u.database.windows.net,1433";
 
         $this->graphApiClient = new GraphApiClient();
