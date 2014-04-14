@@ -18,4 +18,8 @@ class Group extends GraphObject {
         $this->name = $name;
         $this->icon = $icon;
     }   
+    
+    public function jsonSerialize() {
+       return array_merge(get_object_vars($this), parent::jsonSerialize());
+    }
 }
