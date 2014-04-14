@@ -37,6 +37,8 @@ class GroupFactory {
             'queries' => $queries
         ));
         
+        echo json_encode($response);
+        
         $groups = array();
         
         for ($i = 0; $i < count($response[1]['fql_result_set']); $i++) {
