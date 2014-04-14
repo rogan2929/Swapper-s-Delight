@@ -40,7 +40,7 @@ class GroupFactory {
         $groups = array();
         
         for ($i = 0; $i < count($response[1]['fql_result_set']); $i++) {
-            $groups[] = new Group($response[1]['fql_result_set'][$i]['gid'], $response[1]['fql_result_set'][$i]['name'], $response[1][$i]['fql_result_set']['icon']);
+            $groups[] = new Group($response[1]['fql_result_set'][$i]['gid'], $response[1]['fql_result_set'][$i]['name'], $response[1]['fql_result_set'][$i]['icon']);
         }
 
         // Grab the results of the query and return it.
