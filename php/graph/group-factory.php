@@ -1,10 +1,7 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+require_once 'entities/include.php';
+require_once 'graph-api-client.php';
 
 /**
  * A factory for retrieving, hiding, and showing Facebook groups.
@@ -14,9 +11,12 @@ class GroupFactory {
     private $sqlConnectionInfo;
     private $sqlServer;
     private $graphApiClient;
+    
+    private const $UID = "rogan2929@lreuagtc6u";
+    private const $pwd = "Revelation19:11";
 
     function __construct() {
-        $this->sqlConnectionInfo = array("UID" => "rogan2929@lreuagtc6u", "pwd" => "Revelation19:11", "Database" => "swapperAGiJRLgvy", "LoginTimeout" => 30, "Encrypt" => 1);
+        $this->sqlConnectionInfo = array("UID" => $this-UID, "pwd" => $pwd, "Database" => "swapperAGiJRLgvy", "LoginTimeout" => 30, "Encrypt" => 1);
         $this->sqlServer = "tcp:lreuagtc6u.database.windows.net,1433";
 
         $this->graphApiClient = new GraphApiClient();

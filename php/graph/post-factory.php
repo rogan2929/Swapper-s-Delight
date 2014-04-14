@@ -6,6 +6,8 @@
  * and open the template in the editor.
  */
 
+require_once 'entities/include.php';
+
 /**
  * A factory for retrieving posts from a group's stream.
  */
