@@ -6,7 +6,7 @@
  * @author rogan2929
  *
  */
-class GraphObject {
+class GraphObject implements JsonSerializable {
 
     protected $id;
     protected $createdTime;
@@ -35,4 +35,9 @@ class GraphObject {
     public function setUpdatedTime($updatedTime) {
         $this->updatedTime = $updatedTime;
     }
+
+    public function jsonSerialize() {
+        return get_object_vars($this);
+    }
+
 }

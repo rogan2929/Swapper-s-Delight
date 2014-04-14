@@ -18,5 +18,6 @@ class Group extends GraphObject {
         $this->name = $name;
         $this->icon = $icon;
     }
-
+    
+    
 }
