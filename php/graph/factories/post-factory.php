@@ -245,7 +245,7 @@ class PostFactory {
         // Extract image data for the post.
         //$post['image_url'] = $this->getImageUrlArray($post, $images, false);
         $imgFactory = new ImageObjectFactory($response[2]['fql_result_set']);
-        $post->setImageObjects($imgFactory->getImageDataFromFQLResultSet($raw));
+        $post->setImageObjects($imgFactory->getImageObjectsFromFQLResultSet($raw));
 
         // Extract link data.
         //$post['link_data'] = $this->getLinkData($post);
@@ -471,7 +471,7 @@ class PostFactory {
             $post->setMessage($stream[$i]['message']);
 
             // Parse associated data from the query.
-            $post->setImageObjects($imgFactory->getImageDataFromFQLResultSet($stream[$i], $images, true));
+            $post->setImageObjects($imgFactory->getImageObjectsFromFQLResultSet($stream[$i], $images, true));
             $post->setLinkData($lnkFactory->getLinkDataFromFQLResultSet($stream[$i]));
             $post->setActor($usrFactory->getUserFromFQLResultSet($stream[$i], $users));
 

@@ -18,10 +18,10 @@ class ImageObjectFactory {
      * 
      * @param type $post
      * @param type $smallImages
-     * @return ImageData
+     * @return type
      */
-    public function getImageDataFromFQLResultSet($post, $smallImages = true) {
-        $imageUrls = array();
+    public function getImageObjectsFromFQLResultSet($post, $smallImages = true) {
+        $images = array();
 
         if ($post['attachment'] && $post['attachment']['media']) {
             // For posts with an image, look for associated image data.
@@ -33,36 +33,36 @@ class ImageObjectFactory {
                         $fbid = $post['attachment']['media'][$i]['photo']['fbid'];
 
                         // Find the image url from the given Facebook ID
-                        $imageUrls[] = $this->getImageDataFromFbId($fbid, $thumbnails);
+                        $images[] = $this->createImageObject($fbid, $thumbnails);
                     }
                 }
             }
         }
 
-        return $imageUrls;
+        return $images;
     }
     
-    private function getImageDataFromFbId($fbid, $thumbnails = true) {
-        $imageUrl = new ImageData();
+    private function createImageObject($fbid, $thumbnails = true) {
+        $image = new ImageObject();
 
         for ($i = 0; $i < count($this->imageStream); $i++) {
             if ($fbid == $this->imageStream[$i]['object_id']) {
                 // See if we are trying to retrieve a small image. (Usually last in the array.)
                 if ($thumbnails) {
-                    $imageUrl = $this->getSmallImageUrl($this->imageStream[$i]['images']);
+                    $image->setUrl($this->getSmallImageUrl($this->imageStream[$i]['images']));
                 } else {
                     //$imageUrl = $images[$i]['images'][$index]['source'];
-                    $imageUrl = $this->getLargeImageUrl($this->imageStream[$i]['images']);
+                    $image->setUrl($this->getLargeImageUrl($this->imageStream[$i]['images']));
                 }
 
                 break;
             }
         }
 
-        return $imageUrl;
+        return $image;
     }
     
-        private function getLargeImageUrl($image) {
+    private function getLargeImageUrl($image) {
         return $image[0]['source'];
     }
 
