@@ -53,6 +53,8 @@ class GroupFactory {
      */
     public function getHiddenGroups() {
         $uid = $this->graphApiClient->getMe();
+        
+        echo $uid;
 
         $conn = sqlsrv_connect($this->sqlServer, $this->sqlConnectionInfo);
 
