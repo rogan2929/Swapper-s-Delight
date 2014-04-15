@@ -417,7 +417,7 @@ class PostFactory {
             $queries[] = array(
                 'method' => 'POST',
                 'relative_url' => 'method/fql.multiquery?queries=' . json_encode(array(
-                    'streamQuery' => 'SELECT post_id,actor_id,updated_time,message,attachment,comment_info,created_time FROM stream WHERE post_id="' . $page[$i]['post_id'] . '"',
+                    'streamQuery' => 'SELECT post_id,actor_id,updated_time,message,attachment,comment_info,created_time FROM stream WHERE post_id="' . $page[$i]->getId() . '"',
                     'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #streamQuery)',
                     'userQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url,pic FROM user WHERE uid IN (SELECT actor_id FROM #streamQuery)'
                 ))
