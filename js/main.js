@@ -1609,7 +1609,7 @@ var SwdView = {
         }
 
         // Set link data and display it.
-        if (post.post_type === 'link' || post.post_type === 'textlink') {
+        if (post.type === 'link' || post.type === 'textlink') {
             $('#linkdata-href').attr('href', post.linkData.href).text(post.linkData.name);
             $('#linkdata-caption').text(post.linkData.caption);
 
