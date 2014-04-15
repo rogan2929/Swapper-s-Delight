@@ -587,7 +587,7 @@ class PostFactory {
                 'include_headers' => false
             ));
             
-            error_log($response);
+            error_log(json_encode($response));
 
             // Parse the response.
             for ($k = 0; $k < count($response); $k++) {
