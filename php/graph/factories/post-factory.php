@@ -444,7 +444,7 @@ class PostFactory {
 
         // If there are no posts to load, then insert an terminating post.
         if ($offset + $limit >= count($posts)) {
-            $result[] = array('post_id' => 'terminator');
+            $result[] = array('id' => 'terminator');
         }
 
         return $result;
