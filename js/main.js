@@ -810,12 +810,12 @@ var SwdPresenter = {
                 SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
 
                 // Delete the post and then remove it from the feed.
-                SwdModel.deleteObject(SwdPresenter.selectedPost.post_id, {
+                SwdModel.deleteObject(SwdPresenter.selectedPost.id, {
                     success: function(response) {
                         SwdView.toggleAjaxLoadingDiv('#post-details-panel', false);
                         SwdView.toggleFloatingPanel('#post-details-panel', false);
                         SwdView.toggleToolbar('', false);
-                        SwdView.removePost('#' + SwdPresenter.selectedPost.post_id);
+                        SwdView.removePost('#' + SwdPresenter.selectedPost.id);
                     },
                     fail: SwdPresenter.handleError
                 });
@@ -825,15 +825,15 @@ var SwdPresenter = {
     onClickPostButtonLike: function(e, args) {
         var id, userLikes;
 
-        id = SwdPresenter.selectedPost.post_id;
-        userLikes = Number(!SwdPresenter.selectedPost.like_info.user_likes);
+        id = SwdPresenter.selectedPost.id;
+        userLikes = Number(!SwdPresenter.selectedPost.userLikes);
 
         SwdView.setLikePost(userLikes);
 
         // Post the comment.
         SwdModel.likePost(id, userLikes, {
             success: function(response) {
-                SwdPresenter.selectedPost.like_info.user_likes = userLikes;
+                SwdPresenter.selectedPost.userLikes = userLikes;
             },
             error: SwdPresenter.handleError
         });
@@ -946,7 +946,7 @@ var SwdPresenter = {
         if (e.which === 13 && !e.shiftKey) {
             e.preventDefault();
 
-            id = SwdPresenter.selectedPost.post_id;
+            id = SwdPresenter.selectedPost.id;
             comment = $('#post-comment-text').val();
 
             // Show the ajax loading div.
@@ -1256,7 +1256,7 @@ var SwdView = {
         var postBlock, userImage, tileImage, timeStamp, message;
 
         userImage = 'url(' + post.actor.picSquare + ')';
-        tileImage = 'url(' + post.imageObjects[0] + ')';
+        tileImage = 'url(' + post.imageObjects[0].url + ')';
 
         // Create the visible block.
         postBlock = $('<div id="' + post.id + '" class="post-block block unique"><div class="visible-content" style="background-image: ' + tileImage + '"><div class="comment-count">' + post.commentCount + '</div></div></div>');
@@ -1318,7 +1318,7 @@ var SwdView = {
 
         for (i = 0; i < posts.length; i++) {
             // Update comment counts.
-            $('#' + posts[i].post_id + ' .comment-count').text(posts[i].comment_count);
+            $('#' + posts[i].id + ' .comment-count').text(posts[i].comment_count);
         }
     },
     /***
@@ -1328,7 +1328,7 @@ var SwdView = {
     fillPostImageContainer: function(post) {
         var i, imageTile, imageUrl, tileWidth, tileHeight, colCount;
 
-        switch (post.image_url.length) {
+        switch (post.imageObjects.length) {
             case 1:
                 colCount = 1;
                 break;
@@ -1346,8 +1346,8 @@ var SwdView = {
         tileHeight = Math.min(tileWidth, $('#post-image-container').height());
 
         // Create at tile for each image.
-        for (i = 1; i <= post.image_url.length; i++) {
-            imageUrl = 'url(' + post.image_url[i - 1] + ')';
+        for (i = 1; i <= post.imageObjects.length; i++) {
+            imageUrl = 'url(' + post.imageObjects[i - 1].url + ')';
             imageTile = $('<div class="post-image-tile"></div>');
 
             if (i % colCount === 0) {
@@ -1358,7 +1358,7 @@ var SwdView = {
         }
 
         // For only 1 image, set background-size to contain, rather than cover.
-        if (post.image_url.length === 1) {
+        if (post.imageObjects.length === 1) {
             $(imageTile).addClass('single');
         }
 
@@ -1584,8 +1584,8 @@ var SwdView = {
         $('#post-details-user-data .timestamp').text(timeStamp.calendar());
 
         // Display the post's image, or the no-image placeholder.
-        if (post.image_url && post.image_url.length > 0) {
-            postImage = 'url("' + post.image_url[0] + '")';
+        if (post.imageObjects && post.imageObjects.length > 0) {
+            postImage = 'url("' + post.imageObjects[0].url + '")';
 
             // Hide the no-image container and display the post's attached image.
             $('#post-image-container').show().empty();
@@ -1639,7 +1639,7 @@ var SwdView = {
         $('#linkdata-desc, #post-message-text').linkify();
 
         // Wrap stuff up.
-        SwdView.setLikePost(post.like_info.user_likes);
+        SwdView.setLikePost(post.userLikes);
         SwdView.clearPostCommentText();
         SwdView.toggleAjaxLoadingDiv('#post-details-panel', false);
     },
