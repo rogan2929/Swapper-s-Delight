@@ -1580,7 +1580,7 @@ var SwdView = {
         timeStamp = new moment(new Date(post.createdTime * 1000));
 
         $('#post-details-user-data .facebook-user-photo').css('background-image', userImage);
-        $('#post-details-user-data .facebook-user-name').text(post.actor.firstName + ' ' + post.actor.lastName).attr('href', post.user.profile_url);
+        $('#post-details-user-data .facebook-user-name').text(post.actor.firstName + ' ' + post.actor.lastName).attr('href', post.actor.profileUrl);
         $('#post-details-user-data .timestamp').text(timeStamp.calendar());
 
         // Display the post's image, or the no-image placeholder.
