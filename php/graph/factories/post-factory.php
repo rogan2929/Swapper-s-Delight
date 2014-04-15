@@ -473,7 +473,7 @@ class PostFactory {
             // Parse associated data from the query.
             $post->setImageObjects($imgFactory->getImageObjectsFromFQLResultSet($stream[$i], $images, true));
             $post->setLinkData($lnkFactory->getLinkDataFromFQLResultSet($stream[$i]));
-            $post->setActor($usrFactory->getUserFromFQLResultSet($stream[$i], $users));
+            $post->setActor($usrFactory->getUserFromFQLResultSet($stream[$i]));
 
             // Determine which kind of post this is.
             $post->setType($this->getPostType($stream[$i]));
@@ -558,9 +558,9 @@ class PostFactory {
     public function getFeedData($windowSize, $windowStart, $batchSize, $iterations = 1) {
         $windowEnd = $windowStart - $windowSize;
 
-        $rawStream = array();
-        $users = array();
         $stream = array();
+        $users = array();
+        $posts = array();
 
         // Pull the feed for stream data.
         for ($i = 0; $i < $iterations; $i++) {
@@ -586,14 +586,12 @@ class PostFactory {
                 'batch' => json_encode($queries),
                 'include_headers' => false
             ));
-            
-            error_log(json_encode($response));
 
             // Parse the response.
             for ($k = 0; $k < count($response); $k++) {
                 $body = json_decode($response[$k]['body'], true);
 
-                $rawStream = array_merge($rawStream, $body[0]['fql_result_set']);
+                $stream = array_merge($stream, $body[0]['fql_result_set']);
                 $users = array_merge($users, $body[1]['fql_result_set']);
             }
         }
@@ -602,21 +600,21 @@ class PostFactory {
         $usrFactory = new UserFactory($users);
 
         // Clean up the response a little bit for our own purposes.
-        for ($i = 0; $i < count($rawStream); $i++) {
+        for ($i = 0; $i < count($stream); $i++) {
             // Create a new post object and add it to the posts array.
             $post = new Post();
             
             // post_id,message,actor_id,like_info,comment_info FROM stream
-            $post->setId($rawStream[$i]['id']);
-            $post->setMessage($rawStream[$i]['message']);
-            $post->setCommentCount($rawStream[$i]['comment_info']['comment_count']);
-            $post->setUserLikes((int) $rawStream[$i]['like_info']['user_likes']);
-            $post->setActor($usrFactory->getUserFromFQLResultSet($rawStream[$i]));
+            $post->setId($stream[$i]['post_id']);
+            $post->setMessage($stream[$i]['message']);
+            $post->setCommentCount($stream[$i]['comment_info']['comment_count']);
+            $post->setUserLikes((int) $stream[$i]['like_info']['user_likes']);
+            $post->setActor($usrFactory->getUserFromFQLResultSet($stream[$i]));
             
-            $stream[] = $post;
+            $posts[] = $post;
         }
 
-        return $stream;
+        return $posts;
     }
 
     /*

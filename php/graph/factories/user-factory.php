@@ -38,6 +38,7 @@ class UserFactory {
         for ($i = 0; $i < count($this->userStream); $i++) {
             if ($post['actor_id'] == $this->userStream[$i]['uid']) {
                 $user = $this->createUser($this->userStream[$i]);
+                error_log(json_encode($this->userStream[$i]));
                 break;
             }
         }
