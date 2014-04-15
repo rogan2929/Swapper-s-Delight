@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/entities/include.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '\entities\include.php';
 require_once 'graph-api-client.php';
 
 /**
