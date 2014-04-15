@@ -22,6 +22,7 @@ class UserFactory {
         $userObject->setLastName($user['last_name']);
         $userObject->setFirstName($user['first_name']);
         $userObject->setPicSquare($user['pic_square']);
+        $userObject->setPicFull($user['pic']);
         $userObject->setProfileUrl($user['profile_url']);
         
         return $userObject;

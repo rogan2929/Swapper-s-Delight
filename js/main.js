@@ -1028,33 +1028,33 @@ var SwdView = {
         var commentDiv, timeStamp, userImage, i, imageUrl, commentImage;
 
         // Set user image
-        if (comment.user.pic_square) {
-            userImage = 'url("' + comment.user.pic_square + '")';
+        if (comment.actor.picSquare) {
+            userImage = 'url("' + comment.actor.picSquare + '")';
         }
         else {
             userImage = '';
         }
 
         // Get a human-readable version of the comment's timestamp value.
-        timeStamp = new moment(new Date(comment.time * 1000));
+        timeStamp = new moment(new Date(comment.createdTime * 1000));
 
-        commentDiv = $('<div class="post-activity-section block post-comment"><div><div class="facebook-user-photo"></div><a href="' + comment.user.profile_url + '" target="_blank">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><div class="timestamp">' + timeStamp.calendar() + '</div></div><div class="activity-text">' + comment.text + '</div></div>');
+        commentDiv = $('<div class="post-activity-section block post-comment"><div><div class="facebook-user-photo"></div><a href="' + comment.actor.profileUrl + '" target="_blank">' + comment.actor.firstName + ' ' + comment.actor.lastName + '</a><div class="timestamp">' + timeStamp.calendar() + '</div></div><div class="activity-text">' + comment.message + '</div></div>');
 
         // Set the user's photo.
         $(commentDiv).find('.facebook-user-photo').css('background-image', userImage);
 
         // Display any images.
-        if (comment.image_url && comment.image_url.length > 0) {
-            for (i = 1; i <= comment.image_url.length; i++) {
-                imageUrl = 'url(' + comment.image_url[i - 1] + ')';
-                commentImage = $('<div class="post-comment-image"></div>');
-                $(commentImage).css('background-image', imageUrl).appendTo($(commentDiv));
-
-                $(commentImage).click(function() {
-                    //alert('test');
-                });
-            }
-        }
+//        if (comment.image_url && comment.image_url.length > 0) {
+//            for (i = 1; i <= comment.image_url.length; i++) {
+//                imageUrl = 'url(' + comment.image_url[i - 1] + ')';
+//                commentImage = $('<div class="post-comment-image"></div>');
+//                $(commentImage).css('background-image', imageUrl).appendTo($(commentDiv));
+//
+//                $(commentImage).click(function() {
+//                    //alert('test');
+//                });
+//            }
+//        }
 
         // If the current user is the owner of the comment, display the delete and edit buttons.
         if (comment.user.uid === uid) {
@@ -1255,7 +1255,7 @@ var SwdView = {
     createImagePostBlock: function(post) {
         var postBlock, userImage, tileImage, timeStamp, message;
 
-        userImage = 'url(' + post.actor.picSquare + ')';
+        userImage = 'url(' + post.actor.picFull + ')';
         tileImage = 'url(' + post.imageObjects[0].url + ')';
 
         // Create the visible block.
@@ -1264,7 +1264,7 @@ var SwdView = {
         $(postBlock).addClass('post-block-image');
 
         // Create the text block that resides below the visible post block.
-        userImage = 'url(' + post.actor.picSquare + ')';
+        userImage = 'url(' + post.actor.picFull + ')';
 
         timeStamp = new moment(new Date(post.createdTime * 1000));
 
@@ -1301,7 +1301,7 @@ var SwdView = {
 
         postBlock = $('<div id="' + post.id + '" class="post-block block unique"></div>');
 
-        userImage = 'url(' + post.actor.picSquare + ')';
+        userImage = 'url(' + post.actor.picFull + ')';
 
         timeStamp = new moment(new Date(post.createdTime * 1000));
 
@@ -1380,7 +1380,7 @@ var SwdView = {
         $(postBlock).addClass('post-block-link').html(description);
 
         // Create the text block that resides below the visible post block.
-        userImage = 'url(' + post.actor.picSquare + ')';
+        userImage = 'url(' + post.actor.picFull + ')';
 
         timeStamp = new moment(new Date(post.createdTime * 1000));
 
@@ -1399,7 +1399,7 @@ var SwdView = {
 
         postBlock = $('<div id="' + post.id + '" class="post-block block unique"></div>');
 
-        userImage = 'url(' + post.actor.picSquare + ')';
+        userImage = 'url(' + post.actor.picFull + ')';
 
         timeStamp = new moment(new Date(post.createdTime * 1000));
 

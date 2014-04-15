@@ -15,6 +15,15 @@ class User extends GraphObject {
     private $firstName;
     private $profileUrl;
     private $picSquare;
+    private $picFull;
+    
+    public function getPicFull() {
+        return $this->picFull;
+    }
+
+    public function setPicFull($picFull) {
+        $this->picFull = $picFull;
+    }
     
     public function getUid() {
         return $this->uid;

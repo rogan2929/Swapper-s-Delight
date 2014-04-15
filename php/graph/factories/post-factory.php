@@ -51,7 +51,7 @@ class PostFactory {
         // Get the comment and associated user data...
         $queries = array(
             'commentQuery' => 'SELECT fromid,text,text_tags,attachment,time,id FROM comment WHERE id=' . $id['id'],
-            'commentUserQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url FROM user WHERE uid IN (SELECT fromid FROM #commentQuery)'
+            'commentUserQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url,pic FROM user WHERE uid IN (SELECT fromid FROM #commentQuery)'
         );
 
         // Query Facebook's servers for the necessary data.
@@ -193,9 +193,9 @@ class PostFactory {
         $queries = array(
             'detailsQuery' => 'SELECT post_id,message,actor_id,permalink,like_info,share_info,comment_info,tagged_ids,attachment,created_time,updated_time FROM stream WHERE post_id="' . $postId . '"',
             'imageQuery' => 'SELECT object_id,images FROM photo WHERE object_id IN (SELECT attachment FROM #detailsQuery)',
-            'userQuery' => 'SELECT last_name,first_name,pic,profile_url,uid,pic_square FROM user WHERE uid IN (SELECT actor_id FROM #detailsQuery)',
+            'userQuery' => 'SELECT last_name,first_name,pic,profile_url,uid,pic_square,pic FROM user WHERE uid IN (SELECT actor_id FROM #detailsQuery)',
             'commentsQuery' => 'SELECT fromid,text,text_tags,attachment,time,id FROM comment WHERE post_id IN (SELECT post_id FROM #detailsQuery) ORDER BY time ASC',
-            'commentUserQuery' => 'SELECT uid,last_name,first_name,pic_square,profile_url FROM user WHERE uid IN (SELECT fromid FROM #commentsQuery)'
+            'commentUserQuery' => 'SELECT uid,last_name,first_name,pic_square,pic,profile_url FROM user WHERE uid IN (SELECT fromid FROM #commentsQuery)'
         );
 
         // Run the query.
@@ -570,7 +570,7 @@ class PostFactory {
             for ($j = 0; $j < $batchSize; $j++) {
                 $query = array(
                     'streamQuery' => 'SELECT post_id,message,actor_id,like_info,comment_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000',
-                    'userQuery' => 'SELECT first_name,last_name,uid,pic_square,profile_url FROM user WHERE uid IN (SELECT actor_id FROM #streamQuery)'
+                    'userQuery' => 'SELECT first_name,last_name,uid,pic_square,profile_url,pic FROM user WHERE uid IN (SELECT actor_id FROM #streamQuery)'
                 );
 
                 $windowStart -= $windowSize;
