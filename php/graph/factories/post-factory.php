@@ -586,6 +586,8 @@ class PostFactory {
                 'batch' => json_encode($queries),
                 'include_headers' => false
             ));
+            
+            error_log($response);
 
             // Parse the response.
             for ($k = 0; $k < count($response); $k++) {
