@@ -14,11 +14,6 @@ class ImageObject extends GraphObject {
     private $url;
     private $width;
     private $height;
-
-    function __construct($id, $url) {
-        $this->id = $id;
-        $this->url = $url;
-    }
     
     public function getId() {
         return $this->id;

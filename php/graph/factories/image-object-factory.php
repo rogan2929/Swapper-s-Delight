@@ -33,7 +33,7 @@ class ImageObjectFactory {
                         $fbid = $post['attachment']['media'][$i]['photo']['fbid'];
 
                         // Find the image url from the given Facebook ID
-                        $images[] = $this->createImageObject($fbid, $thumbnails);
+                        $images[] = $this->createImageObject($fbid, $smallImages);
                     }
                 }
             }
@@ -42,13 +42,13 @@ class ImageObjectFactory {
         return $images;
     }
     
-    private function createImageObject($fbid, $thumbnails = true) {
+    private function createImageObject($fbid, $smallImages = true) {
         $image = new ImageObject();
 
         for ($i = 0; $i < count($this->imageStream); $i++) {
             if ($fbid == $this->imageStream[$i]['object_id']) {
                 // See if we are trying to retrieve a small image. (Usually last in the array.)
-                if ($thumbnails) {
+                if ($smallImages) {
                     $image->setUrl($this->getSmallImageUrl($this->imageStream[$i]['images']));
                 } else {
                     //$imageUrl = $images[$i]['images'][$index]['source'];

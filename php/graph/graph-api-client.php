@@ -2,6 +2,8 @@
 
 require_once 'facebook/facebook.php';
 
+Facebook::$CURL_OPTS[CURLOPT_CAINFO] = getcwd().'/fb_ca_chain_bundle.crt';
+
 if (!session_id()) {
     session_start();
 }
