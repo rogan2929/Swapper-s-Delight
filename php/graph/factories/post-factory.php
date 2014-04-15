@@ -1,10 +1,10 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '\php\graph\entities\include.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '\php\graph\graph-api-client.php';
-require_once 'image-object-factory.php';
-require_once 'link-data-factory.php';
-require_once 'user-factory.php';
+require $_SERVER['DOCUMENT_ROOT'] . '\php\graph\entities\include.php';
+require $_SERVER['DOCUMENT_ROOT'] . '\php\graph\graph-api-client.php';
+require 'image-object-factory.php';
+require 'link-data-factory.php';
+require 'user-factory.php';
 
 if (!session_id()) {
     session_start();

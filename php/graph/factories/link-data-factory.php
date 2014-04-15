@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '\php\graph\entities\include.php';
+require $_SERVER['DOCUMENT_ROOT'] . '\php\graph\entities\include.php';
 
 /**
  * A factory to create LinkData objects.

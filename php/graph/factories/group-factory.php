@@ -1,7 +1,7 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '\php\graph\entities\include.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '\php\graph\graph-api-client.php';
+require $_SERVER['DOCUMENT_ROOT'] . '\php\graph\entities\include.php';
+require $_SERVER['DOCUMENT_ROOT'] . '\php\graph\graph-api-client.php';
 
 /**
  * A factory for retrieving, hiding, and showing Facebook groups.
