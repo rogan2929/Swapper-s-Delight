@@ -569,7 +569,7 @@ class PostFactory {
             for ($j = 0; $j < $batchSize; $j++) {
                 $query = array(
                     'streamQuery' => 'SELECT post_id,message,actor_id,like_info,comment_info FROM stream WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000',
-                    'userQuery' => 'SELECT first_name,last_name,uid FROM user WHERE uid IN (SELECT actor_id FROM #streamQuery)'
+                    'userQuery' => 'SELECT first_name,last_name,uid,pic_sqare,profile_url FROM user WHERE uid IN (SELECT actor_id FROM #streamQuery)'
                 );
 
                 $windowStart -= $windowSize;
@@ -613,6 +613,8 @@ class PostFactory {
             
             $posts[] = $post;
         }
+        
+        error_log(var_dump($posts));
 
         return $posts;
     }
