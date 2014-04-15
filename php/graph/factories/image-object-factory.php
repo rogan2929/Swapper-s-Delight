@@ -22,8 +22,6 @@ class ImageObjectFactory {
      */
     public function getImageObjectsFromFQLResultSet($post, $smallImages = true) {
         $images = array();
-        
-        error_log(json_encode($post));
 
         if ($post['attachment'] && $post['attachment']['media']) {
             // For posts with an image, look for associated image data.

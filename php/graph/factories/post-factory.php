@@ -463,6 +463,10 @@ class PostFactory {
         for ($i = 0; $i < count($stream); $i++) {
             $post = new Post();
             
+            error_log(' ');
+            error_log(json_encode($stream[$i]));
+            error_log(' ');
+            
             //post_id,actor_id,updated_time,message,attachment,comment_info,created_time
             $post->setId($stream[$i]['post_id']);
             $post->setUpdatedTime($stream[$i]['updated_time']);
