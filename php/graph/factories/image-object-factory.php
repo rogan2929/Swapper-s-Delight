@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '\entities\include.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '\php\graph\entities\include.php';
 
 /**
  * Factory for ImageData creation.
