@@ -14,6 +14,8 @@ class LinkDataFactory {
      */
     function getLinkDataFromFQLResultSet($post) {
         $linkData = new LinkData();
+        
+        error_log(json_encode($post));
 
         // See if the attachment type is of type 'link'.
         if ($post['attachment'] && $post['attachment']['media'] && $post['attachment']['media'][0] && $post['attachment']['media'][0]['type'] == 'link') {
