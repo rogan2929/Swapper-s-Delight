@@ -238,25 +238,26 @@ class PostFactory {
 
         if (strlen($post->getMessage()) > 0) {
             // Replace new line characters with <br/>
-            //$post['message'] = nl2br($post['message']);
             $post->setMessage(nl2br($post->getMessage()));
         }
 
         // Extract image data for the post.
-        //$post['image_url'] = $this->getImageUrlArray($post, $images, false);
         $imgFactory = new ImageObjectFactory($response[2]['fql_result_set']);
         $post->setImageObjects($imgFactory->getImageObjectsFromFQLResultSet($raw));
 
         // Extract link data.
-        //$post['link_data'] = $this->getLinkData($post);
         $post->setLinkData((new LinkDataFactory())->getLinkDataFromFQLResultSet($raw));
 
         // Determine type of post.
-        //$post['post_type'] = $this->getPostType($post);
         $post->setType($this->getPostType($post));
-
-        // Erase attachment data (to make the object smaller), since this has already been parse.
-        //unset($post['attachment']);
+        
+        $comments = array();
+        
+        for ($i = 0; $i < count($response[1]['fql_result_set']); $i++) {
+            
+        }
+        
+        $post->setComments($comments);
 
         // Begin parsing comment data.
 //        for ($i = 0; $i < count($post['comments']); $i++) {
