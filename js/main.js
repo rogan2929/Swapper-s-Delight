@@ -1614,7 +1614,7 @@ var SwdView = {
             $('#linkdata-caption').text(post.linkData.caption);
 
             if (post.linkData.src) {
-                $('#linkdata-img').attr('src', post.linkData.src);
+                $('#post-message-linkdata .linkdata-img').attr('src', post.linkData.src);
             }
 
             $('#linkdata-desc').html(post.linkData.description);
