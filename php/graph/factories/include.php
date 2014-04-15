@@ -1,6 +1,5 @@
 <?php
 
-require_once 'graph-api-client.php';
 require_once 'group-factory.php';
 require_once 'post-factory.php';
 require_once 'user-factory.php';
