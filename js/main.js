@@ -1611,13 +1611,13 @@ var SwdView = {
         // Set link data and display it.
         if (post.type === 'link' || post.type === 'textlink') {
             $('#linkdata-href').attr('href', post.linkData.href).text(post.linkData.name);
-            $('#linkdata-caption').text(post.linkData.caption);
+            $('#post-message-linkdata .linkdata-caption').text(post.linkData.caption);
 
             if (post.linkData.src) {
                 $('#post-message-linkdata .linkdata-img').attr('src', post.linkData.src);
             }
 
-            $('#linkdata-desc').html(post.linkData.description);
+            $('#post-message-linkdata .linkdata-desc').html(post.linkData.description);
             $('#post-message-linkdata').show();
         }
         else {
