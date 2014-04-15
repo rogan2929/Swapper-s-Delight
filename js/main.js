@@ -629,7 +629,7 @@ var SwdPresenter = {
 
             // Capture the ids of all the posts that were just returned.
             for (i = 0; i < response.length; i++) {
-                SwdPresenter.postIds.push(response[i].post_id);
+                SwdPresenter.postIds.push(response[i].id);
             }
 
             // If a response came through, then display the posts.
@@ -1255,20 +1255,20 @@ var SwdView = {
     createImagePostBlock: function(post) {
         var postBlock, userImage, tileImage, timeStamp, message;
 
-        userImage = 'url(' + post.user.pic + ')';
-        tileImage = 'url(' + post.image_url[0] + ')';
+        userImage = 'url(' + post.actor.picSquare + ')';
+        tileImage = 'url(' + post.imageObjects[0] + ')';
 
         // Create the visible block.
-        postBlock = $('<div id="' + post.post_id + '" class="post-block block unique"><div class="visible-content" style="background-image: ' + tileImage + '"><div class="comment-count">' + post.comment_info.comment_count + '</div></div></div>');
+        postBlock = $('<div id="' + post.id + '" class="post-block block unique"><div class="visible-content" style="background-image: ' + tileImage + '"><div class="comment-count">' + post.commentCount + '</div></div></div>');
 
         $(postBlock).addClass('post-block-image');
 
         // Create the text block that resides below the visible post block.
-        userImage = 'url(' + post.user.pic + ')';
+        userImage = 'url(' + post.actor.picSquare + ')';
 
-        timeStamp = new moment(new Date(post.created_time * 1000));
+        timeStamp = new moment(new Date(post.createdTime * 1000));
 
-        message = '<div class="wrapper hidden-content"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+        message = '<div class="wrapper hidden-content"><div class="comment-count">' + post.commentCount + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.actor.firstName + ' ' + post.actor.lastName + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
         $(postBlock).append('<div class="post-block block hover post-block-text hidden-block">' + message + '</div>');
 
@@ -1299,13 +1299,13 @@ var SwdView = {
     createTextPostBlock: function(post) {
         var postBlock, message, userImage, timeStamp;
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block block unique"></div>');
+        postBlock = $('<div id="' + post.id + '" class="post-block block unique"></div>');
 
-        userImage = 'url(' + post.user.pic + ')';
+        userImage = 'url(' + post.actor.picSquare + ')';
 
-        timeStamp = new moment(new Date(post.created_time * 1000));
+        timeStamp = new moment(new Date(post.createdTime * 1000));
 
-        message = '<div class="visible-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+        message = '<div class="visible-content wrapper"><div class="comment-count">' + post.commentCount + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.actor.firstName + ' ' + post.actor.lastName + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
         $(postBlock).addClass('post-block-text').html(message).appendTo('#post-feed');
     },
@@ -1374,17 +1374,17 @@ var SwdView = {
 
         linkImage = 'url(' + post.link_data.media[0].src + ')';
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block block unique"></div>');
-        description = '<div class="visible-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span>' + post.link_data.description + '</p></div>';
+        postBlock = $('<div id="' + post.id + '" class="post-block block unique"></div>');
+        description = '<div class="visible-content wrapper"><div class="comment-count">' + post.commentCount + '</div><p class="content"><span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span>' + post.link_data.description + '</p></div>';
 
         $(postBlock).addClass('post-block-link').html(description);
 
         // Create the text block that resides below the visible post block.
-        userImage = 'url(' + post.user.pic + ')';
+        userImage = 'url(' + post.actor.picSquare + ')';
 
-        timeStamp = new moment(new Date(post.created_time * 1000));
+        timeStamp = new moment(new Date(post.createdTime * 1000));
 
-        message = '<div class="hidden-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+        message = '<div class="hidden-content wrapper"><div class="comment-count">' + post.commentCount + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.actor.firstName + ' ' + post.actor.lastName + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
         $(postBlock).append('<div class="post-block block hover post-block-text hidden-block">' + message + '</div>');
 
@@ -1397,13 +1397,13 @@ var SwdView = {
     createTextLinkPostBlock: function(post) {
         var postBlock, message, userImage, timeStamp, description, linkImage;
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block block unique"></div>');
+        postBlock = $('<div id="' + post.id + '" class="post-block block unique"></div>');
 
-        userImage = 'url(' + post.user.pic + ')';
+        userImage = 'url(' + post.actor.picSquare + ')';
 
-        timeStamp = new moment(new Date(post.created_time * 1000));
+        timeStamp = new moment(new Date(post.createdTime * 1000));
 
-        message = '<div class="visible-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+        message = '<div class="visible-content wrapper"><div class="comment-count">' + post.commentCount + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.actor.firstName + ' ' + post.actor.lastName + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
         $(postBlock).addClass('post-block-textlink').html(message);
 
@@ -1412,7 +1412,7 @@ var SwdView = {
         description = '<span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span>' + post.link_data.description;
 
         // Create the link text block that resides below the visible block.
-        $(postBlock).append('<div class="post-block block hover post-block-link hidden-block"><div class="hidden-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content">' + description + '</p></div></div>');
+        $(postBlock).append('<div class="post-block block hover post-block-link hidden-block"><div class="hidden-content wrapper"><div class="comment-count">' + post.commentCount + '</div><p class="content">' + description + '</p></div></div>');
 
         $(postBlock).appendTo('#post-feed');
     },
@@ -1435,9 +1435,9 @@ var SwdView = {
             for (i = 0; i < posts.length; i++) {
                 post = posts[i];
 
-                if (post.post_id !== 'terminator') {
+                if (post.id !== 'terminator') {
                     // Switch based on post_type
-                    switch (post.post_type) {
+                    switch (post.type) {
                         case 'image':
                             SwdView.createImagePostBlock(post);
                             break;
@@ -1569,18 +1569,18 @@ var SwdView = {
         }
 
         // Display user's data.
-        if (post.user.pic) {
-            userImage = 'url("' + post.user.pic + '")';
+        if (post.actor.picSquare) {
+            userImage = 'url("' + post.actor.picSquare + '")';
         }
         else {
             userImage = '';
         }
 
         // Get a nice, human readable version of the post's created_time timestamp.
-        timeStamp = new moment(new Date(post.created_time * 1000));
+        timeStamp = new moment(new Date(post.createdTime * 1000));
 
         $('#post-details-user-data .facebook-user-photo').css('background-image', userImage);
-        $('#post-details-user-data .facebook-user-name').text(post.user.first_name + ' ' + post.user.last_name).attr('href', post.user.profile_url);
+        $('#post-details-user-data .facebook-user-name').text(post.actor.firstName + ' ' + post.actor.lastName).attr('href', post.user.profile_url);
         $('#post-details-user-data .timestamp').text(timeStamp.calendar());
 
         // Display the post's image, or the no-image placeholder.
