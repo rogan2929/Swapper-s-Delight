@@ -253,7 +253,7 @@ class PostFactory {
 
         // Determine type of post.
         //$post['post_type'] = $this->getPostType($post);
-        $post->setType($this->getPostType($raw));
+        $post->setType($this->getPostType($post));
 
         // Erase attachment data (to make the object smaller), since this has already been parse.
         //unset($post['attachment']);
@@ -476,7 +476,7 @@ class PostFactory {
             $post->setActor($usrFactory->getUserFromFQLResultSet($stream[$i]));
 
             // Determine which kind of post this is.
-            $post->setType($this->getPostType($stream[$i]));
+            $post->setType($this->getPostType($post));
 
             // Replace any line breaks with <br/>
             if (strlen($post->getMessage()) > 0) {
@@ -502,17 +502,17 @@ class PostFactory {
         $postType = 'unknown';
 
         // The logic below should catch everything. If it does, then we have for some reason picked up a post with no visible content.
-        if (count($post['image_url']) > 0) {
+        if (count($post->getImageObjects()) > 0) {
             $postType = 'image';       // Image Post
-        } else if (strlen($post['message']) > 0) {
+        } else if (strlen($post->getMessage()) > 0) {
             $postType = 'text';        // Assume text post, but this might change to link.
         }
 
-        if (strlen($post['message']) == 0 && count($post['link_data']) > 0) {
+        if (strlen($post->getMessage()) == 0 && !is_null($post->getLinkData())) {
             $postType = 'link';        // Link post.
         }
 
-        if (strlen($post['message']) > 0 && count($post['link_data']) > 0) {
+        if (strlen($post->getMessage()) > 0 && !is_null($post->getLinkData())) {
             $postType = 'textlink';    // Link + Text post.
         }
 
