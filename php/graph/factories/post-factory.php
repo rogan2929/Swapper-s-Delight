@@ -21,7 +21,7 @@ class PostFactory {
     
     // FQL Query Strings
     const DETAILS_QUERY = 'SELECT post_id,message,actor_id,permalink,like_info,share_info,comment_info,tagged_ids,attachment,created_time,updated_time FROM stream ';
-    const STREAM_QUERY = 'SELECT post_id,actor_id,updated_time,message,attachment,comment_info,created_time FROM stream ';
+    const STREAM_QUERY = 'SELECT post_id,actor_id,updated_time,message,attachment,comment_info,created_time,like_info FROM stream ';
     const USER_QUERY = 'SELECT uid,last_name,first_name,pic_square,profile_url,pic FROM user ';
     const COMMENT_QUERY = 'SELECT fromid,text,text_tags,attachment,time,id FROM comment ';
     const IMAGE_QUERY = 'SELECT object_id,images FROM photo ';
