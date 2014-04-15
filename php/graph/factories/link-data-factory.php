@@ -1,6 +1,6 @@
 <?php
 
-require_once '../entities/include.php';
+require_once __DIR__ . '../entities/include.php';
 
 /**
  * A factory to create LinkData objects.
