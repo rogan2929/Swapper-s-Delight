@@ -13,12 +13,11 @@ class LinkDataFactory {
      * @return LinkData
      */
     function getLinkDataFromFQLResultSet($post) {
-        $linkData = new LinkData();
-        
-        error_log(json_encode($post));
+        $linkData = null;
 
         // See if the attachment type is of type 'link'.
         if ($post['attachment'] && $post['attachment']['media'] && $post['attachment']['media'][0] && $post['attachment']['media'][0]['type'] == 'link') {
+            $linkData = new LinkData();
             $linkData->setCaption($post['attachment']['caption']);
             $linkData->setDescription($post['attachment']['description']);
             $linkData->setHref($post['attachment']['media'][0]['href']);

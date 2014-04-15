@@ -1372,10 +1372,10 @@ var SwdView = {
     createLinkPostBlock: function(post) {
         var postBlock, description, userImage, timeStamp, message, linkImage;
 
-        linkImage = 'url(' + post.link_data.media[0].src + ')';
+        linkImage = 'url(' + post.linkData.src + ')';
 
         postBlock = $('<div id="' + post.id + '" class="post-block block unique"></div>');
-        description = '<div class="visible-content wrapper"><div class="comment-count">' + post.commentCount + '</div><p class="content"><span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span>' + post.link_data.description + '</p></div>';
+        description = '<div class="visible-content wrapper"><div class="comment-count">' + post.commentCount + '</div><p class="content"><span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.linkData.name + '</span>' + post.linkData.description + '</p></div>';
 
         $(postBlock).addClass('post-block-link').html(description);
 
@@ -1407,9 +1407,9 @@ var SwdView = {
 
         $(postBlock).addClass('post-block-textlink').html(message);
 
-        linkImage = 'url(' + post.link_data.media[0].src + ')';
+        linkImage = 'url(' + post.linkData.src + ')';
 
-        description = '<span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span>' + post.link_data.description;
+        description = '<span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.linkData.name + '</span>' + post.linkData.description;
 
         // Create the link text block that resides below the visible block.
         $(postBlock).append('<div class="post-block block hover post-block-link hidden-block"><div class="hidden-content wrapper"><div class="comment-count">' + post.commentCount + '</div><p class="content">' + description + '</p></div></div>');
@@ -1610,14 +1610,14 @@ var SwdView = {
 
         // Set link data and display it.
         if (post.post_type === 'link' || post.post_type === 'textlink') {
-            $('#linkdata-href').attr('href', post.link_data.href).text(post.link_data.name);
-            $('#linkdata-caption').text(post.link_data.caption);
+            $('#linkdata-href').attr('href', post.linkData.href).text(post.linkData.name);
+            $('#linkdata-caption').text(post.linkData.caption);
 
-            if (post.link_data.media && post.link_data.media[0].src) {
-                $('#linkdata-img').attr('src', post.link_data.media[0].src);
+            if (post.linkData.src) {
+                $('#linkdata-img').attr('src', post.linkData.src);
             }
 
-            $('#linkdata-desc').html(post.link_data.description);
+            $('#linkdata-desc').html(post.linkData.description);
             $('#post-message-linkdata').show();
         }
         else {
