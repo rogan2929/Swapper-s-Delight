@@ -534,13 +534,13 @@ class PostFactory {
             $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
         } else {
             // TODO: Somehow offload this onto a background thread.
-            $stream = $dal->getFeedData($windowSize, $windowStart, 50, 1);
+            $stream = $this->getFeedData($windowSize, $windowStart, 50, 1);
             $windowStart = $windowStart - ($windowSize * 50 * 1);
-            $stream = array_merge($stream, $dal->getFeedData($windowSize * 2, $windowStart, 13, 1));
+            $stream = array_merge($stream, $this->getFeedData($windowSize * 2, $windowStart, 13, 1));
             $windowStart = $windowStart - ($windowSize * 2 * 13 * 1);
-            $stream = array_merge($stream, $dal->getFeedData($windowSize * 3, $windowStart, 11, 1));
+            $stream = array_merge($stream, $this->getFeedData($windowSize * 3, $windowStart, 11, 1));
             $windowStart = $windowStart - ($windowSize * 3 * 11 * 1);
-            $stream = array_merge($stream, $dal->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
+            $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
         }
 
         return $stream;
