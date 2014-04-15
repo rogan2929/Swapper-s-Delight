@@ -8,9 +8,9 @@
 
 require_once 'dal.php';
 
-// Offloaded CachedFeed functionality.
+// Offloaded PostFactory functionality.
 
-$dal = new CachedFeed();
+$dal = new PostFactory();
 $dal->setGid(INPUT_GET, 'gid');
 
 $windowSize = $dal->getOptimalWindowSize();
