@@ -1,6 +1,6 @@
 <?php
 
-require_once 'entities/include.php';
+require_once '../entities/include.php';
 require_once '../graph-api-client.php';
 require_once 'image-object-factory.php';
 require_once 'link-data-factory.php';
