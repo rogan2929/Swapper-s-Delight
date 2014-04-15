@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . '../entities/include.php';
-require_once __DIR__ . '../graph-api-client.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/entities/include.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/graph-api-client.php';
 require_once 'image-object-factory.php';
 require_once 'link-data-factory.php';
 require_once 'user-factory.php';
