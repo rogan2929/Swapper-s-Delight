@@ -236,7 +236,7 @@ class PostFactory {
             http_response_code(500);
         }
 
-        if (strlen($post['message']) > 0) {
+        if (strlen($post->getMessage()) > 0) {
             // Replace new line characters with <br/>
             //$post['message'] = nl2br($post['message']);
             $post->setMessage(nl2br($post->getMessage()));
