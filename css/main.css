@@ -190,7 +190,6 @@ a:visited {
     display: block;
     color: #4d81bf;
     margin-bottom: 6px;
-    font-weight: bold;
 }
 
 .post-block.hidden-block .timestamp, .hover .timestamp {
