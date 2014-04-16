@@ -93,7 +93,8 @@ class CommentFactory extends BaseFactory {
         // Get the comment and associated user data...
         $queries = array(
             'commentQuery' => PostFactory::COMMENT_QUERY . 'WHERE id=' . $id['id'],
-            'commentUserQuery' => PostFactory::USER_QUERY . 'WHERE uid IN (SELECT fromid FROM #commentQuery)'
+            'commentUserQuery' => PostFactory::USER_QUERY . 'WHERE uid IN (SELECT fromid FROM #commentQuery)',
+            'commentImageQuery' => PostFactory::IMAGE_QUERY . 'WHERE object_id IN (SELECT attachment FROM #commentsQuery)'
         );
 
         // Query Facebook's servers for the necessary data.
@@ -111,6 +112,9 @@ class CommentFactory extends BaseFactory {
             $newComment['text'] = nl2br($newComment['text']);
         }
         
+        // Image factory.
+        $imgFactory = new ImageObjectFactory($response[2]['fql_result_set']);
+        
         // Create an entity object.
         $comment = new Comment();
         $comment->setId($newComment['id']);
@@ -118,6 +122,9 @@ class CommentFactory extends BaseFactory {
         $comment->setCreatedTime($newComment['time']);
         
         $comment->setActor((new UserFactory())->createUser($newComment['user']));
+        
+        // For each comment, look for associated image attachment.
+        $comment->setImageObjects($imgFactory->getImageObjectsFromFQLComment($newComment, false));
 
         return $comment;
     }
