@@ -668,6 +668,11 @@ a:visited {
     display: block;
 }
 
+.linkdata {
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
 #post-block-mask, #selection-item-mask {
     background-color: #f6f6f6;
     background-image: none;
