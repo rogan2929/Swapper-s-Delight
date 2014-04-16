@@ -59,8 +59,9 @@ class ImageObjectFactory {
                     // Determine if this attachment is a photo or a link.
                     if ($comment['attachment']['media'][$i]['image']) {
                         $image = new ImageObject();
-                        
                         $image->setUrl($comment['attachment']['media'][$i]['image']['src']);
+                        
+                        $images[] = $image;
                     }
                 }
             }
