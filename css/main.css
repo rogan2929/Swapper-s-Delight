@@ -192,6 +192,10 @@ a:visited {
     margin-bottom: 6px;
 }
 
+#post-comment-wrapper {
+    position: relative;
+}
+
 .post-block.hidden-block .timestamp, .hover .timestamp {
 /*    color: #f6f6f6;*/
 }
