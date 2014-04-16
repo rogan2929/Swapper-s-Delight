@@ -1,22 +1,20 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'] . '\php\graph\entities\include.php';
-require $_SERVER['DOCUMENT_ROOT'] . '\php\graph\graph-api-client.php';
+require 'base-factory.php';
 
 /**
  * A factory for retrieving, hiding, and showing Facebook groups.
  */
-class GroupFactory {
+class GroupFactory extends BaseFactory {
 
     private $sqlConnectionInfo;
     private $sqlServer;
-    private $graphApiClient;
 
     function __construct() {
+        parent::__construct();
+        
         $this->sqlConnectionInfo = array("UID" => "rogan2929@lreuagtc6u", "pwd" => "Revelation19:11", "Database" => "swapperAGiJRLgvy", "LoginTimeout" => 30, "Encrypt" => 1);
         $this->sqlServer = "tcp:lreuagtc6u.database.windows.net,1433";
-
-        $this->graphApiClient = new GraphApiClient();
     }
 
     /**

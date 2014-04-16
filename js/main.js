@@ -1061,7 +1061,7 @@ var SwdView = {
             $(commentDiv).append('<div class="delete-button"></div>');
         }
 
-        $(commentDiv).attr('id', comment.id).hide().linkify().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
+        $(commentDiv).attr('id', comment.id).hide().linkify().appendTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
 
         // Hook up the click event handler.
         $(commentDiv).children('.delete-button').click(SwdView.handlers['onClickCommentDelete']);

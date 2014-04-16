@@ -1,13 +1,16 @@
 <?php
 
+require 'base-factory.php';
+
 /*
  * Factory for user objects.
  */
-class UserFactory {
+class UserFactory extends BaseFactory {
     
     private $userStream;
     
     function __construct($userStream = null) {
+        parent::__construct();
         $this->userStream = $userStream;
     }
 

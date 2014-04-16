@@ -1,9 +1,9 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'] . '\php\graph\entities\include.php';
-require $_SERVER['DOCUMENT_ROOT'] . '\php\graph\graph-api-client.php';
+require 'base-factory.php';
 require 'image-object-factory.php';
 require 'link-data-factory.php';
+require 'comment-factory.php';
 require 'user-factory.php';
 
 if (!session_id()) {
@@ -13,9 +13,8 @@ if (!session_id()) {
 /**
  * A factory for retrieving posts from a group's stream.
  */
-class PostFactory {
+class PostFactory extends BaseFactory {
 
-    private $graphApiClient;
     private $gid;
     private $stream;
     
@@ -27,15 +26,14 @@ class PostFactory {
     const IMAGE_QUERY = 'SELECT object_id,images FROM photo ';
 
     function __construct() {
-
+        parent::__construct();
+        
         // Retrieve the stream if it's there.
         if (isset($_SESSION['stream'])) {
             $this->stream = $_SESSION['stream'];
         } else {
             $this->stream = null;
         }
-
-        $this->graphApiClient = new GraphApiClient();
     }
     
     /**
@@ -43,48 +41,6 @@ class PostFactory {
      */
     public function newPost() {
         
-    }
-    
-    /**
-     * Post a comment on a post.
-     * @param type $postId
-     * @param type $comment
-     * @return type
-     */
-    public function postComment($postId, $comment) {
-        // Post the comment and get the response
-        $id = $this->api('/' . $postId . '/comments', 'POST', array('message' => $comment));
-
-        // Get the comment and associated user data...
-        $queries = array(
-            'commentQuery' => PostFactory::COMMENT_QUERY . 'WHERE id=' . $id['id'],
-            'commentUserQuery' => PostFactory::USER_QUERY . 'WHERE uid IN (SELECT fromid FROM #commentQuery)'
-        );
-
-        // Query Facebook's servers for the necessary data.
-        $response = $this->api(array(
-            'method' => 'fql.multiquery',
-            'queries' => $queries
-        ));
-
-        // Construct a return object.
-        $newComment = $response[0]['fql_result_set'][0];
-        $newComment['user'] = $response[1]['fql_result_set'][0];
-
-        // Replace any line breaks with <br/>
-        if ($newComment['text']) {
-            $newComment['text'] = nl2br($newComment['text']);
-        }
-        
-        // Create an entity object.
-        $comment = new Comment();
-        $comment->setId($newComment['id']);
-        $comment->setMessage($newComment['text']);
-        $comment->setCreatedTime($newComment['time']);
-        
-        $comment->setActor((new UserFactory())->createUser($comment['user']));
-
-        return $comment;
     }
     
     /**
@@ -96,10 +52,10 @@ class PostFactory {
     public function likePost($postId, $userLikes) {
         if ($userLikes == true) {
             // Like the post.
-            $this->api('/' . $postId . '/likes', 'POST', array('user_likes' => true));
+            $this->graphApiClient->api('/' . $postId . '/likes', 'POST', array('user_likes' => true));
         } else {
             // Delete the post's like.
-            $this->api('/' . $postId . '/likes', 'DELETE');
+            $this->graphApiClient->api('/' . $postId . '/likes', 'DELETE');
         }
 
 //        // Update the cached post stream.
@@ -202,7 +158,8 @@ class PostFactory {
             'imageQuery' => PostFactory::IMAGE_QUERY . 'WHERE object_id IN (SELECT attachment FROM #detailsQuery)',
             'userQuery' => PostFactory::USER_QUERY . 'WHERE uid IN (SELECT actor_id FROM #detailsQuery)',
             'commentsQuery' => PostFactory::COMMENT_QUERY . 'WHERE post_id IN (SELECT post_id FROM #detailsQuery) ORDER BY time ASC',
-            'commentUserQuery' => PostFactory::USER_QUERY . 'WHERE uid IN (SELECT fromid FROM #commentsQuery)'
+            'commentUserQuery' => PostFactory::USER_QUERY . 'WHERE uid IN (SELECT fromid FROM #commentsQuery)',
+            'commentImageQuery' => PostFactory::IMAGE_QUERY . 'WHERE object_id IN (SELECT attachment FROM #commentsQuery)'
         );
 
         // Run the query.
@@ -234,10 +191,6 @@ class PostFactory {
             $post->setUpdatedTime($raw['updated_time']);
             $post->setCreatedTime($raw['created_time']);
             $post->setActor((new UserFactory())->createUser($response[3]['fql_result_set'][0]));
-            
-            //$post['comments'] = $response[1]['fql_result_set'];
-            //$images = $response[2]['fql_result_set'];
-            //$post['user'] = $response[3]['fql_result_set'][0];
         } catch (Exception $ex) {
             echo 'Sorry, but this post couldn\'t be loaded. It may have been deleted.';
             http_response_code(500);
@@ -258,42 +211,8 @@ class PostFactory {
         // Determine type of post.
         $post->setType($this->getPostType($post));
         
-        $comments = array();
-        
-        for ($i = 0; $i < count($response[1]['fql_result_set']); $i++) {
-            
-        }
-        
-        $post->setComments($comments);
-
-        // Begin parsing comment data.
-//        for ($i = 0; $i < count($post['comments']); $i++) {
-//            // Replace any line breaks with <br/>
-//            if ($post['comments'][$i]['text']) {
-//                $post['comments'][$i]['text'] = nl2br($post['comments'][$i]['text']);
-//            }
-//
-//            // Set image urls.
-//            $post['comments'][$i]['image_url'] = array();
-//
-//            if ($post['comments'][$i]['attachment'] && $post['comments'][$i]['attachment']['media']) {
-//                //echo var_dump($post['comments'][$i]['attachment']['media']['image']) . "<br/>";
-//                $post['comments'][$i]['image_url'][] = $post['comments'][$i]['attachment']['media']['image']['src'];
-//            }
-//
-//            unset($post['comments'][$i]['attachment']);
-//
-//            // For each comment, attach user data to it.
-//            for ($j = 0; $j < count($response[4]['fql_result_set']); $j++) {
-//                $userDataObject = $response[4]['fql_result_set'][$j];
-//
-//                // See if the comment is from the user.
-//                if ($post['comments'][$i]['fromid'] == $userDataObject['uid']) {
-//                    $post['comments'][$i]['user'] = $userDataObject;
-//                    break;
-//                }
-//            }
-//        }
+        // Parse comment data and set it.
+        $post->setComments((new CommentFactory())->getCommentsFromFQLResultSet($response[1]['fql_result_set'], $response[4]['fql_result_set'], $response[5]['fql_result_set']));
 
         return $post;
     }

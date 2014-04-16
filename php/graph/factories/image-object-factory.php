@@ -14,7 +14,7 @@ class ImageObjectFactory {
     }
 
     /**
-     * With the given post and image array, construct an ImageData object.
+     * With the given post and image array, construct an array ImageData objects.
      * 
      * @param type $post
      * @param type $smallImages

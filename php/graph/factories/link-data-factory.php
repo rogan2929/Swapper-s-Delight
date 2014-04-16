@@ -1,11 +1,11 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'] . '\php\graph\entities\include.php';
+require 'base-factory.php';
 
 /**
  * A factory to create LinkData objects.
  */
-class LinkDataFactory {
+class LinkDataFactory extends BaseFactory {
     
     /**
      * With the given data, constrcut a LinkData object.
