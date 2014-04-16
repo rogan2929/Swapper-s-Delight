@@ -212,7 +212,7 @@ class PostFactory extends BaseFactory {
         $post->setType($this->getPostType($post));
         
         // Parse comment data and set it.
-        $post->setComments((new CommentFactory())->getCommentsFromFQLResultSet($response[1]['fql_result_set'], $response[4]['fql_result_set'], $response[5]['fql_result_set']));
+        $post->setComments((new CommentFactory())->getCommentsFromFQLResultSet($response[1]['fql_result_set'], $response[5]['fql_result_set'], $response[4]['fql_result_set']));
 
         return $post;
     }
