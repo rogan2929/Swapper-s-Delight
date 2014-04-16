@@ -911,9 +911,9 @@ a.link-title {
     padding-top: 0px;
 }
 
-.post-activity-section.original-content .activity-text {
+/*.post-activity-section.original-content .activity-text {
     font-size: 1.0em;
-}
+}*/
 
 .post-activity-section .facebook-user-photo {
     height: 60px;
@@ -949,9 +949,9 @@ a.link-title {
     font-size: 0.98em;
 }
 
-.post-activity-section > .activity-text {
+/*.post-activity-section > .activity-text {
     font-size: 0.95em;
-}
+}*/
 
 .post-activity-section > * {
     margin-top: 8px;
