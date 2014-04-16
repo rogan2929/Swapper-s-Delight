@@ -1316,7 +1316,7 @@ var SwdView = {
 
         for (i = 0; i < posts.length; i++) {
             // Update comment counts.
-            $('#' + posts[i].id + ' .comment-count').text(posts[i].comment_count);
+            $('#' + posts[i].id + ' .comment-count').text(posts[i].commentCount);
         }
     },
     /***
