@@ -20,7 +20,7 @@ class ImageObjectFactory {
      * @param type $smallImages
      * @return type
      */
-    public function getImageObjectsFromFQLResultSet($post, $smallImages = true) {
+    public function getImageObjectsFromFQLPost($post, $smallImages = true) {
         $images = array();
 
         if ($post['attachment'] && $post['attachment']['media']) {
@@ -31,6 +31,35 @@ class ImageObjectFactory {
                     if ($post['attachment']['media'][$i]['type'] == 'photo' && $post['attachment']['media'][$i]['photo']) {
                         // Get image's unique Facebook Id
                         $fbid = $post['attachment']['media'][$i]['photo']['fbid'];
+
+                        // Find the image url from the given Facebook ID
+                        $images[] = $this->createImageObject($fbid, $smallImages);
+                    }
+                }
+            }
+        }
+
+        return $images;
+    }
+    
+        /**
+     * With the given post and image array, construct an array ImageData objects.
+     * 
+     * @param type $comment
+     * @param type $smallImages
+     * @return type
+     */
+    public function getImageObjectsFromFQLComment($comment, $smallImages = true) {
+        $images = array();
+
+        if ($comment['attachment'] && $comment['attachment']['media']) {
+            // For posts with an image, look for associated image data.
+            for ($i = 0; $i < count($comment['attachment']); $i++) {
+                if ($comment['attachment']['media'][$i]) {
+                    // Determine if this attachment is a photo or a link.
+                    if ($comment['attachment']['media'][$i]['type'] == 'photo' && $comment['attachment']['media'][$i]['photo']) {
+                        // Get image's unique Facebook Id
+                        $fbid = $comment['attachment']['media'][$i]['photo']['id'];
 
                         // Find the image url from the given Facebook ID
                         $images[] = $this->createImageObject($fbid, $smallImages);

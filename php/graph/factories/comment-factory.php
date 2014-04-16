@@ -29,6 +29,8 @@ class CommentFactory extends BaseFactory {
                 $comment->setMessage(nl2br($commentStream[$i]['text']));
             }
             
+            $comment->setCreatedTime($commentStream[$i]['time']);
+            
             // For each comment, attach user data to it.
             for ($j = 0; $j < count($userStream); $j++) {
                 $user = $userStream[$j];
@@ -43,7 +45,7 @@ class CommentFactory extends BaseFactory {
             error_log(json_encode($commentStream[$i]));
             
             // For each comment, look for associated image attachment.
-            $comment->setImageObjects($imgFactory->getImageObjectsFromFQLResultSet($commentStream[$i], false));
+            $comment->setImageObjects($imgFactory->getImageObjectsFromFQLComment($commentStream[$i], false));
             
             // Add the comment to the array.
             $comments[] = $comment;
