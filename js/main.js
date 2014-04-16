@@ -1057,7 +1057,7 @@ var SwdView = {
 //        }
 
         // If the current user is the owner of the comment, display the delete and edit buttons.
-        if (comment.user.uid === uid) {
+        if (comment.actor.id === uid) {
             $(commentDiv).append('<div class="delete-button"></div>');
         }
 

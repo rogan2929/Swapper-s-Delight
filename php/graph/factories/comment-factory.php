@@ -18,6 +18,8 @@ class CommentFactory extends BaseFactory {
         $usrFactory = new UserFactory();
         $imgFactory = new ImageObjectFactory($imageStream);
         
+        error_log(json_encode($imageStream));
+        
         // Begin parsing comment data.
         
         for ($i = 0; $i < count($commentStream); $i++) {
@@ -30,8 +32,6 @@ class CommentFactory extends BaseFactory {
             // For each comment, attach user data to it.
             for ($j = 0; $j < count($userStream); $j++) {
                 $user = $userStream[$j];
-                
-                error_log(json_encode($user));
 
                 // See if the comment is from the user.
                 if ($commentStream[$i]['fromid'] == $user['uid']) {
