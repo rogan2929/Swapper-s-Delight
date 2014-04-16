@@ -2,7 +2,7 @@
 
 require 'base-factory.php';
 require 'user-factory.php';
-require 'image-object-factory';
+require 'image-object-factory.php';
 
 /*
  * Factory for comment objects.
