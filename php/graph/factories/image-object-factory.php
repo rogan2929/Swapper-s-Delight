@@ -57,12 +57,10 @@ class ImageObjectFactory {
             for ($i = 0; $i < count($comment['attachment']); $i++) {
                 if ($comment['attachment']['media'][$i]) {
                     // Determine if this attachment is a photo or a link.
-                    if ($comment['attachment']['media'][$i]['type'] == 'photo' && $comment['attachment']['media'][$i]['image']) {
-                        // Get image's unique Facebook Id
-                        $fbid = $comment['attachment']['media'][$i]['image']['id'];
-
-                        // Find the image url from the given Facebook ID
-                        $images[] = $this->createImageObject($fbid, $smallImages);
+                    if ($comment['attachment']['media'][$i]['image']) {
+                        $image = new ImageObject();
+                        
+                        $image->setUrl($comment['attachment']['media'][$i]['image']['src']);
                     }
                 }
             }
