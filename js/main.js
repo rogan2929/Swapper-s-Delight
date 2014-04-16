@@ -1729,7 +1729,7 @@ var SwdView = {
         }
 
         if (!options) {
-            options = {direction: 'down'}
+            options = {direction: 'left'}
         }
 
         if (!overlay) {
@@ -1739,11 +1739,11 @@ var SwdView = {
         if (show) {
             // Make the panel modal by summoning an overlay.
             $(overlay).show();
-            $(id).show(effect, options, 400);
+            $(id).show(effect, options, 250);
         }
         else {
             $(overlay).hide();
-            $(id).hide(effect, options, 400);
+            $(id).hide(effect, options, 250);
         }
     }
 };
