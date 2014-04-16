@@ -42,8 +42,6 @@ class CommentFactory extends BaseFactory {
                 }
             }
             
-            error_log(json_encode($commentStream[$i]));
-            
             // For each comment, look for associated image attachment.
             $comment->setImageObjects($imgFactory->getImageObjectsFromFQLComment($commentStream[$i], false));
             
