@@ -19,9 +19,10 @@ textarea {
 }
 
 html {
-    font-size: 0.80em;
+    font-size: 0.85em;
     line-height: 1.4;
     overflow: hidden;
+    font-family: Arial,Helvetica,sans-serif;
     /*    min-height: 800px;*/
 }
 
@@ -366,8 +367,8 @@ a:visited {
     display: table-cell !important;
     vertical-align: middle;
     text-align: center;
-    height: 110px;
-    width: 139px;
+    height: 150px;
+    width: 150px;
 }
 
 .selection-item-content > div {
@@ -720,7 +721,7 @@ a:visited {
 .post-block.post-block-link .content,
 .post-block.post-block-textlink .content {
     overflow: hidden;
-    height: 16.5em;
+    height: 16.0em;
     padding: 12px;
 }
 
