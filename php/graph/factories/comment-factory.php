@@ -117,7 +117,7 @@ class CommentFactory extends BaseFactory {
         $comment->setMessage($newComment['text']);
         $comment->setCreatedTime($newComment['time']);
         
-        $comment->setActor((new UserFactory())->createUser($comment['user']));
+        $comment->setActor((new UserFactory())->createUser($newComment['user']));
 
         return $comment;
     }
