@@ -94,7 +94,7 @@ class CommentFactory extends BaseFactory {
         $queries = array(
             'commentQuery' => PostFactory::COMMENT_QUERY . 'WHERE id=' . $id['id'],
             'commentUserQuery' => PostFactory::USER_QUERY . 'WHERE uid IN (SELECT fromid FROM #commentQuery)',
-            'commentImageQuery' => PostFactory::IMAGE_QUERY . 'WHERE object_id IN (SELECT attachment FROM #commentsQuery)'
+            'commentImageQuery' => PostFactory::IMAGE_QUERY . 'WHERE object_id IN (SELECT attachment FROM #commentQuery)'
         );
 
         // Query Facebook's servers for the necessary data.
