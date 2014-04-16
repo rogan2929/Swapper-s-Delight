@@ -2,4 +2,4 @@
 
 require_once 'graph/include.php';
 
-echo (new GraphApiClient())->likePost(filter_input(INPUT_POST, 'postId'), filter_input(INPUT_POST, 'userLikes'));
+echo (new PostFactory())->likePost(filter_input(INPUT_POST, 'postId'), filter_input(INPUT_POST, 'userLikes'));
