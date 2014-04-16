@@ -1044,17 +1044,15 @@ var SwdView = {
         $(commentDiv).find('.facebook-user-photo').css('background-image', userImage);
 
         // Display any images.
-//        if (comment.image_url && comment.image_url.length > 0) {
-//            for (i = 1; i <= comment.image_url.length; i++) {
-//                imageUrl = 'url(' + comment.image_url[i - 1] + ')';
-//                commentImage = $('<div class="post-comment-image"></div>');
-//                $(commentImage).css('background-image', imageUrl).appendTo($(commentDiv));
-//
-//                $(commentImage).click(function() {
-//                    //alert('test');
-//                });
-//            }
-//        }
+        if (comment.imageObjects.length > 0) {
+            imageUrl = 'url(' + comment.imageObjects[0].url + ')';
+            commentImage = $('<div class="post-comment-image"></div>');
+            $(commentImage).css('background-image', imageUrl).appendTo($(commentDiv));
+
+            $(commentImage).click(function() {
+                //alert('test');
+            });
+        }
 
         // If the current user is the owner of the comment, display the delete and edit buttons.
         if (comment.actor.id === uid) {
