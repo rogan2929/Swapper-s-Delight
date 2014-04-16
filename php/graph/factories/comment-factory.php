@@ -15,7 +15,7 @@ class CommentFactory extends BaseFactory {
      */
     public function getCommentsFromFQLResultSet($commentStream, $userStream, $imageStream) {
         $comments = array();
-        $usrFactory = new UserFactory($userStream);
+        $usrFactory = new UserFactory();
         $imgFactory = new ImageObjectFactory($imageStream);
         
         // Begin parsing comment data.
@@ -27,8 +27,16 @@ class CommentFactory extends BaseFactory {
                 $comment->setMessage(nl2br($commentStream[$i]['text']));
             }
             
-            // For each comment, attach user data to it.            
-            $comment->setActor($usrFactory->getUserFromFQLResultSet($commentStream[$i]));
+            // For each comment, attach user data to it.
+            for ($j = 0; $j < count($userStream); $j++) {
+                $user = $userStream[$j];
+
+                // See if the comment is from the user.
+                if ($commentStream[$i]['fromid'] == $user['uid']) {
+                    $comment->setActor($usrFactory->createUser($user));
+                    break;
+                }
+            }
             
             // For each comment, look for associated image attachment.
             $comment->setImageObjects($imgFactory->getImageObjectsFromFQLResultSet($commentStream[$i], false));
