@@ -2,4 +2,4 @@
 
 require_once 'graph/include.php';
 
-echo (new GroupManager())->hideGroup(filter_input(INPUT_GET, 'gid'));
+echo (new GroupFactory())->hideGroup(filter_input(INPUT_GET, 'gid'));

@@ -1729,7 +1729,7 @@ var SwdView = {
         }
 
         if (!options) {
-            options = {};
+            options = {direction: 'up'}
         }
 
         if (!overlay) {
