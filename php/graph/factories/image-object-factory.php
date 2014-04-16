@@ -6,9 +6,9 @@ require $_SERVER['DOCUMENT_ROOT'] . '\php\graph\entities\include.php';
  * Factory for ImageData creation.
  */
 class ImageObjectFactory {
-    
+
     private $imageStream;
-    
+
     function __construct($imageStream) {
         $this->imageStream = $imageStream;
     }
@@ -41,8 +41,8 @@ class ImageObjectFactory {
 
         return $images;
     }
-    
-        /**
+
+    /**
      * With the given post and image array, construct an array ImageData objects.
      * 
      * @param type $comment
@@ -52,24 +52,16 @@ class ImageObjectFactory {
     public function getImageObjectsFromFQLComment($comment, $smallImages = true) {
         $images = array();
 
-        if ($comment['attachment'] && $comment['attachment']['media']) {
-            // For posts with an image, look for associated image data.
-            for ($i = 0; $i < count($comment['attachment']); $i++) {
-                if ($comment['attachment']['media'][$i]) {
-                    // Determine if this attachment is a photo or a link.
-                    if ($comment['attachment']['media'][$i]['image']) {
-                        $image = new ImageObject();
-                        $image->setUrl($comment['attachment']['media'][$i]['image']['src']);
-                        
-                        $images[] = $image;
-                    }
-                }
-            }
+        if ($comment['attachment'] && $comment['attachment']['media'] && $comment['attachment']['media']['image']) {
+            $image = new ImageObject();
+            $image->setUrl($comment['attachment']['media']['image']['src']);
+
+            $images[] = $image;
         }
 
         return $images;
     }
-    
+
     private function createImageObject($fbid, $smallImages = true) {
         $image = new ImageObject();
 
@@ -89,7 +81,7 @@ class ImageObjectFactory {
 
         return $image;
     }
-    
+
     private function getLargeImageUrl($image) {
         return $image[0]['source'];
     }
@@ -116,4 +108,5 @@ class ImageObjectFactory {
 
         return $image[$index]['source'];
     }
+
 }
