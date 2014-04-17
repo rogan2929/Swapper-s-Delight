@@ -174,13 +174,13 @@ error_reporting(E_ALL);
 
             <div id='main-toolbar' class='block toolbar'>
                 <div class='toolbar-group float-left'>
-<!--                    <div id='button-new' class='button toolbar-button'>
-                        <span class='button-icon icon-new'></span>
-                        <span>New Post</span>
-                    </div>-->
+                    <!--                    <div id='button-new' class='button toolbar-button'>
+                                            <span class='button-icon icon-new'></span>
+                                            <span>New Post</span>
+                                        </div>-->
                     <div id='button-view-group' class='button toolbar-button'>
                         <span class='button-icon icon-facebook'></span>
-                        <span>View Group in Facebook</span>
+                        <span>View in Facebook</span>
                     </div>
                     <div id='button-refresh' class='button toolbar-button'>
                         <span class='button-icon icon-refresh'></span>
@@ -201,6 +201,10 @@ error_reporting(E_ALL);
 
             <div id='post-details-toolbar' class='block toolbar floating-panel-toolbar hidden'>
                 <div class='toolbar-group float-left'>
+                    <div id='post-button-permalink' class='button toolbar-button'>
+                        <span class='button-icon icon-facebook'></span>
+                        <span>View in Facebook</span>
+                    </div>
                     <div id='post-button-like' class='button toolbar-button'>
                         <span class='button-icon icon-like'></span>
                         <span>Like</span>
@@ -208,10 +212,6 @@ error_reporting(E_ALL);
                     <div id='post-button-pm' class='button toolbar-button'>
                         <span class='button-icon icon-pm'></span>
                         <span>Private Message</span>
-                    </div>
-                    <div id='post-button-permalink' class='button toolbar-button'>
-                        <span class='button-icon icon-facebook'></span>
-                        <span>View in Facebook</span>
                     </div>
                 </div>
                 <div class='toolbar-group float-right'>
