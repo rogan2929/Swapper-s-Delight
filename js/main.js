@@ -854,7 +854,7 @@ var SwdPresenter = {
         });
     },
     onClickPostButtonPm: function(e, args) {
-        window.open('https://www.facebook.com/messages/' + SwdPresenter.selectedPost.actor.id);
+        window.open('https://www.facebook.com/messages/' + SwdPresenter.selectedPost.actor.uid);
 
     },
     onClickPostBlock: function(e, args) {
