@@ -398,7 +398,7 @@ class PostFactory extends BaseFactory {
             $post->setMessage($stream[$i]['message']);
 
             // Parse associated data from the query.
-            $post->setImageObjects($imgFactory->getImageObjectsFromFQLPost($stream[$i], $images, false));
+            $post->setImageObjects($imgFactory->getImageObjectsFromFQLPost($stream[$i], false));
             $post->setLinkData($lnkFactory->getLinkDataFromFQLResultSet($stream[$i]));
             $post->setActor($usrFactory->getUserFromFQLResultSet($stream[$i]));
 

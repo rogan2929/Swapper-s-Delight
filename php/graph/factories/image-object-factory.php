@@ -68,7 +68,7 @@ class ImageObjectFactory {
         for ($i = 0; $i < count($this->imageStream); $i++) {
             if ($fbid == $this->imageStream[$i]['object_id']) {
                 // See if we are trying to retrieve a small image. (Usually last in the array.)
-                if ($smallImages) {
+                if ($smallImages === true) {
                     $image->setUrl($this->getSmallImageUrl($this->imageStream[$i]['images']));
                 } else {
                     //$imageUrl = $images[$i]['images'][$index]['source'];
