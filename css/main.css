@@ -197,7 +197,7 @@ a:visited {
 }
 
 .post-block.hidden-block .timestamp, .hover .timestamp {
-/*    color: #f6f6f6;*/
+    color: white;
 }
 
 /*.post-comment-header .timestamp,#post-message-header .timestamp {
