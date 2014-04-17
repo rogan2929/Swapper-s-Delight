@@ -732,6 +732,9 @@ var SwdPresenter = {
     },
     onClickCommentImage: function(e, args) {
         var src = $(e.currentTarget).css('background-image');
+        
+        src = src.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+        
         SwdView.expandCommentImage(src);
     },
     onClickFloatingPanelCloseButton: function(e, args) {
