@@ -178,7 +178,7 @@ error_reporting(E_ALL);
                         <span class='button-icon icon-new'></span>
                         <span>New Post</span>
                     </div>-->
-                    <div id='button-view' class='button toolbar-button'>
+                    <div id='button-view-group' class='button toolbar-button'>
                         <span class='button-icon icon-new'></span>
                         <span>View Group in Facebook</span>
                     </div>

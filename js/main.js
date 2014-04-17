@@ -402,6 +402,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickButtonGroups', SwdPresenter.onClickButtonGroups, '#button-groups', 'click');
                                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
                                 SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
+                                SwdView.installHandler('onClickButtonViewGroup', SwdPresenter.onClickButtonViewGroup, '#button-view-group', 'click');
                                 SwdView.installHandler('onClickCommentDelete', SwdPresenter.onClickCommentDelete, '.post-comment .delete-button', 'click');
                                 SwdView.installHandler('onClickCommentImage', SwdPresenter.onClickCommentImage, '.post-comment-image', 'click');
                                 SwdView.installHandler('onClickFloatingPanelCloseButton', SwdPresenter.onClickFloatingPanelCloseButton, '.floating-panel-content > .close-button', 'click');
@@ -715,6 +716,11 @@ var SwdPresenter = {
     },
     onClickButtonRefresh: function(e, args) {
         SwdPresenter.loadPosts(false, true);
+    },
+    onClickButtonViewGroup: function(e, args) {
+        if (SwdPresenter.selectedGroup) {
+            window.open('https://www.facebook/com/groups/' + SwdPresenter.selectedGroup.gid, '_blank');
+        }
     },
     onClickCommentDelete: function(e, args) {
         var id;
