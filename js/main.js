@@ -1746,11 +1746,13 @@ var SwdView = {
         if (show) {
             // Make the panel modal by summoning an overlay.
             $(overlay).show();
-            $(id).show(effect, options, 0);
+            $(id).show();
+            //$(id).show(effect, options, 250);
         }
         else {
             $(overlay).hide();
-            $(id).hide(effect, options, 0);
+            $(id).hide();
+            //$(id).hide(effect, options, 250);
         }
     }
 };
