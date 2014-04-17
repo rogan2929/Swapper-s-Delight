@@ -174,9 +174,13 @@ error_reporting(E_ALL);
 
             <div id='main-toolbar' class='block toolbar'>
                 <div class='toolbar-group float-left'>
-                    <div id='button-new' class='button toolbar-button'>
+<!--                    <div id='button-new' class='button toolbar-button'>
                         <span class='button-icon icon-new'></span>
                         <span>New Post</span>
+                    </div>-->
+                    <div id='button-view' class='button toolbar-button'>
+                        <span class='button-icon icon-new'></span>
+                        <span>View Group in Facebook</span>
                     </div>
                     <div id='button-refresh' class='button toolbar-button'>
                         <span class='button-icon icon-refresh'></span>
