@@ -318,9 +318,14 @@ var SwdPresenter = {
      * @param {type} error
      */
     handleError: function(error) {
-        var message = error.responseText;
+        var message, text, code;
+        
+        message = error.responseText;
 
         switch (error.status) {
+            case 400:
+                SwdPresenter.message('error', message);
+                break;
             case 401:
                 // Access denied, most likely from an expired access token.
                 // Get a new access token by simply refreshing the page.
