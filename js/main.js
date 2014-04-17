@@ -1089,7 +1089,7 @@ var SwdView = {
             e.stopPropagation();
         });
 
-        $('.button, .button.menu-item, .button.toolbar-button, .selection-item').hover(function() {
+        $('.button, .menu-item, .button.toolbar-button, .selection-item').hover(function() {
             $(this).addClass('hover', 100);
         }, function() {
             $(this).removeClass('hover', 100);
