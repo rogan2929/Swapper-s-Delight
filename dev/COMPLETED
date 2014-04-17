@@ -29,3 +29,4 @@ Back-end should be as stateless as possible. (Currently selected gid tracked in 
 Add better error handling.
 filter_input() for retrieving passed variables.
 *****************************
+*Render images that are posted in comments.

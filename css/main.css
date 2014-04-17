@@ -904,6 +904,8 @@ a.link-title {
     margin-top: auto;
     margin-bottom: auto;
     height: 3em;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 #post-details-user-data {
