@@ -346,8 +346,10 @@ a:visited {
 }
 
 .block.hover {
-    background-color: #f6f6f6;
-    color: #444;
+/*    background-color: #f6f6f6;
+    color: #444;*/
+    background-color: #4395D1;
+    color: white;
     cursor: pointer;
 }
 
