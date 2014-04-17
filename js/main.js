@@ -1600,10 +1600,9 @@ var SwdView = {
 
         // Display message content, or hide it if empty.
         if (post.message !== '') {
-            $('#post-message').show();
-            $('#post-message-text').html(post.message);
+            $('#post-message-text').show().html(post.message);
         } else {
-            $('#post-message').hide();
+            $('#post-message-text').hide();
         }
 
         // Set link data and display it.
