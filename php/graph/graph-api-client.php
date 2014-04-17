@@ -76,7 +76,7 @@ class GraphApiClient {
             // Set a 400 response code and then exit with the FB exception message.
             http_response_code(400);
 
-            die($ex->getMessage());
+            die($ex->getCode() . ': ' . $ex->getMessage());
         }
     }
 
