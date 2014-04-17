@@ -1732,7 +1732,7 @@ var SwdView = {
      */
     toggleFloatingPanel: function(id, show, effect, options, overlay) {
         if (!effect) {
-            effect = 'slide';
+            effect = 'none';
         }
 
         if (!options) {
