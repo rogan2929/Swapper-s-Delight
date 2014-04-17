@@ -403,6 +403,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
                                 SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
                                 SwdView.installHandler('onClickCommentDelete', SwdPresenter.onClickCommentDelete, '.post-comment .delete-button', 'click');
+                                SwdView.installHandler('onClickCommentImage', SwdPresenter.onClickCommentImage, '.post-comment-image', 'click');
                                 SwdView.installHandler('onClickFloatingPanelCloseButton', SwdPresenter.onClickFloatingPanelCloseButton, '.floating-panel-content > .close-button', 'click');
                                 SwdView.installHandler('onClickFloatingPanelContent', SwdPresenter.onClickFloatingPanelContent, '.floating-panel-content', 'click');
                                 SwdView.installHandler('onClickFloatingPanelModal', SwdPresenter.onClickFloatingPanelModal, '.floating-panel.modal', 'click');
@@ -729,6 +730,10 @@ var SwdPresenter = {
             }
         });
     },
+    onClickCommentImage: function(e, args) {
+        var src = $(e.currentTarget).css('background-image');
+        SwdView.expandCommentImage(src);
+    },
     onClickFloatingPanelCloseButton: function(e, args) {
         SwdView.toggleFloatingPanel('.floating-panel', false);
         SwdView.toggleToolbar('', false);
@@ -1049,9 +1054,8 @@ var SwdView = {
             commentImage = $('<div class="post-comment-image"></div>');
             $(commentImage).css('background-image', imageUrl).appendTo($(commentDiv));
 
-            $(commentImage).click(function() {
-                //alert('test');
-            });
+            // Hook up the click event handler.
+            $(commentImage).click(SwdView.handlers['onClickCommentImage']);
         }
 
         // If the current user is the owner of the comment, display the delete and edit buttons.
@@ -1318,6 +1322,9 @@ var SwdView = {
             // Update comment counts.
             $('#' + posts[i].id + ' .comment-count').text(posts[i].commentCount);
         }
+    },
+    expandCommentImage: function(src) {
+        window.open(src, '_blank');
     },
     /***
      * Fill the post-image-container with post-image-tiles.
