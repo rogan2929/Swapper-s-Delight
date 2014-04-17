@@ -761,8 +761,9 @@ var SwdPresenter = {
     onClickLogout: function(e, args) {
         // User selected 'logout' from the settings menu.
         // Take them back to their main Facebook page.
-        window.location = "https://www.facebook.com";
-    },
+        //window.location = "https://www.facebook.com";
+        FB.logout();
+   },
     onClickMessageButtonNo: function(e, args) {
         if (SwdPresenter.messageCallback) {
             SwdPresenter.messageCallback.call(SwdPresenter, 0);
