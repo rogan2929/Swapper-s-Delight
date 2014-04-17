@@ -538,6 +538,10 @@ a:visited {
     background-image: url('/icons/paperplus32.png');
 }
 
+.toolbar-button .button-icon.icon-facebook {
+    background-image: url('/img/facebook.png');
+}
+
 .toolbar-button .button-icon.icon-refresh {
     background-image: url('/icons/exchange32.png');
 }

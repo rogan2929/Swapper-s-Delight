@@ -179,7 +179,7 @@ error_reporting(E_ALL);
                         <span>New Post</span>
                     </div>-->
                     <div id='button-view-group' class='button toolbar-button'>
-                        <span class='button-icon icon-new'></span>
+                        <span class='button-icon icon-facebook'></span>
                         <span>View Group in Facebook</span>
                     </div>
                     <div id='button-refresh' class='button toolbar-button'>
@@ -210,6 +210,7 @@ error_reporting(E_ALL);
                         <span>Private Message</span>
                     </div>
                     <div id='post-button-permalink' class='button toolbar-button'>
+                        <span class='button-icon icon-facebook'></span>
                         <span>View in Facebook</span>
                     </div>
                 </div>
