@@ -49,34 +49,6 @@ class CommentFactory extends BaseFactory {
             $comments[] = $comment;
         }
         
-//        for ($i = 0; $i < count($post['comments']); $i++) {
-//            // Replace any line breaks with <br/>
-//            if ($post['comments'][$i]['text']) {
-//                $post['comments'][$i]['text'] = nl2br($post['comments'][$i]['text']);
-//            }
-//
-//            // Set image urls.
-//            $post['comments'][$i]['image_url'] = array();
-//
-//            if ($post['comments'][$i]['attachment'] && $post['comments'][$i]['attachment']['media']) {
-//                //echo var_dump($post['comments'][$i]['attachment']['media']['image']) . "<br/>";
-//                $post['comments'][$i]['image_url'][] = $post['comments'][$i]['attachment']['media']['image']['src'];
-//            }
-//
-//            unset($post['comments'][$i]['attachment']);
-//
-//            // For each comment, attach user data to it.
-//            for ($j = 0; $j < count($response[4]['fql_result_set']); $j++) {
-//                $userDataObject = $response[4]['fql_result_set'][$j];
-//
-//                // See if the comment is from the user.
-//                if ($post['comments'][$i]['fromid'] == $userDataObject['uid']) {
-//                    $post['comments'][$i]['user'] = $userDataObject;
-//                    break;
-//                }
-//            }
-//        }
-        
         return $comments;
     }
     
@@ -124,7 +96,8 @@ class CommentFactory extends BaseFactory {
         $comment->setActor((new UserFactory())->createUser($newComment['user']));
         
         // For each comment, look for associated image attachment.
-        $comment->setImageObjects($imgFactory->getImageObjectsFromFQLComment($newComment, false));
+        //$comment->setImageObjects($imgFactory->getImageObjectsFromFQLComment($newComment, false));
+        $comment->setImageObjects(array());
 
         return $comment;
     }
