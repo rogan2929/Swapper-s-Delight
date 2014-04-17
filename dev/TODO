@@ -1,15 +1,5 @@
-*****************************
-Clean up the back end code. 
-*****************************
-Session state managed automatically, and behind the scenes.
-    'stream'
-    'accessToken'
-Back-end should be as stateless as possible. (Currently selected gid tracked in front-end, passed to calls.)
-Add better error handling.
-filter_input() for retrieving passed variables.
 
 
-*Implement 'New' post functionality.
 Implement check to see that app has the correct permissions.
 *Artwork.
 *Privacy Policy.
