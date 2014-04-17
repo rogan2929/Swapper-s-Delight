@@ -719,7 +719,7 @@ var SwdPresenter = {
     },
     onClickButtonViewGroup: function(e, args) {
         if (SwdPresenter.selectedGroup) {
-            window.open('https://www.facebook/com/groups/' + SwdPresenter.selectedGroup.gid, '_blank');
+            window.open('https://www.facebook.com/groups/' + SwdPresenter.selectedGroup.gid, '_blank');
         }
     },
     onClickCommentDelete: function(e, args) {
