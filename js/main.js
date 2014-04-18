@@ -432,6 +432,8 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block.block.unique', 'click');
                                 SwdView.installHandler('onClickPostBlockLoadMore', SwdPresenter.onClickPostBlockLoadMore, '.post-block.load-more', 'click');
                                 SwdView.installHandler('onClickPostImageTile', SwdPresenter.onClickPostImageTile, '.post-image-tile', 'click');
+                                SwdView.installHandler('onClickPostNavPrev', SwdPresenter.onClickPostNavPrev, '#details-prev', 'click');
+                                SwdView.installHandler('onClickPostNavNext', SwdPresenter.onClickPostNavNext, '#details-next', 'click');
                                 SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
                                 SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .close-button', 'click');
                                 SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
@@ -910,6 +912,12 @@ var SwdPresenter = {
     },
     onClickPostImageTile: function(e, args) {
         SwdView.toggleSelectedImage($(e.currentTarget))
+    },
+    onClickPostNavPrev: function(e, args) {
+        alert('prev');
+    },
+    onClickPostNavNext: function(e, args) {
+        alert('next');
     },
     onClickSelectGroup: function(e, args) {
         var i, id, group;
