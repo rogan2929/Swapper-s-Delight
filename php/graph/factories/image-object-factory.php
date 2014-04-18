@@ -53,7 +53,7 @@ class ImageObjectFactory {
         $images = array();
 
         if ($comment['attachment'] && $comment['attachment']['media'] && $comment['attachment']['media']['image']) {
-            $image = new ImageObject();
+            $image = new Image();
             $image->setUrl($comment['attachment']['media']['image']['src']);
 
             $images[] = $image;
@@ -63,7 +63,7 @@ class ImageObjectFactory {
     }
 
     private function createImageObject($fbid, $smallImages = true) {
-        $image = new ImageObject();
+        $image = new Image();
 
         for ($i = 0; $i < count($this->imageStream); $i++) {
             if ($fbid == $this->imageStream[$i]['object_id']) {

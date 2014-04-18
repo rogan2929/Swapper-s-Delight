@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * All includes for /php/graph/entities.
+ */
 require_once 'comment.php';
 require_once 'group.php';
 require_once 'graph-object.php';
