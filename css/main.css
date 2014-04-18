@@ -938,10 +938,12 @@ a.link-title {
 
 .navigation.prev {
     left: 0;
+    background-image: url('/img/nav-prev.png');
 }
 
 .navigation.next {
     right: 0;
+    background-image: url('/img/nav-next.png');
 }
 
 #post-content {
