@@ -920,6 +920,22 @@ a.link-title {
     height: 60px;
 }
 
+.navigation {
+    background-color: green;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    z-index: 1001;
+}
+
+.navigation.prev {
+    left: 0;
+}
+
+.navigation.next {
+    right: 0;
+}
+
 #post-content {
     margin-bottom: 0px;
     padding-bottom: 0px;
