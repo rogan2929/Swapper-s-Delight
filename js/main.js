@@ -654,6 +654,8 @@ var SwdPresenter = {
      * @param {type} id
      */
     loadPostDetails: function(id) {
+        var post;
+        
         SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
         SwdView.toggleFloatingPanel('#post-details-panel', true);
         SwdView.toggleToolbar('#post-details-toolbar', true);
@@ -896,7 +898,6 @@ var SwdPresenter = {
     },
     onClickPostBlock: function(e, args) {
         var id;
-        var post;
 
         // Close any open menus.
         SwdView.closeAllUiMenus();
