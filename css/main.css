@@ -921,7 +921,7 @@ a.link-title {
 }
 
 .navigation {
-    background-color: green;
+    background-color: transparent;
     background-size: contain;
     background-repeat: no-repeat;
     height: 50px;
@@ -933,6 +933,7 @@ a.link-title {
     top: 0;
     bottom: 0;
     opacity: 0.3;
+    cursor: pointer;
 }
 
 .navigation.prev {
@@ -941,6 +942,10 @@ a.link-title {
 
 .navigation.next {
     right: 0;
+}
+
+.navigation:hover {
+    background-color: #aaa;
 }
 
 #post-content {
