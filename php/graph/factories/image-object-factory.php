@@ -3,24 +3,27 @@
 require $_SERVER['DOCUMENT_ROOT'] . '\php\graph\entities\include.php';
 
 /**
- * Factory for ImageData creation.
+ * Factory for Image objects.
  */
 class ImageObjectFactory {
 
     private $imageStream;
 
+    /**
+     * Constructor
+     * @param array $imageStream
+     */
     function __construct($imageStream) {
         $this->imageStream = $imageStream;
     }
 
     /**
-     * With the given post and image array, construct an array ImageData objects.
-     * 
+     * Parse an FQL stream result and construct an array of Image entities.
      * @param type $post
      * @param type $smallImages
-     * @return type
+     * @return array
      */
-    public function getImageObjectsFromFQLPost($post, $smallImages = true) {
+    public function getImageObjectsFromFQL($post, $smallImages = true) {
         $images = array();
 
         if ($post['attachment'] && $post['attachment']['media']) {
@@ -43,13 +46,11 @@ class ImageObjectFactory {
     }
 
     /**
-     * With the given post and image array, construct an array ImageData objects.
-     * 
+     * Parse an FQL comment result and construct an array of Image entities.
      * @param type $comment
-     * @param type $smallImages
-     * @return type
+     * @return array
      */
-    public function getImageObjectsFromFQLComment($comment, $smallImages = true) {
+    public function getImageObjectsFromFQLComment($comment) {
         $images = array();
 
         if ($comment['attachment'] && $comment['attachment']['media'] && $comment['attachment']['media']['image']) {
@@ -62,9 +63,16 @@ class ImageObjectFactory {
         return $images;
     }
 
+    /**
+     * Create an image object with the given ID.
+     * @param type $fbid
+     * @param type $smallImages
+     * @return \Image
+     */
     private function createImageObject($fbid, $smallImages = true) {
         $image = new Image();
 
+        // Loop through the imageStream and try to find a match for the given FBID.
         for ($i = 0; $i < count($this->imageStream); $i++) {
             if ($fbid == $this->imageStream[$i]['object_id']) {
                 // See if we are trying to retrieve a small image. (Usually last in the array.)
@@ -82,14 +90,20 @@ class ImageObjectFactory {
         return $image;
     }
 
+    /**
+     * Finds the image source URL of the largest image in the FQL image stream.
+     * @param array $image
+     * @return string
+     */
     private function getLargeImageUrl($image) {
         return $image[0]['source'];
     }
 
-    /*     * *
-     * In an array, find the smallest Facebook image.
+    /**
+     * Finds the image source of the URL of the smallest image in the FQL image stream.
+     * @param array $image
+     * @return string
      */
-
     private function getSmallImageUrl($image) {
         // Grab the 'middle' image for a scaled version of the full size image.
         $index = intval(floor((count($image) / 2)));

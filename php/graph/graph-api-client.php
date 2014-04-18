@@ -97,5 +97,20 @@ class GraphApiClient {
     public function deleteObject($id) {
         $this->api('/' . $id, 'DELETE');
     }
+    
+    /**
+     * Like a Facebook object.
+     * @param string $id
+     */
+    public function likeObject($id) {
+        $this->api('/' . $id . '/likes', 'POST', array('user_likes' => true));
+    }
 
+    /**
+     * Unlike a Facebook object.
+     * @param type $id
+     */
+    public function unLikeObject($id) {
+        $this->api('/' . $id . '/likes', 'DELETE');
+    }
 }

@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * All includes for /php/graph/factories.
+ */
 require 'group-factory.php';
 require 'post-factory.php';
 require 'comment-factory.php';

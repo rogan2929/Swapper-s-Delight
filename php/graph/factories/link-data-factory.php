@@ -3,19 +3,19 @@
 require 'base-factory.php';
 
 /**
- * A factory to create LinkData objects.
+ * A factory for LinkData objects.
  */
 class LinkDataFactory extends BaseFactory {
     
     /**
-     * With the given data, constrcut a LinkData object.
+     * Parse an FQL stream result and construct a LinkData entity.
      * @param type $post
-     * @return LinkData
+     * @return /LinkData
      */
-    function getLinkDataFromFQLResultSet($post) {
+    function getLinkDataFromFQL($post) {
         $linkData = null;
 
-        // See if the attachment type is of type 'link'.
+        // Verify that the attachment type is of type 'link'.
         if ($post['attachment'] && $post['attachment']['media'] && $post['attachment']['media'][0] && $post['attachment']['media'][0]['type'] == 'link') {
             $linkData = new LinkData();
             $linkData->setCaption($post['attachment']['caption']);

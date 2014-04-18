@@ -5,7 +5,7 @@ require 'user-factory.php';
 require 'image-object-factory.php';
 
 /*
- * Factory for comment objects.
+ * Factory for Comment objects.
  */
 class CommentFactory extends BaseFactory {
     
@@ -13,7 +13,7 @@ class CommentFactory extends BaseFactory {
      * Parse an FQL result and construct an array of Comment entities.
      * @param type $commentStream
      */
-    public function getCommentsFromFQLResultSet($commentStream, $userStream, $imageStream) {
+    public function getCommentsFromFQL($commentStream, $userStream, $imageStream) {
         $comments = array();
         $usrFactory = new UserFactory();
         $imgFactory = new ImageObjectFactory($imageStream);
@@ -43,7 +43,7 @@ class CommentFactory extends BaseFactory {
             }
             
             // For each comment, look for associated image attachment.
-            $comment->setImageObjects($imgFactory->getImageObjectsFromFQLComment($commentStream[$i], false));
+            $comment->setImageObjects($imgFactory->getImageObjectsFromFQLComment($commentStream[$i]));
             
             // Add the comment to the array.
             $comments[] = $comment;

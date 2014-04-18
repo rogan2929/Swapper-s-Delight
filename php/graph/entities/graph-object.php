@@ -5,7 +5,7 @@
  * implement JsonSerializable.
  */
 abstract class GraphObject implements JsonSerializable {
-
+    
     protected $createdTime;
     protected $updatedTime;
 

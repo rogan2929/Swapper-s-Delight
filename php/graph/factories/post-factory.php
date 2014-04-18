@@ -24,7 +24,10 @@ class PostFactory extends BaseFactory {
     const USER_QUERY = 'SELECT uid,last_name,first_name,pic_square,profile_url,pic FROM user ';
     const COMMENT_QUERY = 'SELECT fromid,text,text_tags,attachment,time,id FROM comment ';
     const IMAGE_QUERY = 'SELECT object_id,images FROM photo ';
-
+    
+    /**
+     * Constructor
+     */
     function __construct() {
         parent::__construct();
         
@@ -45,17 +48,17 @@ class PostFactory extends BaseFactory {
     
     /**
      * Like a post.
-     * @param type $postId
-     * @param type $userLikes
-     * @return type
+     * @param string $postId
+     * @param bool $userLikes
+     * @return bool
      */
     public function likePost($postId, $userLikes) {
         if ($userLikes == true) {
             // Like the post.
-            $this->graphApiClient->api('/' . $postId . '/likes', 'POST', array('user_likes' => true));
+            $this->graphApiClient->likeObject($postId);
         } else {
-            // Delete the post's like.
-            $this->graphApiClient->api('/' . $postId . '/likes', 'DELETE');
+            // Unlike the post.
+            $this->graphApiClient->unLikeObject($postId);
         }
 
 //        // Update the cached post stream.
@@ -73,15 +76,15 @@ class PostFactory extends BaseFactory {
 
     /**
      * Set the currently loaded group's gid.
-     * @param type $gid
+     * @param string $gid
      */
     public function setGid($gid) {
         $this->gid = $gid;
     }
 
     /**
-     * Getter for $this->stream.
-     * @return type
+     * Gets the cached post stream.
+     * @return array
      */
     public function getStream() {
         return $this->stream;
@@ -89,9 +92,9 @@ class PostFactory extends BaseFactory {
 
     /**
      * Retrieve posts that are liked by the current user.
-     * @param type $offset
-     * @param type $limit
-     * @return type
+     * @param int $offset
+     * @param int $limit
+     * @return array
      */
     public function getLikedPosts($offset, $limit) {
         $posts = array();
@@ -109,10 +112,10 @@ class PostFactory extends BaseFactory {
     }
 
     /**
-     * Retrieves posts owned by the current user.
-     * @param type $offset
-     * @param type $limit
-     * @return type
+     * Retrieves posts that were created by the current user.
+     * @param int $offset
+     * @param int $limit
+     * @return array
      */
     public function getMyPosts($offset, $limit) {
         $uid = $this->graphApiClient->getMe();
@@ -132,10 +135,10 @@ class PostFactory extends BaseFactory {
 
     /**
      * Retrieves posts newly created in the specified group. Optionally can trigger a refresh of the stream cache.
-     * @param type $refresh
-     * @param type $offset
-     * @param type $limit
-     * @return type
+     * @param bool $refresh
+     * @param int $offset
+     * @param int $limit
+     * @return array
      */
     public function getNewPosts($refresh, $offset, $limit) {
         // Get a new stream if necessary.
@@ -147,10 +150,9 @@ class PostFactory extends BaseFactory {
     }
 
     /**
-     * Retrieves additional data for the given post id.
+     * Retrieves additional data for the given post and populates a /Post entity object.
      * @param type $postId
-     * @return type
-     * @throws Exception
+     * @return /Post
      */
     public function getPostDetails($postId) {
         $queries = array(
@@ -180,7 +182,6 @@ class PostFactory extends BaseFactory {
             $raw = $response[0]['fql_result_set'][0];
             
             // Collect the returned data.
-            //$post = $response[0]['fql_result_set'][0];
             $post = new Post();
             
             // post_id,message,actor_id,permalink,like_info,share_info,comment_info,tagged_ids,attachment,created_time
@@ -203,23 +204,23 @@ class PostFactory extends BaseFactory {
 
         // Extract image data for the post.
         $imgFactory = new ImageObjectFactory($response[2]['fql_result_set']);
-        $post->setImageObjects($imgFactory->getImageObjectsFromFQLPost($raw, false));
+        $post->setImageObjects($imgFactory->getImageObjectsFromFQL($raw, false));
 
         // Extract link data.
-        $post->setLinkData((new LinkDataFactory())->getLinkDataFromFQLResultSet($raw));
+        $post->setLinkData((new LinkDataFactory())->getLinkDataFromFQL($raw));
 
         // Determine type of post.
         $post->setType($this->getPostType($post));
         
         // Parse comment data and set it.
-        $post->setComments((new CommentFactory())->getCommentsFromFQLResultSet($response[1]['fql_result_set'], $response[5]['fql_result_set'], $response[4]['fql_result_set']));
+        $post->setComments((new CommentFactory())->getCommentsFromFQL($response[1]['fql_result_set'], $response[5]['fql_result_set'], $response[4]['fql_result_set']));
 
         return $post;
     }
 
     /**
-     * Retrieves refreshed stream data for the given post ids.
-     * @param type $postIds
+     * Retrieves refreshed post data for the given post ids.
+     * @param array $postIds
      */
     public function getRefreshedStreamData($postIds) {
         $posts = array();
@@ -237,7 +238,7 @@ class PostFactory extends BaseFactory {
     }
 
     /**
-     * Performs an update the local stream cache.
+     * Forces an update of the cached post stream.
      * @return boolean
      */
     public function refreshStream($gid) {
@@ -250,7 +251,7 @@ class PostFactory extends BaseFactory {
     }
 
     /**
-     * Search the stream cache for posts that match the search string. Search is based on message and poster's name.
+     * Search the post cache for posts that match the search string. Search is based on message and poster's name.
      * @param type $search
      * @param type $offset
      * @param type $limit
@@ -270,8 +271,6 @@ class PostFactory extends BaseFactory {
 
         return $this->getPostData($posts, $offset, $limit);
     }
-
-    /** Private Methods * */
 
     /**
      * Fetches the group's post stream.
@@ -323,10 +322,13 @@ class PostFactory extends BaseFactory {
         return 3600 * $windowSize;
     }
 
-    /*
+    /**
      * Retrieve additional data for the posts in the provided array.
+     * @param array $posts
+     * @param int $offset
+     * @param int $limit
+     * @return array
      */
-
     private function getPostData($posts, $offset, $limit) {
         $queries = array();
         $result = array();
@@ -377,10 +379,13 @@ class PostFactory extends BaseFactory {
         return $result;
     }
 
-    /*
-     * Take a response and construct post objects out of it.
+    /**
+     * Take a response and construct \Post objects out of it.
+     * @param array $stream
+     * @param array $images
+     * @param array $users
+     * @return array
      */
-
     private function processStreamQuery($stream, $images, $users) {
         $posts = array();
         $imgFactory = new ImageObjectFactory($images);
@@ -398,8 +403,8 @@ class PostFactory extends BaseFactory {
             $post->setMessage($stream[$i]['message']);
 
             // Parse associated data from the query.
-            $post->setImageObjects($imgFactory->getImageObjectsFromFQLPost($stream[$i], false));
-            $post->setLinkData($lnkFactory->getLinkDataFromFQLResultSet($stream[$i]));
+            $post->setImageObjects($imgFactory->getImageObjectsFromFQL($stream[$i], false));
+            $post->setLinkData($lnkFactory->getLinkDataFromFQL($stream[$i]));
             $post->setActor($usrFactory->getUserFromFQLResultSet($stream[$i]));
 
             // Determine which kind of post this is.
@@ -417,14 +422,11 @@ class PostFactory extends BaseFactory {
         return $posts;
     }
 
-    /*
-     * Determines the post type:
-     *  1. Image Posts (text and non-text, doesn't matter.) ('image')
-     *  2. Text Only Posts ('text')
-     *  3. Link Only Posts ('link')
-     *  4. Link + Text Posts ('textlink')
+    /**
+     * Determine the post's type.
+     * @param Post $post
+     * @return string
      */
-
     private function getPostType($post) {
         $postType = 'unknown';
 
@@ -447,10 +449,10 @@ class PostFactory extends BaseFactory {
     }
 
     /**
-     * Post a comment on a post.
+     * Post a comment.
      * @param type $postId
      * @param type $comment
-     * @return type
+     * @return Comment
      */
     public function postComment($postId, $comment) {
         // Post the comment and get the response
@@ -492,10 +494,11 @@ class PostFactory extends BaseFactory {
         return $comment;
     }
     
-    /*
+    /**
      * Query the FQL stream table for some basic data that will be cached.
+     * @param bool $prefetchOnly
+     * @return array
      */
-
     private function queryStream($prefetchOnly) {
         $windowStart = time();
         $windowSize = $this->getOptimalWindowSize();
@@ -521,11 +524,10 @@ class PostFactory extends BaseFactory {
 
     /**
      * Execute a batch request against the selected group's feed.
-     * 
-     * @param type $windowSize
-     * @param type $windowStart
-     * @param type $batchSize
-     * @param type $iterations
+     * @param int $windowSize
+     * @param int $windowStart
+     * @param int $batchSize
+     * @param int $iterations
      * @return array
      */
     public function getFeedData($windowSize, $windowStart, $batchSize, $iterations = 1) {
@@ -590,10 +592,9 @@ class PostFactory extends BaseFactory {
         return $posts;
     }
 
-    /*
+    /**
      * Forcibly pause the thread in order for fetchStream to complete.
      */
-
     private function waitForFetchStreamCompletion() {
         while ($_SESSION['refreshing'] == true) {
             sleep(3);

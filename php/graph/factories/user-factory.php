@@ -9,13 +9,17 @@ class UserFactory extends BaseFactory {
     
     private $userStream;
     
+    /**
+     * Constructor
+     * @param array $userStream
+     */
     function __construct($userStream = null) {
         parent::__construct();
         $this->userStream = $userStream;
     }
 
     /**
-     * Create a user object from FQL provided user data.
+     * Create a user object from provided FQL user data.
      * @param type $user
      * @return \User
      */
