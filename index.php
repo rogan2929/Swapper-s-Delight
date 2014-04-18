@@ -74,6 +74,8 @@ error_reporting(E_ALL);
 
                 <div id='post-details-panel' class='floating-panel fullsize hidden'>
                     <div class='floating-panel-content ui-widget'>
+                        <div id='details-prev' class='navigation'></div>
+                        <div id='details-next' class='navigation'></div>
                         <div class='close-button'></div>
                         <div id='details-left-column' class='column left'>
                             <div id='post-content' class='floating-panel-section'>
