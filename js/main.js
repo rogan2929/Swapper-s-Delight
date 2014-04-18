@@ -931,6 +931,11 @@ var SwdPresenter = {
             prevIndex = SwdPresenter.postIds.length - 1;
         }
         
+        // Watch out for any terminating blocks.
+        if (SwdPresenter.postIds[prevIndex].id === 'terminator') {
+            prevIndex--;
+        }
+        
         // Load the previous post.
         SwdPresenter.loadPostDetails(SwdPresenter.postIds[prevIndex]);
     },
@@ -938,6 +943,11 @@ var SwdPresenter = {
         var nextIndex;
         
         nextIndex = SwdPresenter.postIds.indexOf(SwdPresenter.selectedPost.id) + 1;
+        
+        // Watch out for any terminating blocks.
+        if (SwdPresenter.postIds[nextIndex].id === 'terminator') {
+            nextIndex++;
+        }
         
         // Wrap around to the end.
         if (nextIndex >= SwdPresenter.postIds.length) {
