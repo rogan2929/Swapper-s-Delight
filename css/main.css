@@ -921,7 +921,6 @@ a.link-title {
 }
 
 .navigation {
-    background-color: white;
     background-size: contain;
     background-repeat: no-repeat;
     height: 80px;
@@ -932,7 +931,7 @@ a.link-title {
     margin-bottom: auto;
     top: 0;
     bottom: 0;
-    opacity: 0.3;
+    opacity: 0.05;
     cursor: pointer;
 }
 
