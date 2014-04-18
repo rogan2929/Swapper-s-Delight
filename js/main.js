@@ -1,5 +1,8 @@
 "use strict";
-// "Enums"
+
+/**
+ * Enums
+ */
 
 // SelectedView Enum
 var SelectedView = {
