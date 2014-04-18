@@ -319,28 +319,29 @@ var SwdPresenter = {
      */
     handleError: function(error) {
         var message, text, code;
-        
-        message = error.responseText;
 
         switch (error.status) {
             case 400:
-                SwdPresenter.message('error', message);
-                break;
-            case 401:
-                // Access denied, most likely from an expired access token.
-                // Get a new access token by simply refreshing the page.
-                //SwdView.showMessage(message);
-                SwdPresenter.message('info', message, function(response) {
-                    // Send the user to the app's main url.
-                    window.location = window.location.href;
-                });
+                message = JSON.parse(error.responseText)
+
+                if (message.code === 'OAuthException') {
+                    // Access denied, most likely from an expired access token.
+                    // Get a new access token by simply refreshing the page.
+                    SwdPresenter.message('info', 'Oops! It looks like your session most likely timed out. Click OK to start a new one.', function(response) {
+                        // Send the user to the app's main url.
+                        window.location = window.location.href;
+                    });
+                }
+                else {
+                    SwdPresenter.message('error', message.message);
+                }
 
                 break;
             case 500:
                 SwdPresenter.message('error', 'Oops! Something happened. Try reloading the app, and with any luck, the problem will go away on its own.');
                 break;
             default:
-                SwdPresenter.message('error', message);
+                SwdPresenter.message('error', error.responseText);
         }
     },
     /**
@@ -743,9 +744,9 @@ var SwdPresenter = {
     },
     onClickCommentImage: function(e, args) {
         var src = $(e.currentTarget).css('background-image');
-        
+
         src = src.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-        
+
         SwdView.expandCommentImage(src);
     },
     onClickFloatingPanelCloseButton: function(e, args) {
@@ -768,7 +769,7 @@ var SwdPresenter = {
         // Take them back to their main Facebook page.
         //window.location = "https://www.facebook.com";
         FB.logout();
-   },
+    },
     onClickMessageButtonNo: function(e, args) {
         if (SwdPresenter.messageCallback) {
             SwdPresenter.messageCallback.call(SwdPresenter, 0);

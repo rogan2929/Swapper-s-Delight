@@ -2,7 +2,7 @@
 
 require_once 'facebook/facebook.php';
 
-Facebook::$CURL_OPTS[CURLOPT_CAINFO] = getcwd().'/fb_ca_chain_bundle.crt';
+Facebook::$CURL_OPTS[CURLOPT_CAINFO] = getcwd() . '/fb_ca_chain_bundle.crt';
 
 if (!session_id()) {
     session_start();
@@ -17,7 +17,6 @@ class GraphApiClient {
     // Prod
     //const APP_ID = '1401018793479333';
     //const APP_SECRET = '603325411a953e21ccbc29d2c7d50e7e';
-    
     // Test
     const APP_ID = '652991661414427';
     const APP_SECRET = 'b8447ce73d2dcfccde6e30931cfb0a90';
@@ -76,7 +75,10 @@ class GraphApiClient {
             // Set a 400 response code and then exit with the FB exception message.
             http_response_code(400);
 
-            die($ex->getCode() . ': ' . $ex->getMessage());
+            die(json_encode(array(
+                'code' => $ex->getCode(),
+                'message' => $ex->getMessage()
+            )));
         }
     }
 
@@ -95,4 +97,5 @@ class GraphApiClient {
     public function deleteObject($id) {
         $this->api('/' . $id, 'DELETE');
     }
+
 }
