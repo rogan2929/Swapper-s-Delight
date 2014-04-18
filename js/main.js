@@ -1633,7 +1633,7 @@ var SwdView = {
         var userImage, postImage, i, timeStamp;
 
         // Display the 'Delete' button for owned posts. Otherwise, hide it.
-        if (post.actor_id === SwdPresenter.uid) {
+        if (post.actor.uid === SwdPresenter.uid) {
             $('.personal-button').fadeIn();
         }
         else {
