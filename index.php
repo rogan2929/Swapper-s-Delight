@@ -61,7 +61,7 @@ error_reporting(E_ALL);
                     <input type='text' id='main-search' placeholder='Search this group'>
                     <div class='separator'></div>
                     <div>
-                        <a href='https://www.facebook.com/SwappersDelight' target='_blank'>Swapper's Delight on Facebook</a>
+                        <a href='https://www.facebook.com/SwappersDelight' target='_blank'>Our Facebook Page</a>
                     </div>
                     <div id='like-button-wrapper'>
                         <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fapps.facebook.com%2F1401018793479333&amp;width=200&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=1401018793479333" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:21px;" allowTransparency="true"></iframe>
@@ -74,6 +74,8 @@ error_reporting(E_ALL);
 
                 <div id='post-details-panel' class='floating-panel fullsize hidden'>
                     <div class='floating-panel-content ui-widget'>
+                        <div id='details-prev' class='navigation prev'></div>
+                        <div id='details-next' class='navigation next'></div>
                         <div class='close-button'></div>
                         <div id='details-left-column' class='column left'>
                             <div id='post-content' class='floating-panel-section'>
@@ -106,7 +108,7 @@ error_reporting(E_ALL);
                         <div id='details-right-column' class='column block right'>
                             <div id='post-image-container'></div>
                             <div id='post-no-image-desc' class='hidden'>
-                                <span class='hint'>Hint: Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. Click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook.</span>
+                                <span class='hint'>Hint: Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. Click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook. You'll be able to see any hidden photos there.</span>
 <!--                                <span><a href='#' class='privacy-settings-about'>What's this all about?</a></span>-->
                             </div>
                         </div>
@@ -174,9 +176,13 @@ error_reporting(E_ALL);
 
             <div id='main-toolbar' class='block toolbar'>
                 <div class='toolbar-group float-left'>
-                    <div id='button-new' class='button toolbar-button'>
-                        <span class='button-icon icon-new'></span>
-                        <span>New Post</span>
+                    <!--                    <div id='button-new' class='button toolbar-button'>
+                                            <span class='button-icon icon-new'></span>
+                                            <span>New Post</span>
+                                        </div>-->
+                    <div id='button-view-group' class='button toolbar-button'>
+                        <span class='button-icon icon-facebook'></span>
+                        <span>View in Facebook</span>
                     </div>
                     <div id='button-refresh' class='button toolbar-button'>
                         <span class='button-icon icon-refresh'></span>
@@ -197,6 +203,10 @@ error_reporting(E_ALL);
 
             <div id='post-details-toolbar' class='block toolbar floating-panel-toolbar hidden'>
                 <div class='toolbar-group float-left'>
+                    <div id='post-button-permalink' class='button toolbar-button'>
+                        <span class='button-icon icon-facebook'></span>
+                        <span>View in Facebook</span>
+                    </div>
                     <div id='post-button-like' class='button toolbar-button'>
                         <span class='button-icon icon-like'></span>
                         <span>Like</span>
@@ -204,9 +214,6 @@ error_reporting(E_ALL);
                     <div id='post-button-pm' class='button toolbar-button'>
                         <span class='button-icon icon-pm'></span>
                         <span>Private Message</span>
-                    </div>
-                    <div id='post-button-permalink' class='button toolbar-button'>
-                        <span>View in Facebook</span>
                     </div>
                 </div>
                 <div class='toolbar-group float-right'>

@@ -1,5 +1,9 @@
 <?php
 
-require_once 'include/dal.php';
+/**
+ * post-comment.php endpoint.
+ */
 
-echo json_encode((new GraphApiClient())->postComment(filter_input(INPUT_POST, 'postId'), filter_input(INPUT_POST, 'comment')));
+require_once 'graph/include.php';
+
+echo json_encode((new PostFactory())->postComment(filter_input(INPUT_POST, 'postId'), filter_input(INPUT_POST, 'comment')));

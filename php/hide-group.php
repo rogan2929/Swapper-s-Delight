@@ -1,5 +1,9 @@
 <?php
 
-require_once 'include/dal.php';
+/**
+ * hide-group.php endpoint.
+ */
 
-echo (new GroupManager())->hideGroup(filter_input(INPUT_GET, 'gid'));
+require_once 'graph/include.php';
+
+echo (new GroupFactory())->hideGroup(filter_input(INPUT_GET, 'gid'));

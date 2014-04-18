@@ -1,8 +1,12 @@
 <?php
 
-require_once 'include/dal.php';
+/**
+ * new-posts.php endpoint.
+ */
 
-$feed = new CachedFeed();
-$feed->setGid(filter_input(INPUT_GET, 'gid'));
+require_once 'graph/include.php';
 
-echo json_encode($feed->getNewPosts(filter_input(INPUT_GET, 'refresh'), filter_input(INPUT_GET, 'offset'), filter_input(INPUT_GET, 'limit')));
+$postFactory = new PostFactory();
+$postFactory->setGid(filter_input(INPUT_GET, 'gid'));
+
+echo json_encode($postFactory->getNewPosts(filter_input(INPUT_GET, 'refresh'), filter_input(INPUT_GET, 'offset'), filter_input(INPUT_GET, 'limit')));

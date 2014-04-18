@@ -1,5 +1,9 @@
 <?php
 
-require_once 'include/dal.php';
+/**
+ * refresh-stream.php endpoint.
+ */
 
-echo (new CachedFeed())->refreshStream(filter_input(INPUT_GET, 'gid'));
+require_once 'graph/include.php';
+
+echo (new PostFactory())->refreshStream(filter_input(INPUT_GET, 'gid'));

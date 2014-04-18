@@ -1,5 +1,9 @@
 <?php
 
-require_once 'include/dal.php';
+/**
+ * restore-groups.php endpoint.
+ */
 
-echo (new GroupManager())->restoreGroups();
+require_once 'graph/include.php';
+
+echo (new GroupFactory())->restoreGroups();

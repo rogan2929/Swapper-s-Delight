@@ -1,5 +1,9 @@
 <?php
 
-require_once 'include/dal.php';
+/**
+ * delete-object.php endpoint.
+ */
+
+require_once 'graph/include.php';
 
 echo (new GraphApiClient())->deleteObject(filter_input(INPUT_GET, 'id'));

@@ -1,5 +1,9 @@
 <?php
 
-require_once 'include/dal.php';
+/**
+ * group-info.php endpoint.
+ */
 
-echo json_encode((new GroupManager())->getGroupInfo());
+require_once 'graph/include.php';
+
+echo json_encode((new GroupFactory())->getGroupInfo());

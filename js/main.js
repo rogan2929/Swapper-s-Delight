@@ -1,5 +1,8 @@
 "use strict";
-// "Enums"
+
+/**
+ * Enums
+ */
 
 // SelectedView Enum
 var SelectedView = {
@@ -318,24 +321,30 @@ var SwdPresenter = {
      * @param {type} error
      */
     handleError: function(error) {
-        var message = error.responseText;
+        var message, text, code;
 
         switch (error.status) {
-            case 401:
-                // Access denied, most likely from an expired access token.
-                // Get a new access token by simply refreshing the page.
-                //SwdView.showMessage(message);
-                SwdPresenter.message('info', message, function(response) {
-                    // Send the user to the app's main url.
-                    window.location = window.location.href;
-                });
+            case 400:
+                message = JSON.parse(error.responseText)
+
+                if (message.code === 'OAuthException') {
+                    // Access denied, most likely from an expired access token.
+                    // Get a new access token by simply refreshing the page.
+                    SwdPresenter.message('info', 'Oops! It looks like your session most likely timed out. Click OK to start a new one.', function(response) {
+                        // Send the user to the app's main url.
+                        window.location = window.location.href;
+                    });
+                }
+                else {
+                    SwdPresenter.message('error', message.message);
+                }
 
                 break;
             case 500:
                 SwdPresenter.message('error', 'Oops! Something happened. Try reloading the app, and with any luck, the problem will go away on its own.');
                 break;
             default:
-                SwdPresenter.message('error', message);
+                SwdPresenter.message('error', error.responseText);
         }
     },
     /**
@@ -402,7 +411,9 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickButtonGroups', SwdPresenter.onClickButtonGroups, '#button-groups', 'click');
                                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
                                 SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
+                                SwdView.installHandler('onClickButtonViewGroup', SwdPresenter.onClickButtonViewGroup, '#button-view-group', 'click');
                                 SwdView.installHandler('onClickCommentDelete', SwdPresenter.onClickCommentDelete, '.post-comment .delete-button', 'click');
+                                SwdView.installHandler('onClickCommentImage', SwdPresenter.onClickCommentImage, '.post-comment-image', 'click');
                                 SwdView.installHandler('onClickFloatingPanelCloseButton', SwdPresenter.onClickFloatingPanelCloseButton, '.floating-panel-content > .close-button', 'click');
                                 SwdView.installHandler('onClickFloatingPanelContent', SwdPresenter.onClickFloatingPanelContent, '.floating-panel-content', 'click');
                                 SwdView.installHandler('onClickFloatingPanelModal', SwdPresenter.onClickFloatingPanelModal, '.floating-panel.modal', 'click');
@@ -421,6 +432,8 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block.block.unique', 'click');
                                 SwdView.installHandler('onClickPostBlockLoadMore', SwdPresenter.onClickPostBlockLoadMore, '.post-block.load-more', 'click');
                                 SwdView.installHandler('onClickPostImageTile', SwdPresenter.onClickPostImageTile, '.post-image-tile', 'click');
+                                SwdView.installHandler('onClickPostNavPrev', SwdPresenter.onClickPostNavPrev, '#details-prev', 'click');
+                                SwdView.installHandler('onClickPostNavNext', SwdPresenter.onClickPostNavNext, '#details-next', 'click');
                                 SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
                                 SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .close-button', 'click');
                                 SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
@@ -437,7 +450,7 @@ var SwdPresenter = {
                                     SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
 
                                     // Start with displaying the group selection panel.
-                                    SwdView.toggleFloatingPanel('#select-group-panel', true, 'drop');
+                                    SwdView.toggleFloatingPanel('#select-group-panel', true);
                                 }, 1000);
 
                                 // Start the idle timer.
@@ -629,12 +642,40 @@ var SwdPresenter = {
 
             // Capture the ids of all the posts that were just returned.
             for (i = 0; i < response.length; i++) {
-                SwdPresenter.postIds.push(response[i].post_id);
+                SwdPresenter.postIds.push(response[i].id);
             }
 
             // If a response came through, then display the posts.
             SwdView.populatePostBlocks(response);
         }
+    },
+    /**
+     * Loads detailed post data for the given post id.
+     * @param {type} id
+     */
+    loadPostDetails: function(id) {
+        var post;
+        
+        SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
+        SwdView.toggleFloatingPanel('#post-details-panel', true);
+        SwdView.toggleToolbar('#post-details-toolbar', true);
+
+        SwdModel.getPostDetails(id, {
+            success: function(response) {
+                post = response;
+
+                if (post) {
+                    SwdPresenter.selectedPost = post;
+                    SwdView.setLikePost(false);
+                    SwdView.showPostDetails(post);
+                }
+            },
+            error: function(response) {
+                SwdView.toggleFloatingPanel('#post-details-panel', false);
+                SwdView.toggleToolbar('', false);
+                SwdPresenter.handleError.call(SwdPresenter, response);
+            }
+        });
     },
     /***
      * Brings up a message dialog box.
@@ -703,7 +744,7 @@ var SwdPresenter = {
         // Prevent the event from bubbling up the DOM and closing the floating panel.
         e.stopPropagation();
 
-        SwdView.toggleFloatingPanel('#select-group-panel', true, 'drop');
+        SwdView.toggleFloatingPanel('#select-group-panel', true);
     },
     // Event Handlers (onX(e, args))
     onClickButtonNew: function(e, args) {
@@ -714,6 +755,11 @@ var SwdPresenter = {
     },
     onClickButtonRefresh: function(e, args) {
         SwdPresenter.loadPosts(false, true);
+    },
+    onClickButtonViewGroup: function(e, args) {
+        if (SwdPresenter.selectedGroup) {
+            window.open('https://www.facebook.com/groups/' + SwdPresenter.selectedGroup.gid, '_blank');
+        }
     },
     onClickCommentDelete: function(e, args) {
         var id;
@@ -728,6 +774,13 @@ var SwdPresenter = {
                 });
             }
         });
+    },
+    onClickCommentImage: function(e, args) {
+        var src = $(e.currentTarget).css('background-image');
+
+        src = src.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+
+        SwdView.expandCommentImage(src);
     },
     onClickFloatingPanelCloseButton: function(e, args) {
         SwdView.toggleFloatingPanel('.floating-panel', false);
@@ -747,7 +800,8 @@ var SwdPresenter = {
     onClickLogout: function(e, args) {
         // User selected 'logout' from the settings menu.
         // Take them back to their main Facebook page.
-        window.location = "www.facebook.com";
+        //window.location = "https://www.facebook.com";
+        FB.logout();
     },
     onClickMessageButtonNo: function(e, args) {
         if (SwdPresenter.messageCallback) {
@@ -810,12 +864,12 @@ var SwdPresenter = {
                 SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
 
                 // Delete the post and then remove it from the feed.
-                SwdModel.deleteObject(SwdPresenter.selectedPost.post_id, {
+                SwdModel.deleteObject(SwdPresenter.selectedPost.id, {
                     success: function(response) {
                         SwdView.toggleAjaxLoadingDiv('#post-details-panel', false);
                         SwdView.toggleFloatingPanel('#post-details-panel', false);
                         SwdView.toggleToolbar('', false);
-                        SwdView.removePost('#' + SwdPresenter.selectedPost.post_id);
+                        SwdView.removePost('#' + SwdPresenter.selectedPost.id);
                     },
                     fail: SwdPresenter.handleError
                 });
@@ -825,26 +879,25 @@ var SwdPresenter = {
     onClickPostButtonLike: function(e, args) {
         var id, userLikes;
 
-        id = SwdPresenter.selectedPost.post_id;
-        userLikes = Number(!SwdPresenter.selectedPost.like_info.user_likes);
+        id = SwdPresenter.selectedPost.id;
+        userLikes = Number(!SwdPresenter.selectedPost.userLikes);
 
         SwdView.setLikePost(userLikes);
 
         // Post the comment.
         SwdModel.likePost(id, userLikes, {
             success: function(response) {
-                SwdPresenter.selectedPost.like_info.user_likes = userLikes;
+                SwdPresenter.selectedPost.userLikes = userLikes;
             },
             error: SwdPresenter.handleError
         });
     },
     onClickPostButtonPm: function(e, args) {
-        window.open('https://www.facebook.com/messages/' + SwdPresenter.selectedPost.actor_id);
+        window.open('https://www.facebook.com/messages/' + SwdPresenter.selectedPost.actor.uid);
 
     },
     onClickPostBlock: function(e, args) {
         var id;
-        var post;
 
         // Close any open menus.
         SwdView.closeAllUiMenus();
@@ -859,26 +912,7 @@ var SwdPresenter = {
         // Prevent the event from bubbling up the DOM and immediately causing the displayed panel to close.
         e.stopPropagation();
 
-        SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
-        SwdView.toggleFloatingPanel('#post-details-panel', true);
-        SwdView.toggleToolbar('#post-details-toolbar', true);
-
-        SwdModel.getPostDetails(id, {
-            success: function(response) {
-                post = response;
-
-                if (post) {
-                    SwdPresenter.selectedPost = post;
-                    SwdView.setLikePost(false);
-                    SwdView.showPostDetails(post);
-                }
-            },
-            error: function(response) {
-                SwdView.toggleFloatingPanel('#post-details-panel', false);
-                SwdView.toggleToolbar('', false);
-                SwdPresenter.handleError.call(SwdPresenter, response);
-            }
-        });
+        SwdPresenter.loadPostDetails(id);
     },
     onClickPostBlockLoadMore: function(e, args) {
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', true);
@@ -886,6 +920,42 @@ var SwdPresenter = {
     },
     onClickPostImageTile: function(e, args) {
         SwdView.toggleSelectedImage($(e.currentTarget))
+    },
+    onClickPostNavPrev: function(e, args) {
+        var prevIndex;
+        
+        prevIndex = SwdPresenter.postIds.indexOf(SwdPresenter.selectedPost.id) - 1;
+        
+        // Wrap around to the end.
+        if (prevIndex < 0) {
+            prevIndex = SwdPresenter.postIds.length - 1;
+        }
+        
+        // Watch out for any terminating blocks.
+        if (SwdPresenter.postIds[prevIndex] === 'terminator') {
+            prevIndex--;
+        }
+        
+        // Load the previous post.
+        SwdPresenter.loadPostDetails(SwdPresenter.postIds[prevIndex]);
+    },
+    onClickPostNavNext: function(e, args) {
+        var nextIndex;
+        
+        nextIndex = SwdPresenter.postIds.indexOf(SwdPresenter.selectedPost.id) + 1;
+        
+        // Watch out for any terminating blocks.
+        if (SwdPresenter.postIds[nextIndex] === 'terminator') {
+            nextIndex++;
+        }
+        
+        // Wrap around to the end.
+        if (nextIndex >= SwdPresenter.postIds.length) {
+            nextIndex = 0;
+        }
+        
+        // Load the next post.
+        SwdPresenter.loadPostDetails(SwdPresenter.postIds[nextIndex]);
     },
     onClickSelectGroup: function(e, args) {
         var i, id, group;
@@ -902,7 +972,7 @@ var SwdPresenter = {
         // Set selected group and load its feed.
         SwdPresenter.setSelectedGroup(group);
 
-        SwdView.toggleFloatingPanel('#select-group-panel', false, 'drop');
+        SwdView.toggleFloatingPanel('#select-group-panel', false);
     },
     onClickGroupClose: function(e, args) {
         var groupTile, target, gid;
@@ -946,7 +1016,7 @@ var SwdPresenter = {
         if (e.which === 13 && !e.shiftKey) {
             e.preventDefault();
 
-            id = SwdPresenter.selectedPost.post_id;
+            id = SwdPresenter.selectedPost.id;
             comment = $('#post-comment-text').val();
 
             // Show the ajax loading div.
@@ -963,6 +1033,8 @@ var SwdPresenter = {
                 },
                 error: SwdPresenter.handleError
             });
+            
+            return false;
         }
 
         return true;
@@ -1028,36 +1100,33 @@ var SwdView = {
         var commentDiv, timeStamp, userImage, i, imageUrl, commentImage;
 
         // Set user image
-        if (comment.user.pic_square) {
-            userImage = 'url("' + comment.user.pic_square + '")';
+        if (comment.actor.picSquare) {
+            userImage = 'url("' + comment.actor.picSquare + '")';
         }
         else {
             userImage = '';
         }
 
         // Get a human-readable version of the comment's timestamp value.
-        timeStamp = new moment(new Date(comment.time * 1000));
+        timeStamp = new moment(new Date(comment.createdTime * 1000));
 
-        commentDiv = $('<div class="post-activity-section block post-comment"><div><div class="facebook-user-photo"></div><a href="' + comment.user.profile_url + '" target="_blank">' + comment.user.first_name + ' ' + comment.user.last_name + '</a><div class="timestamp">' + timeStamp.calendar() + '</div></div><div class="activity-text">' + comment.text + '</div></div>');
+        commentDiv = $('<div class="post-activity-section block post-comment"><div><div class="facebook-user-photo"></div><a href="' + comment.actor.profileUrl + '" target="_blank">' + comment.actor.firstName + ' ' + comment.actor.lastName + '</a><div class="timestamp">' + timeStamp.calendar() + '</div></div><div class="activity-text">' + comment.message + '</div></div>');
 
         // Set the user's photo.
         $(commentDiv).find('.facebook-user-photo').css('background-image', userImage);
 
         // Display any images.
-        if (comment.image_url && comment.image_url.length > 0) {
-            for (i = 1; i <= comment.image_url.length; i++) {
-                imageUrl = 'url(' + comment.image_url[i - 1] + ')';
-                commentImage = $('<div class="post-comment-image"></div>');
-                $(commentImage).css('background-image', imageUrl).appendTo($(commentDiv));
+        if (comment.imageObjects.length > 0) {
+            imageUrl = 'url(' + comment.imageObjects[0].url + ')';
+            commentImage = $('<div class="post-comment-image"></div>');
+            $(commentImage).css('background-image', imageUrl).appendTo($(commentDiv));
 
-                $(commentImage).click(function() {
-                    //alert('test');
-                });
-            }
+            // Hook up the click event handler.
+            $(commentImage).click(SwdView.handlers['onClickCommentImage']);
         }
 
         // If the current user is the owner of the comment, display the delete and edit buttons.
-        if (comment.user.uid === uid) {
+        if (comment.actor.id === uid) {
             $(commentDiv).append('<div class="delete-button"></div>');
         }
 
@@ -1078,7 +1147,7 @@ var SwdView = {
             e.stopPropagation();
         });
 
-        $('.button, .button.menu-item, .button.toolbar-button, .selection-item').hover(function() {
+        $('.button, .menu-item, .button.toolbar-button, .selection-item, .navigation').hover(function() {
             $(this).addClass('hover', 100);
         }, function() {
             $(this).removeClass('hover', 100);
@@ -1255,20 +1324,20 @@ var SwdView = {
     createImagePostBlock: function(post) {
         var postBlock, userImage, tileImage, timeStamp, message;
 
-        userImage = 'url(' + post.user.pic + ')';
-        tileImage = 'url(' + post.image_url[0] + ')';
+        userImage = 'url(' + post.actor.picFull + ')';
+        tileImage = 'url(' + post.imageObjects[0].url + ')';
 
         // Create the visible block.
-        postBlock = $('<div id="' + post.post_id + '" class="post-block block unique"><div class="visible-content" style="background-image: ' + tileImage + '"><div class="comment-count">' + post.comment_info.comment_count + '</div></div></div>');
+        postBlock = $('<div id="' + post.id + '" class="post-block block unique"><div class="visible-content" style="background-image: ' + tileImage + '"><div class="comment-count">' + post.commentCount + '</div></div></div>');
 
         $(postBlock).addClass('post-block-image');
 
         // Create the text block that resides below the visible post block.
-        userImage = 'url(' + post.user.pic + ')';
+        userImage = 'url(' + post.actor.picFull + ')';
 
-        timeStamp = new moment(new Date(post.created_time * 1000));
+        timeStamp = new moment(new Date(post.createdTime * 1000));
 
-        message = '<div class="wrapper hidden-content"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+        message = '<div class="wrapper hidden-content"><div class="comment-count">' + post.commentCount + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.actor.firstName + ' ' + post.actor.lastName + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
         $(postBlock).append('<div class="post-block block hover post-block-text hidden-block">' + message + '</div>');
 
@@ -1299,13 +1368,13 @@ var SwdView = {
     createTextPostBlock: function(post) {
         var postBlock, message, userImage, timeStamp;
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block block unique"></div>');
+        postBlock = $('<div id="' + post.id + '" class="post-block block unique"></div>');
 
-        userImage = 'url(' + post.user.pic + ')';
+        userImage = 'url(' + post.actor.picFull + ')';
 
-        timeStamp = new moment(new Date(post.created_time * 1000));
+        timeStamp = new moment(new Date(post.createdTime * 1000));
 
-        message = '<div class="visible-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+        message = '<div class="visible-content wrapper"><div class="comment-count">' + post.commentCount + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.actor.firstName + ' ' + post.actor.lastName + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
         $(postBlock).addClass('post-block-text').html(message).appendTo('#post-feed');
     },
@@ -1318,8 +1387,11 @@ var SwdView = {
 
         for (i = 0; i < posts.length; i++) {
             // Update comment counts.
-            $('#' + posts[i].post_id + ' .comment-count').text(posts[i].comment_count);
+            $('#' + posts[i].id + ' .comment-count').text(posts[i].commentCount);
         }
+    },
+    expandCommentImage: function(src) {
+        window.open(src, '_blank');
     },
     /***
      * Fill the post-image-container with post-image-tiles.
@@ -1328,7 +1400,7 @@ var SwdView = {
     fillPostImageContainer: function(post) {
         var i, imageTile, imageUrl, tileWidth, tileHeight, colCount;
 
-        switch (post.image_url.length) {
+        switch (post.imageObjects.length) {
             case 1:
                 colCount = 1;
                 break;
@@ -1346,8 +1418,8 @@ var SwdView = {
         tileHeight = Math.min(tileWidth, $('#post-image-container').height());
 
         // Create at tile for each image.
-        for (i = 1; i <= post.image_url.length; i++) {
-            imageUrl = 'url(' + post.image_url[i - 1] + ')';
+        for (i = 1; i <= post.imageObjects.length; i++) {
+            imageUrl = 'url(' + post.imageObjects[i - 1].url + ')';
             imageTile = $('<div class="post-image-tile"></div>');
 
             if (i % colCount === 0) {
@@ -1358,7 +1430,7 @@ var SwdView = {
         }
 
         // For only 1 image, set background-size to contain, rather than cover.
-        if (post.image_url.length === 1) {
+        if (post.imageObjects.length === 1) {
             $(imageTile).addClass('single');
         }
 
@@ -1372,19 +1444,19 @@ var SwdView = {
     createLinkPostBlock: function(post) {
         var postBlock, description, userImage, timeStamp, message, linkImage;
 
-        linkImage = 'url(' + post.link_data.media[0].src + ')';
+        linkImage = 'url(' + post.linkData.src + ')';
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block block unique"></div>');
-        description = '<div class="visible-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span>' + post.link_data.description + '</p></div>';
+        postBlock = $('<div id="' + post.id + '" class="post-block block unique"></div>');
+        description = '<div class="visible-content wrapper"><div class="comment-count">' + post.commentCount + '</div><p class="content"><span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.linkData.name + '</span>' + post.linkData.description + '</p></div>';
 
         $(postBlock).addClass('post-block-link').html(description);
 
         // Create the text block that resides below the visible post block.
-        userImage = 'url(' + post.user.pic + ')';
+        userImage = 'url(' + post.actor.picFull + ')';
 
-        timeStamp = new moment(new Date(post.created_time * 1000));
+        timeStamp = new moment(new Date(post.createdTime * 1000));
 
-        message = '<div class="hidden-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+        message = '<div class="hidden-content wrapper"><div class="comment-count">' + post.commentCount + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.actor.firstName + ' ' + post.actor.lastName + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
         $(postBlock).append('<div class="post-block block hover post-block-text hidden-block">' + message + '</div>');
 
@@ -1397,22 +1469,22 @@ var SwdView = {
     createTextLinkPostBlock: function(post) {
         var postBlock, message, userImage, timeStamp, description, linkImage;
 
-        postBlock = $('<div id="' + post.post_id + '" class="post-block block unique"></div>');
+        postBlock = $('<div id="' + post.id + '" class="post-block block unique"></div>');
 
-        userImage = 'url(' + post.user.pic + ')';
+        userImage = 'url(' + post.actor.picFull + ')';
 
-        timeStamp = new moment(new Date(post.created_time * 1000));
+        timeStamp = new moment(new Date(post.createdTime * 1000));
 
-        message = '<div class="visible-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.user.first_name + ' ' + post.user.last_name + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
+        message = '<div class="visible-content wrapper"><div class="comment-count">' + post.commentCount + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.actor.firstName + ' ' + post.actor.lastName + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
         $(postBlock).addClass('post-block-textlink').html(message);
 
-        linkImage = 'url(' + post.link_data.media[0].src + ')';
+        linkImage = 'url(' + post.linkData.src + ')';
 
-        description = '<span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.link_data.name + '</span>' + post.link_data.description;
+        description = '<span class="link-image" style="background-image: ' + linkImage + '"></span><span class="link-title">' + post.linkData.name + '</span>' + post.linkData.description;
 
         // Create the link text block that resides below the visible block.
-        $(postBlock).append('<div class="post-block block hover post-block-link hidden-block"><div class="hidden-content wrapper"><div class="comment-count">' + post.comment_info.comment_count + '</div><p class="content">' + description + '</p></div></div>');
+        $(postBlock).append('<div class="post-block block hover post-block-link hidden-block"><div class="hidden-content wrapper"><div class="comment-count">' + post.commentCount + '</div><p class="content">' + description + '</p></div></div>');
 
         $(postBlock).appendTo('#post-feed');
     },
@@ -1435,9 +1507,9 @@ var SwdView = {
             for (i = 0; i < posts.length; i++) {
                 post = posts[i];
 
-                if (post.post_id !== 'terminator') {
+                if (post.id !== 'terminator') {
                     // Switch based on post_type
-                    switch (post.post_type) {
+                    switch (post.type) {
                         case 'image':
                             SwdView.createImagePostBlock(post);
                             break;
@@ -1561,7 +1633,7 @@ var SwdView = {
         var userImage, postImage, i, timeStamp;
 
         // Display the 'Delete' button for owned posts. Otherwise, hide it.
-        if (post.actor_id === SwdPresenter.uid) {
+        if (post.actor.uid === SwdPresenter.uid) {
             $('.personal-button').fadeIn();
         }
         else {
@@ -1569,23 +1641,23 @@ var SwdView = {
         }
 
         // Display user's data.
-        if (post.user.pic) {
-            userImage = 'url("' + post.user.pic + '")';
+        if (post.actor.picSquare) {
+            userImage = 'url("' + post.actor.picSquare + '")';
         }
         else {
             userImage = '';
         }
 
         // Get a nice, human readable version of the post's created_time timestamp.
-        timeStamp = new moment(new Date(post.created_time * 1000));
+        timeStamp = new moment(new Date(post.createdTime * 1000));
 
         $('#post-details-user-data .facebook-user-photo').css('background-image', userImage);
-        $('#post-details-user-data .facebook-user-name').text(post.user.first_name + ' ' + post.user.last_name).attr('href', post.user.profile_url);
+        $('#post-details-user-data .facebook-user-name').text(post.actor.firstName + ' ' + post.actor.lastName).attr('href', post.actor.profileUrl);
         $('#post-details-user-data .timestamp').text(timeStamp.calendar());
 
         // Display the post's image, or the no-image placeholder.
-        if (post.image_url && post.image_url.length > 0) {
-            postImage = 'url("' + post.image_url[0] + '")';
+        if (post.imageObjects && post.imageObjects.length > 0) {
+            postImage = 'url("' + post.imageObjects[0].url + '")';
 
             // Hide the no-image container and display the post's attached image.
             $('#post-image-container').show().empty();
@@ -1602,22 +1674,21 @@ var SwdView = {
 
         // Display message content, or hide it if empty.
         if (post.message !== '') {
-            $('#post-message').show();
-            $('#post-message-text').html(post.message);
+            $('#post-message-text').show().html(post.message);
         } else {
-            $('#post-message').hide();
+            $('#post-message-text').hide();
         }
 
         // Set link data and display it.
-        if (post.post_type === 'link' || post.post_type === 'textlink') {
-            $('#linkdata-href').attr('href', post.link_data.href).text(post.link_data.name);
-            $('#linkdata-caption').text(post.link_data.caption);
+        if (post.type === 'link' || post.type === 'textlink') {
+            $('#linkdata-href').attr('href', post.linkData.href).text(post.linkData.name);
+            $('#post-message-linkdata .linkdata-caption').text(post.linkData.caption);
 
-            if (post.link_data.media && post.link_data.media[0].src) {
-                $('#linkdata-img').attr('src', post.link_data.media[0].src);
+            if (post.linkData.src) {
+                $('#post-message-linkdata .linkdata-img').attr('src', post.linkData.src);
             }
 
-            $('#linkdata-desc').html(post.link_data.description);
+            $('#post-message-linkdata .linkdata-desc').html(post.linkData.description);
             $('#post-message-linkdata').show();
         }
         else {
@@ -1639,7 +1710,7 @@ var SwdView = {
         $('#linkdata-desc, #post-message-text').linkify();
 
         // Wrap stuff up.
-        SwdView.setLikePost(post.like_info.user_likes);
+        SwdView.setLikePost(post.userLikes);
         SwdView.clearPostCommentText();
         SwdView.toggleAjaxLoadingDiv('#post-details-panel', false);
     },
@@ -1725,11 +1796,11 @@ var SwdView = {
      */
     toggleFloatingPanel: function(id, show, effect, options, overlay) {
         if (!effect) {
-            effect = 'drop';
+            effect = 'slide';
         }
 
         if (!options) {
-            options = {};
+            options = {direction: 'left'}
         }
 
         if (!overlay) {
@@ -1739,11 +1810,13 @@ var SwdView = {
         if (show) {
             // Make the panel modal by summoning an overlay.
             $(overlay).show();
-            $(id).show(effect, options, 400);
+            $(id).show();
+            //$(id).show(effect, options, 250);
         }
         else {
             $(overlay).hide();
-            $(id).hide(effect, options, 400);
+            $(id).hide();
+            //$(id).hide(effect, options, 250);
         }
     }
 };

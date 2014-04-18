@@ -1,5 +1,9 @@
 <?php
 
-require_once 'include/dal.php';
+/**
+ * my-posts.php endpoint.
+ */
 
-echo json_encode((new CachedFeed())->getMyPosts(filter_input(INPUT_GET, 'offset'), filter_input(INPUT_GET, 'limit')));
+require_once 'graph/include.php';
+
+echo json_encode((new PostFactory())->getMyPosts(filter_input(INPUT_GET, 'offset'), filter_input(INPUT_GET, 'limit')));

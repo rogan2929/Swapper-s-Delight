@@ -1,5 +1,9 @@
 <?php
 
-require_once 'include/dal.php';
+/**
+ * hidden-groups.php endpoint.
+ */
 
-echo (new GroupManager())->getHiddenGroups();
+require_once 'graph/include.php';
+
+echo (new GroupFactory())->getHiddenGroups();

@@ -1,5 +1,9 @@
 <?php
 
-require_once 'include/dal.php';
+/**
+ * post-details.php endpoint.
+ */
 
-echo json_encode((new CachedFeed())->getPostDetails(filter_input(INPUT_GET, 'postId')));
+require_once 'graph/include.php';
+
+echo json_encode((new PostFactory())->getPostDetails(filter_input(INPUT_GET, 'postId')));

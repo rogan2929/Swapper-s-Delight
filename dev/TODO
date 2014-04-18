@@ -1,22 +1,10 @@
-*****************************
-Clean up the back end code. 
-*****************************
-Session state managed automatically, and behind the scenes.
-    'stream'
-    'accessToken'
-Back-end should be as stateless as possible. (Currently selected gid tracked in front-end, passed to calls.)
-Add better error handling.
-filter_input() for retrieving passed variables.
-
-
-*Implement 'New' post functionality.
+Implement multi-threading.
 Implement check to see that app has the correct permissions.
 *Artwork.
 *Privacy Policy.
 Include prompt to change app settings so that others using Swapper's Delight can see the current user's photos.
     https://www.facebook.com/settings?tab=applications&section=friends_share&view (Apps Others Use)
 *Acknowledge tags in posts and comments.
-*Render images that are posted in comments.
 View group info panel.
     Description
     Admin
@@ -25,6 +13,8 @@ View group info panel.
     pic_cover
     View Group in Facebook
 Captions for shared photos.
+When calculating post-image-tile width, whether or not a scrollbar is visible needs to be taken into account.
 
 The 'Maybe' List:
 Add functionality to filter 'My Posts' by comment data.
+Video support.

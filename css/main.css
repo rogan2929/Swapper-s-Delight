@@ -19,9 +19,10 @@ textarea {
 }
 
 html {
-    font-size: 0.80em;
+    font-size: 0.85em;
     line-height: 1.4;
     overflow: hidden;
+    font-family: Arial,Helvetica,sans-serif;
     /*    min-height: 800px;*/
 }
 
@@ -189,11 +190,14 @@ a:visited {
     display: block;
     color: #4d81bf;
     margin-bottom: 6px;
-    font-weight: bold;
+}
+
+#post-comment-wrapper {
+    position: relative;
 }
 
 .post-block.hidden-block .timestamp, .hover .timestamp {
-/*    color: #f6f6f6;*/
+    color: white;
 }
 
 /*.post-comment-header .timestamp,#post-message-header .timestamp {
@@ -246,7 +250,7 @@ a:visited {
 }
 
 #select-group-panel {
-    width: 965px;
+    width: 1030px;
 }
 
 .close-button {
@@ -336,14 +340,16 @@ a:visited {
 .selection-list {
     list-style: none;
     padding: 0;
-    margin-top: 0;
+    margin-top: 10px;
     margin-bottom: 0;
     margin-right: -5px;
 }
 
 .block.hover {
-    background-color: #f6f6f6;
-    color: #444;
+/*    background-color: #f6f6f6;
+    color: #444;*/
+    background-color: #4395D1;
+    color: white;
     cursor: pointer;
 }
 
@@ -366,8 +372,8 @@ a:visited {
     display: table-cell !important;
     vertical-align: middle;
     text-align: center;
-    height: 110px;
-    width: 139px;
+    height: 150px;
+    width: 150px;
 }
 
 .selection-item-content > div {
@@ -532,6 +538,10 @@ a:visited {
     background-image: url('/icons/paperplus32.png');
 }
 
+.toolbar-button .button-icon.icon-facebook {
+    background-image: url('/icons/users32.png');
+}
+
 .toolbar-button .button-icon.icon-refresh {
     background-image: url('/icons/exchange32.png');
 }
@@ -562,6 +572,10 @@ a:visited {
 
 .toolbar-button:hover .button-icon.icon-new {
     background-image: url('/icons/paperplus32w.png');
+}
+
+.toolbar-button:hover .button-icon.icon-facebook {
+    background-image: url('/icons/users32w.png');
 }
 
 .toolbar-button:hover .button-icon.icon-refresh {
@@ -668,6 +682,11 @@ a:visited {
     display: block;
 }
 
+.linkdata {
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
 #post-block-mask, #selection-item-mask {
     background-color: #f6f6f6;
     background-image: none;
@@ -715,7 +734,7 @@ a:visited {
 .post-block.post-block-link .content,
 .post-block.post-block-textlink .content {
     overflow: hidden;
-    height: 16.5em;
+    height: 16.0em;
     padding: 12px;
 }
 
@@ -744,6 +763,7 @@ a:visited {
 .post-block .link-title, .post-block .user-name {
     font-weight: bold;
     display: block;
+    max-width: 230px;
 }
 
 .post-block .link-title {
@@ -834,9 +854,11 @@ a.link-title {
     background-repeat: no-repeat;
     background-size: contain;
     cursor: pointer;
-    margin: 10px;
+    padding: 10px;
+    margin-top: 10px;
     height: 200px;
-    width: 315px;
+    width: 295px;
+    border: 1px solid #ccc;
 }
 
 #post-image-container .post-image-tile.right {
@@ -890,10 +912,41 @@ a.link-title {
     margin-top: auto;
     margin-bottom: auto;
     height: 3em;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 #post-details-user-data {
     height: 60px;
+}
+
+.navigation {
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 80px;
+    width: 80px;
+    position: absolute;
+    z-index: 1001;
+    margin-top: auto;
+    margin-bottom: auto;
+    top: 0;
+    bottom: 0;
+    opacity: 0.05;
+    cursor: pointer;
+}
+
+.navigation.hover {
+    opacity: 0.8;
+}
+
+.navigation.prev {
+    left: 10px;
+    background-image: url('/img/nav-prev.png');
+}
+
+.navigation.next {
+    right: 10px;
+    background-image: url('/img/nav-next.png');
 }
 
 #post-content {
@@ -902,9 +955,9 @@ a.link-title {
     padding-top: 0px;
 }
 
-.post-activity-section.original-content .activity-text {
+/*.post-activity-section.original-content .activity-text {
     font-size: 1.0em;
-}
+}*/
 
 .post-activity-section .facebook-user-photo {
     height: 60px;
@@ -940,9 +993,9 @@ a.link-title {
     font-size: 0.98em;
 }
 
-.post-activity-section > .activity-text {
+/*.post-activity-section > .activity-text {
     font-size: 0.95em;
-}
+}*/
 
 .post-activity-section > * {
     margin-top: 8px;
