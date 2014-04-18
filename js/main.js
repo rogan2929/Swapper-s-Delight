@@ -922,10 +922,30 @@ var SwdPresenter = {
         SwdView.toggleSelectedImage($(e.currentTarget))
     },
     onClickPostNavPrev: function(e, args) {
-        alert('prev');
+        var prevIndex;
+        
+        prevIndex = SwdPresenter.postIds.indexOf(SwdPresenter.selectedPost.id) - 1;
+        
+        // Wrap around to the end.
+        if (prevIndex < 0) {
+            prevIndex = SwdPresenter.postIds.length - 1;
+        }
+        
+        // Load the previous post.
+        SwdPresenter.loadPostDetails(SwdPresenter.postIds[prevIndex]);
     },
     onClickPostNavNext: function(e, args) {
-        alert('next');
+        var nextIndex;
+        
+        nextIndex = SwdPresenter.postIds.indexOf(SwdPresenter.selectedPost.id) + 1;
+        
+        // Wrap around to the end.
+        if (nextIndex >= SwdPresenter.postIds.length) {
+            nextIndex = 0;
+        }
+        
+        // Load the next post.
+        SwdPresenter.loadPostDetails(SwdPresenter.postIds[nextIndex]);
     },
     onClickSelectGroup: function(e, args) {
         var i, id, group;
