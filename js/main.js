@@ -932,7 +932,7 @@ var SwdPresenter = {
         }
         
         // Watch out for any terminating blocks.
-        if (SwdPresenter.postIds[prevIndex].id === 'terminator') {
+        if (SwdPresenter.postIds[prevIndex] === 'terminator') {
             prevIndex--;
         }
         
@@ -945,7 +945,7 @@ var SwdPresenter = {
         nextIndex = SwdPresenter.postIds.indexOf(SwdPresenter.selectedPost.id) + 1;
         
         // Watch out for any terminating blocks.
-        if (SwdPresenter.postIds[nextIndex].id === 'terminator') {
+        if (SwdPresenter.postIds[nextIndex] === 'terminator') {
             nextIndex++;
         }
         
