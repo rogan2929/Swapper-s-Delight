@@ -108,7 +108,7 @@ error_reporting(E_ALL);
                         <div id='details-right-column' class='column block right'>
                             <div id='post-image-container'></div>
                             <div id='post-no-image-desc' class='hidden'>
-                                <span class='hint'>Hint: Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. Click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook.</span>
+                                <span class='hint'>Hint: Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. Click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook. You'll be able to see any hidden photos there.</span>
 <!--                                <span><a href='#' class='privacy-settings-about'>What's this all about?</a></span>-->
                             </div>
                         </div>
