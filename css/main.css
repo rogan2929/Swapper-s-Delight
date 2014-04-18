@@ -494,7 +494,7 @@ a:visited {
     color: #f6f6f6;
 }*/
 
-.button.hover, .menu-item.hover, .navigation.hover {
+.button.hover, .menu-item.hover {
     background-color: #aaa;
     color: #f6f6f6;
 }
@@ -936,13 +936,17 @@ a.link-title {
     cursor: pointer;
 }
 
+.navigation.hover {
+    opacity: 0.8;
+}
+
 .navigation.prev {
-    left: 0;
+    left: 10px;
     background-image: url('/img/nav-prev.png');
 }
 
 .navigation.next {
-    right: 0;
+    right: 10px;
     background-image: url('/img/nav-next.png');
 }
 
