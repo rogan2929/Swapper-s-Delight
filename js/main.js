@@ -649,6 +649,32 @@ var SwdPresenter = {
             SwdView.populatePostBlocks(response);
         }
     },
+    /**
+     * Loads detailed post data for the given post id.
+     * @param {type} id
+     */
+    loadPostDetails: function(id) {
+        SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
+        SwdView.toggleFloatingPanel('#post-details-panel', true);
+        SwdView.toggleToolbar('#post-details-toolbar', true);
+
+        SwdModel.getPostDetails(id, {
+            success: function(response) {
+                post = response;
+
+                if (post) {
+                    SwdPresenter.selectedPost = post;
+                    SwdView.setLikePost(false);
+                    SwdView.showPostDetails(post);
+                }
+            },
+            error: function(response) {
+                SwdView.toggleFloatingPanel('#post-details-panel', false);
+                SwdView.toggleToolbar('', false);
+                SwdPresenter.handleError.call(SwdPresenter, response);
+            }
+        });
+    },
     /***
      * Brings up a message dialog box.
      * @param {type} type
@@ -885,26 +911,7 @@ var SwdPresenter = {
         // Prevent the event from bubbling up the DOM and immediately causing the displayed panel to close.
         e.stopPropagation();
 
-        SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
-        SwdView.toggleFloatingPanel('#post-details-panel', true);
-        SwdView.toggleToolbar('#post-details-toolbar', true);
-
-        SwdModel.getPostDetails(id, {
-            success: function(response) {
-                post = response;
-
-                if (post) {
-                    SwdPresenter.selectedPost = post;
-                    SwdView.setLikePost(false);
-                    SwdView.showPostDetails(post);
-                }
-            },
-            error: function(response) {
-                SwdView.toggleFloatingPanel('#post-details-panel', false);
-                SwdView.toggleToolbar('', false);
-                SwdPresenter.handleError.call(SwdPresenter, response);
-            }
-        });
+        SwdPresenter.loadPostDetails(id);
     },
     onClickPostBlockLoadMore: function(e, args) {
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', true);
