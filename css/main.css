@@ -494,7 +494,7 @@ a:visited {
     color: #f6f6f6;
 }*/
 
-.button.hover, .menu-item.hover {
+.button.hover, .menu-item.hover, .navigation.hover {
     background-color: #aaa;
     color: #f6f6f6;
 }
@@ -921,7 +921,7 @@ a.link-title {
 }
 
 .navigation {
-    background-color: transparent;
+    background-color: white;
     background-size: contain;
     background-repeat: no-repeat;
     height: 50px;
@@ -942,10 +942,6 @@ a.link-title {
 
 .navigation.next {
     right: 0;
-}
-
-.navigation:hover {
-    background-color: #aaa;
 }
 
 #post-content {
