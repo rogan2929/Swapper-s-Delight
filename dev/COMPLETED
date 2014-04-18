@@ -30,3 +30,4 @@ Add better error handling.
 filter_input() for retrieving passed variables.
 *****************************
 *Render images that are posted in comments.
+Prev/Next controls on post details screens.

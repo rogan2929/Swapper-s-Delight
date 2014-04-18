@@ -1033,6 +1033,8 @@ var SwdPresenter = {
                 },
                 error: SwdPresenter.handleError
             });
+            
+            return false;
         }
 
         return true;
