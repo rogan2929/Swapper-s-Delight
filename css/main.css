@@ -922,10 +922,17 @@ a.link-title {
 
 .navigation {
     background-color: green;
+    background-size: contain;
+    background-repeat: no-repeat;
     height: 50px;
     width: 50px;
     position: absolute;
     z-index: 1001;
+    margin-top: auto;
+    margin-bottom: auto;
+    top: 0;
+    bottom: 0;
+    opacity: 0.3;
 }
 
 .navigation.prev {
