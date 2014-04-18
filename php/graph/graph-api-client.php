@@ -15,11 +15,11 @@ class GraphApiClient {
 
     /** Constants * */
     // Prod
-    //const APP_ID = '1401018793479333';
-    //const APP_SECRET = '603325411a953e21ccbc29d2c7d50e7e';
+    const APP_ID = '1401018793479333';
+    const APP_SECRET = '603325411a953e21ccbc29d2c7d50e7e';
     // Test
-    const APP_ID = '652991661414427';
-    const APP_SECRET = 'b8447ce73d2dcfccde6e30931cfb0a90';
+//    const APP_ID = '652991661414427';
+//    const APP_SECRET = 'b8447ce73d2dcfccde6e30931cfb0a90';
 
     private $facebook;
     private $appSecretProof;
