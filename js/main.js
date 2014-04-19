@@ -647,6 +647,7 @@ var SwdPresenter = {
 
             // If a response came through, then display the posts.
             SwdView.populatePostBlocks(response);
+            SwdView.reloadAds();
         }
     },
     /**
@@ -655,7 +656,7 @@ var SwdPresenter = {
      */
     loadPostDetails: function(id) {
         var post;
-        
+
         SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
         SwdView.toggleFloatingPanel('#post-details-panel', true);
         SwdView.toggleToolbar('#post-details-toolbar', true);
@@ -923,37 +924,37 @@ var SwdPresenter = {
     },
     onClickPostNavPrev: function(e, args) {
         var prevIndex;
-        
+
         prevIndex = SwdPresenter.postIds.indexOf(SwdPresenter.selectedPost.id) - 1;
-        
+
         // Wrap around to the end.
         if (prevIndex < 0) {
             prevIndex = SwdPresenter.postIds.length - 1;
         }
-        
+
         // Watch out for any terminating blocks.
         if (SwdPresenter.postIds[prevIndex] === 'terminator') {
             prevIndex--;
         }
-        
+
         // Load the previous post.
         SwdPresenter.loadPostDetails(SwdPresenter.postIds[prevIndex]);
     },
     onClickPostNavNext: function(e, args) {
         var nextIndex;
-        
+
         nextIndex = SwdPresenter.postIds.indexOf(SwdPresenter.selectedPost.id) + 1;
-        
+
         // Watch out for any terminating blocks.
         if (SwdPresenter.postIds[nextIndex] === 'terminator') {
             nextIndex++;
         }
-        
+
         // Wrap around to the end.
         if (nextIndex >= SwdPresenter.postIds.length) {
             nextIndex = 0;
         }
-        
+
         // Load the next post.
         SwdPresenter.loadPostDetails(SwdPresenter.postIds[nextIndex]);
     },
@@ -1033,7 +1034,7 @@ var SwdPresenter = {
                 },
                 error: SwdPresenter.handleError
             });
-            
+
             return false;
         }
 
@@ -1224,6 +1225,38 @@ var SwdView = {
                 my: 'left top',
                 at: 'left bottom'
             });
+        });
+    },
+    /***
+     * Triggers a reload of the ad tiles.
+     */
+    reloadAds: function() {
+        LSM_Slot({
+            adkey: '5a7',
+            ad_size: '300x250',
+            slot: 'slot93684',
+            _render_div_id: 'ad-tile-1'
+        });
+        
+        LSM_Slot({
+            adkey: 'e8f',
+            ad_size: '300x250',
+            slot: 'slot93683',
+            _render_div_id: 'ad-tile-2'
+        });
+        
+        LSM_Slot({
+            adkey: '4df',
+            ad_size: '300x250',
+            slot: 'slot93685',
+            _render_div_id: 'ad-tile-3'
+        });
+        
+        LSM_Slot({
+            adkey: '2e5',
+            ad_size: '300x250',
+            slot: 'slot93255',
+            _render_div_id: 'ad-tile-4'
         });
     },
     /***
