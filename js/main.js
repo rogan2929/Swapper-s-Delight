@@ -1183,7 +1183,7 @@ var SwdView = {
      * Clear all posts from the view.
      */
     clearPosts: function() {
-        $('.post-block.ad-div').hide();
+        //$('.post-block.ad-div').hide();
         $('#post-feed .post-block').not('.post-block.ad-div').remove();
     },
     /***
