@@ -655,7 +655,7 @@ var SwdPresenter = {
      */
     loadPostDetails: function(id) {
         var post;
-        
+
         SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
         SwdView.toggleFloatingPanel('#post-details-panel', true);
         SwdView.toggleToolbar('#post-details-toolbar', true);
@@ -923,37 +923,37 @@ var SwdPresenter = {
     },
     onClickPostNavPrev: function(e, args) {
         var prevIndex;
-        
+
         prevIndex = SwdPresenter.postIds.indexOf(SwdPresenter.selectedPost.id) - 1;
-        
+
         // Wrap around to the end.
         if (prevIndex < 0) {
             prevIndex = SwdPresenter.postIds.length - 1;
         }
-        
+
         // Watch out for any terminating blocks.
         if (SwdPresenter.postIds[prevIndex] === 'terminator') {
             prevIndex--;
         }
-        
+
         // Load the previous post.
         SwdPresenter.loadPostDetails(SwdPresenter.postIds[prevIndex]);
     },
     onClickPostNavNext: function(e, args) {
         var nextIndex;
-        
+
         nextIndex = SwdPresenter.postIds.indexOf(SwdPresenter.selectedPost.id) + 1;
-        
+
         // Watch out for any terminating blocks.
         if (SwdPresenter.postIds[nextIndex] === 'terminator') {
             nextIndex++;
         }
-        
+
         // Wrap around to the end.
         if (nextIndex >= SwdPresenter.postIds.length) {
             nextIndex = 0;
         }
-        
+
         // Load the next post.
         SwdPresenter.loadPostDetails(SwdPresenter.postIds[nextIndex]);
     },
@@ -1033,7 +1033,7 @@ var SwdPresenter = {
                 },
                 error: SwdPresenter.handleError
             });
-            
+
             return false;
         }
 
@@ -1550,8 +1550,16 @@ var SwdView = {
 
                 // If an ad-tile is hidden, then display it. Otherwise, leave it alone.
                 if ($(adDiv).is(':hidden')) {
-                    //.post-block.unique:nth-child(' + i * adSpread + ')
-                    $('#ad-tile-' + i).insertAfter('#post-feed').show();
+                    $('#ad-tile-' + i).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
+
+                    if (i === 1) {
+                        LSM_Slot({
+                            adkey: '5a7',
+                            ad_size: '300x250',
+                            slot: 'slot93684',
+                            _render_div_id: 'ad-tile-1'
+                        });
+                    }
                 }
             }
 
