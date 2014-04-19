@@ -1551,15 +1551,6 @@ var SwdView = {
                 // If an ad-tile is hidden, then display it. Otherwise, leave it alone.
                 if ($(adDiv).is(':hidden')) {
                     $('#ad-tile-' + i).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
-
-                    if (i === 1) {
-                        LSM_Slot({
-                            adkey: '5a7',
-                            ad_size: '300x250',
-                            slot: 'slot93684',
-                            _render_div_id: 'ad-tile-1'
-                        });
-                    }
                 }
             }
 
