@@ -647,6 +647,7 @@ var SwdPresenter = {
 
             // If a response came through, then display the posts.
             SwdView.populatePostBlocks(response);
+            SwdView.reloadAds();
         }
     },
     /**
@@ -1224,6 +1225,38 @@ var SwdView = {
                 my: 'left top',
                 at: 'left bottom'
             });
+        });
+    },
+    /***
+     * Triggers a reload of the ad tiles.
+     */
+    reloadAds: function() {
+        LSM_Slot({
+            adkey: '5a7',
+            ad_size: '300x250',
+            slot: 'slot93684',
+            _render_div_id: 'ad-tile-1'
+        });
+        
+        LSM_Slot({
+            adkey: 'e8f',
+            ad_size: '300x250',
+            slot: 'slot93683',
+            _render_div_id: 'ad-tile-2'
+        });
+        
+        LSM_Slot({
+            adkey: '4df',
+            ad_size: '300x250',
+            slot: 'slot93685',
+            _render_div_id: 'ad-tile-3'
+        });
+        
+        LSM_Slot({
+            adkey: '2e5',
+            ad_size: '300x250',
+            slot: 'slot93255',
+            _render_div_id: 'ad-tile-4'
         });
     },
     /***
