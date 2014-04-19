@@ -1550,8 +1550,8 @@ var SwdView = {
 
                 // If an ad-tile is hidden, then display it. Otherwise, leave it alone.
                 if ($(adDiv).is(':hidden')) {
-                    //$('#ad-tile-' + i).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
-                    $('#ad-tile-' + i).show();
+                    //.post-block.unique:nth-child(' + i * adSpread + ')
+                    $('#ad-tile-' + i).insertAfter('#post-feed').show();
                 }
             }
 
