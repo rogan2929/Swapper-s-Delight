@@ -1153,7 +1153,7 @@ var SwdView = {
             $(this).removeClass('hover', 100);
         });
 
-        $('.post-block.ad-div').hide();
+        //$('.post-block.ad-div').hide();
     },
     /***
      * Increment the given post's comment count.
