@@ -1,6 +1,4 @@
 Implement multi-threading.
-Implement check to see that app has the correct permissions.
-*Artwork.
 *Privacy Policy.
 Include prompt to change app settings so that others using Swapper's Delight can see the current user's photos.
     https://www.facebook.com/settings?tab=applications&section=friends_share&view (Apps Others Use)
@@ -11,7 +9,6 @@ View group info panel.
     Contact info
     Privacy
     pic_cover
-    View Group in Facebook
 Captions for shared photos.
 When calculating post-image-tile width, whether or not a scrollbar is visible needs to be taken into account.
 

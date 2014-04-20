@@ -1004,7 +1004,7 @@ a.link-title {
 #overlay, #message-overlay {
     background: #ddd;
     position: absolute;
-    opacity: 0.75;
+    opacity: 0.90;
     left: 0;
     right: 0;
     top: 0;
