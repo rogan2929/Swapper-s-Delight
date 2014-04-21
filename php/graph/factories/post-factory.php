@@ -305,7 +305,8 @@ class PostFactory extends BaseFactory {
 
             // Perform a two step query of varying window sizes, and then merge the result.
             $this->stream = array_merge(
-                    $this->getFeedData($windowSize, $windowStart, 14, 1), $this->getFeedData(3600 * 24 * 30, $windowStart - ($windowSize * 14 * 1), 1, 1)
+                    $this->getFeedData($windowSize, $windowStart, 14, 1), 
+                    $this->getFeedData(3600 * 24 * 30, $windowStart - ($windowSize * 14 * 1), 1, 1)
             );
         } else {
             $_SESSION['refreshing'] = true;
@@ -332,7 +333,7 @@ class PostFactory extends BaseFactory {
 //            curl_close($ch);
 //            $this->stream = json_decode($result);
             
-            $this->stream = $this->fetchStreamFullAsync();
+            $this->stream = json_decode($this->fetchStreamFullAsync());
 
             $_SESSION['refreshing'] = false;
         }
