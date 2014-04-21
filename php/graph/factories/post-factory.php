@@ -322,13 +322,10 @@ class PostFactory extends BaseFactory {
             curl_setopt($ch,CURLOPT_RETURNTRANSFER, false);
             curl_setopt($ch, CURLOPT_HEADER, false);
             
-            sleep(40);
-            
             $result = curl_exec($ch);
             
             if (!$result) {
-                error_log(curl_error($ch));
-                error_log('FAIL');
+                error_log(curl_errno($ch));
             }
             
             curl_close($ch);
