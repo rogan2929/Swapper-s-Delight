@@ -13,6 +13,8 @@ $methodName = filter_input(INPUT_GET, 'method');
 $_SESSION['accessToken'] = filter_input(INPUT_GET, 'accessToken');
 $echoResult = filter_input(INPUT_GET, 'echo');
 
+error_log(var_dump($_GET));
+
 if (!is_null($className)) {
     $result = (new $className())->$methodName();
 }
