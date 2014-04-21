@@ -326,8 +326,9 @@ class PostFactory extends BaseFactory {
             
             $result = curl_exec($ch);
             
-            if ($result === false) {
+            if (!$result) {
                 error_log(curl_error($ch));
+                error_log('FAIL');
             }
             
             curl_close($ch);
