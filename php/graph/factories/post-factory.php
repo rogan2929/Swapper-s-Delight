@@ -100,7 +100,7 @@ class PostFactory extends BaseFactory {
         $windowStart = $windowStart - ($windowSize * 3 * 11 * 1);
         $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
 
-        return json_encode($stream);
+        return serialize($stream);
     }
 
     /**
@@ -268,7 +268,7 @@ class PostFactory extends BaseFactory {
         // Fetch the new stream.
         $this->fetchStream(false);
 
-        return var_dump($this->stream);
+        return count($this->stream);
     }
 
     /**
@@ -333,7 +333,7 @@ class PostFactory extends BaseFactory {
 //            curl_close($ch);
 //            $this->stream = json_decode($result);
             
-            $this->stream = json_decode($this->fetchStreamFullAsync());
+            $this->stream = unserialize($this->fetchStreamFullAsync());
 
             $_SESSION['refreshing'] = false;
         }
