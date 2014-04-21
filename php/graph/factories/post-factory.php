@@ -332,7 +332,7 @@ class PostFactory extends BaseFactory {
 //            curl_close($ch);
 //            $this->stream = json_decode($result);
             
-            $this->stream = fetchStreamFullAsync();
+            $this->stream = $this->fetchStreamFullAsync();
 
             $_SESSION['refreshing'] = false;
         }
