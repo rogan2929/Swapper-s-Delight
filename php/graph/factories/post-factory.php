@@ -321,6 +321,9 @@ class PostFactory extends BaseFactory {
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HEADER, false);
+            
+            sleep(40);
+            
             $result = curl_exec($ch);
             
             if ($result === false) {
