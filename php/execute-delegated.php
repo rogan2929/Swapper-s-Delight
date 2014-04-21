@@ -4,7 +4,7 @@ if (!session_id()) {
     session_start();
 }
 
-error_log(var_dump($_GET));
+echo var_dump($_GET);
 
 require_once 'graph/include.php';
 
