@@ -268,7 +268,7 @@ class PostFactory extends BaseFactory {
         // Fetch the new stream.
         $this->fetchStream(false);
 
-        return count($this->stream);
+        return var_dump($this->stream);
     }
 
     /**
