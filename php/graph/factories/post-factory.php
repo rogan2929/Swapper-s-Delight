@@ -510,10 +510,10 @@ class PostFactory extends BaseFactory {
             $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
         } else {
             // TODO: Somehow offload this onto a background thread.
-            $child = fopen('http://' . $_SERVER['HTTP_HOST'] . '/php/execute-delegated.php', 'r');
-
+            $child = fopen('http://' . $_SERVER['HTTP_HOST'] . '/php/execute-delegated.php?class=PostFactory&method=queryStream_Async&echo=1', 'r');
+            
             // get response from child (if any) as soon at it's ready:
-            $stream = stream_get_contents($child);
+            $stream = json_decode(stream_get_contents($child));
         }
 
         return $stream;
