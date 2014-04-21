@@ -2,9 +2,9 @@
 
 require_once 'graph/include.php';
 
-$className = filter_input(INPUT_POST, 'class');
-$methodName = filter_input(INPUT_POST, 'method');
-$echoResult = filter_input(INPUT_POST, 'echo');
+$className = filter_input(INPUT_GET, 'class');
+$methodName = filter_input(INPUT_GET, 'method');
+$echoResult = filter_input(INPUT_GET, 'echo');
 
 if (!is_null($className)) {
     $result = (new $className())->$methodName();
