@@ -83,6 +83,27 @@ class PostFactory extends BaseFactory {
     }
 
     /**
+     * Method for performing a fully query of the FQL stream table. 
+     * Designed to be called from an external file so execution can be
+     * performed asynchronously through fopen or popen.
+     * @return string
+     */
+    public function fetchStreamFullAsync() {
+        $windowStart = time();
+        $windowSize = $this->getOptimalWindowSize();
+
+        $stream = $this->getFeedData($windowSize, $windowStart, 50, 1);
+        $windowStart = $windowStart - ($windowSize * 50 * 1);
+        $stream = array_merge($stream, $this->getFeedData($windowSize * 2, $windowStart, 13, 1));
+        $windowStart = $windowStart - ($windowSize * 2 * 13 * 1);
+        $stream = array_merge($stream, $this->getFeedData($windowSize * 3, $windowStart, 11, 1));
+        $windowStart = $windowStart - ($windowSize * 3 * 11 * 1);
+        $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
+
+        return json_encode($stream);
+    }
+
+    /**
      * Gets the cached post stream.
      * @return array
      */
@@ -142,8 +163,8 @@ class PostFactory extends BaseFactory {
      */
     public function getNewPosts($refresh, $offset, $limit) {
         // Get a new stream if necessary.
-        if ($refresh == 1) {
-            $this->fetchStream($refresh);
+        if ($refresh == true) {
+            $this->fetchStream(true);
         }
 
         return $this->getPostData($this->stream, $offset, $limit);
@@ -273,24 +294,38 @@ class PostFactory extends BaseFactory {
     }
 
     /**
-     * Fetches the group's post stream.
+     * Builds a locally cached version of the FQL stream table.
+     * @param bool $prefetchOnly
      */
     private function fetchStream($prefetchOnly) {
-        // Wait for other threads to finish updating the cached FQL stream.
-        $this->waitForFetchStreamCompletion();
+        if ($prefetchOnly) {
+            // Only retrieve a small subset of the full stream, in order for data to be displayed more quickly to the user.
+            $windowStart = time();
+            $windowSize = $this->getOptimalWindowSize();
 
-        // Refresh the FQL stream.
-        $_SESSION['refreshing'] = true;
-        $_SESSION['stream'] = $this->queryStream($prefetchOnly);
-        $_SESSION['refreshing'] = false;
+            // Perform a two step query of varying window sizes, and then merge the result.
+            $this->stream = array_merge(
+                    $this->getFeedData($windowSize, $windowStart, 14, 1), $this->getFeedData(3600 * 24 * 30, $windowStart - ($windowSize * 14 * 1), 1, 1)
+            );
+        } else {
+            $_SESSION['refreshing'] = true;
 
-        $this->stream = $_SESSION['stream'];
+            // Offload full query of the stream onto a simulated background thread by calling fopen.
+            $childProc = fopen('https://' . filter_input(INPUT_SERVER, 'HTTP_HOST') . '/php/execute-delegated.php?class=PostFactory&method=fetchStreamFullAsync&echo=1&accessToken' . $this->graphApiClient->getAccessToken(), 'r');
+
+            // Get response from child (if any) as soon at it's ready:
+            $this->stream = json_decode(stream_get_contents($childProc));
+
+            $_SESSION['refreshing'] = false;
+        }
+
+        $_SESSION['stream'] = $this->stream;
     }
 
     /**
      * Determine the optimal window size to use in batch queries.
      */
-    public function getOptimalWindowSize() {
+    private function getOptimalWindowSize() {
         $startTime = time();
         $endTime = time() - 3600;
 
@@ -495,46 +530,6 @@ class PostFactory extends BaseFactory {
     }
 
     /**
-     * Query the FQL stream table for some basic data that will be cached.
-     * @param bool $prefetchOnly
-     * @return array
-     */
-    private function queryStream($prefetchOnly) {
-        $windowStart = time();
-        $windowSize = $this->getOptimalWindowSize();
-
-        // Check to see if this this is only prefetching the stream data.
-        if ($prefetchOnly) {
-            $stream = $this->getFeedData($windowSize, $windowStart, 14, 1);
-            $windowStart = $windowStart - ($windowSize * 14 * 1);
-            $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
-        } else {
-            // TODO: Somehow offload this onto a background thread.
-            $child = fopen('https://' . $_SERVER['HTTP_HOST'] . '/php/execute-delegated.php?class=PostFactory&method=queryStreamAsync&echo=1', 'r');
-            
-            // get response from child (if any) as soon at it's ready:
-            $stream = json_decode(stream_get_contents($child));
-        }
-
-        return $stream;
-    }
-
-    public function queryStreamAsync() {
-        $windowStart = time();
-        $windowSize = $this->getOptimalWindowSize();
-
-        $stream = $this->getFeedData($windowSize, $windowStart, 50, 1);
-        $windowStart = $windowStart - ($windowSize * 50 * 1);
-        $stream = array_merge($stream, $this->getFeedData($windowSize * 2, $windowStart, 13, 1));
-        $windowStart = $windowStart - ($windowSize * 2 * 13 * 1);
-        $stream = array_merge($stream, $this->getFeedData($windowSize * 3, $windowStart, 11, 1));
-        $windowStart = $windowStart - ($windowSize * 3 * 11 * 1);
-        $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
-        
-        return json_encode($stream);
-    }
-
-    /**
      * Execute a batch request against the selected group's feed.
      * @param int $windowSize
      * @param int $windowStart
@@ -542,7 +537,7 @@ class PostFactory extends BaseFactory {
      * @param int $iterations
      * @return array
      */
-    public function getFeedData($windowSize, $windowStart, $batchSize, $iterations = 1) {
+    private function getFeedData($windowSize, $windowStart, $batchSize, $iterations = 1) {
         $windowEnd = $windowStart - $windowSize;
 
         $stream = array();

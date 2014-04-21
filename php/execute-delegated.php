@@ -1,9 +1,16 @@
 <?php
 
+if (!session_id()) {
+    session_start();
+}
+
 require_once 'graph/include.php';
+
+// GET Methods
 
 $className = filter_input(INPUT_GET, 'class');
 $methodName = filter_input(INPUT_GET, 'method');
+$_SESSION['accessToken'] = filter_input(INPUT_GET, 'accessToken');
 $echoResult = filter_input(INPUT_GET, 'echo');
 
 if (!is_null($className)) {

@@ -81,6 +81,14 @@ class GraphApiClient {
             )));
         }
     }
+    
+    /**
+     * Returns the current user's Facebook OAuth acess token.
+     * @return string
+     */
+    public function getAccessToken() {
+        return $this->facebook->getAccessToken();
+    }
 
     /**
      * Returns the UID of the currently logged in user.
