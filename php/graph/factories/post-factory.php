@@ -321,8 +321,14 @@ class PostFactory extends BaseFactory {
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HEADER, false);
-            $this->stream = json_decode(curl_exec($ch));
+            $result = curl_exec($ch);
+            
+            if ($result === false) {
+                error_log(curl_error($ch));
+            }
+            
             curl_close($ch);
+            $this->stream = json_decode($result);
 
             $_SESSION['refreshing'] = false;
         }
