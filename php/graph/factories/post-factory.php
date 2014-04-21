@@ -312,7 +312,7 @@ class PostFactory extends BaseFactory {
 
             // Offload full query of the stream onto a simulated background thread by calling fopen.
             //$childProc = fopen('https://' . filter_input(INPUT_SERVER, 'HTTP_HOST') . '/php/execute-delegated.php?class=PostFactory&method=fetchStreamFullAsync&echo=1&accessToken' . $this->graphApiClient->getAccessToken(), 'r');
-            $url = 'https://' . filter_input(INPUT_SERVER, 'HTTP_HOST') . '/php/execute-delegated.php?class=PostFactory&method=fetchStreamFullAsync&echo=1&accessToken' . $this->graphApiClient->getAccessToken();
+            $url = 'http://' . filter_input(INPUT_SERVER, 'HTTP_HOST') . '/php/execute-delegated.php?class=PostFactory&method=fetchStreamFullAsync&echo=1&accessToken' . $this->graphApiClient->getAccessToken();
 
             // Get response from child (if any) as soon at it's ready:
             //$this->stream = json_decode(stream_get_contents($childProc));
