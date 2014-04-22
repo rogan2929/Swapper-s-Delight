@@ -103,11 +103,7 @@ class PostFactory extends BaseFactory {
         $windowStart = $windowStart - ($windowSize * 3 * 11 * 1);
         $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
 
-        return serialize($stream);
-    }
-    
-    private function fetchStreamFullAsyncCallback() {
-        
+        return json_encode($stream);
     }
 
     /**
