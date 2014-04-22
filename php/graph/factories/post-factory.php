@@ -183,8 +183,6 @@ class PostFactory extends BaseFactory {
      * @return /Post
      */
     public function getPostDetails($postId) {
-        error_log('getPostDetails');
-        
         $queries = array(
             'detailsQuery' => PostFactory::DETAILS_QUERY . 'WHERE post_id="' . $postId . '"',
             'imageQuery' => PostFactory::IMAGE_QUERY . 'WHERE object_id IN (SELECT attachment FROM #detailsQuery)',
@@ -277,7 +275,7 @@ class PostFactory extends BaseFactory {
         // Fetch the new stream.
         $this->fetchStream(false);
 
-        return var_dump($this->stream);
+        return count($this->stream);
     }
 
     /**
@@ -318,51 +316,49 @@ class PostFactory extends BaseFactory {
                     $this->getFeedData(3600 * 24 * 30, $windowStart - ($windowSize * 14 * 1), 1, 1)
             );
         } else {
-            $_SESSION['refreshing'] = true;
+//            $_SESSION['refreshing'] = true;
 
-//            // Offload full query of the stream onto a simulated background thread by calling fopen.
-//            //$childProc = fopen('https://' . filter_input(INPUT_SERVER, 'HTTP_HOST') . '/php/execute-delegated.php?class=PostFactory&method=fetchStreamFullAsync&echo=1&accessToken' . $this->graphApiClient->getAccessToken(), 'r');
-//            $url = 'http://' . filter_input(INPUT_SERVER, 'HTTP_HOST') . '/php/execute-delegated.php';
-//
-//            // Get response from child (if any) as soon at it's ready:
-//            //$this->stream = json_decode(stream_get_contents($childProc));
-//            
-//            $args = array(
-//                'gid' => $this->gid,
-//                'accessToken' => $this->graphApiClient->getAccessToken()
-//            );
-//            
-//            $postFields = array(
-//                'class' => 'PostFactory',
-//                'method' => 'fetchStreamFullAsync',
-//                'args' => json_encode($args)
-//            );
-//            
-//            $ch = curl_init();
-//            curl_setopt($ch, CURLOPT_URL, $url);
-//            curl_setopt($ch, CURLOPT_POST, true);
-//            curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
-//            curl_setopt($ch,CURLOPT_RETURNTRANSFER, false);
-//            curl_setopt($ch, CURLOPT_HEADER, 0);
-//            
-//            $result = curl_exec($ch);
-//            
-//            if (!$result) {
-//                error_log(curl_errno($ch));
-//                error_log(curl_error($ch));
-//            }
-//            
-//            curl_close($ch);
-//            $this->stream = unserialize($result);
+            // Offload full query of the stream onto a simulated background thread by calling curl.
+            // Due to a lack of delegated functions in PHP, the received data has to be passed to the client
+            // and then sent back.
+            $url = 'http://' . filter_input(INPUT_SERVER, 'HTTP_HOST') . '/php/execute-delegated.php';
             
             $args = array(
                 'gid' => $this->gid,
                 'accessToken' => $this->graphApiClient->getAccessToken()
             );
             
-            $this->stream = unserialize($this->fetchStreamFullAsync($args));
+            $postFields = array(
+                'class' => 'PostFactory',
+                'method' => 'fetchStreamFullAsync',
+                'args' => json_encode($args)
+            );
+            
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+            curl_setopt($ch,CURLOPT_RETURNTRANSFER, false);
+            curl_setopt($ch, CURLOPT_HEADER, 0);
+            
+            $result = curl_exec($ch);
+            
+            if (!$result) {
+                error_log(curl_errno($ch));
+                error_log(curl_error($ch));
+            }
+            
+            curl_close($ch);
+//            $this->stream = unserialize($result);
+            
+//            $args = array(
+//                'gid' => $this->gid,
+//                'accessToken' => $this->graphApiClient->getAccessToken()
+//            );
+//            
+//            $this->stream = unserialize($this->fetchStreamFullAsync($args));
 
-            $_SESSION['refreshing'] = false;
+            //$_SESSION['refreshing'] = false;
         }
 
         $_SESSION['stream'] = $this->stream;
