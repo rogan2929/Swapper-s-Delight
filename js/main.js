@@ -647,12 +647,11 @@ var SwdPresenter = {
 
             // If a response came through, then display the posts.
             SwdView.populatePostBlocks(response);
-            
+
             // Reload the ads and display.
-            SwdView.reloadAds(function() {
-                SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
-                SwdView.toggleElement('#overlay-loading-posts', false);
-            });
+            SwdView.reloadAds();
+            SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
+            SwdView.toggleElement('#overlay-loading-posts', false);
         }
     },
     /**
@@ -1236,7 +1235,7 @@ var SwdView = {
      * Triggers a reload of the ad tiles.
      */
     reloadAds: function(callback) {
-        var i, adDiv, adSpread;
+        var i, adDiv, adSpread, adKey, slot;
 
         // Determine how far apart each ad-tile will be.
         adSpread = Math.max(Math.floor(SwdView.getPostBlockCount() / 4), 10);
@@ -1246,43 +1245,69 @@ var SwdView = {
             adDiv = $('#ad-tile-' + i);
 
             // If an ad-tile is hidden, then display it. Otherwise, leave it alone.
-//            if ($(adDiv).is(':hidden')) {
+            if ($(adDiv).is(':hidden')) {
                 $('#ad-tile-' + i).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
-//            }
+
+                switch (i) {
+                    case 1:
+                        adKey = '5a7';
+                        slot = 'slot93684';
+                        break;
+                    case 2:
+                        adKey = 'e8f';
+                        slot = 'slot93683';
+                        break;
+                    case 3:
+                        adKey = '4df';
+                        slot = 'slot93685';
+                        break;
+                    case 4:
+                        adKey = '2e5';
+                        slot = 'slot93255';
+                        break;
+                }
+
+                LSM_Slot({
+                    adkey: adKey,
+                    ad_size: '300x250',
+                    slot: slot,
+                    _render_div_id: 'ad-tile-' + i,
+                });
+            }
         }
 
         // Chain the LSM Ad loads to avoid glitchiness.
-        LSM_Slot({
-            adkey: '5a7',
-            ad_size: '300x250',
-            slot: 'slot93684',
-            _render_div_id: 'ad-tile-1',
-            _onLoad: function() {
-                LSM_Slot({
-                    adkey: 'e8f',
-                    ad_size: '300x250',
-                    slot: 'slot93683',
-                    _render_div_id: 'ad-tile-2',
-                    _onLoad: function() {
-                        LSM_Slot({
-                            adkey: '4df',
-                            ad_size: '300x250',
-                            slot: 'slot93685',
-                            _render_div_id: 'ad-tile-3',
-                            _onLoad: function() {
-                                LSM_Slot({
-                                    adkey: '2e5',
-                                    ad_size: '300x250',
-                                    slot: 'slot93255',
-                                    _render_div_id: 'ad-tile-4',
-                                    _onLoad: callback               // Call the final callback.
-                                });
-                            }
-                        });
-                    }
-                });
-            }
-        });
+//        LSM_Slot({
+//            adkey: '5a7',
+//            ad_size: '300x250',
+//            slot: 'slot93684',
+//            _render_div_id: 'ad-tile-1',
+//            _onLoad: function() {
+//                LSM_Slot({
+//                    adkey: 'e8f',
+//                    ad_size: '300x250',
+//                    slot: 'slot93683',
+//                    _render_div_id: 'ad-tile-2',
+//                    _onLoad: function() {
+//                        LSM_Slot({
+//                            adkey: '4df',
+//                            ad_size: '300x250',
+//                            slot: 'slot93685',
+//                            _render_div_id: 'ad-tile-3',
+//                            _onLoad: function() {
+//                                LSM_Slot({
+//                                    adkey: '2e5',
+//                                    ad_size: '300x250',
+//                                    slot: 'slot93255',
+//                                    _render_div_id: 'ad-tile-4',
+//                                    _onLoad: callback               // Call the final callback.
+//                                });
+//                            }
+//                        });
+//                    }
+//                });
+//            }
+//        });
     },
     /***
      * Remove a comment from the view.
