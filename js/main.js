@@ -1246,9 +1246,9 @@ var SwdView = {
             adDiv = $('#ad-tile-' + i);
 
             // If an ad-tile is hidden, then display it. Otherwise, leave it alone.
-            if ($(adDiv).is(':hidden')) {
+//            if ($(adDiv).is(':hidden')) {
                 $('#ad-tile-' + i).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
-            }
+//            }
         }
 
         // Chain the LSM Ad loads to avoid glitchiness.
