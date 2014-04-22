@@ -648,6 +648,8 @@ var SwdPresenter = {
             // If a response came through, then display the posts.
             SwdView.populatePostBlocks(response);
             SwdView.reloadAds();
+            SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
+            SwdView.toggleElement('#overlay-loading-posts', false);
         }
     },
     /**
@@ -1246,33 +1248,33 @@ var SwdView = {
             }
         }
 
-//        LSM_Slot({
-//            adkey: '5a7',
-//            ad_size: '300x250',
-//            slot: 'slot93684',
-//            _render_div_id: 'ad-tile-1'
-//        });
-//
-//        LSM_Slot({
-//            adkey: 'e8f',
-//            ad_size: '300x250',
-//            slot: 'slot93683',
-//            _render_div_id: 'ad-tile-2'
-//        });
-//
-//        LSM_Slot({
-//            adkey: '4df',
-//            ad_size: '300x250',
-//            slot: 'slot93685',
-//            _render_div_id: 'ad-tile-3'
-//        });
-//
-//        LSM_Slot({
-//            adkey: '2e5',
-//            ad_size: '300x250',
-//            slot: 'slot93255',
-//            _render_div_id: 'ad-tile-4'
-//        });
+        LSM_Slot({
+            adkey: '5a7',
+            ad_size: '300x250',
+            slot: 'slot93684',
+            _render_div_id: 'ad-tile-1'
+        });
+
+        LSM_Slot({
+            adkey: 'e8f',
+            ad_size: '300x250',
+            slot: 'slot93683',
+            _render_div_id: 'ad-tile-2'
+        });
+
+        LSM_Slot({
+            adkey: '4df',
+            ad_size: '300x250',
+            slot: 'slot93685',
+            _render_div_id: 'ad-tile-3'
+        });
+
+        LSM_Slot({
+            adkey: '2e5',
+            ad_size: '300x250',
+            slot: 'slot93255',
+            _render_div_id: 'ad-tile-4'
+        });
     },
     /***
      * Remove a comment from the view.
@@ -1541,10 +1543,8 @@ var SwdView = {
      * @param {type} posts
      */
     populatePostBlocks: function(posts) {
-        var i, post, adSpread, terminatorReached, adDiv;
-
-        SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
-        SwdView.toggleElement('#overlay-loading-posts', false);
+        var i, post, terminatorReached;
+        
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', false);
 
         // If there is a feed to display, then display it.
