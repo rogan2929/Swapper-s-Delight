@@ -43,7 +43,7 @@ class GraphApiClient {
         $this->appSecretProof = hash_hmac('sha256', $this->facebook->getAccessToken(), self::APP_SECRET);
 
         // Test the facebook object that was created successfully.
-        $this->api('/me', 'GET');
+        //$this->api('/me', 'GET');
     }
 
     /**
