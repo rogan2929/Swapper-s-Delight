@@ -33,7 +33,7 @@ class GraphApiClient {
         ));
 
         // Look up an existing access token, if need be.
-        if (isset($_SESSION['accessToken'])) {
+        if (is_null($this->facebook->getAccessToken())) {
             $this->facebook->setAccessToken($_SESSION['accessToken']);
         } else {
             $_SESSION['accessToken'] = $this->facebook->getAccessToken();
