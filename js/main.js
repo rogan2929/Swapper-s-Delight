@@ -1231,27 +1231,42 @@ var SwdView = {
      * Triggers a reload of the ad tiles.
      */
     reloadAds: function() {
+        var i, adDiv, adSpread;
+        
+        // Determine how far apart each ad-tile will be.
+        adSpread = Math.max(Math.floor(SwdView.getPostBlockCount() / 4), 10);
+
+        // Insert add tiles evenly throughout all the posts.
+        for (i = 1; i <= 4; i++) {
+            adDiv = $('#ad-tile-' + i);
+
+            // If an ad-tile is hidden, then display it. Otherwise, leave it alone.
+            if ($(adDiv).is(':hidden')) {
+                $('#ad-tile-' + i).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
+            }
+        }
+
         LSM_Slot({
             adkey: '5a7',
             ad_size: '300x250',
             slot: 'slot93684',
             _render_div_id: 'ad-tile-1'
         });
-        
+
         LSM_Slot({
             adkey: 'e8f',
             ad_size: '300x250',
             slot: 'slot93683',
             _render_div_id: 'ad-tile-2'
         });
-        
+
         LSM_Slot({
             adkey: '4df',
             ad_size: '300x250',
             slot: 'slot93685',
             _render_div_id: 'ad-tile-3'
         });
-        
+
         LSM_Slot({
             adkey: '2e5',
             ad_size: '300x250',
@@ -1572,19 +1587,6 @@ var SwdView = {
 
                 // Add an event handler for when it is clicked on.
                 $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
-            }
-
-            // Determine how far apart each ad-tile will be.
-            adSpread = Math.max(Math.floor(SwdView.getPostBlockCount() / 4), 10);
-
-            // Insert add tiles evenly throughout all the posts.
-            for (i = 1; i <= 4; i++) {
-                adDiv = $('#ad-tile-' + i);
-
-                // If an ad-tile is hidden, then display it. Otherwise, leave it alone.
-                if ($(adDiv).is(':hidden')) {
-                    $('#ad-tile-' + i).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
-                }
             }
 
             $('.post-block.hidden-block').hide();
