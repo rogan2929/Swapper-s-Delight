@@ -89,8 +89,8 @@ class PostFactory extends BaseFactory {
      * @return string
      */
     public function fetchStreamFullAsync($args) {
-        $this->graphApiClient->setAccessToken($args[0]);
-        $this->setGid($args[1]);
+        $this->graphApiClient->setAccessToken($args['accessToken']);
+        $this->setGid($args['gid']);
         
         $windowStart = time();
         $windowSize = $this->getOptimalWindowSize();
@@ -316,27 +316,40 @@ class PostFactory extends BaseFactory {
 
 //            // Offload full query of the stream onto a simulated background thread by calling fopen.
 //            //$childProc = fopen('https://' . filter_input(INPUT_SERVER, 'HTTP_HOST') . '/php/execute-delegated.php?class=PostFactory&method=fetchStreamFullAsync&echo=1&accessToken' . $this->graphApiClient->getAccessToken(), 'r');
-//            $url = 'http://' . filter_input(INPUT_SERVER, 'HTTP_HOST') . '/php/execute-delegated.php?class=PostFactory&method=fetchStreamFullAsync&echo=1&accessToken=' . $this->graphApiClient->getAccessToken();
-//
-//            // Get response from child (if any) as soon at it's ready:
-//            //$this->stream = json_decode(stream_get_contents($childProc));
-//            
-//            $ch = curl_init();
-//            curl_setopt($ch, CURLOPT_URL, $url);
-//            curl_setopt($ch,CURLOPT_RETURNTRANSFER, false);
-//            curl_setopt($ch, CURLOPT_HEADER, false);
-//            
-//            $result = curl_exec($ch);
-//            
-//            if (!$result) {
-//                error_log(curl_errno($ch));
-//                error_log(curl_error($ch));
-//            }
-//            
-//            curl_close($ch);
-//            $this->stream = json_decode($result);
+            $url = 'http://' . filter_input(INPUT_SERVER, 'HTTP_HOST') . '/php/execute-delegated.php';
+
+            // Get response from child (if any) as soon at it's ready:
+            //$this->stream = json_decode(stream_get_contents($childProc));
             
-            $this->stream = unserialize($this->fetchStreamFullAsync());
+            $args = array(
+                'gid' => $this->gid,
+                'accessToken' => $this->graphApiClient->getAccessToken()
+            );
+            
+            $postFields = array(
+                'class' => 'PostFactory',
+                'method' => 'fetchStreamFullAsync',
+                'args' => $args
+            );
+            
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+            curl_setopt($ch,CURLOPT_RETURNTRANSFER, false);
+            curl_setopt($ch, CURLOPT_HEADER, false);
+            
+            $result = curl_exec($ch);
+            
+            if (!$result) {
+                error_log(curl_errno($ch));
+                error_log(curl_error($ch));
+            }
+            
+            curl_close($ch);
+            $this->stream = unserialize($result);
+            
+            //$this->stream = unserialize($this->fetchStreamFullAsync());
 
             $_SESSION['refreshing'] = false;
         }

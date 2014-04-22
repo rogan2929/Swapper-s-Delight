@@ -12,11 +12,13 @@ $className = filter_input(INPUT_POST, 'class');
 $methodName = filter_input(INPUT_POST, 'method');
 $args = filter_input(INPUT_POST, 'args');
 
-if (!is_null($className)) {
-    $result = (new $className())->$methodName($args);
-} 
-else {
-    $result = $methodName();
-}
+echo var_dump($args);
 
-echo $result;
+//if (!is_null($className)) {
+//    $result = (new $className())->$methodName($args);
+//} 
+//else {
+//    $result = $methodName();
+//}
+//
+//echo $result;
