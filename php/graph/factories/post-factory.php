@@ -329,7 +329,7 @@ class PostFactory extends BaseFactory {
             $postFields = array(
                 'class' => 'PostFactory',
                 'method' => 'fetchStreamFullAsync',
-                'args' => $args
+                'args' => json_encode($args)
             );
             
             $ch = curl_init();

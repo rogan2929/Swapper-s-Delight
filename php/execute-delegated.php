@@ -10,7 +10,7 @@ require_once 'graph/include.php';
 
 $className = filter_input(INPUT_POST, 'class');
 $methodName = filter_input(INPUT_POST, 'method');
-$args = filter_input(INPUT_POST, 'args');
+$args = json_decode(filter_input(INPUT_POST, 'args'));
 
 echo var_dump($args);
 
