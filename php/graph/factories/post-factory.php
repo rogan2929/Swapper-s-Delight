@@ -91,7 +91,7 @@ class PostFactory extends BaseFactory {
     public function fetchStreamFullAsync($args) {
         $this->graphApiClient->setAccessToken($args['accessToken']);
         $this->setGid($args['gid']);
-        
+
         $windowStart = time();
         $windowSize = $this->getOptimalWindowSize();
 
@@ -123,8 +123,6 @@ class PostFactory extends BaseFactory {
     public function getLikedPosts($offset, $limit) {
         $posts = array();
 
-        $this->waitForFetchStreamCompletion();
-
         // Look through the cached stream for liked posts.
         for ($i = 0; $i < count($this->stream); $i++) {
             if ($this->stream[$i]->getUserLikes() == 1) {
@@ -144,8 +142,6 @@ class PostFactory extends BaseFactory {
     public function getMyPosts($offset, $limit) {
         $uid = $this->graphApiClient->getMe();
         $posts = array();
-
-        $this->waitForFetchStreamCompletion();
 
         // Look through the cached stream, match by uid => actor_id
         for ($i = 0; $i < count($this->stream); $i++) {
@@ -271,7 +267,7 @@ class PostFactory extends BaseFactory {
         // Fetch the new stream.
         $this->fetchStream(false);
 
-        //return count($this->stream);
+        return count($this->stream);
     }
 
     /**
@@ -283,8 +279,6 @@ class PostFactory extends BaseFactory {
      */
     public function searchPosts($search, $offset, $limit) {
         $posts = array();
-
-        $this->waitForFetchStreamCompletion();
 
         // Look through the cached stream for posts whose message or user matches the search term.
         for ($i = 0; $i < count($this->stream); $i++) {
@@ -312,49 +306,61 @@ class PostFactory extends BaseFactory {
                     $this->getFeedData(3600 * 24 * 30, $windowStart - ($windowSize * 14 * 1), 1, 1)
             );
         } else {
-//            $_SESSION['refreshing'] = true;
+            $windowStart = time();
+            $windowSize = $this->getOptimalWindowSize();
 
+            $stream = $this->getFeedData($windowSize, $windowStart, 50, 1);
+            $windowStart = $windowStart - ($windowSize * 50 * 1);
+            $stream = array_merge($stream, $this->getFeedData($windowSize * 2, $windowStart, 13, 1));
+            $windowStart = $windowStart - ($windowSize * 2 * 13 * 1);
+            $stream = array_merge($stream, $this->getFeedData($windowSize * 3, $windowStart, 11, 1));
+            $windowStart = $windowStart - ($windowSize * 3 * 11 * 1);
+            $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
+
+            $this->stream = $stream;
+            
+            /*
+//            $_SESSION['refreshing'] = true;
             // Offload full query of the stream onto a simulated background thread by calling curl.
             // Due to a lack of delegated functions in PHP, the received data has to be passed to the client
             // and then sent back.
-            $url = 'http://' . filter_input(INPUT_SERVER, 'HTTP_HOST') . '/php/execute-delegated.php';
-            
-            $args = array(
-                'gid' => $this->gid,
-                'accessToken' => $this->graphApiClient->getAccessToken()
-            );
-            
-            $postFields = array(
-                'class' => 'PostFactory',
-                'method' => 'fetchStreamFullAsync',
-                'args' => json_encode($args)
-            );
-            
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
-            curl_setopt($ch,CURLOPT_RETURNTRANSFER, false);
-            curl_setopt($ch, CURLOPT_HEADER, 0);
-            
-            $result = curl_exec($ch);
-            
-            if (!$result) {
-                error_log(curl_errno($ch));
-                error_log(curl_error($ch));
-            }
-            
-            curl_close($ch);
+//            $url = 'http://' . filter_input(INPUT_SERVER, 'HTTP_HOST') . '/php/execute-delegated.php';
+//            
+//            $args = array(
+//                'gid' => $this->gid,
+//                'accessToken' => $this->graphApiClient->getAccessToken()
+//            );
+//            
+//            $postFields = array(
+//                'class' => 'PostFactory',
+//                'method' => 'fetchStreamFullAsync',
+//                'args' => json_encode($args)
+//            );
+//            
+//            $ch = curl_init();
+//            curl_setopt($ch, CURLOPT_URL, $url);
+//            curl_setopt($ch, CURLOPT_POST, true);
+//            curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+//            curl_setopt($ch,CURLOPT_RETURNTRANSFER, false);
+//            curl_setopt($ch, CURLOPT_HEADER, 0);
+//            
+//            $result = curl_exec($ch);
+//            
+//            if (!$result) {
+//                error_log(curl_errno($ch));
+//                error_log(curl_error($ch));
+//            }
+//            
+//            curl_close($ch);
 //            $this->stream = unserialize($result);
-            
 //            $args = array(
 //                'gid' => $this->gid,
 //                'accessToken' => $this->graphApiClient->getAccessToken()
 //            );
 //            
 //            $this->stream = unserialize($this->fetchStreamFullAsync($args));
-
             //$_SESSION['refreshing'] = false;
+            */
         }
 
         $_SESSION['stream'] = $this->stream;
@@ -635,15 +641,6 @@ class PostFactory extends BaseFactory {
         }
 
         return $posts;
-    }
-
-    /**
-     * Forcibly pause the thread in order for fetchStream to complete.
-     */
-    private function waitForFetchStreamCompletion() {
-//        while ($_SESSION['refreshing'] == true) {
-//            sleep(3);
-//        }
     }
 
 }

@@ -6,4 +6,4 @@
 
 require_once 'graph/include.php';
 
-(new PostFactory())->refreshStream(filter_input(INPUT_GET, 'gid'));
+echo (new PostFactory())->refreshStream(filter_input(INPUT_GET, 'gid'));
