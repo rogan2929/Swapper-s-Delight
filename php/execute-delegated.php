@@ -8,18 +8,15 @@ require_once 'graph/include.php';
 
 // GET Methods
 
-$className = filter_input(INPUT_GET, 'class');
-$methodName = filter_input(INPUT_GET, 'method');
-$_SESSION['accessToken'] = filter_input(INPUT_GET, 'accessToken');
-$echoResult = filter_input(INPUT_GET, 'echo');
+$className = filter_input(INPUT_POST, 'class');
+$methodName = filter_input(INPUT_POST, 'method');
+$args = filter_input(INPUT_POST, 'args');
 
 if (!is_null($className)) {
-    $result = (new $className())->$methodName();
-}
+    $result = (new $className())->$methodName($args);
+} 
 else {
     $result = $methodName();
 }
 
-if ($echoResult) {
-    echo $result;
-}
+echo $result;

@@ -88,7 +88,10 @@ class PostFactory extends BaseFactory {
      * performed asynchronously through fopen or popen.
      * @return string
      */
-    public function fetchStreamFullAsync() {
+    public function fetchStreamFullAsync($args) {
+        $this->graphApiClient->setAccessToken($args[0]);
+        $this->setGid($args[1]);
+        
         $windowStart = time();
         $windowSize = $this->getOptimalWindowSize();
 
