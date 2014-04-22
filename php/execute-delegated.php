@@ -12,13 +12,11 @@ $className = filter_input(INPUT_POST, 'class');
 $methodName = filter_input(INPUT_POST, 'method');
 $args = json_decode(filter_input(INPUT_POST, 'args'));
 
-echo var_dump($args);
+if (!is_null($className)) {
+    $result = (new $className())->$methodName($args);
+} 
+else {
+    $result = $methodName();
+}
 
-//if (!is_null($className)) {
-//    $result = (new $className())->$methodName($args);
-//} 
-//else {
-//    $result = $methodName();
-//}
-//
-//echo $result;
+echo $result;
