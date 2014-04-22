@@ -75,6 +75,8 @@ class GraphApiClient {
             // Set a 400 response code and then exit with the FB exception message.
             http_response_code(400);
 
+            error_log($ex->getCode() . ': ' . $ex->getMessage());
+            
             die(json_encode(array(
                 'code' => $ex->getCode(),
                 'message' => $ex->getMessage()
@@ -83,11 +85,20 @@ class GraphApiClient {
     }
     
     /**
-     * Returns the current user's Facebook OAuth acess token.
+     * Returns the current user's Facebook OAuth access token.
      * @return string
      */
     public function getAccessToken() {
         return $this->facebook->getAccessToken();
+    }
+    
+    /**
+     * Sets the current user's Facebook OAuth access token.
+     * @param string $accessToken
+     */
+    public function setAccessToken($accessToken) {
+        $this->facebook->setAccessToken($accessToken);
+        $_SESSION['accessToken'] = $accessToken;
     }
 
     /**
