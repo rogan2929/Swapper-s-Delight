@@ -105,6 +105,10 @@ class PostFactory extends BaseFactory {
 
         return serialize($stream);
     }
+    
+    private function fetchStreamFullAsyncCallback() {
+        
+    }
 
     /**
      * Gets the cached post stream.
@@ -179,6 +183,8 @@ class PostFactory extends BaseFactory {
      * @return /Post
      */
     public function getPostDetails($postId) {
+        error_log('getPostDetails');
+        
         $queries = array(
             'detailsQuery' => PostFactory::DETAILS_QUERY . 'WHERE post_id="' . $postId . '"',
             'imageQuery' => PostFactory::IMAGE_QUERY . 'WHERE object_id IN (SELECT attachment FROM #detailsQuery)',
@@ -316,40 +322,45 @@ class PostFactory extends BaseFactory {
 
 //            // Offload full query of the stream onto a simulated background thread by calling fopen.
 //            //$childProc = fopen('https://' . filter_input(INPUT_SERVER, 'HTTP_HOST') . '/php/execute-delegated.php?class=PostFactory&method=fetchStreamFullAsync&echo=1&accessToken' . $this->graphApiClient->getAccessToken(), 'r');
-            $url = 'http://' . filter_input(INPUT_SERVER, 'HTTP_HOST') . '/php/execute-delegated.php';
-
-            // Get response from child (if any) as soon at it's ready:
-            //$this->stream = json_decode(stream_get_contents($childProc));
+//            $url = 'http://' . filter_input(INPUT_SERVER, 'HTTP_HOST') . '/php/execute-delegated.php';
+//
+//            // Get response from child (if any) as soon at it's ready:
+//            //$this->stream = json_decode(stream_get_contents($childProc));
+//            
+//            $args = array(
+//                'gid' => $this->gid,
+//                'accessToken' => $this->graphApiClient->getAccessToken()
+//            );
+//            
+//            $postFields = array(
+//                'class' => 'PostFactory',
+//                'method' => 'fetchStreamFullAsync',
+//                'args' => json_encode($args)
+//            );
+//            
+//            $ch = curl_init();
+//            curl_setopt($ch, CURLOPT_URL, $url);
+//            curl_setopt($ch, CURLOPT_POST, true);
+//            curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+//            curl_setopt($ch,CURLOPT_RETURNTRANSFER, false);
+//            curl_setopt($ch, CURLOPT_HEADER, 0);
+//            
+//            $result = curl_exec($ch);
+//            
+//            if (!$result) {
+//                error_log(curl_errno($ch));
+//                error_log(curl_error($ch));
+//            }
+//            
+//            curl_close($ch);
+//            $this->stream = unserialize($result);
             
             $args = array(
                 'gid' => $this->gid,
                 'accessToken' => $this->graphApiClient->getAccessToken()
             );
             
-            $postFields = array(
-                'class' => 'PostFactory',
-                'method' => 'fetchStreamFullAsync',
-                'args' => json_encode($args)
-            );
-            
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
-            curl_setopt($ch,CURLOPT_RETURNTRANSFER, false);
-            curl_setopt($ch, CURLOPT_HEADER, false);
-            
-            $result = curl_exec($ch);
-            
-            if (!$result) {
-                error_log(curl_errno($ch));
-                error_log(curl_error($ch));
-            }
-            
-            curl_close($ch);
-            $this->stream = unserialize($result);
-            
-            //$this->stream = unserialize($this->fetchStreamFullAsync());
+            $this->stream = unserialize($this->fetchStreamFullAsync($args));
 
             $_SESSION['refreshing'] = false;
         }
