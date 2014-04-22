@@ -301,10 +301,11 @@ class PostFactory extends BaseFactory {
             $windowSize = $this->getOptimalWindowSize();
 
             // Perform a two step query of varying window sizes, and then merge the result.
-            $this->stream = array_merge(
-                    $this->getFeedData($windowSize, $windowStart, 14, 1), 
-                    $this->getFeedData(3600 * 24 * 30, $windowStart - ($windowSize * 14 * 1), 1, 1)
-            );
+            $stream = $this->getFeedData($windowSize, $windowStart, 14, 1);
+            $windowStart = $windowStart - ($windowSize * 14 * 1);
+            $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
+            
+            $this->stream = $stream;
         } else {
             $windowStart = time();
             $windowSize = $this->getOptimalWindowSize();
