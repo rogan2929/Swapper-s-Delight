@@ -39,8 +39,7 @@ class GraphApiClient {
             $_SESSION['accessToken'] = $this->facebook->getAccessToken();
         }
 
-        // Set the AppSecretProof, which is required for FB api calls.
-        $this->appSecretProof = hash_hmac('sha256', $this->facebook->getAccessToken(), self::APP_SECRET);
+        $this->generateAppSecretProof();
 
         // Test the facebook object that was created successfully.
         //$this->api('/me', 'GET');
@@ -99,6 +98,8 @@ class GraphApiClient {
     public function setAccessToken($accessToken) {
         $this->facebook->setAccessToken($accessToken);
         $_SESSION['accessToken'] = $accessToken;
+        
+        $this->generateAppSecretProof();
     }
 
     /**
@@ -131,5 +132,13 @@ class GraphApiClient {
      */
     public function unLikeObject($id) {
         $this->api('/' . $id . '/likes', 'DELETE');
+    }
+    
+    /**
+     * Generates an appSecretProof that Facebook requires for API transactions.
+     */
+    private function generateAppSecretProof() {
+        // Set the AppSecretProof, which is required for FB api calls.
+        $this->appSecretProof = hash_hmac('sha256', $this->facebook->getAccessToken(), self::APP_SECRET);
     }
 }
