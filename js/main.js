@@ -650,8 +650,11 @@ var SwdPresenter = {
 
             // Reload the ads and display.
             SwdView.reloadAds();
-            SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
-            SwdView.toggleElement('#overlay-loading-posts', false);
+
+            setTimeOut(function() {
+                SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
+                SwdView.toggleElement('#overlay-loading-posts', false);
+            }, 3000);
         }
     },
     /**
