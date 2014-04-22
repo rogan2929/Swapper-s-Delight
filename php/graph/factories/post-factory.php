@@ -641,9 +641,9 @@ class PostFactory extends BaseFactory {
      * Forcibly pause the thread in order for fetchStream to complete.
      */
     private function waitForFetchStreamCompletion() {
-        while ($_SESSION['refreshing'] == true) {
-            sleep(3);
-        }
+//        while ($_SESSION['refreshing'] == true) {
+//            sleep(3);
+//        }
     }
 
 }
