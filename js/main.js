@@ -1275,17 +1275,19 @@ var SwdView = {
      * Triggers a reload of the ad tiles.
      */
     reloadAds: function(callback) {
-        var i, adDiv, adSpread;
+        var i, adDiv, adSpread, postBlockCount;
+        
+        postBlockCount = SwdView.getPostBlockCount()
 
         // Determine how far apart each ad-tile will be.
-        adSpread = Math.max(Math.floor(SwdView.getPostBlockCount() / 4), 10);
+        adSpread = Math.max(Math.floor(postBlockCount / 4), 10);
 
         // Insert add tiles evenly throughout all the posts.
         for (i = 1; i <= 4; i++) {
             adDiv = $('#ad-tile-' + i);
 
             // If an ad-tile is hidden, then display it. Otherwise, leave it alone.
-            if ($(adDiv).is(':hidden')) {
+            if ($(adDiv).is(':hidden') && (i * adSpread) < postBlockCount) {
                 $(adDiv).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
 
                 switch (i) {
