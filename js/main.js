@@ -1298,7 +1298,11 @@ var SwdView = {
                 $(adDiv).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
 
                 // Show and reload the ad-tile.
-                SwdView.adTiles[i - 1].show().reload();
+                SwdView.adTiles[i - 1].reload();
+                
+                while(SwdView.adTiles[i - 1].state() === 'loading');
+                
+                SwdView.adTiles[i - 1].show();
             }
         }
     },
