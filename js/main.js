@@ -1067,10 +1067,7 @@ var SwdPresenter = {
  * View for the Swapper's Delight program.
  */
 var SwdView = {
-    adTile1: null,
-    adTile2: null,
-    adTile3: null,
-    adTile4: null,
+    adTiles: {},
     handlers: {},
     /***
      * Add group to Group Select Menu.
@@ -1161,38 +1158,42 @@ var SwdView = {
             $(this).removeClass('hover', 100);
         });
 
-        SwdView.adTile1 = LSM_Slot({
+        SwdView.adTiles[0] = LSM_Slot({
             adkey: '5a7',
             ad_size: '300x250',
             slot: 'slot93684',
             _render_div_id: 'ad-tile-1',
+            _preload: 'wait',
             _onload: function() {
 
             }
         });
-        SwdView.adTile2 = LSM_Slot({
+        SwdView.adTiles[1] = LSM_Slot({
             adkey: 'e8f',
             ad_size: '300x250',
             slot: 'slot93683',
             _render_div_id: 'ad-tile-2',
+            _preload: 'wait',
             _onload: function() {
 
             }
         });
-        SwdView.adTile3 = LSM_Slot({
+        SwdView.adTiles[2] = LSM_Slot({
             adkey: '4df',
             ad_size: '300x250',
             slot: 'slot93685',
             _render_div_id: 'ad-tile-3',
+            _preload: 'wait',
             _onload: function() {
 
             }
         });
-        SwdView.adTile4 = LSM_Slot({
+        SwdView.adTiles[3] = LSM_Slot({
             adkey: '2e5',
             ad_size: '300x250',
             slot: 'slot93255',
             _render_div_id: 'ad-tile-4',
+            _preload: 'wait',
             _onload: function() {
 
             }
@@ -1228,6 +1229,12 @@ var SwdView = {
      * Clear all posts from the view.
      */
     clearPosts: function() {
+        var i;
+        
+        for (i = 0; i < SwdView.adTiles.length; i++) {
+            SwdView.adTiles[i].hide();
+        }
+        
         $('.post-block.ad-div').hide();
         $('#post-feed .post-block').not('.post-block.ad-div').remove();
     },
@@ -1274,7 +1281,7 @@ var SwdView = {
     /***
      * Triggers a reload of the ad tiles.
      */
-    reloadAds: function(callback) {
+    reloadAds: function() {
         var i, adDiv, adSpread, postBlockCount;
         
         postBlockCount = SwdView.getPostBlockCount()
@@ -1290,20 +1297,8 @@ var SwdView = {
             if ($(adDiv).is(':hidden') && (i * adSpread) < postBlockCount) {
                 $(adDiv).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
 
-                switch (i) {
-                    case 1:
-                        SwdView.adTile1.reload();
-                        break;
-                    case 2:
-                        SwdView.adTile2.reload();
-                        break;
-                    case 3:
-                        SwdView.adTile3.reload();
-                        break;
-                    case 4:
-                        SwdView.adTile4.reload();
-                        break;
-                }
+                // Show and reload the ad-tile.
+                SwdView.adTiles[i - 1].show().reload();
             }
         }
     },
