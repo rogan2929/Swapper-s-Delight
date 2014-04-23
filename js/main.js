@@ -1165,28 +1165,35 @@ var SwdView = {
             adkey: '5a7',
             ad_size: '300x250',
             slot: 'slot93684',
-            _render_div_id: 'ad-tile-1'
+            _render_div_id: 'ad-tile-1',
+            _onload: function() {
+                SwdView.adTile2 = LSM_Slot({
+                    adkey: 'e8f',
+                    ad_size: '300x250',
+                    slot: 'slot93683',
+                    _render_div_id: 'ad-tile-2',
+                    _onload: function() {
+                        SwdView.adTile3 = LSM_Slot({
+                            adkey: '4df',
+                            ad_size: '300x250',
+                            slot: 'slot93685',
+                            _render_div_id: 'ad-tile-3',
+                            _onload: function() {
+                                SwdView.adTile4 = LSM_Slot({
+                                    adkey: '2e5',
+                                    ad_size: '300x250',
+                                    slot: 'slot93255',
+                                    _render_div_id: 'ad-tile-4',
+                                    _onload: function() {
+                                        $('.post-block.ad-div').hide();
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
         });
-        SwdView.adTile2 = LSM_Slot({
-            adkey: 'e8f',
-            ad_size: '300x250',
-            slot: 'slot93683',
-            _render_div_id: 'ad-tile-2'
-        });
-        SwdView.adTile3 = LSM_Slot({
-            adkey: '4df',
-            ad_size: '300x250',
-            slot: 'slot93685',
-            _render_div_id: 'ad-tile-3'
-        });
-        SwdView.adTile4 = LSM_Slot({
-            adkey: '2e5',
-            ad_size: '300x250',
-            slot: 'slot93255',
-            _render_div_id: 'ad-tile-4'
-        });
-
-        $('.post-block.ad-div').hide();
     },
     /***
      * Increment the given post's comment count.
