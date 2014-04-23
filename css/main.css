@@ -435,6 +435,10 @@ a:visited {
     font-weight: bold;
 }
 
+iframe {
+    visibility: hidden;
+}
+
 #bottom-ad-banner {
     width: 728px;
     height: 90px;
