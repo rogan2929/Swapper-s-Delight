@@ -648,6 +648,9 @@ var SwdPresenter = {
             // If a response came through, then display the posts.
             SwdView.populatePostBlocks(response);
             SwdView.reloadAds();
+            SwdView.showPostBlocks();
+            SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
+            SwdView.toggleElement('#overlay-loading-posts', false);
         }
     },
     /**
@@ -771,7 +774,11 @@ var SwdPresenter = {
         SwdPresenter.message('confirm', 'Delete this comment?', function(response) {
             if (response === 1) {
                 SwdView.removeComment('#' + id);
-                SwdModel.deleteObject(id, function() {
+                SwdModel.deleteObject(id, {
+                    success: function() {
+                        // TODO: Update the post tile comment count.
+                    },
+                    error: SwdPresenter.handleError
                 });
             }
         });
@@ -1064,6 +1071,7 @@ var SwdPresenter = {
  * View for the Swapper's Delight program.
  */
 var SwdView = {
+    adTiles: {},
     handlers: {},
     /***
      * Add group to Group Select Menu.
@@ -1127,7 +1135,7 @@ var SwdView = {
         }
 
         // If the current user is the owner of the comment, display the delete and edit buttons.
-        if (comment.actor.id === uid) {
+        if (comment.actor.uid === uid) {
             $(commentDiv).append('<div class="delete-button"></div>');
         }
 
@@ -1152,6 +1160,43 @@ var SwdView = {
             $(this).addClass('hover', 100);
         }, function() {
             $(this).removeClass('hover', 100);
+        });
+
+        SwdView.adTiles[0] = LSM_Slot({
+            adkey: '5a7',
+            ad_size: '300x250',
+            slot: 'slot93684',
+            _render_div_id: 'ad-tile-1',
+            _preload: true,
+            _onload: function() {
+            }
+        });
+        SwdView.adTiles[1] = LSM_Slot({
+            adkey: 'e8f',
+            ad_size: '300x250',
+            slot: 'slot93683',
+            _render_div_id: 'ad-tile-2',
+            _preload: true,
+            _onload: function() {
+            }
+        });
+        SwdView.adTiles[2] = LSM_Slot({
+            adkey: '4df',
+            ad_size: '300x250',
+            slot: 'slot93685',
+            _render_div_id: 'ad-tile-3',
+            _preload: true,
+            _onload: function() {
+            }
+        });
+        SwdView.adTiles[3] = LSM_Slot({
+            adkey: '2e5',
+            ad_size: '300x250',
+            slot: 'slot93255',
+            _render_div_id: 'ad-tile-4',
+            _preload: true,
+            _onload: function() {
+            }
         });
 
         $('.post-block.ad-div').hide();
@@ -1184,6 +1229,12 @@ var SwdView = {
      * Clear all posts from the view.
      */
     clearPosts: function() {
+        var i;
+        
+        for (i = 0; i < SwdView.adTiles.length; i++) {
+            SwdView.adTiles[i].hide();
+        }
+        
         $('.post-block.ad-div').hide();
         $('#post-feed .post-block').not('.post-block.ad-div').remove();
     },
@@ -1231,33 +1282,25 @@ var SwdView = {
      * Triggers a reload of the ad tiles.
      */
     reloadAds: function() {
-        LSM_Slot({
-            adkey: '5a7',
-            ad_size: '300x250',
-            slot: 'slot93684',
-            _render_div_id: 'ad-tile-1'
-        });
+        var i, adDiv, adSpread, postBlockCount;
         
-        LSM_Slot({
-            adkey: 'e8f',
-            ad_size: '300x250',
-            slot: 'slot93683',
-            _render_div_id: 'ad-tile-2'
-        });
-        
-        LSM_Slot({
-            adkey: '4df',
-            ad_size: '300x250',
-            slot: 'slot93685',
-            _render_div_id: 'ad-tile-3'
-        });
-        
-        LSM_Slot({
-            adkey: '2e5',
-            ad_size: '300x250',
-            slot: 'slot93255',
-            _render_div_id: 'ad-tile-4'
-        });
+        postBlockCount = SwdView.getPostBlockCount()
+
+        // Determine how far apart each ad-tile will be.
+        adSpread = Math.max(Math.floor(postBlockCount / 4), 10);
+
+        // Insert add tiles evenly throughout all the posts.
+        for (i = 1; i <= 4; i++) {
+            adDiv = $('#ad-tile-' + i);
+
+            // If an ad-tile is hidden, then display it. Otherwise, leave it alone.
+            if ($(adDiv).is(':hidden') && (i * adSpread) < postBlockCount) {
+                $(adDiv).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
+
+                // Reload and the ad-tile.
+                SwdView.adTiles[i - 1].reload();
+            }
+        }
     },
     /***
      * Remove a comment from the view.
@@ -1374,7 +1417,7 @@ var SwdView = {
 
         $(postBlock).append('<div class="post-block block hover post-block-text hidden-block">' + message + '</div>');
 
-        $(postBlock).appendTo('#post-feed');
+        $(postBlock).hide().appendTo('#post-feed');
     },
     /***
      * Expands a selected post details image to fill its entire parent container.
@@ -1409,7 +1452,7 @@ var SwdView = {
 
         message = '<div class="visible-content wrapper"><div class="comment-count">' + post.commentCount + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.actor.firstName + ' ' + post.actor.lastName + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
-        $(postBlock).addClass('post-block-text').html(message).appendTo('#post-feed');
+        $(postBlock).hide().addClass('post-block-text').html(message).appendTo('#post-feed');
     },
     /***
      * Displays refreshed post data.
@@ -1493,7 +1536,7 @@ var SwdView = {
 
         $(postBlock).append('<div class="post-block block hover post-block-text hidden-block">' + message + '</div>');
 
-        $(postBlock).appendTo('#post-feed');
+        $(postBlock).hide().appendTo('#post-feed');
     },
     /***
      * Create and display a textlink type post block.
@@ -1519,17 +1562,15 @@ var SwdView = {
         // Create the link text block that resides below the visible block.
         $(postBlock).append('<div class="post-block block hover post-block-link hidden-block"><div class="hidden-content wrapper"><div class="comment-count">' + post.commentCount + '</div><p class="content">' + description + '</p></div></div>');
 
-        $(postBlock).appendTo('#post-feed');
+        $(postBlock).hide().appendTo('#post-feed');
     },
     /***
      * Populate the main view with post blocks.
      * @param {type} posts
      */
     populatePostBlocks: function(posts) {
-        var i, post, adSpread, terminatorReached, adDiv;
+        var i, post, terminatorReached;
 
-        SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
-        SwdView.toggleElement('#overlay-loading-posts', false);
         SwdView.toggleAjaxLoadingDiv('.post-block.load-more', false);
 
         // If there is a feed to display, then display it.
@@ -1568,23 +1609,10 @@ var SwdView = {
             // Show the "Load More..." block if the group's main feed is being displayed.
             // Add the 'Load More...' post block.
             if (!terminatorReached) {
-                $('<div class="button post-block block load-more"><div class="ajax-loading-div hidden"></div><div class="load-more-text">Load more...</div></div>').appendTo('#post-feed');
+                $('<div class="button post-block block load-more"><div class="ajax-loading-div hidden"></div><div class="load-more-text">Load more...</div></div>').hide().appendTo('#post-feed');
 
                 // Add an event handler for when it is clicked on.
                 $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
-            }
-
-            // Determine how far apart each ad-tile will be.
-            adSpread = Math.max(Math.floor(SwdView.getPostBlockCount() / 4), 10);
-
-            // Insert add tiles evenly throughout all the posts.
-            for (i = 1; i <= 4; i++) {
-                adDiv = $('#ad-tile-' + i);
-
-                // If an ad-tile is hidden, then display it. Otherwise, leave it alone.
-                if ($(adDiv).is(':hidden')) {
-                    $('#ad-tile-' + i).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
-                }
             }
 
             $('.post-block.hidden-block').hide();
@@ -1657,6 +1685,12 @@ var SwdView = {
     showMessage: function(message) {
         $('#popup-info-message .message-text').text(message);
         $('#popup-info-message').fadeIn();
+    },
+    /**
+     * Shows the post blocks.
+     */
+    showPostBlocks: function() {
+        $('.post-block').not('.post-block.ad-div').show();
     },
     /***
      * Shows the post details for the selected post.

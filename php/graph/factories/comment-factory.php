@@ -25,6 +25,8 @@ class CommentFactory extends BaseFactory {
         for ($i = 0; $i < count($commentStream); $i++) {
             $comment = new Comment();
             
+            $comment->setId($commentStream[$i]['id']);
+            
             if (!is_null($commentStream[$i]['text'])) {
                 $comment->setMessage(nl2br($commentStream[$i]['text']));
             }

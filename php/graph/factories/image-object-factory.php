@@ -29,7 +29,7 @@ class ImageObjectFactory {
         if ($post['attachment'] && $post['attachment']['media']) {
             // For posts with an image, look for associated image data.
             for ($i = 0; $i < count($post['attachment']); $i++) {
-                if ($post['attachment']['media'][$i]) {
+                if (isset($post['attachment']['media'][$i])) {
                     // Determine if this attachment is a photo or a link.
                     if ($post['attachment']['media'][$i]['type'] == 'photo' && $post['attachment']['media'][$i]['photo']) {
                         // Get image's unique Facebook Id
@@ -53,7 +53,7 @@ class ImageObjectFactory {
     public function getImageObjectsFromFQLComment($comment) {
         $images = array();
 
-        if ($comment['attachment'] && $comment['attachment']['media'] && $comment['attachment']['media']['image']) {
+        if ($comment['attachment'] && $comment['attachment']['type'] == 'photo' && $comment['attachment']['media'] && $comment['attachment']['media']['image']) {
             $image = new Image();
             $image->setUrl($comment['attachment']['media']['image']['src']);
 

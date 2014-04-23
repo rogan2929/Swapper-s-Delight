@@ -17,20 +17,20 @@ class PostFactory extends BaseFactory {
 
     private $gid;
     private $stream;
-    
+
     // FQL Query Strings
     const DETAILS_QUERY = 'SELECT post_id,message,actor_id,permalink,like_info,share_info,comment_info,tagged_ids,attachment,created_time,updated_time FROM stream ';
     const STREAM_QUERY = 'SELECT post_id,actor_id,updated_time,message,attachment,comment_info,created_time,like_info FROM stream ';
     const USER_QUERY = 'SELECT uid,last_name,first_name,pic_square,profile_url,pic FROM user ';
     const COMMENT_QUERY = 'SELECT fromid,text,text_tags,attachment,time,id FROM comment ';
     const IMAGE_QUERY = 'SELECT object_id,images FROM photo ';
-    
+
     /**
      * Constructor
      */
     function __construct() {
         parent::__construct();
-        
+
         // Retrieve the stream if it's there.
         if (isset($_SESSION['stream'])) {
             $this->stream = $_SESSION['stream'];
@@ -38,14 +38,14 @@ class PostFactory extends BaseFactory {
             $this->stream = null;
         }
     }
-    
+
     /**
      * Create a new post.
      */
     public function newPost() {
         
     }
-    
+
     /**
      * Like a post.
      * @param string $postId
@@ -83,6 +83,30 @@ class PostFactory extends BaseFactory {
     }
 
     /**
+     * Method for performing a fully query of the FQL stream table. 
+     * Designed to be called from an external file so execution can be
+     * performed asynchronously through fopen or popen.
+     * @return string
+     */
+    public function fetchStreamFullAsync($args) {
+        $this->graphApiClient->setAccessToken($args['accessToken']);
+        $this->setGid($args['gid']);
+
+        $windowStart = time();
+        $windowSize = $this->getOptimalWindowSize();
+
+        $stream = $this->getFeedData($windowSize, $windowStart, 50, 1);
+        $windowStart = $windowStart - ($windowSize * 50 * 1);
+        $stream = array_merge($stream, $this->getFeedData($windowSize * 2, $windowStart, 13, 1));
+        $windowStart = $windowStart - ($windowSize * 2 * 13 * 1);
+        $stream = array_merge($stream, $this->getFeedData($windowSize * 3, $windowStart, 11, 1));
+        $windowStart = $windowStart - ($windowSize * 3 * 11 * 1);
+        $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
+
+        return json_encode($stream);
+    }
+
+    /**
      * Gets the cached post stream.
      * @return array
      */
@@ -98,8 +122,6 @@ class PostFactory extends BaseFactory {
      */
     public function getLikedPosts($offset, $limit) {
         $posts = array();
-
-        $this->waitForFetchStreamCompletion();
 
         // Look through the cached stream for liked posts.
         for ($i = 0; $i < count($this->stream); $i++) {
@@ -121,8 +143,6 @@ class PostFactory extends BaseFactory {
         $uid = $this->graphApiClient->getMe();
         $posts = array();
 
-        $this->waitForFetchStreamCompletion();
-
         // Look through the cached stream, match by uid => actor_id
         for ($i = 0; $i < count($this->stream); $i++) {
             if ($this->stream[$i]->getActor()->getUid() == $uid) {
@@ -142,8 +162,8 @@ class PostFactory extends BaseFactory {
      */
     public function getNewPosts($refresh, $offset, $limit) {
         // Get a new stream if necessary.
-        if ($refresh == 1) {
-            $this->fetchStream($refresh);
+        if ($refresh == true) {
+            $this->fetchStream(true);
         }
 
         return $this->getPostData($this->stream, $offset, $limit);
@@ -180,10 +200,10 @@ class PostFactory extends BaseFactory {
 
         try {
             $raw = $response[0]['fql_result_set'][0];
-            
+
             // Collect the returned data.
             $post = new Post();
-            
+
             // post_id,message,actor_id,permalink,like_info,share_info,comment_info,tagged_ids,attachment,created_time
             $post->setId($raw['post_id']);
             $post->setMessage($raw['message']);
@@ -211,7 +231,7 @@ class PostFactory extends BaseFactory {
 
         // Determine type of post.
         $post->setType($this->getPostType($post));
-        
+
         // Parse comment data and set it.
         $post->setComments((new CommentFactory())->getCommentsFromFQL($response[1]['fql_result_set'], $response[5]['fql_result_set'], $response[4]['fql_result_set']));
 
@@ -260,8 +280,6 @@ class PostFactory extends BaseFactory {
     public function searchPosts($search, $offset, $limit) {
         $posts = array();
 
-        $this->waitForFetchStreamCompletion();
-
         // Look through the cached stream for posts whose message or user matches the search term.
         for ($i = 0; $i < count($this->stream); $i++) {
             if (stripos($this->stream[$i]->getMessage(), $search) !== false || stripos($this->stream[$i]->getActor()->getFullName(), $search) !== false) {
@@ -273,27 +291,89 @@ class PostFactory extends BaseFactory {
     }
 
     /**
-     * Fetches the group's post stream.
+     * Builds a locally cached version of the FQL stream table.
+     * @param bool $prefetchOnly
      */
     private function fetchStream($prefetchOnly) {
-        // Wait for other threads to finish updating the cached FQL stream.
-        $this->waitForFetchStreamCompletion();
+        if ($prefetchOnly) {
+            // Only retrieve a small subset of the full stream, in order for data to be displayed more quickly to the user.
+            $windowStart = time();
+            $windowSize = $this->getOptimalWindowSize();
 
-        // Refresh the FQL stream.
-        $_SESSION['refreshing'] = true;
-        $_SESSION['stream'] = $this->queryStream($prefetchOnly);
-        $_SESSION['refreshing'] = false;
+            // Perform a two step query of varying window sizes, and then merge the result.
+            $stream = $this->getFeedData($windowSize, $windowStart, 14, 1);
+            $windowStart = $windowStart - ($windowSize * 14 * 1);
+            $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
+            
+            $this->stream = $stream;
+        } else {
+            $windowStart = time();
+            $windowSize = $this->getOptimalWindowSize();
 
-        $this->stream = $_SESSION['stream'];
+            $stream = $this->getFeedData($windowSize, $windowStart, 50, 1);
+            $windowStart = $windowStart - ($windowSize * 50 * 1);
+            $stream = array_merge($stream, $this->getFeedData($windowSize * 2, $windowStart, 13, 1));
+            $windowStart = $windowStart - ($windowSize * 2 * 13 * 1);
+            $stream = array_merge($stream, $this->getFeedData($windowSize * 3, $windowStart, 11, 1));
+            $windowStart = $windowStart - ($windowSize * 3 * 11 * 1);
+            $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
+
+            $this->stream = $stream;
+            
+            /*
+//            $_SESSION['refreshing'] = true;
+            // Offload full query of the stream onto a simulated background thread by calling curl.
+            // Due to a lack of delegated functions in PHP, the received data has to be passed to the client
+            // and then sent back.
+//            $url = 'http://' . filter_input(INPUT_SERVER, 'HTTP_HOST') . '/php/execute-delegated.php';
+//            
+//            $args = array(
+//                'gid' => $this->gid,
+//                'accessToken' => $this->graphApiClient->getAccessToken()
+//            );
+//            
+//            $postFields = array(
+//                'class' => 'PostFactory',
+//                'method' => 'fetchStreamFullAsync',
+//                'args' => json_encode($args)
+//            );
+//            
+//            $ch = curl_init();
+//            curl_setopt($ch, CURLOPT_URL, $url);
+//            curl_setopt($ch, CURLOPT_POST, true);
+//            curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+//            curl_setopt($ch,CURLOPT_RETURNTRANSFER, false);
+//            curl_setopt($ch, CURLOPT_HEADER, 0);
+//            
+//            $result = curl_exec($ch);
+//            
+//            if (!$result) {
+//                error_log(curl_errno($ch));
+//                error_log(curl_error($ch));
+//            }
+//            
+//            curl_close($ch);
+//            $this->stream = unserialize($result);
+//            $args = array(
+//                'gid' => $this->gid,
+//                'accessToken' => $this->graphApiClient->getAccessToken()
+//            );
+//            
+//            $this->stream = unserialize($this->fetchStreamFullAsync($args));
+            //$_SESSION['refreshing'] = false;
+            */
+        }
+
+        $_SESSION['stream'] = $this->stream;
     }
 
     /**
      * Determine the optimal window size to use in batch queries.
      */
-    public function getOptimalWindowSize() {
+    private function getOptimalWindowSize() {
         $startTime = time();
         $endTime = time() - 3600;
-        
+
         // Make the call and count the number of responses.
         $count = count($this->graphApiClient->api('/' . $this->gid . '/feed?fields=id&since=' . $endTime . '&until=' . $startTime . ' LIMIT 100'));
 
@@ -391,10 +471,10 @@ class PostFactory extends BaseFactory {
         $imgFactory = new ImageObjectFactory($images);
         $lnkFactory = new LinkDataFactory();
         $usrFactory = new UserFactory($users);
-        
+
         for ($i = 0; $i < count($stream); $i++) {
             $post = new Post();
-            
+
             //post_id,actor_id,updated_time,message,attachment,comment_info,created_time
             $post->setId($stream[$i]['post_id']);
             $post->setUpdatedTime($stream[$i]['updated_time']);
@@ -478,48 +558,20 @@ class PostFactory extends BaseFactory {
         if ($newComment['text']) {
             $newComment['text'] = nl2br($newComment['text']);
         }
-        
+
         // Create an entity object.
         $comment = new Comment();
         $comment->setId($newComment['id']);
         $comment->setMessage($newComment['text']);
         $comment->setCreatedTime($newComment['time']);
-        
+
         $comment->setActor((new UserFactory())->createUser($newComment['user']));
-        
+
         // For each comment, look for associated image attachment.
         //$comment->setImageObjects($imgFactory->getImageObjectsFromFQLComment($newComment, false));
         $comment->setImageObjects(array());
 
         return $comment;
-    }
-    
-    /**
-     * Query the FQL stream table for some basic data that will be cached.
-     * @param bool $prefetchOnly
-     * @return array
-     */
-    private function queryStream($prefetchOnly) {
-        $windowStart = time();
-        $windowSize = $this->getOptimalWindowSize();
-
-        // Check to see if this this is only prefetching the stream data.
-        if ($prefetchOnly) {
-            $stream = $this->getFeedData($windowSize, $windowStart, 14, 1);
-            $windowStart = $windowStart - ($windowSize * 14 * 1);
-            $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
-        } else {
-            // TODO: Somehow offload this onto a background thread.
-            $stream = $this->getFeedData($windowSize, $windowStart, 50, 1);
-            $windowStart = $windowStart - ($windowSize * 50 * 1);
-            $stream = array_merge($stream, $this->getFeedData($windowSize * 2, $windowStart, 13, 1));
-            $windowStart = $windowStart - ($windowSize * 2 * 13 * 1);
-            $stream = array_merge($stream, $this->getFeedData($windowSize * 3, $windowStart, 11, 1));
-            $windowStart = $windowStart - ($windowSize * 3 * 11 * 1);
-            $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
-        }
-
-        return $stream;
     }
 
     /**
@@ -530,7 +582,7 @@ class PostFactory extends BaseFactory {
      * @param int $iterations
      * @return array
      */
-    public function getFeedData($windowSize, $windowStart, $batchSize, $iterations = 1) {
+    private function getFeedData($windowSize, $windowStart, $batchSize, $iterations = 1) {
         $windowEnd = $windowStart - $windowSize;
 
         $stream = array();
@@ -570,7 +622,7 @@ class PostFactory extends BaseFactory {
                 $users = array_merge($users, $body[1]['fql_result_set']);
             }
         }
-        
+
         // Create the user factory.
         $usrFactory = new UserFactory($users);
 
@@ -578,27 +630,18 @@ class PostFactory extends BaseFactory {
         for ($i = 0; $i < count($stream); $i++) {
             // Create a new post object and add it to the posts array.
             $post = new Post();
-            
+
             // post_id,message,actor_id,like_info,comment_info FROM stream
             $post->setId($stream[$i]['post_id']);
             $post->setMessage($stream[$i]['message']);
             $post->setCommentCount($stream[$i]['comment_info']['comment_count']);
             $post->setUserLikes((int) $stream[$i]['like_info']['user_likes']);
             $post->setActor($usrFactory->getUserFromFQLResultSet($stream[$i]));
-            
+
             $posts[] = $post;
         }
 
         return $posts;
-    }
-
-    /**
-     * Forcibly pause the thread in order for fetchStream to complete.
-     */
-    private function waitForFetchStreamCompletion() {
-        while ($_SESSION['refreshing'] == true) {
-            sleep(3);
-        }
     }
 
 }
