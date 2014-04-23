@@ -1157,8 +1157,6 @@ var SwdView = {
             $(this).removeClass('hover', 100);
         });
 
-        $('.post-block.ad-div').hide();
-
         //SwdView.reloadAds();
 
         LSM_Slot({
@@ -1185,6 +1183,8 @@ var SwdView = {
             slot: 'slot93255',
             _render_div_id: 'ad-tile-4'
         });
+
+        $('.post-block.ad-div').hide();
     },
     /***
      * Increment the given post's comment count.
@@ -1272,26 +1272,26 @@ var SwdView = {
 
             // If an ad-tile is hidden, then display it. Otherwise, leave it alone.
             if ($(adDiv).is(':hidden')) {
-                $(adDiv).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')');
-
-                switch (i) {
-                    case 1:
-                        adKey = '5a7';
-                        slot = 'slot93684';
-                        break;
-                    case 2:
-                        adKey = 'e8f';
-                        slot = 'slot93683';
-                        break;
-                    case 3:
-                        adKey = '4df';
-                        slot = 'slot93685';
-                        break;
-                    case 4:
-                        adKey = '2e5';
-                        slot = 'slot93255';
-                        break;
-                }
+                $(adDiv).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
+//
+//                switch (i) {
+//                    case 1:
+//                        adKey = '5a7';
+//                        slot = 'slot93684';
+//                        break;
+//                    case 2:
+//                        adKey = 'e8f';
+//                        slot = 'slot93683';
+//                        break;
+//                    case 3:
+//                        adKey = '4df';
+//                        slot = 'slot93685';
+//                        break;
+//                    case 4:
+//                        adKey = '2e5';
+//                        slot = 'slot93255';
+//                        break;
+//                }
 
 //                LSM_Slot({
 //                    adkey: adKey,
