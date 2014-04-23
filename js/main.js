@@ -1067,6 +1067,10 @@ var SwdPresenter = {
  * View for the Swapper's Delight program.
  */
 var SwdView = {
+    adTile1: null,
+    adTile2: null,
+    adTile3: null,
+    adTile4: null,
     handlers: {},
     /***
      * Add group to Group Select Menu.
@@ -1141,10 +1145,6 @@ var SwdView = {
 
 
     },
-    adTile1: null,
-    adTile2: null,
-    adTile3: null,
-    adTile4: null,
     /**
      * Init function for SwdView.
      */
@@ -1160,8 +1160,6 @@ var SwdView = {
         }, function() {
             $(this).removeClass('hover', 100);
         });
-
-        //SwdView.reloadAds();
 
         SwdView.adTile1 = LSM_Slot({
             adkey: '5a7',
@@ -1269,11 +1267,11 @@ var SwdView = {
 
         // Determine how far apart each ad-tile will be.
         adSpread = Math.max(Math.floor(SwdView.getPostBlockCount() / 4), 10);
-        
-        SwdView.adTile1.reload();
-        SwdView.adTile2.reload();
-        SwdView.adTile3.reload();
-        SwdView.adTile4.reload();
+
+//        SwdView.adTile1.reload();
+//        SwdView.adTile2.reload();
+//        SwdView.adTile3.reload();
+//        SwdView.adTile4.reload();
 
         // Insert add tiles evenly throughout all the posts.
         for (i = 1; i <= 4; i++) {
