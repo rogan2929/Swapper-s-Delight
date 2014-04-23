@@ -1165,7 +1165,7 @@ var SwdView = {
             _render_div_id: 'ad-tile-1',
             _preload: true,
             _onload: function() {
-
+                this.style.visibility = 'hidden';
             }
         });
         SwdView.adTiles[1] = LSM_Slot({
@@ -1175,7 +1175,7 @@ var SwdView = {
             _render_div_id: 'ad-tile-2',
             _preload: true,
             _onload: function() {
-
+                this.style.visibility = 'hidden';
             }
         });
         SwdView.adTiles[2] = LSM_Slot({
@@ -1185,7 +1185,7 @@ var SwdView = {
             _render_div_id: 'ad-tile-3',
             _preload: true,
             _onload: function() {
-
+                this.style.visibility = 'hidden';
             }
         });
         SwdView.adTiles[3] = LSM_Slot({
@@ -1195,7 +1195,7 @@ var SwdView = {
             _render_div_id: 'ad-tile-4',
             _preload: true,
             _onload: function() {
-
+                this.style.visibility = 'hidden';
             }
         });
 
