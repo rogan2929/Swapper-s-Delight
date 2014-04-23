@@ -774,7 +774,11 @@ var SwdPresenter = {
         SwdPresenter.message('confirm', 'Delete this comment?', function(response) {
             if (response === 1) {
                 SwdView.removeComment('#' + id);
-                SwdModel.deleteObject(id, function() {
+                SwdModel.deleteObject(id, {
+                    success: function() {
+                        // TODO: Update the post tile comment count.
+                    },
+                    error: SwdPresenter.handleError
                 });
             }
         });
