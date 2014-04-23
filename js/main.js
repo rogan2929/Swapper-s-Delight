@@ -1167,33 +1167,38 @@ var SwdView = {
             slot: 'slot93684',
             _render_div_id: 'ad-tile-1',
             _onload: function() {
-                SwdView.adTile2 = LSM_Slot({
-                    adkey: 'e8f',
-                    ad_size: '300x250',
-                    slot: 'slot93683',
-                    _render_div_id: 'ad-tile-2',
-                    _onload: function() {
-                        SwdView.adTile3 = LSM_Slot({
-                            adkey: '4df',
-                            ad_size: '300x250',
-                            slot: 'slot93685',
-                            _render_div_id: 'ad-tile-3',
-                            _onload: function() {
-                                SwdView.adTile4 = LSM_Slot({
-                                    adkey: '2e5',
-                                    ad_size: '300x250',
-                                    slot: 'slot93255',
-                                    _render_div_id: 'ad-tile-4',
-                                    _onload: function() {
-                                        $('.post-block.ad-div').hide();
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
+
             }
         });
+        SwdView.adTile2 = LSM_Slot({
+            adkey: 'e8f',
+            ad_size: '300x250',
+            slot: 'slot93683',
+            _render_div_id: 'ad-tile-2',
+            _onload: function() {
+
+            }
+        });
+        SwdView.adTile3 = LSM_Slot({
+            adkey: '4df',
+            ad_size: '300x250',
+            slot: 'slot93685',
+            _render_div_id: 'ad-tile-3',
+            _onload: function() {
+
+            }
+        });
+        SwdView.adTile4 = LSM_Slot({
+            adkey: '2e5',
+            ad_size: '300x250',
+            slot: 'slot93255',
+            _render_div_id: 'ad-tile-4',
+            _onload: function() {
+
+            }
+        });
+
+        $('.post-block.ad-div').hide();
     },
     /***
      * Increment the given post's comment count.
@@ -1275,11 +1280,6 @@ var SwdView = {
         // Determine how far apart each ad-tile will be.
         adSpread = Math.max(Math.floor(SwdView.getPostBlockCount() / 4), 10);
 
-        SwdView.adTile1.reload();
-        SwdView.adTile2.reload();
-        SwdView.adTile3.reload();
-        SwdView.adTile4.reload();
-
         // Insert add tiles evenly throughout all the posts.
         for (i = 1; i <= 4; i++) {
             adDiv = $('#ad-tile-' + i);
@@ -1287,6 +1287,21 @@ var SwdView = {
             // If an ad-tile is hidden, then display it. Otherwise, leave it alone.
             if ($(adDiv).is(':hidden')) {
                 $(adDiv).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
+
+                switch (i) {
+                    case 1:
+                        SwdView.adTile1.reload();
+                        break;
+                    case 2:
+                        SwdView.adTile2.reload();
+                        break;
+                    case 3:
+                        SwdView.adTile3.reload();
+                        break;
+                    case 4:
+                        SwdView.adTile4.reload();
+                        break;
+                }
             }
         }
     },
