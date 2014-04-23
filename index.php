@@ -63,9 +63,7 @@ error_reporting(E_ALL);
                     <div>
                         <a href='https://www.facebook.com/SwappersDelight' target='_blank'>Our Facebook Page</a>
                     </div>
-                    <div id='like-button-wrapper'>
-                        <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fapps.facebook.com%2F1401018793479333&amp;width=200&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=1401018793479333" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:21px;" allowTransparency="true"></iframe>
-                    </div>
+                    <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fapps.facebook.com%2F652991661414427%2F&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=false&amp;height=21&amp;appId=1401018793479333" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
                 </div>
 
                 <div id='post-feed' class='scroll-y'></div>
