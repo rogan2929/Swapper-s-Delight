@@ -53,7 +53,7 @@ class ImageObjectFactory {
     public function getImageObjectsFromFQLComment($comment) {
         $images = array();
 
-        if ($comment['attachment'] && $comment['attachment']['media'] && $comment['attachment']['media']['image']) {
+        if ($comment['attachment'] && $comment['attachment']['type'] == 'photo' && $comment['attachment']['media'] && $comment['attachment']['media']['image']) {
             $image = new Image();
             $image->setUrl($comment['attachment']['media']['image']['src']);
 
