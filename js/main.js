@@ -1275,7 +1275,7 @@ var SwdView = {
      * Triggers a reload of the ad tiles.
      */
     reloadAds: function(callback) {
-        var i, adDiv, adSpread, adKey, slot;
+        var i, adDiv, adSpread;
 
         // Determine how far apart each ad-tile will be.
         adSpread = Math.max(Math.floor(SwdView.getPostBlockCount() / 4), 10);
