@@ -647,11 +647,10 @@ var SwdPresenter = {
 
             // If a response came through, then display the posts.
             SwdView.populatePostBlocks(response);
-            SwdView.reloadAds(function() {
-                SwdView.showPostBlocks();
-                SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
-                SwdView.toggleElement('#overlay-loading-posts', false);
-            });
+            SwdView.reloadAds();
+            SwdView.showPostBlocks();
+            SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
+            SwdView.toggleElement('#overlay-loading-posts', false);
         }
     },
     /**
@@ -1246,7 +1245,7 @@ var SwdView = {
 
             // If an ad-tile is hidden, then display it. Otherwise, leave it alone.
             if ($(adDiv).is(':hidden')) {
-                $('#ad-tile-' + i).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
+                $(adDiv).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')');
 
                 switch (i) {
                     case 1:
@@ -1272,6 +1271,9 @@ var SwdView = {
                     ad_size: '300x250',
                     slot: slot,
                     _render_div_id: 'ad-tile-' + i,
+                    _onload: function() {
+                        $(adDiv).show();
+                    }
                 });
             }
         }
@@ -1424,7 +1426,7 @@ var SwdView = {
 
         $(postBlock).append('<div class="post-block block hover post-block-text hidden-block">' + message + '</div>');
 
-        $(postBlock).appendTo('#post-feed');
+        $(postBlock).hide().appendTo('#post-feed');
     },
     /***
      * Expands a selected post details image to fill its entire parent container.
@@ -1459,7 +1461,7 @@ var SwdView = {
 
         message = '<div class="visible-content wrapper"><div class="comment-count">' + post.commentCount + '</div><p class="content"><span class="user-image" style="background-image: ' + userImage + '"></span><span class="user-name">' + post.actor.firstName + ' ' + post.actor.lastName + '</span><span class="timestamp">' + timeStamp.calendar() + '</span>' + post.message + '</p></div>';
 
-        $(postBlock).addClass('post-block-text').html(message).appendTo('#post-feed');
+        $(postBlock).hide().addClass('post-block-text').html(message).appendTo('#post-feed');
     },
     /***
      * Displays refreshed post data.
@@ -1543,7 +1545,7 @@ var SwdView = {
 
         $(postBlock).append('<div class="post-block block hover post-block-text hidden-block">' + message + '</div>');
 
-        $(postBlock).appendTo('#post-feed');
+        $(postBlock).hide().appendTo('#post-feed');
     },
     /***
      * Create and display a textlink type post block.
@@ -1569,7 +1571,7 @@ var SwdView = {
         // Create the link text block that resides below the visible block.
         $(postBlock).append('<div class="post-block block hover post-block-link hidden-block"><div class="hidden-content wrapper"><div class="comment-count">' + post.commentCount + '</div><p class="content">' + description + '</p></div></div>');
 
-        $(postBlock).appendTo('#post-feed');
+        $(postBlock).hide().appendTo('#post-feed');
     },
     /***
      * Populate the main view with post blocks.
@@ -1616,7 +1618,7 @@ var SwdView = {
             // Show the "Load More..." block if the group's main feed is being displayed.
             // Add the 'Load More...' post block.
             if (!terminatorReached) {
-                $('<div class="button post-block block load-more"><div class="ajax-loading-div hidden"></div><div class="load-more-text">Load more...</div></div>').appendTo('#post-feed');
+                $('<div class="button post-block block load-more"><div class="ajax-loading-div hidden"></div><div class="load-more-text">Load more...</div></div>').hide().appendTo('#post-feed');
 
                 // Add an event handler for when it is clicked on.
                 $('.post-block.load-more').click(SwdView.handlers['onClickPostBlockLoadMore']);
@@ -1697,7 +1699,7 @@ var SwdView = {
      * Shows the post blocks.
      */
     showPostBlocks: function() {
-        
+        $('.post-block').show();
     },
     /***
      * Shows the post details for the selected post.
