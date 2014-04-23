@@ -1291,15 +1291,15 @@ var SwdView = {
 
             // If an ad-tile is hidden, then display it. Otherwise, leave it alone.
             if ($(adDiv).is(':hidden') && (i * adSpread) < postBlockCount) {
-                $(adDiv).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')');
+                $(adDiv).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
 
                 // Show and reload the ad-tile.
                 SwdView.adTiles[i - 1].reload();
                 SwdView.adTiles[i - 1].show();
                 
-                setTimeout(function () {
-                    $(adDiv).show();
-                }, 500);
+//                setTimeout(function () {
+//                    $(adDiv).show();
+//                }, 500);
             }
         }
     },
