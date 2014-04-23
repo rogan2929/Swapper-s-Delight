@@ -1695,7 +1695,7 @@ var SwdView = {
      * Shows the post blocks.
      */
     showPostBlocks: function() {
-        $('.post-block').show();
+        $('.post-block').not('.post-block.ad-div').show();
     },
     /***
      * Shows the post details for the selected post.
