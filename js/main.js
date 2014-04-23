@@ -647,14 +647,11 @@ var SwdPresenter = {
 
             // If a response came through, then display the posts.
             SwdView.populatePostBlocks(response);
-
-            // Reload the ads and display.
-            SwdView.reloadAds();
-
-            setTimeOut(function() {
+            SwdView.reloadAds(function() {
+                SwdView.showPostBlocks();
                 SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
                 SwdView.toggleElement('#overlay-loading-posts', false);
-            }, 3000);
+            });
         }
     },
     /**
@@ -1695,6 +1692,12 @@ var SwdView = {
     showMessage: function(message) {
         $('#popup-info-message .message-text').text(message);
         $('#popup-info-message').fadeIn();
+    },
+    /**
+     * Shows the post blocks.
+     */
+    showPostBlocks: function() {
+        
     },
     /***
      * Shows the post details for the selected post.
