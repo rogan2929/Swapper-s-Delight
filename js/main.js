@@ -1163,7 +1163,7 @@ var SwdView = {
             ad_size: '300x250',
             slot: 'slot93684',
             _render_div_id: 'ad-tile-1',
-            _preload: 'wait',
+            _preload: true,
             _onload: function() {
 
             }
@@ -1173,7 +1173,7 @@ var SwdView = {
             ad_size: '300x250',
             slot: 'slot93683',
             _render_div_id: 'ad-tile-2',
-            _preload: 'wait',
+            _preload: true,
             _onload: function() {
 
             }
@@ -1183,7 +1183,7 @@ var SwdView = {
             ad_size: '300x250',
             slot: 'slot93685',
             _render_div_id: 'ad-tile-3',
-            _preload: 'wait',
+            _preload: true,
             _onload: function() {
 
             }
@@ -1193,7 +1193,7 @@ var SwdView = {
             ad_size: '300x250',
             slot: 'slot93255',
             _render_div_id: 'ad-tile-4',
-            _preload: 'wait',
+            _preload: true,
             _onload: function() {
 
             }
