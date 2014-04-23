@@ -270,55 +270,6 @@ error_reporting(E_ALL);
         <div id='post-block-mask' class='post-block ui-widget hidden'></div>
         <div id='selection-item-mask' class='button selection-item ui-widget hidden'></div>
 
-        <!-- LifeStreet Media Ad Scripts -->
-        <!-- Ad-Tile-FT -->
-        <script type="text/javascript">
-            //<![CDATA[
-            LSM_Slot({
-                adkey: '5a7',
-                ad_size: '300x250',
-                slot: 'slot93684',
-                _render_div_id: 'ad-tile-1'
-            });
-            //]]>
-        </script>
-
-        <!-- Ad-Tile-MT -->
-        <script type="text/javascript">
-            //<![CDATA[
-            LSM_Slot({
-                adkey: 'e8f',
-                ad_size: '300x250',
-                slot: 'slot93683',
-                _render_div_id: 'ad-tile-2'
-            });
-            //]]>
-        </script>
-
-        <!-- Ad-Tile-UT -->
-        <script type="text/javascript">
-            //<![CDATA[
-            LSM_Slot({
-                adkey: '4df',
-                ad_size: '300x250',
-                slot: 'slot93685',
-                _render_div_id: 'ad-tile-3'
-            });
-            //]]>
-        </script>
-
-        <!-- Ad-Tile-4 -->
-        <script type="text/javascript">
-            //<![CDATA[
-            LSM_Slot({
-                adkey: '2e5',
-                ad_size: '300x250',
-                slot: 'slot93255',
-                _render_div_id: 'ad-tile-4'
-            });
-            //]]>
-        </script>
-
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script src="js/plugins.js"></script>
