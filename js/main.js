@@ -1165,7 +1165,6 @@ var SwdView = {
             _render_div_id: 'ad-tile-1',
             _preload: true,
             _onload: function() {
-                $(this).hide();
             }
         });
         SwdView.adTiles[1] = LSM_Slot({
@@ -1175,7 +1174,6 @@ var SwdView = {
             _render_div_id: 'ad-tile-2',
             _preload: true,
             _onload: function() {
-                $(this).hide();
             }
         });
         SwdView.adTiles[2] = LSM_Slot({
@@ -1185,7 +1183,6 @@ var SwdView = {
             _render_div_id: 'ad-tile-3',
             _preload: true,
             _onload: function() {
-                $(this).hide();
             }
         });
         SwdView.adTiles[3] = LSM_Slot({
@@ -1195,7 +1192,6 @@ var SwdView = {
             _render_div_id: 'ad-tile-4',
             _preload: true,
             _onload: function() {
-                $(this).hide();
             }
         });
 
@@ -1295,11 +1291,13 @@ var SwdView = {
 
             // If an ad-tile is hidden, then display it. Otherwise, leave it alone.
             if ($(adDiv).is(':hidden') && (i * adSpread) < postBlockCount) {
-                $(adDiv).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
+                $(adDiv).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')');
 
                 // Show and reload the ad-tile.
                 SwdView.adTiles[i - 1].reload();
                 SwdView.adTiles[i - 1].show();
+                
+                
             }
         }
     },
