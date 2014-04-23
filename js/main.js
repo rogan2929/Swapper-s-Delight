@@ -1297,7 +1297,7 @@ var SwdView = {
                 SwdView.adTiles[i - 1].reload();
                 SwdView.adTiles[i - 1].show();
                 
-                
+                $(adDiv).show();
             }
         }
     },
