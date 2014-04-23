@@ -1157,7 +1157,34 @@ var SwdView = {
             $(this).removeClass('hover', 100);
         });
 
-        //$('.post-block.ad-div').hide();
+        $('.post-block.ad-div').hide();
+
+        //SwdView.reloadAds();
+
+        LSM_Slot({
+            adkey: '5a7',
+            ad_size: '300x250',
+            slot: 'slot93684',
+            _render_div_id: 'ad-tile-1'
+        });
+        LSM_Slot({
+            adkey: 'e8f',
+            ad_size: '300x250',
+            slot: 'slot93683',
+            _render_div_id: 'ad-tile-2'
+        });
+        LSM_Slot({
+            adkey: '4df',
+            ad_size: '300x250',
+            slot: 'slot93685',
+            _render_div_id: 'ad-tile-3'
+        });
+        LSM_Slot({
+            adkey: '2e5',
+            ad_size: '300x250',
+            slot: 'slot93255',
+            _render_div_id: 'ad-tile-4'
+        });
     },
     /***
      * Increment the given post's comment count.
@@ -1266,15 +1293,15 @@ var SwdView = {
                         break;
                 }
 
-                LSM_Slot({
-                    adkey: adKey,
-                    ad_size: '300x250',
-                    slot: slot,
-                    _render_div_id: 'ad-tile-' + i,
-                    _onload: function() {
-                        $(adDiv).show();
-                    }
-                });
+//                LSM_Slot({
+//                    adkey: adKey,
+//                    ad_size: '300x250',
+//                    slot: slot,
+//                    _render_div_id: 'ad-tile-' + i,
+//                    _onload: function() {
+//                        $(adDiv).show();
+//                    }
+//                });
             }
         }
 
