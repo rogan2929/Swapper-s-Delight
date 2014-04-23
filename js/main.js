@@ -1141,6 +1141,10 @@ var SwdView = {
 
 
     },
+    adTile1: null,
+    adTile2: null,
+    adTile3: null,
+    adTile4: null,
     /**
      * Init function for SwdView.
      */
@@ -1159,25 +1163,25 @@ var SwdView = {
 
         //SwdView.reloadAds();
 
-        LSM_Slot({
+        SwdView.adTile1 = LSM_Slot({
             adkey: '5a7',
             ad_size: '300x250',
             slot: 'slot93684',
             _render_div_id: 'ad-tile-1'
         });
-        LSM_Slot({
+        SwdView.adTile2 = LSM_Slot({
             adkey: 'e8f',
             ad_size: '300x250',
             slot: 'slot93683',
             _render_div_id: 'ad-tile-2'
         });
-        LSM_Slot({
+        SwdView.adTile3 = LSM_Slot({
             adkey: '4df',
             ad_size: '300x250',
             slot: 'slot93685',
             _render_div_id: 'ad-tile-3'
         });
-        LSM_Slot({
+        SwdView.adTile4 = LSM_Slot({
             adkey: '2e5',
             ad_size: '300x250',
             slot: 'slot93255',
@@ -1265,6 +1269,11 @@ var SwdView = {
 
         // Determine how far apart each ad-tile will be.
         adSpread = Math.max(Math.floor(SwdView.getPostBlockCount() / 4), 10);
+        
+        SwdView.adTile1.reload();
+        SwdView.adTile2.reload();
+        SwdView.adTile3.reload();
+        SwdView.adTile4.reload();
 
         // Insert add tiles evenly throughout all the posts.
         for (i = 1; i <= 4; i++) {
