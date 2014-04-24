@@ -1231,11 +1231,11 @@ var SwdView = {
      */
     clearPosts: function() {
         var i;
-        
+
         for (i = 0; i < SwdView.adTiles.length; i++) {
             SwdView.adTiles[i].hide();
         }
-        
+
         $('.post-block.ad-div').hide();
         $('#post-feed .post-block').not('.post-block.ad-div').remove();
     },
@@ -1284,7 +1284,7 @@ var SwdView = {
      */
     reloadAds: function() {
         var i, adDiv, adSpread, postBlockCount;
-        
+
         postBlockCount = SwdView.getPostBlockCount()
 
         // Determine how far apart each ad-tile will be.
@@ -1733,21 +1733,21 @@ var SwdView = {
         // Display the post's image, or the no-image placeholder.
         if (post.imageObjects && post.imageObjects.length > 0) {
             postImage = 'url("' + post.imageObjects[0].url + '")';
-            
-            $('#post-details-panel .floating-panel-content').removeClass('narrow', 200);
 
-            // Hide the no-image container and display the post's attached image.
-            $('#post-image-container').show().empty();
-            $('#post-no-image-desc').hide();
+            $('#post-details-panel .floating-panel-content').removeClass('narrow', 200, function() {
+                // Hide the no-image container and display the post's attached image.
+                $('#post-image-container').show().empty();
+                $('#post-no-image-desc').hide();
 
-            // File the image container with post-image-tiles.
-            SwdView.fillPostImageContainer(post);
+                // File the image container with post-image-tiles.
+                SwdView.fillPostImageContainer(post);
+            });
         }
         else {
             // Hide the image container.
             $('#post-image-container').hide();
             $('#post-no-image-desc').show();
-            
+
             // Apply the 'narrow' CSS rule.
             $('#post-details-panel .floating-panel-content').addClass('narrow', 200);
         }
