@@ -660,6 +660,7 @@ var SwdPresenter = {
     loadPostDetails: function(id) {
         var post;
 
+        SwdView.restorePostDetails();
         SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
         SwdView.toggleFloatingPanel('#post-details-panel', true);
         SwdView.toggleToolbar('#post-details-toolbar', true);
@@ -1650,6 +1651,13 @@ var SwdView = {
 
         SwdPresenter.currentlyLoading = false;
     },
+    /**
+     * Function to restore the #post-details-panel to it's original state.
+     */
+    restorePostDetails: function() {
+        // Remove the 'narrow' CSS rule if present.
+        $('#post-details-panel .floating-panel-content').removeClass('narrow');
+    },
     /***
      * Sets the 'Like' or 'Unlike' button text.
      * @param {type} userLikes
@@ -1698,9 +1706,6 @@ var SwdView = {
      */
     showPostDetails: function(post) {
         var userImage, postImage, i, timeStamp;
-        
-        // Remove the 'narrow' CSS rule if present.
-        $('#post-details-panel .floating-panel-content').removeClass('narrow');
 
         // Display the 'Delete' button for owned posts. Otherwise, hide it.
         if (post.actor.uid === SwdPresenter.uid) {
