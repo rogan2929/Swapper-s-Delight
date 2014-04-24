@@ -1698,6 +1698,9 @@ var SwdView = {
      */
     showPostDetails: function(post) {
         var userImage, postImage, i, timeStamp;
+        
+        // Remove the 'narrow' CSS rule if present.
+        $('#post-details-panel .floating-panel-content').removeClass('narrow');
 
         // Display the 'Delete' button for owned posts. Otherwise, hide it.
         if (post.actor.uid === SwdPresenter.uid) {
@@ -1729,9 +1732,6 @@ var SwdView = {
             // Hide the no-image container and display the post's attached image.
             $('#post-image-container').show().empty();
             $('#post-no-image-desc').hide();
-
-            // Remove the 'narrow' CSS rule if present.
-            $('#post-details-panel .floating-panel-content').removeClass('narrow', 300);
 
             // File the image container with post-image-tiles.
             SwdView.fillPostImageContainer(post);
@@ -1884,12 +1884,10 @@ var SwdView = {
             // Make the panel modal by summoning an overlay.
             $(overlay).show();
             $(id).show();
-            //$(id).show(effect, options, 250);
         }
         else {
             $(overlay).hide();
             $(id).hide();
-            //$(id).hide(effect, options, 250);
         }
     }
 };
