@@ -1734,7 +1734,7 @@ var SwdView = {
         if (post.imageObjects && post.imageObjects.length > 0) {
             postImage = 'url("' + post.imageObjects[0].url + '")';
             
-            $('#post-details-panel .floating-panel-content').removeClass('narrow', 300);
+            $('#post-details-panel .floating-panel-content').removeClass('narrow', 200);
 
             // Hide the no-image container and display the post's attached image.
             $('#post-image-container').show().empty();
@@ -1749,7 +1749,7 @@ var SwdView = {
             $('#post-no-image-desc').show();
             
             // Apply the 'narrow' CSS rule.
-            $('#post-details-panel .floating-panel-content').addClass('narrow', 300);
+            $('#post-details-panel .floating-panel-content').addClass('narrow', 200);
         }
 
         // Display message content, or hide it if empty.
