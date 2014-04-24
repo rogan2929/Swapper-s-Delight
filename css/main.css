@@ -294,6 +294,8 @@ a:visited {
     right: 0;
     padding: 10px;
     padding-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .floating-panel.fullsize {
@@ -883,6 +885,14 @@ a.link-title {
     left: 25px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
+}
+
+.floating-panel-content.narrow {
+    width: 755px;
+}
+
+.floating-panel-content.narrow .column {
+    width: 350px;
 }
 
 #overlay-app-loading, .floating-overlay {
