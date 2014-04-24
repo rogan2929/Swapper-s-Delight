@@ -660,28 +660,25 @@ var SwdPresenter = {
     loadPostDetails: function(id) {
         var post;
 
-        // Restore the panel to it's original state and begin loading.
-        SwdView.restorePostDetails(function() {
-            SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
-            SwdView.toggleFloatingPanel('#post-details-panel', true);
-            SwdView.toggleToolbar('#post-details-toolbar', true);
+        SwdView.toggleAjaxLoadingDiv('#post-details-panel', true);
+        SwdView.toggleFloatingPanel('#post-details-panel', true);
+        SwdView.toggleToolbar('#post-details-toolbar', true);
 
-            SwdModel.getPostDetails(id, {
-                success: function(response) {
-                    post = response;
+        SwdModel.getPostDetails(id, {
+            success: function(response) {
+                post = response;
 
-                    if (post) {
-                        SwdPresenter.selectedPost = post;
-                        SwdView.setLikePost(false);
-                        SwdView.showPostDetails(post);
-                    }
-                },
-                error: function(response) {
-                    SwdView.toggleFloatingPanel('#post-details-panel', false);
-                    SwdView.toggleToolbar('', false);
-                    SwdPresenter.handleError.call(SwdPresenter, response);
+                if (post) {
+                    SwdPresenter.selectedPost = post;
+                    SwdView.setLikePost(false);
+                    SwdView.showPostDetails(post);
                 }
-            });
+            },
+            error: function(response) {
+                SwdView.toggleFloatingPanel('#post-details-panel', false);
+                SwdView.toggleToolbar('', false);
+                SwdPresenter.handleError.call(SwdPresenter, response);
+            }
         });
     },
     /***
@@ -923,6 +920,7 @@ var SwdPresenter = {
         // Prevent the event from bubbling up the DOM and immediately causing the displayed panel to close.
         e.stopPropagation();
 
+        SwdView.restorePostDetails();
         SwdPresenter.loadPostDetails(id);
     },
     onClickPostBlockLoadMore: function(e, args) {
@@ -1233,11 +1231,11 @@ var SwdView = {
      */
     clearPosts: function() {
         var i;
-
+        
         for (i = 0; i < SwdView.adTiles.length; i++) {
             SwdView.adTiles[i].hide();
         }
-
+        
         $('.post-block.ad-div').hide();
         $('#post-feed .post-block').not('.post-block.ad-div').remove();
     },
@@ -1286,7 +1284,7 @@ var SwdView = {
      */
     reloadAds: function() {
         var i, adDiv, adSpread, postBlockCount;
-
+        
         postBlockCount = SwdView.getPostBlockCount()
 
         // Determine how far apart each ad-tile will be.
@@ -1658,7 +1656,7 @@ var SwdView = {
      */
     restorePostDetails: function(callback) {
         // Remove the 'narrow' CSS rule if present.
-        $('#post-details-panel .floating-panel-content').removeClass('narrow', 300, callback);
+        $('#post-details-panel .floating-panel-content').removeClass('narrow');
     },
     /***
      * Sets the 'Like' or 'Unlike' button text.
@@ -1735,6 +1733,8 @@ var SwdView = {
         // Display the post's image, or the no-image placeholder.
         if (post.imageObjects && post.imageObjects.length > 0) {
             postImage = 'url("' + post.imageObjects[0].url + '")';
+            
+            $('#post-details-panel .floating-panel-content').removeClass('narrow', 300);
 
             // Hide the no-image container and display the post's attached image.
             $('#post-image-container').show().empty();
@@ -1747,7 +1747,7 @@ var SwdView = {
             // Hide the image container.
             $('#post-image-container').hide();
             $('#post-no-image-desc').show();
-
+            
             // Apply the 'narrow' CSS rule.
             $('#post-details-panel .floating-panel-content').addClass('narrow', 300);
         }
