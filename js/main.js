@@ -1731,7 +1731,7 @@ var SwdView = {
             $('#post-no-image-desc').hide();
 
             // Remove the 'narrow' CSS rule if present.
-            $('#post-details-panel .floating-panel-content').removeClass('narrow');
+            $('#post-details-panel .floating-panel-content').removeClass('narrow', 300);
 
             // File the image container with post-image-tiles.
             SwdView.fillPostImageContainer(post);
@@ -1742,7 +1742,7 @@ var SwdView = {
             $('#post-no-image-desc').show();
             
             // Apply the 'narrow' CSS rule.
-            $('#post-details-panel .floating-panel-content').addClass('narrow');
+            $('#post-details-panel .floating-panel-content').addClass('narrow', 300);
         }
 
         // Display message content, or hide it if empty.
