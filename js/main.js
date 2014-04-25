@@ -439,7 +439,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .close-button', 'click');
                                 SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
                                 SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
-                                SwdView.installHandler('onKeyDownCommentTextarea', SwdPresenter.onKeyDownCommentTextarea, '#post-comment-text', 'keydown');
+                                SwdView.installHandler('onKeyDownCommentTextarea', SwdPresenter.onKeyDownCommentTextarea, '.post-comment-text', 'keydown');
                                 SwdView.installHandler('onKeyPress', SwdPresenter.onKeyPress, document, 'keypress');
                                 SwdView.installHandler('onKeyUpSearch', SwdPresenter.onKeyUpSearch, '#main-search', 'keyup');
                                 SwdView.installHandler('onMouseMove', SwdPresenter.onMouseMove, document, 'mousemove');
@@ -1029,10 +1029,10 @@ var SwdPresenter = {
 
         if (e.which === 13 && !e.shiftKey) {
             id = SwdPresenter.selectedPost.id;
-            comment = $('#post-comment-text').val();
+            comment = $(this).val();
 
             // Show the ajax loading div.
-            SwdView.toggleAjaxLoadingDiv('#post-comment-wrapper', true);
+            SwdView.toggleAjaxLoadingDiv('.post-comment-wrapper', true);
 
             // Increment the post's tile's comment count.
             SwdView.incrementCommentCount(id);
@@ -1249,8 +1249,8 @@ var SwdView = {
      * Clear comment box.
      */
     clearPostCommentText: function() {
-        $('#post-comment-text').val('');
-        SwdView.toggleAjaxLoadingDiv('#post-comment-wrapper', false);
+        $('.post-comment-text').val('');
+        SwdView.toggleAjaxLoadingDiv('.post-comment-wrapper', false);
     },
     clearSelectedNav: function() {
         $('.nav-button').removeClass('selected-nav');
