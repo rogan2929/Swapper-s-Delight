@@ -93,6 +93,7 @@ textarea {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    height: 8em;
 }
 
 input[type=text] {
@@ -1150,7 +1151,6 @@ div.login-div {
 }
 
 #post-comment-text {
-    height: 4.5em;
     position: relative;
     width: 100%;
     padding: 0;
