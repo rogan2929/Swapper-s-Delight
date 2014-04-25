@@ -336,9 +336,7 @@ a:visited {
 }
 
 .comment-control {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
+    text-align: right;
 }
 
 .transparent {
