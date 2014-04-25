@@ -414,6 +414,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickButtonViewGroup', SwdPresenter.onClickButtonViewGroup, '#button-view-group', 'click');
                                 SwdView.installHandler('onClickCommentDelete', SwdPresenter.onClickCommentDelete, '.post-comment .delete-button', 'click');
                                 SwdView.installHandler('onClickCommentImage', SwdPresenter.onClickCommentImage, '.post-comment-image', 'click');
+                                SwdView.installHandler('onClickEditComment', SwdPresenter.onClickEditComment, '.comment-edit', 'click');
                                 SwdView.installHandler('onClickFloatingPanelCloseButton', SwdPresenter.onClickFloatingPanelCloseButton, '.floating-panel-content > .close-button', 'click');
                                 SwdView.installHandler('onClickFloatingPanelContent', SwdPresenter.onClickFloatingPanelContent, '.floating-panel-content', 'click');
                                 SwdView.installHandler('onClickFloatingPanelModal', SwdPresenter.onClickFloatingPanelModal, '.floating-panel.modal', 'click');
@@ -789,6 +790,10 @@ var SwdPresenter = {
         src = src.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
 
         SwdView.expandCommentImage(src);
+    },
+    onClickEditComment: function(e, args) {
+        var id = $(e.currentTarget).parent().attr('id');
+        alert(id);
     },
     onClickFloatingPanelCloseButton: function(e, args) {
         SwdView.toggleFloatingPanel('.floating-panel', false);

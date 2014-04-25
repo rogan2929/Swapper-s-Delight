@@ -335,6 +335,11 @@ a:visited {
     z-index: 2000;
 }
 
+.comment-edit {
+    margin-top: 5px;
+    display: block;
+}
+
 .transparent {
     background: transparent;
 }
