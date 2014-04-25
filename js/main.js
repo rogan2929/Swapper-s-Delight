@@ -1029,7 +1029,7 @@ var SwdPresenter = {
 
         if (e.which === 13 && !e.shiftKey) {
             id = SwdPresenter.selectedPost.id;
-            comment = $(this).val();
+            comment = $(e.currentTarget).val();
 
             // Show the ajax loading div.
             SwdView.toggleAjaxLoadingDiv('.post-comment-wrapper', true);
