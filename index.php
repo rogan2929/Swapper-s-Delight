@@ -52,10 +52,10 @@ error_reporting(E_ALL);
                             <span>Newest Posts</span>
                         </div>
                         <div id='button-nav-myposts' class='button nav-button'>
-                            <span>My Posts</span>
+                            <span>Posts by Me</span>
                         </div>
                         <div id='button-nav-liked' class='button nav-button'>
-                            <span>Liked Posts</span>
+                            <span>Posts Liked by Me</span>
                         </div>
                     </div>
                     <input type='text' id='main-search' placeholder='Search this group'>
