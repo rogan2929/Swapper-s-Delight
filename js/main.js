@@ -412,7 +412,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
                                 SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
                                 SwdView.installHandler('onClickButtonViewGroup', SwdPresenter.onClickButtonViewGroup, '#button-view-group', 'click');
-                                SwdView.installHandler('onClickCommentDelete', SwdPresenter.onClickCommentDelete, '.post-comment .delete-button', 'click');
+                                SwdView.installHandler('onClickCommentDelete', SwdPresenter.onClickCommentDelete, '.post-comment .comment-control .delete', 'click');
                                 SwdView.installHandler('onClickCommentImage', SwdPresenter.onClickCommentImage, '.post-comment-image', 'click');
                                 SwdView.installHandler('onClickCommentEdit', SwdPresenter.onClickCommentEdit, '.comment-edit', 'click');
                                 SwdView.installHandler('onClickFloatingPanelCloseButton', SwdPresenter.onClickFloatingPanelCloseButton, '.floating-panel-content > .close-button', 'click');
@@ -769,7 +769,7 @@ var SwdPresenter = {
     onClickCommentDelete: function(e, args) {
         var id;
 
-        id = $(e.currentTarget).parent().attr('id');
+        id = $(e.currentTarget).parent().parent().attr('id');
 
         // Prompt for deletion of the comment.
         SwdPresenter.message('confirm', 'Delete this comment?', function(response) {
@@ -1045,7 +1045,7 @@ var SwdPresenter = {
                 },
                 error: SwdPresenter.handleError
             });
-            
+
             e.preventDefault();
             return false;
         }
@@ -1142,17 +1142,16 @@ var SwdView = {
         // If the current user is the owner of the comment, display the delete and edit buttons.
         if (comment.actor.uid === uid) {
             //$(commentDiv).append('<div class="delete-button"></div><a href="#" class="comment-edit">Edit</a>');
-            $(commentDiv).append('<div class="delete-button"></div>');
-            
-            //$(commentDiv).children('.comment-edit').click(SwdView.handlers['onClickCommentEdit']);
+            //$(commentDiv).append('<div class="delete-button"></div>');
+            $(commentDiv).append('<div class="comment-control"><a href="#" class="delete">Delete</a></div>');
+
+
+            // Hook up the click event handler.
+            $(commentDiv).find('.delete').click(SwdView.handlers['onClickCommentDelete']);
+            //$(commentDiv).find('.edit').click(SwdView.handlers['onClickCommentEdit']);
         }
 
         $(commentDiv).attr('id', comment.id).hide().linkify().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
-
-        // Hook up the click event handler.
-        $(commentDiv).children('.delete-button').click(SwdView.handlers['onClickCommentDelete']);
-
-
     },
     /**
      * Init function for SwdView.
