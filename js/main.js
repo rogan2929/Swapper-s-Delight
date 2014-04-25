@@ -1147,12 +1147,8 @@ var SwdView = {
 
 
             // Hook up the click event handler.
-            //$(commentDiv).children('.delete').click(SwdView.handlers['onClickCommentDelete']);
-            $(commentDiv).children('.delete').click(function() {
-                alert('test');
-            });
-
-            //$(commentDiv).children('.comment-edit').click(SwdView.handlers['onClickCommentEdit']);
+            $(commentDiv).find('.delete').click(SwdView.handlers['onClickCommentDelete']);
+            //$(commentDiv).find('.edit').click(SwdView.handlers['onClickCommentEdit']);
         }
 
         $(commentDiv).attr('id', comment.id).hide().linkify().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
