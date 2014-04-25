@@ -894,6 +894,9 @@ a.link-title {
 
 .floating-panel-content.narrow {
     width: 755px;
+    height: 400px;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .floating-panel-content.narrow .column {
