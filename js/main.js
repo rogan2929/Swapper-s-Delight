@@ -1143,7 +1143,7 @@ var SwdView = {
         if (comment.actor.uid === uid) {
             $(commentDiv).append('<div class="delete-button"></div><a href="#" class="comment-edit">Edit</a>');
             
-            $(commentDiv).child('.comment-edit').click(SwdView.handlers['onClickCommentEdit']);
+            $(commentDiv).children('.comment-edit').click(SwdView.handlers['onClickCommentEdit']);
         }
 
         $(commentDiv).attr('id', comment.id).hide().linkify().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
