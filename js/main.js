@@ -412,7 +412,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
                                 SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
                                 SwdView.installHandler('onClickButtonViewGroup', SwdPresenter.onClickButtonViewGroup, '#button-view-group', 'click');
-                                SwdView.installHandler('onClickCommentDelete', SwdPresenter.onClickCommentDelete, '.post-comment .comment-control.delete', 'click');
+                                SwdView.installHandler('onClickCommentDelete', SwdPresenter.onClickCommentDelete, '.post-comment .comment-control .delete', 'click');
                                 SwdView.installHandler('onClickCommentImage', SwdPresenter.onClickCommentImage, '.post-comment-image', 'click');
                                 SwdView.installHandler('onClickCommentEdit', SwdPresenter.onClickCommentEdit, '.comment-edit', 'click');
                                 SwdView.installHandler('onClickFloatingPanelCloseButton', SwdPresenter.onClickFloatingPanelCloseButton, '.floating-panel-content > .close-button', 'click');
@@ -1143,7 +1143,7 @@ var SwdView = {
         if (comment.actor.uid === uid) {
             //$(commentDiv).append('<div class="delete-button"></div><a href="#" class="comment-edit">Edit</a>');
             //$(commentDiv).append('<div class="delete-button"></div>');
-            $(commentDiv).append('<a href="#" class="comment-control delete">Delete</a>');
+            $(commentDiv).append('<div class="comment-control"><a href="#" class="delete">Delete</a></div>');
             
             //$(commentDiv).children('.comment-edit').click(SwdView.handlers['onClickCommentEdit']);
         }

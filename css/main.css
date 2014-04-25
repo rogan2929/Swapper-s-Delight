@@ -336,8 +336,9 @@ a:visited {
 }
 
 .comment-control {
-    margin-top: 5px;
-    display: inline-block;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
 }
 
 .transparent {
