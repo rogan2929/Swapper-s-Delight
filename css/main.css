@@ -1155,7 +1155,7 @@ div.login-div {
         margin-top: -2px;*/
 }
 
-post-comment-wrapper > textarea {
+.post-comment-wrapper > textarea {
     border: transparent;
     width: 100%;
     height: 100%;
@@ -1163,7 +1163,7 @@ post-comment-wrapper > textarea {
     margin-top: -2px;
 }
 
-post-comment-wrapper {
+.post-comment-wrapper {
     position: relative;
     width: 100%;
     padding: 0;
