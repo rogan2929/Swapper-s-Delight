@@ -1045,7 +1045,7 @@ var SwdPresenter = {
                 },
                 error: SwdPresenter.handleError
             });
-            
+
             e.preventDefault();
             return false;
         }
@@ -1144,16 +1144,18 @@ var SwdView = {
             //$(commentDiv).append('<div class="delete-button"></div><a href="#" class="comment-edit">Edit</a>');
             //$(commentDiv).append('<div class="delete-button"></div>');
             $(commentDiv).append('<div class="comment-control"><a href="#" class="delete">Delete</a></div>');
-            
+
+
+            // Hook up the click event handler.
+            //$(commentDiv).children('.delete').click(SwdView.handlers['onClickCommentDelete']);
+            $(commentDiv).children('.delete').click(function() {
+                alert('test');
+            });
+
             //$(commentDiv).children('.comment-edit').click(SwdView.handlers['onClickCommentEdit']);
         }
 
         $(commentDiv).attr('id', comment.id).hide().linkify().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
-
-        // Hook up the click event handler.
-        $(commentDiv).children('.delete').click(SwdView.handlers['onClickCommentDelete']);
-
-
     },
     /**
      * Init function for SwdView.
