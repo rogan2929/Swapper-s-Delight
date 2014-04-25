@@ -438,7 +438,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .close-button', 'click');
                                 SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
                                 SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
-                                SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#post-comment-text', 'keyup');
+                                SwdView.installHandler('onKeyDownCommentTextarea', SwdPresenter.onKeyDownCommentTextarea, '#post-comment-text', 'keydown');
                                 SwdView.installHandler('onKeyPress', SwdPresenter.onKeyPress, document, 'keypress');
                                 SwdView.installHandler('onKeyUpSearch', SwdPresenter.onKeyUpSearch, '#main-search', 'keyup');
                                 SwdView.installHandler('onMouseMove', SwdPresenter.onMouseMove, document, 'mousemove');
@@ -1019,12 +1019,10 @@ var SwdPresenter = {
 
         SwdView.closeAllUiMenus();
     },
-    onKeyUpCommentTextarea: function(e, args) {
+    onKeyDownCommentTextarea: function(e, args) {
         var id, comment;
 
         if (e.which === 13 && !e.shiftKey) {
-            e.preventDefault();
-
             id = SwdPresenter.selectedPost.id;
             comment = $('#post-comment-text').val();
 
@@ -1042,7 +1040,8 @@ var SwdPresenter = {
                 },
                 error: SwdPresenter.handleError
             });
-
+            
+            e.preventDefault();
             return false;
         }
 

@@ -75,14 +75,14 @@ class GraphApiClient {
             http_response_code(400);
 
             error_log($ex->getCode() . ': ' . $ex->getMessage());
-            
+
             die(json_encode(array(
                 'code' => $ex->getCode(),
                 'message' => $ex->getMessage()
             )));
         }
     }
-    
+
     /**
      * Returns the current user's Facebook OAuth access token.
      * @return string
@@ -90,7 +90,7 @@ class GraphApiClient {
     public function getAccessToken() {
         return $this->facebook->getAccessToken();
     }
-    
+
     /**
      * Sets the current user's Facebook OAuth access token.
      * @param string $accessToken
@@ -98,7 +98,7 @@ class GraphApiClient {
     public function setAccessToken($accessToken) {
         $this->facebook->setAccessToken($accessToken);
         $_SESSION['accessToken'] = $accessToken;
-        
+
         $this->generateAppSecretProof();
     }
 
@@ -111,13 +111,24 @@ class GraphApiClient {
     }
 
     /**
+     * Update a comment.
+     * @param string $id
+     * @param string $message
+     */
+    public function updateComment($id, $message) {
+        $this->api($id, "POST", array(
+            'message' => $message,
+        ));
+    }
+
+    /**
      * Delete a Facebook Object.
      * @param type $id
      */
     public function deleteObject($id) {
         $this->api('/' . $id, 'DELETE');
     }
-    
+
     /**
      * Like a Facebook object.
      * @param string $id
@@ -133,7 +144,7 @@ class GraphApiClient {
     public function unLikeObject($id) {
         $this->api('/' . $id . '/likes', 'DELETE');
     }
-    
+
     /**
      * Generates an appSecretProof that Facebook requires for API transactions.
      */
@@ -141,4 +152,5 @@ class GraphApiClient {
         // Set the AppSecretProof, which is required for FB api calls.
         $this->appSecretProof = hash_hmac('sha256', $this->facebook->getAccessToken(), self::APP_SECRET);
     }
+
 }
