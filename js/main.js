@@ -414,7 +414,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickButtonViewGroup', SwdPresenter.onClickButtonViewGroup, '#button-view-group', 'click');
                                 SwdView.installHandler('onClickCommentDelete', SwdPresenter.onClickCommentDelete, '.post-comment .delete-button', 'click');
                                 SwdView.installHandler('onClickCommentImage', SwdPresenter.onClickCommentImage, '.post-comment-image', 'click');
-                                SwdView.installHandler('onClickEditComment', SwdPresenter.onClickEditComment, '.comment-edit', 'click');
+                                SwdView.installHandler('onClickCommentEdit', SwdPresenter.onClickCommentEdit, '.comment-edit', 'click');
                                 SwdView.installHandler('onClickFloatingPanelCloseButton', SwdPresenter.onClickFloatingPanelCloseButton, '.floating-panel-content > .close-button', 'click');
                                 SwdView.installHandler('onClickFloatingPanelContent', SwdPresenter.onClickFloatingPanelContent, '.floating-panel-content', 'click');
                                 SwdView.installHandler('onClickFloatingPanelModal', SwdPresenter.onClickFloatingPanelModal, '.floating-panel.modal', 'click');
@@ -791,7 +791,7 @@ var SwdPresenter = {
 
         SwdView.expandCommentImage(src);
     },
-    onClickEditComment: function(e, args) {
+    onClickCommentEdit: function(e, args) {
         var id = $(e.currentTarget).parent().attr('id');
         alert(id);
     },
@@ -1142,6 +1142,8 @@ var SwdView = {
         // If the current user is the owner of the comment, display the delete and edit buttons.
         if (comment.actor.uid === uid) {
             $(commentDiv).append('<div class="delete-button"></div><a href="#" class="comment-edit">Edit</a>');
+            
+            $(commentDiv).child('.comment-edit').click(SwdView.handlers['onClickCommentEdit']);
         }
 
         $(commentDiv).attr('id', comment.id).hide().linkify().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
