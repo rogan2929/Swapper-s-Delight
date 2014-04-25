@@ -335,6 +335,11 @@ a:visited {
     z-index: 2000;
 }
 
+.comment-edit {
+    margin-top: 5px;
+    display: block;
+}
+
 .transparent {
     background: transparent;
 }
@@ -889,6 +894,9 @@ a.link-title {
 
 .floating-panel-content.narrow {
     width: 755px;
+    height: 400px;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .floating-panel-content.narrow .column {

@@ -414,6 +414,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickButtonViewGroup', SwdPresenter.onClickButtonViewGroup, '#button-view-group', 'click');
                                 SwdView.installHandler('onClickCommentDelete', SwdPresenter.onClickCommentDelete, '.post-comment .delete-button', 'click');
                                 SwdView.installHandler('onClickCommentImage', SwdPresenter.onClickCommentImage, '.post-comment-image', 'click');
+                                SwdView.installHandler('onClickCommentEdit', SwdPresenter.onClickCommentEdit, '.comment-edit', 'click');
                                 SwdView.installHandler('onClickFloatingPanelCloseButton', SwdPresenter.onClickFloatingPanelCloseButton, '.floating-panel-content > .close-button', 'click');
                                 SwdView.installHandler('onClickFloatingPanelContent', SwdPresenter.onClickFloatingPanelContent, '.floating-panel-content', 'click');
                                 SwdView.installHandler('onClickFloatingPanelModal', SwdPresenter.onClickFloatingPanelModal, '.floating-panel.modal', 'click');
@@ -438,7 +439,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .close-button', 'click');
                                 SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
                                 SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
-                                SwdView.installHandler('onKeyUpCommentTextarea', SwdPresenter.onKeyUpCommentTextarea, '#post-comment-text', 'keyup');
+                                SwdView.installHandler('onKeyDownCommentTextarea', SwdPresenter.onKeyDownCommentTextarea, '#post-comment-text', 'keydown');
                                 SwdView.installHandler('onKeyPress', SwdPresenter.onKeyPress, document, 'keypress');
                                 SwdView.installHandler('onKeyUpSearch', SwdPresenter.onKeyUpSearch, '#main-search', 'keyup');
                                 SwdView.installHandler('onMouseMove', SwdPresenter.onMouseMove, document, 'mousemove');
@@ -790,6 +791,10 @@ var SwdPresenter = {
 
         SwdView.expandCommentImage(src);
     },
+    onClickCommentEdit: function(e, args) {
+        var id = $(e.currentTarget).parent().attr('id');
+        alert(id);
+    },
     onClickFloatingPanelCloseButton: function(e, args) {
         SwdView.toggleFloatingPanel('.floating-panel', false);
         SwdView.toggleToolbar('', false);
@@ -1019,12 +1024,10 @@ var SwdPresenter = {
 
         SwdView.closeAllUiMenus();
     },
-    onKeyUpCommentTextarea: function(e, args) {
+    onKeyDownCommentTextarea: function(e, args) {
         var id, comment;
 
         if (e.which === 13 && !e.shiftKey) {
-            e.preventDefault();
-
             id = SwdPresenter.selectedPost.id;
             comment = $('#post-comment-text').val();
 
@@ -1042,7 +1045,8 @@ var SwdPresenter = {
                 },
                 error: SwdPresenter.handleError
             });
-
+            
+            e.preventDefault();
             return false;
         }
 
@@ -1137,7 +1141,10 @@ var SwdView = {
 
         // If the current user is the owner of the comment, display the delete and edit buttons.
         if (comment.actor.uid === uid) {
+            //$(commentDiv).append('<div class="delete-button"></div><a href="#" class="comment-edit">Edit</a>');
             $(commentDiv).append('<div class="delete-button"></div>');
+            
+            //$(commentDiv).children('.comment-edit').click(SwdView.handlers['onClickCommentEdit']);
         }
 
         $(commentDiv).attr('id', comment.id).hide().linkify().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
