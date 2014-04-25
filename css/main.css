@@ -335,9 +335,9 @@ a:visited {
     z-index: 2000;
 }
 
-.comment-edit {
+.comment-control {
     margin-top: 5px;
-    display: block;
+    display: inline-block;
 }
 
 .transparent {
