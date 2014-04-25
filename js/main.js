@@ -769,7 +769,7 @@ var SwdPresenter = {
     onClickCommentDelete: function(e, args) {
         var id;
 
-        id = $(e.currentTarget).parent().attr('id');
+        id = $(e.currentTarget).parent().parent().attr('id');
 
         // Prompt for deletion of the comment.
         SwdPresenter.message('confirm', 'Delete this comment?', function(response) {
