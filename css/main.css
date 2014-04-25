@@ -725,7 +725,7 @@ a:visited {
 }
 
 .hint {
-    color: #e35765;
+    color: #888;
     display: block;
     font-style: italic;
 }
@@ -929,7 +929,7 @@ a.link-title {
     bottom: 0;
     margin-top: auto;
     margin-bottom: auto;
-    height: 3em;
+    height: 6em;
     margin-left: 10px;
     margin-right: 10px;
 }
