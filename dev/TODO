@@ -1,7 +1,9 @@
 *Privacy Policy.
 Include prompt to change app settings so that others using Swapper's Delight can see the current user's photos.
     https://www.facebook.com/settings?tab=applications&section=friends_share&view (Apps Others Use)
-*Acknowledge tags in posts and comments.
+Handle tag viewing and creation.
+Left/Right keys.
+Admins have ability to delete others' posts.
 View group info panel.
     Description
     Admin
