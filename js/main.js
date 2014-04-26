@@ -357,8 +357,6 @@ var SwdPresenter = {
         $.ajaxSetup({
             cache: true
         });
-        
-        var i = ijij / 5;
 
         // Fetch the FB JS API
         $.getScript('//connect.facebook.net/en_US/all.js', function() {
