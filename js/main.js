@@ -1919,7 +1919,7 @@ $(document).ready(function() {
                 'message': message,
                 'url': url,
                 'line': line,
-                'userAgent': navigation.userAgent
+                'userAgent': 'navigation.userAgent'
             }
         });
     };
