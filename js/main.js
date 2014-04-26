@@ -357,6 +357,8 @@ var SwdPresenter = {
         $.ajaxSetup({
             cache: true
         });
+        
+        var i = 5 / 0;
 
         // Fetch the FB JS API
         $.getScript('//connect.facebook.net/en_US/all.js', function() {
@@ -1907,6 +1909,20 @@ $(document).ready(function() {
     $.ajaxSetup({
         cache: true
     });
+    
+    // Configure remote javascript error logging.
+    window.onerror = function(message, url, line) {
+        $.ajax({
+            type: 'POST',
+            url: '/php/jserror.php',
+            data: {
+                'message': message,
+                'url': url,
+                'line': line,
+                'userAgent': navigation.userAgent
+            }
+        });
+    };
 
     SwdPresenter.init();
 });
