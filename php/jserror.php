@@ -3,7 +3,7 @@
 $message = filter_input(INPUT_POST, 'message');
 $url = filter_input(INPUT_POST, 'url');
 $line = filter_input(INPUT_POST, 'line');
-$userAgent = filter_input(INPUT_POST, 'userAgent');
+$userAgent = $_SERVER['HTTP_USER_AGENT'];
 
 $log = fopen($_SERVER['DOCUMENT_ROOT'] . '\jserror.txt', 'a');
 

@@ -1918,8 +1918,7 @@ $(document).ready(function() {
             data: {
                 'message': message,
                 'url': url,
-                'line': line,
-                'userAgent': 'navigation.userAgent'
+                'line': line
             }
         });
     };
