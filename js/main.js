@@ -1907,6 +1907,19 @@ $(document).ready(function() {
     $.ajaxSetup({
         cache: true
     });
+    
+    // Configure remote javascript error logging.
+    window.onerror = function(message, url, line) {
+        $.ajax({
+            type: 'POST',
+            url: '/php/jserror.php',
+            data: {
+                'message': message,
+                'url': url,
+                'line': line
+            }
+        });
+    };
 
     SwdPresenter.init();
 });
