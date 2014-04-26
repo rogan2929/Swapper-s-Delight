@@ -16,7 +16,7 @@ class LinkDataFactory extends BaseFactory {
         $linkData = null;
 
         // Verify that the attachment type is of type 'link'.
-        if ($post['attachment'] && $post['attachment']['media'] && $post['attachment']['media'][0] && $post['attachment']['media'][0]['type'] == 'link') {
+        if ($post['attachment'] && isset($post['attachment']['media']) && $post['attachment']['media'][0] && $post['attachment']['media'][0]['type'] == 'link') {
             $linkData = new LinkData();
             $linkData->setCaption($post['attachment']['caption']);
             $linkData->setDescription($post['attachment']['description']);

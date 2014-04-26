@@ -26,7 +26,7 @@ class ImageObjectFactory {
     public function getImageObjectsFromFQL($post, $smallImages = true) {
         $images = array();
 
-        if ($post['attachment'] && $post['attachment']['media']) {
+        if ($post['attachment'] && isset($post['attachment']['media'])) {
             // For posts with an image, look for associated image data.
             for ($i = 0; $i < count($post['attachment']); $i++) {
                 if (isset($post['attachment']['media'][$i])) {
