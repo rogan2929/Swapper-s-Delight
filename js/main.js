@@ -368,53 +368,60 @@ var SwdPresenter = {
 
             $('#loginbutton,#feedbutton').removeAttr('disabled');
 
-            FB.login(function(response) {
+            
+//            FB.login(function(response) {
+//                if (response.status === 'connected') {
+//                    SwdPresenter.uid = response.authResponse.userID;
+//                    
+//                    Logger.logEntry(SwdPresenter.uid + ' has logged in.');
+//                    
+//                    SwdPresenter.startApp();
+//                }
+//                else if (response.status === 'not authorized') {
+//                    alert('In order to use this app, you must authorize it.');
+//                }
+//            }, {
+//                scope: 'user_groups,user_likes,publish_stream,read_stream'
+//            });
+
+            // Try to get a session going if there isn't one already.
+            FB.getLoginStatus(function(response) {
                 if (response.status === 'connected') {
                     SwdPresenter.uid = response.authResponse.userID;
                     SwdPresenter.startApp();
                 }
                 else if (response.status === 'not authorized') {
-                    alert('In order to use this app, you must authorize it.');
+                    // User did not authorize app.
+                    
                 }
-            }, {
-                scope: 'user_groups,user_likes,publish_stream,read_stream'
-            });
+                else {
+                    FB.login(function(response) {
+                        if (response.status === 'connected') {
+                            SwdPresenter.uid = response.authResponse.userID;
+                            SwdPresenter.startApp();
+                        }
+                        else if (response.status === 'not authorized') {
 
-            // Try to get a session going if there isn't one already.
-//            FB.getLoginStatus(function(response) {
-//                if (response.status === 'connected') {
-//                    SwdPresenter.uid = response.authResponse.userID;
-//                    SwdPresenter.startApp();
-//                }
-//                else if (response.status === 'not authorized') {
-//                    // User did not authorize app.
-//                    
-//                }
-//                else {
-//                    FB.login(function(response) {
-//                        if (response.status === 'connected') {
-//                            SwdPresenter.uid = response.authResponse.userID;
-//                            SwdPresenter.startApp();
-//                        }
-//                        else if (response.status === 'not authorized') {
-//
-//                        }
-//                    }, {
-//                        scope: 'user_groups,user_likes,publish_stream,read_stream'
-//                    });
-//                }
-//            });
+                        }
+                    }, {
+                        scope: 'user_groups,user_likes,publish_stream,read_stream'
+                    });
+                }
+            });
         });
     },
     /***
      * Starts the application after init has finished.
      */
     startApp: function() {
+        Logger.logEntry(SwdPresenter.uid + ' has logged in.');
+        
         if (!SwdPresenter.groups) {
             // Retrieve group info for logged in user.
             SwdModel.getGroupInfo({
                 success: function(response) {
                     SwdPresenter.groups = response;
+                    Logger.logEntry(SwdPresenter.uid + ' has logged retrieved groups.');
 
                     // Call the polling function again after 100ms.
                     SwdPresenter.facebookPageInfoPoll();
@@ -424,6 +431,7 @@ var SwdPresenter = {
                         // Retrieve the user's group preferences.
                         SwdModel.getHiddenGroups({
                             success: function(response) {
+                                Logger.logEntry(SwdPresenter.uid + ' has logged retrieved hidden groups.');
                                 SwdView.addGroupsToSelectPanel(SwdPresenter.groups, response);
 
                                 // Install Event Handlers
@@ -1922,13 +1930,8 @@ var SwdView = {
     }
 };
 
-$(document).ready(function() {
-    $.ajaxSetup({
-        cache: true
-    });
-
-    // Configure remote javascript error logging.
-    window.onerror = function(message, url, line) {
+var Logger = {
+    logError: function(message, url, line) {
         $.ajax({
             type: 'POST',
             url: '/php/jserror.php',
@@ -1938,6 +1941,26 @@ $(document).ready(function() {
                 'line': line
             }
         });
+    },
+    logEntry: function(message) {
+        $.ajax({
+            type: 'POST',
+            url: '/php/jslog-entry.php',
+            data: {
+                'message': message
+            }
+        });
+    }
+}
+
+$(document).ready(function() {
+    $.ajaxSetup({
+        cache: true
+    });
+
+    // Configure remote javascript error logging.
+    window.onerror = function(message, url, line) {
+        Logger.logError(message, url, line);
     };
 
     SwdPresenter.init();

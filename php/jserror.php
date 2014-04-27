@@ -11,6 +11,6 @@ if (!$log) {
     exit();
 }
 
-fwrite($log, $userAgent . ': ' . $message . ', ' . $url . ', ' . $line);
+fwrite($log, $userAgent . ': ' . $message . ', ' . $url . ', ' . $line . PHP_EOL);
 
 fclose($log);
