@@ -11,6 +11,6 @@ if (!$log) {
     exit();
 }
 
-fwrite($log, $userAgent . ': ' . $message . ', ' . $url . ', ' . $line . PHP_EOL);
+fwrite($log, $_SERVER['REQUEST_TIME'] . ': ' . $userAgent . ': ' . $message . ', ' . $url . ', ' . $line . PHP_EOL);
 
 fclose($log);
