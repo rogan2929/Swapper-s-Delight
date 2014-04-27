@@ -8,6 +8,6 @@ if (!$log) {
     exit();
 }
 
-fwrite($log, $message . '\r\n');
+fwrite($log, $message . PHP_EOL);
 
 fclose($log);
