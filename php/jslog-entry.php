@@ -8,6 +8,6 @@ if (!$log) {
     exit();
 }
 
-fwrite($log, $message);
+fwrite($log, $message . '\r\n');
 
 fclose($log);
