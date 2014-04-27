@@ -421,6 +421,7 @@ var SwdPresenter = {
             SwdModel.getGroupInfo({
                 success: function(response) {
                     SwdPresenter.groups = response;
+                    Logger.logEntry(SwdPresenter.uid + ' has logged retrieved groups.');
 
                     // Call the polling function again after 100ms.
                     SwdPresenter.facebookPageInfoPoll();
@@ -430,6 +431,7 @@ var SwdPresenter = {
                         // Retrieve the user's group preferences.
                         SwdModel.getHiddenGroups({
                             success: function(response) {
+                                Logger.logEntry(SwdPresenter.uid + ' has logged retrieved hidden groups.');
                                 SwdView.addGroupsToSelectPanel(SwdPresenter.groups, response);
 
                                 // Install Event Handlers
