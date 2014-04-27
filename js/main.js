@@ -767,8 +767,8 @@ var SwdPresenter = {
     timerIncrement: function() {
         SwdPresenter.idleTime++;
 
-        if (SwdPresenter.idleTime > 34) {
-            // After 35, do a full refresh of the canvas app.
+        if (SwdPresenter.idleTime > 59) {
+            // After 60, do a full refresh of the canvas app.
             window.location = window.location.href;
         }
         else if (SwdPresenter.idleTime > 19) {
