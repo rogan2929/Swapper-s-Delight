@@ -374,7 +374,7 @@ var SwdPresenter = {
                     SwdPresenter.startApp();
                 }
                 else if (response.status === 'not authorized') {
-                    alert('TEST');
+                    alert('In order to use this app, you must authorize it.');
                 }
             }, {
                 scope: 'user_groups,user_likes,publish_stream,read_stream'
