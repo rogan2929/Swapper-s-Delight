@@ -584,7 +584,7 @@ class PostFactory extends GraphObjectFactory {
                 $body = json_decode($response[$k]['body'], true);
                 
                 if (!is_array($body[0])) {
-                    error_log("$body[0] is not an array. Content is: " . $body[0]);
+                    error_log("$body[0] is not an array. Response from server was: " . var_dump($response));
                 }
 
                 $stream = array_merge($stream, $body[0]['fql_result_set']);
