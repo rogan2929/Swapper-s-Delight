@@ -368,7 +368,7 @@ var SwdPresenter = {
 
             $('#loginbutton,#feedbutton').removeAttr('disabled');
 
-
+            
 //            FB.login(function(response) {
 //                if (response.status === 'connected') {
 //                    SwdPresenter.uid = response.authResponse.userID;
@@ -393,22 +393,10 @@ var SwdPresenter = {
                 else if (response.status === 'not_authorized') {
                     // User did not authorize app.
                     Logger.logEntry('User auth failure.');
-
-                    FB.login(function(response) {
-                        if (response.status === 'connected') {
-                            SwdPresenter.uid = response.authResponse.userID;
-                            SwdPresenter.startApp();
-                        }
-                        else if (response.status === 'not_authorized') {
-                            Logger.logEntry('User auth failure.');
-                        }
-                    }, {
-                        scope: 'user_groups,user_likes,publish_stream,read_stream'
-                    });
                 }
                 else {
                     Logger.logEntry('User was logged out. Attemping another login.');
-
+                    
                     FB.login(function(response) {
                         if (response.status === 'connected') {
                             SwdPresenter.uid = response.authResponse.userID;
@@ -429,7 +417,7 @@ var SwdPresenter = {
      */
     startApp: function() {
         Logger.logEntry(SwdPresenter.uid + ' has logged in.');
-
+        
         if (!SwdPresenter.groups) {
             // Retrieve group info for logged in user.
             SwdModel.getGroupInfo({
@@ -493,7 +481,7 @@ var SwdPresenter = {
 
                                     // Start with displaying the group selection panel.
                                     SwdView.toggleFloatingPanel('#select-group-panel', true);
-
+                                    
                                     Logger.logEntry('startApp() completed for ' + SwdPresenter.uid);
                                 }, 1000);
 
