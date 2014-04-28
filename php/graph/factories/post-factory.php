@@ -582,6 +582,10 @@ class PostFactory extends GraphObjectFactory {
             // Parse the response.
             for ($k = 0; $k < count($response); $k++) {
                 $body = json_decode($response[$k]['body'], true);
+                
+                if (!is_array($body[0])) {
+                    error_log("$body[0] is not an array. Content is: " . $body[0]);
+                }
 
                 $stream = array_merge($stream, $body[0]['fql_result_set']);
                 $users = array_merge($users, $body[1]['fql_result_set']);
