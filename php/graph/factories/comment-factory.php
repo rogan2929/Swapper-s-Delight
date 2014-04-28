@@ -105,7 +105,7 @@ class CommentFactory extends GraphObjectFactory {
      * @param string $message
      */
     public function updateComment($id, $message) {
-        $this->graphApiClient->api($id, "POST", array(
+        $this->graphApiClient->api('/' . $id, "POST", array(
             'message' => $message,
         ));
     }
