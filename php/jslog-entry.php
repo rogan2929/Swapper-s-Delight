@@ -8,6 +8,6 @@ if (!$log) {
     exit();
 }
 
-fwrite($log, $_SERVER['REQUEST_TIME'] . ': ' . $message . PHP_EOL);
+fwrite($log, date(DATE_RFC2822, $_SERVER['REQUEST_TIME']) . ': ' . $message . PHP_EOL);
 
 fclose($log);

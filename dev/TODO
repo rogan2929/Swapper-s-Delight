@@ -1,4 +1,3 @@
-*Privacy Policy.
 Include prompt to change app settings so that others using Swapper's Delight can see the current user's photos.
     https://www.facebook.com/settings?tab=applications&section=friends_share&view (Apps Others Use)
 Handle tag viewing and creation.
@@ -13,6 +12,7 @@ View group info panel.
     pic_cover
 Captions for shared photos.
 When calculating post-image-tile width, whether or not a scrollbar is visible needs to be taken into account.
+A 'board', where users can view their favorited posts.
 
 The 'Maybe' List:
 Add functionality to filter 'My Posts' by comment data.
