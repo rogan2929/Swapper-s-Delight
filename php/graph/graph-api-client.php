@@ -57,7 +57,7 @@ class GraphApiClient {
             $args[0]['appsecret_proof'] = $this->appSecretProof;
         } else {
             // Array was not passed as an argument.
-            if (is_array($args[1]) && empty($args[2])) {
+            if (isset($args[1]) && is_array($args[1]) && empty($args[2])) {
                 $args[2] = $args[1];
                 $args[1] = 'GET';
             }
