@@ -1,6 +1,6 @@
 <?php
 
-require 'base-factory.php';
+require 'graph-object-factory.php';
 require 'image-object-factory.php';
 require 'link-data-factory.php';
 require 'comment-factory.php';
@@ -13,17 +13,10 @@ if (!session_id()) {
 /**
  * A factory for retrieving posts from a group's stream.
  */
-class PostFactory extends BaseFactory {
+class PostFactory extends GraphObjectFactory {
 
     private $gid;
     private $stream;
-
-    // FQL Query Strings
-    const DETAILS_QUERY = 'SELECT post_id,message,actor_id,permalink,like_info,share_info,comment_info,tagged_ids,attachment,created_time,updated_time FROM stream ';
-    const STREAM_QUERY = 'SELECT post_id,actor_id,updated_time,message,attachment,comment_info,created_time,like_info FROM stream ';
-    const USER_QUERY = 'SELECT uid,last_name,first_name,pic_square,profile_url,pic FROM user ';
-    const COMMENT_QUERY = 'SELECT fromid,text,text_tags,attachment,time,id FROM comment ';
-    const IMAGE_QUERY = 'SELECT object_id,images FROM photo ';
 
     /**
      * Constructor
@@ -45,6 +38,24 @@ class PostFactory extends BaseFactory {
     public function newPost() {
         
     }
+    
+    /**
+     * Override of GraphObjectFactory::likeObject
+     * @param type $id
+     * @return bool
+     */
+    public function likeObject($id) {
+        return parent::likeObject($id);
+    }
+    
+    /**
+     * Override of GraphObjectFactory::unLikeObject
+     * @param type $id
+     * @return bool
+     */
+    public function unLikeObject($id) {
+        return parent::unLikeObject($id);
+    }
 
     /**
      * Like a post.
@@ -52,27 +63,27 @@ class PostFactory extends BaseFactory {
      * @param bool $userLikes
      * @return bool
      */
-    public function likePost($postId, $userLikes) {
-        if ($userLikes == true) {
-            // Like the post.
-            $this->graphApiClient->likeObject($postId);
-        } else {
-            // Unlike the post.
-            $this->graphApiClient->unLikeObject($postId);
-        }
-
-//        // Update the cached post stream.
-//        for ($i = 0; $i < count($this->stream); $i++) {
-//            if ($this->stream[$i]['post_id'] == $postId) {
-//                $this->stream[$i]['user_likes'] = (int) $userLikes;
-//            }
+//    public function likePost($postId, $userLikes) {
+//        if ($userLikes == true) {
+//            // Like the post.
+//            $this->likeObject($postId);
+//        } else {
+//            // Unlike the post.
+//            $this->unLikeObject($postId);
 //        }
 //
-//        // Save the updated stream.
-//        $_SESSION['stream'] = $this->stream;
-
-        return $userLikes;
-    }
+////        // Update the cached post stream.
+////        for ($i = 0; $i < count($this->stream); $i++) {
+////            if ($this->stream[$i]['post_id'] == $postId) {
+////                $this->stream[$i]['user_likes'] = (int) $userLikes;
+////            }
+////        }
+////
+////        // Save the updated stream.
+////        $_SESSION['stream'] = $this->stream;
+//
+//        return $userLikes;
+//    }
 
     /**
      * Set the currently loaded group's gid.
@@ -176,12 +187,12 @@ class PostFactory extends BaseFactory {
      */
     public function getPostDetails($postId) {
         $queries = array(
-            'detailsQuery' => PostFactory::DETAILS_QUERY . 'WHERE post_id="' . $postId . '"',
-            'imageQuery' => PostFactory::IMAGE_QUERY . 'WHERE object_id IN (SELECT attachment FROM #detailsQuery)',
-            'userQuery' => PostFactory::USER_QUERY . 'WHERE uid IN (SELECT actor_id FROM #detailsQuery)',
-            'commentsQuery' => PostFactory::COMMENT_QUERY . 'WHERE post_id IN (SELECT post_id FROM #detailsQuery) ORDER BY time ASC',
-            'commentUserQuery' => PostFactory::USER_QUERY . 'WHERE uid IN (SELECT fromid FROM #commentsQuery)',
-            'commentImageQuery' => PostFactory::IMAGE_QUERY . 'WHERE object_id IN (SELECT attachment FROM #commentsQuery)'
+            'detailsQuery' => GraphObjectFactory::DETAILS_QUERY . 'WHERE post_id="' . $postId . '"',
+            'imageQuery' => GraphObjectFactory::IMAGE_QUERY . 'WHERE object_id IN (SELECT attachment FROM #detailsQuery)',
+            'userQuery' => GraphObjectFactory::USER_QUERY . 'WHERE uid IN (SELECT actor_id FROM #detailsQuery)',
+            'commentsQuery' => GraphObjectFactory::COMMENT_QUERY . 'WHERE post_id IN (SELECT post_id FROM #detailsQuery) ORDER BY time ASC',
+            'commentUserQuery' => GraphObjectFactory::USER_QUERY . 'WHERE uid IN (SELECT fromid FROM #commentsQuery)',
+            'commentImageQuery' => GraphObjectFactory::IMAGE_QUERY . 'WHERE object_id IN (SELECT attachment FROM #commentsQuery)'
         );
 
         // Run the query.
@@ -426,9 +437,9 @@ class PostFactory extends BaseFactory {
             $queries[] = array(
                 'method' => 'POST',
                 'relative_url' => 'method/fql.multiquery?queries=' . json_encode(array(
-                    'streamQuery' => PostFactory::STREAM_QUERY . 'WHERE post_id="' . $page[$i]->getId() . '"',
-                    'imageQuery' => PostFactory::IMAGE_QUERY . 'WHERE object_id IN (SELECT attachment FROM #streamQuery)',
-                    'userQuery' => PostFactory::USER_QUERY . 'WHERE uid IN (SELECT actor_id FROM #streamQuery)'
+                    'streamQuery' => GraphObjectFactory::STREAM_QUERY . 'WHERE post_id="' . $page[$i]->getId() . '"',
+                    'imageQuery' => GraphObjectFactory::IMAGE_QUERY . 'WHERE object_id IN (SELECT attachment FROM #streamQuery)',
+                    'userQuery' => GraphObjectFactory::USER_QUERY . 'WHERE uid IN (SELECT actor_id FROM #streamQuery)'
                 ))
             );
         }
@@ -529,52 +540,6 @@ class PostFactory extends BaseFactory {
     }
 
     /**
-     * Post a comment.
-     * @param type $postId
-     * @param type $comment
-     * @return Comment
-     */
-    public function postComment($postId, $comment) {
-        // Post the comment and get the response
-        $id = $this->graphApiClient->api('/' . $postId . '/comments', 'POST', array('message' => $comment));
-
-        // Get the comment and associated user data...
-        $queries = array(
-            'commentQuery' => PostFactory::COMMENT_QUERY . 'WHERE id=' . $id['id'],
-            'commentUserQuery' => PostFactory::USER_QUERY . 'WHERE uid IN (SELECT fromid FROM #commentQuery)'
-        );
-
-        // Query Facebook's servers for the necessary data.
-        $response = $this->graphApiClient->api(array(
-            'method' => 'fql.multiquery',
-            'queries' => $queries
-        ));
-
-        // Construct a return object.
-        $newComment = $response[0]['fql_result_set'][0];
-        $newComment['user'] = $response[1]['fql_result_set'][0];
-
-        // Replace any line breaks with <br/>
-        if ($newComment['text']) {
-            $newComment['text'] = nl2br($newComment['text']);
-        }
-
-        // Create an entity object.
-        $comment = new Comment();
-        $comment->setId($newComment['id']);
-        $comment->setMessage($newComment['text']);
-        $comment->setCreatedTime($newComment['time']);
-
-        $comment->setActor((new UserFactory())->createUser($newComment['user']));
-
-        // For each comment, look for associated image attachment.
-        //$comment->setImageObjects($imgFactory->getImageObjectsFromFQLComment($newComment, false));
-        $comment->setImageObjects(array());
-
-        return $comment;
-    }
-
-    /**
      * Execute a batch request against the selected group's feed.
      * @param int $windowSize
      * @param int $windowStart
@@ -595,8 +560,8 @@ class PostFactory extends BaseFactory {
 
             for ($j = 0; $j < $batchSize; $j++) {
                 $query = array(
-                    'streamQuery' => PostFactory::STREAM_QUERY . 'WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000',
-                    'userQuery' => PostFactory::USER_QUERY . 'WHERE uid IN (SELECT actor_id FROM #streamQuery)'
+                    'streamQuery' => GraphObjectFactory::STREAM_QUERY . 'WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000',
+                    'userQuery' => GraphObjectFactory::USER_QUERY . 'WHERE uid IN (SELECT actor_id FROM #streamQuery)'
                 );
 
                 $windowStart -= $windowSize;

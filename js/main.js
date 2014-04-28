@@ -294,6 +294,15 @@ var SwdModel = {
                 callbacks.error.call(SwdModel, response);
             }
         });
+    },
+    /**
+     * Updates a comment with a new message.
+     * @param {type} id
+     * @param {type} message
+     * @param {type} callbacks
+     */
+    updateComment: function(id, message, callbacks) {
+        
     }
 };
 /**

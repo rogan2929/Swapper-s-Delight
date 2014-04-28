@@ -111,41 +111,6 @@ class GraphApiClient {
     }
 
     /**
-     * Update a comment.
-     * @param string $id
-     * @param string $message
-     */
-    public function updateComment($id, $message) {
-        $this->api($id, "POST", array(
-            'message' => $message,
-        ));
-    }
-
-    /**
-     * Delete a Facebook Object.
-     * @param type $id
-     */
-    public function deleteObject($id) {
-        $this->api('/' . $id, 'DELETE');
-    }
-
-    /**
-     * Like a Facebook object.
-     * @param string $id
-     */
-    public function likeObject($id) {
-        $this->api('/' . $id . '/likes', 'POST', array('user_likes' => true));
-    }
-
-    /**
-     * Unlike a Facebook object.
-     * @param type $id
-     */
-    public function unLikeObject($id) {
-        $this->api('/' . $id . '/likes', 'DELETE');
-    }
-
-    /**
      * Generates an appSecretProof that Facebook requires for API transactions.
      */
     private function generateAppSecretProof() {

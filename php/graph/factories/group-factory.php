@@ -1,11 +1,11 @@
 <?php
 
-require 'base-factory.php';
+require 'graph-object-factory.php';
 
 /**
  * A factory for retrieving, hiding, and showing Facebook groups.
  */
-class GroupFactory extends BaseFactory {
+class GroupFactory extends GraphObjectFactory {
 
     private $sqlConnectionInfo;
     private $sqlServer;

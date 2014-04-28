@@ -1,11 +1,11 @@
 <?php
 
-require 'base-factory.php';
+require 'graph-object-factory.php';
 
 /**
  * A factory for LinkData objects.
  */
-class LinkDataFactory extends BaseFactory {
+class LinkDataFactory extends GraphObjectFactory {
     
     /**
      * Parse an FQL stream result and construct a LinkData entity.

@@ -1,11 +1,11 @@
 <?php
 
-require 'base-factory.php';
+require 'graph-object-factory.php';
 
 /*
  * Factory for user objects.
  */
-class UserFactory extends BaseFactory {
+class UserFactory extends GraphObjectFactory {
     
     private $userStream;
     
