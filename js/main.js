@@ -395,7 +395,7 @@ var SwdPresenter = {
                     Logger.logEntry('User auth failure.');
 
                     // Redirect to app page.
-                    top.location.href = 'https://www.facebook.com/SwappersDelight';
+                    window.top.location.href = 'https://www.facebook.com/SwappersDelight';
                 }
                 else {
                     Logger.logEntry('User was logged out. Attemping another login.');
@@ -407,7 +407,7 @@ var SwdPresenter = {
                         }
                         else {
                             // Redirect to app page.
-                            top.location.href = 'https://www.facebook.com/SwappersDelight';
+                            window.top.location.href = 'https://www.facebook.com/SwappersDelight';
                         }
                     }, {
                         scope: 'user_groups,user_likes,publish_stream,read_stream'
