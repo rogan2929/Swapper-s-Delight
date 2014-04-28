@@ -390,7 +390,7 @@ var SwdPresenter = {
                     SwdPresenter.uid = response.authResponse.userID;
                     SwdPresenter.startApp();
                 }
-                else if (response.status === 'not authorized') {
+                else if (response.status === 'not_authorized') {
                     // User did not authorize app.
                     Logger.logEntry('User auth failure.');
                 }
@@ -402,7 +402,7 @@ var SwdPresenter = {
                             SwdPresenter.uid = response.authResponse.userID;
                             SwdPresenter.startApp();
                         }
-                        else if (response.status === 'not authorized') {
+                        else if (response.status === 'not_authorized') {
                             Logger.logEntry('User auth failure.');
                         }
                     }, {
