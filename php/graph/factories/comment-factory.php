@@ -18,8 +18,6 @@ class CommentFactory extends BaseFactory {
         $usrFactory = new UserFactory();
         $imgFactory = new ImageObjectFactory($imageStream);
         
-        error_log(json_encode($imageStream));
-        
         // Begin parsing comment data.
         
         for ($i = 0; $i < count($commentStream); $i++) {
