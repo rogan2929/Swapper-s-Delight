@@ -391,15 +391,12 @@ var SwdPresenter = {
                     SwdPresenter.startApp();
                 }
                 else {
-
                     if (response.status === 'not_authorized') {
-                        // User did not authorize app.
                         Logger.logEntry('User auth failure.');
                     }
                     else {
                         Logger.logEntry('User was logged out. Attemping another login.');
                     }
-
 
                     FB.login(function(response) {
                         if (response.status === 'connected') {
@@ -407,6 +404,10 @@ var SwdPresenter = {
                             SwdPresenter.startApp();
                         }
                         else {
+                            Logger.logEntry('User auth failure.');
+                            
+                            // Redirect to app page.
+                            window.top.location.href = 'https://www.facebook.com/SwappersDelight';
                         }
                     }, {
                         scope: 'user_groups,user_likes,publish_stream,read_stream'
