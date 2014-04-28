@@ -390,32 +390,23 @@ var SwdPresenter = {
                     SwdPresenter.uid = response.authResponse.userID;
                     SwdPresenter.startApp();
                 }
-                else if (response.status === 'not_authorized') {
-                    // User did not authorize app.
-                    Logger.logEntry('User auth failure.');
-
-                    FB.login(function(response) {
-                        if (response.status === 'connected') {
-                            SwdPresenter.uid = response.authResponse.userID;
-                            SwdPresenter.startApp();
-                        }
-                        else if (response.status === 'not_authorized') {
-                            Logger.logEntry('User auth failure.');
-                        }
-                    }, {
-                        scope: 'user_groups,user_likes,publish_stream,read_stream'
-                    });
-                }
                 else {
-                    Logger.logEntry('User was logged out. Attemping another login.');
+
+                    if (response.status === 'not_authorized') {
+                        // User did not authorize app.
+                        Logger.logEntry('User auth failure.');
+                    }
+                    else {
+                        Logger.logEntry('User was logged out. Attemping another login.');
+                    }
+
 
                     FB.login(function(response) {
                         if (response.status === 'connected') {
                             SwdPresenter.uid = response.authResponse.userID;
                             SwdPresenter.startApp();
                         }
-                        else if (response.status === 'not_authorized') {
-                            Logger.logEntry('User auth failure.');
+                        else {
                         }
                     }, {
                         scope: 'user_groups,user_likes,publish_stream,read_stream'
