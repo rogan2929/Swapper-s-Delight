@@ -496,6 +496,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
                                 SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
                                 SwdView.installHandler('onKeyDownCommentTextarea', SwdPresenter.onKeyDownCommentTextarea, '.post-comment-text', 'keydown');
+                                SwdView.installHandler('onKeyDownCommentUpdate', SwdPresenter.onKeyDownCommentUpdate, '.post-comment-text.comment-update', 'keydown');
                                 SwdView.installHandler('onKeyPress', SwdPresenter.onKeyPress, document, 'keypress');
                                 SwdView.installHandler('onKeyUpSearch', SwdPresenter.onKeyUpSearch, '#main-search', 'keyup');
                                 SwdView.installHandler('onMouseMove', SwdPresenter.onMouseMove, document, 'mousemove');
@@ -1110,6 +1111,19 @@ var SwdPresenter = {
 
         return true;
     },
+    onKeyDownCommentUpdate: function(e, args) {
+        var id, message;
+        
+        // Update the comment if enter was pressed.
+        if (e.which === 13 && !e.shiftKey) {
+            alert('TEST');
+            
+            e.preventDefault();
+            return false;
+        }
+        
+        return true;
+    },
     onKeyPress: function(e, args) {
         SwdPresenter.idleTime = 0;
     },
@@ -1202,12 +1216,13 @@ var SwdView = {
             //$(commentDiv).append('<div class="delete-button"></div><a href="#" class="comment-edit">Edit</a>');
             //$(commentDiv).append('<div class="delete-button"></div>');
             $(commentDiv).append('<div class="comment-control"><a href="#" class="edit">Edit</a><a href="#" class="delete">Delete</a></div>');
-            $(commentDiv).append('<div class="post-comment-wrapper"><textarea class="post-comment-text" placeholder="Type a comment and press [Enter] to post it."></textarea><div class="ajax-loading-div hidden"></div></div>')
+            $(commentDiv).append('<div class="post-comment-wrapper"><textarea class="post-comment-text comment-update"></textarea><div class="ajax-loading-div hidden"></div></div>')
 
 
-            // Hook up the click event handler.
+            // Hook up any event handlers.
             $(commentDiv).find('.delete').click(SwdView.handlers['onClickCommentDelete']);
             $(commentDiv).find('.edit').click(SwdView.handlers['onClickCommentEdit']);
+            $(commentDiv).find('.post-comment-text.comment-update').keydown(SwdView.handlers['onKeyDownCommentUpdate']);
         }
 
         $(commentDiv).attr('id', comment.id).hide().linkify().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
