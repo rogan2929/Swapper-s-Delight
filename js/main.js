@@ -852,8 +852,18 @@ var SwdPresenter = {
         SwdView.expandCommentImage(src);
     },
     onClickCommentEdit: function(e, args) {
-        var id = $(e.currentTarget).parents('.post-comment').attr('id');
+        var id, message;
         
+        // Grab the ID of the parent comment object.
+        id = $(e.currentTarget).parents('.post-comment').attr('id');
+        
+        // Grab the content of the existing comment.
+        message = $('#' + id + ' .activity-text').text();
+        
+        // Set textarea value to existing content.
+        $('#' + id + ' .post-comment-text').val(message);
+        
+        // Show the updating text area element.
         SwdView.toggleElement('#' + id + ' .post-comment-wrapper', true);
     },
     onClickCommentUpdateClose: function(e, args) {
@@ -1133,7 +1143,7 @@ var SwdPresenter = {
             SwdModel.updateComment(id, message, {
                 success: function(response) {
                     // Update the view now.
-                    SwdView.updateCommentText(id, message);
+                    SwdView.updateCommentText(id, response);
                     SwdView.toggleAjaxLoadingDiv('.post-comment-wrapper', false);
                     SwdView.toggleElement($(e.currentTarget).parent(), false);
                 },
