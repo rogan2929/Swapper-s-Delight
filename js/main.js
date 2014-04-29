@@ -305,7 +305,6 @@ var SwdModel = {
         $.ajax({
             type: 'POST',
             url: '/php/update-comment.php',
-            dataType: 'json',
             data: {
                 'id': id,
                 'message': message
