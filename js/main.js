@@ -1125,8 +1125,10 @@ var SwdPresenter = {
             // Update the comment.
             SwdModel.updateComment(id, message, {
                 success: function(response) {
+                    // Update the view now.
                     SwdView.updateCommentText(id, message);
                     SwdView.toggleAjaxLoadingDiv('.post-comment-wrapper', false);
+                    SwdView.toggleElement($(e.currentTarget).parent(), false);
                 },
                 error: SwdPresenter.handleError
             });
