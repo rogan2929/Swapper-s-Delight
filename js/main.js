@@ -495,7 +495,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .close-button', 'click');
                                 SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
                                 SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
-                                SwdView.installHandler('onKeyDownCommentTextarea', SwdPresenter.onKeyDownCommentTextarea, '.post-comment-text', 'keydown');
+                                SwdView.installHandler('onKeyDownNewCommentText', SwdPresenter.onKeyDownNewCommentText, '#new-comment-text', 'keydown');
                                 SwdView.installHandler('onKeyDownCommentUpdate', SwdPresenter.onKeyDownCommentUpdate, '.post-comment-text.comment-update', 'keydown');
                                 SwdView.installHandler('onKeyPress', SwdPresenter.onKeyPress, document, 'keypress');
                                 SwdView.installHandler('onKeyUpSearch', SwdPresenter.onKeyUpSearch, '#main-search', 'keyup');
@@ -1083,7 +1083,7 @@ var SwdPresenter = {
 
         SwdView.closeAllUiMenus();
     },
-    onKeyDownCommentTextarea: function(e, args) {
+    onKeyDownNewCommentText: function(e, args) {
         var id, comment;
 
         if (e.which === 13 && !e.shiftKey) {
@@ -1116,7 +1116,16 @@ var SwdPresenter = {
         
         // Update the comment if enter was pressed.
         if (e.which === 13 && !e.shiftKey) {
-            alert('TEST');
+            id = $(e.currentTarget).parents('.post-comment').attr('id');
+            message = $(e.currentTarget).val();
+            
+            alert(id);
+            
+            // Show the ajax loading div.
+            //SwdView.toggleAjaxLoadingDiv('.post-comment-wrapper', true);
+            
+            // Update the comment.
+            //SwdModel.updateComment(id)
             
             e.preventDefault();
             return false;
