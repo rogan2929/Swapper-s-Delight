@@ -94,6 +94,8 @@ textarea {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     height: 8em;
+    font-family: monospace;
+    font-size: 13px;
 }
 
 input[type=text] {
@@ -270,6 +272,15 @@ a:visited {
     background-repeat: no-repeat;
 }
 
+.divider {
+    margin-left: 5px;
+    margin-right: 5px;
+    height: 8px;
+    width: 8px;
+    display: inline-block;
+    background-image: url('/img/divider.png');
+}
+
 .close-button:hover {
     background-image: url('/img/panel-close-hover.png');
     cursor: pointer;
@@ -345,9 +356,9 @@ a:visited {
     text-align: right;
 }
 
-.comment-control :not(:last-child) {
+/*.comment-control :not(:last-child) {
     margin-right: 5px;
-}
+}*/
 
 .transparent {
     background: transparent;

@@ -1244,7 +1244,7 @@ var SwdView = {
 
         // If the current user is the owner of the comment, display the delete and edit buttons.
         if (comment.actor.uid === uid) {
-            $(commentDiv).append('<div class="comment-control"><a href="#" class="edit">Edit</a><a href="#" class="delete">Delete</a></div>');
+            $(commentDiv).append('<div class="comment-control"><a href="#" class="edit">Edit</a><span class="divider"></span><a href="#" class="delete">Delete</a></div>');
             $(commentDiv).append('<div class="post-comment-wrapper hidden"><div class="close-button"></div><textarea class="post-comment-text comment-update"></textarea><div class="ajax-loading-div hidden"></div></div>')
 
 
