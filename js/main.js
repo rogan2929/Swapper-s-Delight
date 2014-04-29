@@ -851,7 +851,10 @@ var SwdPresenter = {
         SwdView.expandCommentImage(src);
     },
     onClickCommentEdit: function(e, args) {
-        var id = $(e.currentTarget).parent().attr('id');
+        var id = $(e.currentTarget).parents('.post-comment').attr('id');
+        
+        SwdView.toggleElement('#' + id + ' .post-comment-wrapper', true);
+        
         alert(id);
     },
     onClickFloatingPanelCloseButton: function(e, args) {
@@ -1231,7 +1234,7 @@ var SwdView = {
             //$(commentDiv).append('<div class="delete-button"></div><a href="#" class="comment-edit">Edit</a>');
             //$(commentDiv).append('<div class="delete-button"></div>');
             $(commentDiv).append('<div class="comment-control"><a href="#" class="edit">Edit</a><a href="#" class="delete">Delete</a></div>');
-            $(commentDiv).append('<div class="post-comment-wrapper"><textarea class="post-comment-text comment-update"></textarea><div class="ajax-loading-div hidden"></div></div>')
+            $(commentDiv).append('<div class="post-comment-wrapper hidden"><textarea class="post-comment-text comment-update"></textarea><div class="ajax-loading-div hidden"></div></div>')
 
 
             // Hook up any event handlers.
