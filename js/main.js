@@ -1201,7 +1201,7 @@ var SwdView = {
         if (comment.actor.uid === uid) {
             //$(commentDiv).append('<div class="delete-button"></div><a href="#" class="comment-edit">Edit</a>');
             //$(commentDiv).append('<div class="delete-button"></div>');
-            $(commentDiv).append('<div class="comment-control"><a href="#" class="comment-edit">Edit</a><a href="#" class="delete">Delete</a></div>');
+            $(commentDiv).append('<div class="comment-control"><a href="#" class="edit">Edit</a><a href="#" class="delete">Delete</a></div>');
             $(commentDiv).append('<div class="post-comment-wrapper"><textarea class="post-comment-text" placeholder="Type a comment and press [Enter] to post it."></textarea><div class="ajax-loading-div hidden"></div></div>')
 
 
