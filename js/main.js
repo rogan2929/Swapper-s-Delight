@@ -1119,13 +1119,17 @@ var SwdPresenter = {
             id = $(e.currentTarget).parents('.post-comment').attr('id');
             message = $(e.currentTarget).val();
             
-            alert(id);
-            
             // Show the ajax loading div.
-            //SwdView.toggleAjaxLoadingDiv('.post-comment-wrapper', true);
+            SwdView.toggleAjaxLoadingDiv('.post-comment-wrapper', true);
             
             // Update the comment.
-            //SwdModel.updateComment(id)
+            SwdModel.updateComment(id, message, {
+                success: function(response) {
+                    SwdView.updateCommentText(id, message);
+                    SwdView.toggleAjaxLoadingDiv('.post-comment-wrapper', false);
+                },
+                error: SwdPresenter.handleError
+            });
             
             e.preventDefault();
             return false;
@@ -1983,6 +1987,14 @@ var SwdView = {
             $(overlay).hide();
             $(id).hide();
         }
+    },
+    /**
+     * Updates the given comment's text.
+     * @param {type} id
+     * @param {type} message
+     */
+    updateCommentText: function(id, message) {
+        $('#' + id + ' .activity-text').html(message);
     }
 };
 
