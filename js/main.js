@@ -1405,7 +1405,7 @@ var SwdView = {
             adDiv = $('#ad-tile-' + i);
 
             // If an ad-tile is hidden, then display it. Otherwise, leave it alone.
-            if ($(adDiv).is(':hidden') && (i * adSpread) < postBlockCount) {
+            if ($(adDiv).is(':hidden') && (i * adSpread) <= postBlockCount) {
                 $(adDiv).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
 
                 // Reload and the ad-tile.

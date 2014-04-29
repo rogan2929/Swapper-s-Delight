@@ -12,6 +12,7 @@ View group info panel.
 Captions for shared photos.
 When calculating post-image-tile width, whether or not a scrollbar is visible needs to be taken into account.
 A 'board', where users can view their favorited posts.
+Add notification that the user isn't a part of any groups.
 
 The 'Maybe' List:
 Add functionality to filter 'My Posts' by comment data.
