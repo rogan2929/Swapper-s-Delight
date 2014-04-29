@@ -93,7 +93,7 @@ error_reporting(E_ALL);
                                         <span class='linkdata-desc'></span>
                                     </div>
                                     <div class='post-comment-wrapper'>
-                                        <textarea class='post-comment-text' placeholder='Type a comment and press [Enter] to post it.'></textarea>
+                                        <textarea id='new-comment-text' class='post-comment-text' placeholder='Type a comment and press [Enter] to post it.'></textarea>
                                         <div class='ajax-loading-div hidden'></div>
                                     </div>
                                 </div>

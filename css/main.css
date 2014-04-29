@@ -345,6 +345,10 @@ a:visited {
     text-align: right;
 }
 
+.comment-control :not(:last-child) {
+    margin-right: 5px;
+}
+
 .transparent {
     background: transparent;
 }

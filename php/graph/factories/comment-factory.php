@@ -108,5 +108,7 @@ class CommentFactory extends GraphObjectFactory {
         $this->graphApiClient->api('/' . $id, "POST", array(
             'message' => $message,
         ));
+        
+        return nl2br($message);
     }
 }

@@ -302,7 +302,20 @@ var SwdModel = {
      * @param {type} callbacks
      */
     updateComment: function(id, message, callbacks) {
-        
+        $.ajax({
+            type: 'POST',
+            url: '/php/update-comment.php',
+            data: {
+                'id': id,
+                'message': message
+            },
+            success: function(response) {
+                callbacks.success.call(SwdModel, response);
+            },
+            error: function(response) {
+                callbacks.fail.call(SwdModel, response);
+            }
+        });        
     }
 };
 /**
@@ -457,6 +470,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickCommentDelete', SwdPresenter.onClickCommentDelete, '.post-comment .comment-control .delete', 'click');
                                 SwdView.installHandler('onClickCommentImage', SwdPresenter.onClickCommentImage, '.post-comment-image', 'click');
                                 SwdView.installHandler('onClickCommentEdit', SwdPresenter.onClickCommentEdit, '.comment-edit', 'click');
+                                SwdView.installHandler('onClickCommentUpdateClose', SwdPresenter.onClickCommentUpdateClose, '.post-comment-wrapper .delete-button', 'click');
                                 SwdView.installHandler('onClickFloatingPanelCloseButton', SwdPresenter.onClickFloatingPanelCloseButton, '.floating-panel-content > .close-button', 'click');
                                 SwdView.installHandler('onClickFloatingPanelContent', SwdPresenter.onClickFloatingPanelContent, '.floating-panel-content', 'click');
                                 SwdView.installHandler('onClickFloatingPanelModal', SwdPresenter.onClickFloatingPanelModal, '.floating-panel.modal', 'click');
@@ -481,7 +495,8 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .close-button', 'click');
                                 SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
                                 SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
-                                SwdView.installHandler('onKeyDownCommentTextarea', SwdPresenter.onKeyDownCommentTextarea, '.post-comment-text', 'keydown');
+                                SwdView.installHandler('onKeyDownNewCommentText', SwdPresenter.onKeyDownNewCommentText, '#new-comment-text', 'keydown');
+                                SwdView.installHandler('onKeyDownCommentUpdate', SwdPresenter.onKeyDownCommentUpdate, '.post-comment-text.comment-update', 'keydown');
                                 SwdView.installHandler('onKeyPress', SwdPresenter.onKeyPress, document, 'keypress');
                                 SwdView.installHandler('onKeyUpSearch', SwdPresenter.onKeyUpSearch, '#main-search', 'keyup');
                                 SwdView.installHandler('onMouseMove', SwdPresenter.onMouseMove, document, 'mousemove');
@@ -836,8 +851,24 @@ var SwdPresenter = {
         SwdView.expandCommentImage(src);
     },
     onClickCommentEdit: function(e, args) {
-        var id = $(e.currentTarget).parent().attr('id');
-        alert(id);
+        var id, message;
+        
+        // Grab the ID of the parent comment object.
+        id = $(e.currentTarget).parents('.post-comment').attr('id');
+        
+        // Grab the content of the existing comment.
+        message = $('#' + id + ' .activity-text').text();
+        
+        // Set textarea value to existing content.
+        $('#' + id + ' .post-comment-text').val(message);
+        
+        // Show the updating text area element.
+        SwdView.toggleElement('#' + id + ' .post-comment-wrapper', true);
+    },
+    onClickCommentUpdateClose: function(e, args) {
+        var id = $(e.currentTarget).parents('.post-comment').attr('id');
+        
+        SwdView.toggleElement('#' + id + ' .post-comment-wrapper', false);
     },
     onClickFloatingPanelCloseButton: function(e, args) {
         SwdView.toggleFloatingPanel('.floating-panel', false);
@@ -1068,7 +1099,7 @@ var SwdPresenter = {
 
         SwdView.closeAllUiMenus();
     },
-    onKeyDownCommentTextarea: function(e, args) {
+    onKeyDownNewCommentText: function(e, args) {
         var id, comment;
 
         if (e.which === 13 && !e.shiftKey) {
@@ -1094,6 +1125,34 @@ var SwdPresenter = {
             return false;
         }
 
+        return true;
+    },
+    onKeyDownCommentUpdate: function(e, args) {
+        var id, message;
+        
+        // Update the comment if enter was pressed.
+        if (e.which === 13 && !e.shiftKey) {
+            id = $(e.currentTarget).parents('.post-comment').attr('id');
+            message = $(e.currentTarget).val();
+            
+            // Show the ajax loading div.
+            SwdView.toggleAjaxLoadingDiv('#' + id + ' .post-comment-wrapper', true);
+            
+            // Update the comment.
+            SwdModel.updateComment(id, message, {
+                success: function(response) {
+                    // Update the view now.
+                    SwdView.updateCommentText(id, response);
+                    SwdView.toggleAjaxLoadingDiv('.post-comment-wrapper', false);
+                    SwdView.toggleElement($(e.currentTarget).parent(), false);
+                },
+                error: SwdPresenter.handleError
+            });
+            
+            e.preventDefault();
+            return false;
+        }
+        
         return true;
     },
     onKeyPress: function(e, args) {
@@ -1185,14 +1244,15 @@ var SwdView = {
 
         // If the current user is the owner of the comment, display the delete and edit buttons.
         if (comment.actor.uid === uid) {
-            //$(commentDiv).append('<div class="delete-button"></div><a href="#" class="comment-edit">Edit</a>');
-            //$(commentDiv).append('<div class="delete-button"></div>');
-            $(commentDiv).append('<div class="comment-control"><a href="#" class="delete">Delete</a></div>');
+            $(commentDiv).append('<div class="comment-control"><a href="#" class="edit">Edit</a><a href="#" class="delete">Delete</a></div>');
+            $(commentDiv).append('<div class="post-comment-wrapper hidden"><div class="close-button"></div><textarea class="post-comment-text comment-update"></textarea><div class="ajax-loading-div hidden"></div></div>')
 
 
-            // Hook up the click event handler.
+            // Hook up any event handlers.
             $(commentDiv).find('.delete').click(SwdView.handlers['onClickCommentDelete']);
-            //$(commentDiv).find('.edit').click(SwdView.handlers['onClickCommentEdit']);
+            $(commentDiv).find('.edit').click(SwdView.handlers['onClickCommentEdit']);
+            $(commentDiv).find('.post-comment-text.comment-update').keydown(SwdView.handlers['onKeyDownCommentUpdate']);
+            $(commentDiv).find('.close-button').click(SwdView.handlers['onClickCommentUpdateClose']);
         }
 
         $(commentDiv).attr('id', comment.id).hide().linkify().prependTo('#post-comment-list').fadeIn();      // .prependTo to place newest on top.
@@ -1944,6 +2004,14 @@ var SwdView = {
             $(overlay).hide();
             $(id).hide();
         }
+    },
+    /**
+     * Updates the given comment's text.
+     * @param {type} id
+     * @param {type} message
+     */
+    updateCommentText: function(id, message) {
+        $('#' + id + ' .activity-text').html(message);
     }
 };
 
