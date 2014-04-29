@@ -302,7 +302,21 @@ var SwdModel = {
      * @param {type} callbacks
      */
     updateComment: function(id, message, callbacks) {
-        
+        $.ajax({
+            type: 'POST',
+            url: '/php/update-comment.php',
+            dataType: 'json',
+            data: {
+                'id': id,
+                'message': message
+            },
+            success: function(response) {
+                callbacks.success.call(SwdModel, response);
+            },
+            error: function(response) {
+                callbacks.fail.call(SwdModel, response);
+            }
+        });        
     }
 };
 /**
