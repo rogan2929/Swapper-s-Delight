@@ -1120,7 +1120,7 @@ var SwdPresenter = {
             message = $(e.currentTarget).val();
             
             // Show the ajax loading div.
-            SwdView.toggleAjaxLoadingDiv('.post-comment-wrapper', true);
+            SwdView.toggleAjaxLoadingDiv('#' + id + ' .post-comment-wrapper', true);
             
             // Update the comment.
             SwdModel.updateComment(id, message, {
