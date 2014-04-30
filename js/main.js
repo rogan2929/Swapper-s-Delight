@@ -460,7 +460,7 @@ var SwdPresenter = {
                         SwdModel.getHiddenGroups({
                             success: function(response) {
                                 Logger.logEntry(SwdPresenter.uid + ' has retrieved hidden groups.');
-                                SwdView.addGroupsToSelectPanel(SwdPresenter.groups, response);
+                                //SwdView.addGroupsToSelectPanel(SwdPresenter.groups, response);
 
                                 // Install Event Handlers
                                 SwdView.installHandler('onClickButtonGroups', SwdPresenter.onClickButtonGroups, '#button-groups', 'click');
