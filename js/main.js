@@ -513,6 +513,13 @@ var SwdPresenter = {
                                     Logger.logEntry('startApp() completed for ' + SwdPresenter.uid);
                                 }, 1000);
 
+                                // Detect if an ad blocker is running. If it is, display a message.
+                                setTimeout(function() {
+                                    if ($('.ad-div').filter(':visible').length === 0) {
+                                        alert("It looks like you're using an ad-blocker of some kind. Please consider turning it off for this app, as ads are the only way I pay for hosting costs and am compensated for my work. Thank you!");
+                                    }
+                                }, 3000);
+
                                 // Start the idle timer.
                                 SwdPresenter.idleInterval = setInterval(SwdPresenter.timerIncrement, 60000);     // 1 minute
                             },
@@ -1273,7 +1280,7 @@ var SwdView = {
             $(this).removeClass('hover', 100);
         });
 
-        if (typeof(LSM_Slot) !== 'undefined') {
+        if (typeof (LSM_Slot) !== 'undefined') {
             SwdView.adTiles[0] = LSM_Slot({
                 adkey: '5a7',
                 ad_size: '300x250',
@@ -1345,7 +1352,7 @@ var SwdView = {
         var i;
 
         for (i = 0; i < SwdView.adTiles.length; i++) {
-            if (typeof(LSM_Slot) !== 'undefined') {
+            if (typeof (LSM_Slot) !== 'undefined') {
                 SwdView.adTiles[i].hide();
             }
         }
@@ -1413,7 +1420,7 @@ var SwdView = {
                 $(adDiv).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
 
                 // Reload and the ad-tile.
-                if (typeof(LSM_Slot) !== 'undefined') {
+                if (typeof (LSM_Slot) !== 'undefined') {
                     SwdView.adTiles[i - 1].reload();
                 }
             }
