@@ -219,7 +219,8 @@ a:visited {
 
 #select-group-no-groups {
     height: 1.1em;
-    width: 700px;
+    width: 750px;
+    text-align: center;
 }
 
 /*.post-comment-header .timestamp,#post-message-header .timestamp {
