@@ -315,7 +315,7 @@ var SwdModel = {
             error: function(response) {
                 callbacks.fail.call(SwdModel, response);
             }
-        });        
+        });
     }
 };
 /**
@@ -427,7 +427,7 @@ var SwdPresenter = {
                         }
                         else {
                             Logger.logEntry('User auth failure.');
-                            
+
                             // Redirect to app page.
                             window.top.location.href = 'https://www.facebook.com/SwappersDelight';
                         }
@@ -852,22 +852,22 @@ var SwdPresenter = {
     },
     onClickCommentEdit: function(e, args) {
         var id, message;
-        
+
         // Grab the ID of the parent comment object.
         id = $(e.currentTarget).parents('.post-comment').attr('id');
-        
+
         // Grab the content of the existing comment.
         message = $('#' + id + ' .activity-text').text();
-        
+
         // Set textarea value to existing content.
         $('#' + id + ' .post-comment-text').val(message);
-        
+
         // Show the updating text area element.
         SwdView.toggleElement('#' + id + ' .post-comment-wrapper', true);
     },
     onClickCommentUpdateClose: function(e, args) {
         var id = $(e.currentTarget).parents('.post-comment').attr('id');
-        
+
         SwdView.toggleElement('#' + id + ' .post-comment-wrapper', false);
     },
     onClickFloatingPanelCloseButton: function(e, args) {
@@ -1129,15 +1129,15 @@ var SwdPresenter = {
     },
     onKeyDownCommentUpdate: function(e, args) {
         var id, message;
-        
+
         // Update the comment if enter was pressed.
         if (e.which === 13 && !e.shiftKey) {
             id = $(e.currentTarget).parents('.post-comment').attr('id');
             message = $(e.currentTarget).val();
-            
+
             // Show the ajax loading div.
             SwdView.toggleAjaxLoadingDiv('#' + id + ' .post-comment-wrapper', true);
-            
+
             // Update the comment.
             SwdModel.updateComment(id, message, {
                 success: function(response) {
@@ -1148,11 +1148,11 @@ var SwdPresenter = {
                 },
                 error: SwdPresenter.handleError
             });
-            
+
             e.preventDefault();
             return false;
         }
-        
+
         return true;
     },
     onKeyPress: function(e, args) {
@@ -1273,42 +1273,44 @@ var SwdView = {
             $(this).removeClass('hover', 100);
         });
 
-        SwdView.adTiles[0] = LSM_Slot({
-            adkey: '5a7',
-            ad_size: '300x250',
-            slot: 'slot93684',
-            _render_div_id: 'ad-tile-1',
-            _preload: true,
-            _onload: function() {
-            }
-        });
-        SwdView.adTiles[1] = LSM_Slot({
-            adkey: 'e8f',
-            ad_size: '300x250',
-            slot: 'slot93683',
-            _render_div_id: 'ad-tile-2',
-            _preload: true,
-            _onload: function() {
-            }
-        });
-        SwdView.adTiles[2] = LSM_Slot({
-            adkey: '4df',
-            ad_size: '300x250',
-            slot: 'slot93685',
-            _render_div_id: 'ad-tile-3',
-            _preload: true,
-            _onload: function() {
-            }
-        });
-        SwdView.adTiles[3] = LSM_Slot({
-            adkey: '2e5',
-            ad_size: '300x250',
-            slot: 'slot93255',
-            _render_div_id: 'ad-tile-4',
-            _preload: true,
-            _onload: function() {
-            }
-        });
+        if (typeof(LSM_Slot) !== 'undefined') {
+            SwdView.adTiles[0] = LSM_Slot({
+                adkey: '5a7',
+                ad_size: '300x250',
+                slot: 'slot93684',
+                _render_div_id: 'ad-tile-1',
+                _preload: true,
+                _onload: function() {
+                }
+            });
+            SwdView.adTiles[1] = LSM_Slot({
+                adkey: 'e8f',
+                ad_size: '300x250',
+                slot: 'slot93683',
+                _render_div_id: 'ad-tile-2',
+                _preload: true,
+                _onload: function() {
+                }
+            });
+            SwdView.adTiles[2] = LSM_Slot({
+                adkey: '4df',
+                ad_size: '300x250',
+                slot: 'slot93685',
+                _render_div_id: 'ad-tile-3',
+                _preload: true,
+                _onload: function() {
+                }
+            });
+            SwdView.adTiles[3] = LSM_Slot({
+                adkey: '2e5',
+                ad_size: '300x250',
+                slot: 'slot93255',
+                _render_div_id: 'ad-tile-4',
+                _preload: true,
+                _onload: function() {
+                }
+            });
+        }
 
         $('.post-block.ad-div').hide();
     },
@@ -1343,7 +1345,9 @@ var SwdView = {
         var i;
 
         for (i = 0; i < SwdView.adTiles.length; i++) {
-            SwdView.adTiles[i].hide();
+            if (typeof(LSM_Slot) !== 'undefined') {
+                SwdView.adTiles[i].hide();
+            }
         }
 
         $('.post-block.ad-div').hide();
@@ -1409,7 +1413,9 @@ var SwdView = {
                 $(adDiv).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
 
                 // Reload and the ad-tile.
-                SwdView.adTiles[i - 1].reload();
+                if (typeof(LSM_Slot) !== 'undefined') {
+                    SwdView.adTiles[i - 1].reload();
+                }
             }
         }
     },
