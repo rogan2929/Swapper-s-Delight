@@ -381,11 +381,12 @@ var SwdPresenter = {
         });
 
         // Fetch the FB JS API
-        $.getScript('//connect.facebook.net/en_US/all.js', function() {
+        $.getScript('//connect.facebook.net/en_US/sdk.js', function() {
             FB.init({
                 appId: AppId,
                 cookie: true,
-                status: true
+                status: true,
+                version: 'v2.0'
             });
 
             $('#loginbutton,#feedbutton').removeAttr('disabled');
