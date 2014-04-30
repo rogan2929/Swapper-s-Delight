@@ -235,28 +235,28 @@ error_reporting(E_ALL);
             <div id='ad-tile-1' class='post-block ui-widget ad-div post-block-text'>
                 <div class='wrapper'>
                     <p class='content'>
-                        Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+                        Hi there! It looks like you're using an ad blocker of some kind. Please consider turning it off for this site. Ads are what makes this program viable. Thank you!
                     </p>
                 </div>
             </div>
             <div id='ad-tile-2' class='post-block ui-widget ad-div post-block-text'>
                 <div class='wrapper'>
                     <p class='content'>
-                        Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+                        Hi there! It looks like you're using an ad blocker of some kind. Please consider turning it off for this site. Ads are what makes this program viable. Thank you!
                     </p>
                 </div>
             </div>
             <div id='ad-tile-3' class='post-block ui-widget ad-div post-block-text'>
                 <div class='wrapper'>
                     <p class='content'>
-                        Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+                        Hi there! It looks like you're using an ad blocker of some kind. Please consider turning it off for this site. Ads are what makes this program viable. Thank you!
                     </p>
                 </div>
             </div>
             <div id='ad-tile-4' class='post-block ui-widget ad-div post-block-text'>
                 <div class='wrapper'>
                     <p class='content'>
-                        Hey, I saw that! You're using something to block my ads, aren't you? Come on, admit it. Please do yourself a favor (and me) by turning what you're using off for this site. Ads are what makes this program viable. Thank you!
+                        Hi there! It looks like you're using an ad blocker of some kind. Please consider turning it off for this site. Ads are what makes this program viable. Thank you!
                     </p>
                 </div>
             </div>
