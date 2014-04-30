@@ -1196,7 +1196,9 @@ var SwdView = {
     addGroupsToSelectPanel: function(groups, hiddenGroups) {
         var i, groupItem;
 
-        $('#select-group-no-groups').hide();
+        if (groups.length > 0) {
+            $('#select-group-no-groups').hide();
+        }
 
         for (i = 0; i < groups.length; i++) {
             groupItem = $('<div id="' + groups[i].gid + '" class="block group-selection-item selection-item select-group"><div class="close-button"></div><div class="selection-item-content"><span class="button-icon" style="background-image: url(' + groups[i].icon + ')"></span><div>' + groups[i].name + '</div></div></div>');
