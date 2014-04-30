@@ -515,8 +515,8 @@ var SwdPresenter = {
 
                                 // Detect if an ad blocker is running. If it is, display a message.
                                 setTimeout(function() {
-                                    if ($('.ad-div').filter(':visible').length === 0) {
-                                        alert("It looks like you're using an ad-blocker of some kind. Please consider turning it off for this app, as ads are the only way I pay for hosting costs and am compensated for my work. Thank you!");
+                                    if ($('.ad-div iframe').length === 0) {
+                                        //alert("It looks like you're using an ad-blocker of some kind. Please consider turning it off for this app, as ads are the only way I pay for hosting costs and am compensated for my work. Thank you!");
                                     }
                                 }, 3000);
 
