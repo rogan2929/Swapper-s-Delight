@@ -128,13 +128,14 @@ error_reporting(E_ALL);
                 <div id='select-group-panel' class='floating-panel hidden'>
                     <div class='floating-panel-content ui-widget scroll-y'>
                         <div class='close-button'></div>
-                        <span class='heading'>Choose a group to start.</span>
-                        <span class='hint'>Hint: You can also hide any groups that you don't want to see here. Don't worry; click <a id='restore-group-selection-items' href='#'>here</a> to bring them back.</span>
-                        <div id='select-group-list' class='selection-list'>
-                            <div id='select-group-no-groups' class='selection-item select-group'>
-                                You're not a member of any Facebook groups.
-                            </div>
+                        <div class='heading-group'>
+                            <span class='heading'>Choose a group to start.</span>
+                            <span class='hint'>Hint: You can also hide any groups that you don't want to see here. Don't worry; click <a id='restore-group-selection-items' href='#'>here</a> to bring them back.</span>
                         </div>
+                        <div id='select-group-no-groups' class='heading hints'>
+                            You're not a member of any Facebook groups. Use the Facebook search function to find some to join.
+                        </div>
+                        <div id='select-group-list' class='selection-list'></div>
                     </div>
                 </div>
 
@@ -232,64 +233,39 @@ error_reporting(E_ALL);
 
             <!--Ad Tiles that will be dynamically placed.-->
 
-            <div id='ad-tile-1' class='post-block ui-widget ad-div post-block-text'>
-                <div class='wrapper'>
-                    <p class='content'>
-                        Hi there! It looks like you're using an ad blocker of some kind. Please consider turning it off for this site. Ads are what makes this program viable. Thank you!
-                    </p>
-                </div>
-            </div>
-            <div id='ad-tile-2' class='post-block ui-widget ad-div post-block-text'>
-                <div class='wrapper'>
-                    <p class='content'>
-                        Hi there! It looks like you're using an ad blocker of some kind. Please consider turning it off for this site. Ads are what makes this program viable. Thank you!
-                    </p>
-                </div>
-            </div>
-            <div id='ad-tile-3' class='post-block ui-widget ad-div post-block-text'>
-                <div class='wrapper'>
-                    <p class='content'>
-                        Hi there! It looks like you're using an ad blocker of some kind. Please consider turning it off for this site. Ads are what makes this program viable. Thank you!
-                    </p>
-                </div>
-            </div>
-            <div id='ad-tile-4' class='post-block ui-widget ad-div post-block-text'>
-                <div class='wrapper'>
-                    <p class='content'>
-                        Hi there! It looks like you're using an ad blocker of some kind. Please consider turning it off for this site. Ads are what makes this program viable. Thank you!
-                    </p>
-                </div>
-            </div>
-        </div>
+            <div id='ad-tile-1' class='post-block ui-widget ad-div post-block-text'></div>
+            <div id='ad-tile-2' class='post-block ui-widget ad-div post-block-text'></div>
+            <div id='ad-tile-3' class='post-block ui-widget ad-div post-block-text'></div>
+            <div id='ad-tile-4' class='post-block ui-widget ad-div post-block-text'></div>
 
-        <div id='overlay-loading-posts' class='floating-overlay'>
-            <div class='ajax-loading-div semi-transparent'></div>
-        </div>
-        <div id='overlay' class='hidden'></div>
-        <div id='message-overlay' class='hidden'></div>
-        <div id='post-block-mask' class='post-block ui-widget hidden'></div>
-        <div id='selection-item-mask' class='button selection-item ui-widget hidden'></div>
+            <div id='overlay-loading-posts' class='floating-overlay'>
+                <div class='ajax-loading-div semi-transparent'></div>
+            </div>
+            <div id='overlay' class='hidden'></div>
+            <div id='message-overlay' class='hidden'></div>
+            <div id='post-block-mask' class='post-block ui-widget hidden'></div>
+            <div id='selection-item-mask' class='button selection-item ui-widget hidden'></div>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+            <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+            <script src="js/plugins.js"></script>
+            <script src="js/main.js"></script>
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            (function(b, o, i, l, e, r) {
-                b.GoogleAnalyticsObject = l;
-                b[l] || (b[l] = function() {
-                    (b[l].q = b[l].q || []).push(arguments)
-                });
-                b[l].l = +new Date;
-                e = o.createElement(i);
-                r = o.getElementsByTagName(i)[0];
-                e.src = '//www.google-analytics.com/analytics.js';
-                r.parentNode.insertBefore(e, r)
-            }(window, document, 'script', 'ga'));
-            ga('create', 'UA-XXXXX-X');
-            ga('send', 'pageview');
-        </script>
+            <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+            <script>
+                (function(b, o, i, l, e, r) {
+                    b.GoogleAnalyticsObject = l;
+                    b[l] || (b[l] = function() {
+                        (b[l].q = b[l].q || []).push(arguments)
+                    });
+                    b[l].l = +new Date;
+                    e = o.createElement(i);
+                    r = o.getElementsByTagName(i)[0];
+                    e.src = '//www.google-analytics.com/analytics.js';
+                    r.parentNode.insertBefore(e, r)
+                }(window, document, 'script', 'ga'));
+                ga('create', 'UA-XXXXX-X');
+                ga('send', 'pageview');
+            </script>
     </body>
 </html>

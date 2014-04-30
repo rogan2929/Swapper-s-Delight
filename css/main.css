@@ -208,6 +208,10 @@ a:visited {
     color: white;
 }
 
+#select-group-no-groups {
+    text-align: center;
+}
+
 /*.post-comment-header .timestamp,#post-message-header .timestamp {
     display: block;
     font-weight: normal;
