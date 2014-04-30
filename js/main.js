@@ -2055,4 +2055,11 @@ $(document).ready(function() {
     };
 
     SwdPresenter.init();
+    
+    // Detect if an ad blocker is running. If it is, display a message.
+    setTimeout(function() {
+        if ($('.ad-div').length === 0) {
+            SwdPresenter.message("Hi, it looks like you're using an ad blocker of some kind. Please consider turning it off for this site, as it's the only way I'm compensated for my work. Thank you!");
+        }
+    }, 2000);
 });
