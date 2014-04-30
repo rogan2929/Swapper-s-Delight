@@ -1273,7 +1273,7 @@ var SwdView = {
             $(this).removeClass('hover', 100);
         });
 
-        if (LSM_Slot) {
+        if (typeof(LSM_Slot) !== 'undefined') {
             SwdView.adTiles[0] = LSM_Slot({
                 adkey: '5a7',
                 ad_size: '300x250',
@@ -1345,7 +1345,7 @@ var SwdView = {
         var i;
 
         for (i = 0; i < SwdView.adTiles.length; i++) {
-            if (LSM_Slot) {
+            if (typeof(LSM_Slot) !== 'undefined') {
                 SwdView.adTiles[i].hide();
             }
         }
@@ -1413,7 +1413,7 @@ var SwdView = {
                 $(adDiv).insertAfter('#post-feed .post-block.unique:nth-child(' + i * adSpread + ')').show();
 
                 // Reload and the ad-tile.
-                if (LSM_Slot) {
+                if (typeof(LSM_Slot) !== 'undefined') {
                     SwdView.adTiles[i - 1].reload();
                 }
             }
