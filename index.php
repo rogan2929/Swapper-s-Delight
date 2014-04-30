@@ -34,7 +34,7 @@ error_reporting(E_ALL);
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 
         <!--LifesiteMedia Script-->
-        <script src="//ads.lfstmedia.com/getad?site=231280" type="text/javascript"></script>
+        <!--<script src="//ads.lfstmedia.com/getad?site=231280" type="text/javascript"></script>-->
     </head>
     <body>
         <!--[if lt IE 7]>
