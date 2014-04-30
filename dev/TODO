@@ -1,3 +1,13 @@
+Support v2.0 Graph API
+Submit App For Review https://developers.facebook.com/docs/apps/review
+----------------------------------
+https://developers.facebook.com/docs/apps/changelog
+Apps using Facebook Login that require more than public_profile (default), email and user_friends will 
+require review by Facebook in order to request these permissions from people.
+----------------------------------
+https://github.com/facebook/facebook-php-sdk-v4
+
+
 Include prompt to change app settings so that others using Swapper's Delight can see the current user's photos.
     https://www.facebook.com/settings?tab=applications&section=friends_share&view (Apps Others Use)
 Handle tag viewing and creation.
