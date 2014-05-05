@@ -184,20 +184,6 @@ a:visited {
     position: absolute;
 }
 
-#post-message-header {
-    position: relative;
-    height: 100%;
-    margin-left: 60px;
-}
-
-#post-message-header .wrapper {
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    height: 6.8em;
-    position: absolute;
-}
-
 .post-block .timestamp {
     display: block;
     color: #4d81bf;
@@ -236,12 +222,8 @@ a:visited {
 
 #main-search {
     height: 1.5em;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 6px;
-    padding-bottom: 6px;
+    padding: 6px 10px 6px 10px;
     width: 138px;
-    /*    margin-top: 10px;*/
     resize: none;
 }
 
@@ -389,9 +371,6 @@ a:visited {
     padding: 4px !important;
     position: relative;
     display: inline-block;
-/*    border-radius: 5px;
-    box-shadow: #ccc 1px 1px 4px;
-    background-color: #f1f1f1;*/
 }
 
 /*.button.selection-item.hover {
@@ -430,17 +409,6 @@ a:visited {
         border: none !important;*/
 }
 
-#post-feed-noposts {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    font-size: 3em;
-    color: #a7a7a7;
-    text-align: center;
-}
-
 .body.row {
     top: 60px;
     bottom: 0;
@@ -450,12 +418,6 @@ a:visited {
     border: 1px solid #ccc
 }
 
-#ad-space {
-    margin-top: 10px;
-    width: 160px;
-    height: 600px;
-}
-
 .ad-div {
     overflow: hidden;
 }
@@ -463,18 +425,6 @@ a:visited {
 .post-block.ad-div {
     background-color: #f6f6f6;
     color: #e35765;
-}
-
-#bottom-ad-banner {
-    width: 728px;
-    height: 90px;
-    display: block;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 70px;
-    margin-bottom: 10px;
 }
 
 .float-left {
@@ -540,13 +490,13 @@ a:visited {
 .button.toolbar-button {
     height: 42px;
     line-height: 42px;
-    border-radius: 0px;
+    border-radius: 0;
     font-size: 1.1em;
 /*    color: #f6f6f6;*/
 }
 
 .button.menu-button {
-    border-radius: 0px;
+    border-radius: 0;
     color: #f6f6f6;
     font-size: 1.1em;
 }
@@ -699,7 +649,7 @@ a:visited {
 }
 
 .post-block.load-more {
-    padding: 0px;
+    padding: 0;
     position: relative;
     background-color: #e35765;
     color: #f6f6f6;
@@ -1146,7 +1096,7 @@ div.right-toolbar-button {
     opacity: 0.7;
 }
 
-div.login-div {
+.login-div {
     position: absolute;
     left: 0;
     right: 0;
@@ -1289,9 +1239,7 @@ p {
  */
 
 .hidden {
-    /*    display: none !important;*/
     display: none;
-    /*    visibility: hidden;*/
 }
 
 /*

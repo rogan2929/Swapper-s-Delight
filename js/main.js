@@ -1770,9 +1770,6 @@ var SwdView = {
 
             SwdPresenter.refreshFbCanvasSize();
         }
-        else {
-//            $('#post-feed-noposts').show();
-        }
 
         // Display the official count.
         SwdView.setGroupButtonText(SwdPresenter.selectedGroup.name, SwdView.getPostBlockCount());
