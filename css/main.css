@@ -589,11 +589,11 @@ a:visited {
     padding-right: 20px;
 }
 
-.padded-button.emphasized {
+.button.emphasized {
     font-weight: bold;
 }
 
-.padded-button.emphasized.hover {
+.button.emphasized.hover {
     background-color: #e35765;
 }
 
