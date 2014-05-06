@@ -776,49 +776,51 @@ a.link-title {
     padding-bottom: 5px;
 }
 
-#popup-logged-out {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 1003;
-}
-
 .ui-effects-transfer {
     border: 2px dotted gray;
 }
 
-#post-image-container {
+.image-container {
+    
+}
+
+.no-scroll-y {
+    overflow-y: hidden;
+}
+
+.no-scroll-x {
+    overflow-x: hidden;
+}
+
+.absolute-fullsize {
     position: absolute;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
+}
+
+.no-padding {
     padding: 0;
+}
+
+.post-image-container {
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
-#post-image-container .post-image-tile.expanding {
+.post-image-container .post-image-tile.expanding {
     position: absolute;
 }
 
-#post-image-container .post-image-tile.expanded, #post-image-container .post-image-tile.single {
-    position: absolute;
+.post-image-container .post-image-tile.expanded, .post-image-container .post-image-tile.single {
     background-size: contain;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
     width: auto !important;
     height: auto !important;
     margin: 10px;
 }
 
-#post-image-container .post-image-tile {
+.post-image-container .post-image-tile {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;

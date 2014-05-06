@@ -1554,13 +1554,13 @@ var SwdView = {
      */
     toggleSelectedImage: function(image) {
         if (!$(image).hasClass('expanded') && $('#post-image-container').children('.post-image-tile').length > 1) {
-            $(image).addClass('expanded');
+            $(image).addClass('expanded absolute-fullsize');
 
             // Hide all the other images.
             $('#post-image-container .post-image-tile').not(image).hide();
         }
         else {
-            $(image).removeClass('expanded');
+            $(image).removeClass('expanded absolute-fullsize');
 
             // Show all the other images.
             $('#post-image-container .post-image-tile').not(image).show();
