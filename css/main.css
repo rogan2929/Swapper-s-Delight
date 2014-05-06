@@ -1069,22 +1069,23 @@ div.right-toolbar-button {
     min-height: 1500px;
 }
 
-#left-rail {
+.rail {
     width: 160px;
     position: absolute;
     top: 55px;
     overflow: hidden;
     box-shadow: #aaa 1px 1px 4px;
     padding: 10px;
-    margin-left: 10px;
     margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
-#left-rail > *:not(:last-child) {
+.rail > *:not(:last-child) {
     margin-bottom: 8px;
 }
 
-#left-rail .separator {
+.rail .separator {
     border-bottom: 1px solid #ccc;
 }
 
@@ -1116,24 +1117,6 @@ div.right-toolbar-button {
     top: 0;
     bottom: 0;
     background: white;
-}
-
-#popup-comment {
-    position: absolute;
-    display: none;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    margin: 0;
-    padding: 5px;
-}
-
-#popup-comment-text {
-    border: 1px solid #dddddd;
-    border-radius: 2px;
-    width: 300px;
-    height: 100px;
-    /*    margin-left: -2px;
-        margin-top: -2px;*/
 }
 
 .post-comment-wrapper > textarea {
