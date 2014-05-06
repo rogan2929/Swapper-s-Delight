@@ -834,8 +834,6 @@ a.link-title {
 
 .floating-panel-content .column.right {
     right: 25px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
     left: 392px;
     padding-right: 8px;
     overflow: hidden;
@@ -843,8 +841,6 @@ a.link-title {
 
 .floating-panel-content .column.left {
     left: 25px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
     width: 350px;
     padding-right: 8px;
 }
