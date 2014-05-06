@@ -1482,6 +1482,10 @@ var SwdView = {
         $('.toolbar, .floating-overlay, .menu').animate({
             top: Math.max(offset, 0)
         }, 100);
+        
+        $('.menu').animate({
+            top: Math.max(offset + 42, 42)
+        }, 100);
 
         $('.floating-panel').animate({
             top: Math.max(offset + 47, 47)
