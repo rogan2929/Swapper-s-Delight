@@ -381,30 +381,15 @@ var SwdPresenter = {
         });
 
         // Fetch the FB JS API
-        $.getScript('//connect.facebook.net/en_US/all.js', function() {
+        $.getScript('//connect.facebook.net/en_US/sdk.js', function() {
             FB.init({
                 appId: AppId,
                 cookie: true,
-                status: true
+                status: true,
+                version: 'v2.0'
             });
 
             $('#loginbutton,#feedbutton').removeAttr('disabled');
-
-
-//            FB.login(function(response) {
-//                if (response.status === 'connected') {
-//                    SwdPresenter.uid = response.authResponse.userID;
-//                    
-//                    Logger.logEntry(SwdPresenter.uid + ' has logged in.');
-//                    
-//                    SwdPresenter.startApp();
-//                }
-//                else if (response.status === 'not authorized') {
-//                    alert('In order to use this app, you must authorize it.');
-//                }
-//            }, {
-//                scope: 'user_groups,user_likes,publish_stream,read_stream'
-//            });
 
             // Try to get a session going if there isn't one already.
             FB.getLoginStatus(function(response) {
@@ -432,7 +417,7 @@ var SwdPresenter = {
                             window.top.location.href = 'https://www.facebook.com/SwappersDelight';
                         }
                     }, {
-                        scope: 'user_groups,publish_stream'
+                        scope: 'publish_stream'
                     });
                 }
             });
