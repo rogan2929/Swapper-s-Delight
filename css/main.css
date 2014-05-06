@@ -198,21 +198,6 @@ a:visited {
     text-align: center;
 }
 
-/*.post-comment-header .timestamp,#post-message-header .timestamp {
-    display: block;
-    font-weight: normal;
-    color: black;
-}*/
-
-/*.facebook-user-header .facebook-poststamp > * {
-    color: #f6f6f6;
-    display: block;
-}
-
-.facebook-user-header .facebook-user-name {
-    font-weight: bold;
-}*/
-
 .nav-button.selected-nav {
     color: #ffffff;
     text-decoration: none;
@@ -772,8 +757,7 @@ a.link-title {
 .floating-panel-section {
     margin-bottom: 10px;
     position: relative;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 0;
 }
 
 .ui-effects-transfer {
@@ -932,22 +916,12 @@ a.link-title {
 }
 
 .floating-panel-section :last-child {
-    padding-bottom: 0;
+    margin-bottom: 0;
 }
 
 .floating-panel-section :first-child {
-    padding-top: 0;
+    margin-top: 0;
 }
-
-/*#post-content {
-    margin-bottom: 0px;
-    padding-bottom: 0px;
-    padding-top: 0px;
-}*/
-
-/*.post-activity-section.original-content .activity-text {
-    font-size: 1.0em;
-}*/
 
 .post-activity-section .facebook-user-photo {
     height: 60px;
@@ -963,10 +937,6 @@ a.link-title {
 .post-activity-section.post-comment .facebook-user-photo {
     height: 37px;
     width: 37px;
-}
-
-#post-comments {
-    padding: 0;
 }
 
 .italic {
