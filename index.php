@@ -57,6 +57,9 @@ error_reporting(E_ALL);
                         <div id='button-nav-liked' class='button nav-button'>
                             <span>Posts Liked by Me</span>
                         </div>
+                        <div id='button-view-group' class='button nav-button'>
+                            <span>View in Facebook</span>
+                        </div>
                     </div>
                     <input type='text' id='main-search' class='search-box' placeholder='Search this group'>
                     <div class='separator'></div>
@@ -179,10 +182,10 @@ error_reporting(E_ALL);
                                             <span class='button-icon icon-new'></span>
                                             <span>New Post</span>
                                         </div>-->
-                    <div id='button-view-group' class='button toolbar-button'>
-                        <span class='button-icon icon-facebook'></span>
-                        <span>View in Facebook</span>
-                    </div>
+                    <!--                    <div id='button-view-group' class='button toolbar-button'>
+                                            <span class='button-icon icon-facebook'></span>
+                                            <span>View in Facebook</span>
+                                        </div>-->
                     <div id='button-refresh' class='button toolbar-button'>
                         <span class='button-icon icon-refresh'></span>
                         <span>Refresh</span>

@@ -504,39 +504,39 @@ a:visited {
     background-position: center center;
 }
 
-.toolbar-button .button-icon.icon-new {
+.button-icon.icon-new {
     background-image: url('/icons/paperplus32.png');
 }
 
-.toolbar-button .button-icon.icon-facebook {
+.button-icon.icon-facebook {
     background-image: url('/icons/users32.png');
 }
 
-.toolbar-button .button-icon.icon-refresh {
+.button-icon.icon-refresh {
     background-image: url('/icons/exchange32.png');
 }
 
-.toolbar-button .button-icon.icon-search {
+.button-icon.icon-search {
     background-image: url('/icons/search32w.png');
 }
 
-.toolbar-button .button-icon.icon-menu {
+.button-icon.icon-menu {
     background-image: url('/icons/gear32.png');
 }
 
-.toolbar-button .button-icon.icon-comment {
+.button-icon.icon-comment {
     background-image: url('/icons/comment32.png');
 }
 
-.toolbar-button .button-icon.icon-like {
+.button-icon.icon-like {
     background-image: url('/icons/heart32.png');
 }
 
-.toolbar-button .button-icon.icon-pm {
+.button-icon.icon-pm {
     background-image: url('/icons/mail32.png');
 }
 
-.toolbar-button .button-icon.icon-delete {
+.button-icon.icon-delete {
     background-image: url('/icons/recycle32.png');
 }
 
@@ -994,11 +994,12 @@ a.link-title {
 }
 
 .main-feed {
-    margin-left: 200px;
-    margin-top: 57px;
+/*    margin-left: 200px;*/
+    margin-top: 47px;
     position: relative;
     padding-bottom: 25px;
     min-height: 1500px;
+    padding: 10px;
 }
 
 .rail {
@@ -1011,6 +1012,7 @@ a.link-title {
     margin-top: 5px;
     margin-left: 10px;
     margin-right: 10px;
+    z-index: 800;
 }
 
 .rail > *:not(:last-child) {
