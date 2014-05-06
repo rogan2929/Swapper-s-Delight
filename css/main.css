@@ -843,7 +843,7 @@ a.link-title {
     border: 1px solid #ccc;
 }
 
-#post-image-container .post-image-tile.right {
+.post-image-container .post-image-tile.right {
     margin-right: 10px;
 }
 
