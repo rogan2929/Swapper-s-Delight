@@ -1479,11 +1479,7 @@ var SwdView = {
      * @param {type} offset
      */
     setFixedDivs: function(offset) {
-        $('#left-rail').animate({
-            top: Math.max(offset + 55, 0)
-        }, 100);
-
-        $('.toolbar, .floating-overlay').animate({
+        $('.toolbar, .floating-overlay, .menu').animate({
             top: Math.max(offset, 0)
         }, 100);
 
