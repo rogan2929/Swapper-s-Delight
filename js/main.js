@@ -1636,7 +1636,7 @@ var SwdView = {
 
         // For only 1 image, set background-size to contain, rather than cover.
         if (post.imageObjects.length === 1) {
-            $(imageTile).addClass('single');
+            $(imageTile).addClass('single absolute-fullsize');
         }
 
         // Connect to click event handler.
