@@ -125,7 +125,7 @@ error_reporting(E_ALL);
 
                 <!--Select Group panel-->
 
-                <div id='select-group-panel' class='floating-panel hidden'>
+                <div id='select-group-panel' class='floating-panel fullsize hidden'>
                     <div class='floating-panel-content ui-widget scroll-y'>
                         <div class='close-button'></div>
                         <div class='heading-group'>
