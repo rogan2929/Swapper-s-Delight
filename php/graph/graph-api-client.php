@@ -118,4 +118,12 @@ class GraphApiClient {
         $this->appSecretProof = hash_hmac('sha256', $this->facebook->getAccessToken(), self::APP_SECRET);
     }
 
+    /**
+     * 
+     * @param string $query
+     * @param string $type
+     */
+    public function search($query, $type) {
+        return $this->api('/search?q=' . $query . '?type=' . $type);
+    }
 }
