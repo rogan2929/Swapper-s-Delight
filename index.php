@@ -78,7 +78,7 @@ error_reporting(E_ALL);
                         <div id='details-left-column' class='column left'>
                             <div id='post-content' class='floating-panel-section'>
                                 <div class='post-activity-section block original-content'>
-                                    <div id='post-details-user-data'>
+                                    <div id='post-details-user-data' class='user-data-header'>
                                         <div class='facebook-user-photo'></div>
                                         <a class='facebook-user-name' target='_blank'></a>
                                         <div class='timestamp'></div>
@@ -104,8 +104,8 @@ error_reporting(E_ALL);
                             </div>
                         </div>
                         <div id='details-right-column' class='column block right'>
-                            <div id='post-image-container' class='post-image-container absolute-fullsize no-padding scroll-x'></div>
-                            <div id='post-no-image-desc' class='hidden'>
+                            <div id='post-image-container' class='post-image-container absolute-fullsize no-padding scroll-x no-scroll-y'></div>
+                            <div id='post-no-image-desc' class='post-image-container-empty hidden'>
                                 <span class='hint'>Hint: Sometimes posts have photos, but the owner of the post hasn't allowed apps like Swapper's Delight access to them. Click <a target='_blank' class='post-permalink wrappable-link'>here</a> to see the post directly in Facebook. You'll be able to see any hidden photos there.</span>
 <!--                                <span><a href='#' class='privacy-settings-about'>What's this all about?</a></span>-->
                             </div>

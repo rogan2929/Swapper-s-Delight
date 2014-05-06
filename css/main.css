@@ -780,10 +780,6 @@ a.link-title {
     border: 2px dotted gray;
 }
 
-.image-container {
-    
-}
-
 .no-scroll-y {
     overflow-y: hidden;
 }
@@ -792,7 +788,7 @@ a.link-title {
     overflow-x: hidden;
 }
 
-.absolute-fullsize {
+.absolute-fullsize, .floating-overlay {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -883,26 +879,14 @@ a.link-title {
     width: 350px;
 }
 
-#overlay-app-loading, .floating-overlay {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-}
-
-#overlay-app-loading {
-    background-color: white;
-}
-
-#post-no-image-desc {
+.post-image-container-empty {
     position: relative;
     width: 100%;
     height: 100%;
     box-sizing: border-box;
 }
 
-#post-no-image-desc .hint {
+.post-image-container-empty .hint {
     text-align: center;
     position: absolute;
     top: 0;
@@ -914,7 +898,7 @@ a.link-title {
     margin-right: 10px;
 }
 
-#post-details-user-data {
+.user-data-header {
     height: 60px;
 }
 
@@ -947,11 +931,11 @@ a.link-title {
     background-image: url('/img/nav-next.png');
 }
 
-#post-content {
+/*#post-content {
     margin-bottom: 0px;
     padding-bottom: 0px;
     padding-top: 0px;
-}
+}*/
 
 /*.post-activity-section.original-content .activity-text {
     font-size: 1.0em;
