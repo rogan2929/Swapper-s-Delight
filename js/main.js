@@ -1640,7 +1640,7 @@ var SwdView = {
         }
 
         // Connect to click event handler.
-        $('#post-image-container .post-image-tile').not('single').click(SwdView.handlers['onClickPostImageTile']);
+        $('#post-image-container .post-image-tile').not('.post-image-tile.single').click(SwdView.handlers['onClickPostImageTile']);
     },
     /***
      * Create and display a link type post block.
