@@ -985,6 +985,9 @@ a.link-title {
 
 .menu > *:not(.menu-item) {
     margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    text-align: center;
 }
 
 .floating-panel-menu {
