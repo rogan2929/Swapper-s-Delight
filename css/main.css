@@ -469,13 +469,13 @@ a:visited {
     color: #f6f6f6;
 }
 
-.nav-button {
+/*.nav-button {
     display: block;
     height: 40px;
     line-height: 40px;
     font-size: 0.95em;
     background-color: #ddd;
-}
+}*/
 
 .button.toolbar-button, .toolbar-item {
     height: 42px;
@@ -495,7 +495,7 @@ a:visited {
     font-size: 1.1em;
 }
 
-.button.toolbar-button.hover, .button.nav-button.hover {
+.button.toolbar-button.hover {
     color: #f6f6f6;
 }
 

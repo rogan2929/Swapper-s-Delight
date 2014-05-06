@@ -232,16 +232,16 @@ error_reporting(E_ALL);
                         </div>-->
 
             <div id='popup-menu-main' class='menu'>
-                <div id='button-nav-group' class='menu-item selected-nav'>
+                <div id='button-nav-group' class='menu-item nav-button selected-nav'>
                     <span>Newest Posts</span>
                 </div>
-                <div id='button-nav-myposts' class='menu-item'>
+                <div id='button-nav-myposts' class='menu-item nav-button'>
                     <span>Posts by Me</span>
                 </div>
-                <div id='button-nav-liked' class='menu-item'>
+                <div id='button-nav-liked' class='menu-item nav-button'>
                     <span>Posts Liked by Me</span>
                 </div>
-                <div id='button-view-group' class='menu-item'>
+                <div id='button-view-group' class='menu-item nav-button'>
                     <span>View in Facebook</span>
                 </div>
                 <input type='text' id='main-search' class='search-box' placeholder='Search this group'>
