@@ -931,6 +931,14 @@ a.link-title {
     background-image: url('/img/nav-next.png');
 }
 
+.floating-panel-section :last-child {
+    padding-bottom: 0;
+}
+
+.floating-panel-section :first-child {
+    padding-top: 0;
+}
+
 /*#post-content {
     margin-bottom: 0px;
     padding-bottom: 0px;
