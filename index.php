@@ -241,8 +241,8 @@ error_reporting(E_ALL);
             <div id='overlay-loading-posts' class='floating-overlay'>
                 <div class='ajax-loading-div semi-transparent'></div>
             </div>
-            <div id='overlay' class='hidden'></div>
-            <div id='message-overlay' class='hidden'></div>
+            <div id='overlay' class='overlay hidden'></div>
+            <div id='message-overlay' class='message overlay hidden'></div>
 
             <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
             <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>

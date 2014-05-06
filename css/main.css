@@ -772,7 +772,7 @@ a.link-title {
     overflow-x: hidden;
 }
 
-.absolute-fullsize, .floating-overlay {
+.absolute-fullsize, .floating-overlay, .overlay {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -875,11 +875,8 @@ a.link-title {
     position: absolute;
     top: 0;
     bottom: 0;
-    margin-top: auto;
-    margin-bottom: auto;
+    margin: auto 10px auto 10px;
     height: 6em;
-    margin-left: 10px;
-    margin-right: 10px;
 }
 
 .user-data-header {
@@ -926,7 +923,6 @@ a.link-title {
 .post-activity-section .facebook-user-photo {
     height: 60px;
     width: 60px;
-    display: inline-block;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -961,18 +957,13 @@ a.link-title {
     margin-top: 8px;
 }
 
-#overlay, #message-overlay {
+.overlay {
     background: #ddd;
-    position: absolute;
     opacity: 0.90;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
     z-index: 999;
 }
 
-#message-overlay {
+.message.overlay {
     z-index: 2000;
 }
 
