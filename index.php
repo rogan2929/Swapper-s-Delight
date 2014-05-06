@@ -46,27 +46,6 @@ error_reporting(E_ALL);
             <div id='fb-root'></div>
 
             <div id='main-panel' class='full-width'>
-                <div id='left-rail-mouseover' class='rail-mouseover'></div>
-                <div id='left-rail' class='block rail scroll-y'>
-                    <div id='left-rail-nav'>
-                        <div id='button-nav-group' class='button nav-button selected-nav'>
-                            <span>Newest Posts</span>
-                        </div>
-                        <div id='button-nav-myposts' class='button nav-button'>
-                            <span>Posts by Me</span>
-                        </div>
-                        <div id='button-nav-liked' class='button nav-button'>
-                            <span>Posts Liked by Me</span>
-                        </div>
-                    </div>
-                    <input type='text' id='main-search' class='search-box' placeholder='Search this group'>
-                    <div class='separator'></div>
-                    <div>
-                        <a href='https://www.facebook.com/SwappersDelight' target='_blank'>Our Facebook Page</a>
-                    </div>
-                    <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FSwappersDelight&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=1401018793479333" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
-                </div>
-
                 <div id='post-feed' class='main-feed scroll-y'></div>
 
                 <!--Post Details Panel-->
@@ -180,17 +159,17 @@ error_reporting(E_ALL);
                                             <span class='button-icon icon-new'></span>
                                             <span>New Post</span>
                                         </div>-->
-                    <div id='button-view-group' class='button toolbar-button'>
-                        <span class='button-icon icon-facebook'></span>
-                        <span>View in Facebook</span>
+                    <!--                    <div id='button-view-group' class='button toolbar-button'>
+                                            <span class='button-icon icon-facebook'></span>
+                                            <span>View in Facebook</span>
+                                        </div>-->
+                    <div id='button-menu-main' class='button toolbar-button menu-button icon-only no-min-width'>
+                        <span class='button-icon icon-menu'></span>
+                        <a href='#popup-menu-main'></a>
                     </div>
                     <div id='button-refresh' class='button toolbar-button'>
                         <span class='button-icon icon-refresh'></span>
                         <span>Refresh</span>
-                    </div>
-                    <div id='button-menu-main' class='button toolbar-button menu-button icon-only no-min-width'>
-                        <span class='button-icon icon-menu'></span>
-                        <a href='#popup-menu-main'></a>
                     </div>
                 </div>
                 <div class='toolbar-group float-right'>
@@ -226,10 +205,48 @@ error_reporting(E_ALL);
 
             <!--Menus and Popups-->
 
+            <!--            <div id='left-rail' class='block rail scroll-y'>
+                            <div id='left-rail-nav'>
+                                <div id='button-nav-group' class='button nav-button selected-nav'>
+                                    <span>Newest Posts</span>
+                                </div>
+                                <div id='button-nav-myposts' class='button nav-button'>
+                                    <span>Posts by Me</span>
+                                </div>
+                                <div id='button-nav-liked' class='button nav-button'>
+                                    <span>Posts Liked by Me</span>
+                                </div>
+                                <div id='button-view-group' class='button nav-button'>
+                                    <span>View in Facebook</span>
+                                </div>
+                            </div>
+                            <input type='text' id='main-search' class='search-box' placeholder='Search this group'>
+                            <div class='separator'></div>
+                            <div>
+                                <a href='https://www.facebook.com/SwappersDelight' target='_blank'>Our Facebook Page</a>
+                            </div>
+                            <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FSwappersDelight&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=1401018793479333" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
+                        </div>-->
+
             <div id='popup-menu-main' class='menu'>
-                <div id='menu-item-logout' class='menu-item'>
-                    <span>Logout</span>
+                <div id='button-nav-group' class='menu-item selected-nav'>
+                    <span>Newest Posts</span>
                 </div>
+                <div id='button-nav-myposts' class='menu-item nav-button'>
+                    <span>Posts by Me</span>
+                </div>
+                <div id='button-nav-liked' class='menu-item nav-button'>
+                    <span>Posts Liked by Me</span>
+                </div>
+                <div id='button-view-group' class='menu-item nav-button'>
+                    <span>View in Facebook</span>
+                </div>
+                <input type='text' id='main-search' class='search-box' placeholder='Search this group'>
+                <div class='separator'></div>
+                <div>
+                    <a href='https://www.facebook.com/SwappersDelight' target='_blank'>Our Facebook Page</a>
+                </div>
+                <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FSwappersDelight&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=1401018793479333" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
             </div>
 
             <!--Ad Tiles that will be dynamically placed.-->
