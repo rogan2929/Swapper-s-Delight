@@ -595,7 +595,7 @@ a:visited {
 
 .block {
     box-shadow: #ccc 1px 1px 4px;
-    border-radius: 2px;
+/*    border-radius: 2px;*/
     background-color: white;
 }
 
