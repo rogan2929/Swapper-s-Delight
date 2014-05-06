@@ -171,13 +171,13 @@ error_reporting(E_ALL);
                         <span class='button-icon icon-refresh'></span>
                         <span>Refresh</span>
                     </div>
+                    <div class='toolbar-item'>
+                        <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FSwappersDelight&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=21&amp;appId=1401018793479333" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px; line-height:normal; vertical-align:middle;" allowTransparency="true"></iframe>
+                    </div>
                 </div>
                 <div class='toolbar-group float-right'>
                     <div id='button-groups' class='button toolbar-button padded-button emphasized'>
                         <span>Select a Group</span>
-                    </div>
-                    <div class='toolbar-item'>
-                        <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FSwappersDelight&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=21&amp;appId=1401018793479333" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px; line-height:normal; vertical-align:middle;" allowTransparency="true"></iframe>
                     </div>
                 </div>
                 <div style='clear: both;'></div>
