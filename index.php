@@ -46,6 +46,7 @@ error_reporting(E_ALL);
             <div id='fb-root'></div>
 
             <div id='main-panel' class='full-width'>
+                <div id='left-rail-mouseover' class='rail-mouseover'></div>
                 <div id='left-rail' class='block rail scroll-y'>
                     <div id='left-rail-nav'>
                         <div id='button-nav-group' class='button nav-button selected-nav'>
@@ -56,9 +57,6 @@ error_reporting(E_ALL);
                         </div>
                         <div id='button-nav-liked' class='button nav-button'>
                             <span>Posts Liked by Me</span>
-                        </div>
-                        <div id='button-view-group' class='button nav-button'>
-                            <span>View in Facebook</span>
                         </div>
                     </div>
                     <input type='text' id='main-search' class='search-box' placeholder='Search this group'>
@@ -182,10 +180,10 @@ error_reporting(E_ALL);
                                             <span class='button-icon icon-new'></span>
                                             <span>New Post</span>
                                         </div>-->
-                    <!--                    <div id='button-view-group' class='button toolbar-button'>
-                                            <span class='button-icon icon-facebook'></span>
-                                            <span>View in Facebook</span>
-                                        </div>-->
+                    <div id='button-view-group' class='button toolbar-button'>
+                        <span class='button-icon icon-facebook'></span>
+                        <span>View in Facebook</span>
+                    </div>
                     <div id='button-refresh' class='button toolbar-button'>
                         <span class='button-icon icon-refresh'></span>
                         <span>Refresh</span>

@@ -1010,9 +1010,12 @@ a.link-title {
     box-shadow: #aaa 1px 1px 4px;
     padding: 10px;
     margin-top: 5px;
-    margin-left: 10px;
     margin-right: 10px;
     z-index: 800;
+}
+
+.rail-mouseover {
+    z-index: 799;
 }
 
 .rail > *:not(:last-child) {
