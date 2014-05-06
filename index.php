@@ -165,7 +165,7 @@ error_reporting(E_ALL);
                                         </div>-->
                     <div id='button-menu-main' class='button toolbar-button menu-button icon-only no-min-width emphasized'>
                         <span class='button-icon icon-menu'></span>
-                        <span>Main</span>
+                        <span>Menu</span>
                         <a href='#popup-menu-main'></a>
                     </div>
                     <div id='button-refresh' class='button toolbar-button'>
