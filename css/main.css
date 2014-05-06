@@ -981,7 +981,8 @@ a.link-title {
     margin: 0;
 }
 
-.menu > *:not(.menu-item) {
+.menu > *:not(.menu-item), 
+.menu > *:not(.search-box) {
     margin-top: 5px;
     margin-left: 5px;
     margin-right: 5px;
