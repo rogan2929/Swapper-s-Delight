@@ -485,6 +485,10 @@ a:visited {
     /*    color: #f6f6f6;*/
 }
 
+.toolbar-item {
+    display: inline-block;
+}
+
 .button.menu-button {
     border-radius: 0;
     color: #f6f6f6;
