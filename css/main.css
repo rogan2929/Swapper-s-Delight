@@ -994,6 +994,10 @@ a.link-title {
     text-align: center;
 }
 
+.menu > *:last-child {
+    margin-bottom: 5px;
+}
+
 .floating-panel-menu {
     z-index: 1002;
 }
