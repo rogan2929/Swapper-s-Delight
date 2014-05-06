@@ -241,7 +241,7 @@ error_reporting(E_ALL);
                 <div id='button-nav-liked' class='menu-item nav-button'>
                     <span>Posts Liked by Me</span>
                 </div>
-                <div id='button-view-group' class='menu-item nav-button'>
+                <div id='button-view-group' class='menu-item'>
                     <span>View in Facebook</span>
                 </div>
                 <input type='text' id='main-search' class='search-box' placeholder='Search this group'>
