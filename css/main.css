@@ -587,21 +587,24 @@ a:visited {
     background-image: url('/icons/recycle32w.png');
 }
 
-#button-menu-main {
-    min-width: 0 !important;
+.no-min-width {
+    min-width: 0;
 }
 
 .button.icon-only > .button-icon {
     margin-right: 0;
 }
 
-#button-groups {
+.padded-button {
     padding-left: 20px;
     padding-right: 20px;
+}
+
+.padded-button.emphasized {
     font-weight: bold;
 }
 
-#button-groups.hover {
+.padded-button.emphasized.hover {
     background-color: #e35765;
 }
 
