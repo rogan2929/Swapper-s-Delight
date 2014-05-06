@@ -209,6 +209,7 @@ a:visited {
     padding: 6px 10px 6px 10px;
     width: 138px;
     resize: none;
+    text-align: left;
 }
 
 .full-width {
