@@ -977,17 +977,9 @@ a.link-title {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.28);
 }
 
-div.right-toolbar-button {
+.right-toolbar-button {
     display: inline-block;
     margin-left: 5px;
-}
-
-.toolbar-group.float-left {
-    /*    margin-left: 10px;*/
-}
-
-.toolbar-group.float-right {
-    /*    margin-right: 10px;*/
 }
 
 .menu {
@@ -1008,7 +1000,7 @@ div.right-toolbar-button {
     min-width: 100px;
 }
 
-#post-feed {
+.main-feed {
     margin-left: 195px;
     margin-top: 52px;
     position: relative;
@@ -1135,15 +1127,15 @@ div.right-toolbar-button {
     display: table-cell;
 }
 
-#popup-error-message .message-icon {
+.dialog-box.error .message-icon {
     background-image: url('/img/error.png');
 }
 
-#popup-info-message .message-icon {
+.dialog-box.info .message-icon {
     background-image: url('/img/info.png');
 }
 
-#popup-confirm-message .message-icon {
+.dialog-box.confirm .message-icon {
     background-image: url('/img/confirm.png');
 }
 

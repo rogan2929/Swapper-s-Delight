@@ -66,7 +66,7 @@ error_reporting(E_ALL);
                     <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FSwappersDelight&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=1401018793479333" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
                 </div>
 
-                <div id='post-feed' class='scroll-y'></div>
+                <div id='post-feed' class='main-feed scroll-y'></div>
 
                 <!--Post Details Panel-->
 
@@ -142,7 +142,7 @@ error_reporting(E_ALL);
                 <!--Message Boxes-->
 
                 <div id='message-box-panel' class='floating-panel modal hidden'>
-                    <div id='popup-error-message' class='ui-widget floating-panel-content dialog-box hidden'>
+                    <div id='popup-error-message' class='error ui-widget floating-panel-content dialog-box hidden'>
                         <div class='message'>
                             <div class='message-icon'></div>
                             <span class='message-text'></span>
@@ -151,7 +151,7 @@ error_reporting(E_ALL);
                             <div class='button dialog-button button-ok'>OK</div>
                         </div>
                     </div>
-                    <div id='popup-info-message' class='ui-widget floating-panel-content dialog-box hidden'>
+                    <div id='popup-info-message' class='info ui-widget floating-panel-content dialog-box hidden'>
                         <div class='message'>
                             <div class='message-icon'></div>
                             <span class='message-text'></span>
@@ -160,7 +160,7 @@ error_reporting(E_ALL);
                             <div class='button dialog-button button-ok'>OK</div>
                         </div>
                     </div>
-                    <div id='popup-confirm-message' class='ui-widget floating-panel-content dialog-box hidden'>
+                    <div id='popup-confirm-message' class='confirm ui-widget floating-panel-content dialog-box hidden'>
                         <div class='message'>
                             <div class='message-icon'></div>
                             <span class='message-text'></span>
