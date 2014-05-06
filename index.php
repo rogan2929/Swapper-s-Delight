@@ -232,13 +232,13 @@ error_reporting(E_ALL);
                 <div id='button-nav-group' class='menu-item selected-nav'>
                     <span>Newest Posts</span>
                 </div>
-                <div id='button-nav-myposts' class='menu-item nav-button'>
+                <div id='button-nav-myposts' class='menu-item'>
                     <span>Posts by Me</span>
                 </div>
-                <div id='button-nav-liked' class='menu-item nav-button'>
+                <div id='button-nav-liked' class='menu-item'>
                     <span>Posts Liked by Me</span>
                 </div>
-                <div id='button-view-group' class='menu-item nav-button'>
+                <div id='button-view-group' class='menu-item'>
                     <span>View in Facebook</span>
                 </div>
                 <input type='text' id='main-search' class='search-box' placeholder='Search this group'>
@@ -246,7 +246,7 @@ error_reporting(E_ALL);
                 <div>
                     <a href='https://www.facebook.com/SwappersDelight' target='_blank'>Our Facebook Page</a>
                 </div>
-                <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FSwappersDelight&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=1401018793479333" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
+                <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FSwappersDelight&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=1401018793479333" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px; width:150px;" allowTransparency="true"></iframe>
             </div>
 
             <!--Ad Tiles that will be dynamically placed.-->
