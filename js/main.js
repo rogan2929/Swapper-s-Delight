@@ -668,6 +668,9 @@ var SwdPresenter = {
     loadPosts: function(refresh, viewChanged) {
         if (!SwdPresenter.currentlyLoading && SwdPresenter.selectedGroup !== null) {
             SwdPresenter.currentlyLoading = true;
+            
+            // Close all open menus...
+            SwdView.closeAllUiMenus();
 
             if (refresh || viewChanged) {
                 SwdPresenter.postIds = [];
