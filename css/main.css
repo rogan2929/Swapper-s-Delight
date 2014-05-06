@@ -983,6 +983,10 @@ a.link-title {
     margin: 0;
 }
 
+.menu > *:not(.menu-item) {
+    margin-top: 5px;
+}
+
 .floating-panel-menu {
     z-index: 1002;
 }
