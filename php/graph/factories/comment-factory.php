@@ -7,8 +7,9 @@ require 'image-object-factory.php';
 /*
  * Factory for Comment objects.
  */
+
 class CommentFactory extends GraphObjectFactory {
-    
+
     /**
      * Parse an FQL result and construct an array of Comment entities.
      * @param type $commentStream
@@ -17,20 +18,20 @@ class CommentFactory extends GraphObjectFactory {
         $comments = array();
         $usrFactory = new UserFactory();
         $imgFactory = new ImageObjectFactory($imageStream);
-        
+
         // Begin parsing comment data.
-        
+
         for ($i = 0; $i < count($commentStream); $i++) {
             $comment = new Comment();
-            
+
             $comment->setId($commentStream[$i]['id']);
-            
+
             if (!is_null($commentStream[$i]['text'])) {
                 $comment->setMessage(nl2br($commentStream[$i]['text']));
             }
-            
+
             $comment->setCreatedTime($commentStream[$i]['time']);
-            
+
             // For each comment, attach user data to it.
             for ($j = 0; $j < count($userStream); $j++) {
                 $user = $userStream[$j];
@@ -41,18 +42,17 @@ class CommentFactory extends GraphObjectFactory {
                     break;
                 }
             }
-            
+
             // For each comment, look for associated image attachment.
             $comment->setImageObjects($imgFactory->getImageObjectsFromFQLComment($commentStream[$i]));
-            
+
             // Add the comment to the array.
             $comments[] = $comment;
         }
-        
+
         return $comments;
     }
-    
-    
+
     /**
      * Post a comment.
      * @param type $postId
@@ -61,7 +61,10 @@ class CommentFactory extends GraphObjectFactory {
      */
     public function postComment($postId, $comment) {
         // Post the comment and get the response
-        $id = $this->graphApiClient->api('/' . $postId . '/comments', 'POST', array('message' => $comment));
+        //$id = $this->graphApiClient->api('/' . $postId . '/comments', 'POST', array('message' => $comment));
+        $id = $this->graphApiClient->executeRequest('POST', '/' . $postId . '/comments', array(
+            'message' => $comment
+        ));
 
         // Get the comment and associated user data...
         $queries = array(
@@ -98,17 +101,18 @@ class CommentFactory extends GraphObjectFactory {
 
         return $comment;
     }
-    
+
     /**
      * Update a comment.
      * @param string $id
      * @param string $message
      */
     public function updateComment($id, $message) {
-        $this->graphApiClient->api('/' . $id, "POST", array(
+        $this->graphApiClient->executeRequest('POST', '/' . $id, array(
             'message' => $message,
         ));
-        
+
         return nl2br($message);
     }
+
 }

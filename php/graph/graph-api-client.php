@@ -1,8 +1,14 @@
 <?php
 
-require_once 'facebook/facebook.php';
+//require_once 'facebook/facebook.php';
+//Facebook::$CURL_OPTS[CURLOPT_CAINFO] = getcwd() . '/fb_ca_chain_bundle.crt';
 
-Facebook::$CURL_OPTS[CURLOPT_CAINFO] = getcwd() . '/fb_ca_chain_bundle.crt';
+// Graph API v2.0 PHP
+use Facebook\FacebookSession;
+use Facebook\FacebookRequest;
+use Facebook\FacebookResponse;
+use Facebook\FacebookRequestException;
+use Facebook\FacebookJavaScriptLoginHelper;
 
 if (!session_id()) {
     session_start();
@@ -21,28 +27,47 @@ class GraphApiClient {
     const APP_ID = '652991661414427';
     const APP_SECRET = 'b8447ce73d2dcfccde6e30931cfb0a90';
 
-    private $facebook;
-    private $appSecretProof;
+    //private $facebook;
+    //private $appSecretProof;
+    private $session;
 
     function __construct() {
 
-        $this->facebook = new Facebook(array(
-            'appId' => self::APP_ID,
-            'secret' => self::APP_SECRET,
-            'cookie' => true
-        ));
+        // Try to set the default application.
+        FacebookSession::setDefaultApplication(self::APP_ID, self::APP_SECRET);
 
-        // Look up an existing access token, if need be.
-        if (is_null($this->facebook->getAccessToken())) {
-            $this->facebook->setAccessToken($_SESSION['accessToken']);
-        } else {
-            $_SESSION['accessToken'] = $this->facebook->getAccessToken();
+        $helper = new FacebookJavaScriptLoginHelper();
+
+        try {
+            $this->session = $helper->getSession();
+        } catch (FacebookRequestException $ex) {
+            // When Facebook returns an error
+        } catch (\Exception $ex) {
+            // When validation fails or other local issues
         }
+    }
+    
+    /**
+     * Create and execute a FacebookRequest object.
+     * @param string $method
+     * @param type $parameters
+     * @return object
+     */
+    public function executeRequest($method, $path, $parameters = null) {
+        try {
+            $response = (new FacebookRequest($this->session, $method, $path, $parameters));
+            return $response->execute()->getResponse();
+        } catch (FacebookRequestException  $ex) {
+            // Set a 400 response code and then exit with the FB exception message.
+            http_response_code(400);
 
-        $this->generateAppSecretProof();
+            error_log($ex->getCode() . ': ' . $ex->getMessage());
 
-        // Test the facebook object that was created successfully.
-        //$this->api('/me', 'GET');
+            die(json_encode(array(
+                'code' => $ex->getCode(),
+                'message' => $ex->getMessage()
+            )));
+        }
     }
 
     /**
@@ -84,38 +109,12 @@ class GraphApiClient {
     }
 
     /**
-     * Returns the current user's Facebook OAuth access token.
-     * @return string
-     */
-    public function getAccessToken() {
-        return $this->facebook->getAccessToken();
-    }
-
-    /**
-     * Sets the current user's Facebook OAuth access token.
-     * @param string $accessToken
-     */
-    public function setAccessToken($accessToken) {
-        $this->facebook->setAccessToken($accessToken);
-        $_SESSION['accessToken'] = $accessToken;
-
-        $this->generateAppSecretProof();
-    }
-
-    /**
      * Returns the UID of the currently logged in user.
      * @return string
      */
     public function getMe() {
-        return $this->api('/me')['id'];
-    }
-
-    /**
-     * Generates an appSecretProof that Facebook requires for API transactions.
-     */
-    private function generateAppSecretProof() {
-        // Set the AppSecretProof, which is required for FB api calls.
-        $this->appSecretProof = hash_hmac('sha256', $this->facebook->getAccessToken(), self::APP_SECRET);
+        //return $this->api('/me')['id'];
+        return $this->executeRequest('GET', '/me');
     }
 
     /**
@@ -124,6 +123,7 @@ class GraphApiClient {
      * @param string $type
      */
     public function search($query, $type) {
-        return $this->api('/search?q=' . $query . '?type=' . $type);
+        return $this->executeRequest('GET', '/search?q=' . $query . '?type=' . $type);
     }
+
 }
