@@ -494,6 +494,7 @@ var SwdPresenter = {
                                 SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
                                 SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .close-button', 'click');
                                 SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
+                                SwdView.installHandler('onClickMenuSearchBox', SwdPresenter.onClickMenuSearchBox, '.menu .search-box', 'click');
                                 SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
                                 SwdView.installHandler('onKeyDownNewCommentText', SwdPresenter.onKeyDownNewCommentText, '#new-comment-text', 'keydown');
                                 SwdView.installHandler('onKeyDownCommentUpdate', SwdPresenter.onKeyDownCommentUpdate, '.post-comment-text.comment-update', 'keydown');
@@ -1100,6 +1101,10 @@ var SwdPresenter = {
             },
             error: SwdPresenter.handleError
         });
+    },
+    onClickMenuSearchBox: function(e, args) {
+        // Stop DOM event bubble up.
+        e.stopPropagation();
     },
     onClickToolbar: function(e, args) {
         e.stopPropagation();
