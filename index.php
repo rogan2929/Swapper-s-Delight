@@ -163,7 +163,7 @@ error_reporting(E_ALL);
                                             <span class='button-icon icon-facebook'></span>
                                             <span>View in Facebook</span>
                                         </div>-->
-                    <div id='button-menu-main' class='button toolbar-button menu-button icon-only no-min-width'>
+                    <div id='button-menu-main' class='button toolbar-button menu-button icon-only no-min-width emphasized'>
                         <span class='button-icon icon-menu'></span>
                         <a href='#popup-menu-main'></a>
                     </div>
