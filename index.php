@@ -45,7 +45,7 @@ error_reporting(E_ALL);
         <div id='app-content'>
             <div id='fb-root'></div>
 
-            <div id='main-panel'>
+            <div id='main-panel' class='full-width'>
                 <div id='left-rail' class='block scroll-y'>
                     <div id='left-rail-nav'>
                         <div id='button-nav-group' class='button nav-button selected-nav'>
@@ -58,7 +58,7 @@ error_reporting(E_ALL);
                             <span>Posts Liked by Me</span>
                         </div>
                     </div>
-                    <input type='text' id='main-search' placeholder='Search this group'>
+                    <input type='text' id='main-search' class='search-box' placeholder='Search this group'>
                     <div class='separator'></div>
                     <div>
                         <a href='https://www.facebook.com/SwappersDelight' target='_blank'>Our Facebook Page</a>
@@ -125,14 +125,14 @@ error_reporting(E_ALL);
 
                 <!--Select Group panel-->
 
-                <div id='select-group-panel' class='floating-panel hidden'>
+                <div id='select-group-panel' class='floating-panel narrow hidden'>
                     <div class='floating-panel-content ui-widget scroll-y'>
                         <div class='close-button'></div>
                         <div class='heading-group'>
                             <span class='heading'>Choose a group to start.</span>
                             <span class='hint'>Hint: You can also hide any groups that you don't want to see here. Don't worry; click <a id='restore-group-selection-items' href='#'>here</a> to bring them back.</span>
                         </div>
-                        <div id='select-group-no-groups' class='heading hints'>
+                        <div id='select-group-no-groups' class='heading hints text-centered'>
                             You're not a member of any Facebook groups. Use the Facebook search function to find some to join.
                         </div>
                         <div id='select-group-list' class='selection-list'></div>
