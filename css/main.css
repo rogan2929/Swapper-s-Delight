@@ -665,7 +665,7 @@ a:visited {
     font-weight: bold;
 }
 
-#post-message-linkdata > *:not(:last-child) {
+.linkdata > *:not(:last-child) {
     margin-bottom: 1em;
     display: block;
 }
@@ -673,14 +673,6 @@ a:visited {
 .linkdata {
     border: 1px solid #ccc;
     padding: 5px;
-}
-
-#post-block-mask, #selection-item-mask {
-    background-color: #f6f6f6;
-    background-image: none;
-    opacity: 0.3;
-    position: absolute;
-    pointer-events: none;
 }
 
 .facebook-user-header {
