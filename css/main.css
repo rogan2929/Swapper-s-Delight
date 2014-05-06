@@ -991,6 +991,7 @@ a.link-title {
     height: 40px;
     line-height: 40px;
     min-width: 100px;
+    display: block;
 }
 
 .main-feed {
