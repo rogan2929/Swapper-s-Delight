@@ -36,8 +36,6 @@ class GraphApiClient {
         FacebookSession::setDefaultApplication(self::APP_ID, self::APP_SECRET);
 
         $signedRequest = $_COOKIE['fbsr_' . self::APP_ID];
-        
-        echo $accessToken;
 
         try {
             $this->session = FacebookSession::newSessionFromSignedRequest($signedRequest);
