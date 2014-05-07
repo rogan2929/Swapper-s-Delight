@@ -395,6 +395,7 @@ var SwdPresenter = {
             FB.getLoginStatus(function(response) {
                 if (response.status === 'connected') {
                     SwdPresenter.uid = response.authResponse.userID;
+                    $.cookie('accessToken', response.authResponse['accessToken']);
                     SwdPresenter.startApp();
                 }
                 else {
@@ -408,6 +409,7 @@ var SwdPresenter = {
                     FB.login(function(response) {
                         if (response.status === 'connected') {
                             SwdPresenter.uid = response.authResponse.userID;
+                            $.cookie('accessToken', response.authResponse['accessToken']);
                             SwdPresenter.startApp();
                         }
                         else {
