@@ -35,20 +35,16 @@ class GraphApiClient {
         // Try to set the default application.
         FacebookSession::setDefaultApplication(self::APP_ID, self::APP_SECRET);
 
-        //$helper = new FacebookJavaScriptLoginHelper();
-        //$helper = new FacebookCanvasLoginHelper();
-        
-        //error_log($_COOKIE['fbsr_' . self::APP_ID]);
         $accessToken = filter_input(INPUT_COOKIE, 'fbsr_' . self::APP_ID);
-        
-        
 
         try {
             //$this->session = $helper->getSession();
             $this->session = new FacebookSession($accessToken);
         } catch (FacebookRequestException $ex) {
+            error_log('FacebookRequestException');
             error_log($ex->getMessage());
         } catch (\Exception $ex) {
+            error_log('Exception');
             error_log($ex->getMessage());
         }
         
