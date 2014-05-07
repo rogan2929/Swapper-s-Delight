@@ -36,6 +36,8 @@ class GraphApiClient {
         FacebookSession::setDefaultApplication(self::APP_ID, self::APP_SECRET);
 
         $accessToken = filter_input(INPUT_COOKIE, 'fbsr_' . self::APP_ID);
+        
+        error_log($accessToken);
 
         try {
             $this->session = new FacebookSession($accessToken);
