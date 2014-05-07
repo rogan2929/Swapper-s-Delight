@@ -40,7 +40,7 @@ class GraphApiClient {
         FacebookSession::setDefaultApplication(static::APP_ID, static::APP_SECRET);
 
         //$helper = new FacebookJavaScriptLoginHelper();
-        $helper = new Facebook\FacebookCanvasLoginHelper();
+        $helper = new FacebookCanvasLoginHelper();
 
         try {
             $this->session = $helper->getSession();
@@ -51,7 +51,9 @@ class GraphApiClient {
         }
         
         // Generate appsecret_proof
-        $this->appSecretProof = hash_hmac('sha256', $this->session->getToken(), static::APP_SECRET);
+        if ($session) {
+            $this->appSecretProof = hash_hmac('sha256', $this->session->getToken(), static::APP_SECRET);
+        }
     }
     
     /**
