@@ -9,7 +9,6 @@ require $_SERVER['DOCUMENT_ROOT'] . '\vendor\autoload.php';
 // Facebook PHP 4.0 SDK
 use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
-use Facebook\FacebookResponse;
 use Facebook\FacebookRequestException;
 use Facebook\FacebookJavaScriptLoginHelper;
 use Facebook\FacebookCanvasLoginHelper;
@@ -52,8 +51,11 @@ class GraphApiClient {
         }
         
         // Generate appsecret_proof
-        if ($session) {
+        if ($this->session) {
             $this->appSecretProof = hash_hmac('sha256', $this->session->getToken(), static::APP_SECRET);
+        }
+        else {
+            error_log('$this->session is null!');
         }
     }
     
