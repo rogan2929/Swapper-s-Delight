@@ -35,9 +35,9 @@ class GraphApiClient {
         // Try to set the default application.
         FacebookSession::setDefaultApplication(self::APP_ID, self::APP_SECRET);
 
-        $accessToken = filter_input(INPUT_COOKIE, 'fbsr_' . self::APP_ID);
+        $accessToken = $_COOKIE['fbsr_' . self::APP_ID];
         
-        error_log($accessToken);
+        echo $accessToken;
 
         try {
             $this->session = new FacebookSession($accessToken);
@@ -50,7 +50,6 @@ class GraphApiClient {
         // Generate appsecret_proof
         if ($this->session) {
             $this->appSecretProof = hash_hmac('sha256', $this->session->getToken(), self::APP_SECRET);
-            error_log(var_dump($this->session->getSessionInfo()));
         }
         else {
             error_log('$this->session is null!');
