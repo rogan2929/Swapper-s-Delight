@@ -38,7 +38,7 @@ class PostFactory extends GraphObjectFactory {
     public function newPost() {
         
     }
-    
+
     /**
      * Override of GraphObjectFactory::likeObject
      * @param type $id
@@ -47,7 +47,7 @@ class PostFactory extends GraphObjectFactory {
     public function likeObject($id) {
         return parent::likeObject($id);
     }
-    
+
     /**
      * Override of GraphObjectFactory::unLikeObject
      * @param type $id
@@ -315,7 +315,7 @@ class PostFactory extends GraphObjectFactory {
             $stream = $this->getFeedData($windowSize, $windowStart, 14, 1);
             $windowStart = $windowStart - ($windowSize * 14 * 1);
             $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
-            
+
             $this->stream = $stream;
         } else {
             $windowStart = time();
@@ -330,49 +330,6 @@ class PostFactory extends GraphObjectFactory {
             $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
 
             $this->stream = $stream;
-            
-            /*
-//            $_SESSION['refreshing'] = true;
-            // Offload full query of the stream onto a simulated background thread by calling curl.
-            // Due to a lack of delegated functions in PHP, the received data has to be passed to the client
-            // and then sent back.
-//            $url = 'http://' . filter_input(INPUT_SERVER, 'HTTP_HOST') . '/php/execute-delegated.php';
-//            
-//            $args = array(
-//                'gid' => $this->gid,
-//                'accessToken' => $this->graphApiClient->getAccessToken()
-//            );
-//            
-//            $postFields = array(
-//                'class' => 'PostFactory',
-//                'method' => 'fetchStreamFullAsync',
-//                'args' => json_encode($args)
-//            );
-//            
-//            $ch = curl_init();
-//            curl_setopt($ch, CURLOPT_URL, $url);
-//            curl_setopt($ch, CURLOPT_POST, true);
-//            curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
-//            curl_setopt($ch,CURLOPT_RETURNTRANSFER, false);
-//            curl_setopt($ch, CURLOPT_HEADER, 0);
-//            
-//            $result = curl_exec($ch);
-//            
-//            if (!$result) {
-//                error_log(curl_errno($ch));
-//                error_log(curl_error($ch));
-//            }
-//            
-//            curl_close($ch);
-//            $this->stream = unserialize($result);
-//            $args = array(
-//                'gid' => $this->gid,
-//                'accessToken' => $this->graphApiClient->getAccessToken()
-//            );
-//            
-//            $this->stream = unserialize($this->fetchStreamFullAsync($args));
-            //$_SESSION['refreshing'] = false;
-            */
         }
 
         $_SESSION['stream'] = $this->stream;
@@ -386,7 +343,12 @@ class PostFactory extends GraphObjectFactory {
         $endTime = time() - 3600;
 
         // Make the call and count the number of responses.
-        $count = count($this->graphApiClient->executeRequest('GET', '/' . $this->gid . '/feed?fields=id&since=' . $endTime . '&until=' . $startTime . ' LIMIT 100'));
+        //$count = count($this->graphApiClient->executeRequest('GET', '/' . $this->gid . '/feed?fields=id&since=' . $endTime . '&until=' . $startTime . ' LIMIT 100'));
+        $count = count($this->graphApiClient->executeRequest('GET', '/' . $this->gid . '/feed?fields=id', array(
+                    'since' => $endTime,
+                    'until' => $startTime,
+                    'limit' => 100
+        )));
 
         // These values were reached through trial and error.
         switch ($count) {
@@ -553,62 +515,79 @@ class PostFactory extends GraphObjectFactory {
         $stream = array();
         $users = array();
         $posts = array();
+        $stream = array();
 
         // Pull the feed for stream data.
         for ($i = 0; $i < $iterations; $i++) {
-            $queries = array();
 
             for ($j = 0; $j < $batchSize; $j++) {
-                $query = array(
-                    'streamQuery' => GraphObjectFactory::STREAM_QUERY . 'WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000',
-                    'userQuery' => GraphObjectFactory::USER_QUERY . 'WHERE uid IN (SELECT actor_id FROM #streamQuery)'
-                );
-
-                $windowStart -= $windowSize;
-                $windowEnd -= $windowSize;
-
-                $queries[] = array(
-                    'method' => 'POST',
-                    'relative_url' => 'method/fql.multiquery?queries=' . json_encode($query)
-                );
-            }
-
-            // Execute a batch query.
-            $response = $this->graphApiClient->api('/', 'POST', array(
-                'batch' => json_encode($queries),
-                'include_headers' => false
-            ));
-
-            // Parse the response.
-            for ($k = 0; $k < count($response); $k++) {
-                $body = json_decode($response[$k]['body'], true);
+                $response = $this->graphApiClient->executeRequest('GET', '/' . $this->gid . '/feed', array(
+                    'limit' => 5000,
+                    'since' => $windowEnd,
+                    'until' => $windowStart
+                ));
                 
-                if (!is_array($body[0])) {
-                    error_log("$body[0] is not an array. Response from server was: " . var_dump($response));
-                }
-
-                $stream = array_merge($stream, $body[0]['fql_result_set']);
-                $users = array_merge($users, $body[1]['fql_result_set']);
+                $stream = array_merge($stream, $response);
             }
         }
+        
+        echo json_encode($stream);
 
-        // Create the user factory.
-        $usrFactory = new UserFactory($users);
 
-        // Clean up the response a little bit for our own purposes.
-        for ($i = 0; $i < count($stream); $i++) {
-            // Create a new post object and add it to the posts array.
-            $post = new Post();
-
-            // post_id,message,actor_id,like_info,comment_info FROM stream
-            $post->setId($stream[$i]['post_id']);
-            $post->setMessage($stream[$i]['message']);
-            $post->setCommentCount($stream[$i]['comment_info']['comment_count']);
-            $post->setUserLikes((int) $stream[$i]['like_info']['user_likes']);
-            $post->setActor($usrFactory->getUserFromFQLResultSet($stream[$i]));
-
-            $posts[] = $post;
+//            //$queries = array();
+//            $requests = array();
+//
+//            for ($j = 0; $j < $batchSize; $j++) {
+//                $request = array(
+//                    
+//                );
+////                $query = array(
+////                    'streamQuery' => GraphObjectFactory::STREAM_QUERY . 'WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000',
+////                    'userQuery' => GraphObjectFactory::USER_QUERY . 'WHERE uid IN (SELECT actor_id FROM #streamQuery)'
+////                );
+////
+////                $windowStart -= $windowSize;
+////                $windowEnd -= $windowSize;
+////
+////                $queries[] = array(
+////                    'method' => 'POST',
+////                    'relative_url' => 'method/fql.multiquery?queries=' . json_encode($query)
+////                );
+//            }
+//            // Execute a batch query.
+//            $response = $this->graphApiClient->api('/', 'POST', array(
+//                'batch' => json_encode($queries),
+//                'include_headers' => false
+//            ));
+        // Parse the response.
+        for ($k = 0; $k < count($response); $k++) {
+//                $body = json_decode($response[$k]['body'], true);
+//                
+//                if (!is_array($body[0])) {
+//                    error_log("$body[0] is not an array. Response from server was: " . var_dump($response));
+//                }
+//
+//                $stream = array_merge($stream, $body[0]['fql_result_set']);
+//                $users = array_merge($users, $body[1]['fql_result_set']);
         }
+//        }
+        // Create the user factory.
+//        $usrFactory = new UserFactory($users);
+//
+//        // Clean up the response a little bit for our own purposes.
+//        for ($i = 0; $i < count($stream); $i++) {
+//            // Create a new post object and add it to the posts array.
+//            $post = new Post();
+//
+//            // post_id,message,actor_id,like_info,comment_info FROM stream
+//            $post->setId($stream[$i]['post_id']);
+//            $post->setMessage($stream[$i]['message']);
+//            $post->setCommentCount($stream[$i]['comment_info']['comment_count']);
+//            $post->setUserLikes((int) $stream[$i]['like_info']['user_likes']);
+//            $post->setActor($usrFactory->getUserFromFQLResultSet($stream[$i]));
+//
+//            $posts[] = $post;
+//        }
 
         return $posts;
     }
