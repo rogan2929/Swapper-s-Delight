@@ -30,7 +30,7 @@ class GraphObjectFactory {
      * @param type $id
      */
     public function deleteObject($id) {
-        return $this->graphApiClient->api('/' . $id, 'DELETE');
+        return $this->graphApiClient->executeRequest('DELETE', '/' . $id);
     }
 
     /**
@@ -38,7 +38,7 @@ class GraphObjectFactory {
      * @param string $id
      */
     public function likeObject($id) {
-        return $this->graphApiClient->api('/' . $id . '/likes', 'POST', array('user_likes' => true));
+        return $this->graphApiClient->executeRequest('POST', '/' . $id . '/likes', array('user_likes' => true));
     }
 
     /**
@@ -46,7 +46,7 @@ class GraphObjectFactory {
      * @param type $id
      */
     public function unLikeObject($id) {
-        return $this->graphApiClient->api('/' . $id . '/likes', 'DELETE');
+        return $this->graphApiClient->executeRequest('DELETE', '/' . $id . '/likes');
     }
 
 }

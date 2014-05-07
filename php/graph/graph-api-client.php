@@ -3,7 +3,7 @@
 //require_once 'facebook/facebook.php';
 //Facebook::$CURL_OPTS[CURLOPT_CAINFO] = getcwd() . '/fb_ca_chain_bundle.crt';
 
-// Graph API v2.0 PHP
+// Facebook PHP 4.0 SDK
 use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
 use Facebook\FacebookResponse;

@@ -386,7 +386,7 @@ class PostFactory extends GraphObjectFactory {
         $endTime = time() - 3600;
 
         // Make the call and count the number of responses.
-        $count = count($this->graphApiClient->api('/' . $this->gid . '/feed?fields=id&since=' . $endTime . '&until=' . $startTime . ' LIMIT 100'));
+        $count = count($this->graphApiClient->executeRequest('GET', '/' . $this->gid . '/feed?fields=id&since=' . $endTime . '&until=' . $startTime . ' LIMIT 100'));
 
         // These values were reached through trial and error.
         switch ($count) {
