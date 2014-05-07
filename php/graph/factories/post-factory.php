@@ -515,90 +515,51 @@ class PostFactory extends GraphObjectFactory {
         $stream = array();
         $users = array();
         $posts = array();
-        $stream = array();
-        $requests = array();
 
         // Pull the feed for stream data.
         for ($i = 0; $i < $iterations; $i++) {
+            $requests = array();
+            
             // Create the batch query.
             for ($j = 0; $j < $batchSize; $j++) {
                 $requests[] = array(
                     'method' => 'GET',
-                    'relative_url' => '/' . $this->gid . '/feed?fields=id,from,message,updated_time,created_time&since=' . $windowEnd . '&until=' . $windowStart . '&limit=5000'
+                    'relative_url' => '/' . $this->gid . '/feed?fields=id,from,message&since=' . $windowEnd . '&until=' . $windowStart . '&limit=5000'
                 );
             }
-            
+
             // Execute the batch query.
             $response = $this->graphApiClient->executeRequest('POST', '/', array(
                 'batch' => json_encode($requests),
                 'include_headers' => false
             ));
 
+            // Gather up post data.
             for ($k = 0; $k < count($response); $k++) {
                 $body = json_decode($response[$k]->body);
                 $stream = array_merge($stream, $body->data);
             }
         }
         
-        echo var_dump($stream);
-        
-        //echo json_encode($stream);
-
-
-//            //$queries = array();
-//            $requests = array();
-//
-//            for ($j = 0; $j < $batchSize; $j++) {
-//                $request = array(
-//                    
-//                );
-////                $query = array(
-////                    'streamQuery' => GraphObjectFactory::STREAM_QUERY . 'WHERE source_id=' . $this->gid . ' AND updated_time <= ' . $windowStart . ' AND updated_time >= ' . $windowEnd . ' LIMIT 5000',
-////                    'userQuery' => GraphObjectFactory::USER_QUERY . 'WHERE uid IN (SELECT actor_id FROM #streamQuery)'
-////                );
-////
-////                $windowStart -= $windowSize;
-////                $windowEnd -= $windowSize;
-////
-////                $queries[] = array(
-////                    'method' => 'POST',
-////                    'relative_url' => 'method/fql.multiquery?queries=' . json_encode($query)
-////                );
-//            }
-//            // Execute a batch query.
-//            $response = $this->graphApiClient->api('/', 'POST', array(
-//                'batch' => json_encode($queries),
-//                'include_headers' => false
-//            ));
-        // Parse the response.
- //       for ($k = 0; $k < count($response); $k++) {
-//                $body = json_decode($response[$k]['body'], true);
-//                
-//                if (!is_array($body[0])) {
-//                    error_log("$body[0] is not an array. Response from server was: " . var_dump($response));
-//                }
-//
-//                $stream = array_merge($stream, $body[0]['fql_result_set']);
-//                $users = array_merge($users, $body[1]['fql_result_set']);
- //       }
-//        }
-        // Create the user factory.
-//        $usrFactory = new UserFactory($users);
-//
-//        // Clean up the response a little bit for our own purposes.
-//        for ($i = 0; $i < count($stream); $i++) {
-//            // Create a new post object and add it to the posts array.
-//            $post = new Post();
-//
-//            // post_id,message,actor_id,like_info,comment_info FROM stream
-//            $post->setId($stream[$i]['post_id']);
-//            $post->setMessage($stream[$i]['message']);
-//            $post->setCommentCount($stream[$i]['comment_info']['comment_count']);
-//            $post->setUserLikes((int) $stream[$i]['like_info']['user_likes']);
-//            $post->setActor($usrFactory->getUserFromFQLResultSet($stream[$i]));
-//
-//            $posts[] = $post;
-//        }
+        // Parse the post data.
+        for ($i = 0; $i < count($stream); $i++) {
+            // Create user object.
+            $user = new User();
+            $user->setUid($stream[$i]->from->id);
+            
+            // Split full name.
+            $names = preg_split("/[\s,]+/", $stream[$i]->from->name);
+            
+            $user->setFirstName($names[0]);
+            $user->setLastName($names[1]);
+            
+            $post = new Post();
+            $post->setActor($user);
+            $post->setId($stream[$i]->id);
+            $post->setMessage($stream[$i]->message);
+            
+            $posts[] = $post;
+        }
 
         return $posts;
     }
