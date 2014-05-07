@@ -62,7 +62,7 @@ class GroupFactory extends GraphObjectFactory {
      * @return array
      */
     public function getGroupInfo() {
-        echo 'Blah';
+        echo var_dump($this->graphApiClient->getMe());
 //        $userGroupIds = $this->getUserGroupIds();
 //        
 //        $groups = array();
