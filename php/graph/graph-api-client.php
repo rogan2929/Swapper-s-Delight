@@ -3,6 +3,8 @@
 //require_once 'facebook/facebook.php';
 //Facebook::$CURL_OPTS[CURLOPT_CAINFO] = getcwd() . '/fb_ca_chain_bundle.crt';
 
+require $_SERVER['DOCUMENT_ROOT'] . '\vendor\autoload.php';
+
 
 // Facebook PHP 4.0 SDK
 use Facebook\FacebookSession;
