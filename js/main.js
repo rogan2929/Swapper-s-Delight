@@ -444,75 +444,70 @@ var SwdPresenter = {
                     if (SwdPresenter.groups) {
 
                         // Retrieve the user's group preferences.
-                        SwdModel.getHiddenGroups({
-                            success: function(response) {
-                                Logger.logEntry(SwdPresenter.uid + ' has retrieved hidden groups.');
-                                SwdView.addGroupsToSelectPanel(SwdPresenter.groups, response);
+                        Logger.logEntry(SwdPresenter.uid + ' has retrieved hidden groups.');
+                        SwdView.addGroupsToSelectPanel(SwdPresenter.groups, response);
 
-                                // Install Event Handlers
-                                SwdView.installHandler('onClickButtonGroups', SwdPresenter.onClickButtonGroups, '#button-groups', 'click');
-                                SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
-                                SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
-                                SwdView.installHandler('onClickButtonViewGroup', SwdPresenter.onClickButtonViewGroup, '#button-view-group', 'click');
-                                SwdView.installHandler('onClickCommentDelete', SwdPresenter.onClickCommentDelete, '.post-comment .comment-control .delete', 'click');
-                                SwdView.installHandler('onClickCommentImage', SwdPresenter.onClickCommentImage, '.post-comment-image', 'click');
-                                SwdView.installHandler('onClickCommentEdit', SwdPresenter.onClickCommentEdit, '.comment-edit', 'click');
-                                SwdView.installHandler('onClickCommentUpdateClose', SwdPresenter.onClickCommentUpdateClose, '.post-comment-wrapper .delete-button', 'click');
-                                SwdView.installHandler('onClickFloatingPanelCloseButton', SwdPresenter.onClickFloatingPanelCloseButton, '.floating-panel-content > .close-button', 'click');
-                                SwdView.installHandler('onClickFloatingPanelContent', SwdPresenter.onClickFloatingPanelContent, '.floating-panel-content', 'click');
-                                SwdView.installHandler('onClickFloatingPanelModal', SwdPresenter.onClickFloatingPanelModal, '.floating-panel.modal', 'click');
-                                SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
-                                SwdView.installHandler('onClickLogout', SwdPresenter.onClickLogout, '#menu-item-logout', 'click');
-                                SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
-                                SwdView.installHandler('onClickMessageButtonNo', SwdPresenter.onClickMessageButtonNo, '.dialog-box .button-no', 'click');
-                                SwdView.installHandler('onClickMessageButtonOk', SwdPresenter.onClickMessageButtonOk, '.dialog-box .button-ok', 'click');
-                                SwdView.installHandler('onClickMessageButtonYes', SwdPresenter.onClickMessageButtonYes, '.dialog-box .button-yes', 'click');
-                                SwdView.installHandler('onClickMessageOverlay', SwdPresenter.onClickMessageOverlay, '#message-overlay', 'click');
-                                SwdView.installHandler('onClickPermalink', SwdPresenter.onClickPermalink, '#post-button-permalink', 'click');
-                                SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
-                                SwdView.installHandler('onClickPostButtonDelete', SwdPresenter.onClickPostButtonDelete, '#post-button-delete', 'click');
-                                SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
-                                SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
-                                SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block.block.unique', 'click');
-                                SwdView.installHandler('onClickPostBlockLoadMore', SwdPresenter.onClickPostBlockLoadMore, '.post-block.load-more', 'click');
-                                SwdView.installHandler('onClickPostImageTile', SwdPresenter.onClickPostImageTile, '.post-image-tile', 'click');
-                                SwdView.installHandler('onClickPostNavPrev', SwdPresenter.onClickPostNavPrev, '#details-prev', 'click');
-                                SwdView.installHandler('onClickPostNavNext', SwdPresenter.onClickPostNavNext, '#details-next', 'click');
-                                SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
-                                SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .close-button', 'click');
-                                SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
-                                SwdView.installHandler('onClickMenuSearchBox', SwdPresenter.onClickMenuSearchBox, '.menu .search-box', 'click');
-                                SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
-                                SwdView.installHandler('onKeyDownNewCommentText', SwdPresenter.onKeyDownNewCommentText, '#new-comment-text', 'keydown');
-                                SwdView.installHandler('onKeyDownCommentUpdate', SwdPresenter.onKeyDownCommentUpdate, '.post-comment-text.comment-update', 'keydown');
-                                SwdView.installHandler('onKeyPress', SwdPresenter.onKeyPress, document, 'keypress');
-                                SwdView.installHandler('onKeyUpSearch', SwdPresenter.onKeyUpSearch, '#main-search', 'keyup');
-                                SwdView.installHandler('onMouseMove', SwdPresenter.onMouseMove, document, 'mousemove');
-                                SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
-                                SwdView.positionMenus();
+                        // Install Event Handlers
+                        SwdView.installHandler('onClickButtonGroups', SwdPresenter.onClickButtonGroups, '#button-groups', 'click');
+                        SwdView.installHandler('onClickButtonNew', SwdPresenter.onClickButtonNew, '#button-new', 'click');
+                        SwdView.installHandler('onClickButtonRefresh', SwdPresenter.onClickButtonRefresh, '#button-refresh', 'click');
+                        SwdView.installHandler('onClickButtonViewGroup', SwdPresenter.onClickButtonViewGroup, '#button-view-group', 'click');
+                        SwdView.installHandler('onClickCommentDelete', SwdPresenter.onClickCommentDelete, '.post-comment .comment-control .delete', 'click');
+                        SwdView.installHandler('onClickCommentImage', SwdPresenter.onClickCommentImage, '.post-comment-image', 'click');
+                        SwdView.installHandler('onClickCommentEdit', SwdPresenter.onClickCommentEdit, '.comment-edit', 'click');
+                        SwdView.installHandler('onClickCommentUpdateClose', SwdPresenter.onClickCommentUpdateClose, '.post-comment-wrapper .delete-button', 'click');
+                        SwdView.installHandler('onClickFloatingPanelCloseButton', SwdPresenter.onClickFloatingPanelCloseButton, '.floating-panel-content > .close-button', 'click');
+                        SwdView.installHandler('onClickFloatingPanelContent', SwdPresenter.onClickFloatingPanelContent, '.floating-panel-content', 'click');
+                        SwdView.installHandler('onClickFloatingPanelModal', SwdPresenter.onClickFloatingPanelModal, '.floating-panel.modal', 'click');
+                        SwdView.installHandler('onClickHtml', SwdPresenter.onClickHtml, 'html', 'click');
+                        SwdView.installHandler('onClickLogout', SwdPresenter.onClickLogout, '#menu-item-logout', 'click');
+                        SwdView.installHandler('onClickMenuButton', SwdPresenter.onClickMenuButton, '.menu-button', 'click');
+                        SwdView.installHandler('onClickMessageButtonNo', SwdPresenter.onClickMessageButtonNo, '.dialog-box .button-no', 'click');
+                        SwdView.installHandler('onClickMessageButtonOk', SwdPresenter.onClickMessageButtonOk, '.dialog-box .button-ok', 'click');
+                        SwdView.installHandler('onClickMessageButtonYes', SwdPresenter.onClickMessageButtonYes, '.dialog-box .button-yes', 'click');
+                        SwdView.installHandler('onClickMessageOverlay', SwdPresenter.onClickMessageOverlay, '#message-overlay', 'click');
+                        SwdView.installHandler('onClickPermalink', SwdPresenter.onClickPermalink, '#post-button-permalink', 'click');
+                        SwdView.installHandler('onClickNavButton', SwdPresenter.onClickNavButton, '.nav-button', 'click');
+                        SwdView.installHandler('onClickPostButtonDelete', SwdPresenter.onClickPostButtonDelete, '#post-button-delete', 'click');
+                        SwdView.installHandler('onClickPostButtonLike', SwdPresenter.onClickPostButtonLike, '#post-button-like', 'click');
+                        SwdView.installHandler('onClickPostButtonPm', SwdPresenter.onClickPostButtonPm, '#post-button-pm', 'click');
+                        SwdView.installHandler('onClickPostBlock', SwdPresenter.onClickPostBlock, '.post-block.block.unique', 'click');
+                        SwdView.installHandler('onClickPostBlockLoadMore', SwdPresenter.onClickPostBlockLoadMore, '.post-block.load-more', 'click');
+                        SwdView.installHandler('onClickPostImageTile', SwdPresenter.onClickPostImageTile, '.post-image-tile', 'click');
+                        SwdView.installHandler('onClickPostNavPrev', SwdPresenter.onClickPostNavPrev, '#details-prev', 'click');
+                        SwdView.installHandler('onClickPostNavNext', SwdPresenter.onClickPostNavNext, '#details-next', 'click');
+                        SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
+                        SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .close-button', 'click');
+                        SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
+                        SwdView.installHandler('onClickMenuSearchBox', SwdPresenter.onClickMenuSearchBox, '.menu .search-box', 'click');
+                        SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
+                        SwdView.installHandler('onKeyDownNewCommentText', SwdPresenter.onKeyDownNewCommentText, '#new-comment-text', 'keydown');
+                        SwdView.installHandler('onKeyDownCommentUpdate', SwdPresenter.onKeyDownCommentUpdate, '.post-comment-text.comment-update', 'keydown');
+                        SwdView.installHandler('onKeyPress', SwdPresenter.onKeyPress, document, 'keypress');
+                        SwdView.installHandler('onKeyUpSearch', SwdPresenter.onKeyUpSearch, '#main-search', 'keyup');
+                        SwdView.installHandler('onMouseMove', SwdPresenter.onMouseMove, document, 'mousemove');
+                        SwdView.installHandler('onWindowResize', SwdPresenter.onWindowResize, window, 'resize');
+                        SwdView.positionMenus();
 
-                                // Sleep for 1 second, allowing facebookPageInfoPoll() to complete for the first time.
-                                setTimeout(function() {
-                                    SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
+                        // Sleep for 1 second, allowing facebookPageInfoPoll() to complete for the first time.
+                        setTimeout(function() {
+                            SwdView.toggleAjaxLoadingDiv('#overlay-loading-posts', false);
 
-                                    // Start with displaying the group selection panel.
-                                    SwdView.toggleFloatingPanel('#select-group-panel', true);
+                            // Start with displaying the group selection panel.
+                            SwdView.toggleFloatingPanel('#select-group-panel', true);
 
-                                    Logger.logEntry('startApp() completed for ' + SwdPresenter.uid);
-                                }, 1000);
+                            Logger.logEntry('startApp() completed for ' + SwdPresenter.uid);
+                        }, 1000);
 
-                                // Detect if an ad blocker is running. If it is, display a message.
-                                setTimeout(function() {
-                                    if (typeof (LSM_Slot) === 'undefined') {
-                                        alert("It looks like you're using an ad-blocker of some kind. Please consider turning it off for this app, as ads are the only way I pay for hosting costs and am compensated for my work. Thank you!");
-                                    }
-                                }, 3000);
+                        // Detect if an ad blocker is running. If it is, display a message.
+                        setTimeout(function() {
+                            if (typeof (LSM_Slot) === 'undefined') {
+                                alert("It looks like you're using an ad-blocker of some kind. Please consider turning it off for this app, as ads are the only way I pay for hosting costs and am compensated for my work. Thank you!");
+                            }
+                        }, 3000);
 
-                                // Start the idle timer.
-                                SwdPresenter.idleInterval = setInterval(SwdPresenter.timerIncrement, 60000);     // 1 minute
-                            },
-                            error: SwdPresenter.handleError
-                        });
+                        // Start the idle timer.
+                        SwdPresenter.idleInterval = setInterval(SwdPresenter.timerIncrement, 60000);     // 1 minute
                     }
                 },
                 error: SwdPresenter.handleError
@@ -655,7 +650,7 @@ var SwdPresenter = {
     loadPosts: function(refresh, viewChanged) {
         if (!SwdPresenter.currentlyLoading && SwdPresenter.selectedGroup !== null) {
             SwdPresenter.currentlyLoading = true;
-            
+
             // Close all open menus...
             SwdView.closeAllUiMenus();
 
@@ -1472,7 +1467,7 @@ var SwdView = {
         $('.toolbar, .floating-overlay, .menu').animate({
             top: Math.max(offset, 0)
         }, 100);
-        
+
         $('.menu').animate({
             top: Math.max(offset + 42, 42)
         }, 100);
