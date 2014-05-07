@@ -9,6 +9,8 @@ header('Cache-Control: no-cache, must-revalidate');
 header('Pragma: no-cache');
 
 error_reporting(E_ALL);
+
+error_log(var_dump($_GET));
 ?>
 
 <!DOCTYPE html>
