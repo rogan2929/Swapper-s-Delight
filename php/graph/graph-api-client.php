@@ -35,12 +35,12 @@ class GraphApiClient {
         // Try to set the default application.
         FacebookSession::setDefaultApplication(self::APP_ID, self::APP_SECRET);
 
-        $accessToken = $_COOKIE['fbsr_' . self::APP_ID];
+        $signedRequest = $_COOKIE['fbsr_' . self::APP_ID];
         
         echo $accessToken;
 
         try {
-            $this->session = new FacebookSession($accessToken);
+            $this->session = FacebookSession::newSessionFromSignedRequest($signedRequest);
         } catch (FacebookRequestException $ex) {
             error_log($ex->getMessage());
         } catch (\Exception $ex) {
