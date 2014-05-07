@@ -12,6 +12,7 @@ use Facebook\FacebookRequest;
 use Facebook\FacebookResponse;
 use Facebook\FacebookRequestException;
 use Facebook\FacebookJavaScriptLoginHelper;
+use Facebook\FacebookCanvasLoginHelper;
 
 if (!session_id()) {
     session_start();
