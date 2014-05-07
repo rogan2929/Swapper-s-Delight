@@ -536,7 +536,7 @@ class PostFactory extends GraphObjectFactory {
 
             for ($k = 0; $k < count($response); $k++) {
                 $body = json_decode($response[$k]->body);
-                $stream = array_merge($stream, $body['data']);
+                $stream = array_merge($stream, $body->data);
             }
         }
         
