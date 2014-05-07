@@ -39,8 +39,8 @@ class GraphApiClient {
         // Try to set the default application.
         FacebookSession::setDefaultApplication(self::APP_ID, self::APP_SECRET);
 
-        $helper = new FacebookJavaScriptLoginHelper();
-        //$helper = new FacebookCanvasLoginHelper();
+        //$helper = new FacebookJavaScriptLoginHelper();
+        $helper = new FacebookCanvasLoginHelper();
 
         try {
             $this->session = $helper->getSession();
