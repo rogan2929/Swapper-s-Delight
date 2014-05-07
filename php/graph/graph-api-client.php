@@ -6,6 +6,7 @@
 require 'facebook/4.0/FacebookSession.php';
 require 'facebook/4.0/FacebookRequest.php';
 require 'facebook/4.0/FacebookResponse.php';
+require 'facebook/4.0/FacebookSDKException.php';
 require 'facebook/4.0/FacebookRequestException.php';
 require 'facebook/4.0/FacebookJavaScriptLoginHelper.php';
 
