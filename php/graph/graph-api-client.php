@@ -45,6 +45,7 @@ class GraphApiClient {
             $this->session = $helper->getSession();
         } catch (FacebookRequestException $ex) {
             error_log($ex->getMessage());
+            error_log(var_dump($helper->getSession()->getSessionInfo()));
         } catch (\Exception $ex) {
             error_log($ex->getMessage());
         }
