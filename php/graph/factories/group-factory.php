@@ -68,6 +68,7 @@ class GroupFactory extends GraphObjectFactory {
         
         for ($i = 0; $i < count($userGroupIds); $i++) {
             $response = $this->graphApiClient->executeRequest('GET', '/' . $userGroupIds[$i]);
+            echo var_dump($response);
             $groups[] = new Group($response['id'], $response['name'], $response['icon']);
         }
         
