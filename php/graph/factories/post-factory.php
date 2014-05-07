@@ -516,22 +516,26 @@ class PostFactory extends GraphObjectFactory {
         $users = array();
         $posts = array();
         $stream = array();
+        $requests = array();
 
         // Pull the feed for stream data.
         for ($i = 0; $i < $iterations; $i++) {
-
+            // Create the batch query.
             for ($j = 0; $j < $batchSize; $j++) {
-                $response = $this->graphApiClient->executeRequest('GET', '/' . $this->gid . '/feed', array(
-                    'limit' => 5000,
-                    'since' => $windowEnd,
-                    'until' => $windowStart
-                ));
-                
-                $stream = array_merge($stream, $response);
+                $requests[] = array(
+                    'method' => 'GET',
+                    'relative_url' => '/' . $this->gid . '/feed?since=' . $windowEnd . '&until=' . $windowStart . '&limit=5000'
+                );
             }
+            
+            // Execute the batch query.
+            $response = $this->graphApiClient->executeRequest('POST', '/', array(
+                'batch' => json_encode($requests),
+                'include_headers' => false
+            ));
+            
+            echo json_encode($response);
         }
-        
-        echo json_encode($stream);
 
 
 //            //$queries = array();
