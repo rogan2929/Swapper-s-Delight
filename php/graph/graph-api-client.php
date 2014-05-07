@@ -44,9 +44,9 @@ class GraphApiClient {
         try {
             $this->session = $helper->getSession();
         } catch (FacebookRequestException $ex) {
-            // When Facebook returns an error
+            error_log($ex->getMessage());
         } catch (\Exception $ex) {
-            // When validation fails or other local issues
+            error_log($ex->getMessage());
         }
         
         // Generate appsecret_proof
