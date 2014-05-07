@@ -382,45 +382,45 @@ var SwdPresenter = {
 
         // Fetch the FB JS API
         $.getScript('//connect.facebook.net/en_US/sdk.js', function() {
-            FB.init({
-                appId: AppId,
-                cookie: true,
-                status: true,
-                version: 'v2.0'
-            });
+//            FB.init({
+//                appId: AppId,
+//                cookie: true,
+//                status: true,
+//                version: 'v2.0'
+//            });
 
             $('#loginbutton,#feedbutton').removeAttr('disabled');
 
             // Try to get a session going if there isn't one already.
-            FB.getLoginStatus(function(response) {
-                if (response.status === 'connected') {
-                    SwdPresenter.uid = response.authResponse.userID;
-                    SwdPresenter.startApp();
-                }
-                else {
-                    if (response.status === 'not_authorized') {
-                        Logger.logEntry('User auth failure.');
-                    }
-                    else {
-                        Logger.logEntry('User was logged out. Attemping another login.');
-                    }
-
-                    FB.login(function(response) {
-                        if (response.status === 'connected') {
-                            SwdPresenter.uid = response.authResponse.userID;
-                            SwdPresenter.startApp();
-                        }
-                        else {
-                            Logger.logEntry('User auth failure.');
-
-                            // Redirect to app page.
-                            window.top.location.href = 'https://www.facebook.com/SwappersDelight';
-                        }
-                    }, {
-                        scope: 'publish_actions'
-                    });
-                }
-            });
+//            FB.getLoginStatus(function(response) {
+//                if (response.status === 'connected') {
+//                    SwdPresenter.uid = response.authResponse.userID;
+//                    SwdPresenter.startApp();
+//                }
+//                else {
+//                    if (response.status === 'not_authorized') {
+//                        Logger.logEntry('User auth failure.');
+//                    }
+//                    else {
+//                        Logger.logEntry('User was logged out. Attemping another login.');
+//                    }
+//
+//                    FB.login(function(response) {
+//                        if (response.status === 'connected') {
+//                            SwdPresenter.uid = response.authResponse.userID;
+//                            SwdPresenter.startApp();
+//                        }
+//                        else {
+//                            Logger.logEntry('User auth failure.');
+//
+//                            // Redirect to app page.
+//                            window.top.location.href = 'https://www.facebook.com/SwappersDelight';
+//                        }
+//                    }, {
+//                        scope: 'publish_actions'
+//                    });
+//                }
+//            });
         });
     },
     /***
