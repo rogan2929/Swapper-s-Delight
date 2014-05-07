@@ -305,7 +305,7 @@ class PostFactory extends GraphObjectFactory {
      * Builds a locally cached version of the FQL stream table.
      * @param bool $prefetchOnly
      */
-    private function fetchStream($prefetchOnly) {
+    public function fetchStream($prefetchOnly) {
         if ($prefetchOnly) {
             // Only retrieve a small subset of the full stream, in order for data to be displayed more quickly to the user.
             $windowStart = time();
