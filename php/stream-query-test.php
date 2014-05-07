@@ -7,7 +7,7 @@ $gid = '120696471425768';
 $graphApiClient = new GraphApiClient();
 
 $response = $graphApiClient->executeRequest('GET', '/' . $gid . '/feed', array(
-    'limit' => 5000
+    'limit' => 10000
 ));
 
 echo json_encode($response);
