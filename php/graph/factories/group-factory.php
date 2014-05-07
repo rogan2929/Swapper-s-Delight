@@ -78,27 +78,27 @@ class GroupFactory extends GraphObjectFactory {
      * Retrieve marked groups for that belong to the user.
      */
     private function getUserGroupIds() {
-        //$this->markedGroups = array('409783902455116', '125721407536012');
+        return array('409783902455116', '125721407536012');
         // Get the UID of the currently logged in user.
-        $uid = $this->graphApiClient->getMe();
-
-        $conn = sqlsrv_connect($this->sqlServer, $this->sqlConnectionInfo);
-
-        if ($conn === false) {
-            die(print('Could not connect to database.'));
-        }
-
-        $sql = 'SELECT UserId,GroupId FROM UserGroups WHERE UID=\'' . $uid . '\'';
-
-        // Execute the query.
-        $result = sqlsrv_query($conn, $sql);
-
-        $userGroupIds = array();
-
-        while ($row = sqlsrv_fetch_array($result)) {
-            $userGroupIds[] = $row['GroupId'];
-        }
-        
-        return $userGroupIds;
+//        $uid = $this->graphApiClient->getMe();
+//
+//        $conn = sqlsrv_connect($this->sqlServer, $this->sqlConnectionInfo);
+//
+//        if ($conn === false) {
+//            die(print('Could not connect to database.'));
+//        }
+//
+//        $sql = 'SELECT UserId,GroupId FROM UserGroups WHERE UID=\'' . $uid . '\'';
+//
+//        // Execute the query.
+//        $result = sqlsrv_query($conn, $sql);
+//
+//        $userGroupIds = array();
+//
+//        while ($row = sqlsrv_fetch_array($result)) {
+//            $userGroupIds[] = $row['GroupId'];
+//        }
+//        
+//        return $userGroupIds;
     }
 }
