@@ -3,6 +3,13 @@
 //require_once 'facebook/facebook.php';
 //Facebook::$CURL_OPTS[CURLOPT_CAINFO] = getcwd() . '/fb_ca_chain_bundle.crt';
 
+require 'facebook/4.0/FacebookSession.php';
+require 'facebook/4.0/FacebookRequest.php';
+require 'facebook/4.0/FacebookResponse.php';
+require 'facebook/4.0/FacebookRequestException.php';
+require 'facebook/4.0/FacebookJavaScriptLoginHelper.php';
+
+
 // Facebook PHP 4.0 SDK
 use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
