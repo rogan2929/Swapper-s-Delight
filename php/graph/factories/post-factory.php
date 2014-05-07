@@ -557,7 +557,7 @@ class PostFactory extends GraphObjectFactory {
             $post->setActor($user);
             $post->setId($stream[$i]->id);
             $post->setMessage($stream[$i]->message);
-            $post->setCommentCount($stream[$i]->summary->total_count);
+            $post->setCommentCount($stream[$i]->comments->summary->total_count);
             
             $posts[] = $post;
         }
