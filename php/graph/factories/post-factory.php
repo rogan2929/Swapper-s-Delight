@@ -533,12 +533,12 @@ class PostFactory extends GraphObjectFactory {
                 'batch' => json_encode($requests),
                 'include_headers' => false
             ));
-            
-            echo var_dump($response);
-            
-//            for ($k = 0; $k < count($response); $k++) {
+
+            for ($k = 0; $k < count($response); $k++) {
+                $body = json_decode($response[$k]->body);
+                echo var_dump($body);
 //                $stream = array_merge($stream, $response[$k]);
-//            }
+            }
         }
         
         //echo json_encode($stream);
