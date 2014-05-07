@@ -524,7 +524,7 @@ class PostFactory extends GraphObjectFactory {
             for ($j = 0; $j < $batchSize; $j++) {
                 $requests[] = array(
                     'method' => 'GET',
-                    'relative_url' => '/' . $this->gid . '/feed?fields=id,from,message&since=' . $windowEnd . '&until=' . $windowStart . '&limit=5000'
+                    'relative_url' => '/' . $this->gid . '/feed?fields=id,from,message,comments.limit(1).summary(true)&since=' . $windowEnd . '&until=' . $windowStart . '&limit=5000'
                 );
             }
 
@@ -557,6 +557,7 @@ class PostFactory extends GraphObjectFactory {
             $post->setActor($user);
             $post->setId($stream[$i]->id);
             $post->setMessage($stream[$i]->message);
+            $post->setCommentCount($stream[$i]->summary->total_count);
             
             $posts[] = $post;
         }
