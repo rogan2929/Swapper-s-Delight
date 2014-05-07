@@ -10,7 +10,7 @@ header('Pragma: no-cache');
 
 error_reporting(E_ALL);
 
-error_log(var_dump($_GET));
+error_log(var_dump($_POST));
 ?>
 
 <!DOCTYPE html>
