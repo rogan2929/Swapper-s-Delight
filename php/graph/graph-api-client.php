@@ -63,7 +63,7 @@ class GraphApiClient {
     public function executeRequest($method, $path, $parameters = null) {
         try {
             if (!is_null($parameters) && is_array($parameters)) {
-                $parameters[appsecret_proof] = $this->appSecretProof;
+                $parameters['appsecret_proof'] = $this->appSecretProof;
             }
             else {
                 $parameters = array(
