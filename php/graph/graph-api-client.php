@@ -13,10 +13,6 @@ use Facebook\FacebookRequestException;
 use Facebook\FacebookJavaScriptLoginHelper;
 use Facebook\FacebookCanvasLoginHelper;
 
-if (!session_id()) {
-    session_start();
-}
-
 /**
  * A client to the Facebook Graph API.
  */
@@ -40,7 +36,7 @@ class GraphApiClient {
         FacebookSession::setDefaultApplication(self::APP_ID, self::APP_SECRET);
 
         //$helper = new FacebookJavaScriptLoginHelper();
-        $helper = new FacebookCanvasLoginHelper();
+        $helper = new Facebook\FacebookRedirectLoginHelper();
         
         echo var_dump($helper->getSession());
 
