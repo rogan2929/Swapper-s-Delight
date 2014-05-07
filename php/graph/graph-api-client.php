@@ -38,13 +38,10 @@ class GraphApiClient {
         $accessToken = filter_input(INPUT_COOKIE, 'fbsr_' . self::APP_ID);
 
         try {
-            //$this->session = $helper->getSession();
             $this->session = new FacebookSession($accessToken);
         } catch (FacebookRequestException $ex) {
-            error_log('FacebookRequestException');
             error_log($ex->getMessage());
         } catch (\Exception $ex) {
-            error_log('Exception');
             error_log($ex->getMessage());
         }
         

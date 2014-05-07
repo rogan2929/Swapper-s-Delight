@@ -62,16 +62,17 @@ class GroupFactory extends GraphObjectFactory {
      * @return array
      */
     public function getGroupInfo() {
-        $userGroupIds = $this->getUserGroupIds();
-        
-        $groups = array();
-        
-        for ($i = 0; $i < count($userGroupIds); $i++) {
-            $response = $this->graphApiClient->executeRequest('GET', '/' . $userGroupIds[$i]);
-            $groups[] = new Group($response['id'], $response['name'], $response['icon']);
-        }
-        
-        return $groups;
+        echo 'Blah';
+//        $userGroupIds = $this->getUserGroupIds();
+//        
+//        $groups = array();
+//        
+//        for ($i = 0; $i < count($userGroupIds); $i++) {
+//            $response = $this->graphApiClient->executeRequest('GET', '/' . $userGroupIds[$i]);
+//            $groups[] = new Group($response['id'], $response['name'], $response['icon']);
+//        }
+//        
+//        return $groups;
     }
     
     /**
