@@ -524,7 +524,7 @@ class PostFactory extends GraphObjectFactory {
             for ($j = 0; $j < $batchSize; $j++) {
                 $requests[] = array(
                     'method' => 'GET',
-                    'relative_url' => '/' . $this->gid . '/feed?since=' . $windowEnd . '&until=' . $windowStart . '&limit=5000'
+                    'relative_url' => '/' . $this->gid . '/feed?fields=id,from,message,updated_time,created_time&since=' . $windowEnd . '&until=' . $windowStart . '&limit=5000'
                 );
             }
             
