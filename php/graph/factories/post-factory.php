@@ -536,11 +536,12 @@ class PostFactory extends GraphObjectFactory {
 
             for ($k = 0; $k < count($response); $k++) {
                 $body = json_decode($response[$k]->body);
+                echo var_dump($body);
                 $stream = array_merge($stream, $body->data);
             }
         }
         
-        echo json_encode($stream);
+        //echo json_encode($stream);
 
 
 //            //$queries = array();
