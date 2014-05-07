@@ -48,6 +48,7 @@ class GraphApiClient {
         // Generate appsecret_proof
         if ($this->session) {
             $this->appSecretProof = hash_hmac('sha256', $this->session->getToken(), self::APP_SECRET);
+            error_log(var_dump($this->session->getSessionInfo()));
         }
         else {
             error_log('$this->session is null!');
