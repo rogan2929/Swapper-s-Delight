@@ -4,8 +4,10 @@ require_once 'graph/include.php';
 
 $gid = '120696471425768';
 
-$postFactory = new PostFactory();
+$graphApiClient = new GraphApiClient();
 
-//echo var_dump($feed);
+$response = $graphApiClient->executeRequest('GET', '/' . $gid . '/feed', array(
+    'limit' => 5000
+));
 
-echo json_encode($postFactory->getStream());
+echo json_encode($response);
