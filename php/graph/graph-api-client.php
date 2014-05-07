@@ -41,6 +41,8 @@ class GraphApiClient {
 
         //$helper = new FacebookJavaScriptLoginHelper();
         $helper = new FacebookCanvasLoginHelper();
+        
+        echo var_dump($helper->getSession());
 
         try {
             $this->session = $helper->getSession();
