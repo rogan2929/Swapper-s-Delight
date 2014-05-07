@@ -417,7 +417,7 @@ var SwdPresenter = {
                             window.top.location.href = 'https://www.facebook.com/SwappersDelight';
                         }
                     }, {
-                        scope: 'publish_stream'
+                        scope: 'publish_actions'
                     });
                 }
             });
