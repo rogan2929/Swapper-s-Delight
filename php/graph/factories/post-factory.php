@@ -534,12 +534,14 @@ class PostFactory extends GraphObjectFactory {
                 'include_headers' => false
             ));
             
-            for ($k = 0; $k < count($response); $k++) {
-                $stream = array_merge($stream, $response[$k]);
-            }
+            echo var_dump($response);
+            
+//            for ($k = 0; $k < count($response); $k++) {
+//                $stream = array_merge($stream, $response[$k]);
+//            }
         }
         
-        echo json_encode($stream);
+        //echo json_encode($stream);
 
 
 //            //$queries = array();
