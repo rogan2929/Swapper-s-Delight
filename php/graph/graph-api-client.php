@@ -130,7 +130,9 @@ class GraphApiClient {
      */
     public function getMe() {
         //return $this->api('/me')['id'];
-        return $this->executeRequest('GET', '/me');
+        $response = $this->executeRequest('GET', '/me');
+        
+        return $response->id;
     }
 
     /**
