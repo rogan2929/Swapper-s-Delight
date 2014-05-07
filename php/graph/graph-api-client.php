@@ -36,7 +36,7 @@ class GraphApiClient {
         FacebookSession::setDefaultApplication(self::APP_ID, self::APP_SECRET);
 
         //$helper = new FacebookJavaScriptLoginHelper();
-        $helper = new Facebook\FacebookRedirectLoginHelper();
+        $helper = new FacebookJavaScriptLoginHelper(self::APP_ID);
         
         echo var_dump($helper->getSession());
 
