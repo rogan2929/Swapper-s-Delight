@@ -535,7 +535,7 @@ class PostFactory extends GraphObjectFactory {
             ));
             
             for ($k = 0; $k < count($response); $k++) {
-                $stream = array_merge($stream, $body[0]);
+                $stream = array_merge($stream, $response[$k]->body[0]);
             }
         }
         
