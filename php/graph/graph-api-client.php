@@ -31,13 +31,13 @@ class GraphApiClient {
     const APP_SECRET = 'b8447ce73d2dcfccde6e30931cfb0a90';
 
     //private $facebook;
-    //private $appSecretProof;
     private $session;
+    private $appSecretProof;
 
     function __construct() {
 
         // Try to set the default application.
-        FacebookSession::setDefaultApplication(self::APP_ID, self::APP_SECRET);
+        FacebookSession::setDefaultApplication(static::APP_ID, static::APP_SECRET);
 
         $helper = new FacebookJavaScriptLoginHelper();
 
@@ -48,6 +48,9 @@ class GraphApiClient {
         } catch (\Exception $ex) {
             // When validation fails or other local issues
         }
+        
+        // Generate appsecret_proof
+        $this->appSecretProof = hash_hmac('sha256', $this->session->getToken(), static::APP_SECRET);
     }
     
     /**
@@ -58,7 +61,14 @@ class GraphApiClient {
      */
     public function executeRequest($method, $path, $parameters = null) {
         try {
-            $appsecret_proof= hash_hmac('sha256', $access_token, self::APP_SECRET);
+            if (!is_null($parameters) && is_array($parameters)) {
+                $parameters[appsecret_proof] = $this->appSecretProof;
+            }
+            else {
+                $parameters = array(
+                    'appsecret_proof' => $this->appSecretProof
+                );
+            }
             
             $response = (new FacebookRequest($this->session, $method, $path, $parameters));
             return $response->execute()->getResponse();

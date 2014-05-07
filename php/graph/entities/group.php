@@ -7,18 +7,18 @@ require_once 'graph-object.php';
  */
 class Group extends GraphObject {
 
-    private $gid;
+    private $id;
     private $name;
     private $icon;
 
     /**
      * Constructor.
-     * @param type $gid
+     * @param type $id
      * @param type $name
      * @param type $icon
      */
-    function __construct($gid, $name, $icon) {
-        $this->gid = $gid;
+    function __construct($id, $name, $icon) {
+        $this->id = $id;
         $this->name = $name;
         $this->icon = $icon;
     }
@@ -32,11 +32,11 @@ class Group extends GraphObject {
     }
 
     /**
-     * Gets the group's unique GID.
+     * Gets the group's unique ID.
      * @return string
      */
-    public function getGid() {
-        return $this->gid;
+    public function getId() {
+        return $this->id;
     }
 
     /**
@@ -56,11 +56,11 @@ class Group extends GraphObject {
     }
 
     /**
-     * Sets the group's unique GID.
+     * Sets the group's unique ID.
      * @param string $gid
      */
-    public function setGid($gid) {
-        $this->gid = $gid;
+    public function setId($gid) {
+        $this->id = $gid;
     }
 
     /**
