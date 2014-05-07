@@ -58,6 +58,8 @@ class GraphApiClient {
      */
     public function executeRequest($method, $path, $parameters = null) {
         try {
+            $appsecret_proof= hash_hmac('sha256', $access_token, self::APP_SECRET);
+            
             $response = (new FacebookRequest($this->session, $method, $path, $parameters));
             return $response->execute()->getResponse();
         } catch (FacebookRequestException  $ex) {
