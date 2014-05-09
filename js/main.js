@@ -1519,7 +1519,7 @@ var SwdView = {
     createImagePostBlock: function(post) {
         var postBlock, userImage, tileImage, timeStamp, message;
 
-        userImage = 'url(' + post.actor.picFull + ')';
+        userImage = 'url(' + post.actor.picSquare + ')';
         tileImage = 'url(' + post.imageObjects[0].url + ')';
 
         // Create the visible block.
@@ -1528,7 +1528,7 @@ var SwdView = {
         $(postBlock).addClass('post-block-image');
 
         // Create the text block that resides below the visible post block.
-        userImage = 'url(' + post.actor.picFull + ')';
+        userImage = 'url(' + post.actor.picSquare + ')';
 
         timeStamp = new moment(new Date(post.createdTime * 1000));
 
@@ -1565,7 +1565,7 @@ var SwdView = {
 
         postBlock = $('<div id="' + post.id + '" class="post-block block unique"></div>');
 
-        userImage = 'url(' + post.actor.picFull + ')';
+        userImage = 'url(' + post.actor.picSquare + ')';
 
         timeStamp = new moment(new Date(post.createdTime * 1000));
 
@@ -1647,7 +1647,7 @@ var SwdView = {
         $(postBlock).addClass('post-block-link').html(description);
 
         // Create the text block that resides below the visible post block.
-        userImage = 'url(' + post.actor.picFull + ')';
+        userImage = 'url(' + post.actor.picSquare + ')';
 
         timeStamp = new moment(new Date(post.createdTime * 1000));
 
@@ -1666,7 +1666,7 @@ var SwdView = {
 
         postBlock = $('<div id="' + post.id + '" class="post-block block unique"></div>');
 
-        userImage = 'url(' + post.actor.picFull + ')';
+        userImage = 'url(' + post.actor.picSquare + ')';
 
         timeStamp = new moment(new Date(post.createdTime * 1000));
 
