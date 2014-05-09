@@ -401,6 +401,8 @@ class PostFactory extends GraphObjectFactory {
             'include_headers' => false
         ));
         
+        echo json_encode($response);
+        
         // Take care of the non-image posts.
         for ($j = 0; $j < count($nonImagePostIndices); $j++) {
             $images[$nonImagePostIndices[$j]] = null;
