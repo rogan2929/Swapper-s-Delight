@@ -496,7 +496,7 @@ class PostFactory extends GraphObjectFactory {
             $post = new Post();
 
             // Actor
-            $post->setActor(UserFactory::getUserFromGraphResponse($stream[$i]));
+            $post->setActor(UserFactory::getUserFromGraphResponse($stream[$i]->from));
 
             // ID
             $post->setId($stream[$i]->id);
