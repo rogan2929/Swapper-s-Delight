@@ -396,6 +396,10 @@ class PostFactory extends GraphObjectFactory {
         if (!isset($limit)) {
             $limit = 50;        // Max batch size.
         }
+        
+        // What needs to be captured from the Graph API?
+        // Fully flushed image data. (Multiple images, small / large srcs.)
+        // User profile picture, url.
 
         // Slice and dice the array.
         $page = array_slice($posts, $offset, $limit);
@@ -536,7 +540,7 @@ class PostFactory extends GraphObjectFactory {
             for ($j = 0; $j < $batchSize; $j++) {
                 $requests[] = array(
                     'method' => 'GET',
-                    'relative_url' => '/' . $this->gid . '/feed?fields=id,from,message,comments.limit(1).summary(true)&since=' . $windowEnd . '&until=' . $windowStart . '&limit=5000'
+                    'relative_url' => '/' . $this->gid . '/feed?fields=id,from,message,picture,object_id,actions,link,comments.limit(1).summary(true)&since=' . $windowEnd . '&until=' . $windowStart . '&limit=5000'
                 );
             }
 
@@ -570,6 +574,14 @@ class PostFactory extends GraphObjectFactory {
             $post->setId($stream[$i]->id);
             $post->setMessage($stream[$i]->message);
             $post->setCommentCount($stream[$i]->comments->summary->total_count);
+            $post->setPermalink($stream[$i]->actions[0]->link);
+            
+            // Grab any basic image data first attached image, if there is one. Src lookup will be done later.
+            if (!is_null($stream[$i]->object_id)) {
+                $image = new Image();
+                $image->setId($stream[$i]->object_id);
+                $post->setImageObjects(array($image));
+            }
 
             $posts[] = $post;
         }
