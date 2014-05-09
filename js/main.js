@@ -444,7 +444,7 @@ var SwdPresenter = {
                     if (SwdPresenter.groups) {
 
                         // Retrieve the user's group preferences.
-                        Logger.logEntry(SwdPresenter.uid + ' has retrieved hidden groups.');
+                        Logger.logEntry(SwdPresenter.uid + ' has retrieved groups.');
                         SwdView.addGroupsToSelectPanel(SwdPresenter.groups, response);
 
                         // Install Event Handlers
