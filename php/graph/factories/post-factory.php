@@ -311,10 +311,17 @@ class PostFactory extends GraphObjectFactory {
             $windowStart = time();
             $windowSize = $this->getOptimalWindowSize();
 
+            // To speed up the initial load, only grab a maximum of 200 posts during deep query.
+            $postLimit = 200;
+
             // Perform a two step query of varying window sizes, and then merge the result.
-            $stream = $this->getFeedData($windowSize, $windowStart, 14, 1);
-            $windowStart = $windowStart - ($windowSize * 14 * 1);
-            $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
+            $stream = $this->getFeedData($windowSize, $windowStart, 14, 1, $postLimit);
+
+            // Only continue with another batch if $postLimit has not been reached.
+            if (count($stream) <= $postLimit) {
+                $windowStart = $windowStart - ($windowSize * 14 * 1);
+                $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
+            }
 
             $this->stream = $stream;
         } else {
@@ -509,7 +516,7 @@ class PostFactory extends GraphObjectFactory {
      * @param int $iterations
      * @return array
      */
-    private function getFeedData($windowSize, $windowStart, $batchSize, $iterations = 1) {
+    private function getFeedData($windowSize, $windowStart, $batchSize, $iterations = 1, $postLimit = null) {
         $windowEnd = $windowStart - $windowSize;
 
         $stream = array();
@@ -518,8 +525,13 @@ class PostFactory extends GraphObjectFactory {
 
         // Pull the feed for stream data.
         for ($i = 0; $i < $iterations; $i++) {
+            // If a post limit has been set and has been reached, then immediately return what we have.
+            if (!is_null($postLimit) && count($posts) > $postLimit) {
+                return $posts;
+            }
+
             $requests = array();
-            
+
             // Create the batch query.
             for ($j = 0; $j < $batchSize; $j++) {
                 $requests[] = array(
@@ -540,25 +552,25 @@ class PostFactory extends GraphObjectFactory {
                 $stream = array_merge($stream, $body->data);
             }
         }
-        
+
         // Parse the post data.
         for ($i = 0; $i < count($stream); $i++) {
             // Create user object.
             $user = new User();
             $user->setUid($stream[$i]->from->id);
-            
+
             // Split full name.
             $names = preg_split("/[\s,]+/", $stream[$i]->from->name);
-            
+
             $user->setFirstName($names[0]);
             $user->setLastName($names[1]);
-            
+
             $post = new Post();
             $post->setActor($user);
             $post->setId($stream[$i]->id);
             $post->setMessage($stream[$i]->message);
             $post->setCommentCount($stream[$i]->comments->summary->total_count);
-            
+
             $posts[] = $post;
         }
 
