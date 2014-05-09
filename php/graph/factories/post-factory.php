@@ -398,47 +398,48 @@ class PostFactory extends GraphObjectFactory {
         }
         
         // What needs to be captured from the Graph API?
-        // Fully flushed image data. (Multiple images, small / large srcs.)
+        // Fully flushed image data. (Multiple images, small / large srcs.) This may have to be retrieved using FQL.
         // User profile picture, url.
 
-        // Slice and dice the array.
+        // Break up the incoming posts into pages of up to 50.
+        // 50 is the highest number of requests that can fit into one batch.
         $page = array_slice($posts, $offset, $limit);
 
-        // Build a multiquery for each post in the provided array.
-        // If count($page) > 50, then it has to be broken up, since the maximum batch size is only 50.
-        for ($i = 0; $i < count($page); $i++) {
-            $queries[] = array(
-                'method' => 'POST',
-                'relative_url' => 'method/fql.multiquery?queries=' . json_encode(array(
-                    'streamQuery' => GraphObjectFactory::STREAM_QUERY . 'WHERE post_id="' . $page[$i]->getId() . '"',
-                    'imageQuery' => GraphObjectFactory::IMAGE_QUERY . 'WHERE object_id IN (SELECT attachment FROM #streamQuery)',
-                    'userQuery' => GraphObjectFactory::USER_QUERY . 'WHERE uid IN (SELECT actor_id FROM #streamQuery)'
-                ))
-            );
-        }
-
-        $processed = 0;
-
-        // Execute the batch queries in chunks of 50.
-        while ($processed < count($page)) {
-            $response = $this->graphApiClient->api('/', 'POST', array(
-                'batch' => json_encode(array_slice($queries, $processed, 50)),
-                'include_headers' => false
-            ));
-
-            // Sift through the results.
-            for ($i = 0; $i < count($response); $i++) {
-                $body = json_decode($response[$i]['body'], true);
-                $result = array_merge($result, $this->processStreamQuery($body[0]['fql_result_set'], $body[1]['fql_result_set'], $body[2]['fql_result_set']));
-            }
-
-            $processed += count($response);
-        }
-
-        // If there are no posts to load, then insert an terminating post.
-        if ($offset + $limit >= count($posts)) {
-            $result[] = array('id' => 'terminator');
-        }
+//        // Build a multiquery for each post in the provided array.
+//        // If count($page) > 50, then it has to be broken up, since the maximum batch size is only 50.
+//        for ($i = 0; $i < count($page); $i++) {
+//            $queries[] = array(
+//                'method' => 'POST',
+//                'relative_url' => 'method/fql.multiquery?queries=' . json_encode(array(
+//                    'streamQuery' => GraphObjectFactory::STREAM_QUERY . 'WHERE post_id="' . $page[$i]->getId() . '"',
+//                    'imageQuery' => GraphObjectFactory::IMAGE_QUERY . 'WHERE object_id IN (SELECT attachment FROM #streamQuery)',
+//                    'userQuery' => GraphObjectFactory::USER_QUERY . 'WHERE uid IN (SELECT actor_id FROM #streamQuery)'
+//                ))
+//            );
+//        }
+//
+//        $processed = 0;
+//
+//        // Execute the batch queries in chunks of 50.
+//        while ($processed < count($page)) {
+//            $response = $this->graphApiClient->api('/', 'POST', array(
+//                'batch' => json_encode(array_slice($queries, $processed, 50)),
+//                'include_headers' => false
+//            ));
+//
+//            // Sift through the results.
+//            for ($i = 0; $i < count($response); $i++) {
+//                $body = json_decode($response[$i]['body'], true);
+//                $result = array_merge($result, $this->processStreamQuery($body[0]['fql_result_set'], $body[1]['fql_result_set'], $body[2]['fql_result_set']));
+//            }
+//
+//            $processed += count($response);
+//        }
+//
+//        // If there are no posts to load, then insert an terminating post.
+//        if ($offset + $limit >= count($posts)) {
+//            $result[] = array('id' => 'terminator');
+//        }
 
         return $result;
     }
@@ -577,11 +578,11 @@ class PostFactory extends GraphObjectFactory {
             $post->setPermalink($stream[$i]->actions[0]->link);
             
             // Grab any basic image data first attached image, if there is one. Src lookup will be done later.
-            if (!is_null($stream[$i]->object_id)) {
-                $image = new Image();
-                $image->setId($stream[$i]->object_id);
-                $post->setImageObjects(array($image));
-            }
+//            if (!is_null($stream[$i]->object_id)) {
+//                $image = new Image();
+//                $image->setId($stream[$i]->object_id);
+//                $post->setImageObjects(array($image));
+//            }
 
             $posts[] = $post;
         }
