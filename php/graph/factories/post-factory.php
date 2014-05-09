@@ -408,7 +408,7 @@ class PostFactory extends GraphObjectFactory {
 
             $userRequests[] = array(
                 'method' => 'GET',
-                'relative_url' => '/' . $actor->getId() . '/picture'
+                'relative_url' => '/' . $actor->getUid() . '/picture'
             );
         }
 
@@ -592,14 +592,17 @@ class PostFactory extends GraphObjectFactory {
             $post = new Post();
             $post->setActor($user);
             $post->setId($stream[$i]->id);
-            $post->setMessage($stream[$i]->message);
-            
+
+            if ($stream[$i]->message) {
+                $post->setMessage($stream[$i]->message);
+            }
+
             if (isset($stream[$i]->comments)) {
                 $post->setCommentCount($stream[$i]->comments->summary->total_count);
             } else {
                 $post->setCommentCount(0);
             }
-            
+
             $post->setPermalink($stream[$i]->actions[0]->link);
 
             // Grab any basic image data first attached image, if there is one. Src lookup will be done later.
