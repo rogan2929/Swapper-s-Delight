@@ -458,7 +458,6 @@ class PostFactory extends GraphObjectFactory {
         $windowEnd = $windowStart - $windowSize;
 
         $stream = array();
-        $users = array();
         $posts = array();
 
         // Pull the feed for stream data.
@@ -476,6 +475,9 @@ class PostFactory extends GraphObjectFactory {
                     'method' => 'GET',
                     'relative_url' => '/' . $this->gid . '/feed?fields=id,from,message,created_time,updated_time,picture,object_id,actions,link,comments.limit(1).summary(true)&since=' . $windowEnd . '&until=' . $windowStart . '&limit=5000&date_format=U'
                 );
+                
+                $windowStart -= $windowSize;
+                $windowEnd -= $windowSize;
             }
 
             // Execute the batch query.
