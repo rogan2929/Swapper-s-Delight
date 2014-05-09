@@ -417,13 +417,11 @@ class PostFactory extends GraphObjectFactory {
             'batch' => json_encode($userRequests),
             'include_headers' => false
         ));
-        
+
         echo json_encode($response);
 
         for ($j = 0; $j < count($response); $j++) {
             $body = json_decode($response[$j]->body);
-            
-            
         }
 
 //        // Build a multiquery for each post in the provided array.
@@ -595,7 +593,13 @@ class PostFactory extends GraphObjectFactory {
             $post->setActor($user);
             $post->setId($stream[$i]->id);
             $post->setMessage($stream[$i]->message);
-            $post->setCommentCount($stream[$i]->comments->summary->total_count);
+            
+            if (isset($stream[$i]->comments)) {
+                $post->setCommentCount($stream[$i]->comments->summary->total_count);
+            } else {
+                $post->setCommentCount(0);
+            }
+            
             $post->setPermalink($stream[$i]->actions[0]->link);
 
             // Grab any basic image data first attached image, if there is one. Src lookup will be done later.
