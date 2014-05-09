@@ -359,7 +359,7 @@ class PostFactory extends GraphObjectFactory {
             $post->setActor($users[$i]);
 
             // Get post type.
-            $post->setType($this->getPostType($pagedPosts[$j]));
+            $post->setType($this->getPostType($post));
         }
 
         // If there are no posts to load, then insert an terminating post.
