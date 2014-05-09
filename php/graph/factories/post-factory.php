@@ -420,7 +420,7 @@ class PostFactory extends GraphObjectFactory {
 
         for ($j = 0; $j < count($response); $j++) {
             $body = json_decode($response[$j]->body);
-            echo json_encode($body) . "</br></br>";
+            echo $body->picture->data->url . "</br></br>";
         }
 
 //        // Build a multiquery for each post in the provided array.
