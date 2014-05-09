@@ -390,22 +390,39 @@ class PostFactory extends GraphObjectFactory {
      * @return array
      */
     private function getPostData($posts, $offset, $limit) {
-        $queries = array();
-        $result = array();
+        $userRequests = array();
 
         if (!isset($limit) || $limit > 50) {
             $limit = 50;        // Max batch size.
         }
-        
+
         // What needs to be captured from the Graph API?
         // Fully flushed image data. (Multiple images, small / large srcs.) This may have to be retrieved using FQL.
         // User profile picture, url.
-
         // Break up the incoming posts into pages of up to 50.
         // 50 is the highest number of requests that can fit into one batch.
         $pagedPosts = array_slice($posts, $offset, $limit);
-        
+
         for ($i = 0; $i < count($pagedPosts); $i++) {
+            $actor = $pagedPosts[$i]->getActor();
+
+            $userRequests[] = array(
+                'method' => 'GET',
+                'relative_url' => '/' . $actor->getId() . '/picture'
+            );
+        }
+
+        // Execute the batch query.
+        $response = $this->graphApiClient->executeRequest('POST', '/', array(
+            'batch' => json_encode($userRequests),
+            'include_headers' => false
+        ));
+        
+        echo json_encode($response);
+
+        for ($j = 0; $j < count($response); $j++) {
+            $body = json_decode($response[$j]->body);
+            
             
         }
 
@@ -580,7 +597,7 @@ class PostFactory extends GraphObjectFactory {
             $post->setMessage($stream[$i]->message);
             $post->setCommentCount($stream[$i]->comments->summary->total_count);
             $post->setPermalink($stream[$i]->actions[0]->link);
-            
+
             // Grab any basic image data first attached image, if there is one. Src lookup will be done later.
 //            if (!is_null($stream[$i]->object_id)) {
 //                $image = new Image();
