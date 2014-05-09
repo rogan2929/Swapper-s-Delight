@@ -408,7 +408,7 @@ class PostFactory extends GraphObjectFactory {
 
             $userRequests[] = array(
                 'method' => 'GET',
-                'relative_url' => '/' . $actor->getUid() . '?fields=picture'
+                'relative_url' => '/' . $actor->getUid() . '?fields=link,picture'
             );
         }
 
@@ -418,10 +418,25 @@ class PostFactory extends GraphObjectFactory {
             'include_headers' => false
         ));
 
+        // Parse the user request responses.
         for ($j = 0; $j < count($response); $j++) {
             $body = json_decode($response[$j]->body);
-            echo $body->picture->data->url . "</br></br>";
+            //echo $body->picture->data->url . "</br></br>";
+            
+            $user = $pagedPosts[$j]->getActor();
+            
+            $user->setPicSquare($body->picture->data->url);
+            $user->setProfileUrl($body->link);
+            
+            $pagedPosts[$j]->setActor($user);
         }
+        
+        // If there are no posts to load, then insert an terminating post.
+        if ($offset + $limit >= count($posts)) {
+            $pagedPosts[] = array('id' => 'terminator');
+        }
+        
+        return $pagedPosts;
 
 //        // Build a multiquery for each post in the provided array.
 //        // If count($page) > 50, then it has to be broken up, since the maximum batch size is only 50.
@@ -459,7 +474,7 @@ class PostFactory extends GraphObjectFactory {
 //            $result[] = array('id' => 'terminator');
 //        }
 
-        return $result;
+        //return $result;
     }
 
     /**
