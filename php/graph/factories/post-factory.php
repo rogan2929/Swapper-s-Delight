@@ -394,14 +394,12 @@ class PostFactory extends GraphObjectFactory {
                 $nonImagePostIndices[] = $i;
             }
         }
-
+        
         // Execute the batch queries.
         $response = $this->graphApiClient->executeRequest('POST', '/', array(
             'batch' => json_encode($requests),
             'include_headers' => false
         ));
-        
-        echo json_encode($response);
         
         // Take care of the non-image posts.
         for ($j = 0; $j < count($nonImagePostIndices); $j++) {
