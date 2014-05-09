@@ -549,7 +549,7 @@ class PostFactory extends GraphObjectFactory {
             $post->setUpdatedTime($stream[$i]->updated_time);
 
             // Grab any basic image data first attached image, if there is one. Src lookup will be done later.
-            if (!is_null($stream[$i]->object_id)) {
+            if (isset($stream[$i]->object_id)) {
                 $image = new Image();
                 $image->setId($stream[$i]->object_id);
                 $post->setImageObjects(array($image));
