@@ -410,8 +410,6 @@ class PostFactory extends GraphObjectFactory {
             $images[] = ImageObjectFactory::getFirstImageFromGraphResponse(json_decode($response[$k]->body));
         }
         
-        echo var_dump($images);
-        
         return $images;
     }
 
