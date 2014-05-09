@@ -416,8 +416,6 @@ class PostFactory extends GraphObjectFactory {
         for ($j = 0; $j < count($response); $j++) {
             $users[] = UserFactory::getUserFromGraphResponse(json_decode($response[$j]->body));
         }
-
-        echo var_dump($users);
         
         return $users;
     }

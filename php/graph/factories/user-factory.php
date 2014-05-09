@@ -18,11 +18,17 @@ class UserFactory extends GraphObjectFactory {
         $user = new User();
         $user->setUid($response->id);
 
-        // Split full name.
-        $names = preg_split("/[\s,]+/", $response->name);
+        // Get full name.
+        if (isset($response->name)) {
+            $names = preg_split("/[\s,]+/", $response->name);
 
-        $user->setFirstName($names[0]);
-        $user->setLastName($names[1]);
+            $user->setFirstName($names[0]);
+            $user->setLastName($names[1]);
+        }
+        else {
+            $user->setFirstName($response->first_name);
+            $user->setLastName($response->last_name);
+        }
 
         if (isset($response->picture)) {
             $user->setPicSquare($response->picture->data->url);
