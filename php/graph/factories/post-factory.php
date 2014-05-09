@@ -429,6 +429,8 @@ class PostFactory extends GraphObjectFactory {
             $user->setProfileUrl($body->link);
             
             $pagedPosts[$j]->setActor($user);
+            
+            $pagedPosts[$j]->setPostType($this->getPostType($pagedPosts[$j]));
         }
         
         // If there are no posts to load, then insert an terminating post.
