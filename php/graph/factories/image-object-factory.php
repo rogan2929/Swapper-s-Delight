@@ -26,6 +26,8 @@ class ImageObjectFactory {
         $image->setId($response->id);
         $image->setUrl($response->source);
         
+        echo var_dump($response);
+        
         return $image;
     }
 
