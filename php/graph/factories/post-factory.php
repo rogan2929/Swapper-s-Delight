@@ -345,12 +345,11 @@ class PostFactory extends GraphObjectFactory {
         // What needs to be captured from the Graph API?
         // Fully flushed image data. (Multiple images, small / large srcs.) This may have to be retrieved using FQL.
         // User profile picture, url.
-        // Break up the incoming posts into pages of up to 50.
-        // 50 is the highest number of requests that can fit into one batch.
         $pagedPosts = array_slice($posts, $offset, $limit);
 
         // Get Post User Data
         $users = $this->getPostUserData($pagedPosts);
+        $images = $this->getPostImageData($pagedPosts);
 
         for ($i = 0; $i < count($pagedPosts); $i++) {
             $post = $pagedPosts[$i];
@@ -358,6 +357,9 @@ class PostFactory extends GraphObjectFactory {
             // Set actor.
             $post->setActor($users[$i]);
 
+            // Set tile image. (Can be null).
+            $post->setImageObjects(array($images[$i]));
+            
             // Get post type.
             $post->setType($this->getPostType($post));
         }
@@ -371,20 +373,44 @@ class PostFactory extends GraphObjectFactory {
     }
 
     private function getPostImageData($posts) {
-        $imageRequests = array();
-//        $imageResponse = $this->graphApiClient->executeRequest('POST', '/', array(
-//            'batch' => json_encode($imageRequests),
-//            'include_headers' => false
-//        ));
-        // Parse image responses.
-//        for ($k = 0; $k < count($pagedPosts); $k++) {
-//            $post = $pagedPosts[$k];
-//            $imageObjects = ImageObjectFactory::getImageObjects($post, $imageResponse);
-//            $post->setImageObjects($imageObjects);
-//        }
-//        for ($k = 0; $k < count($imageResponse); $k++) {
-//            
-//        }
+        $requests = array();
+        $nonImagePostIndices = array();
+        $images = array();
+
+        for ($i = 0; $i < count($posts); $i++) {
+            $post = $posts[$i];
+            $imageObjects = $post->getImageObjects();
+
+            if (!is_null($imageObjects)) {
+                $image = $imageObjects[0];
+
+                $requests[] = array(
+                    'method' => 'GET',
+                    'relative_url' => '/' . $image->getId() . '?fields=id,source'
+                );
+            }
+            else {
+                // Keep track of which posts do not have images.
+                $nonImagePostIndices[] = $i;
+            }
+        }
+
+        // Execute the batch queries.
+        $response = $this->graphApiClient->executeRequest('POST', '/', array(
+            'batch' => json_encode($requests),
+            'include_headers' => false
+        ));
+        
+        // Take care of the non-image posts.
+        for ($j = 0; $j < count($nonImagePostIndices); $j++) {
+            $images[$nonImagePostIndices[$j]] = null;
+        }
+        
+        for ($k = 0; $k < count($response); $k++) {
+            $images[] = ImageObjectFactory::getFirstImageFromGraphResponse($response[$k]->body);
+        }
+        
+        return $images;
     }
 
     /**
@@ -416,7 +442,7 @@ class PostFactory extends GraphObjectFactory {
         for ($j = 0; $j < count($response); $j++) {
             $users[] = UserFactory::getUserFromGraphResponse(json_decode($response[$j]->body));
         }
-        
+
         return $users;
     }
 
@@ -475,7 +501,7 @@ class PostFactory extends GraphObjectFactory {
                     'method' => 'GET',
                     'relative_url' => '/' . $this->gid . '/feed?fields=id,from,message,created_time,updated_time,picture,object_id,actions,link,comments.limit(1).summary(true)&since=' . $windowEnd . '&until=' . $windowStart . '&limit=5000&date_format=U'
                 );
-                
+
                 $windowStart -= $windowSize;
                 $windowEnd -= $windowSize;
             }

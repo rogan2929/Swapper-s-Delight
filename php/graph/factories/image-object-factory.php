@@ -17,22 +17,16 @@ class ImageObjectFactory {
         $this->imageStream = $imageStream;
     }
 
-    public static function getImageObjects($post, $imageResponse) {
-        // Image data, if there is any.
-        $imageObjects = $post->getImageObjects();
-        $fullImageObjects = array();
-
-        if (!is_null($imageObjects)) {
-            $image = $imageObjects[0];
-
-            for ($i = 0; $i < count($imageResponse); $i++) {
-                
-            }
-        } else {
-            
-        }
-
-        return $fullImageObjects;
+    /**
+     * Get first image from graph response.
+     * @param type $response
+     */
+    public static function getFirstImageFromGraphResponse($response) {
+        $image = new Image();
+        $image->setId($response->id);
+        $image->setUrl($response->source);
+        
+        return $image;
     }
 
     /**
