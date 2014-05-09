@@ -576,7 +576,7 @@ class PostFactory extends GraphObjectFactory {
             for ($j = 0; $j < $batchSize; $j++) {
                 $requests[] = array(
                     'method' => 'GET',
-                    'relative_url' => '/' . $this->gid . '/feed?fields=id,from,message,picture,object_id,actions,link,comments.limit(1).summary(true)&since=' . $windowEnd . '&until=' . $windowStart . '&limit=5000&date_format=U'
+                    'relative_url' => '/' . $this->gid . '/feed?fields=id,from,message,created_time,updated_time,picture,object_id,actions,link,comments.limit(1).summary(true)&since=' . $windowEnd . '&until=' . $windowStart . '&limit=5000&date_format=U'
                 );
             }
 
@@ -620,6 +620,9 @@ class PostFactory extends GraphObjectFactory {
             }
 
             $post->setPermalink($stream[$i]->actions[0]->link);
+            
+            $post->setCreatedTime($stream[$i]->created_time);
+            $post->setUpdatedTime($stream[$i]->updated_time);
 
             // Grab any basic image data first attached image, if there is one. Src lookup will be done later.
 //            if (!is_null($stream[$i]->object_id)) {
