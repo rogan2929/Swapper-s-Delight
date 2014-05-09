@@ -389,17 +389,25 @@ class PostFactory extends GraphObjectFactory {
      * @param int $limit
      * @return array
      */
-    private function getPostData($posts, $offset) {
+    private function getPostData($posts, $offset, $limit) {
         $queries = array();
         $result = array();
 
-        if (!isset($limit)) {
+        if (!isset($limit) || $limit > 50) {
             $limit = 50;        // Max batch size.
         }
         
         // What needs to be captured from the Graph API?
         // Fully flushed image data. (Multiple images, small / large srcs.) This may have to be retrieved using FQL.
         // User profile picture, url.
+
+        // Break up the incoming posts into pages of up to 50.
+        // 50 is the highest number of requests that can fit into one batch.
+        $pagedPosts = array_slice($posts, $offset, $limit);
+        
+        for ($i = 0; $i < count($pagedPosts); $i++) {
+            
+        }
 
 //        // Build a multiquery for each post in the provided array.
 //        // If count($page) > 50, then it has to be broken up, since the maximum batch size is only 50.
