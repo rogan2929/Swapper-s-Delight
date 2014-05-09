@@ -17,6 +17,24 @@ class ImageObjectFactory {
         $this->imageStream = $imageStream;
     }
 
+    public static function getImageObjects($post, $imageResponse) {
+        // Image data, if there is any.
+        $imageObjects = $post->getImageObjects();
+        $fullImageObjects = array();
+
+        if (!is_null($imageObjects)) {
+            $image = $imageObjects[0];
+
+            for ($i = 0; $i < count($imageResponse); $i++) {
+                
+            }
+        } else {
+            
+        }
+
+        return $fullImageObjects;
+    }
+
     /**
      * Parse an FQL stream result and construct an array of Image entities.
      * @param type $post

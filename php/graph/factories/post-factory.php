@@ -58,63 +58,11 @@ class PostFactory extends GraphObjectFactory {
     }
 
     /**
-     * Like a post.
-     * @param string $postId
-     * @param bool $userLikes
-     * @return bool
-     */
-//    public function likePost($postId, $userLikes) {
-//        if ($userLikes == true) {
-//            // Like the post.
-//            $this->likeObject($postId);
-//        } else {
-//            // Unlike the post.
-//            $this->unLikeObject($postId);
-//        }
-//
-////        // Update the cached post stream.
-////        for ($i = 0; $i < count($this->stream); $i++) {
-////            if ($this->stream[$i]['post_id'] == $postId) {
-////                $this->stream[$i]['user_likes'] = (int) $userLikes;
-////            }
-////        }
-////
-////        // Save the updated stream.
-////        $_SESSION['stream'] = $this->stream;
-//
-//        return $userLikes;
-//    }
-
-    /**
      * Set the currently loaded group's gid.
      * @param string $gid
      */
     public function setGid($gid) {
         $this->gid = $gid;
-    }
-
-    /**
-     * Method for performing a fully query of the FQL stream table. 
-     * Designed to be called from an external file so execution can be
-     * performed asynchronously through fopen or popen.
-     * @return string
-     */
-    public function fetchStreamFullAsync($args) {
-        $this->graphApiClient->setAccessToken($args['accessToken']);
-        $this->setGid($args['gid']);
-
-        $windowStart = time();
-        $windowSize = $this->getOptimalWindowSize();
-
-        $stream = $this->getFeedData($windowSize, $windowStart, 50, 1);
-        $windowStart = $windowStart - ($windowSize * 50 * 1);
-        $stream = array_merge($stream, $this->getFeedData($windowSize * 2, $windowStart, 13, 1));
-        $windowStart = $windowStart - ($windowSize * 2 * 13 * 1);
-        $stream = array_merge($stream, $this->getFeedData($windowSize * 3, $windowStart, 11, 1));
-        $windowStart = $windowStart - ($windowSize * 3 * 11 * 1);
-        $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
-
-        return json_encode($stream);
     }
 
     /**
@@ -174,7 +122,7 @@ class PostFactory extends GraphObjectFactory {
     public function getNewPosts($refresh, $offset, $limit) {
         // Get a new stream if necessary.
         if ($refresh == true) {
-            $this->fetchStream(true);
+            $this->fetchPosts(true);
         }
 
         return $this->getPostData($this->stream, $offset, $limit);
@@ -186,67 +134,67 @@ class PostFactory extends GraphObjectFactory {
      * @return /Post
      */
     public function getPostDetails($postId) {
-        $queries = array(
-            'detailsQuery' => GraphObjectFactory::DETAILS_QUERY . 'WHERE post_id="' . $postId . '"',
-            'imageQuery' => GraphObjectFactory::IMAGE_QUERY . 'WHERE object_id IN (SELECT attachment FROM #detailsQuery)',
-            'userQuery' => GraphObjectFactory::USER_QUERY . 'WHERE uid IN (SELECT actor_id FROM #detailsQuery)',
-            'commentsQuery' => GraphObjectFactory::COMMENT_QUERY . 'WHERE post_id IN (SELECT post_id FROM #detailsQuery) ORDER BY time ASC',
-            'commentUserQuery' => GraphObjectFactory::USER_QUERY . 'WHERE uid IN (SELECT fromid FROM #commentsQuery)',
-            'commentImageQuery' => GraphObjectFactory::IMAGE_QUERY . 'WHERE object_id IN (SELECT attachment FROM #commentsQuery)'
-        );
-
-        // Run the query.
-        $response = $this->graphApiClient->api(array(
-            'method' => 'fql.multiquery',
-            'queries' => $queries
-        ));
-
-        // Check to ensure that post data was actually returned.
-        // This is done by checking for post_id in the fql_result_set.
-        if (!isset($response[0]['fql_result_set'][0]['post_id'])) {
-            $e = new Exception('Sorry, but this post couldn\'t be loaded. It may have been deleted.');
-            echo $e->getMessage();
-            throw $e;
-        }
-
-        try {
-            $raw = $response[0]['fql_result_set'][0];
-
-            // Collect the returned data.
-            $post = new Post();
-
-            // post_id,message,actor_id,permalink,like_info,share_info,comment_info,tagged_ids,attachment,created_time
-            $post->setId($raw['post_id']);
-            $post->setMessage($raw['message']);
-            $post->setPermalink($raw['permalink']);
-            $post->setUserLikes($raw['like_info']['user_likes']);
-            $post->setUpdatedTime($raw['updated_time']);
-            $post->setCreatedTime($raw['created_time']);
-            $post->setActor((new UserFactory())->createUser($response[3]['fql_result_set'][0]));
-        } catch (Exception $ex) {
-            echo 'Sorry, but this post couldn\'t be loaded. It may have been deleted.';
-            http_response_code(500);
-        }
-
-        if (strlen($post->getMessage()) > 0) {
-            // Replace new line characters with <br/>
-            $post->setMessage(nl2br($post->getMessage()));
-        }
-
-        // Extract image data for the post.
-        $imgFactory = new ImageObjectFactory($response[2]['fql_result_set']);
-        $post->setImageObjects($imgFactory->getImageObjectsFromFQL($raw, false));
-
-        // Extract link data.
-        $post->setLinkData((new LinkDataFactory())->getLinkDataFromFQL($raw));
-
-        // Determine type of post.
-        $post->setType($this->getPostType($post));
-
-        // Parse comment data and set it.
-        $post->setComments((new CommentFactory())->getCommentsFromFQL($response[1]['fql_result_set'], $response[5]['fql_result_set'], $response[4]['fql_result_set']));
-
-        return $post;
+//        $queries = array(
+//            'detailsQuery' => GraphObjectFactory::DETAILS_QUERY . 'WHERE post_id="' . $postId . '"',
+//            'imageQuery' => GraphObjectFactory::IMAGE_QUERY . 'WHERE object_id IN (SELECT attachment FROM #detailsQuery)',
+//            'userQuery' => GraphObjectFactory::USER_QUERY . 'WHERE uid IN (SELECT actor_id FROM #detailsQuery)',
+//            'commentsQuery' => GraphObjectFactory::COMMENT_QUERY . 'WHERE post_id IN (SELECT post_id FROM #detailsQuery) ORDER BY time ASC',
+//            'commentUserQuery' => GraphObjectFactory::USER_QUERY . 'WHERE uid IN (SELECT fromid FROM #commentsQuery)',
+//            'commentImageQuery' => GraphObjectFactory::IMAGE_QUERY . 'WHERE object_id IN (SELECT attachment FROM #commentsQuery)'
+//        );
+//
+//        // Run the query.
+//        $response = $this->graphApiClient->api(array(
+//            'method' => 'fql.multiquery',
+//            'queries' => $queries
+//        ));
+//
+//        // Check to ensure that post data was actually returned.
+//        // This is done by checking for post_id in the fql_result_set.
+//        if (!isset($response[0]['fql_result_set'][0]['post_id'])) {
+//            $e = new Exception('Sorry, but this post couldn\'t be loaded. It may have been deleted.');
+//            echo $e->getMessage();
+//            throw $e;
+//        }
+//
+//        try {
+//            $raw = $response[0]['fql_result_set'][0];
+//
+//            // Collect the returned data.
+//            $post = new Post();
+//
+//            // post_id,message,actor_id,permalink,like_info,share_info,comment_info,tagged_ids,attachment,created_time
+//            $post->setId($raw['post_id']);
+//            $post->setMessage($raw['message']);
+//            $post->setPermalink($raw['permalink']);
+//            $post->setUserLikes($raw['like_info']['user_likes']);
+//            $post->setUpdatedTime($raw['updated_time']);
+//            $post->setCreatedTime($raw['created_time']);
+//            $post->setActor((new UserFactory())->createUser($response[3]['fql_result_set'][0]));
+//        } catch (Exception $ex) {
+//            echo 'Sorry, but this post couldn\'t be loaded. It may have been deleted.';
+//            http_response_code(500);
+//        }
+//
+//        if (strlen($post->getMessage()) > 0) {
+//            // Replace new line characters with <br/>
+//            $post->setMessage(nl2br($post->getMessage()));
+//        }
+//
+//        // Extract image data for the post.
+//        $imgFactory = new ImageObjectFactory($response[2]['fql_result_set']);
+//        $post->setImageObjects($imgFactory->getImageObjectsFromFQL($raw, false));
+//
+//        // Extract link data.
+//        $post->setLinkData((new LinkDataFactory())->getLinkDataFromFQL($raw));
+//
+//        // Determine type of post.
+//        $post->setType($this->getPostType($post));
+//
+//        // Parse comment data and set it.
+//        $post->setComments((new CommentFactory())->getCommentsFromFQL($response[1]['fql_result_set'], $response[5]['fql_result_set'], $response[4]['fql_result_set']));
+//
+//        return $post;
     }
 
     /**
@@ -276,7 +224,7 @@ class PostFactory extends GraphObjectFactory {
         $this->gid = $gid;
 
         // Fetch the new stream.
-        $this->fetchStream(false);
+        $this->fetchPosts(false);
 
         return count($this->stream);
     }
@@ -305,7 +253,7 @@ class PostFactory extends GraphObjectFactory {
      * Builds a locally cached version of the FQL stream table.
      * @param bool $prefetchOnly
      */
-    public function fetchStream($prefetchOnly) {
+    public function fetchPosts($prefetchOnly) {
         if ($prefetchOnly) {
             // Only retrieve a small subset of the full stream, in order for data to be displayed more quickly to the user.
             $windowStart = time();
@@ -315,12 +263,12 @@ class PostFactory extends GraphObjectFactory {
             $postLimit = 200;
 
             // Perform a two step query of varying window sizes, and then merge the result.
-            $stream = $this->getFeedData($windowSize, $windowStart, 14, 1, $postLimit);
+            $stream = $this->getPostStreamData($windowSize, $windowStart, 14, 1, $postLimit);
 
             // Only continue with another batch if $postLimit has not been reached.
             if (count($stream) <= $postLimit) {
                 $windowStart = $windowStart - ($windowSize * 14 * 1);
-                $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
+                $stream = array_merge($stream, $this->getPostStreamData(3600 * 24 * 30, $windowStart, 1, 1));
             }
 
             $this->stream = $stream;
@@ -328,13 +276,13 @@ class PostFactory extends GraphObjectFactory {
             $windowStart = time();
             $windowSize = $this->getOptimalWindowSize();
 
-            $stream = $this->getFeedData($windowSize, $windowStart, 50, 1);
+            $stream = $this->getPostStreamData($windowSize, $windowStart, 50, 1);
             $windowStart = $windowStart - ($windowSize * 50 * 1);
-            $stream = array_merge($stream, $this->getFeedData($windowSize * 2, $windowStart, 13, 1));
+            $stream = array_merge($stream, $this->getPostStreamData($windowSize * 2, $windowStart, 13, 1));
             $windowStart = $windowStart - ($windowSize * 2 * 13 * 1);
-            $stream = array_merge($stream, $this->getFeedData($windowSize * 3, $windowStart, 11, 1));
+            $stream = array_merge($stream, $this->getPostStreamData($windowSize * 3, $windowStart, 11, 1));
             $windowStart = $windowStart - ($windowSize * 3 * 11 * 1);
-            $stream = array_merge($stream, $this->getFeedData(3600 * 24 * 30, $windowStart, 1, 1));
+            $stream = array_merge($stream, $this->getPostStreamData(3600 * 24 * 30, $windowStart, 1, 1));
 
             $this->stream = $stream;
         }
@@ -390,8 +338,6 @@ class PostFactory extends GraphObjectFactory {
      * @return array
      */
     private function getPostData($posts, $offset, $limit) {
-        $userRequests = array();
-
         if (!isset($limit) || $limit > 50) {
             $limit = 50;        // Max batch size.
         }
@@ -403,124 +349,75 @@ class PostFactory extends GraphObjectFactory {
         // 50 is the highest number of requests that can fit into one batch.
         $pagedPosts = array_slice($posts, $offset, $limit);
 
-        for ($i = 0; $i < count($pagedPosts); $i++) {
-            $actor = $pagedPosts[$i]->getActor();
+        // Get Post User Data
+        $users = $this->getPostUserData($pagedPosts);
 
-            $userRequests[] = array(
+        for ($i = 0; $i < count($pagedPosts); $i++) {
+            $post = $pagedPosts[$i];
+
+            // Set actor.
+            $post->setActor($users[$i]);
+
+            // Get post type.
+            $post->setType($this->getPostType($pagedPosts[$j]));
+        }
+
+        // If there are no posts to load, then insert an terminating post.
+        if ($offset + $limit >= count($posts)) {
+            $pagedPosts[] = array('id' => 'terminator');
+        }
+
+        return $pagedPosts;
+    }
+
+    private function getPostImageData($posts) {
+        $imageRequests = array();
+//        $imageResponse = $this->graphApiClient->executeRequest('POST', '/', array(
+//            'batch' => json_encode($imageRequests),
+//            'include_headers' => false
+//        ));
+        // Parse image responses.
+//        for ($k = 0; $k < count($pagedPosts); $k++) {
+//            $post = $pagedPosts[$k];
+//            $imageObjects = ImageObjectFactory::getImageObjects($post, $imageResponse);
+//            $post->setImageObjects($imageObjects);
+//        }
+//        for ($k = 0; $k < count($imageResponse); $k++) {
+//            
+//        }
+    }
+
+    /**
+     * Get user data for the array of posts.
+     * @param type $posts
+     * @return type
+     */
+    private function getPostUserData($posts) {
+        $requests = array();
+        $users = array();
+
+        // Generate requests for additional data.
+        for ($i = 0; $i < count($posts); $i++) {
+            $actor = $posts[$i]->getActor();
+
+            $requests[] = array(
                 'method' => 'GET',
                 'relative_url' => '/' . $actor->getUid() . '?fields=link,picture'
             );
         }
 
-        // Execute the batch query.
+        // Execute the batch queries
         $response = $this->graphApiClient->executeRequest('POST', '/', array(
-            'batch' => json_encode($userRequests),
+            'batch' => json_encode($requests),
             'include_headers' => false
         ));
 
         // Parse the user request responses.
         for ($j = 0; $j < count($response); $j++) {
-            $body = json_decode($response[$j]->body);
-            //echo $body->picture->data->url . "</br></br>";
-            
-            $user = $pagedPosts[$j]->getActor();
-            
-            $user->setPicSquare($body->picture->data->url);
-            $user->setPicFull($body->picture->data->url);
-            $user->setProfileUrl($body->link);
-            
-            $pagedPosts[$j]->setActor($user);
-            
-            $pagedPosts[$j]->setType($this->getPostType($pagedPosts[$j]));
-        }
-        
-        // If there are no posts to load, then insert an terminating post.
-        if ($offset + $limit >= count($posts)) {
-            $pagedPosts[] = array('id' => 'terminator');
-        }
-        
-        return $pagedPosts;
-
-//        // Build a multiquery for each post in the provided array.
-//        // If count($page) > 50, then it has to be broken up, since the maximum batch size is only 50.
-//        for ($i = 0; $i < count($page); $i++) {
-//            $queries[] = array(
-//                'method' => 'POST',
-//                'relative_url' => 'method/fql.multiquery?queries=' . json_encode(array(
-//                    'streamQuery' => GraphObjectFactory::STREAM_QUERY . 'WHERE post_id="' . $page[$i]->getId() . '"',
-//                    'imageQuery' => GraphObjectFactory::IMAGE_QUERY . 'WHERE object_id IN (SELECT attachment FROM #streamQuery)',
-//                    'userQuery' => GraphObjectFactory::USER_QUERY . 'WHERE uid IN (SELECT actor_id FROM #streamQuery)'
-//                ))
-//            );
-//        }
-//
-//        $processed = 0;
-//
-//        // Execute the batch queries in chunks of 50.
-//        while ($processed < count($page)) {
-//            $response = $this->graphApiClient->api('/', 'POST', array(
-//                'batch' => json_encode(array_slice($queries, $processed, 50)),
-//                'include_headers' => false
-//            ));
-//
-//            // Sift through the results.
-//            for ($i = 0; $i < count($response); $i++) {
-//                $body = json_decode($response[$i]['body'], true);
-//                $result = array_merge($result, $this->processStreamQuery($body[0]['fql_result_set'], $body[1]['fql_result_set'], $body[2]['fql_result_set']));
-//            }
-//
-//            $processed += count($response);
-//        }
-//
-//        // If there are no posts to load, then insert an terminating post.
-//        if ($offset + $limit >= count($posts)) {
-//            $result[] = array('id' => 'terminator');
-//        }
-
-        //return $result;
-    }
-
-    /**
-     * Take a response and construct \Post objects out of it.
-     * @param array $stream
-     * @param array $images
-     * @param array $users
-     * @return array
-     */
-    private function processStreamQuery($stream, $images, $users) {
-        $posts = array();
-        $imgFactory = new ImageObjectFactory($images);
-        $lnkFactory = new LinkDataFactory();
-        $usrFactory = new UserFactory($users);
-
-        for ($i = 0; $i < count($stream); $i++) {
-            $post = new Post();
-
-            //post_id,actor_id,updated_time,message,attachment,comment_info,created_time
-            $post->setId($stream[$i]['post_id']);
-            $post->setUpdatedTime($stream[$i]['updated_time']);
-            $post->setCreatedTime($stream[$i]['created_time']);
-            $post->setCommentCount($stream[$i]['comment_info']['comment_count']);
-            $post->setMessage($stream[$i]['message']);
-
-            // Parse associated data from the query.
-            $post->setImageObjects($imgFactory->getImageObjectsFromFQL($stream[$i], false));
-            $post->setLinkData($lnkFactory->getLinkDataFromFQL($stream[$i]));
-            $post->setActor($usrFactory->getUserFromFQLResultSet($stream[$i]));
-
-            // Determine which kind of post this is.
-            $post->setType($this->getPostType($post));
-
-            // Replace any line breaks with <br/>
-            if (strlen($post->getMessage()) > 0) {
-                $post->setMessage(nl2br($post->getMessage()));
-            }
-
-            // Add to the posts array.
-            $posts[] = $post;
+            $users[] = UserFactory::getUserFromGraphResponse(json_decode($response[$j]->body));
         }
 
-        return $posts;
+        return $users;
     }
 
     /**
@@ -557,7 +454,7 @@ class PostFactory extends GraphObjectFactory {
      * @param int $iterations
      * @return array
      */
-    private function getFeedData($windowSize, $windowStart, $batchSize, $iterations = 1, $postLimit = null) {
+    private function getPostStreamData($windowSize, $windowStart, $batchSize, $iterations = 1, $postLimit = null) {
         $windowEnd = $windowStart - $windowSize;
 
         $stream = array();
@@ -596,41 +493,39 @@ class PostFactory extends GraphObjectFactory {
 
         // Parse the post data.
         for ($i = 0; $i < count($stream); $i++) {
-            // Create user object.
-            $user = new User();
-            $user->setUid($stream[$i]->from->id);
-
-            // Split full name.
-            $names = preg_split("/[\s,]+/", $stream[$i]->from->name);
-
-            $user->setFirstName($names[0]);
-            $user->setLastName($names[1]);
-
             $post = new Post();
-            $post->setActor($user);
+
+            // Actor
+            $post->setActor(UserFactory::getUserFromGraphResponse($stream[$i]));
+
+            // ID
             $post->setId($stream[$i]->id);
 
+            // Message
             if ($stream[$i]->message) {
                 $post->setMessage($stream[$i]->message);
             }
 
+            // Comment count.
             if (isset($stream[$i]->comments)) {
                 $post->setCommentCount($stream[$i]->comments->summary->total_count);
             } else {
                 $post->setCommentCount(0);
             }
 
+            // Permalink
             $post->setPermalink($stream[$i]->actions[0]->link);
-            
+
+            // Creation / updated time.
             $post->setCreatedTime($stream[$i]->created_time);
             $post->setUpdatedTime($stream[$i]->updated_time);
 
             // Grab any basic image data first attached image, if there is one. Src lookup will be done later.
-//            if (!is_null($stream[$i]->object_id)) {
-//                $image = new Image();
-//                $image->setId($stream[$i]->object_id);
-//                $post->setImageObjects(array($image));
-//            }
+            if (!is_null($stream[$i]->object_id)) {
+                $image = new Image();
+                $image->setId($stream[$i]->object_id);
+                $post->setImageObjects(array($image));
+            }
 
             $posts[] = $post;
         }
