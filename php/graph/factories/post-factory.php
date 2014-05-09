@@ -407,7 +407,7 @@ class PostFactory extends GraphObjectFactory {
         }
         
         for ($k = 0; $k < count($response); $k++) {
-            $images[] = ImageObjectFactory::getFirstImageFromGraphResponse($response[$k]->body);
+            $images[] = ImageObjectFactory::getFirstImageFromGraphResponse(json_decode($response[$k]->body));
         }
         
         return $images;
