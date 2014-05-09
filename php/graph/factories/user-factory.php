@@ -17,8 +17,6 @@ class UserFactory extends GraphObjectFactory {
         // Create user object.
         $user = new User();
         $user->setUid($response->id);
-        
-        echo var_dump($response) . "</br>";
 
         // Split full name.
         $names = preg_split("/[\s,]+/", $response->name);
@@ -34,6 +32,8 @@ class UserFactory extends GraphObjectFactory {
         if (isset($response->link)) {
             $user->setProfileUrl($response->link);
         }
+        
+        echo var_dump(user) . "</br>";
 
         return $user;
     }
