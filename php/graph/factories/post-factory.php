@@ -357,8 +357,13 @@ class PostFactory extends GraphObjectFactory {
             // Set actor.
             $post->setActor($users[$i]);
 
-            // Set tile image. (Can be null).
-            $post->setImageObjects(array($images[$i]));
+            // Set tile image. (Can be empty).
+            if (!is_null($images[$i])) {
+                $post->setImageObjects(array($images[$i])); 
+            }
+            else {
+                $post->setImageObjects(array());
+            }
             
             // Get post type.
             $post->setType($this->getPostType($post));
