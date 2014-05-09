@@ -426,6 +426,7 @@ class PostFactory extends GraphObjectFactory {
             $user = $pagedPosts[$j]->getActor();
             
             $user->setPicSquare($body->picture->data->url);
+            $user->setPicFull($body->picture->data->url);
             $user->setProfileUrl($body->link);
             
             $pagedPosts[$j]->setActor($user);
