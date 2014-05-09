@@ -10,4 +10,4 @@ $postFactory = new PostFactory();
 $postFactory->setGid($gid);
 $postFactory->fetchPosts(true);
 
-//echo json_encode($postFactory->getStream());
+echo json_encode($postFactory->getStream());

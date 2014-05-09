@@ -32,8 +32,6 @@ class UserFactory extends GraphObjectFactory {
         if (isset($response->link)) {
             $user->setProfileUrl($response->link);
         }
-        
-        echo var_dump($user);
 
         return $user;
     }
