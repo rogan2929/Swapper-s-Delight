@@ -408,7 +408,7 @@ class PostFactory extends GraphObjectFactory {
 
             $userRequests[] = array(
                 'method' => 'GET',
-                'relative_url' => '/' . $actor->getUid() . '/picture'
+                'relative_url' => '/' . $actor->getUid() . '?fields=picture'
             );
         }
 

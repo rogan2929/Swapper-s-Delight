@@ -165,7 +165,7 @@ error_reporting(E_ALL);
                                         </div>-->
                     <div id='button-menu-main' class='button toolbar-button menu-button emphasized'>
                         <span class='button-icon icon-menu'></span>
-                        <span>Menu</span>
+                        <span>View</span>
                         <a href='#popup-menu-main'></a>
                     </div>
                     <div id='button-refresh' class='button toolbar-button'>
@@ -188,7 +188,7 @@ error_reporting(E_ALL);
                 <div class='toolbar-group float-left'>
                     <div id='post-button-permalink' class='button toolbar-button'>
                         <span class='button-icon icon-facebook'></span>
-                        <span>View in Facebook</span>
+                        <span>Open in Facebook</span>
                     </div>
                     <div id='post-button-like' class='button toolbar-button'>
                         <span class='button-icon icon-like'></span>
@@ -243,7 +243,7 @@ error_reporting(E_ALL);
                     <span>Posts Liked by Me</span>
                 </div>
                 <div id='button-view-group' class='menu-item'>
-                    <span>View in Facebook</span>
+                    <span>Open in Facebook</span>
                 </div>
                 <input type='text' id='main-search' class='search-box' placeholder='Search this group'>
                 <!--                <div class='separator'></div>
