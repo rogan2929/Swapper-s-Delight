@@ -529,7 +529,7 @@ class PostFactory extends GraphObjectFactory {
             $post->setId($stream[$i]->id);
 
             // Message
-            if ($stream[$i]->message) {
+            if (isset($stream[$i]->message)) {
                 $post->setMessage($stream[$i]->message);
             }
 
