@@ -84,18 +84,6 @@ var SwdModel = {
             }
         });
     },
-    getHiddenGroups: function(callbacks) {
-        $.ajax({
-            type: 'GET',
-            url: '/php/hidden-groups.php',
-            success: function(response) {
-                callbacks.success.call(SwdModel, response);
-            },
-            error: function(response) {
-                callbacks.error.call(SwdModel, response);
-            }
-        });
-    },
     /***
      * Get posts that are owned by the current user in the provided group. Go back 42 days.
      * 
@@ -202,12 +190,11 @@ var SwdModel = {
     },
     /***
      * Remove a group from the selected groups list by saving it to the HiddenGroups DB table.
-     * @param {type} uid
      * @param {type} gid
      * @param {type} callbacks
      */
-    hideGroup: function(uid, gid, callbacks) {
-        var url = '/php/hide-group.php?uid=' + uid + '&gid=' + gid;
+    removeGroup: function(gid, callbacks) {
+        var url = '/php/remove-group.php?&gid=' + gid;
 
         $.ajax({
             type: 'GET',
@@ -251,22 +238,6 @@ var SwdModel = {
         $.ajax({
             type: 'GET',
             url: url,
-            success: function(response) {
-                callbacks.success.call(SwdModel, response);
-            },
-            error: function(response) {
-                callbacks.error.call(SwdModel, response);
-            }
-        });
-    },
-    /***
-     * Restores all groups to the selected groups list.
-     * @param {type} callbacks
-     */
-    restoreAllGroups: function(callbacks) {
-        $.ajax({
-            type: 'GET',
-            url: '/php/restore-groups.php',
             success: function(response) {
                 callbacks.success.call(SwdModel, response);
             },
@@ -478,7 +449,6 @@ var SwdPresenter = {
                         SwdView.installHandler('onClickPostNavNext', SwdPresenter.onClickPostNavNext, '#details-next', 'click');
                         SwdView.installHandler('onClickSelectGroup', SwdPresenter.onClickSelectGroup, '.selection-item.select-group', 'click');
                         SwdView.installHandler('onClickGroupClose', SwdPresenter.onClickGroupClose, '.group-selection-item > .close-button', 'click');
-                        SwdView.installHandler('onClickRestoreGroupSelectionItems', SwdPresenter.onClickRestoreGroupSelectionItems, '#restore-group-selection-items', 'click');
                         SwdView.installHandler('onClickMenuSearchBox', SwdPresenter.onClickMenuSearchBox, '.menu .search-box', 'click');
                         SwdView.installHandler('onClickToolbar', SwdPresenter.onClickToolbar, '.toolbar', 'click');
                         SwdView.installHandler('onKeyDownNewCommentText', SwdPresenter.onKeyDownNewCommentText, '#new-comment-text', 'keydown');
@@ -1071,20 +1041,10 @@ var SwdPresenter = {
         SwdView.hideGroupFromSelectPanel(groupTile);
 
         // Remove the item from the back end.
-        SwdModel.hideGroup(SwdPresenter.uid, gid, {
+        SwdModel.removeGroup(gid, {
             success: function() {
             },
             fail: SwdPresenter.handleError
-        });
-    },
-    onClickRestoreGroupSelectionItems: function(e, args) {
-        // Restore all group selection items.
-        SwdView.showAllGroupSelectionItems();
-
-        SwdModel.restoreAllGroups({
-            success: function() {
-            },
-            error: SwdPresenter.handleError
         });
     },
     onClickMenuSearchBox: function(e, args) {

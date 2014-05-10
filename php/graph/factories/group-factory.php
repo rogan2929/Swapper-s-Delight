@@ -19,9 +19,9 @@ class GroupFactory extends GraphObjectFactory {
     
     /**
      * Add a group to the application.
-     * @param string $id
+     * @param string $gid
      */
-    public function addGroup($id) {
+    public function addGroup($gid) {
         $uid = $this->graphApiClient->getMe();
 
         $conn = sqlsrv_connect($this->sqlServer, $this->sqlConnectionInfo);
@@ -31,7 +31,7 @@ class GroupFactory extends GraphObjectFactory {
         }
 
         // Insert the appropriate row.
-        $sql = 'INSERT INTO UserGroups (UserId, GroupId) VALUES (\'' . $uid . '\', \'' . $id . '\')';
+        $sql = 'INSERT INTO UserGroups (UserId, GroupId) VALUES (\'' . $uid . '\', \'' . $gid . '\')';
 
         // Execute the query.
         sqlsrv_query($conn, $sql);
@@ -39,9 +39,9 @@ class GroupFactory extends GraphObjectFactory {
     
     /**
      * Remove a marked group.
-     * @param string $id
+     * @param string $gid
      */
-    public function removeGroup($id) {
+    public function removeGroup($gid) {
         $uid = $this->graphApiClient->getMe();
 
         $conn = sqlsrv_connect($this->sqlServer, $this->sqlConnectionInfo);
@@ -51,7 +51,7 @@ class GroupFactory extends GraphObjectFactory {
         }
 
         // Delete the appropriate row.
-        $sql = 'DELETE FROM UserGroups WHERE UserId=\'' . $uid . '\' AND GroupId=\'' . $id . '\'';
+        $sql = 'DELETE FROM UserGroups WHERE UserId=\'' . $uid . '\' AND GroupId=\'' . $gid . '\'';
 
         // Execute the query.
         sqlsrv_query($conn, $sql);   

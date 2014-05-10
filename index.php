@@ -110,7 +110,6 @@ error_reporting(E_ALL);
                         <div class='close-button'></div>
                         <div class='heading-group'>
                             <span class='heading'>Choose a group to start.</span>
-                            <span class='hint'>Hint: You can also hide any groups that you don't want to see here. Don't worry; click <a id='restore-group-selection-items' href='#'>here</a> to bring them back.</span>
                         </div>
                         <div id='select-group-no-groups' class='heading hints text-centered'>
                             You're not a member of any Facebook groups. Use the Facebook search function to find some to join.
