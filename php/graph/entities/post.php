@@ -18,6 +18,10 @@ class Post extends GraphObject {
     protected $permalink;
     protected $comments;
     protected $imageObjects;
+    
+    public function __construct() {
+        $this->imageObjects = array();
+    }
 
     /**
      * Gets the post's associated image objects.
@@ -25,6 +29,27 @@ class Post extends GraphObject {
      */
     public function getImageObjects() {
         return $this->imageObjects;
+    }
+    
+    /**
+     * Gets the post's first image.
+     * @return type
+     */
+    public function getFirstImage() {
+        if (isset($this->imageObjects[0])) {
+            return $this->imageObjects[0];
+        }
+        else {
+            return null;
+        }
+    }
+    
+    /**
+     * Sets the post's first image.
+     * @param \Image $image
+     */
+    public function setFirstImage($image) {
+        $this->imageObjects[] = $image;
     }
 
     /**

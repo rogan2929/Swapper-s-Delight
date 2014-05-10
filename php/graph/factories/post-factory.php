@@ -122,7 +122,7 @@ class PostFactory extends GraphObjectFactory {
     public function getNewPosts($refresh, $offset, $limit) {
         // Get a new stream if necessary.
         if ($refresh == true) {
-            $this->fetchPosts(true);
+            $this->fetchStream(true);
         }
 
         return $this->getPostData($this->stream, $offset, $limit);
@@ -224,7 +224,7 @@ class PostFactory extends GraphObjectFactory {
         $this->gid = $gid;
 
         // Fetch the new stream.
-        $this->fetchPosts(false);
+        $this->fetchStream(false);
 
         return count($this->stream);
     }
@@ -253,7 +253,7 @@ class PostFactory extends GraphObjectFactory {
      * Builds a locally cached version of the FQL stream table.
      * @param bool $prefetchOnly
      */
-    public function fetchPosts($prefetchOnly) {
+    public function fetchStream($prefetchOnly) {
         if ($prefetchOnly) {
             // Only retrieve a small subset of the full stream, in order for data to be displayed more quickly to the user.
             $windowStart = time();
@@ -263,12 +263,12 @@ class PostFactory extends GraphObjectFactory {
             $postLimit = 200;
 
             // Perform a two step query of varying window sizes, and then merge the result.
-            $stream = $this->getPostStreamData($windowSize, $windowStart, 14, 1, $postLimit);
+            $stream = $this->getStreamData($windowSize, $windowStart, 14, 1, $postLimit);
 
             // Only continue with another batch if $postLimit has not been reached.
             if (count($stream) <= $postLimit) {
                 $windowStart = $windowStart - ($windowSize * 14 * 1);
-                $stream = array_merge($stream, $this->getPostStreamData(3600 * 24 * 30, $windowStart, 1, 1));
+                $stream = array_merge($stream, $this->getStreamData(3600 * 24 * 30, $windowStart, 1, 1));
             }
 
             $this->stream = $stream;
@@ -276,13 +276,13 @@ class PostFactory extends GraphObjectFactory {
             $windowStart = time();
             $windowSize = $this->getOptimalWindowSize();
 
-            $stream = $this->getPostStreamData($windowSize, $windowStart, 50, 1);
+            $stream = $this->getStreamData($windowSize, $windowStart, 50, 1);
             $windowStart = $windowStart - ($windowSize * 50 * 1);
-            $stream = array_merge($stream, $this->getPostStreamData($windowSize * 2, $windowStart, 13, 1));
+            $stream = array_merge($stream, $this->getStreamData($windowSize * 2, $windowStart, 13, 1));
             $windowStart = $windowStart - ($windowSize * 2 * 13 * 1);
-            $stream = array_merge($stream, $this->getPostStreamData($windowSize * 3, $windowStart, 11, 1));
+            $stream = array_merge($stream, $this->getStreamData($windowSize * 3, $windowStart, 11, 1));
             $windowStart = $windowStart - ($windowSize * 3 * 11 * 1);
-            $stream = array_merge($stream, $this->getPostStreamData(3600 * 24 * 30, $windowStart, 1, 1));
+            $stream = array_merge($stream, $this->getStreamData(3600 * 24 * 30, $windowStart, 1, 1));
 
             $this->stream = $stream;
         }
@@ -356,14 +356,16 @@ class PostFactory extends GraphObjectFactory {
 
             // Set actor.
             $post->setActor($users[$i]);
-
-            // Set tile image. (Can be empty).
-            if (!is_null($images[$i])) {
-                $post->setImageObjects(array($images[$i])); 
-            }
-            else {
-                $post->setImageObjects(array());
-            }
+            
+            $image = $post->getFirstImage();
+            
+            // Set tile image by looking for its associated post.
+            for ($j = 0; $j < count($images); $j++) {
+                if ($image->getId() == $images[$j]->getId()) {
+                    $post->setFirstImage($images[$j]);
+                    break;
+                }
+            }           
             
             // Get post type.
             $post->setType($this->getPostType($post));
@@ -379,24 +381,19 @@ class PostFactory extends GraphObjectFactory {
 
     private function getPostImageData($posts) {
         $requests = array();
-        $nonImagePostIndices = array();
         $images = array();
 
         for ($i = 0; $i < count($posts); $i++) {
             $post = $posts[$i];
-            $imageObjects = $post->getImageObjects();
+            
+            // Try to see if this post has a primary image.
+            $image = $post->getFirstImage();
 
-            if (!is_null($imageObjects)) {
-                $image = $imageObjects[0];
-
+            if (!is_null($image)) {
                 $requests[] = array(
                     'method' => 'GET',
                     'relative_url' => '/' . $image->getId() . '?fields=id,source'
                 );
-            }
-            else {
-                // Keep track of which posts do not have images.
-                $nonImagePostIndices[] = $i;
             }
         }
         
@@ -406,13 +403,8 @@ class PostFactory extends GraphObjectFactory {
             'include_headers' => false
         ));
         
-        // Take care of the non-image posts.
-        for ($j = 0; $j < count($nonImagePostIndices); $j++) {
-            $images[$nonImagePostIndices[$j]] = null;
-        }
-        
-        for ($k = 0; $k < count($response); $k++) {
-            $images[] = ImageObjectFactory::getFirstImageFromGraphResponse(json_decode($response[$k]->body));
+        for ($j = 0; $j < count($response); $j++) {
+            $images[] = ImageObjectFactory::getFirstImageFromGraphResponse(json_decode($response[$j]->body));
         }
         
         return $images;
@@ -460,7 +452,7 @@ class PostFactory extends GraphObjectFactory {
         $postType = 'unknown';
 
         // The logic below should catch everything. If it does, then we have for some reason picked up a post with no visible content.
-        if (count($post->getImageObjects()) > 0) {
+        if (!is_null($post->getFirstImage())) {
             $postType = 'image';       // Image Post
         } else if (strlen($post->getMessage()) > 0) {
             $postType = 'text';        // Assume text post, but this might change to link.
@@ -478,14 +470,14 @@ class PostFactory extends GraphObjectFactory {
     }
 
     /**
-     * Execute a batch request against the selected group's feed.
+     * Manages batch requests targeted toward the selected group's feed.
      * @param int $windowSize
      * @param int $windowStart
      * @param int $batchSize
      * @param int $iterations
      * @return array
      */
-    private function getPostStreamData($windowSize, $windowStart, $batchSize, $iterations = 1, $postLimit = null) {
+    private function getStreamData($windowSize, $windowStart, $batchSize, $iterations = 1, $postLimit = null) {
         $windowEnd = $windowStart - $windowSize;
 
         $stream = array();
@@ -557,7 +549,7 @@ class PostFactory extends GraphObjectFactory {
             if (isset($stream[$i]->object_id)) {
                 $image = new Image();
                 $image->setId($stream[$i]->object_id);
-                $post->setImageObjects(array($image));
+                $post->setFirstImage($image);
             }
 
             $posts[] = $post;

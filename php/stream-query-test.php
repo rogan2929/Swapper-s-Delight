@@ -9,6 +9,6 @@ $gid = '409783902455116';
 
 $postFactory = new PostFactory();
 $postFactory->setGid($gid);
-$postFactory->fetchPosts(true);
+$postFactory->fetchStream(true);
 
 echo json_encode($postFactory->getStream());
