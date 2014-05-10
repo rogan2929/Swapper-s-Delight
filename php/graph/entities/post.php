@@ -49,7 +49,7 @@ class Post extends GraphObject {
      * @param \Image $image
      */
     public function setFirstImage($image) {
-        $this->imageObjects[] = $image;
+        $this->imageObjects[0] = $image;
     }
 
     /**
