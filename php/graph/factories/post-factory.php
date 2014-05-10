@@ -356,17 +356,19 @@ class PostFactory extends GraphObjectFactory {
 
             // Set actor.
             $post->setActor($users[$i]);
-            
+
             $image = $post->getFirstImage();
-            
+
             // Set tile image by looking for its associated post.
-            for ($j = 0; $j < count($images); $j++) {
-                if ($image->getId() == $images[$j]->getId()) {
-                    $post->setFirstImage($images[$j]);
-                    break;
+            if (!is_null($image)) {
+                for ($j = 0; $j < count($images); $j++) {
+                    if ($image->getId() == $images[$j]->getId()) {
+                        $post->setFirstImage($images[$j]);
+                        break;
+                    }
                 }
-            }           
-            
+            }
+
             // Get post type.
             $post->setType($this->getPostType($post));
         }
@@ -385,7 +387,7 @@ class PostFactory extends GraphObjectFactory {
 
         for ($i = 0; $i < count($posts); $i++) {
             $post = $posts[$i];
-            
+
             // Try to see if this post has a primary image.
             $image = $post->getFirstImage();
 
@@ -396,17 +398,17 @@ class PostFactory extends GraphObjectFactory {
                 );
             }
         }
-        
+
         // Execute the batch queries.
         $response = $this->graphApiClient->executeRequest('POST', '/', array(
             'batch' => json_encode($requests),
             'include_headers' => false
         ));
-        
+
         for ($j = 0; $j < count($response); $j++) {
             $images[] = ImageObjectFactory::getFirstImageFromGraphResponse(json_decode($response[$j]->body));
         }
-        
+
         return $images;
     }
 
