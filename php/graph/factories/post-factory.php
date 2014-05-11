@@ -175,6 +175,8 @@ class PostFactory extends GraphObjectFactory {
         $imageObjects = $imageObjectFactory->getSinglePostImageObjects($post);
         $post->setImageObjects($imageObjects);
         
+        return $post;
+        
 //        $queries = array(
 //            'detailsQuery' => GraphObjectFactory::DETAILS_QUERY . 'WHERE post_id="' . $postId . '"',
 //            'imageQuery' => GraphObjectFactory::IMAGE_QUERY . 'WHERE object_id IN (SELECT attachment FROM #detailsQuery)',
