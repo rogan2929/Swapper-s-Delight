@@ -13,7 +13,7 @@ class UserFactory extends GraphObjectFactory {
      * @param type $response
      * @return \User
      */
-    private static function getUserFromGraphResponse($response) {
+    public static function getUserFromGraphResponse($response) {
         // Create user object.
         $user = new User();
         $user->setUid($response->id);
