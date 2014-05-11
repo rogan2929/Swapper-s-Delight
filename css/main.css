@@ -845,7 +845,7 @@ a.link-title {
 
 .floating-panel-content.narrow {
     width: 755px;
-    height: 600px;
+/*    height: 600px;*/
     margin-top: auto;
     margin-bottom: auto;
 }
