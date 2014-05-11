@@ -160,20 +160,28 @@ class PostFactory extends GraphObjectFactory {
         // First, find the post that is being selected for additional details.
         $post = $this->getPostFromId($postId);
         
+        error_log('TEST1');
+        
         // User data.
         $userFactory = new UserFactory();
         $user = $userFactory->getSinglePostUserData($post);
         $post->setActor($user);
+        
+        error_log('TEST2');
         
         // Commments.
         $commentFactory = new CommentFactory();
         $comments = $commentFactory->getSinglePostComments($post);
         $post->setComments($comments);
         
+        error_log('TEST3');
+        
         // Image data.
         $imageObjectFactory = new ImageObjectFactory();
         $imageObjects = $imageObjectFactory->getSinglePostImageObjects($post);
         $post->setImageObjects($imageObjects);
+        
+        error_log('TEST4');
         
         return $post;
         
