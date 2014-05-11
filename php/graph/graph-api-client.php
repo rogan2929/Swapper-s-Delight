@@ -28,7 +28,7 @@ class GraphApiClient {
 
     //private $facebook;
     private $session;
-    private $appSecretProof;
+    public $appSecretProof;
 
     function __construct() {
 
