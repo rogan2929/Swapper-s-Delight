@@ -78,6 +78,8 @@ class GraphApiClient {
             http_response_code(400);
 
             error_log($ex->getCode() . ': ' . $ex->getMessage());
+            
+            error_log(debug_backtrace());
 
             die(json_encode(array(
                 'code' => $ex->getCode(),
