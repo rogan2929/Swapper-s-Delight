@@ -8,14 +8,6 @@ require $_SERVER['DOCUMENT_ROOT'] . '\php\graph\entities\include.php';
 class ImageObjectFactory {
 
     private $imageStream;
-
-    /**
-     * Constructor
-     * @param array $imageStream
-     */
-    function __construct($imageStream) {
-        $this->imageStream = $imageStream;
-    }
     
     /**
      * Retrieve image objects for a single post.

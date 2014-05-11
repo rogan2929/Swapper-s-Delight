@@ -12,7 +12,7 @@ class LinkDataFactory extends GraphObjectFactory {
      * @param type $response
      * @return \LinkData
      */
-    public static function getLinkDataFromGraphResponse($response) {
+    public function getLinkDataFromGraphResponse($response) {
         $linkData = null;
 
         if (isset($response->link)) {

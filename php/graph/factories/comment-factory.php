@@ -15,7 +15,7 @@ class CommentFactory extends GraphObjectFactory {
      * @param type $post
      * @return array
      */
-    public static function getSinglePostComments($post) {
+    public function getSinglePostComments($post) {
         return array();
     }
 

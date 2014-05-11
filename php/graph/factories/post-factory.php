@@ -161,15 +161,18 @@ class PostFactory extends GraphObjectFactory {
         $post = $this->getPostFromId($postId);
         
         // User data.
-        $user = UserFactory::getSinglePostUserData($post);
+        $userFactory = new UserFactory();
+        $user = $userFactory->getSinglePostUserData($post);
         $post->setActor($user);
         
         // Commments.
-        $comments = CommentFactory::getSinglePostComments($post);
+        $commentFactory = new CommentFactory();
+        $comments = $commentFactory->getSinglePostComments($post);
         $post->setComments($comments);
         
         // Image data.
-        $imageObjects = ImageObjectFactory::getSinglePostImageObjects($post);
+        $imageObjectFactory = new ImageObjectFactory();
+        $imageObjects = $imageObjectFactory->getSinglePostImageObjects($post);
         $post->setImageObjects($imageObjects);
         
 //        $queries = array(
@@ -386,8 +389,10 @@ class PostFactory extends GraphObjectFactory {
         $pagedPosts = array_slice($posts, $offset, $limit);
 
         // Get Post User Data
-        $users = UserFactory::getPostUserData($pagedPosts);
-        $images = ImageObjectFactory::getPostImageData($pagedPosts);
+        $userFactory = new UserFactory();
+        $users = $userFactory->getPostUserData($pagedPosts);
+        $imageObjectFactory = new ImageObjectFactory();
+        $images = $imageObjectFactory->getPostImageData($pagedPosts);
 
         for ($i = 0; $i < count($pagedPosts); $i++) {
             $post = $pagedPosts[$i];
@@ -491,13 +496,15 @@ class PostFactory extends GraphObjectFactory {
                 $stream = array_merge($stream, $body->data);
             }
         }
-
+        
+        $userFactory = new UserFactory();
+                
         // Parse the post data.
         for ($i = 0; $i < count($stream); $i++) {
             $post = new Post();
 
             // Actor
-            $post->setActor(UserFactory::getUserFromGraphResponse($stream[$i]->from));
+            $post->setActor($userFactory->getUserFromGraphResponse($stream[$i]->from));
 
             // ID
             $post->setId($stream[$i]->id);
@@ -529,7 +536,8 @@ class PostFactory extends GraphObjectFactory {
             }
             
             // LinkData, if any.
-            $linkData = LinkDataFactory::getLinkDataFromGraphResponse($stream[$i]);
+            $linkDataFactory = new LinkDataFactory();
+            $linkData = $linkDataFactory->getLinkDataFromGraphResponse($stream[$i]);
             
             $post->setLinkData($linkData);
 
