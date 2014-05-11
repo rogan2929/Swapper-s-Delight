@@ -83,7 +83,9 @@ class UserFactory extends GraphObjectFactory {
     public function getSinglePostUserData($post) {
         $actor = $post->getActor();
         
-        $response = $this->graphApiClient->executeRequest('GET', '/' . $actor->getUid() . '?fields=first_name,last_name,link,picture');
+        $response = $this->graphApiClient->executeRequest('GET', '/' . $actor->getUid(), array(
+            'fields' => 'first_name,last_name,link,picture'
+        ));
         
         $user = $this->getUserFromGraphResponse($response);
         
