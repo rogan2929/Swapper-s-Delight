@@ -69,7 +69,7 @@ class UserFactory extends GraphObjectFactory {
 
         // Parse the user request responses.
         for ($j = 0; $j < count($response); $j++) {
-            $users[] = UserFactory::getUserFromGraphResponse(json_decode($response[$j]->body));
+            $users[] = $this->getUserFromGraphResponse(json_decode($response[$j]->body));
         }
 
         return $users;
@@ -77,15 +77,15 @@ class UserFactory extends GraphObjectFactory {
     
     /**
      * Get user data for a single post.
-     * @param type $postId
-     * @return \User
+     * @param Post $post
+     * @return User
      */
     public function getSinglePostUserData($post) {
         $actor = $post->getActor();
         
         $response = $this->graphApiClient->executeRequest('GET', '/' . $actor->getUid() . '?fields=first_name,last_name,link,picture');
         
-        $user = UserFactory::getUserFromGraphResponse($response);
+        $user = $this->getUserFromGraphResponse($response);
         
         return $user;
     }
