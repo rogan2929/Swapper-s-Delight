@@ -5,7 +5,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '\php\graph\entities\include.php';
 /**
  * Factory for Image objects.
  */
-class ImageObjectFactory {
+class ImageObjectFactory extends GraphObjectFactory {
 
     private $imageStream;
     
@@ -14,7 +14,7 @@ class ImageObjectFactory {
      * @param type $post
      * @return array
      */
-    public static function getSinglePostImageObjects($post) {
+    public function getSinglePostImageObjects($post) {
         return array();
     }
 
@@ -22,7 +22,7 @@ class ImageObjectFactory {
      * Get first image from graph response.
      * @param type $response
      */
-    private static function getFirstImageFromGraphResponse($response) {
+    private function getFirstImageFromGraphResponse($response) {
         $image = new Image();
         $image->setId($response->id);
         $image->setUrl($response->source);
