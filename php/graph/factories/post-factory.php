@@ -440,11 +440,11 @@ class PostFactory extends GraphObjectFactory {
             $postType = 'text';        // Assume text post, but this might change to link.
         }
 
-        if (strlen($post->getMessage()) == 0 && !is_null($linkData->getName())) {
+        if (strlen($post->getMessage()) == 0 && !is_null($linkData) && !is_null($linkData->getName())) {
             $postType = 'link';        // Link post.
         }
 
-        if (strlen($post->getMessage()) > 0 && !is_null($linkData->getName())) {
+        if (strlen($post->getMessage()) > 0 && !is_null($linkData) && !is_null($linkData->getName())) {
             $postType = 'textlink';    // Link + Text post.
         }
 
