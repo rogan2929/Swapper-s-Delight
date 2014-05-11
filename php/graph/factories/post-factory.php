@@ -431,6 +431,7 @@ class PostFactory extends GraphObjectFactory {
      */
     private function getPostType($post) {
         $postType = 'unknown';
+        $linkData = $post->getLinkData();
 
         // The logic below should catch everything. If it does, then we have for some reason picked up a post with no visible content.
         if (!is_null($post->getFirstImage())) {
@@ -439,11 +440,11 @@ class PostFactory extends GraphObjectFactory {
             $postType = 'text';        // Assume text post, but this might change to link.
         }
 
-        if (strlen($post->getMessage()) == 0 && !is_null($post->getLinkData())) {
+        if (strlen($post->getMessage()) == 0 && !is_null($linkData->getName())) {
             $postType = 'link';        // Link post.
         }
 
-        if (strlen($post->getMessage()) > 0 && !is_null($post->getLinkData())) {
+        if (strlen($post->getMessage()) > 0 && !is_null($linkData->getName())) {
             $postType = 'textlink';    // Link + Text post.
         }
 
