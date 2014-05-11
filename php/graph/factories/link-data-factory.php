@@ -17,11 +17,20 @@ class LinkDataFactory extends GraphObjectFactory {
 
         if (isset($response->link)) {
             $linkData = new LinkData();
-            $linkData->setCaption($response->caption);
-            $linkData->setDescription($response->description);
-            $linkData->setName($response->name);
-            $linkData->setSrc($response->picture);
             $linkData->setHref($response->link);
+
+            if (isset($response->caption)) {
+                $linkData->setCaption($response->caption);
+            }
+            if (isset($response->description)) {
+                $linkData->setDescription($response->description);
+            }
+            if (isset($response->name)) {
+                $linkData->setName($response->name);
+            }
+            if (isset($response->picture)) {
+                $linkData->setSrc($response->picture);
+            }
         }
 
         return $linkData;
