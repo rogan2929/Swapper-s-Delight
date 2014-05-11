@@ -6,25 +6,25 @@ require 'graph-object-factory.php';
  * A factory for LinkData objects.
  */
 class LinkDataFactory extends GraphObjectFactory {
-    
+
     /**
-     * Parse an FQL stream result and construct a LinkData entity.
-     * @param type $post
-     * @return /LinkData
+     * Parse a Graph response and construct a LinkData entity.
+     * @param type $response
+     * @return \LinkData
      */
-    function getLinkDataFromFQL($post) {
+    public static function getLinkDataFromGraphResponse($response) {
         $linkData = null;
 
-        // Verify that the attachment type is of type 'link'.
-        if ($post['attachment'] && isset($post['attachment']['media']) && $post['attachment']['media'][0] && $post['attachment']['media'][0]['type'] == 'link') {
+        if (isset($response->link)) {
             $linkData = new LinkData();
-            $linkData->setCaption($post['attachment']['caption']);
-            $linkData->setDescription($post['attachment']['description']);
-            $linkData->setHref($post['attachment']['media'][0]['href']);
-            $linkData->setName($post['attachment']['name']);
-            $linkData->setSrc($post['attachment']['media'][0]['src']);
+            $linkData->setCaption($response->caption);
+            $linkData->setDescription($response->description);
+            $linkData->setName($response->name);
+            $linkData->setSrc($response->picture);
+            $linkData->setHref($response->link);
         }
 
         return $linkData;
     }
+
 }

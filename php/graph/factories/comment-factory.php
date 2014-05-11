@@ -9,6 +9,15 @@ require 'image-object-factory.php';
  */
 
 class CommentFactory extends GraphObjectFactory {
+    
+    /**
+     * Retrieve comments for a single post.
+     * @param type $post
+     * @return array
+     */
+    public static function getSinglePostComments($post) {
+        return array();
+    }
 
     /**
      * Parse an FQL result and construct an array of Comment entities.

@@ -16,17 +16,57 @@ class ImageObjectFactory {
     function __construct($imageStream) {
         $this->imageStream = $imageStream;
     }
+    
+    /**
+     * Retrieve image objects for a single post.
+     * @param type $post
+     * @return array
+     */
+    public static function getSinglePostImageObjects($post) {
+        return array();
+    }
 
     /**
      * Get first image from graph response.
      * @param type $response
      */
-    public static function getFirstImageFromGraphResponse($response) {
+    private static function getFirstImageFromGraphResponse($response) {
         $image = new Image();
         $image->setId($response->id);
         $image->setUrl($response->source);
         
         return $image;
+    }
+    
+    public function getPostImageData($posts) {
+        $requests = array();
+        $images = array();
+
+        for ($i = 0; $i < count($posts); $i++) {
+            $post = $posts[$i];
+
+            // Try to see if this post has a primary image.
+            $image = $post->getFirstImage();
+
+            if (!is_null($image)) {
+                $requests[] = array(
+                    'method' => 'GET',
+                    'relative_url' => '/' . $image->getId() . '?fields=id,source'
+                );
+            }
+        }
+
+        // Execute the batch queries.
+        $response = $this->graphApiClient->executeRequest('POST', '/', array(
+            'batch' => json_encode($requests),
+            'include_headers' => false
+        ));
+
+        for ($j = 0; $j < count($response); $j++) {
+            $images[] = ImageObjectFactory::getFirstImageFromGraphResponse(json_decode($response[$j]->body));
+        }
+
+        return $images;
     }
 
     /**

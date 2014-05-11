@@ -13,7 +13,7 @@ class UserFactory extends GraphObjectFactory {
      * @param type $response
      * @return \User
      */
-    public static function getUserFromGraphResponse($response) {
+    private static function getUserFromGraphResponse($response) {
         // Create user object.
         $user = new User();
         $user->setUid($response->id);
@@ -39,6 +39,54 @@ class UserFactory extends GraphObjectFactory {
             $user->setProfileUrl($response->link);
         }
 
+        return $user;
+    }
+    
+    /**
+     * Get user data for the array of posts.
+     * @param type $posts
+     * @return type
+     */
+    public static function getPostUserData($posts) {
+        $requests = array();
+        $users = array();
+
+        // Generate requests for additional data.
+        for ($i = 0; $i < count($posts); $i++) {
+            $actor = $posts[$i]->getActor();
+
+            $requests[] = array(
+                'method' => 'GET',
+                'relative_url' => '/' . $actor->getUid() . '?fields=first_name,last_name,link,picture'
+            );
+        }
+
+        // Execute the batch queries
+        $response = $this->graphApiClient->executeRequest('POST', '/', array(
+            'batch' => json_encode($requests),
+            'include_headers' => false
+        ));
+
+        // Parse the user request responses.
+        for ($j = 0; $j < count($response); $j++) {
+            $users[] = UserFactory::getUserFromGraphResponse(json_decode($response[$j]->body));
+        }
+
+        return $users;
+    }
+    
+    /**
+     * Get user data for a single post.
+     * @param type $postId
+     * @return \User
+     */
+    public function getSinglePostUserData($post) {
+        $actor = $post->getActor();
+        
+        $response = $this->graphApiClient->executeRequest('GET', '/' . $actor->getUid() . '?fields=first_name,last_name,link,picture');
+        
+        $user = UserFactory::getUserFromGraphResponse($response);
+        
         return $user;
     }
 

@@ -127,13 +127,51 @@ class PostFactory extends GraphObjectFactory {
 
         return $this->getPostData($this->stream, $offset, $limit);
     }
+    
+    /**
+     * Search the stream for a post with the matching id.
+     * @param string $postId
+     * @return \Post
+     */
+    private function getPostFromId($postId) {
+        $post = null;
+        
+        for ($i = 0; $i < count($this->stream); $i++) {
+            if ($postId == $this->stream[$i]->getId()) {
+                $post = $this->stream[$i];
+                break;
+            }
+        }
+        
+        return $post;
+    }
 
     /**
      * Retrieves additional data for the given post and populates a /Post entity object.
-     * @param type $postId
+     * @param string $postId
      * @return /Post
      */
     public function getPostDetails($postId) {
+        // Info that needs to be retrieved:
+        // User profile url, image (Graph)
+        // All post comments. (Graph)
+        // All post images. (FQL)
+        
+        // First, find the post that is being selected for additional details.
+        $post = $this->getPostFromId($postId);
+        
+        // User data.
+        $user = UserFactory::getSinglePostUserData($post);
+        $post->setActor($user);
+        
+        // Commments.
+        $comments = CommentFactory::getSinglePostComments($post);
+        $post->setComments($comments);
+        
+        // Image data.
+        $imageObjects = ImageObjectFactory::getSinglePostImageObjects($post);
+        $post->setImageObjects($imageObjects);
+        
 //        $queries = array(
 //            'detailsQuery' => GraphObjectFactory::DETAILS_QUERY . 'WHERE post_id="' . $postId . '"',
 //            'imageQuery' => GraphObjectFactory::IMAGE_QUERY . 'WHERE object_id IN (SELECT attachment FROM #detailsQuery)',
@@ -253,7 +291,7 @@ class PostFactory extends GraphObjectFactory {
      * Builds a locally cached version of the FQL stream table.
      * @param bool $prefetchOnly
      */
-    public function fetchStream($prefetchOnly) {
+    private function fetchStream($prefetchOnly) {
         if ($prefetchOnly) {
             // Only retrieve a small subset of the full stream, in order for data to be displayed more quickly to the user.
             $windowStart = time();
@@ -348,8 +386,8 @@ class PostFactory extends GraphObjectFactory {
         $pagedPosts = array_slice($posts, $offset, $limit);
 
         // Get Post User Data
-        $users = $this->getPostUserData($pagedPosts);
-        $images = $this->getPostImageData($pagedPosts);
+        $users = UserFactory::getPostUserData($pagedPosts);
+        $images = ImageObjectFactory::getPostImageData($pagedPosts);
 
         for ($i = 0; $i < count($pagedPosts); $i++) {
             $post = $pagedPosts[$i];
@@ -379,70 +417,6 @@ class PostFactory extends GraphObjectFactory {
         }
 
         return $pagedPosts;
-    }
-
-    private function getPostImageData($posts) {
-        $requests = array();
-        $images = array();
-
-        for ($i = 0; $i < count($posts); $i++) {
-            $post = $posts[$i];
-
-            // Try to see if this post has a primary image.
-            $image = $post->getFirstImage();
-
-            if (!is_null($image)) {
-                $requests[] = array(
-                    'method' => 'GET',
-                    'relative_url' => '/' . $image->getId() . '?fields=id,source'
-                );
-            }
-        }
-
-        // Execute the batch queries.
-        $response = $this->graphApiClient->executeRequest('POST', '/', array(
-            'batch' => json_encode($requests),
-            'include_headers' => false
-        ));
-
-        for ($j = 0; $j < count($response); $j++) {
-            $images[] = ImageObjectFactory::getFirstImageFromGraphResponse(json_decode($response[$j]->body));
-        }
-
-        return $images;
-    }
-
-    /**
-     * Get user data for the array of posts.
-     * @param type $posts
-     * @return type
-     */
-    private function getPostUserData($posts) {
-        $requests = array();
-        $users = array();
-
-        // Generate requests for additional data.
-        for ($i = 0; $i < count($posts); $i++) {
-            $actor = $posts[$i]->getActor();
-
-            $requests[] = array(
-                'method' => 'GET',
-                'relative_url' => '/' . $actor->getUid() . '?fields=first_name,last_name,link,picture'
-            );
-        }
-
-        // Execute the batch queries
-        $response = $this->graphApiClient->executeRequest('POST', '/', array(
-            'batch' => json_encode($requests),
-            'include_headers' => false
-        ));
-
-        // Parse the user request responses.
-        for ($j = 0; $j < count($response); $j++) {
-            $users[] = UserFactory::getUserFromGraphResponse(json_decode($response[$j]->body));
-        }
-
-        return $users;
     }
 
     /**
@@ -498,7 +472,7 @@ class PostFactory extends GraphObjectFactory {
             for ($j = 0; $j < $batchSize; $j++) {
                 $requests[] = array(
                     'method' => 'GET',
-                    'relative_url' => '/' . $this->gid . '/feed?fields=id,from,message,created_time,updated_time,picture,object_id,actions,link,comments.limit(1).summary(true)&since=' . $windowEnd . '&until=' . $windowStart . '&limit=5000&date_format=U'
+                    'relative_url' => '/' . $this->gid . '/feed?fields=id,from,message,created_time,updated_time,picture,object_id,actions,link,name,caption,description,comments.limit(1).summary(true)&since=' . $windowEnd . '&until=' . $windowStart . '&limit=5000&date_format=U'
                 );
 
                 $windowStart -= $windowSize;
@@ -553,6 +527,11 @@ class PostFactory extends GraphObjectFactory {
                 $image->setId($stream[$i]->object_id);
                 $post->setFirstImage($image);
             }
+            
+            // LinkData, if any.
+            $linkData = LinkDataFactory::getLinkDataFromGraphResponse($stream[$i]);
+            
+            $post->setLinkData($linkData);
 
             $posts[] = $post;
         }
