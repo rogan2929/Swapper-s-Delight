@@ -33,7 +33,7 @@ class CommentFactory extends GraphObjectFactory {
             $comment->setActor($userFactory->getUserFromGraphResponse($respComment->from));
             $user = $userFactory->getSinglePostUserData($comment);
             
-            //$comment->setActor($user);
+            $comment->setActor($user);
             
             if (isset($respComment->message)) {
                 $comment->setMessage($respComment->message);
