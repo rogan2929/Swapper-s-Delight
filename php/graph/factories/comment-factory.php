@@ -9,14 +9,37 @@ require 'image-object-factory.php';
  */
 
 class CommentFactory extends GraphObjectFactory {
-    
+
     /**
      * Retrieve comments for a single post.
-     * @param type $post
+     * @param Post $post
      * @return array
      */
     public function getSinglePostComments($post) {
-        return array();
+        $response = $this->graphApiClient->executeRequest('GET', '/' . $post->getId() . '/comments');
+
+        $comments = array();
+        
+        for ($i = 0; $i < count($response->data); $i++) {
+            $comment = new Comment();
+            $respComment = $response->data[$i];
+
+            $comment->setId($respComment->id);
+            $comment->setCreatedTime($respComment->created_time);
+            
+            $userFactory = new UserFactory();
+            $user = $userFactory->getSinglePostUserData($comment);
+            
+            $comment->setActor($user);
+            
+            if (isset($respComment->message)) {
+                $comment->setMessage($respComment->message);
+            }
+            
+            $comments[] = $comment;
+        }
+
+        return $comments;
     }
 
     /**
