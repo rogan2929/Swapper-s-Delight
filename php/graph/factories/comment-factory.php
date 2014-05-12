@@ -16,7 +16,9 @@ class CommentFactory extends GraphObjectFactory {
      * @return array
      */
     public function getSinglePostComments($post) {
-        $response = $this->graphApiClient->executeRequest('GET', '/' . $post->getId() . '/comments');
+        $response = $this->graphApiClient->executeRequest('GET', '/' . $post->getId() . '/comments', array(
+            'date_format' => 'U'
+        ));
         
         $comments = array();
         
@@ -29,7 +31,7 @@ class CommentFactory extends GraphObjectFactory {
             
             $userFactory = new UserFactory();
             $comment->setActor($userFactory->getUserFromGraphResponse($respComment->from));
-            //$user = $userFactory->getSinglePostUserData($comment);
+            $user = $userFactory->getSinglePostUserData($comment);
             
             //$comment->setActor($user);
             
