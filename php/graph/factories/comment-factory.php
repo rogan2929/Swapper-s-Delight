@@ -17,6 +17,8 @@ class CommentFactory extends GraphObjectFactory {
      */
     public function getSinglePostComments($post) {
         $response = $this->graphApiClient->executeRequest('GET', '/' . $post->getId() . '/comments');
+        
+        echo var_dump($response);
 
         $comments = array();
         
