@@ -28,6 +28,7 @@ class CommentFactory extends GraphObjectFactory {
             $comment->setCreatedTime($respComment->created_time);
             
             $userFactory = new UserFactory();
+            $comment->setActor($userFactory->getUserFromGraphResponse($respComment));
             $user = $userFactory->getSinglePostUserData($comment);
             
             $comment->setActor($user);
